@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+# Get the temporary directory of the system
+TEMPDIR := $(shell dirname $(shell mktemp -u))
+
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
@@ -52,7 +55,7 @@ fclean: clean
 # - Bind : Handle gomobile bind
 
 # - Bind - initialization
-bind_init_files := $(TMPDIR)/.tool-versions $(gobind) $(gomobile)
+bind_init_files := $(TEMPDIR)/.tool-versions $(gobind) $(gomobile)
 
 $(gobind): go.sum go.mod
 	@mkdir -p $(dir $@)
@@ -63,9 +66,9 @@ $(gomobile): $(gobind) go.sum go.mod
 	go build -o $@ golang.org/x/mobile/cmd/gomobile && chmod +x $@
 	$(gomobile) init || (rm -f $@ && exit 1) # in case of failure, remove gomobile so we can init again
 
-$(TMPDIR)/.tool-versions: .tool-versions
-	@echo "> copying current '.tool-versions' in '$(TMPDIR)' folder in order to make asdf works"
-	@echo "> this hack is needed in order for gomobile (who is building from '$(TMPDIR)') bind to use the correct javac and go version"
+$(TEMPDIR)/.tool-versions: .tool-versions
+	@echo "> copying current '.tool-versions' in '$(TEMPDIR)' folder in order to make asdf works"
+	@echo "> this hack is needed in order for gomobile (who is building from '$(TEMPDIR)') bind to use the correct javac and go version"
 	@cp -v $< $@
 
 .PHONY: bind.init
