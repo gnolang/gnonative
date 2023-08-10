@@ -6,18 +6,19 @@ TEMPDIR := $(shell dirname $(shell mktemp -u))
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
+react_native_dir := $(make_dir)/gnoboard
 
 # Argument Defaults
-IOS_OUTPUT_FRAMEWORK_DIR ?= $(make_dir)/ios/Frameworks
-ANDROID_OUTPUT_LIBS_DIR ?= $(make_dir)/android/libs
+IOS_OUTPUT_FRAMEWORK_DIR ?= $(react_native_dir)/ios/Frameworks
+ANDROID_OUTPUT_LIBS_DIR ?= $(react_native_dir)/android/libs
 GO_BIND_BIN_DIR ?= $(cache_dir)/bind
 
 # IOS definitions
 gnocore_xcframework := $(IOS_OUTPUT_FRAMEWORK_DIR)/GnoCore.xcframework
 
 # Android definitions
-gnocore_aar := $(ANDROID_OUTPUT_LIBS_DIR)/GnoCore.aar
-gnocore_jar := $(ANDROID_OUTPUT_LIBS_DIR)/GnoCore-sources.jar
+gnocore_aar := $(ANDROID_OUTPUT_LIBS_DIR)/gnocore.aar
+gnocore_jar := $(ANDROID_OUTPUT_LIBS_DIR)/gnocore-sources.jar
 
 # Utility definitions
 gomobile := $(GO_BIND_BIN_DIR)/gomobile
@@ -64,7 +65,7 @@ $(gobind): go.sum go.mod
 $(gomobile): $(gobind) go.sum go.mod
 	@mkdir -p $(dir $@)
 	go build -o $@ golang.org/x/mobile/cmd/gomobile && chmod +x $@
-	$(gomobile) init || (rm -f $@ && exit 1) # in case of failure, remove gomobile so we can init again
+	$(gomobile) init || (rm -rf $@ && exit 1) # in case of failure, remove gomobile so we can init again
 
 $(TEMPDIR)/.tool-versions: .tool-versions
 	@echo "> copying current '.tool-versions' in '$(TEMPDIR)' folder in order to make asdf works"
@@ -82,7 +83,7 @@ $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 		-tags 'nowatchdog' -prefix=Gno \
 		-o $@ -target ios ./framework
 _bind.clean.ios:
-	rm -rf gnocore_xcframework
+	rm -rf $(gnocore_xcframework)
 
 # - Bind - android aar and jar
 
@@ -98,5 +99,5 @@ _bind.clean.android:
 # - Bind - cleaning
 
 bind.clean: _bind.clean.ios _bind.clean.android
-	rm -f $(bind_init_files)
+	rm -rf $(bind_init_files)
 
