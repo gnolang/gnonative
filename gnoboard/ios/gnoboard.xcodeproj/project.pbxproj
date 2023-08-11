@@ -3,18 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3310DF473105470FBA4883B6 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26928F07A2B14F638F3E7CF3 /* noop-file.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		8AB390522A85415D00CB681E /* GnoCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB390512A85415D00CB681E /* GnoCore.xcframework */; };
+		8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905B2A85BA7C00CB681E /* GoBridge.m */; };
+		8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905C2A85BA7C00CB681E /* GoBridge.swift */; };
+		8AB390602A85BD6000CB681E /* PromiseBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-gnoboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-gnoboard.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		3310DF473105470FBA4883B6 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26928F07A2B14F638F3E7CF3 /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,15 +28,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = gnoboard/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = gnoboard/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = gnoboard/main.m; sourceTree = "<group>"; };
+		26928F07A2B14F638F3E7CF3 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "gnoboard/noop-file.swift"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-gnoboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gnoboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-gnoboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gnoboard.debug.xcconfig"; path = "Target Support Files/Pods-gnoboard/Pods-gnoboard.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-gnoboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gnoboard.release.xcconfig"; path = "Target Support Files/Pods-gnoboard/Pods-gnoboard.release.xcconfig"; sourceTree = "<group>"; };
+		8AB390512A85415D00CB681E /* GnoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GnoCore.xcframework; path = Frameworks/GnoCore.xcframework; sourceTree = "<group>"; };
+		8AB3905B2A85BA7C00CB681E /* GoBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoBridge.m; sourceTree = "<group>"; };
+		8AB3905C2A85BA7C00CB681E /* GoBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoBridge.swift; sourceTree = "<group>"; };
+		8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseBlock.swift; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = gnoboard/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B11419FF73544E34A5C7A3A2 /* gnoboard-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "gnoboard-Bridging-Header.h"; path = "gnoboard/gnoboard-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-gnoboard/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		26928F07A2B14F638F3E7CF3 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "gnoboard/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		B11419FF73544E34A5C7A3A2 /* gnoboard-Bridging-Header.h */ = {isa = PBXFileReference; name = "gnoboard-Bridging-Header.h"; path = "gnoboard/gnoboard-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB390522A85415D00CB681E /* GnoCore.xcframework in Frameworks */,
 				96905EF65AED1B983A6B3ABC /* libPods-gnoboard.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,6 +59,7 @@
 		13B07FAE1A68108700A75B9A /* gnoboard */ = {
 			isa = PBXGroup;
 			children = (
+				8AB390582A85B9B800CB681E /* Sources */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -66,6 +76,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AB390512A85415D00CB681E /* GnoCore.xcframework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-gnoboard.a */,
 			);
@@ -101,6 +112,25 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		8AB390582A85B9B800CB681E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8AB3905A2A85BA7C00CB681E /* Bridge */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8AB3905A2A85BA7C00CB681E /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */,
+				8AB3905B2A85BA7C00CB681E /* GoBridge.m */,
+				8AB3905C2A85BA7C00CB681E /* GoBridge.swift */,
+			);
+			name = Bridge;
+			path = gnoboard/Sources/Bridge;
+			sourceTree = SOURCE_ROOT;
 		};
 		92DBD88DE9BF7D494EA9DA96 /* gnoboard */ = {
 			isa = PBXGroup;
@@ -145,11 +175,13 @@
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
+				BD858FD2E95B7A0E599CEEE5 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
+				7E08702C5FB9376A4B130759 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,7 +231,6 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				73F9DE3C1F4F46D0A5B611CE /* gnoboard-Bridging-Header.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +273,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7E08702C5FB9376A4B130759 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gnoboard/Pods-gnoboard-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gnoboard/Pods-gnoboard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,19 +299,36 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-gnoboard/Pods-gnoboard-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/EXUpdates/EXUpdates.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXUpdates.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gnoboard/Pods-gnoboard-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BD858FD2E95B7A0E599CEEE5 /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-gnoboard/expo-configure-project.sh\"\n";
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -290,6 +356,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB390602A85BD6000CB681E /* PromiseBlock.swift in Sources */,
+				8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */,
+				8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
@@ -306,7 +375,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = gnoboard/gnoboard.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -314,21 +385,24 @@
 				);
 				INFOPLIST_FILE = gnoboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "land.gno.gnoboard";
-				PRODUCT_NAME = "gnoboard";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = land.gno.gnoboard;
+				PRODUCT_NAME = gnoboard;
+				SWIFT_OBJC_BRIDGING_HEADER = "gnoboard/gnoboard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = gnoboard/gnoboard-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = gnoboard/gnoboard.entitlements;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -338,23 +412,28 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = gnoboard/gnoboard.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = gnoboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "land.gno.gnoboard";
-				PRODUCT_NAME = "gnoboard";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = land.gno.gnoboard;
+				PRODUCT_NAME = gnoboard;
+				SWIFT_OBJC_BRIDGING_HEADER = "gnoboard/gnoboard-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = gnoboard/gnoboard-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = gnoboard/gnoboard.entitlements;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -390,6 +469,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -406,10 +486,16 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
-				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -446,6 +532,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -455,9 +542,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
-				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
