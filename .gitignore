@@ -1,0 +1,11 @@
+# OSX
+#
+.DS_Store
+
+# Cache
+.cache
+.eslintcache
+
+# VSCode
+.vscode/
+jsconfig.json
