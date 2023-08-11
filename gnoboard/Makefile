@@ -9,6 +9,12 @@ node_modules: package.json yarn.lock
 	(yarn && touch $@) || true
 .PHONY: node_modules
 
+ios/gnoboard.xcworkspace: ios/gnoboard.xcodeproj ios/Podfile node_modules
+	$(call check-program, bundle)
+	cd ios && pod install
+	touch $@
+.PHONY: ios/gnoboard.xcworkspace
+
 # - Helpers
 
 android.reverse_tcp:
