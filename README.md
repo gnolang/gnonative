@@ -3,6 +3,44 @@
 
 ## Build instructions
 
+### Install asdf for macOS 11, macOS 12 and macOS 13
+
+(If you are on Ubuntu, see the next section to install asdf.)
+
+To install the Command Line Developer Tools, in a terminal enter:
+
+    xcode-select --install
+
+After the Developer Tools are installed, we need to make sure it is updated. In
+System Preferences, click Software Update and update it if needed.
+
+To install asdf using brew, follow instructions at https://asdf-vm.com . In short,
+first install brew following the instructions at https://brew.sh . Then, in
+a terminal enter:
+
+    brew install asdf
+
+If your terminal is zsh, enter:
+
+    echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+
+If your terminal is bash, enter:
+
+    echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
+
+Start a new terminal to get the changes to the environment .
+
+### Install asdf for Ubuntu 18.04, 20.04 and 22.04
+
+To install asdf, follow instructions at https://asdf-vm.com . In short, in
+a terminal enter:
+
+    sudo apt install curl git
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+
+Start a new terminal to get the changes to the environment .
+
 ### Get a copy of the repo
 
 ```console
@@ -12,7 +50,13 @@ cd gnomobile
 
 ### Android
 
-#### Build the Go code as a librairy
+#### Install the tools with asdf (only need to do once)
+
+```console
+make asdf.install_tools
+```
+
+#### Build the Go code as a library
 
 ```console
 make build.android
@@ -51,7 +95,7 @@ Once done, bind the port to metro:
 make android.reverse_tcp
 ```
 
-#### Build with android-studio
+#### Build with Android Studio
 
 Open Android Studio and open the current Android project if it's not already done.
 Select the right device in the device list. Open the `Run` menu, and select `Run app`.
@@ -59,7 +103,20 @@ See more: https://developer.android.com/studio/run#basic-build-run
 
 ### iOS
 
-#### Build the Go code as a librairy
+#### Install the tools with asdf (only need to do once)
+
+```console
+make asdf.install_tools
+```
+
+If you get an error like "https://github.com/CocoaPods/CLAide.git (at master@97b765e) is not yet checked out" then reinstall cocoapods like this: 
+
+```console
+asdf uninstall cocoapods
+make asdf.install_tools
+```
+
+#### Build the Go code as a library
 
 ```console
 make build.ios
@@ -78,7 +135,7 @@ Open Xcode and open the GnoBoard Xcode workspace: `gnoboard/ios/gnoboard.xcworks
 You can either connect an iOS phone via USB cable, or launch an emulator device from Xcode.
 See more: https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device
 
-#### Select a developper certificate
+#### Select a developer certificate
 
 In Xcode, double click on gnoboard project on the left pane, go to the `Signing & Capabilities` pane.
 In the `Signing` section, select your `team` certificate.
