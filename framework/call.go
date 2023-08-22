@@ -1,6 +1,7 @@
 package gnomobile
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/gnolang/gno/tm2/pkg/amino"
@@ -37,6 +38,26 @@ type makeTxCfg struct {
 
 	broadcast bool
 	chainID   string
+}
+
+func (m *makeTxCfg) MarshalJSON() ([]byte, error) {
+    return json.Marshal(struct {
+		RootCfg *baseCfg
+
+		GasWanted int64
+		GasFee    string
+		Memo      string
+
+		Broadcast bool
+		ChainID   string
+	}{
+		RootCfg: m.rootCfg,
+		GasWanted: m.gasWanted,
+		GasFee: m.gasFee,
+		Memo: m.memo,
+		Broadcast: m.broadcast,
+		ChainID: m.chainID,
+	})
 }
 
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go

@@ -12,7 +12,7 @@ RCT_EXTERN_METHOD(hello:(NSString)name
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(getAccountAndTxCfg:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
 + (BOOL)requiresMainQueueSetup

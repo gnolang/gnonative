@@ -1,6 +1,7 @@
 package gnomobile
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
@@ -42,8 +43,17 @@ func Hello(rootDir string) string {
 	return fmt.Sprintf("Posted: %s", message)
 }
 
-func getAccountAndTxCfg(rootDir string) *accountAndTxCfg {
-	dataDir := rootDir + "/data"
+func ExportJsonConfig() (string, error) {
+	config, err := json.Marshal(getAccountAndTxCfg())
+	if err != nil {
+		return "", err
+	}
+
+	return string(config), nil
+}
+
+func getAccountAndTxCfg() *accountAndTxCfg {
+	dataDir := "data"
 	remote := "testnet.gno.berty.io:26657"
 	chainID := "dev"
 	keyName := "jefft0"

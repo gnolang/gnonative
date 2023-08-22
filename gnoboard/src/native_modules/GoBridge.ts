@@ -9,11 +9,11 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
-  getAccountAndTxCfg() {
+  hello(_: string) {
     return Promise.reject();
   }
 
-  hello(_: string) {
+  exportJsonConfig() {
     return Promise.reject();
   }
 }
