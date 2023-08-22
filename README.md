@@ -1,5 +1,8 @@
 # gnomobile
-*experimental* Gno &amp; mobile
+
+Current Gno apps run on desktop/laptop computers which have Go installed. To run on mobile, the app would need to bundle the Go runtime which is complicated for most developers. However our devs have years of experience with using Go on mobile and overcoming other difficulties of the Android and iOS operating systems. 
+
+Therefore, we demonstrate that it is possible to run a Gno app on mobile. This project's objective is to create a proof-of-concept mobile application which stores a Gno wallet on the mobile and calls a realm function on a remote Gno.land node and to create this software framework called GnoMobile. The ultimate objective of GnoMobile is to allow other Gno developers to easily offer their apps to run on mobile devices.
 
 ## Build instructions
 
