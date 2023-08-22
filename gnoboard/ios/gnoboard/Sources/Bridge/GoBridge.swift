@@ -49,6 +49,14 @@ class GoBridge: NSObject {
       }
   }
 
+    @objc func getAccountAndTxCfg(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        do {
+            resolve(GnoGnomobileHello("name"))
+        } catch let error as NSError {
+            reject("\(String(describing: error.code))", error.userInfo.description, error)
+        }
+    }
+
     @objc func closeBridge(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         do {
             resolve(true)

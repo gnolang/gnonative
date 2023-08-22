@@ -12,6 +12,9 @@ RCT_EXTERN_METHOD(hello:(NSString)name
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(getAccountAndTxCfg:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 + (BOOL)requiresMainQueueSetup
 {
  return YES;  // only do this if your module initialization relies on calling UIKit!

@@ -1,17 +1,21 @@
-import { GoBridgeInterface } from './GoBridgeInterface'
+import { GoBridgeInterface } from "./GoBridgeInterface";
 
 class NoopGoBridge implements GoBridgeInterface {
-	initBridge() {
-		return Promise.reject()
-	}
+  initBridge() {
+    return Promise.reject();
+  }
 
-	closeBridge() {
-		return Promise.reject()
-	}
+  closeBridge() {
+    return Promise.reject();
+  }
+
+  getAccountAndTxCfg() {
+    return Promise.reject();
+  }
 
   hello(_: string) {
-		return Promise.reject()
+    return Promise.reject();
   }
 }
 
-export const GoBridge: GoBridgeInterface = new NoopGoBridge()
+export const GoBridge: GoBridgeInterface = new NoopGoBridge();

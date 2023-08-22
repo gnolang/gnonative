@@ -14,7 +14,7 @@ export default function App() {
 
   useEffect(() => {
     const getGreeting = async () =>
-      setGreeting(await GoBridge.hello("Gno.land"));
+      setGreeting(await GoBridge.getAccountAndTxCfg());
 
     getGreeting();
   }, []);
