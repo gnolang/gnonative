@@ -1,5 +1,5 @@
 export interface GoBridgeInterface {
-	initBridge(): Promise<void>
-	closeBridge(): Promise<void>
-  hello(name: string): Promise<string>
+  initBridge(): Promise<void>;
+  closeBridge(): Promise<void>;
+  hello(name: string): Promise<string>;
 }
