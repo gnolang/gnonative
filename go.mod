@@ -52,5 +52,5 @@ require (
 
 replace (
 	github.com/btcsuite/btcd/btcutil v1.1.1 => github.com/btcsuite/btcd/btcutil v1.0.0
-	golang.org/x/mobile => github.com/berty/mobile v0.0.10 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
+	golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
 )
