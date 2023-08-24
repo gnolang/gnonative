@@ -50,12 +50,8 @@ class GoBridge: NSObject {
   }
 
     @objc func exportJsonConfig(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        var err: NSError?
         do {
-            resolve(GnoGnomobileExportJsonConfig(&err))
-            if err != nil {
-              throw err!
-            }
+            resolve(GnoGnomobileExportJsonConfig(self.appRootDir))
         } catch let error as NSError {
             reject("\(String(describing: error.code))", error.userInfo.description, error)
         }

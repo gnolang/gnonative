@@ -43,17 +43,8 @@ func Hello(rootDir string) string {
 	return fmt.Sprintf("Posted: %s", message)
 }
 
-func ExportJsonConfig() (string, error) {
-	config, err := json.Marshal(getAccountAndTxCfg())
-	if err != nil {
-		return "", err
-	}
-
-	return string(config), nil
-}
-
-func getAccountAndTxCfg() *accountAndTxCfg {
-	dataDir := "data"
+func getAccountAndTxCfg(rootDir string) *accountAndTxCfg {
+	dataDir := rootDir + "/data"
 	remote := "testnet.gno.berty.io:26657"
 	chainID := "dev"
 	keyName := "jefft0"
@@ -96,4 +87,12 @@ func callCreateReply(cfg *accountAndTxCfg, boardId string, threadId string, post
 		args:     []string{boardId, threadId, postId, body},
 	}
 	return execCall(callCfg, cfg.KeyName, cfg.Password)
+}
+
+func ExportJsonConfig(rootDir string) string {
+	config, err := json.Marshal(getAccountAndTxCfg(rootDir))
+	if err != nil {
+		return fmt.Sprintf("Error: unable load config: %s", err.Error())
+	}
+	return string(config)
 }
