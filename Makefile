@@ -85,6 +85,7 @@ $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@)
     # need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
 	$(gomobile) bind -v \
+		-cache $(cache_dir)/ios-gmomobile \
 		-tags 'nowatchdog' -prefix=Gno \
 		-o $@ -target ios ./framework
 _bind.clean.ios:
@@ -95,6 +96,7 @@ _bind.clean.ios:
 $(gnocore_aar): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@) .cache/bind/android
 	$(gomobile) bind -v \
+		-cache $(cache_dir)/android-gmomobile \
 		-javapkg=gnoland.gno \
 		-o $@ -target android -androidapi 21 ./framework
 _bind.clean.android:
