@@ -14,10 +14,13 @@ import gnoland.gno.gnomobile.Gnomobile;
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
     private final ReactApplicationContext reactContext;
+    private final File rootDir;
 
     public GoBridgeModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+
+        rootDir = new File(new land.gno.rootdir.RootDirModule(reactContext).getRootDir());
     }
 
     @Override
@@ -49,7 +52,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void hello(String name, Promise promise) {
-        promise.resolve(Gnomobile.hello(name));
+        promise.resolve(Gnomobile.hello(rootDir.getAbsolutePath()));
     }
 
     @Override

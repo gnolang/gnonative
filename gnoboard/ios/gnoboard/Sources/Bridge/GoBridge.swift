@@ -3,11 +3,14 @@ import GnoCore
 
 @objc(GoBridge)
 class GoBridge: NSObject {
+    let appRootDir: String
+
     static func requiresMainQueueSetup() -> Bool {
         return true
     }
 
     override init() {
+        self.appRootDir = try! RootDirGet()
         super.init()
     }
 
@@ -40,7 +43,7 @@ class GoBridge: NSObject {
 
   @objc func hello(_ name: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
       do {
-          resolve(GnoGnomobileHello(name))
+        resolve(GnoGnomobileHello(self.appRootDir))
       } catch let error as NSError {
           reject("\(String(describing: error.code))", error.userInfo.description, error)
       }

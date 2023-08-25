@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
-	"github.com/gnolang/gno/tm2/pkg/crypto/keys/client"
 )
 
 type PromiseBlock interface {
@@ -19,8 +18,8 @@ type accountAndTxCfg struct {
 	Password string
 }
 
-func Hello(name string) string {
-	cfg := getAccountAndTxCfg()
+func Hello(rootDir string) string {
+	cfg := getAccountAndTxCfg(rootDir)
 
 	// Debug: We should only have to do this once. It seems that the Keybase dir is deleted when we reinstall the app.
 	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)
@@ -43,8 +42,8 @@ func Hello(name string) string {
 	return fmt.Sprintf("Posted: %s", message)
 }
 
-func getAccountAndTxCfg() *accountAndTxCfg {
-	dataDir := "data"
+func getAccountAndTxCfg(rootDir string) *accountAndTxCfg {
+	dataDir := rootDir + "/data"
 	remote := "testnet.gno.berty.io:26657"
 	chainID := "dev"
 	keyName := "jefft0"
@@ -53,7 +52,7 @@ func getAccountAndTxCfg() *accountAndTxCfg {
 	return &accountAndTxCfg{
 		TxCfg: &makeTxCfg{
 			rootCfg: &baseCfg{
-				BaseOptions: client.BaseOptions{
+				BaseOptions: BaseOptions{
 					Home:   dataDir,
 					Remote: remote,
 				},
