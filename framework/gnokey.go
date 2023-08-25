@@ -21,16 +21,23 @@ type accountAndTxCfg struct {
 func Hello(rootDir string) string {
 	cfg := getAccountAndTxCfg(rootDir)
 
-	// Debug: We should only have to do this once. It seems that the Keybase dir is deleted when we reinstall the app.
 	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)
 	if err != nil {
 		return fmt.Sprintf("Error: unable to open Keybase: %s", err.Error())
 	}
-	_, err = kb.CreateAccount(cfg.KeyName,
-		"enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee",
-		"", cfg.Password, uint32(0), uint32(0))
+	keyList, err := kb.List()
 	if err != nil {
-		return fmt.Sprintf("Error: unable to create account: %s", err.Error())
+		return fmt.Sprintf("Error: unable to list keys: %s", err.Error())
+	}
+
+	if len(keyList) == 0 {
+		// Create a default hard-wired account for the proof-of-concept. This should be proper account management.
+		_, err = kb.CreateAccount(cfg.KeyName,
+			"enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee",
+			"", cfg.Password, uint32(0), uint32(0))
+		if err != nil {
+			return fmt.Sprintf("Error: unable to create account: %s", err.Error())
+		}
 	}
 
 	message := "Hello from GnoMobile demo"
