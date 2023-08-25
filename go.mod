@@ -3,13 +3,13 @@ module github.com/gnolang/gnomobile
 go 1.20
 
 require (
-	github.com/gnolang/gno v0.0.0-20230817171108-b40ac9cda5a5
+	github.com/gnolang/gno v0.0.0-20230824160121-aa7c1df119cd
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
 )
 
 require (
 	github.com/btcsuite/btcd v0.22.0-beta.0.20220111032746-97732e52810c // indirect
-	github.com/btcsuite/btcd/btcutil v1.1.1 // indirect
+	github.com/btcsuite/btcd/btcutil v1.0.0 // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/cockroachdb/apd v1.1.0 // indirect
@@ -17,6 +17,7 @@ require (
 	github.com/dgraph-io/badger/v3 v3.2103.4 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
+	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gnolang/cors v1.8.1 // indirect
 	github.com/gnolang/goleveldb v0.0.9 // indirect
 	github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 // indirect
@@ -31,7 +32,6 @@ require (
 	github.com/klauspost/compress v1.12.3 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
 	github.com/linxGnu/grocksdb v1.7.15 // indirect
-	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/peterbourgon/ff/v3 v3.4.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -50,7 +50,4 @@ require (
 	google.golang.org/protobuf v1.31.0 // indirect
 )
 
-replace (
-	github.com/btcsuite/btcd/btcutil v1.1.1 => github.com/btcsuite/btcd/btcutil v1.0.0
-	golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
-)
+replace golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82

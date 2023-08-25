@@ -51,8 +51,8 @@ github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWo
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/gnolang/cors v1.8.1 h1:D3y1DMoWcgGpCefHwD4UHjy1w1163sfczZyy7b5wH8o=
 github.com/gnolang/cors v1.8.1/go.mod h1:g7HJhHH+N1r+oRrb7ckR2J6xp5es4EizpAP0JpfgVgU=
-github.com/gnolang/gno v0.0.0-20230817171108-b40ac9cda5a5 h1:RHT4qC+etrC144HgB1YKin+QEn3eeR9igZ1rI6j+6Kg=
-github.com/gnolang/gno v0.0.0-20230817171108-b40ac9cda5a5/go.mod h1:UOqlXB96pTBqIvzvFjtrZ1QTmDzupj6ZgtgnA/Pv65k=
+github.com/gnolang/gno v0.0.0-20230824160121-aa7c1df119cd h1:mHDNPrio9ih/rB0ASAEcE0hcajzxT0012tWENTBtsyE=
+github.com/gnolang/gno v0.0.0-20230824160121-aa7c1df119cd/go.mod h1:XXHIVMAtlkT+97nrgLLcwE8nQgFUDJUJ7wUYRZsdD/I=
 github.com/gnolang/goleveldb v0.0.9 h1:Q7rGko9oXMKtQA+Apeeed5a3sjba/mcDhzJGoTVLCKE=
 github.com/gnolang/goleveldb v0.0.9/go.mod h1:Dz6p9bmpy/FBESTgduiThZt5mToVDipcHGzj/zUOo8E=
 github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 h1:GKvsK3oLWG9B1GL7WP/VqwM6C92j5tIvB844oggL9Lk=
@@ -106,7 +106,6 @@ github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czP
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
 github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
-github.com/nxadm/tail v1.4.8/go.mod h1:+ncqLTQzXmGhMZNUePPaPqPvBxHAIsmXswZKocGu+AU=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.7.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.14.0 h1:2mOpI4JVVPBN+WQRa0WKH2eXR+Ey+uK4n7Zj0aYpIQA=
