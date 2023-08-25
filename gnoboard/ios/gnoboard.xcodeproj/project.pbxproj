@@ -16,6 +16,8 @@
 		8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905B2A85BA7C00CB681E /* GoBridge.m */; };
 		8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905C2A85BA7C00CB681E /* GoBridge.swift */; };
 		8AB390602A85BD6000CB681E /* PromiseBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */; };
+		8AF1F6892A98ABBA0073D4D1 /* RootDir.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF1F6872A98ABBA0073D4D1 /* RootDir.m */; };
+		8AF1F68A2A98ABBA0073D4D1 /* RootDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF1F6882A98ABBA0073D4D1 /* RootDir.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-gnoboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-gnoboard.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
@@ -36,6 +38,8 @@
 		8AB3905B2A85BA7C00CB681E /* GoBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoBridge.m; sourceTree = "<group>"; };
 		8AB3905C2A85BA7C00CB681E /* GoBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoBridge.swift; sourceTree = "<group>"; };
 		8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseBlock.swift; sourceTree = "<group>"; };
+		8AF1F6872A98ABBA0073D4D1 /* RootDir.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootDir.m; sourceTree = "<group>"; };
+		8AF1F6882A98ABBA0073D4D1 /* RootDir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootDir.swift; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = gnoboard/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B11419FF73544E34A5C7A3A2 /* gnoboard-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "gnoboard-Bridging-Header.h"; path = "gnoboard/gnoboard-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		8AB390582A85B9B800CB681E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8AF1F6862A98ABBA0073D4D1 /* RootDir */,
 				8AB3905A2A85BA7C00CB681E /* Bridge */,
 			);
 			path = Sources;
@@ -131,6 +136,15 @@
 			name = Bridge;
 			path = gnoboard/Sources/Bridge;
 			sourceTree = SOURCE_ROOT;
+		};
+		8AF1F6862A98ABBA0073D4D1 /* RootDir */ = {
+			isa = PBXGroup;
+			children = (
+				8AF1F6872A98ABBA0073D4D1 /* RootDir.m */,
+				8AF1F6882A98ABBA0073D4D1 /* RootDir.swift */,
+			);
+			path = RootDir;
+			sourceTree = "<group>";
 		};
 		92DBD88DE9BF7D494EA9DA96 /* gnoboard */ = {
 			isa = PBXGroup;
@@ -363,6 +377,8 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
 				3310DF473105470FBA4883B6 /* noop-file.swift in Sources */,
+				8AF1F68A2A98ABBA0073D4D1 /* RootDir.swift in Sources */,
+				8AF1F6892A98ABBA0073D4D1 /* RootDir.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

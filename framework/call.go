@@ -8,15 +8,23 @@ import (
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
 	"github.com/gnolang/gno/tm2/pkg/commands"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
-	"github.com/gnolang/gno/tm2/pkg/crypto/keys/client"
 	"github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/gnolang/gno/tm2/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/std"
 )
 
+// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/common.go
+type BaseOptions struct {
+	Home                  string
+	Remote                string
+	Quiet                 bool
+	InsecurePasswordStdin bool
+	Config                string
+}
+
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/root.go
 type baseCfg struct {
-	client.BaseOptions
+	BaseOptions
 }
 
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/maketx.go
