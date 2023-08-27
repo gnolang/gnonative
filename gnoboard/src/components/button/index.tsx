@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { colors } from "@gno/styles/colors";
 
@@ -18,11 +18,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ title, onPress }) => {
+const Button = ({ title, onPress, loading }) => {
   return (
     <Pressable onPress={onPress}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{title}</Text>
+        {loading ? (
+          <ActivityIndicator size="small" />
+        ) : (
+          <Text style={styles.buttonText}>{title}</Text>
+        )}
       </View>
     </Pressable>
   );

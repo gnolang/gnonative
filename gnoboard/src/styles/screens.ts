@@ -6,6 +6,9 @@ export const screenStyleSheet = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
+  paddingVertical:{
+   paddingVertical: 8,
+  },
   container: {
     flex: 1,
     paddingTop: 340,
