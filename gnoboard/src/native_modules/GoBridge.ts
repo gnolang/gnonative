@@ -13,6 +13,10 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  createReply(_: string, __: string) {
+    return Promise.reject();
+  }
+
   exportJsonConfig() {
     return Promise.reject();
   }

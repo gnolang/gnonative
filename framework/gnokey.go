@@ -96,3 +96,15 @@ func ExportJsonConfig(rootDir string) string {
 	}
 	return string(config)
 }
+
+func CreateReply(message string, rootDir string) string {
+	cfg := getAccountAndTxCfg(rootDir)
+
+	err := callCreateReply(cfg, "2", "1", "1", message)
+
+	if err != nil {
+		return fmt.Sprintf("Error: unable to exec call command: %s", err.Error())
+	}
+
+	return fmt.Sprintf("Posted: %s", message)
+}

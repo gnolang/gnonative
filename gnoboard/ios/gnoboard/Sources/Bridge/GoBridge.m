@@ -15,6 +15,11 @@ RCT_EXTERN_METHOD(hello:(NSString)name
 RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(createReply:(NSString)message
+                  rootdir:(NSString)rootdir
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 + (BOOL)requiresMainQueueSetup
 {
  return YES;  // only do this if your module initialization relies on calling UIKit!

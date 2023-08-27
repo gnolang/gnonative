@@ -12,9 +12,12 @@ function HomeScreen() {
   const [loading, setLoading] = useState<string | undefined>(undefined);
 
   const onPostPress = async () => {
-    GoBridge.createReply(postContent)
+    setLoading("Replying to a post...");
+    setAppConsole("replying to a post...");
+    GoBridge.createReply(postContent, "")
       .then((data) => {
         setAppConsole(data);
+        setPostContent("");
       })
       .catch((err) => {
         setAppConsole(err);

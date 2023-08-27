@@ -49,6 +49,14 @@ class GoBridge: NSObject {
       }
   }
 
+    @objc func createReply(_ message: String, rootdir: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+      do {
+        resolve(GnoGnomobileCreateReply(message, self.appRootDir))
+      } catch let error as NSError {
+          reject("\(String(describing: error.code))", error.userInfo.description, error)
+      }
+  }
+
     @objc func exportJsonConfig(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         do {
             resolve(GnoGnomobileExportJsonConfig(self.appRootDir))

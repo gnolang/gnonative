@@ -3,4 +3,5 @@ export interface GoBridgeInterface {
   closeBridge(): Promise<void>;
   hello(name: string): Promise<string>;
   exportJsonConfig(): Promise<string>;
+  createReply(message: string, _: string | null): Promise<string>;
 }
