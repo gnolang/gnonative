@@ -1,32 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 
-import { GoBridge } from '@gno/native_modules/GoBridge';
+import HomeScreen from "@gno/screens/home";
+import SettingsScreen from "@gno/screens/settings";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [greeting, setGreeting] = React.useState<string>('');
-
-  useEffect(() => {
-    const getGreeting = async () => setGreeting(await GoBridge.hello('Gno.land'));
-
-    getGreeting();
-    }, []);
-
-
   return (
-    <View style={styles.container}>
-      <Text>{greeting}</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

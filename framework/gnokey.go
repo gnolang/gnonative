@@ -1,6 +1,7 @@
 package gnomobile
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
@@ -93,4 +94,24 @@ func callCreateReply(cfg *accountAndTxCfg, boardId string, threadId string, post
 		args:     []string{boardId, threadId, postId, body},
 	}
 	return execCall(callCfg, cfg.KeyName, cfg.Password)
+}
+
+func ExportJsonConfig(rootDir string) string {
+	config, err := json.Marshal(getAccountAndTxCfg(rootDir))
+	if err != nil {
+		return fmt.Sprintf("Error: unable load config: %s", err.Error())
+	}
+	return string(config)
+}
+
+func CreateReply(message string, rootDir string) string {
+	cfg := getAccountAndTxCfg(rootDir)
+
+	err := callCreateReply(cfg, "2", "1", "1", message)
+
+	if err != nil {
+		return fmt.Sprintf("Error: unable to exec call command: %s", err.Error())
+	}
+
+	return fmt.Sprintf("Posted: %s", message)
 }
