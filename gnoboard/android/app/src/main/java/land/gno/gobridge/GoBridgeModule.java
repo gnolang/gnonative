@@ -56,14 +56,14 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createReply(String message, String _, Promise promise) {
+    public void createReply(String message, String path, Promise promise) {
         promise.resolve(Gnomobile.createReply(message, rootDir.getAbsolutePath()));
     }
 
     @ReactMethod
     public void exportJsonConfig(Promise promise) {
         try {
-            promise.resolve(Gnomobile.exportJsonConfig());
+            promise.resolve(Gnomobile.exportJsonConfig(rootDir.getAbsolutePath()));
         } catch (Exception err) {
             promise.reject(err);
         }
