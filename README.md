@@ -47,7 +47,7 @@ Start a new terminal to get the changes to the environment .
 ### Get a copy of the repo
 
 ```console
-git clone git@github.com:gnolang/gnomobile.git
+git clone https://github.com/gnolang/gnomobile
 cd gnomobile
 ```
 
