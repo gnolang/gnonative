@@ -17,28 +17,15 @@ type accountAndTxCfg struct {
 
 	KeyName  string
 	Password string
+	Mnemonic string
 }
 
 func Hello(rootDir string) string {
 	cfg := getAccountAndTxCfg(rootDir)
 
-	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)
+	err := CreateDefaulAccount(rootDir)
 	if err != nil {
-		return fmt.Sprintf("Error: unable to open Keybase: %s", err.Error())
-	}
-	keyList, err := kb.List()
-	if err != nil {
-		return fmt.Sprintf("Error: unable to list keys: %s", err.Error())
-	}
-
-	if len(keyList) == 0 {
-		// Create a default hard-wired account for the proof-of-concept. This should be proper account management.
-		_, err = kb.CreateAccount(cfg.KeyName,
-			"enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee",
-			"", cfg.Password, uint32(0), uint32(0))
-		if err != nil {
-			return fmt.Sprintf("Error: unable to create account: %s", err.Error())
-		}
+		return fmt.Sprintf("Error: unable to create default account: %s", err.Error())
 	}
 
 	message := "Hello from GnoMobile demo"
@@ -50,12 +37,36 @@ func Hello(rootDir string) string {
 	return fmt.Sprintf("Posted: %s", message)
 }
 
+func CreateDefaulAccount(rootDir string) error {
+	cfg := getAccountAndTxCfg(rootDir)
+
+	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)
+	if err != nil {
+		return err
+	}
+	keyList, err := kb.List()
+	if err != nil {
+		return err
+	}
+	if len(keyList) > 0 {
+		// Assume the account with cfg.KeyName is already created.
+		return nil
+	}
+
+	_, err = kb.CreateAccount(cfg.KeyName, cfg.Mnemonic, "", cfg.Password, uint32(0), uint32(0))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func getAccountAndTxCfg(rootDir string) *accountAndTxCfg {
 	dataDir := rootDir + "/data"
 	remote := "testnet.gno.berty.io:26657"
 	chainID := "dev"
 	keyName := "jefft0"
 	password := "password"
+	mnemonic := "enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee"
 
 	return &accountAndTxCfg{
 		TxCfg: &makeTxCfg{
@@ -73,6 +84,7 @@ func getAccountAndTxCfg(rootDir string) *accountAndTxCfg {
 		},
 		KeyName:  keyName,
 		Password: password,
+		Mnemonic: mnemonic,
 	}
 }
 
