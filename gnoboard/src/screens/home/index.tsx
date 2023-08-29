@@ -26,15 +26,20 @@ function HomeScreen() {
   };
 
   const onCreateAccountPress = async () => {
-    setLoading("Creating account...");
-    GoBridge.hello("create account")
-      .then((data) => {
-        setAppConsole(data);
-      })
-      .catch((err) => {
-        setAppConsole(err);
-      })
-      .finally(() => setLoading(undefined));
+    setLoading("Creating default account...");
+    setAppConsole("Creating default account...");
+
+    try {
+      const data = await GoBridge.createDefaulAccount("create account");
+      setAppConsole(data);
+
+      const config = await GoBridge.exportJsonConfig();
+      setAppConsole(config);
+    } catch (err) {
+      setAppConsole(err as any);
+    } finally {
+      setLoading(undefined);
+    }
   };
 
   const loadInBrowser = () => {

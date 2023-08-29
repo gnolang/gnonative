@@ -9,7 +9,7 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
-  hello(_: string) {
+  createDefaulAccount(_: string) {
     return Promise.reject();
   }
 

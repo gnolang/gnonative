@@ -9,6 +9,10 @@ export const consoleStyleSheet = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     margin: 5,
+    maxHeight: 400,
+  },
+  contentContainer: {
+    minHeight: 150,
   },
   text: {
     color: "#ffffff",
