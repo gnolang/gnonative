@@ -30,7 +30,7 @@ function HomeScreen() {
     setAppConsole("Creating default account...");
 
     try {
-      const data = await GoBridge.createDefaulAccount("create account");
+      const data = await GoBridge.createDefaultAccount("create account");
       setAppConsole(data);
 
       const config = await GoBridge.exportJsonConfig();

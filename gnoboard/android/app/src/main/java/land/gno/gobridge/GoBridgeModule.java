@@ -51,8 +51,13 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createDefaulAccount(String name, Promise promise) {
-        promise.resolve(Gnomobile.createDefaulAccount(rootDir.getAbsolutePath()));
+    public void createDefaultAccount(String name, Promise promise) {
+        try {
+            Gnomobile.createDefaultAccount(rootDir.getAbsolutePath());
+            promise.resolve(true);
+        } catch (Exception err) {
+            promise.reject(err);
+        }
     }
 
     @ReactMethod

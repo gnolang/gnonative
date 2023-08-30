@@ -20,7 +20,7 @@ type accountAndTxCfg struct {
 	Mnemonic string
 }
 
-func CreateDefaulAccount(rootDir string) error {
+func CreateDefaultAccount(rootDir string) error {
 	cfg := getAccountAndTxCfg(rootDir)
 
 	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)
