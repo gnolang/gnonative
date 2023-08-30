@@ -14,15 +14,16 @@ function HomeScreen() {
   const onPostPress = async () => {
     setLoading("Replying to a post...");
     setAppConsole("replying to a post...");
-    GoBridge.createReply(postContent, "")
-      .then((data) => {
-        setAppConsole(data);
-        setPostContent("");
-      })
-      .catch((err) => {
-        setAppConsole(err);
-      })
-      .finally(() => setLoading(undefined));
+
+    try {
+      const data = await GoBridge.createReply(postContent, "");
+      setAppConsole(data);
+      setPostContent("");
+    } catch (err) {
+      setAppConsole(err as any);
+    } finally {
+      setLoading(undefined);
+    }
   };
 
   const onCreateAccountPress = async () => {
@@ -32,9 +33,6 @@ function HomeScreen() {
     try {
       const data = await GoBridge.createDefaultAccount("create account");
       setAppConsole(data);
-
-      const config = await GoBridge.exportJsonConfig();
-      setAppConsole(config);
     } catch (err) {
       setAppConsole(err as any);
     } finally {
