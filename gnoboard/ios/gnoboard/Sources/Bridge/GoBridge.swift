@@ -41,10 +41,10 @@ class GoBridge: NSObject {
         }
     }
 
-    @objc func createDefaulAccount(_ name: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    @objc func createDefaultAccount(_ name: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         do {
             var err: NSError?
-            resolve(GnoGnomobileCreateDefaulAccount(self.appRootDir, &err))
+            resolve(GnoGnomobileCreateDefaultAccount(self.appRootDir, &err))
             if err != nil {
                 throw err!
             }
