@@ -6,37 +6,10 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	rpc_client "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
-	"github.com/gnolang/gno/tm2/pkg/commands"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/gnolang/gno/tm2/pkg/std"
 )
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/common.go
-type BaseOptions struct {
-	Home                  string
-	Remote                string
-	Quiet                 bool
-	InsecurePasswordStdin bool
-	Config                string
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/root.go
-type baseCfg struct {
-	BaseOptions
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/maketx.go
-type makeTxCfg struct {
-	rootCfg *baseCfg
-
-	gasWanted int64
-	gasFee    string
-	memo      string
-
-	broadcast bool
-	chainID   string
-}
 
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go
 type queryCfg struct {
@@ -74,35 +47,6 @@ type broadcastCfg struct {
 
 	// internal
 	tx *std.Tx
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/call.go
-type callCfg struct {
-	rootCfg *makeTxCfg
-
-	send     string
-	pkgPath  string
-	funcName string
-	args     commands.StringArr
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/call.go
-func execCall(cfg *callCfg, nameOrBech32 string, password string) error {
-	client := NewClient(cfg.rootCfg.rootCfg.Remote, cfg.rootCfg.chainID)
-	client.SetAccount(nameOrBech32, password)
-	if err := client.SetKeyBaseFromDir(cfg.rootCfg.rootCfg.Home); err != nil {
-		return err
-	}
-	r := client.NewRequest("call")
-	r.StringOption("pkgpath", cfg.pkgPath)
-	r.StringOption("func", cfg.funcName)
-	r.StringOption("gas-fee", cfg.rootCfg.gasFee)
-	r.Int64Option("gas-wanted", cfg.rootCfg.gasWanted)
-	for _, arg := range cfg.args {
-		r.Argument(arg)
-	}
-
-	return r.Send()
 }
 
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go
