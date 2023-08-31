@@ -20,24 +20,7 @@ type accountAndTxCfg struct {
 	Mnemonic string
 }
 
-func Hello(rootDir string) string {
-	cfg := getAccountAndTxCfg(rootDir)
-
-	err := CreateDefaulAccount(rootDir)
-	if err != nil {
-		return fmt.Sprintf("Error: unable to create default account: %s", err.Error())
-	}
-
-	message := "Hello from GnoMobile demo"
-	err = callCreateReply(cfg, "2", "1", "1", message)
-	if err != nil {
-		return fmt.Sprintf("Error: unable to exec call command: %s", err.Error())
-	}
-
-	return fmt.Sprintf("Posted: %s", message)
-}
-
-func CreateDefaulAccount(rootDir string) error {
+func CreateDefaultAccount(rootDir string) error {
 	cfg := getAccountAndTxCfg(rootDir)
 
 	kb, err := keys.NewKeyBaseFromDir(cfg.TxCfg.rootCfg.Home)

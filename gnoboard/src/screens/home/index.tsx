@@ -14,27 +14,30 @@ function HomeScreen() {
   const onPostPress = async () => {
     setLoading("Replying to a post...");
     setAppConsole("replying to a post...");
-    GoBridge.createReply(postContent, "")
-      .then((data) => {
-        setAppConsole(data);
-        setPostContent("");
-      })
-      .catch((err) => {
-        setAppConsole(err);
-      })
-      .finally(() => setLoading(undefined));
+
+    try {
+      const data = await GoBridge.createReply(postContent, "");
+      setAppConsole(data);
+      setPostContent("");
+    } catch (err) {
+      setAppConsole(err as any);
+    } finally {
+      setLoading(undefined);
+    }
   };
 
   const onCreateAccountPress = async () => {
-    setLoading("Creating account...");
-    GoBridge.hello("create account")
-      .then((data) => {
-        setAppConsole(data);
-      })
-      .catch((err) => {
-        setAppConsole(err);
-      })
-      .finally(() => setLoading(undefined));
+    setLoading("Creating default account...");
+    setAppConsole("Creating default account...");
+
+    try {
+      const data = await GoBridge.createDefaultAccount("create account");
+      setAppConsole(data);
+    } catch (err) {
+      setAppConsole(err as any);
+    } finally {
+      setLoading(undefined);
+    }
   };
 
   const loadInBrowser = () => {
