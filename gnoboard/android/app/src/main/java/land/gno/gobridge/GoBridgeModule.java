@@ -10,11 +10,14 @@ import com.facebook.react.bridge.ReactMethod;
 import java.io.File;
 
 import gnoland.gno.gnomobile.Gnomobile;
+import gnoland.gno.gnomobile.Bridge;
+import gnoland.gno.gnomobile.BridgeConfig;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
     private final ReactApplicationContext reactContext;
     private final File rootDir;
+    private static Bridge bridgeGnomobile = null;
 
     public GoBridgeModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -35,6 +38,14 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void initBridge(Promise promise) {
         try {
+            final BridgeConfig config = Gnomobile.newBridgeConfig();
+            if (config == null) {
+                throw new Exception("");
+            }
+
+            config.setRootDir(rootDir.getAbsolutePath());
+
+            bridgeGnomobile = Gnomobile.newBridge(config);
             promise.resolve(true);
         } catch (Exception err) {
             promise.reject(err);
@@ -44,6 +55,10 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void closeBridge(Promise promise) {
         try {
+            if (bridgeGnomobile != null) {
+                bridgeGnomobile.close();
+                bridgeGnomobile = null;
+            }
             promise.resolve(true);
         } catch (Exception err) {
             promise.reject(err);

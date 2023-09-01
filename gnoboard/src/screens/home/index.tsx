@@ -3,13 +3,28 @@ import { ConsoleView } from "@gno/components/consoleview";
 import TextInput from "@gno/components/textinput";
 import { GoBridge } from "@gno/native_modules";
 import { screenStyleSheet as styles } from "@gno/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
+import { initBridge } from "@gno/utils/bridge";
 
 function HomeScreen() {
   const [postContent, setPostContent] = useState("");
   const [appConsole, setAppConsole] = useState<string>("");
   const [loading, setLoading] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+  	const init = async () => {
+	  await initBridge()
+	}
+	init()
+
+	return () => {
+		const deinit = async () => {
+		  await GoBridge.closeBridge()
+		}
+		deinit()
+	}
+  }, [])
 
   const onPostPress = async () => {
     setLoading("Replying to a post...");

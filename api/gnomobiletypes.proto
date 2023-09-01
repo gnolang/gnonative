@@ -47,7 +47,10 @@ enum ErrCode {
   // Parameters and I/O errors
 
   ErrInvalidInput = 100;
+  ErrBridgeInterrupted = 101;
   ErrMissingInput = 102;
   ErrSerialization = 103;
   ErrDeserialization = 104;
 }
+
+message ErrDetails { repeated ErrCode codes = 1; }

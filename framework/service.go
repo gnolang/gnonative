@@ -34,12 +34,12 @@ type gnomobileServiceServer struct {
 	server   *grpc.Server
 }
 
-type GnomobileServerOption struct {
+type GnomobileServerOptions struct {
 	ServiceOpts []GnomobileOption
 	SockAddr    string
 }
 
-func (o *GnomobileServerOption) applyDefaults() error {
+func (o *GnomobileServerOptions) applyDefaults() error {
 	if o.ServiceOpts == nil {
 		o.ServiceOpts = []GnomobileOption{}
 	}
@@ -55,7 +55,7 @@ type GnomobileOption func(*gnomobileService) error
 
 // NewGnomobileServiceServer creates a new Gnomobile protocol service and runs a gRPC server.
 // When finished, you must call Close().
-func NewGnomobileServiceServer(opts GnomobileServerOption) (GnomobileServiceServer, error) {
+func NewGnomobileServiceServer(opts GnomobileServerOptions) (GnomobileServiceServer, error) {
 	if err := opts.applyDefaults(); err != nil {
 		return nil, err
 	}
