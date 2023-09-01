@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package gomobile.v1;
+
+option go_package = "github.com/gnoland/gnomobile/framework/gnomobiletypes";
+
+// GnomobileService is the service to interact with the Gno blockchain
+service GnomobileService {
+	// CreateReply creates a reply to the Gnoboard realms
+	rpc CreateReply (CreateReply.Request) returns (CreateReply.Reply);
+
+	// Hello greets someone
+	rpc Hello (Hello.Request) returns (Hello.Reply);
+}
+
+message CreateReply {
+	message Request {
+		string message = 1;
+	}
+	message Reply {}
+}
+
+message Hello {
+	message Request {
+		string name = 1;
+	}
+	message Reply {
+		string message = 1;
+	}
+}
+
+enum ErrCode {
+  //----------------
+  // Special errors
+  //----------------
+
+  Undefined = 0; // default value, should never be set manually
+
+  TODO = 1;              // indicates that you plan to create an error later
+  ErrNotImplemented = 2; // indicates that a method is not implemented yet
+  ErrInternal = 3; // indicates an unknown error (without Code), i.e. in gRPC
+
+  //----------------
+  // Generic errors
+  //----------------
+
+  // Parameters and I/O errors
+
+  ErrInvalidInput = 100;
+  ErrMissingInput = 102;
+  ErrSerialization = 103;
+  ErrDeserialization = 104;
+}

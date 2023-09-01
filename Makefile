@@ -48,6 +48,9 @@ build.ios: generate $(gnocore_xcframework)
 build.android: generate $(gnocore_aar) $(gnocore_jar)
 	cd $(react_native_dir); $(MAKE) node_modules
 
+# Generate API from protofiles
+generate: api.generate
+
 # Clean all generated files
 clean: bind.clean
 
@@ -56,7 +59,34 @@ fclean: clean
 	rm -rf node_modules
 	rm -rf $(cache_dir)
 
-.PHONY: generate build.ios build.android fclean
+.PHONY: generate build.ios build.android clean fclean
+
+# - API : Handle API generation and cleaning
+
+api.generate: _api.generate.protocol
+api.clean: _api.clean.protocol
+
+# - API - gnomobiletypes
+
+protos_src := $(wildcard api/*.proto)
+gen_src := $(protos_src) Makefile
+gen_sum := gen.sum
+
+_api.generate.protocol: gen.sum
+_api.clean.protocol:
+	rm -f framework/gnomobiletypes/*.pb.go
+
+$(gen_sum): $(gen_src)
+	$(call check-program, shasum buf)
+	@shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp
+	@diff -q $(gen_sum).tmp $(gen_sum) || ( \
+		buf generate api; \
+		shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp; \
+		mv $(gen_sum).tmp $(gen_sum); \
+		go mod tidy \
+	)
+
+.PHONY: api.generate _api.generate.protocol
 
 # - Bind : Handle gomobile bind
 
