@@ -10,18 +10,20 @@ type PromiseBlock interface {
 	CallReject(error error)
 }
 
-type accountAndTxCfg struct {
-	Client *Client
-
-	GasWanted int64
+type GnoConfig struct {
+	Remote    string
+	ChainID   string
+	KeyName   string
+	Password  string
 	GasFee    string
+	GasWanted int64
 	Mnemonic  string
 }
 
 var client *Client = NewClient()
 
 func ClientExec(command string, rootDir string) string {
-	cfg, err := getAccountAndTxCfg(rootDir)
+	_, err := getGnoConfig(rootDir)
 	if err != nil {
 		return fmt.Sprintf("Error: unable to get config: %s", err.Error())
 	}
@@ -37,7 +39,7 @@ func ClientExec(command string, rootDir string) string {
 	var call Call
 	err = json.Unmarshal([]byte(command), &call)
 	if err == nil {
-		err = cfg.Client.Call(
+		err = client.Call(
 			call.PackagePath, call.Fnc, call.Args, call.GasFee, int64(call.GasWanted), "")
 		if err != nil {
 			return fmt.Sprintf("Error: unable to exec call command: %s", err.Error())
@@ -49,12 +51,12 @@ func ClientExec(command string, rootDir string) string {
 }
 
 func CreateDefaultAccount(rootDir string) error {
-	cfg, err := getAccountAndTxCfg(rootDir)
+	cfg, err := getGnoConfig(rootDir)
 	if err != nil {
 		return err
 	}
 
-	keyCount, err := cfg.Client.GetKeyCount()
+	keyCount, err := client.GetKeyCount()
 	if err != nil {
 		return err
 	}
@@ -63,10 +65,10 @@ func CreateDefaultAccount(rootDir string) error {
 		return nil
 	}
 
-	return cfg.Client.CreateAccount(cfg.Mnemonic, "", 0, 0)
+	return client.CreateAccount(cfg.Mnemonic, "", 0, 0)
 }
 
-func getAccountAndTxCfg(rootDir string) (*accountAndTxCfg, error) {
+func getGnoConfig(rootDir string) (*GnoConfig, error) {
 	dataDir := rootDir + "/data"
 	remote := "testnet.gno.berty.io:26657"
 	chainID := "dev"
@@ -80,16 +82,19 @@ func getAccountAndTxCfg(rootDir string) (*accountAndTxCfg, error) {
 		return nil, err
 	}
 
-	return &accountAndTxCfg{
-		Client:    client,
-		GasWanted: 2000000,
+	return &GnoConfig{
+		Remote:    remote,
+		ChainID:   chainID,
+		KeyName:   keyName,
+		Password:  password,
 		GasFee:    "1000000ugnot",
+		GasWanted: 2000000,
 		Mnemonic:  mnemonic,
 	}, nil
 }
 
 func ExportJsonConfig(rootDir string) string {
-	cfg, err := getAccountAndTxCfg(rootDir)
+	cfg, err := getGnoConfig(rootDir)
 	if err != nil {
 		return fmt.Sprintf("Error: unable make config: %s", err.Error())
 	}
