@@ -8,7 +8,7 @@ RCT_EXTERN_METHOD(initBridge:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(closeBridge:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(hello:(NSString)name
+RCT_EXTERN_METHOD(clientExec:(NSString)command
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
@@ -17,11 +17,6 @@ RCT_EXTERN_METHOD(createDefaultAccount:(NSString)name
                   reject:(RCTPromiseRejectBlock)reject);
 
 RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject);
-
-RCT_EXTERN_METHOD(createReply:(NSString)message
-                  rootdir:(NSString)rootdir
-                  resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
 + (BOOL)requiresMainQueueSetup

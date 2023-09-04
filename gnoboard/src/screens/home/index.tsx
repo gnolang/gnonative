@@ -29,30 +29,32 @@ function HomeScreen() {
   const onPostPress = async () => {
     setLoading("Replying to a post...");
     setAppConsole("replying to a post...");
-
-    try {
-      const data = await GoBridge.createReply(postContent, "");
-      setAppConsole(data);
-      setPostContent("");
-    } catch (err) {
-      setAppConsole(err as any);
-    } finally {
-      setLoading(undefined);
-    }
+    var gasFee = "1000000ugnot"
+    var gasWanted = 2000000
+    GoBridge.clientExec(JSON.stringify({PackagePath: "gno.land/r/demo/boards", Fnc: "CreateReply",
+         Args: ["2", "1", "1", postContent], GasFee: gasFee, GasWanted: gasWanted}))
+      .then((data) => {
+        setAppConsole(data);
+        setPostContent("");
+      })
+      .catch((err) => {
+        setAppConsole(err);
+      })
+      .finally(() => setLoading(undefined));
   };
 
   const onCreateAccountPress = async () => {
     setLoading("Creating default account...");
     setAppConsole("Creating default account...");
 
-    try {
-      const data = await GoBridge.createDefaultAccount("create account");
-      setAppConsole(data);
-    } catch (err) {
-      setAppConsole(err as any);
-    } finally {
-      setLoading(undefined);
-    }
+    // try {
+    //   const data = await GoBridge.createDefaultAccount("create account");
+    //   setAppConsole(data);
+    // } catch (err) {
+    //   setAppConsole(err as any);
+    // } finally {
+    //   setLoading(undefined);
+    // }
   };
 
   const loadInBrowser = () => {

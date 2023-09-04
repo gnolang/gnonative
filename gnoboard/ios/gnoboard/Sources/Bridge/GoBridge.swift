@@ -41,24 +41,12 @@ class GoBridge: NSObject {
         }
     }
 
-    @objc func createDefaultAccount(_ name: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        do {
-            var err: NSError?
-            resolve(GnoGnomobileCreateDefaultAccount(self.appRootDir, &err))
-            if err != nil {
-                throw err!
-            }
-        } catch let error as NSError {
-            reject("\(String(describing: error.code))", error.userInfo.description, error)
-        }
+  @objc func clientExec(_ command: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      resolve(GnoGnomobileClientExec(command, self.appRootDir))
+    } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.userInfo.description, error)
     }
-
-    @objc func createReply(_ message: String, rootdir: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-      do {
-        resolve(GnoGnomobileCreateReply(message, self.appRootDir))
-      } catch let error as NSError {
-          reject("\(String(describing: error.code))", error.userInfo.description, error)
-      }
   }
 
     @objc func exportJsonConfig(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
