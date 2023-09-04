@@ -7,25 +7,25 @@ option go_package = "github.com/gnoland/gnomobile/framework/gnomobiletypes";
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
 	// Set the connection info for the remote node. If you don't call this, the default is
-	// remote = "127.0.0.1:26657" and chainID = "dev" .
+	// remote = "127.0.0.1:26657" and chainID = "dev"
 	rpc SetRemote (SetRemote.Request) returns (SetRemote.Reply);
 
 	// NewKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
 	rpc SetKeyBaseFromDir (SetKeyBaseFromDir.Request) returns (SetKeyBaseFromDir.Reply);
 
-	// Set the name and password for the account in the keybase, used for later operations.
+	// Set the name and password for the account in the keybase, used for later operations
 	rpc SetAccount (SetAccount.Request) returns (SetAccount.Reply);
 
-	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir.
+	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir
 	rpc GetKeyCount (GetKeyCount.Request) returns (GetKeyCount.Reply);
 
 	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
-	// the name an password specified by SetAccount.
+	// the name an password specified by SetAccount
 	rpc CreateAccount (CreateAccount.Request) returns (CreateAccount.Reply);
 
-	// CreateReply creates a reply to a message in the Gnoboard realms
-	rpc CreateReply (CreateReply.Request) returns (CreateReply.Reply);
+	// Call a specific realm function.
+	rpc Call (Call.Request) returns (Call.Reply);
 }
 
 message SetRemote {
@@ -73,19 +73,18 @@ message CreateAccount {
   }
 }
 
-// GasInfo contains the operation's gas information such as gas fee and gas wanted.
+// GasInfo contains the operation's gas information such as gas fee and gas wanted
 message GasInfo {
 		string gasFee = 1;
 		int64 gasWanted = 2;
 }
 
-message CreateReply {
+message Call {
 	message Request {
-		string boardId = 1;
-		string threadId = 2;
-		string postId = 3;
-		string message = 4;
-		GasInfo gasInfo = 5;
+		string packagePath = 1; // Example: "gno.land/r/demo/boards"
+		string fnc = 2; // Example: "CreateReply"
+		repeated string args = 3; // list of arguments specific to the function
+		GasInfo gasInfo = 4;
 	}
 	message Reply {
     string error = 1;
