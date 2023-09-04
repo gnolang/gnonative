@@ -6,27 +6,90 @@ option go_package = "github.com/gnoland/gnomobile/framework/gnomobiletypes";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
-	// CreateReply creates a reply to the Gnoboard realms
-	rpc CreateReply (CreateReply.Request) returns (CreateReply.Reply);
+	// Set the connection info for the remote node. If you don't call this, the default is
+	// remote = "127.0.0.1:26657" and chainID = "dev" .
+	rpc SetRemote (SetRemote.Request) returns (SetRemote.Reply);
 
-	// Hello greets someone
-	rpc Hello (Hello.Request) returns (Hello.Reply);
+	// NewKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
+	rpc SetKeyBaseFromDir (SetKeyBaseFromDir.Request) returns (SetKeyBaseFromDir.Reply);
+
+	// Set the name and password for the account in the keybase, used for later operations.
+	rpc SetAccount (SetAccount.Request) returns (SetAccount.Reply);
+
+	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir.
+	rpc GetKeyCount (GetKeyCount.Request) returns (GetKeyCount.Reply);
+
+	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
+	// the name an password specified by SetAccount.
+	rpc CreateAccount (CreateAccount.Request) returns (CreateAccount.Reply);
+
+	// CreateReply creates a reply to a message in the Gnoboard realms
+	rpc CreateReply (CreateReply.Request) returns (CreateReply.Reply);
 }
 
-message CreateReply {
+message SetRemote {
 	message Request {
-		string message = 1;
+		string remote = 1;
+		string chainID = 2;
 	}
 	message Reply {}
 }
 
-message Hello {
+message SetKeyBaseFromDir {
 	message Request {
-		string name = 1;
+		string subDir = 1;
 	}
 	message Reply {
-		string message = 1;
+    string error = 1;
+  }
+}
+
+message SetAccount {
+	message Request {
+		string nameOrBech32 = 1;
+		string password = 2;
 	}
+	message Reply {}
+}
+
+message GetKeyCount {
+	message Request {}
+	message Reply {
+    int64 keyCount = 1;
+    string error = 2;
+  }
+}
+
+message CreateAccount {
+	message Request {
+		string mnemonic = 1;
+		string string = 2;
+		int64 account = 3;
+		int64 index = 4;
+	}
+	message Reply {
+    string error = 1;
+  }
+}
+
+// GasInfo contains the operation's gas information such as gas fee and gas wanted.
+message GasInfo {
+		string gasFee = 1;
+		int64 gasWanted = 2;
+}
+
+message CreateReply {
+	message Request {
+		string boardId = 1;
+		string threadId = 2;
+		string postId = 3;
+		string message = 4;
+		GasInfo gasInfo = 5;
+	}
+	message Reply {
+    string error = 1;
+  }
 }
 
 enum ErrCode {
