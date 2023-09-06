@@ -87,7 +87,8 @@ message Call {
 		GasInfo gasInfo = 4;
 	}
 	message Reply {
-    string error = 1;
+    bytes data = 1;
+    string error = 2;
   }
 }
 

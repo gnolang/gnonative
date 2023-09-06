@@ -34,7 +34,7 @@ type GnomobileServiceClient interface {
 	// Set the connection info for the remote node. If you don't call this, the default is
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	SetRemote(ctx context.Context, in *SetRemote_Request, opts ...grpc.CallOption) (*SetRemote_Reply, error)
-	// NewKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
 	SetKeyBaseFromDir(ctx context.Context, in *SetKeyBaseFromDir_Request, opts ...grpc.CallOption) (*SetKeyBaseFromDir_Reply, error)
 	// Set the name and password for the account in the keybase, used for later operations
@@ -117,7 +117,7 @@ type GnomobileServiceServer interface {
 	// Set the connection info for the remote node. If you don't call this, the default is
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error)
-	// NewKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
 	SetKeyBaseFromDir(context.Context, *SetKeyBaseFromDir_Request) (*SetKeyBaseFromDir_Reply, error)
 	// Set the name and password for the account in the keybase, used for later operations
