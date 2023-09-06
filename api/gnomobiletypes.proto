@@ -24,6 +24,9 @@ service GnomobileService {
 	// the name an password specified by SetAccount
 	rpc CreateAccount (CreateAccount.Request) returns (CreateAccount.Reply);
 
+	// Make an ABCI query to the remote node.
+	rpc Query (Query.Request) returns (Query.Reply);
+
 	// Call a specific realm function.
 	rpc Call (Call.Request) returns (Call.Reply);
 }
@@ -73,10 +76,15 @@ message CreateAccount {
   }
 }
 
-// GasInfo contains the operation's gas information such as gas fee and gas wanted
-message GasInfo {
-		string gasFee = 1;
-		int64 gasWanted = 2;
+message Query {
+	message Request {
+		string path = 1; // Example: "vm/qrender"
+		string data = 2; // Example: "gno.land/r/demo/boards\ntestboard"
+	}
+	message Reply {
+    bytes result = 1;
+    string error = 2;
+  }
 }
 
 message Call {
@@ -84,10 +92,11 @@ message Call {
 		string packagePath = 1; // Example: "gno.land/r/demo/boards"
 		string fnc = 2; // Example: "CreateReply"
 		repeated string args = 3; // list of arguments specific to the function
-		GasInfo gasInfo = 4;
+		string gasFee = 4;
+		int64 gasWanted = 5;
 	}
 	message Reply {
-    bytes data = 1;
+    bytes result = 1;
     string error = 2;
   }
 }

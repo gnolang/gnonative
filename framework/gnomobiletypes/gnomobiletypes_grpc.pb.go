@@ -24,6 +24,7 @@ const (
 	GnomobileService_SetAccount_FullMethodName        = "/gomobile.v1.GnomobileService/SetAccount"
 	GnomobileService_GetKeyCount_FullMethodName       = "/gomobile.v1.GnomobileService/GetKeyCount"
 	GnomobileService_CreateAccount_FullMethodName     = "/gomobile.v1.GnomobileService/CreateAccount"
+	GnomobileService_Query_FullMethodName             = "/gomobile.v1.GnomobileService/Query"
 	GnomobileService_Call_FullMethodName              = "/gomobile.v1.GnomobileService/Call"
 )
 
@@ -44,6 +45,8 @@ type GnomobileServiceClient interface {
 	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
 	// the name an password specified by SetAccount
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
+	// Make an ABCI query to the remote node.
+	Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error)
 	// Call a specific realm function.
 	Call(ctx context.Context, in *Call_Request, opts ...grpc.CallOption) (*Call_Reply, error)
 }
@@ -101,6 +104,15 @@ func (c *gnomobileServiceClient) CreateAccount(ctx context.Context, in *CreateAc
 	return out, nil
 }
 
+func (c *gnomobileServiceClient) Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error) {
+	out := new(Query_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_Query_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gnomobileServiceClient) Call(ctx context.Context, in *Call_Request, opts ...grpc.CallOption) (*Call_Reply, error) {
 	out := new(Call_Reply)
 	err := c.cc.Invoke(ctx, GnomobileService_Call_FullMethodName, in, out, opts...)
@@ -127,6 +139,8 @@ type GnomobileServiceServer interface {
 	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
 	// the name an password specified by SetAccount
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
+	// Make an ABCI query to the remote node.
+	Query(context.Context, *Query_Request) (*Query_Reply, error)
 	// Call a specific realm function.
 	Call(context.Context, *Call_Request) (*Call_Reply, error)
 	mustEmbedUnimplementedGnomobileServiceServer()
@@ -150,6 +164,9 @@ func (UnimplementedGnomobileServiceServer) GetKeyCount(context.Context, *GetKeyC
 }
 func (UnimplementedGnomobileServiceServer) CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedGnomobileServiceServer) Query(context.Context, *Query_Request) (*Query_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Query not implemented")
 }
 func (UnimplementedGnomobileServiceServer) Call(context.Context, *Call_Request) (*Call_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
@@ -257,6 +274,24 @@ func _GnomobileService_CreateAccount_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GnomobileService_Query_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Query_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GnomobileServiceServer).Query(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GnomobileService_Query_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GnomobileServiceServer).Query(ctx, req.(*Query_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GnomobileService_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Call_Request)
 	if err := dec(in); err != nil {
@@ -301,6 +336,10 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAccount",
 			Handler:    _GnomobileService_CreateAccount_Handler,
+		},
+		{
+			MethodName: "Query",
+			Handler:    _GnomobileService_Query_Handler,
 		},
 		{
 			MethodName: "Call",
