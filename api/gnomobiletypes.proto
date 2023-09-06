@@ -10,7 +10,7 @@ service GnomobileService {
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	rpc SetRemote (SetRemote.Request) returns (SetRemote.Reply);
 
-	// NewKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
 	rpc SetKeyBaseFromDir (SetKeyBaseFromDir.Request) returns (SetKeyBaseFromDir.Reply);
 
