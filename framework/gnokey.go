@@ -78,7 +78,7 @@ func getGnoConfig(rootDir string) (*GnoConfig, error) {
 
 	client.SetRemote(remote, chainID)
 	client.SetAccount(keyName, password)
-	if err := client.SetKeyBaseFromDir(dataDir); err != nil {
+	if err := client.InitKeyBaseFromDir(dataDir); err != nil {
 		return nil, err
 	}
 

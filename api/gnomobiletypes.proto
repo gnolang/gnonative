@@ -10,17 +10,17 @@ service GnomobileService {
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	rpc SetRemote (SetRemote.Request) returns (SetRemote.Reply);
 
-	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	rpc SetKeyBaseFromDir (SetKeyBaseFromDir.Request) returns (SetKeyBaseFromDir.Reply);
+	rpc InitKeyBaseFromDir (InitKeyBaseFromDir.Request) returns (InitKeyBaseFromDir.Reply);
 
 	// Set the name and password for the account in the keybase, used for later operations
 	rpc SetAccount (SetAccount.Request) returns (SetAccount.Reply);
 
-	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir
+	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
 	rpc GetKeyCount (GetKeyCount.Request) returns (GetKeyCount.Reply);
 
-	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
+	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
 	// the name an password specified by SetAccount
 	rpc CreateAccount (CreateAccount.Request) returns (CreateAccount.Reply);
 
@@ -39,7 +39,7 @@ message SetRemote {
 	message Reply {}
 }
 
-message SetKeyBaseFromDir {
+message InitKeyBaseFromDir {
 	message Request {
 		string subDir = 1;
 	}

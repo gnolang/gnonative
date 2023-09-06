@@ -19,13 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GnomobileService_SetRemote_FullMethodName         = "/gomobile.v1.GnomobileService/SetRemote"
-	GnomobileService_SetKeyBaseFromDir_FullMethodName = "/gomobile.v1.GnomobileService/SetKeyBaseFromDir"
-	GnomobileService_SetAccount_FullMethodName        = "/gomobile.v1.GnomobileService/SetAccount"
-	GnomobileService_GetKeyCount_FullMethodName       = "/gomobile.v1.GnomobileService/GetKeyCount"
-	GnomobileService_CreateAccount_FullMethodName     = "/gomobile.v1.GnomobileService/CreateAccount"
-	GnomobileService_Query_FullMethodName             = "/gomobile.v1.GnomobileService/Query"
-	GnomobileService_Call_FullMethodName              = "/gomobile.v1.GnomobileService/Call"
+	GnomobileService_SetRemote_FullMethodName          = "/gomobile.v1.GnomobileService/SetRemote"
+	GnomobileService_InitKeyBaseFromDir_FullMethodName = "/gomobile.v1.GnomobileService/InitKeyBaseFromDir"
+	GnomobileService_SetAccount_FullMethodName         = "/gomobile.v1.GnomobileService/SetAccount"
+	GnomobileService_GetKeyCount_FullMethodName        = "/gomobile.v1.GnomobileService/GetKeyCount"
+	GnomobileService_CreateAccount_FullMethodName      = "/gomobile.v1.GnomobileService/CreateAccount"
+	GnomobileService_Query_FullMethodName              = "/gomobile.v1.GnomobileService/Query"
+	GnomobileService_Call_FullMethodName               = "/gomobile.v1.GnomobileService/Call"
 )
 
 // GnomobileServiceClient is the client API for GnomobileService service.
@@ -35,14 +35,14 @@ type GnomobileServiceClient interface {
 	// Set the connection info for the remote node. If you don't call this, the default is
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	SetRemote(ctx context.Context, in *SetRemote_Request, opts ...grpc.CallOption) (*SetRemote_Reply, error)
-	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	SetKeyBaseFromDir(ctx context.Context, in *SetKeyBaseFromDir_Request, opts ...grpc.CallOption) (*SetKeyBaseFromDir_Reply, error)
+	InitKeyBaseFromDir(ctx context.Context, in *InitKeyBaseFromDir_Request, opts ...grpc.CallOption) (*InitKeyBaseFromDir_Reply, error)
 	// Set the name and password for the account in the keybase, used for later operations
 	SetAccount(ctx context.Context, in *SetAccount_Request, opts ...grpc.CallOption) (*SetAccount_Reply, error)
-	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir
+	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
 	GetKeyCount(ctx context.Context, in *GetKeyCount_Request, opts ...grpc.CallOption) (*GetKeyCount_Reply, error)
-	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
+	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
 	// the name an password specified by SetAccount
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
 	// Make an ABCI query to the remote node.
@@ -68,9 +68,9 @@ func (c *gnomobileServiceClient) SetRemote(ctx context.Context, in *SetRemote_Re
 	return out, nil
 }
 
-func (c *gnomobileServiceClient) SetKeyBaseFromDir(ctx context.Context, in *SetKeyBaseFromDir_Request, opts ...grpc.CallOption) (*SetKeyBaseFromDir_Reply, error) {
-	out := new(SetKeyBaseFromDir_Reply)
-	err := c.cc.Invoke(ctx, GnomobileService_SetKeyBaseFromDir_FullMethodName, in, out, opts...)
+func (c *gnomobileServiceClient) InitKeyBaseFromDir(ctx context.Context, in *InitKeyBaseFromDir_Request, opts ...grpc.CallOption) (*InitKeyBaseFromDir_Reply, error) {
+	out := new(InitKeyBaseFromDir_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_InitKeyBaseFromDir_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -129,14 +129,14 @@ type GnomobileServiceServer interface {
 	// Set the connection info for the remote node. If you don't call this, the default is
 	// remote = "127.0.0.1:26657" and chainID = "dev"
 	SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error)
-	// SetKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
+	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
 	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	SetKeyBaseFromDir(context.Context, *SetKeyBaseFromDir_Request) (*SetKeyBaseFromDir_Reply, error)
+	InitKeyBaseFromDir(context.Context, *InitKeyBaseFromDir_Request) (*InitKeyBaseFromDir_Reply, error)
 	// Set the name and password for the account in the keybase, used for later operations
 	SetAccount(context.Context, *SetAccount_Request) (*SetAccount_Reply, error)
-	// Get the count of keys in the keybase that was specified by SetKeyBaseFromDir
+	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
 	GetKeyCount(context.Context, *GetKeyCount_Request) (*GetKeyCount_Reply, error)
-	// Create a new account the keybase that was specified by SetKeyBaseFromDir, using
+	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
 	// the name an password specified by SetAccount
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
 	// Make an ABCI query to the remote node.
@@ -153,8 +153,8 @@ type UnimplementedGnomobileServiceServer struct {
 func (UnimplementedGnomobileServiceServer) SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetRemote not implemented")
 }
-func (UnimplementedGnomobileServiceServer) SetKeyBaseFromDir(context.Context, *SetKeyBaseFromDir_Request) (*SetKeyBaseFromDir_Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetKeyBaseFromDir not implemented")
+func (UnimplementedGnomobileServiceServer) InitKeyBaseFromDir(context.Context, *InitKeyBaseFromDir_Request) (*InitKeyBaseFromDir_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitKeyBaseFromDir not implemented")
 }
 func (UnimplementedGnomobileServiceServer) SetAccount(context.Context, *SetAccount_Request) (*SetAccount_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetAccount not implemented")
@@ -202,20 +202,20 @@ func _GnomobileService_SetRemote_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GnomobileService_SetKeyBaseFromDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetKeyBaseFromDir_Request)
+func _GnomobileService_InitKeyBaseFromDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitKeyBaseFromDir_Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GnomobileServiceServer).SetKeyBaseFromDir(ctx, in)
+		return srv.(GnomobileServiceServer).InitKeyBaseFromDir(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GnomobileService_SetKeyBaseFromDir_FullMethodName,
+		FullMethod: GnomobileService_InitKeyBaseFromDir_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GnomobileServiceServer).SetKeyBaseFromDir(ctx, req.(*SetKeyBaseFromDir_Request))
+		return srv.(GnomobileServiceServer).InitKeyBaseFromDir(ctx, req.(*InitKeyBaseFromDir_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -322,8 +322,8 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GnomobileService_SetRemote_Handler,
 		},
 		{
-			MethodName: "SetKeyBaseFromDir",
-			Handler:    _GnomobileService_SetKeyBaseFromDir_Handler,
+			MethodName: "InitKeyBaseFromDir",
+			Handler:    _GnomobileService_InitKeyBaseFromDir_Handler,
 		},
 		{
 			MethodName: "SetAccount",

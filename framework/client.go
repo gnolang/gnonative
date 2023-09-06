@@ -37,7 +37,7 @@ func (c *Client) SetRemote(remote string, chainID string) {
 	c.chainID = chainID
 }
 
-func (c *Client) SetKeyBaseFromDir(rootDir string) error {
+func (c *Client) InitKeyBaseFromDir(rootDir string) error {
 	var err error
 	if c.keybase, err = keys.NewKeyBaseFromDir(rootDir); err != nil {
 		return err
