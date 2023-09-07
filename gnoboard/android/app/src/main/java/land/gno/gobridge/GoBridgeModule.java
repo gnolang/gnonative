@@ -8,10 +8,18 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import java.io.File;
+import java.util.logging.Level;
 
 import gnoland.gno.gnomobile.Gnomobile;
 import gnoland.gno.gnomobile.Bridge;
 import gnoland.gno.gnomobile.BridgeConfig;
+
+import io.grpc.Channel;
+import android.net.LocalSocketAddress.Namespace;
+
+import io.grpc.StatusRuntimeException;
+import land.gno.gnomobile.GnomobileServiceGrpc;
+import land.gno.udschannel.UdsChannelBuilder;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
@@ -46,6 +54,20 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             config.setRootDir(rootDir.getAbsolutePath());
 
             bridgeGnomobile = Gnomobile.newBridge(config);
+
+            String path = rootDir.getAbsolutePath() + "/gnomobile.sock";
+
+//            Channel channel = UdsChannelBuilder.forPath(path, Namespace.FILESYSTEM).build();
+//            GnomobileServiceGrpc.GnomobileServiceBlockingStub blockingStub = GnomobileServiceGrpc.newBlockingStub(channel);
+//            Hello.Request request = Hello.Request.newBuilder().setName("d4ryl00").build();
+//            Hello.Reply greeting;
+//            try {
+//                greeting = blockingStub.hello(request);
+//            } catch (StatusRuntimeException e) {
+//                Log.d("Gnomobile", String.format("RPC failed: {%s}", e.getStatus()));
+//                return;
+//            }
+
             promise.resolve(true);
         } catch (Exception err) {
             promise.reject(err);

@@ -6,3 +6,9 @@ plugins:
   - plugin: buf.build/grpc/go
     out: ./
     opt: module=github.com/gnoland/gnomobile
+  - plugin: buf.build/grpc/java:v1.57.2
+    out: gnoboard/android/app/src/main/java
+    opt: lite
+  - plugin: buf.build/protocolbuffers/java
+    out: gnoboard/android/app/src/main/java
+    opt: lite

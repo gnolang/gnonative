@@ -3,6 +3,7 @@ syntax = "proto3";
 package gomobile.v1;
 
 option go_package = "github.com/gnoland/gnomobile/framework/gnomobiletypes";
+option java_package = "land.gno.gnomobile";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {

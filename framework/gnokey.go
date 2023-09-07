@@ -5,11 +5,6 @@ import (
 	"fmt"
 )
 
-type PromiseBlock interface {
-	CallResolve(reply string)
-	CallReject(error error)
-}
-
 type GnoConfig struct {
 	Remote    string
 	ChainID   string
@@ -103,4 +98,8 @@ func ExportJsonConfig(rootDir string) string {
 		return fmt.Sprintf("Error: unable load config: %s", err.Error())
 	}
 	return string(config)
+}
+
+func Hello(name string) string {
+	return fmt.Sprintf("Hello %s", name)
 }

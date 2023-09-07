@@ -1,14 +1,8 @@
 package gnomobile
 
 import (
-	"io"
-	"net"
-	"os"
-
-	"go.uber.org/zap"
-	"google.golang.org/grpc"
-
 	"github.com/gnolang/gnomobile/framework/gnomobiletypes"
+	"go.uber.org/zap"
 )
 
 type GnomobileService interface {
@@ -22,79 +16,6 @@ type gnomobileService struct {
 }
 
 var _ GnomobileService = (*gnomobileService)(nil)
-
-type GnomobileServiceServer interface {
-	io.Closer
-}
-
-type gnomobileServiceServer struct {
-	opts     []GnomobileOption
-	listener net.Listener
-	service  GnomobileService
-	server   *grpc.Server
-}
-
-type GnomobileServerOptions struct {
-	ServiceOpts []GnomobileOption
-	SockAddr    string
-}
-
-func (o *GnomobileServerOptions) applyDefaults() error {
-	if o.ServiceOpts == nil {
-		o.ServiceOpts = []GnomobileOption{}
-	}
-
-	if o.SockAddr == "" {
-		o.SockAddr = "/tmp/gnomobile.sock"
-	}
-
-	return nil
-}
-
-type GnomobileOption func(*gnomobileService) error
-
-// NewGnomobileServiceServer creates a new Gnomobile protocol service and runs a gRPC server.
-// When finished, you must call Close().
-func NewGnomobileServiceServer(opts GnomobileServerOptions) (GnomobileServiceServer, error) {
-	if err := opts.applyDefaults(); err != nil {
-		return nil, err
-	}
-
-	svc, err := NewGnomobileService(opts.ServiceOpts...)
-	if err != nil {
-		return nil, err
-	}
-
-	// delete socket if it already exists
-	if _, err := os.Stat(opts.SockAddr); !os.IsNotExist(err) {
-		if err := os.RemoveAll(opts.SockAddr); err != nil {
-			return nil, err
-		}
-	}
-
-	listener, err := net.Listen("unix", opts.SockAddr)
-	if err != nil {
-		return nil, err
-	}
-
-	s := grpc.NewServer()
-
-	gnomobiletypes.RegisterGnomobileServiceServer(s, svc)
-	go func() {
-		// we dont need to log the error
-		_ = s.Serve(listener)
-	}()
-
-	return &gnomobileServiceServer{
-		listener: listener,
-		server:   s,
-		service:  svc,
-	}, nil
-}
-
-func (s *gnomobileServiceServer) Close() error {
-	return s.listener.Close()
-}
 
 func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	svc := &gnomobileService{}
@@ -110,6 +31,8 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 
 	return svc, nil
 }
+
+type GnomobileOption func(*gnomobileService) error
 
 // FallBackOption is a structure that permit to fallback to a default option if the option is not set.
 type FallBackOption struct {

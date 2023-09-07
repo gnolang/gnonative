@@ -72,9 +72,10 @@ protos_src := $(wildcard api/*.proto)
 gen_src := $(protos_src) Makefile
 gen_sum := gen.sum
 
-_api.generate.protocol: gen.sum
+_api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
 	rm -f framework/gnomobiletypes/*.pb.go
+	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/*.java
 
 $(gen_sum): $(gen_src)
 	$(call check-program, shasum buf)
@@ -86,7 +87,7 @@ $(gen_sum): $(gen_src)
 		go mod tidy \
 	)
 
-.PHONY: api.generate _api.generate.protocol
+.PHONY: api.generate _api.generate.protocol _api.clean.protocol
 
 # - Bind : Handle gomobile bind
 

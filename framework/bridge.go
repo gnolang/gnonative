@@ -12,6 +12,11 @@ import (
 	gnotypes "github.com/gnolang/gnomobile/framework/gnomobiletypes"
 )
 
+type PromiseBlock interface {
+	CallResolve(reply string)
+	CallReject(error error)
+}
+
 type BridgeConfig struct {
 	RootDir string
 }
@@ -55,7 +60,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 	// setup native bridge client
 	{
 		opts := GnomobileServerOptions{
-			SockAddr: config.RootDir + "/gnomobile.sock",
+			SockPath: config.RootDir + "/gnomobile.sock",
 		}
 
 		serviceServer, err := NewGnomobileServiceServer(opts)
