@@ -9,7 +9,8 @@ import (
 	"github.com/oklog/run"
 	"go.uber.org/multierr"
 
-	gnotypes "github.com/gnolang/gnomobile/framework/gnomobiletypes"
+	"github.com/gnolang/gnomobile/service"
+	"github.com/gnolang/gnomobile/service/gnomobiletypes"
 )
 
 type PromiseBlock interface {
@@ -25,10 +26,6 @@ func NewBridgeConfig() *BridgeConfig {
 	return &BridgeConfig{}
 }
 
-// func (c *BridgeConfig) SetRootDir(rootDir string) {
-// 	c.RootDir = rootDir
-// }
-
 type Bridge struct {
 	errc   chan error
 	closec chan struct{}
@@ -36,10 +33,12 @@ type Bridge struct {
 	onceCloser sync.Once
 	workers    run.Group
 
-	serviceServer GnomobileServiceServer
+	serviceServer service.GnomobileService
 }
 
 func NewBridge(config *BridgeConfig) (*Bridge, error) {
+	svcOpts := []service.GnomobileOption{}
+
 	// create bridge instance
 	b := &Bridge{
 		errc:   make(chan error),
@@ -51,19 +50,21 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		b.workers.Add(func() error {
 			// wait for closing signal
 			<-b.closec
-			return gnotypes.ErrCode_ErrBridgeInterrupted
+			return gnomobiletypes.ErrCode_ErrBridgeInterrupted
 		}, func(error) {
 			b.onceCloser.Do(func() { close(b.closec) })
 		})
 	}
 
-	// setup native bridge client
+	// start gRPC service
 	{
-		opts := GnomobileServerOptions{
-			SockPath: config.RootDir + "/gnomobile.sock",
-		}
+		socketPath := config.RootDir + "/" + service.SOCKET_FILE
+		svcOpts = append(svcOpts,
+			service.WithRootDir(config.RootDir),
+			service.WithSocketPath(socketPath),
+		)
 
-		serviceServer, err := NewGnomobileServiceServer(opts)
+		serviceServer, err := service.NewGnomobileService(svcOpts...)
 		if err != nil {
 			return nil, errors.Wrap(err, "unable to create bridge service")
 		}
@@ -76,6 +77,10 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 	}()
 
 	return b, nil
+}
+
+func (b *Bridge) GetSocketPath() string {
+	return b.serviceServer.GetSocketPath()
 }
 
 func (b *Bridge) Close() error {
@@ -99,7 +104,7 @@ func (b *Bridge) Close() error {
 
 		b.serviceServer.Close()
 
-		if !gnotypes.Is(err, gnotypes.ErrCode_ErrBridgeInterrupted) {
+		if !gnomobiletypes.Is(err, gnomobiletypes.ErrCode_ErrBridgeInterrupted) {
 			errs = multierr.Append(errs, err)
 		}
 

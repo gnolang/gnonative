@@ -19,32 +19,36 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GnomobileService_SetRemote_FullMethodName          = "/gomobile.v1.GnomobileService/SetRemote"
-	GnomobileService_InitKeyBaseFromDir_FullMethodName = "/gomobile.v1.GnomobileService/InitKeyBaseFromDir"
-	GnomobileService_SetAccount_FullMethodName         = "/gomobile.v1.GnomobileService/SetAccount"
-	GnomobileService_GetKeyCount_FullMethodName        = "/gomobile.v1.GnomobileService/GetKeyCount"
-	GnomobileService_CreateAccount_FullMethodName      = "/gomobile.v1.GnomobileService/CreateAccount"
-	GnomobileService_Query_FullMethodName              = "/gomobile.v1.GnomobileService/Query"
-	GnomobileService_Call_FullMethodName               = "/gomobile.v1.GnomobileService/Call"
+	GnomobileService_SetRemote_FullMethodName       = "/gomobile.v1.GnomobileService/SetRemote"
+	GnomobileService_SetChainID_FullMethodName      = "/gomobile.v1.GnomobileService/SetChainID"
+	GnomobileService_SetNameOrBech32_FullMethodName = "/gomobile.v1.GnomobileService/SetNameOrBech32"
+	GnomobileService_SetPassword_FullMethodName     = "/gomobile.v1.GnomobileService/SetPassword"
+	GnomobileService_ListKeyInfo_FullMethodName     = "/gomobile.v1.GnomobileService/ListKeyInfo"
+	GnomobileService_CreateAccount_FullMethodName   = "/gomobile.v1.GnomobileService/CreateAccount"
+	GnomobileService_SelectAccount_FullMethodName   = "/gomobile.v1.GnomobileService/SelectAccount"
+	GnomobileService_Query_FullMethodName           = "/gomobile.v1.GnomobileService/Query"
+	GnomobileService_Call_FullMethodName            = "/gomobile.v1.GnomobileService/Call"
 )
 
 // GnomobileServiceClient is the client API for GnomobileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GnomobileServiceClient interface {
-	// Set the connection info for the remote node. If you don't call this, the default is
-	// remote = "127.0.0.1:26657" and chainID = "dev"
+	// Set the connection addresse for the remote node. If you don't call this, the default is
+	// "127.0.0.1:26657"
 	SetRemote(ctx context.Context, in *SetRemote_Request, opts ...grpc.CallOption) (*SetRemote_Reply, error)
-	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
-	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	InitKeyBaseFromDir(ctx context.Context, in *InitKeyBaseFromDir_Request, opts ...grpc.CallOption) (*InitKeyBaseFromDir_Reply, error)
-	// Set the name and password for the account in the keybase, used for later operations
-	SetAccount(ctx context.Context, in *SetAccount_Request, opts ...grpc.CallOption) (*SetAccount_Reply, error)
-	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
-	GetKeyCount(ctx context.Context, in *GetKeyCount_Request, opts ...grpc.CallOption) (*GetKeyCount_Reply, error)
-	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
-	// the name an password specified by SetAccount
+	// Set the chain ID for the remote node. If you don't call this, the default is "dev"
+	SetChainID(ctx context.Context, in *SetChainID_Request, opts ...grpc.CallOption) (*SetChainID_Reply, error)
+	// Set the nameOrBech32 for the account in the keybase, used for later operations
+	SetNameOrBech32(ctx context.Context, in *SetNameOrBech32_Request, opts ...grpc.CallOption) (*SetNameOrBech32_Reply, error)
+	// Set the password for the account in the keybase, used for later operations
+	SetPassword(ctx context.Context, in *SetPassword_Request, opts ...grpc.CallOption) (*SetPassword_Reply, error)
+	// Get the keys informations in the keybase
+	ListKeyInfo(ctx context.Context, in *ListKeyInfo_Request, opts ...grpc.CallOption) (*ListKeyInfo_Reply, error)
+	// Create a new account the keybase using the name an password specified by SetAccount
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
+	// SelectAccount selects the account to use for later operations
+	SelectAccount(ctx context.Context, in *SelectAccount_Request, opts ...grpc.CallOption) (*SelectAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error)
 	// Call a specific realm function.
@@ -68,27 +72,36 @@ func (c *gnomobileServiceClient) SetRemote(ctx context.Context, in *SetRemote_Re
 	return out, nil
 }
 
-func (c *gnomobileServiceClient) InitKeyBaseFromDir(ctx context.Context, in *InitKeyBaseFromDir_Request, opts ...grpc.CallOption) (*InitKeyBaseFromDir_Reply, error) {
-	out := new(InitKeyBaseFromDir_Reply)
-	err := c.cc.Invoke(ctx, GnomobileService_InitKeyBaseFromDir_FullMethodName, in, out, opts...)
+func (c *gnomobileServiceClient) SetChainID(ctx context.Context, in *SetChainID_Request, opts ...grpc.CallOption) (*SetChainID_Reply, error) {
+	out := new(SetChainID_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_SetChainID_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gnomobileServiceClient) SetAccount(ctx context.Context, in *SetAccount_Request, opts ...grpc.CallOption) (*SetAccount_Reply, error) {
-	out := new(SetAccount_Reply)
-	err := c.cc.Invoke(ctx, GnomobileService_SetAccount_FullMethodName, in, out, opts...)
+func (c *gnomobileServiceClient) SetNameOrBech32(ctx context.Context, in *SetNameOrBech32_Request, opts ...grpc.CallOption) (*SetNameOrBech32_Reply, error) {
+	out := new(SetNameOrBech32_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_SetNameOrBech32_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gnomobileServiceClient) GetKeyCount(ctx context.Context, in *GetKeyCount_Request, opts ...grpc.CallOption) (*GetKeyCount_Reply, error) {
-	out := new(GetKeyCount_Reply)
-	err := c.cc.Invoke(ctx, GnomobileService_GetKeyCount_FullMethodName, in, out, opts...)
+func (c *gnomobileServiceClient) SetPassword(ctx context.Context, in *SetPassword_Request, opts ...grpc.CallOption) (*SetPassword_Reply, error) {
+	out := new(SetPassword_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_SetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, in *ListKeyInfo_Request, opts ...grpc.CallOption) (*ListKeyInfo_Reply, error) {
+	out := new(ListKeyInfo_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_ListKeyInfo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,6 +111,15 @@ func (c *gnomobileServiceClient) GetKeyCount(ctx context.Context, in *GetKeyCoun
 func (c *gnomobileServiceClient) CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error) {
 	out := new(CreateAccount_Reply)
 	err := c.cc.Invoke(ctx, GnomobileService_CreateAccount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, in *SelectAccount_Request, opts ...grpc.CallOption) (*SelectAccount_Reply, error) {
+	out := new(SelectAccount_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_SelectAccount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,19 +148,21 @@ func (c *gnomobileServiceClient) Call(ctx context.Context, in *Call_Request, opt
 // All implementations must embed UnimplementedGnomobileServiceServer
 // for forward compatibility
 type GnomobileServiceServer interface {
-	// Set the connection info for the remote node. If you don't call this, the default is
-	// remote = "127.0.0.1:26657" and chainID = "dev"
+	// Set the connection addresse for the remote node. If you don't call this, the default is
+	// "127.0.0.1:26657"
 	SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error)
-	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
-	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	InitKeyBaseFromDir(context.Context, *InitKeyBaseFromDir_Request) (*InitKeyBaseFromDir_Reply, error)
-	// Set the name and password for the account in the keybase, used for later operations
-	SetAccount(context.Context, *SetAccount_Request) (*SetAccount_Reply, error)
-	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
-	GetKeyCount(context.Context, *GetKeyCount_Request) (*GetKeyCount_Reply, error)
-	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
-	// the name an password specified by SetAccount
+	// Set the chain ID for the remote node. If you don't call this, the default is "dev"
+	SetChainID(context.Context, *SetChainID_Request) (*SetChainID_Reply, error)
+	// Set the nameOrBech32 for the account in the keybase, used for later operations
+	SetNameOrBech32(context.Context, *SetNameOrBech32_Request) (*SetNameOrBech32_Reply, error)
+	// Set the password for the account in the keybase, used for later operations
+	SetPassword(context.Context, *SetPassword_Request) (*SetPassword_Reply, error)
+	// Get the keys informations in the keybase
+	ListKeyInfo(context.Context, *ListKeyInfo_Request) (*ListKeyInfo_Reply, error)
+	// Create a new account the keybase using the name an password specified by SetAccount
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
+	// SelectAccount selects the account to use for later operations
+	SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *Query_Request) (*Query_Reply, error)
 	// Call a specific realm function.
@@ -153,17 +177,23 @@ type UnimplementedGnomobileServiceServer struct {
 func (UnimplementedGnomobileServiceServer) SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetRemote not implemented")
 }
-func (UnimplementedGnomobileServiceServer) InitKeyBaseFromDir(context.Context, *InitKeyBaseFromDir_Request) (*InitKeyBaseFromDir_Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InitKeyBaseFromDir not implemented")
+func (UnimplementedGnomobileServiceServer) SetChainID(context.Context, *SetChainID_Request) (*SetChainID_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetChainID not implemented")
 }
-func (UnimplementedGnomobileServiceServer) SetAccount(context.Context, *SetAccount_Request) (*SetAccount_Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetAccount not implemented")
+func (UnimplementedGnomobileServiceServer) SetNameOrBech32(context.Context, *SetNameOrBech32_Request) (*SetNameOrBech32_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetNameOrBech32 not implemented")
 }
-func (UnimplementedGnomobileServiceServer) GetKeyCount(context.Context, *GetKeyCount_Request) (*GetKeyCount_Reply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetKeyCount not implemented")
+func (UnimplementedGnomobileServiceServer) SetPassword(context.Context, *SetPassword_Request) (*SetPassword_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPassword not implemented")
+}
+func (UnimplementedGnomobileServiceServer) ListKeyInfo(context.Context, *ListKeyInfo_Request) (*ListKeyInfo_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListKeyInfo not implemented")
 }
 func (UnimplementedGnomobileServiceServer) CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedGnomobileServiceServer) SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SelectAccount not implemented")
 }
 func (UnimplementedGnomobileServiceServer) Query(context.Context, *Query_Request) (*Query_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Query not implemented")
@@ -202,56 +232,74 @@ func _GnomobileService_SetRemote_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GnomobileService_InitKeyBaseFromDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InitKeyBaseFromDir_Request)
+func _GnomobileService_SetChainID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetChainID_Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GnomobileServiceServer).InitKeyBaseFromDir(ctx, in)
+		return srv.(GnomobileServiceServer).SetChainID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GnomobileService_InitKeyBaseFromDir_FullMethodName,
+		FullMethod: GnomobileService_SetChainID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GnomobileServiceServer).InitKeyBaseFromDir(ctx, req.(*InitKeyBaseFromDir_Request))
+		return srv.(GnomobileServiceServer).SetChainID(ctx, req.(*SetChainID_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GnomobileService_SetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAccount_Request)
+func _GnomobileService_SetNameOrBech32_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNameOrBech32_Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GnomobileServiceServer).SetAccount(ctx, in)
+		return srv.(GnomobileServiceServer).SetNameOrBech32(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GnomobileService_SetAccount_FullMethodName,
+		FullMethod: GnomobileService_SetNameOrBech32_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GnomobileServiceServer).SetAccount(ctx, req.(*SetAccount_Request))
+		return srv.(GnomobileServiceServer).SetNameOrBech32(ctx, req.(*SetNameOrBech32_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GnomobileService_GetKeyCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetKeyCount_Request)
+func _GnomobileService_SetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPassword_Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GnomobileServiceServer).GetKeyCount(ctx, in)
+		return srv.(GnomobileServiceServer).SetPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GnomobileService_GetKeyCount_FullMethodName,
+		FullMethod: GnomobileService_SetPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GnomobileServiceServer).GetKeyCount(ctx, req.(*GetKeyCount_Request))
+		return srv.(GnomobileServiceServer).SetPassword(ctx, req.(*SetPassword_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GnomobileService_ListKeyInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListKeyInfo_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GnomobileServiceServer).ListKeyInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GnomobileService_ListKeyInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GnomobileServiceServer).ListKeyInfo(ctx, req.(*ListKeyInfo_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -270,6 +318,24 @@ func _GnomobileService_CreateAccount_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GnomobileServiceServer).CreateAccount(ctx, req.(*CreateAccount_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GnomobileService_SelectAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SelectAccount_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GnomobileServiceServer).SelectAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GnomobileService_SelectAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GnomobileServiceServer).SelectAccount(ctx, req.(*SelectAccount_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -322,20 +388,28 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GnomobileService_SetRemote_Handler,
 		},
 		{
-			MethodName: "InitKeyBaseFromDir",
-			Handler:    _GnomobileService_InitKeyBaseFromDir_Handler,
+			MethodName: "SetChainID",
+			Handler:    _GnomobileService_SetChainID_Handler,
 		},
 		{
-			MethodName: "SetAccount",
-			Handler:    _GnomobileService_SetAccount_Handler,
+			MethodName: "SetNameOrBech32",
+			Handler:    _GnomobileService_SetNameOrBech32_Handler,
 		},
 		{
-			MethodName: "GetKeyCount",
-			Handler:    _GnomobileService_GetKeyCount_Handler,
+			MethodName: "SetPassword",
+			Handler:    _GnomobileService_SetPassword_Handler,
+		},
+		{
+			MethodName: "ListKeyInfo",
+			Handler:    _GnomobileService_ListKeyInfo_Handler,
 		},
 		{
 			MethodName: "CreateAccount",
 			Handler:    _GnomobileService_CreateAccount_Handler,
+		},
+		{
+			MethodName: "SelectAccount",
+			Handler:    _GnomobileService_SelectAccount_Handler,
 		},
 		{
 			MethodName: "Query",

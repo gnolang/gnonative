@@ -31,8 +31,15 @@ function HomeScreen() {
     setAppConsole("replying to a post...");
     var gasFee = "1000000ugnot"
     var gasWanted = 2000000
-    GoBridge.clientExec(JSON.stringify({PackagePath: "gno.land/r/demo/boards", Fnc: "CreateReply",
-         Args: ["2", "1", "1", postContent], GasFee: gasFee, GasWanted: gasWanted}))
+	var args: Array<string> = ["2", "1", "1", postContent]
+    GoBridge.call(
+		"gno.land/r/demo/boards",
+		"CreateReply",
+		args,
+		gasFee,
+		gasWanted,
+		"password"
+	)
       .then((data) => {
         setAppConsole(data);
         setPostContent("");

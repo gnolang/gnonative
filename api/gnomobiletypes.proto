@@ -2,28 +2,32 @@ syntax = "proto3";
 
 package gomobile.v1;
 
-option go_package = "github.com/gnoland/gnomobile/framework/gnomobiletypes";
+option go_package = "github.com/gnoland/gnomobile/service/gnomobiletypes";
 option java_package = "land.gno.gnomobile";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
-	// Set the connection info for the remote node. If you don't call this, the default is
-	// remote = "127.0.0.1:26657" and chainID = "dev"
+	// Set the connection addresse for the remote node. If you don't call this, the default is
+	// "127.0.0.1:26657"
 	rpc SetRemote (SetRemote.Request) returns (SetRemote.Reply);
 
-	// InitKeyBaseFromDir initializes a keybase in the given subdirectory of the app's root directory.
-	// If the keybase already exists then this opens it, otherwise this creates a new empty keybase.
-	rpc InitKeyBaseFromDir (InitKeyBaseFromDir.Request) returns (InitKeyBaseFromDir.Reply);
+	// Set the chain ID for the remote node. If you don't call this, the default is "dev"
+	rpc SetChainID (SetChainID.Request) returns (SetChainID.Reply);
 
-	// Set the name and password for the account in the keybase, used for later operations
-	rpc SetAccount (SetAccount.Request) returns (SetAccount.Reply);
+	// Set the nameOrBech32 for the account in the keybase, used for later operations
+	rpc SetNameOrBech32 (SetNameOrBech32.Request) returns (SetNameOrBech32.Reply);
 
-	// Get the count of keys in the keybase that was specified by InitKeyBaseFromDir
-	rpc GetKeyCount (GetKeyCount.Request) returns (GetKeyCount.Reply);
+	// Set the password for the account in the keybase, used for later operations
+	rpc SetPassword (SetPassword.Request) returns (SetPassword.Reply);
 
-	// Create a new account the keybase that was specified by InitKeyBaseFromDir, using
-	// the name an password specified by SetAccount
+	// Get the keys informations in the keybase
+	rpc ListKeyInfo (ListKeyInfo.Request) returns (ListKeyInfo.Reply);
+
+	// Create a new account the keybase using the name an password specified by SetAccount
 	rpc CreateAccount (CreateAccount.Request) returns (CreateAccount.Reply);
+
+	// SelectAccount selects the account to use for later operations
+	rpc SelectAccount (SelectAccount.Request) returns (SelectAccount.Reply);
 
 	// Make an ABCI query to the remote node.
 	rpc Query (Query.Request) returns (Query.Reply);
@@ -35,46 +39,74 @@ service GnomobileService {
 message SetRemote {
 	message Request {
 		string remote = 1;
-		string chainID = 2;
 	}
 	message Reply {}
 }
 
-message InitKeyBaseFromDir {
+message SetChainID {
 	message Request {
-		string subDir = 1;
+		string chainID = 1;
 	}
-	message Reply {
-    string error = 1;
-  }
+	message Reply {}
 }
 
-message SetAccount {
+message SetNameOrBech32 {
 	message Request {
 		string nameOrBech32 = 1;
-		string password = 2;
 	}
 	message Reply {}
 }
 
-message GetKeyCount {
+message SetPassword {
+	message Request {
+		string password = 1;
+	}
+	message Reply {}
+}
+
+enum KeyType {
+	TypeLocal = 0;
+	TypeLedger = 1;
+	TypeOffline = 2;
+	TypeMulti = 3;
+}
+
+message KeyInfo {
+	KeyType type = 1;
+	string name = 2;
+	bytes pubKey = 3;
+	bytes address = 4;
+	bytes path = 5;
+}
+
+message ListKeyInfo {
 	message Request {}
 	message Reply {
-    int64 keyCount = 1;
-    string error = 2;
+  		repeated KeyInfo keys = 1;
   }
 }
 
 message CreateAccount {
 	message Request {
-		string mnemonic = 1;
-		string string = 2;
-		int64 account = 3;
-		int64 index = 4;
+		string nameOrBech32 = 1;
+		string mnemonic = 2;
+		string bip39Passwd = 3;
+		string password = 4;
+		uint32 account = 5;
+		uint32 index = 6;
 	}
 	message Reply {
-    string error = 1;
-  }
+		KeyInfo key = 1;
+	}
+}
+
+message SelectAccount {
+	message Request {
+		string nameOrBech32 = 1;
+	}
+	message Reply {
+		KeyInfo key = 1;
+	}
 }
 
 message Query {
@@ -83,8 +115,7 @@ message Query {
 		string data = 2; // Example: "gno.land/r/demo/boards\ntestboard"
 	}
 	message Reply {
-    bytes result = 1;
-    string error = 2;
+		bytes result = 1;
   }
 }
 
@@ -95,10 +126,10 @@ message Call {
 		repeated string args = 3; // list of arguments specific to the function
 		string gasFee = 4;
 		int64 gasWanted = 5;
+		string password = 6;
 	}
 	message Reply {
-    bytes result = 1;
-    string error = 2;
+		bytes result = 1;
   }
 }
 
@@ -124,6 +155,8 @@ enum ErrCode {
   ErrMissingInput = 102;
   ErrSerialization = 103;
   ErrDeserialization = 104;
+  ErrCryptoKeyTypeUnknown = 105;
+  ErrCryptoKeyNotFound = 106;
 }
 
 message ErrDetails { repeated ErrCode codes = 1; }

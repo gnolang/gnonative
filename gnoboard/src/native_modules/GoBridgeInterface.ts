@@ -1,6 +1,6 @@
 export interface GoBridgeInterface {
   initBridge(): Promise<void>;
   closeBridge(): Promise<void>;
-  clientExec(command: string): Promise<string>;
+  call(packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: Number, password: string): Promise<string>;
   exportJsonConfig(): Promise<string>;
 }

@@ -74,7 +74,7 @@ gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
-	rm -f framework/gnomobiletypes/*.pb.go
+	rm -f framework/service/gnomobiletypes/*.pb.go
 	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/*.java
 
 $(gen_sum): $(gen_src)

@@ -1,6 +1,6 @@
 // This is a temporary shadow of the Client struct to be provided by https://github.com/gnolang/gno/pull/1047 .
 
-package gnomobile
+package service
 
 import (
 	"fmt"
@@ -24,16 +24,39 @@ type Client struct {
 	password     string
 }
 
-func NewClient() *Client {
-	// Set defaults.
-	return &Client{
-		remote:  "127.0.0.1:26657",
-		chainID: "dev",
+type Opts struct {
+	Remote       string
+	ChainID      string
+	NameOrBech32 string
+	Password     string
+}
+
+func (o *Opts) ApplyDefaults() {
+	if o.Remote == "" {
+		o.Remote = "127.0.0.1:26657"
+	}
+
+	if o.ChainID == "" {
+		o.ChainID = "dev"
 	}
 }
 
-func (c *Client) SetRemote(remote string, chainID string) {
+func NewClient(opts Opts) *Client {
+	opts.ApplyDefaults()
+
+	return &Client{
+		remote:       opts.Remote,
+		chainID:      opts.ChainID,
+		nameOrBech32: opts.NameOrBech32,
+		password:     opts.Password,
+	}
+}
+
+func (c *Client) SetRemote(remote string) {
 	c.remote = remote
+}
+
+func (c *Client) SetChainID(chainID string) {
 	c.chainID = chainID
 }
 
@@ -45,22 +68,33 @@ func (c *Client) InitKeyBaseFromDir(rootDir string) error {
 	return nil
 }
 
-func (c *Client) SetAccount(nameOrBech32 string, password string) {
+func (c *Client) SetNameOrBech32(nameOrBech32 string) {
 	c.nameOrBech32 = nameOrBech32
+}
+
+func (c *Client) SetPassword(password string) {
 	c.password = password
 }
 
-func (c *Client) GetKeyCount() (int, error) {
+func (c *Client) GetKeys() ([]keys.Info, error) {
 	keyList, err := c.keybase.List()
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
-	return len(keyList), nil
+	return keyList, nil
 }
 
-func (c *Client) CreateAccount(mnemonic string, bip39Passwd string, account int, index int) error {
-	_, err := c.keybase.CreateAccount(c.nameOrBech32, mnemonic, bip39Passwd, c.password, uint32(account), uint32(index))
-	return err
+func (c *Client) GetKeyByNameOrBech32(nameOrBech32 string) (keys.Info, error) {
+	return c.keybase.GetByNameOrAddress(nameOrBech32)
+}
+
+func (c *Client) CreateAccount(nameOrBech32 string, mnemonic string, bip39Passwd string, password string, account uint32, index uint32) (keys.Info, error) {
+	info, err := c.keybase.CreateAccount(nameOrBech32, mnemonic, bip39Passwd, password, account, index)
+	if err != nil {
+		return nil, err
+	}
+
+	return info, err
 }
 
 // TODO: port existing code, i.e. faucet?
@@ -77,8 +111,8 @@ func (c *Client) CreateAccount(mnemonic string, bip39Passwd string, account int,
 // TODO: alternative configuration (pass existing websocket?)
 // TODO: minimal go.mod to make it light to import
 
-func (c *Client) Call(pkgPath string, fnc string, args commands.StringArr, gasFee string, gasWanted int64, send string) error {
-	info, err := c.keybase.GetByNameOrAddress(c.nameOrBech32)
+func (c *Client) Call(pkgPath string, fnc string, args commands.StringArr, gasFee string, gasWanted int64, send string, nameOrBech32 string, password string) error {
+	info, err := c.keybase.GetByNameOrAddress(nameOrBech32)
 	if err != nil {
 		return err
 	}
@@ -133,9 +167,9 @@ func (c *Client) Call(pkgPath string, fnc string, args commands.StringArr, gasFe
 		sequence:      sequence,
 		accountNumber: accountNumber,
 		chainID:       c.chainID,
-		nameOrBech32:  c.nameOrBech32,
+		nameOrBech32:  nameOrBech32,
 		txJSON:        amino.MustMarshalJSON(tx),
-		pass:          c.password,
+		pass:          password,
 	}
 
 	signedTx, err := SignHandler(sopts)
