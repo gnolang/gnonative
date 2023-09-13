@@ -15,7 +15,7 @@ public final class GnomobileServiceGrpc {
 
   private GnomobileServiceGrpc() {}
 
-  public static final java.lang.String SERVICE_NAME = "gomobile.v1.GnomobileService";
+  public static final java.lang.String SERVICE_NAME = "gnomobile.v1.GnomobileService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.Gnomobiletypes.SetRemote.Request,

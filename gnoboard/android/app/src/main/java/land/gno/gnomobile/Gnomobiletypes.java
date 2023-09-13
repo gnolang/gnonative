@@ -9,7 +9,7 @@ public final class Gnomobiletypes {
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
   /**
-   * Protobuf enum {@code gomobile.v1.KeyType}
+   * Protobuf enum {@code gnomobile.v1.KeyType}
    */
   public enum KeyType
       implements com.google.protobuf.Internal.EnumLite {
@@ -112,7 +112,7 @@ public final class Gnomobiletypes {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:gomobile.v1.KeyType)
+    // @@protoc_insertion_point(enum_scope:gnomobile.v1.KeyType)
   }
 
   /**
@@ -122,7 +122,7 @@ public final class Gnomobiletypes {
    *----------------
    * </pre>
    *
-   * Protobuf enum {@code gomobile.v1.ErrCode}
+   * Protobuf enum {@code gnomobile.v1.ErrCode}
    */
   public enum ErrCode
       implements com.google.protobuf.Internal.EnumLite {
@@ -320,25 +320,25 @@ public final class Gnomobiletypes {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:gomobile.v1.ErrCode)
+    // @@protoc_insertion_point(enum_scope:gnomobile.v1.ErrCode)
   }
 
   public interface SetRemoteOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.SetRemote)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetRemote)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.SetRemote}
+   * Protobuf type {@code gnomobile.v1.SetRemote}
    */
   public  static final class SetRemote extends
       com.google.protobuf.GeneratedMessageLite<
           SetRemote, SetRemote.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.SetRemote)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.SetRemote)
       SetRemoteOrBuilder {
     private SetRemote() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetRemote.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetRemote.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -354,12 +354,12 @@ public final class Gnomobiletypes {
           getRemoteBytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetRemote.Request}
+     * Protobuf type {@code gnomobile.v1.SetRemote.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetRemote.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetRemote.Request)
         RequestOrBuilder {
       private Request() {
         remote_ = "";
@@ -495,12 +495,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetRemote.Request}
+       * Protobuf type {@code gnomobile.v1.SetRemote.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetRemote.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetRemote.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetRemote.Request)
           land.gno.gnomobile.Gnomobiletypes.SetRemote.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetRemote.Request.newBuilder()
         private Builder() {
@@ -557,7 +557,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetRemote.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetRemote.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -609,7 +609,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetRemote.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetRemote.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.SetRemote.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -632,16 +632,16 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetRemote.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetRemote.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetRemote.Reply}
+     * Protobuf type {@code gnomobile.v1.SetRemote.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetRemote.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetRemote.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -729,12 +729,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetRemote.Reply}
+       * Protobuf type {@code gnomobile.v1.SetRemote.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetRemote.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetRemote.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetRemote.Reply)
           land.gno.gnomobile.Gnomobiletypes.SetRemote.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetRemote.Reply.newBuilder()
         private Builder() {
@@ -742,7 +742,7 @@ public final class Gnomobiletypes {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetRemote.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetRemote.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -791,7 +791,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetRemote.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetRemote.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.SetRemote.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -897,12 +897,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.SetRemote}
+     * Protobuf type {@code gnomobile.v1.SetRemote}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.SetRemote, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.SetRemote)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetRemote)
         land.gno.gnomobile.Gnomobiletypes.SetRemoteOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.SetRemote.newBuilder()
       private Builder() {
@@ -910,7 +910,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.SetRemote)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetRemote)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -959,7 +959,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.SetRemote)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.SetRemote)
     private static final land.gno.gnomobile.Gnomobiletypes.SetRemote DEFAULT_INSTANCE;
     static {
       SetRemote defaultInstance = new SetRemote();
@@ -982,21 +982,21 @@ public final class Gnomobiletypes {
   }
 
   public interface SetChainIDOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.SetChainID)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetChainID)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.SetChainID}
+   * Protobuf type {@code gnomobile.v1.SetChainID}
    */
   public  static final class SetChainID extends
       com.google.protobuf.GeneratedMessageLite<
           SetChainID, SetChainID.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.SetChainID)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.SetChainID)
       SetChainIDOrBuilder {
     private SetChainID() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetChainID.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetChainID.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -1012,12 +1012,12 @@ public final class Gnomobiletypes {
           getChainIDBytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetChainID.Request}
+     * Protobuf type {@code gnomobile.v1.SetChainID.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetChainID.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetChainID.Request)
         RequestOrBuilder {
       private Request() {
         chainID_ = "";
@@ -1153,12 +1153,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetChainID.Request}
+       * Protobuf type {@code gnomobile.v1.SetChainID.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetChainID.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetChainID.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetChainID.Request)
           land.gno.gnomobile.Gnomobiletypes.SetChainID.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetChainID.Request.newBuilder()
         private Builder() {
@@ -1215,7 +1215,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetChainID.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetChainID.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -1267,7 +1267,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetChainID.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetChainID.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.SetChainID.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -1290,16 +1290,16 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetChainID.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetChainID.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetChainID.Reply}
+     * Protobuf type {@code gnomobile.v1.SetChainID.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetChainID.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetChainID.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -1387,12 +1387,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetChainID.Reply}
+       * Protobuf type {@code gnomobile.v1.SetChainID.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetChainID.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetChainID.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetChainID.Reply)
           land.gno.gnomobile.Gnomobiletypes.SetChainID.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetChainID.Reply.newBuilder()
         private Builder() {
@@ -1400,7 +1400,7 @@ public final class Gnomobiletypes {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetChainID.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetChainID.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -1449,7 +1449,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetChainID.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetChainID.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.SetChainID.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -1555,12 +1555,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.SetChainID}
+     * Protobuf type {@code gnomobile.v1.SetChainID}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.SetChainID, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.SetChainID)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetChainID)
         land.gno.gnomobile.Gnomobiletypes.SetChainIDOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.SetChainID.newBuilder()
       private Builder() {
@@ -1568,7 +1568,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.SetChainID)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetChainID)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -1617,7 +1617,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.SetChainID)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.SetChainID)
     private static final land.gno.gnomobile.Gnomobiletypes.SetChainID DEFAULT_INSTANCE;
     static {
       SetChainID defaultInstance = new SetChainID();
@@ -1640,21 +1640,21 @@ public final class Gnomobiletypes {
   }
 
   public interface SetNameOrBech32OrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.SetNameOrBech32)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetNameOrBech32)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.SetNameOrBech32}
+   * Protobuf type {@code gnomobile.v1.SetNameOrBech32}
    */
   public  static final class SetNameOrBech32 extends
       com.google.protobuf.GeneratedMessageLite<
           SetNameOrBech32, SetNameOrBech32.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.SetNameOrBech32)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.SetNameOrBech32)
       SetNameOrBech32OrBuilder {
     private SetNameOrBech32() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetNameOrBech32.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetNameOrBech32.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -1670,12 +1670,12 @@ public final class Gnomobiletypes {
           getNameOrBech32Bytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetNameOrBech32.Request}
+     * Protobuf type {@code gnomobile.v1.SetNameOrBech32.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetNameOrBech32.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetNameOrBech32.Request)
         RequestOrBuilder {
       private Request() {
         nameOrBech32_ = "";
@@ -1811,12 +1811,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetNameOrBech32.Request}
+       * Protobuf type {@code gnomobile.v1.SetNameOrBech32.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetNameOrBech32.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetNameOrBech32.Request)
           land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request.newBuilder()
         private Builder() {
@@ -1873,7 +1873,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetNameOrBech32.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetNameOrBech32.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -1925,7 +1925,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetNameOrBech32.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetNameOrBech32.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -1948,16 +1948,16 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetNameOrBech32.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetNameOrBech32.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetNameOrBech32.Reply}
+     * Protobuf type {@code gnomobile.v1.SetNameOrBech32.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetNameOrBech32.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetNameOrBech32.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -2045,12 +2045,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetNameOrBech32.Reply}
+       * Protobuf type {@code gnomobile.v1.SetNameOrBech32.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetNameOrBech32.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetNameOrBech32.Reply)
           land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Reply.newBuilder()
         private Builder() {
@@ -2058,7 +2058,7 @@ public final class Gnomobiletypes {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetNameOrBech32.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetNameOrBech32.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -2107,7 +2107,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetNameOrBech32.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetNameOrBech32.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -2213,12 +2213,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.SetNameOrBech32}
+     * Protobuf type {@code gnomobile.v1.SetNameOrBech32}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.SetNameOrBech32)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetNameOrBech32)
         land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32OrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.newBuilder()
       private Builder() {
@@ -2226,7 +2226,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.SetNameOrBech32)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetNameOrBech32)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -2275,7 +2275,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.SetNameOrBech32)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.SetNameOrBech32)
     private static final land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32 DEFAULT_INSTANCE;
     static {
       SetNameOrBech32 defaultInstance = new SetNameOrBech32();
@@ -2298,21 +2298,21 @@ public final class Gnomobiletypes {
   }
 
   public interface SetPasswordOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.SetPassword)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetPassword)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.SetPassword}
+   * Protobuf type {@code gnomobile.v1.SetPassword}
    */
   public  static final class SetPassword extends
       com.google.protobuf.GeneratedMessageLite<
           SetPassword, SetPassword.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.SetPassword)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.SetPassword)
       SetPasswordOrBuilder {
     private SetPassword() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetPassword.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetPassword.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -2328,12 +2328,12 @@ public final class Gnomobiletypes {
           getPasswordBytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetPassword.Request}
+     * Protobuf type {@code gnomobile.v1.SetPassword.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetPassword.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetPassword.Request)
         RequestOrBuilder {
       private Request() {
         password_ = "";
@@ -2469,12 +2469,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetPassword.Request}
+       * Protobuf type {@code gnomobile.v1.SetPassword.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetPassword.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetPassword.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetPassword.Request)
           land.gno.gnomobile.Gnomobiletypes.SetPassword.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetPassword.Request.newBuilder()
         private Builder() {
@@ -2531,7 +2531,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetPassword.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetPassword.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -2583,7 +2583,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetPassword.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetPassword.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.SetPassword.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -2606,16 +2606,16 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SetPassword.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SetPassword.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
     }
     /**
-     * Protobuf type {@code gomobile.v1.SetPassword.Reply}
+     * Protobuf type {@code gnomobile.v1.SetPassword.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SetPassword.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SetPassword.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -2703,12 +2703,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SetPassword.Reply}
+       * Protobuf type {@code gnomobile.v1.SetPassword.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SetPassword.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SetPassword.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetPassword.Reply)
           land.gno.gnomobile.Gnomobiletypes.SetPassword.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SetPassword.Reply.newBuilder()
         private Builder() {
@@ -2716,7 +2716,7 @@ public final class Gnomobiletypes {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SetPassword.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetPassword.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -2765,7 +2765,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SetPassword.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SetPassword.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.SetPassword.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -2871,12 +2871,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.SetPassword}
+     * Protobuf type {@code gnomobile.v1.SetPassword}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.SetPassword, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.SetPassword)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.SetPassword)
         land.gno.gnomobile.Gnomobiletypes.SetPasswordOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.SetPassword.newBuilder()
       private Builder() {
@@ -2884,7 +2884,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.SetPassword)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.SetPassword)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -2933,7 +2933,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.SetPassword)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.SetPassword)
     private static final land.gno.gnomobile.Gnomobiletypes.SetPassword DEFAULT_INSTANCE;
     static {
       SetPassword defaultInstance = new SetPassword();
@@ -2956,16 +2956,16 @@ public final class Gnomobiletypes {
   }
 
   public interface KeyInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.KeyInfo)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.KeyInfo)
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @return The type.
      */
     land.gno.gnomobile.Gnomobiletypes.KeyType getType();
@@ -3001,12 +3001,12 @@ public final class Gnomobiletypes {
     com.google.protobuf.ByteString getPath();
   }
   /**
-   * Protobuf type {@code gomobile.v1.KeyInfo}
+   * Protobuf type {@code gnomobile.v1.KeyInfo}
    */
   public  static final class KeyInfo extends
       com.google.protobuf.GeneratedMessageLite<
           KeyInfo, KeyInfo.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.KeyInfo)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.KeyInfo)
       KeyInfoOrBuilder {
     private KeyInfo() {
       name_ = "";
@@ -3017,7 +3017,7 @@ public final class Gnomobiletypes {
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_;
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @return The enum numeric value on the wire for type.
      */
     @java.lang.Override
@@ -3025,7 +3025,7 @@ public final class Gnomobiletypes {
       return type_;
     }
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @return The type.
      */
     @java.lang.Override
@@ -3034,14 +3034,14 @@ public final class Gnomobiletypes {
       return result == null ? land.gno.gnomobile.Gnomobiletypes.KeyType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @param value The enum numeric value on the wire for type to set.
      */
     private void setTypeValue(int value) {
         type_ = value;
     }
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      * @param value The type to set.
      */
     private void setType(land.gno.gnomobile.Gnomobiletypes.KeyType value) {
@@ -3049,7 +3049,7 @@ public final class Gnomobiletypes {
 
     }
     /**
-     * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+     * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
      */
     private void clearType() {
 
@@ -3268,12 +3268,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.KeyInfo}
+     * Protobuf type {@code gnomobile.v1.KeyInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.KeyInfo, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.KeyInfo)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.KeyInfo)
         land.gno.gnomobile.Gnomobiletypes.KeyInfoOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.KeyInfo.newBuilder()
       private Builder() {
@@ -3282,7 +3282,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+       * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
        * @return The enum numeric value on the wire for type.
        */
       @java.lang.Override
@@ -3290,7 +3290,7 @@ public final class Gnomobiletypes {
         return instance.getTypeValue();
       }
       /**
-       * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+       * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
@@ -3300,7 +3300,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+       * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
        * @return The type.
        */
       @java.lang.Override
@@ -3308,7 +3308,7 @@ public final class Gnomobiletypes {
         return instance.getType();
       }
       /**
-       * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+       * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
        * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
@@ -3318,7 +3318,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>.gomobile.v1.KeyType type = 1 [json_name = "type"];</code>
+       * <code>.gnomobile.v1.KeyType type = 1 [json_name = "type"];</code>
        * @return This builder for chaining.
        */
       public Builder clearType() {
@@ -3460,7 +3460,7 @@ public final class Gnomobiletypes {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.KeyInfo)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.KeyInfo)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -3517,7 +3517,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.KeyInfo)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.KeyInfo)
     private static final land.gno.gnomobile.Gnomobiletypes.KeyInfo DEFAULT_INSTANCE;
     static {
       KeyInfo defaultInstance = new KeyInfo();
@@ -3540,30 +3540,30 @@ public final class Gnomobiletypes {
   }
 
   public interface ListKeyInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.ListKeyInfo)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.ListKeyInfo)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.ListKeyInfo}
+   * Protobuf type {@code gnomobile.v1.ListKeyInfo}
    */
   public  static final class ListKeyInfo extends
       com.google.protobuf.GeneratedMessageLite<
           ListKeyInfo, ListKeyInfo.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.ListKeyInfo)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.ListKeyInfo)
       ListKeyInfoOrBuilder {
     private ListKeyInfo() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.ListKeyInfo.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.ListKeyInfo.Request)
         com.google.protobuf.MessageLiteOrBuilder {
     }
     /**
-     * Protobuf type {@code gomobile.v1.ListKeyInfo.Request}
+     * Protobuf type {@code gnomobile.v1.ListKeyInfo.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.ListKeyInfo.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.ListKeyInfo.Request)
         RequestOrBuilder {
       private Request() {
       }
@@ -3651,12 +3651,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.ListKeyInfo.Request}
+       * Protobuf type {@code gnomobile.v1.ListKeyInfo.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.ListKeyInfo.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.ListKeyInfo.Request)
           land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Request.newBuilder()
         private Builder() {
@@ -3664,7 +3664,7 @@ public final class Gnomobiletypes {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.ListKeyInfo.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.ListKeyInfo.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -3713,7 +3713,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.ListKeyInfo.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.ListKeyInfo.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -3736,30 +3736,30 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.ListKeyInfo.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.ListKeyInfo.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       java.util.List<land.gno.gnomobile.Gnomobiletypes.KeyInfo> 
           getKeysList();
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       land.gno.gnomobile.Gnomobiletypes.KeyInfo getKeys(int index);
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       int getKeysCount();
     }
     /**
-     * Protobuf type {@code gomobile.v1.ListKeyInfo.Reply}
+     * Protobuf type {@code gnomobile.v1.ListKeyInfo.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.ListKeyInfo.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.ListKeyInfo.Reply)
         ReplyOrBuilder {
       private Reply() {
         keys_ = emptyProtobufList();
@@ -3767,35 +3767,35 @@ public final class Gnomobiletypes {
       public static final int KEYS_FIELD_NUMBER = 1;
       private com.google.protobuf.Internal.ProtobufList<land.gno.gnomobile.Gnomobiletypes.KeyInfo> keys_;
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       @java.lang.Override
       public java.util.List<land.gno.gnomobile.Gnomobiletypes.KeyInfo> getKeysList() {
         return keys_;
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       public java.util.List<? extends land.gno.gnomobile.Gnomobiletypes.KeyInfoOrBuilder> 
           getKeysOrBuilderList() {
         return keys_;
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       @java.lang.Override
       public int getKeysCount() {
         return keys_.size();
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       @java.lang.Override
       public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKeys(int index) {
         return keys_.get(index);
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       public land.gno.gnomobile.Gnomobiletypes.KeyInfoOrBuilder getKeysOrBuilder(
           int index) {
@@ -3810,7 +3810,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void setKeys(
           int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -3819,7 +3819,7 @@ public final class Gnomobiletypes {
         keys_.set(index, value);
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void addKeys(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
         value.getClass();
@@ -3827,7 +3827,7 @@ public final class Gnomobiletypes {
         keys_.add(value);
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void addKeys(
           int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -3836,7 +3836,7 @@ public final class Gnomobiletypes {
         keys_.add(index, value);
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void addAllKeys(
           java.lang.Iterable<? extends land.gno.gnomobile.Gnomobiletypes.KeyInfo> values) {
@@ -3845,13 +3845,13 @@ public final class Gnomobiletypes {
             values, keys_);
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void clearKeys() {
         keys_ = emptyProtobufList();
       }
       /**
-       * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
        */
       private void removeKeys(int index) {
         ensureKeysIsMutable();
@@ -3942,12 +3942,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.ListKeyInfo.Reply}
+       * Protobuf type {@code gnomobile.v1.ListKeyInfo.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.ListKeyInfo.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.ListKeyInfo.Reply)
           land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Reply.newBuilder()
         private Builder() {
@@ -3956,7 +3956,7 @@ public final class Gnomobiletypes {
 
 
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         @java.lang.Override
         public java.util.List<land.gno.gnomobile.Gnomobiletypes.KeyInfo> getKeysList() {
@@ -3964,20 +3964,20 @@ public final class Gnomobiletypes {
               instance.getKeysList());
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         @java.lang.Override
         public int getKeysCount() {
           return instance.getKeysCount();
         }/**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         @java.lang.Override
         public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKeys(int index) {
           return instance.getKeys(index);
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder setKeys(
             int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -3986,7 +3986,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder setKeys(
             int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo.Builder builderForValue) {
@@ -3996,7 +3996,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder addKeys(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
           copyOnWrite();
@@ -4004,7 +4004,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder addKeys(
             int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -4013,7 +4013,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder addKeys(
             land.gno.gnomobile.Gnomobiletypes.KeyInfo.Builder builderForValue) {
@@ -4022,7 +4022,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder addKeys(
             int index, land.gno.gnomobile.Gnomobiletypes.KeyInfo.Builder builderForValue) {
@@ -4032,7 +4032,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder addAllKeys(
             java.lang.Iterable<? extends land.gno.gnomobile.Gnomobiletypes.KeyInfo> values) {
@@ -4041,7 +4041,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder clearKeys() {
           copyOnWrite();
@@ -4049,7 +4049,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>repeated .gomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+         * <code>repeated .gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
          */
         public Builder removeKeys(int index) {
           copyOnWrite();
@@ -4057,7 +4057,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.ListKeyInfo.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.ListKeyInfo.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -4110,7 +4110,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.ListKeyInfo.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.ListKeyInfo.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -4216,12 +4216,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.ListKeyInfo}
+     * Protobuf type {@code gnomobile.v1.ListKeyInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.ListKeyInfo, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.ListKeyInfo)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.ListKeyInfo)
         land.gno.gnomobile.Gnomobiletypes.ListKeyInfoOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.ListKeyInfo.newBuilder()
       private Builder() {
@@ -4229,7 +4229,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.ListKeyInfo)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.ListKeyInfo)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -4278,7 +4278,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.ListKeyInfo)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.ListKeyInfo)
     private static final land.gno.gnomobile.Gnomobiletypes.ListKeyInfo DEFAULT_INSTANCE;
     static {
       ListKeyInfo defaultInstance = new ListKeyInfo();
@@ -4301,21 +4301,21 @@ public final class Gnomobiletypes {
   }
 
   public interface CreateAccountOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.CreateAccount)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.CreateAccount)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.CreateAccount}
+   * Protobuf type {@code gnomobile.v1.CreateAccount}
    */
   public  static final class CreateAccount extends
       com.google.protobuf.GeneratedMessageLite<
           CreateAccount, CreateAccount.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.CreateAccount)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.CreateAccount)
       CreateAccountOrBuilder {
     private CreateAccount() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.CreateAccount.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.CreateAccount.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -4379,12 +4379,12 @@ public final class Gnomobiletypes {
       int getIndex();
     }
     /**
-     * Protobuf type {@code gomobile.v1.CreateAccount.Request}
+     * Protobuf type {@code gnomobile.v1.CreateAccount.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.CreateAccount.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.CreateAccount.Request)
         RequestOrBuilder {
       private Request() {
         nameOrBech32_ = "";
@@ -4716,12 +4716,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.CreateAccount.Request}
+       * Protobuf type {@code gnomobile.v1.CreateAccount.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.CreateAccount.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.CreateAccount.Request)
           land.gno.gnomobile.Gnomobiletypes.CreateAccount.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request.newBuilder()
         private Builder() {
@@ -4981,7 +4981,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.CreateAccount.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.CreateAccount.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -5039,7 +5039,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.CreateAccount.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.CreateAccount.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -5062,27 +5062,27 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.CreateAccount.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.CreateAccount.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        * @return Whether the key field is set.
        */
       boolean hasKey();
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        * @return The key.
        */
       land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey();
     }
     /**
-     * Protobuf type {@code gomobile.v1.CreateAccount.Reply}
+     * Protobuf type {@code gnomobile.v1.CreateAccount.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.CreateAccount.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.CreateAccount.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -5090,21 +5090,21 @@ public final class Gnomobiletypes {
       public static final int KEY_FIELD_NUMBER = 1;
       private land.gno.gnomobile.Gnomobiletypes.KeyInfo key_;
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.Override
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.Override
       public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey() {
         return key_ == null ? land.gno.gnomobile.Gnomobiletypes.KeyInfo.getDefaultInstance() : key_;
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       private void setKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
         value.getClass();
@@ -5112,7 +5112,7 @@ public final class Gnomobiletypes {
         bitField0_ |= 0x00000001;
         }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.SuppressWarnings({"ReferenceEquality"})
       private void mergeKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -5127,7 +5127,7 @@ public final class Gnomobiletypes {
         bitField0_ |= 0x00000001;
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       private void clearKey() {  key_ = null;
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -5217,12 +5217,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.CreateAccount.Reply}
+       * Protobuf type {@code gnomobile.v1.CreateAccount.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.CreateAccount.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.CreateAccount.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.CreateAccount.Reply)
           land.gno.gnomobile.Gnomobiletypes.CreateAccount.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.CreateAccount.Reply.newBuilder()
         private Builder() {
@@ -5231,21 +5231,21 @@ public final class Gnomobiletypes {
 
 
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         @java.lang.Override
         public boolean hasKey() {
           return instance.hasKey();
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         @java.lang.Override
         public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey() {
           return instance.getKey();
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder setKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
           copyOnWrite();
@@ -5253,7 +5253,7 @@ public final class Gnomobiletypes {
           return this;
           }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder setKey(
             land.gno.gnomobile.Gnomobiletypes.KeyInfo.Builder builderForValue) {
@@ -5262,7 +5262,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder mergeKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
           copyOnWrite();
@@ -5270,14 +5270,14 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder clearKey() {  copyOnWrite();
           instance.clearKey();
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.CreateAccount.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.CreateAccount.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -5330,7 +5330,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.CreateAccount.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.CreateAccount.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.CreateAccount.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -5436,12 +5436,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.CreateAccount}
+     * Protobuf type {@code gnomobile.v1.CreateAccount}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.CreateAccount, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.CreateAccount)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.CreateAccount)
         land.gno.gnomobile.Gnomobiletypes.CreateAccountOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.CreateAccount.newBuilder()
       private Builder() {
@@ -5449,7 +5449,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.CreateAccount)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.CreateAccount)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -5498,7 +5498,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.CreateAccount)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.CreateAccount)
     private static final land.gno.gnomobile.Gnomobiletypes.CreateAccount DEFAULT_INSTANCE;
     static {
       CreateAccount defaultInstance = new CreateAccount();
@@ -5521,21 +5521,21 @@ public final class Gnomobiletypes {
   }
 
   public interface SelectAccountOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.SelectAccount)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.SelectAccount)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.SelectAccount}
+   * Protobuf type {@code gnomobile.v1.SelectAccount}
    */
   public  static final class SelectAccount extends
       com.google.protobuf.GeneratedMessageLite<
           SelectAccount, SelectAccount.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.SelectAccount)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.SelectAccount)
       SelectAccountOrBuilder {
     private SelectAccount() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SelectAccount.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SelectAccount.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -5551,12 +5551,12 @@ public final class Gnomobiletypes {
           getNameOrBech32Bytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SelectAccount.Request}
+     * Protobuf type {@code gnomobile.v1.SelectAccount.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SelectAccount.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SelectAccount.Request)
         RequestOrBuilder {
       private Request() {
         nameOrBech32_ = "";
@@ -5692,12 +5692,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SelectAccount.Request}
+       * Protobuf type {@code gnomobile.v1.SelectAccount.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SelectAccount.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SelectAccount.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SelectAccount.Request)
           land.gno.gnomobile.Gnomobiletypes.SelectAccount.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SelectAccount.Request.newBuilder()
         private Builder() {
@@ -5754,7 +5754,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SelectAccount.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SelectAccount.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -5806,7 +5806,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SelectAccount.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SelectAccount.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.SelectAccount.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -5829,27 +5829,27 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.SelectAccount.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.SelectAccount.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        * @return Whether the key field is set.
        */
       boolean hasKey();
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        * @return The key.
        */
       land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey();
     }
     /**
-     * Protobuf type {@code gomobile.v1.SelectAccount.Reply}
+     * Protobuf type {@code gnomobile.v1.SelectAccount.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.SelectAccount.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.SelectAccount.Reply)
         ReplyOrBuilder {
       private Reply() {
       }
@@ -5857,21 +5857,21 @@ public final class Gnomobiletypes {
       public static final int KEY_FIELD_NUMBER = 1;
       private land.gno.gnomobile.Gnomobiletypes.KeyInfo key_;
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.Override
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.Override
       public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey() {
         return key_ == null ? land.gno.gnomobile.Gnomobiletypes.KeyInfo.getDefaultInstance() : key_;
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       private void setKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
         value.getClass();
@@ -5879,7 +5879,7 @@ public final class Gnomobiletypes {
         bitField0_ |= 0x00000001;
         }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       @java.lang.SuppressWarnings({"ReferenceEquality"})
       private void mergeKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
@@ -5894,7 +5894,7 @@ public final class Gnomobiletypes {
         bitField0_ |= 0x00000001;
       }
       /**
-       * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
        */
       private void clearKey() {  key_ = null;
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -5984,12 +5984,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.SelectAccount.Reply}
+       * Protobuf type {@code gnomobile.v1.SelectAccount.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.SelectAccount.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.SelectAccount.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.SelectAccount.Reply)
           land.gno.gnomobile.Gnomobiletypes.SelectAccount.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.SelectAccount.Reply.newBuilder()
         private Builder() {
@@ -5998,21 +5998,21 @@ public final class Gnomobiletypes {
 
 
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         @java.lang.Override
         public boolean hasKey() {
           return instance.hasKey();
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         @java.lang.Override
         public land.gno.gnomobile.Gnomobiletypes.KeyInfo getKey() {
           return instance.getKey();
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder setKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
           copyOnWrite();
@@ -6020,7 +6020,7 @@ public final class Gnomobiletypes {
           return this;
           }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder setKey(
             land.gno.gnomobile.Gnomobiletypes.KeyInfo.Builder builderForValue) {
@@ -6029,7 +6029,7 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder mergeKey(land.gno.gnomobile.Gnomobiletypes.KeyInfo value) {
           copyOnWrite();
@@ -6037,14 +6037,14 @@ public final class Gnomobiletypes {
           return this;
         }
         /**
-         * <code>.gomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+         * <code>.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
          */
         public Builder clearKey() {  copyOnWrite();
           instance.clearKey();
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.SelectAccount.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.SelectAccount.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -6097,7 +6097,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.SelectAccount.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.SelectAccount.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.SelectAccount.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -6203,12 +6203,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.SelectAccount}
+     * Protobuf type {@code gnomobile.v1.SelectAccount}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.SelectAccount, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.SelectAccount)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.SelectAccount)
         land.gno.gnomobile.Gnomobiletypes.SelectAccountOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.SelectAccount.newBuilder()
       private Builder() {
@@ -6216,7 +6216,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.SelectAccount)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.SelectAccount)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -6265,7 +6265,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.SelectAccount)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.SelectAccount)
     private static final land.gno.gnomobile.Gnomobiletypes.SelectAccount DEFAULT_INSTANCE;
     static {
       SelectAccount defaultInstance = new SelectAccount();
@@ -6288,21 +6288,21 @@ public final class Gnomobiletypes {
   }
 
   public interface QueryOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.Query)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.Query)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.Query}
+   * Protobuf type {@code gnomobile.v1.Query}
    */
   public  static final class Query extends
       com.google.protobuf.GeneratedMessageLite<
           Query, Query.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.Query)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.Query)
       QueryOrBuilder {
     private Query() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.Query.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.Query.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -6346,12 +6346,12 @@ public final class Gnomobiletypes {
           getDataBytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.Query.Request}
+     * Protobuf type {@code gnomobile.v1.Query.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.Query.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.Query.Request)
         RequestOrBuilder {
       private Request() {
         path_ = "";
@@ -6575,12 +6575,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.Query.Request}
+       * Protobuf type {@code gnomobile.v1.Query.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.Query.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.Query.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.Query.Request)
           land.gno.gnomobile.Gnomobiletypes.Query.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.Query.Request.newBuilder()
         private Builder() {
@@ -6726,7 +6726,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.Query.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.Query.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -6780,7 +6780,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.Query.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.Query.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.Query.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -6803,7 +6803,7 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.Query.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.Query.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -6813,12 +6813,12 @@ public final class Gnomobiletypes {
       com.google.protobuf.ByteString getResult();
     }
     /**
-     * Protobuf type {@code gomobile.v1.Query.Reply}
+     * Protobuf type {@code gnomobile.v1.Query.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.Query.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.Query.Reply)
         ReplyOrBuilder {
       private Reply() {
         result_ = com.google.protobuf.ByteString.EMPTY;
@@ -6934,12 +6934,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.Query.Reply}
+       * Protobuf type {@code gnomobile.v1.Query.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.Query.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.Query.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.Query.Reply)
           land.gno.gnomobile.Gnomobiletypes.Query.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.Query.Reply.newBuilder()
         private Builder() {
@@ -6975,7 +6975,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.Query.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.Query.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -7027,7 +7027,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.Query.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.Query.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.Query.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -7133,12 +7133,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.Query}
+     * Protobuf type {@code gnomobile.v1.Query}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.Query, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.Query)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.Query)
         land.gno.gnomobile.Gnomobiletypes.QueryOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.Query.newBuilder()
       private Builder() {
@@ -7146,7 +7146,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.Query)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.Query)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -7195,7 +7195,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.Query)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.Query)
     private static final land.gno.gnomobile.Gnomobiletypes.Query DEFAULT_INSTANCE;
     static {
       Query defaultInstance = new Query();
@@ -7218,21 +7218,21 @@ public final class Gnomobiletypes {
   }
 
   public interface CallOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.Call)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.Call)
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code gomobile.v1.Call}
+   * Protobuf type {@code gnomobile.v1.Call}
    */
   public  static final class Call extends
       com.google.protobuf.GeneratedMessageLite<
           Call, Call.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.Call)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.Call)
       CallOrBuilder {
     private Call() {
     }
     public interface RequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.Call.Request)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.Call.Request)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -7347,12 +7347,12 @@ public final class Gnomobiletypes {
           getPasswordBytes();
     }
     /**
-     * Protobuf type {@code gomobile.v1.Call.Request}
+     * Protobuf type {@code gnomobile.v1.Call.Request}
      */
     public  static final class Request extends
         com.google.protobuf.GeneratedMessageLite<
             Request, Request.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.Call.Request)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.Call.Request)
         RequestOrBuilder {
       private Request() {
         packagePath_ = "";
@@ -7828,12 +7828,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.Call.Request}
+       * Protobuf type {@code gnomobile.v1.Call.Request}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.Call.Request, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.Call.Request)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.Call.Request)
           land.gno.gnomobile.Gnomobiletypes.Call.RequestOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.Call.Request.newBuilder()
         private Builder() {
@@ -8233,7 +8233,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.Call.Request)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.Call.Request)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -8291,7 +8291,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.Call.Request)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.Call.Request)
       private static final land.gno.gnomobile.Gnomobiletypes.Call.Request DEFAULT_INSTANCE;
       static {
         Request defaultInstance = new Request();
@@ -8314,7 +8314,7 @@ public final class Gnomobiletypes {
     }
 
     public interface ReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:gomobile.v1.Call.Reply)
+        // @@protoc_insertion_point(interface_extends:gnomobile.v1.Call.Reply)
         com.google.protobuf.MessageLiteOrBuilder {
 
       /**
@@ -8324,12 +8324,12 @@ public final class Gnomobiletypes {
       com.google.protobuf.ByteString getResult();
     }
     /**
-     * Protobuf type {@code gomobile.v1.Call.Reply}
+     * Protobuf type {@code gnomobile.v1.Call.Reply}
      */
     public  static final class Reply extends
         com.google.protobuf.GeneratedMessageLite<
             Reply, Reply.Builder> implements
-        // @@protoc_insertion_point(message_implements:gomobile.v1.Call.Reply)
+        // @@protoc_insertion_point(message_implements:gnomobile.v1.Call.Reply)
         ReplyOrBuilder {
       private Reply() {
         result_ = com.google.protobuf.ByteString.EMPTY;
@@ -8445,12 +8445,12 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * Protobuf type {@code gomobile.v1.Call.Reply}
+       * Protobuf type {@code gnomobile.v1.Call.Reply}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageLite.Builder<
             land.gno.gnomobile.Gnomobiletypes.Call.Reply, Builder> implements
-          // @@protoc_insertion_point(builder_implements:gomobile.v1.Call.Reply)
+          // @@protoc_insertion_point(builder_implements:gnomobile.v1.Call.Reply)
           land.gno.gnomobile.Gnomobiletypes.Call.ReplyOrBuilder {
         // Construct using land.gno.gnomobile.Gnomobiletypes.Call.Reply.newBuilder()
         private Builder() {
@@ -8486,7 +8486,7 @@ public final class Gnomobiletypes {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:gomobile.v1.Call.Reply)
+        // @@protoc_insertion_point(builder_scope:gnomobile.v1.Call.Reply)
       }
       @java.lang.Override
       @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -8538,7 +8538,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(class_scope:gomobile.v1.Call.Reply)
+      // @@protoc_insertion_point(class_scope:gnomobile.v1.Call.Reply)
       private static final land.gno.gnomobile.Gnomobiletypes.Call.Reply DEFAULT_INSTANCE;
       static {
         Reply defaultInstance = new Reply();
@@ -8644,12 +8644,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.Call}
+     * Protobuf type {@code gnomobile.v1.Call}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.Call, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.Call)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.Call)
         land.gno.gnomobile.Gnomobiletypes.CallOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.Call.newBuilder()
       private Builder() {
@@ -8657,7 +8657,7 @@ public final class Gnomobiletypes {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.Call)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.Call)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -8706,7 +8706,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.Call)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.Call)
     private static final land.gno.gnomobile.Gnomobiletypes.Call DEFAULT_INSTANCE;
     static {
       Call defaultInstance = new Call();
@@ -8729,45 +8729,45 @@ public final class Gnomobiletypes {
   }
 
   public interface ErrDetailsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gomobile.v1.ErrDetails)
+      // @@protoc_insertion_point(interface_extends:gnomobile.v1.ErrDetails)
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return A list containing the codes.
      */
     java.util.List<land.gno.gnomobile.Gnomobiletypes.ErrCode> getCodesList();
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return The count of codes.
      */
     int getCodesCount();
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param index The index of the element to return.
      * @return The codes at the given index.
      */
     land.gno.gnomobile.Gnomobiletypes.ErrCode getCodes(int index);
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return A list containing the enum numeric values on the wire for codes.
      */
     java.util.List<java.lang.Integer>
     getCodesValueList();
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param index The index of the value to return.
      * @return The enum numeric value on the wire of codes at the given index.
      */
     int getCodesValue(int index);
   }
   /**
-   * Protobuf type {@code gomobile.v1.ErrDetails}
+   * Protobuf type {@code gnomobile.v1.ErrDetails}
    */
   public  static final class ErrDetails extends
       com.google.protobuf.GeneratedMessageLite<
           ErrDetails, ErrDetails.Builder> implements
-      // @@protoc_insertion_point(message_implements:gomobile.v1.ErrDetails)
+      // @@protoc_insertion_point(message_implements:gnomobile.v1.ErrDetails)
       ErrDetailsOrBuilder {
     private ErrDetails() {
       codes_ = emptyIntList();
@@ -8785,7 +8785,7 @@ public final class Gnomobiletypes {
               }
             };
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return A list containing the codes.
      */
     @java.lang.Override
@@ -8794,7 +8794,7 @@ public final class Gnomobiletypes {
           java.lang.Integer, land.gno.gnomobile.Gnomobiletypes.ErrCode>(codes_, codes_converter_);
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return The count of codes.
      */
     @java.lang.Override
@@ -8802,7 +8802,7 @@ public final class Gnomobiletypes {
       return codes_.size();
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param index The index of the element to return.
      * @return The codes at the given index.
      */
@@ -8812,7 +8812,7 @@ public final class Gnomobiletypes {
       return result == null ? land.gno.gnomobile.Gnomobiletypes.ErrCode.UNRECOGNIZED : result;
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @return A list containing the enum numeric values on the wire for codes.
      */
     @java.lang.Override
@@ -8821,7 +8821,7 @@ public final class Gnomobiletypes {
       return codes_;
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param index The index of the value to return.
      * @return The enum numeric value on the wire of codes at the given index.
      */
@@ -8838,7 +8838,7 @@ public final class Gnomobiletypes {
       }
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param index The index to set the value at.
      * @param value The codes to set.
      */
@@ -8849,7 +8849,7 @@ public final class Gnomobiletypes {
       codes_.setInt(index, value.getNumber());
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param value The codes to add.
      */
     private void addCodes(land.gno.gnomobile.Gnomobiletypes.ErrCode value) {
@@ -8858,7 +8858,7 @@ public final class Gnomobiletypes {
       codes_.addInt(value.getNumber());
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param values The codes to add.
      */
     private void addAllCodes(
@@ -8869,13 +8869,13 @@ public final class Gnomobiletypes {
       }
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      */
     private void clearCodes() {
       codes_ = emptyIntList();
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param value The enum numeric value on the wire for codes to set.
      */
     private void setCodesValue(
@@ -8884,7 +8884,7 @@ public final class Gnomobiletypes {
       codes_.setInt(index, value);
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param value The enum numeric value on the wire for codes to add.
      */
     private void addCodesValue(int value) {
@@ -8892,7 +8892,7 @@ public final class Gnomobiletypes {
       codes_.addInt(value);
     }
     /**
-     * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+     * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
      * @param values The enum numeric values on the wire for codes to add.
      */
     private void addAllCodesValue(
@@ -8987,12 +8987,12 @@ public final class Gnomobiletypes {
     }
 
     /**
-     * Protobuf type {@code gomobile.v1.ErrDetails}
+     * Protobuf type {@code gnomobile.v1.ErrDetails}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
           land.gno.gnomobile.Gnomobiletypes.ErrDetails, Builder> implements
-        // @@protoc_insertion_point(builder_implements:gomobile.v1.ErrDetails)
+        // @@protoc_insertion_point(builder_implements:gnomobile.v1.ErrDetails)
         land.gno.gnomobile.Gnomobiletypes.ErrDetailsOrBuilder {
       // Construct using land.gno.gnomobile.Gnomobiletypes.ErrDetails.newBuilder()
       private Builder() {
@@ -9001,7 +9001,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @return A list containing the codes.
        */
       @java.lang.Override
@@ -9009,7 +9009,7 @@ public final class Gnomobiletypes {
         return instance.getCodesList();
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @return The count of codes.
        */
       @java.lang.Override
@@ -9017,7 +9017,7 @@ public final class Gnomobiletypes {
         return instance.getCodesCount();
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param index The index of the element to return.
        * @return The codes at the given index.
        */
@@ -9026,7 +9026,7 @@ public final class Gnomobiletypes {
         return instance.getCodes(index);
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param index The index to set the value at.
        * @param value The codes to set.
        * @return This builder for chaining.
@@ -9038,7 +9038,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param value The codes to add.
        * @return This builder for chaining.
        */
@@ -9048,7 +9048,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param values The codes to add.
        * @return This builder for chaining.
        */
@@ -9058,7 +9058,7 @@ public final class Gnomobiletypes {
         instance.addAllCodes(values);  return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @return This builder for chaining.
        */
       public Builder clearCodes() {
@@ -9067,7 +9067,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @return A list containing the enum numeric values on the wire for codes.
        */
       @java.lang.Override
@@ -9077,7 +9077,7 @@ public final class Gnomobiletypes {
             instance.getCodesValueList());
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param index The index of the value to return.
        * @return The enum numeric value on the wire of codes at the given index.
        */
@@ -9086,7 +9086,7 @@ public final class Gnomobiletypes {
         return instance.getCodesValue(index);
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param index The index to set the value at.
        * @param value The enum numeric value on the wire for codes to set.
        * @return This builder for chaining.
@@ -9098,7 +9098,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param value The enum numeric value on the wire for codes to add.
        * @return This builder for chaining.
        */
@@ -9108,7 +9108,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated .gomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
+       * <code>repeated .gnomobile.v1.ErrCode codes = 1 [json_name = "codes"];</code>
        * @param values The enum numeric values on the wire for codes to add.
        * @return This builder for chaining.
        */
@@ -9119,7 +9119,7 @@ public final class Gnomobiletypes {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:gomobile.v1.ErrDetails)
+      // @@protoc_insertion_point(builder_scope:gnomobile.v1.ErrDetails)
     }
     @java.lang.Override
     @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
@@ -9171,7 +9171,7 @@ public final class Gnomobiletypes {
     }
 
 
-    // @@protoc_insertion_point(class_scope:gomobile.v1.ErrDetails)
+    // @@protoc_insertion_point(class_scope:gnomobile.v1.ErrDetails)
     private static final land.gno.gnomobile.Gnomobiletypes.ErrDetails DEFAULT_INSTANCE;
     static {
       ErrDetails defaultInstance = new ErrDetails();

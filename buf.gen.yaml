@@ -12,3 +12,10 @@ plugins:
   - plugin: buf.build/protocolbuffers/java
     out: gnoboard/android/app/src/main/java
     opt: lite
+  - plugin: buf.build/grpc/swift:v1.19.1
+    out: gnoboard/ios/Sources
+    opt: Client=true,Server=false
+  # dependencies
+  - plugin: buf.build/apple/swift
+    out: gnoboard/ios/Sources
+    opt: Visibility=Public
