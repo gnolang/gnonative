@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package gnomobile.v1;
 
-option go_package = "github.com/gnoland/gnomobile/service/gnomobiletypes";
+option go_package = "github.com/gnolang/gnomobile/service/gnomobiletypes";
 option java_package = "land.gno.gnomobile";
 option objc_class_prefix = "RTG";
 

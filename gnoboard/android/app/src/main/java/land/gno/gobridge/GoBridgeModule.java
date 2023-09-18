@@ -12,9 +12,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import gnoland.gno.gnomobile.Gnomobile;
-import gnoland.gno.gnomobile.Bridge;
-import gnoland.gno.gnomobile.BridgeConfig;
+import gnolang.gno.gnomobile.Gnomobile;
+import gnolang.gno.gnomobile.Bridge;
+import gnolang.gno.gnomobile.BridgeConfig;
 
 import io.grpc.Channel;
 import android.net.LocalSocketAddress.Namespace;
