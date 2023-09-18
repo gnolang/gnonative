@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/gnoland/gnomobile
+name: buf.build/gnolang/gnomobile
 breaking:
   use:
     - FILE

@@ -128,7 +128,7 @@ $(gnocore_aar): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@) .cache/bind/android
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gmomobile \
-		-javapkg=gnoland.gno \
+		-javapkg=gnolang.gno \
 		-o $@ -target android -androidapi 21 ./framework
 _bind.clean.android:
 	rm -rf $(gnocore_jar) $(gnocore_aar)
