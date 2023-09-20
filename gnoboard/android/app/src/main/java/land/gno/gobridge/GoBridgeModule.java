@@ -81,7 +81,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
             Log.i(TAG, String.format("list accounts size: %d", listKeyRep.getKeysCount()));
 
-            // if no account, create a new one
+                // if no account, create a new one
             if (listKeyRep.getKeysCount() == 0) {
                 Gnomobiletypes.CreateAccount.Request createAccReq = Gnomobiletypes.CreateAccount.Request.newBuilder()
                     .setNameOrBech32("jefft0")

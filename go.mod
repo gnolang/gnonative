@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/gnolang/gno v0.0.0-20230824160121-aa7c1df119cd
 	github.com/oklog/run v1.1.0
+	github.com/pkg/errors v0.9.1
 	go.uber.org/multierr v1.11.0
 	go.uber.org/zap v1.25.0
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
@@ -40,7 +41,6 @@ require (
 	github.com/linxGnu/grocksdb v1.7.15 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/peterbourgon/ff/v3 v3.4.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
 	go.etcd.io/bbolt v1.3.7 // indirect
 	go.opencensus.io v0.24.0 // indirect

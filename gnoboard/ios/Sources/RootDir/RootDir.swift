@@ -8,24 +8,18 @@
 import Foundation
 
 enum RootDirError: Error {
-    case path
+  case path
 }
 extension RootDirError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .path:
-            return NSLocalizedString(
-                "unable to get app group path url",
-                comment: ""
-            )
-        }
+  public var errorDescription: String? {
+    switch self {
+    case .path:
+      return NSLocalizedString(
+        "unable to get app group path url",
+        comment: ""
+      )
     }
-}
-
-func RootDirGet() throws -> String {
-  
-  let docDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-  return docDir.appendingPathComponent("gnomobile", isDirectory: true).path
+  }
 }
 
 @objc(RootDir)
@@ -37,8 +31,31 @@ class RootDir: NSObject {
       reject("root_dir_failure", error.localizedDescription, error)
     }
   }
-  
+
   @objc static func requiresMainQueueSetup() -> Bool {
-      return false
+    return false
+  }
+}
+
+func RootDirGet() throws -> String {
+  return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).path
+}
+
+func TempDirGet() throws -> String {
+  return FileManager.default.compatTemporaryDirectory.path
+}
+
+extension FileManager {
+  public var compatTemporaryDirectory: URL {
+    if #available(iOS 10.0, *) {
+      return temporaryDirectory
+    } else {
+      return (try? url(
+        for: .itemReplacementDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true)
+      ) ?? URL(fileURLWithPath: NSTemporaryDirectory())
+    }
   }
 }

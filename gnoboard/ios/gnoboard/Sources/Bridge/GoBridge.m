@@ -18,16 +18,17 @@ RCT_EXTERN_METHOD(call:(NSString *)packagePath
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(createDefaultAccount:(NSString)name
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject);
-
 RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
 + (BOOL)requiresMainQueueSetup
 {
- return YES;  // only do this if your module initialization relies on calling UIKit!
+  return NO;  // only do this if your module initialization relies on calling UIKit!
+}
+
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_queue_create("com.facebook.React.AsyncLocalStorageQueue", DISPATCH_QUEUE_SERIAL);
 }
 
 @end

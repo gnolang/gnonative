@@ -34,18 +34,21 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GnomobileServiceClient interface {
-	// Set the connection addresse for the remote node. If you don't call this, the default is
-	// "127.0.0.1:26657"
+	// Set the connection addresse for the remote node. If you don't call this,
+	// the default is "127.0.0.1:26657"
 	SetRemote(ctx context.Context, in *SetRemote_Request, opts ...grpc.CallOption) (*SetRemote_Reply, error)
-	// Set the chain ID for the remote node. If you don't call this, the default is "dev"
+	// Set the chain ID for the remote node. If you don't call this, the default
+	// is "dev"
 	SetChainID(ctx context.Context, in *SetChainID_Request, opts ...grpc.CallOption) (*SetChainID_Reply, error)
-	// Set the nameOrBech32 for the account in the keybase, used for later operations
+	// Set the nameOrBech32 for the account in the keybase, used for later
+	// operations
 	SetNameOrBech32(ctx context.Context, in *SetNameOrBech32_Request, opts ...grpc.CallOption) (*SetNameOrBech32_Reply, error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(ctx context.Context, in *SetPassword_Request, opts ...grpc.CallOption) (*SetPassword_Reply, error)
 	// Get the keys informations in the keybase
 	ListKeyInfo(ctx context.Context, in *ListKeyInfo_Request, opts ...grpc.CallOption) (*ListKeyInfo_Reply, error)
-	// Create a new account the keybase using the name an password specified by SetAccount
+	// Create a new account the keybase using the name an password specified by
+	// SetAccount
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
 	// SelectAccount selects the account to use for later operations
 	SelectAccount(ctx context.Context, in *SelectAccount_Request, opts ...grpc.CallOption) (*SelectAccount_Reply, error)
@@ -148,18 +151,21 @@ func (c *gnomobileServiceClient) Call(ctx context.Context, in *Call_Request, opt
 // All implementations must embed UnimplementedGnomobileServiceServer
 // for forward compatibility
 type GnomobileServiceServer interface {
-	// Set the connection addresse for the remote node. If you don't call this, the default is
-	// "127.0.0.1:26657"
+	// Set the connection addresse for the remote node. If you don't call this,
+	// the default is "127.0.0.1:26657"
 	SetRemote(context.Context, *SetRemote_Request) (*SetRemote_Reply, error)
-	// Set the chain ID for the remote node. If you don't call this, the default is "dev"
+	// Set the chain ID for the remote node. If you don't call this, the default
+	// is "dev"
 	SetChainID(context.Context, *SetChainID_Request) (*SetChainID_Reply, error)
-	// Set the nameOrBech32 for the account in the keybase, used for later operations
+	// Set the nameOrBech32 for the account in the keybase, used for later
+	// operations
 	SetNameOrBech32(context.Context, *SetNameOrBech32_Request) (*SetNameOrBech32_Reply, error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(context.Context, *SetPassword_Request) (*SetPassword_Reply, error)
 	// Get the keys informations in the keybase
 	ListKeyInfo(context.Context, *ListKeyInfo_Request) (*ListKeyInfo_Reply, error)
-	// Create a new account the keybase using the name an password specified by SetAccount
+	// Create a new account the keybase using the name an password specified by
+	// SetAccount
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
 	// SelectAccount selects the account to use for later operations
 	SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error)

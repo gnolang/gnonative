@@ -4,15 +4,18 @@ import (
 	"io"
 	"net"
 	"os"
+	"path/filepath"
 	"sync"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gnomobile/service/gnomobiletypes"
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )
 
-const SOCKET_FILE = "gnomobile.sock"
+const SOCKET_SUBDIR = "s"
+const SOCKET_FILE = "gno"
 
 type GnomobileService interface {
 	gnomobiletypes.GnomobileServiceServer
@@ -26,6 +29,7 @@ type gnomobileService struct {
 	logger     *zap.Logger
 	client     *Client
 	rootDir    string
+	tmpDir     string
 	socketPath string
 	lock       sync.RWMutex
 
@@ -48,6 +52,10 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 		return nil, err
 	}
 
+	if err := svc.checkDirs(); err != nil {
+		return nil, err
+	}
+
 	svc.client = NewClient(Opts{
 		Remote:  svc.remote,
 		ChainID: svc.chainID,
@@ -58,7 +66,9 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	}
 
 	// start gRPC server
-	svc.runServer()
+	if err := svc.runServer(); err != nil {
+		return nil, err
+	}
 
 	return svc, nil
 }
@@ -75,7 +85,35 @@ func (s *gnomobileService) applyOptions(opts ...GnomobileOption) error {
 	return nil
 }
 
+func (s *gnomobileService) checkDirs() error {
+	// check if rootDir exists
+	{
+		_, err := os.Stat(s.rootDir)
+		if os.IsNotExist(err) {
+			return errors.Wrap(err, "rootDir folder doesn't exist")
+		}
+	}
+
+	// check if tmpDir exists
+	{
+		_, err := os.Stat(s.tmpDir)
+		if os.IsNotExist(err) {
+			return errors.Wrap(err, "tmpDir folder doesn't exist")
+		}
+	}
+
+	return nil
+}
+
 func (s *gnomobileService) runServer() error {
+	// create a socket subdirectory
+	sockDir := filepath.Join(s.tmpDir, SOCKET_SUBDIR)
+	if err := os.MkdirAll(sockDir, 0700); err != nil {
+		return errors.Wrap(err, "can't create sock folder")
+	}
+
+	s.socketPath = filepath.Join(sockDir, SOCKET_FILE)
+
 	// delete socket if it already exists
 	if _, err := os.Stat(s.socketPath); !os.IsNotExist(err) {
 		if err := os.RemoveAll(s.socketPath); err != nil {
@@ -93,7 +131,10 @@ func (s *gnomobileService) runServer() error {
 	gnomobiletypes.RegisterGnomobileServiceServer(server, s)
 	go func() {
 		// we dont need to log the error
-		_ = server.Serve(listener)
+		err := server.Serve(listener)
+		if err != nil {
+			s.logger.Error("failed to serve the gRPC listener")
+		}
 	}()
 
 	s.listener = listener
@@ -251,37 +292,37 @@ var WithFallbackRootDir GnomobileOption = func(s *gnomobileService) error {
 	return nil
 }
 
-// --- SocketPath options ---
+// --- tmpDir options ---
 
-// WithSocketPath set the given socket path where the gRPC server listens.
-var WithSocketPath = func(path string) GnomobileOption {
+// WithTmpDir set the given temporary path.
+var WithTmpDir = func(path string) GnomobileOption {
 	return func(s *gnomobileService) error {
-		s.socketPath = path
+		s.tmpDir = path
 		return nil
 	}
 }
 
-// WithDefaultSocketPath set a default socket path in the root directory.
-var WithDefaultSocketPath GnomobileOption = func(s *gnomobileService) error {
+// WithDefaultTmpDir set a default temporary path.
+var WithDefaultTmpDir GnomobileOption = func(s *gnomobileService) error {
 	// dependency
 	if err := WithFallbackRootDir(s); err != nil {
 		return err
 	}
 
-	s.socketPath = s.rootDir + "/" + SOCKET_FILE
+	s.tmpDir = s.rootDir
 
 	return nil
 }
 
-var fallbackSocketPath = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.socketPath == "" },
-	opt:      WithDefaultSocketPath,
+var fallbackTmpDir = FallBackOption{
+	fallback: func(s *gnomobileService) bool { return s.tmpDir == "" },
+	opt:      WithDefaultTmpDir,
 }
 
 // WithFallbackSocketPath set the default socket path if no path is set.
-var WithFallbacSocketPath GnomobileOption = func(s *gnomobileService) error {
-	if fallbackSocketPath.fallback(s) {
-		return fallbackSocketPath.opt(s)
+var WithFallbackTmpDir GnomobileOption = func(s *gnomobileService) error {
+	if fallbackTmpDir.fallback(s) {
+		return fallbackTmpDir.opt(s)
 	}
 	return nil
 }
@@ -293,7 +334,7 @@ var defaults = []FallBackOption{
 	fallbackRemote,
 	fallbackChainID,
 	fallbackRootDir,
-	fallbackSocketPath,
+	fallbackTmpDir,
 }
 
 // WithFallbackDefaults set the default options if no option is set.

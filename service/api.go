@@ -122,6 +122,10 @@ func (s *gnomobileService) Query(ctx context.Context, req *gnomobiletypes.Query_
 func (s *gnomobileService) Call(ctx context.Context, req *gnomobiletypes.Call_Request) (*gnomobiletypes.Call_Reply, error) {
 	s.logger.Debug("Call", zap.String("package", req.PackagePath), zap.String("function", req.Fnc), zap.Any("args", req.Args))
 
+	if s.activeAccount == nil {
+		return nil, gnomobiletypes.ErrCode_ErrNoActiveAccount
+	}
+
 	if err := s.client.Call(req.PackagePath, req.Fnc, req.Args, req.GasFee, req.GasWanted, "", s.activeAccount.GetName(), req.Password); err != nil {
 		return nil, err
 	}

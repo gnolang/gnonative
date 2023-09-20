@@ -341,8 +341,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the connection addresse for the remote node. If you don't call this, the default is
-     * "127.0.0.1:26657"
+     * Set the connection addresse for the remote node. If you don't call this,
+     * the default is "127.0.0.1:26657"
      * </pre>
      */
     default void setRemote(land.gno.gnomobile.Gnomobiletypes.SetRemote.Request request,
@@ -352,7 +352,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the chain ID for the remote node. If you don't call this, the default is "dev"
+     * Set the chain ID for the remote node. If you don't call this, the default
+     * is "dev"
      * </pre>
      */
     default void setChainID(land.gno.gnomobile.Gnomobiletypes.SetChainID.Request request,
@@ -362,7 +363,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later operations
+     * Set the nameOrBech32 for the account in the keybase, used for later
+     * operations
      * </pre>
      */
     default void setNameOrBech32(land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request request,
@@ -392,7 +394,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new account the keybase using the name an password specified by SetAccount
+     * Create a new account the keybase using the name an password specified by
+     * SetAccount
      * </pre>
      */
     default void createAccount(land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request request,
@@ -466,8 +469,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the connection addresse for the remote node. If you don't call this, the default is
-     * "127.0.0.1:26657"
+     * Set the connection addresse for the remote node. If you don't call this,
+     * the default is "127.0.0.1:26657"
      * </pre>
      */
     public void setRemote(land.gno.gnomobile.Gnomobiletypes.SetRemote.Request request,
@@ -478,7 +481,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the chain ID for the remote node. If you don't call this, the default is "dev"
+     * Set the chain ID for the remote node. If you don't call this, the default
+     * is "dev"
      * </pre>
      */
     public void setChainID(land.gno.gnomobile.Gnomobiletypes.SetChainID.Request request,
@@ -489,7 +493,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later operations
+     * Set the nameOrBech32 for the account in the keybase, used for later
+     * operations
      * </pre>
      */
     public void setNameOrBech32(land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request request,
@@ -522,7 +527,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new account the keybase using the name an password specified by SetAccount
+     * Create a new account the keybase using the name an password specified by
+     * SetAccount
      * </pre>
      */
     public void createAccount(land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request request,
@@ -586,8 +592,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the connection addresse for the remote node. If you don't call this, the default is
-     * "127.0.0.1:26657"
+     * Set the connection addresse for the remote node. If you don't call this,
+     * the default is "127.0.0.1:26657"
      * </pre>
      */
     public land.gno.gnomobile.Gnomobiletypes.SetRemote.Reply setRemote(land.gno.gnomobile.Gnomobiletypes.SetRemote.Request request) {
@@ -597,7 +603,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the chain ID for the remote node. If you don't call this, the default is "dev"
+     * Set the chain ID for the remote node. If you don't call this, the default
+     * is "dev"
      * </pre>
      */
     public land.gno.gnomobile.Gnomobiletypes.SetChainID.Reply setChainID(land.gno.gnomobile.Gnomobiletypes.SetChainID.Request request) {
@@ -607,7 +614,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later operations
+     * Set the nameOrBech32 for the account in the keybase, used for later
+     * operations
      * </pre>
      */
     public land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Reply setNameOrBech32(land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Request request) {
@@ -637,7 +645,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new account the keybase using the name an password specified by SetAccount
+     * Create a new account the keybase using the name an password specified by
+     * SetAccount
      * </pre>
      */
     public land.gno.gnomobile.Gnomobiletypes.CreateAccount.Reply createAccount(land.gno.gnomobile.Gnomobiletypes.CreateAccount.Request request) {
@@ -697,8 +706,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the connection addresse for the remote node. If you don't call this, the default is
-     * "127.0.0.1:26657"
+     * Set the connection addresse for the remote node. If you don't call this,
+     * the default is "127.0.0.1:26657"
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.Gnomobiletypes.SetRemote.Reply> setRemote(
@@ -709,7 +718,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the chain ID for the remote node. If you don't call this, the default is "dev"
+     * Set the chain ID for the remote node. If you don't call this, the default
+     * is "dev"
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.Gnomobiletypes.SetChainID.Reply> setChainID(
@@ -720,7 +730,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later operations
+     * Set the nameOrBech32 for the account in the keybase, used for later
+     * operations
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.Gnomobiletypes.SetNameOrBech32.Reply> setNameOrBech32(
@@ -753,7 +764,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new account the keybase using the name an password specified by SetAccount
+     * Create a new account the keybase using the name an password specified by
+     * SetAccount
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.Gnomobiletypes.CreateAccount.Reply> createAccount(

@@ -186,6 +186,10 @@ public final class Gnomobiletypes {
      * <code>ErrCryptoKeyNotFound = 106;</code>
      */
     ErrCryptoKeyNotFound(106),
+    /**
+     * <code>ErrNoActiveAccount = 107;</code>
+     */
+    ErrNoActiveAccount(107),
     UNRECOGNIZED(-1),
     ;
 
@@ -249,6 +253,10 @@ public final class Gnomobiletypes {
      * <code>ErrCryptoKeyNotFound = 106;</code>
      */
     public static final int ErrCryptoKeyNotFound_VALUE = 106;
+    /**
+     * <code>ErrNoActiveAccount = 107;</code>
+     */
+    public static final int ErrNoActiveAccount_VALUE = 107;
 
 
     @java.lang.Override
@@ -283,6 +291,7 @@ public final class Gnomobiletypes {
         case 104: return ErrDeserialization;
         case 105: return ErrCryptoKeyTypeUnknown;
         case 106: return ErrCryptoKeyNotFound;
+        case 107: return ErrNoActiveAccount;
         default: return null;
       }
     }

@@ -20,6 +20,7 @@ type PromiseBlock interface {
 
 type BridgeConfig struct {
 	RootDir string
+	TmpDir  string
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -58,10 +59,9 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 	// start gRPC service
 	{
-		socketPath := config.RootDir + "/" + service.SOCKET_FILE
 		svcOpts = append(svcOpts,
 			service.WithRootDir(config.RootDir),
-			service.WithSocketPath(socketPath),
+			service.WithTmpDir(config.TmpDir),
 		)
 
 		serviceServer, err := service.NewGnomobileService(svcOpts...)
