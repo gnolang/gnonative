@@ -11,8 +11,7 @@ class GoBridge: NSObject {
   let appRootDir: String
   let tmpDir: String
   var bridge: GnoGnomobileBridge?
-  var socketPath: String?
-  
+
   var eventLoopGroup: EventLoopGroup?
   var channel: GRPCChannel?
   var client: Gnomobile_V1_GnomobileServiceAsyncClient?
@@ -76,6 +75,11 @@ class GoBridge: NSObject {
       }
       config.rootDir = self.appRootDir
       config.tmpDir = self.tmpDir
+
+      // On simulator we can't create an UDS, see comment below
+      #if targetEnvironment(simulator)
+      config.useTcpListener = true
+      #endif
       
       let bridge = GnoGnomobileNewBridge(config, &err);
       if err != nil {
@@ -83,22 +87,39 @@ class GoBridge: NSObject {
       }
       self.bridge = bridge
       
-      self.socketPath = bridge?.getSocketPath()
-      self.logger.info("socket path: \(self.socketPath!)")
+      // init the gRPC client
+
+      /*
+      ** On iOS simulator, temporary directory's absolute path exceeds
+      ** the length limit for Unix Domain Socket, since simulator is
+      ** only used for debug, we can safely fallback over TCP
+      */
+      #if !targetEnvironment(simulator)
+      let socketPath = bridge!.getSocketPath()
+      self.logger.info("gRPC server socket path: \(socketPath)")
+      let target: ConnectionTarget = .unixDomainSocket(socketPath)
+      #else
+      let port = bridge!.getTcpPort()
+      self.logger.info("gRPC server port: \(port)")
+      let target: ConnectionTarget = .host("localhost", port: port)
+      #endif
       
       // init the gPRC client
       
+      // With React Native, we have to use MultiThreadedEventLoopGroup
+      // instead of PlatformSupport.makeEventLoopGroup
       self.eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
       
       // Configure the channel, we're not using TLS so the connection is `insecure`.
       self.channel = try GRPCChannelPool.with(
-        target: .unixDomainSocket(self.socketPath!),
+        target: target,
         transportSecurity: .plaintext,
         eventLoopGroup: self.eventLoopGroup!
       )
       
       self.client = Gnomobile_V1_GnomobileServiceAsyncClient(channel: self.channel!)
       
+      // TODO: restore resolve when deleting the temporary account create below
       //            resolve(true)
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.localizedDescription, error)

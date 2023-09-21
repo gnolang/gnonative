@@ -19,8 +19,9 @@ type PromiseBlock interface {
 }
 
 type BridgeConfig struct {
-	RootDir string
-	TmpDir  string
+	RootDir        string
+	TmpDir         string
+	UseTcpListener bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -62,6 +63,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		svcOpts = append(svcOpts,
 			service.WithRootDir(config.RootDir),
 			service.WithTmpDir(config.TmpDir),
+			service.WithTcpListener(config.UseTcpListener),
 		)
 
 		serviceServer, err := service.NewGnomobileService(svcOpts...)
@@ -80,7 +82,19 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 }
 
 func (b *Bridge) GetSocketPath() string {
+	if b.serviceServer == nil {
+		return ""
+	}
+
 	return b.serviceServer.GetSocketPath()
+}
+
+func (b *Bridge) GetTcpPort() int {
+	if b.serviceServer == nil {
+		return 0
+	}
+
+	return b.serviceServer.GetTcpPort()
 }
 
 func (b *Bridge) Close() error {

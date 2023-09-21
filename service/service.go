@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"io"
 	"net"
 	"os"
@@ -21,17 +22,20 @@ type GnomobileService interface {
 	gnomobiletypes.GnomobileServiceServer
 
 	GetSocketPath() string
+	GetTcpPort() int
 
 	io.Closer
 }
 
 type gnomobileService struct {
-	logger     *zap.Logger
-	client     *Client
-	rootDir    string
-	tmpDir     string
-	socketPath string
-	lock       sync.RWMutex
+	logger         *zap.Logger
+	client         *Client
+	rootDir        string
+	tmpDir         string
+	tcpPort        int
+	useTcpListener bool
+	socketPath     string
+	lock           sync.RWMutex
 
 	remote  string
 	chainID string
@@ -47,6 +51,29 @@ type gnomobileService struct {
 var _ GnomobileService = (*gnomobileService)(nil)
 
 func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
+	svc, err := initService(opts...)
+	if err != nil {
+		return nil, err
+	}
+
+	if svc.useTcpListener {
+		if err := svc.createTcpListener(); err != nil {
+			return nil, err
+		}
+	} else {
+		if err := svc.createUDSListener(); err != nil {
+			return nil, err
+		}
+	}
+
+	if err := svc.runGRPCServer(); err != nil {
+		return nil, err
+	}
+
+	return svc, nil
+}
+
+func initService(opts ...GnomobileOption) (*gnomobileService, error) {
 	svc := &gnomobileService{}
 	if err := svc.applyOptions(opts...); err != nil {
 		return nil, err
@@ -62,11 +89,6 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	})
 
 	if err := svc.client.InitKeyBaseFromDir(svc.rootDir); err != nil {
-		return nil, err
-	}
-
-	// start gRPC server
-	if err := svc.runServer(); err != nil {
 		return nil, err
 	}
 
@@ -105,11 +127,11 @@ func (s *gnomobileService) checkDirs() error {
 	return nil
 }
 
-func (s *gnomobileService) runServer() error {
+func (s *gnomobileService) createUDSListener() error {
 	// create a socket subdirectory
 	sockDir := filepath.Join(s.tmpDir, SOCKET_SUBDIR)
 	if err := os.MkdirAll(sockDir, 0700); err != nil {
-		return errors.Wrap(err, "can't create sock folder")
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.socketPath = filepath.Join(sockDir, SOCKET_FILE)
@@ -117,27 +139,63 @@ func (s *gnomobileService) runServer() error {
 	// delete socket if it already exists
 	if _, err := os.Stat(s.socketPath); !os.IsNotExist(err) {
 		if err := os.RemoveAll(s.socketPath); err != nil {
-			return err
+			return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
 		}
 	}
 
 	listener, err := net.Listen("unix", s.socketPath)
 	if err != nil {
-		return err
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
+	s.listener = listener
+
+	return nil
+}
+
+func (s *gnomobileService) createTcpListener() error {
+	tcpAddr := fmt.Sprintf(":%d", s.tcpPort)
+	listener, err := net.Listen("tcp", tcpAddr)
+	if err != nil {
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+	}
+
+	s.listener = listener
+
+	// update the tcpPort field
+	addr := listener.Addr().String()
+
+	_, portStr, err := net.SplitHostPort(addr)
+	if err != nil {
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+	}
+
+	portInt, err := net.LookupPort("tcp", portStr)
+	if err != nil {
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+	}
+
+	s.logger.Info("gRPC server listen on", zap.Int("port", portInt))
+	s.tcpPort = portInt
+
+	return nil
+}
+
+func (s *gnomobileService) runGRPCServer() error {
+	if s.listener == nil {
+		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(errors.New("listener is not initialized"))
+	}
 	server := grpc.NewServer()
 
 	gnomobiletypes.RegisterGnomobileServiceServer(server, s)
 	go func() {
 		// we dont need to log the error
-		err := server.Serve(listener)
+		err := server.Serve(s.listener)
 		if err != nil {
 			s.logger.Error("failed to serve the gRPC listener")
 		}
 	}()
 
-	s.listener = listener
 	s.server = server
 
 	return nil
@@ -145,6 +203,10 @@ func (s *gnomobileService) runServer() error {
 
 func (s *gnomobileService) GetSocketPath() string {
 	return s.socketPath
+}
+
+func (s *gnomobileService) GetTcpPort() int {
+	return s.tcpPort
 }
 
 func (s *gnomobileService) Close() error {
@@ -319,12 +381,32 @@ var fallbackTmpDir = FallBackOption{
 	opt:      WithDefaultTmpDir,
 }
 
-// WithFallbackSocketPath set the default socket path if no path is set.
+// WithFallbackTmpDir set the default temporary path if no path is set.
 var WithFallbackTmpDir GnomobileOption = func(s *gnomobileService) error {
 	if fallbackTmpDir.fallback(s) {
 		return fallbackTmpDir.opt(s)
 	}
 	return nil
+}
+
+// --- tcpPort options ---
+
+// WithTcpPort set the given tcp port to serve the gRPC server.
+var WithTcpPort = func(port int) GnomobileOption {
+	return func(s *gnomobileService) error {
+		s.tcpPort = port
+		return nil
+	}
+}
+
+// --- useTcpListener options ---
+
+// WithTcpListener set the given tcp port to serve the gRPC server.
+var WithTcpListener = func(choice bool) GnomobileOption {
+	return func(s *gnomobileService) error {
+		s.useTcpListener = choice
+		return nil
+	}
 }
 
 // --- Fallback options ---

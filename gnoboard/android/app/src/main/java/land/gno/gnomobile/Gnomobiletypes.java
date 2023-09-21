@@ -190,6 +190,10 @@ public final class Gnomobiletypes {
      * <code>ErrNoActiveAccount = 107;</code>
      */
     ErrNoActiveAccount(107),
+    /**
+     * <code>ErrRunGRPCServer = 108;</code>
+     */
+    ErrRunGRPCServer(108),
     UNRECOGNIZED(-1),
     ;
 
@@ -257,6 +261,10 @@ public final class Gnomobiletypes {
      * <code>ErrNoActiveAccount = 107;</code>
      */
     public static final int ErrNoActiveAccount_VALUE = 107;
+    /**
+     * <code>ErrRunGRPCServer = 108;</code>
+     */
+    public static final int ErrRunGRPCServer_VALUE = 108;
 
 
     @java.lang.Override
@@ -292,6 +300,7 @@ public final class Gnomobiletypes {
         case 105: return ErrCryptoKeyTypeUnknown;
         case 106: return ErrCryptoKeyNotFound;
         case 107: return ErrNoActiveAccount;
+        case 108: return ErrRunGRPCServer;
         default: return null;
       }
     }

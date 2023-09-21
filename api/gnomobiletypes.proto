@@ -142,6 +142,7 @@ enum ErrCode {
   ErrCryptoKeyTypeUnknown = 105;
   ErrCryptoKeyNotFound = 106;
   ErrNoActiveAccount = 107;
+  ErrRunGRPCServer = 108;
 }
 
 message ErrDetails { repeated ErrCode codes = 1; }

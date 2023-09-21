@@ -93,6 +93,7 @@ public enum Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
   case errCryptoKeyTypeUnknown // = 105
   case errCryptoKeyNotFound // = 106
   case errNoActiveAccount // = 107
+  case errRunGrpcserver // = 108
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -113,6 +114,7 @@ public enum Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case 105: self = .errCryptoKeyTypeUnknown
     case 106: self = .errCryptoKeyNotFound
     case 107: self = .errNoActiveAccount
+    case 108: self = .errRunGrpcserver
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -131,6 +133,7 @@ public enum Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case .errCryptoKeyTypeUnknown: return 105
     case .errCryptoKeyNotFound: return 106
     case .errNoActiveAccount: return 107
+    case .errRunGrpcserver: return 108
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -154,6 +157,7 @@ extension Gnomobile_V1_ErrCode: CaseIterable {
     .errCryptoKeyTypeUnknown,
     .errCryptoKeyNotFound,
     .errNoActiveAccount,
+    .errRunGrpcserver,
   ]
 }
 
@@ -593,6 +597,7 @@ extension Gnomobile_V1_ErrCode: SwiftProtobuf._ProtoNameProviding {
     105: .same(proto: "ErrCryptoKeyTypeUnknown"),
     106: .same(proto: "ErrCryptoKeyNotFound"),
     107: .same(proto: "ErrNoActiveAccount"),
+    108: .same(proto: "ErrRunGRPCServer"),
   ]
 }
 
