@@ -1,4 +1,4 @@
-package gnomobiletypes
+package rpc
 
 import (
 	"fmt"

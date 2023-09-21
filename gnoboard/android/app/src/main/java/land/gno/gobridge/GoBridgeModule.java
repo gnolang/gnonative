@@ -20,8 +20,8 @@ import io.grpc.Channel;
 import android.net.LocalSocketAddress.Namespace;
 
 import io.grpc.StatusRuntimeException;
-import land.gno.gnomobile.GnomobileServiceGrpc;
-import land.gno.gnomobile.Gnomobiletypes;
+import land.gno.gnomobile.v1.GnomobileServiceGrpc;
+import land.gno.gnomobile.v1.Rpc;
 import land.gno.udschannel.UdsChannelBuilder;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
@@ -70,8 +70,8 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             // To be handled by the frontend
 
             // Get the list of account and determine if we have to create a account
-            Gnomobiletypes.ListKeyInfo.Request listKeyReq = Gnomobiletypes.ListKeyInfo.Request.newBuilder().build();
-            Gnomobiletypes.ListKeyInfo.Reply listKeyRep;
+            Rpc.ListKeyInfo.Request listKeyReq = Rpc.ListKeyInfo.Request.newBuilder().build();
+            Rpc.ListKeyInfo.Reply listKeyRep;
             try {
                 listKeyRep = blockingStub.listKeyInfo(listKeyReq);
             } catch (StatusRuntimeException e) {
@@ -83,7 +83,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
                 // if no account, create a new one
             if (listKeyRep.getKeysCount() == 0) {
-                Gnomobiletypes.CreateAccount.Request createAccReq = Gnomobiletypes.CreateAccount.Request.newBuilder()
+                Rpc.CreateAccount.Request createAccReq = Rpc.CreateAccount.Request.newBuilder()
                     .setNameOrBech32("jefft0")
                     .setMnemonic("enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee")
                     .setBip39Passwd("")
@@ -91,7 +91,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
                     .setAccount(0)
                     .setIndex(0)
                     .build();
-                Gnomobiletypes.CreateAccount.Reply createAccRep;
+                Rpc.CreateAccount.Reply createAccRep;
                 try {
                     createAccRep = blockingStub.createAccount(createAccReq);
                 } catch (StatusRuntimeException e) {
@@ -101,10 +101,10 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             }
 
             // select the account
-            Gnomobiletypes.SelectAccount.Request selectAccReq = Gnomobiletypes.SelectAccount.Request.newBuilder()
+            Rpc.SelectAccount.Request selectAccReq = Rpc.SelectAccount.Request.newBuilder()
                 .setNameOrBech32("jefft0")
                 .build();
-            Gnomobiletypes.SelectAccount.Reply selectAccRep;
+            Rpc.SelectAccount.Reply selectAccRep;
             try {
                 selectAccRep = blockingStub.selectAccount(selectAccReq);
             } catch (StatusRuntimeException e) {
@@ -138,7 +138,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             argList.add(args.getString(i));
         }
 
-        Gnomobiletypes.Call.Request request = Gnomobiletypes.Call.Request.newBuilder()
+        Rpc.Call.Request request = Rpc.Call.Request.newBuilder()
             .setPackagePath(packagePath)
             .setFnc(fnc)
             .addAllArgs(argList)
@@ -147,7 +147,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .setPassword(password)
             .build();
 
-        Gnomobiletypes.Call.Reply reply;
+        Rpc.Call.Reply reply;
         try {
             reply = blockingStub.call(request);
         } catch (StatusRuntimeException e) {

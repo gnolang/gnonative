@@ -14,7 +14,7 @@ class GoBridge: NSObject {
 
   var eventLoopGroup: EventLoopGroup?
   var channel: GRPCChannel?
-  var client: Gnomobile_V1_GnomobileServiceAsyncClient?
+  var client: Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClient?
   
   static func requiresMainQueueSetup() -> Bool {
     return false
@@ -77,7 +77,7 @@ class GoBridge: NSObject {
       config.tmpDir = self.tmpDir
 
       // On simulator we can't create an UDS, see comment below
-      #if targetEnvironment(simulator)
+		      #if targetEnvironment(simulator)
       config.useTcpListener = true
       #endif
       
@@ -117,7 +117,7 @@ class GoBridge: NSObject {
         eventLoopGroup: self.eventLoopGroup!
       )
       
-      self.client = Gnomobile_V1_GnomobileServiceAsyncClient(channel: self.channel!)
+      self.client = Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClient(channel: self.channel!)
       
       // TODO: restore resolve when deleting the temporary account create below
       //            resolve(true)
@@ -132,8 +132,8 @@ class GoBridge: NSObject {
     
     Task {
       // Get the list of account and determine if we have to create a account
-      let listKeyReq = Gnomobile_V1_ListKeyInfo.Request()
-      var listKeyRep: Gnomobile_V1_ListKeyInfo.Reply?;
+      let listKeyReq = Land_Gno_Gnomobile_V1_ListKeyInfo.Request()
+      var listKeyRep: Land_Gno_Gnomobile_V1_ListKeyInfo.Reply?;
       
       do {
         listKeyRep = try await self.client?.listKeyInfo(listKeyReq)
@@ -145,7 +145,7 @@ class GoBridge: NSObject {
       self.logger.info("list account size: \(listKeyRep!.keys.count)")
       
       // if no account, create a new one
-      let createAccountReq = Gnomobile_V1_CreateAccount.Request.with {
+      let createAccountReq = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
         $0.nameOrBech32 = "jefft0"
         $0.mnemonic = "enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee"
         $0.bip39Passwd = ""
@@ -162,7 +162,7 @@ class GoBridge: NSObject {
       }
       
       // select the account
-      let selectAccountReq = Gnomobile_V1_SelectAccount.Request.with {
+      let selectAccountReq = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
         $0.nameOrBech32 = "jefft0"
       }
       
@@ -192,7 +192,7 @@ class GoBridge: NSObject {
       argArray.append(arg as? String ?? "")
     }
     
-    let request = Gnomobile_V1_Call.Request.with {
+    let request = Land_Gno_Gnomobile_V1_Call.Request.with {
       $0.packagePath = packagePath as String
       $0.fnc = fnc as String
       $0.args = argArray

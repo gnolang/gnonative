@@ -1,9 +1,8 @@
 syntax = "proto3";
 
-package gnomobile.v1;
+package land.gno.gnomobile.v1;
 
-option go_package = "github.com/gnolang/gnomobile/service/gnomobiletypes";
-option java_package = "land.gno.gnomobile";
+option go_package = "github.com/gnolang/gnomobile/service/rpc";
 option objc_class_prefix = "RTG";
 
 // GnomobileService is the service to interact with the Gno blockchain
