@@ -192,7 +192,7 @@ class GoBridge: NSObject {
       argArray.append(arg as? String ?? "")
     }
     
-    let request = Land_Gno_Gnomobile_V1_Call.Request.with {
+    let request = Land_Gno_Gnomobile_V1_Call_Request.with {
       $0.packagePath = packagePath as String
       $0.fnc = fnc as String
       $0.args = argArray

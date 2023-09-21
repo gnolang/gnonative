@@ -19,24 +19,24 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
   var interceptors: Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactoryProtocol? { get }
 
   func setRemote(
-    _ request: Land_Gno_Gnomobile_V1_SetRemote.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetRemote_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetRemote.Request, Land_Gno_Gnomobile_V1_SetRemote.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetRemote_Request, Land_Gno_Gnomobile_V1_SetRemote_Reply>
 
   func setChainID(
-    _ request: Land_Gno_Gnomobile_V1_SetChainID.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetChainID_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetChainID.Request, Land_Gno_Gnomobile_V1_SetChainID.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetChainID_Request, Land_Gno_Gnomobile_V1_SetChainID_Reply>
 
   func setNameOrBech32(
-    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32.Request, Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply>
 
   func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPassword.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetPassword_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPassword.Request, Land_Gno_Gnomobile_V1_SetPassword.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>
 
   func listKeyInfo(
     _ request: Land_Gno_Gnomobile_V1_ListKeyInfo.Request,
@@ -54,14 +54,14 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>
 
   func query(
-    _ request: Land_Gno_Gnomobile_V1_Query.Request,
+    _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Query.Request, Land_Gno_Gnomobile_V1_Query.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply>
 
   func call(
-    _ request: Land_Gno_Gnomobile_V1_Call.Request,
+    _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Call.Request, Land_Gno_Gnomobile_V1_Call.Reply>
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>
 }
 
 extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
@@ -77,9 +77,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func setRemote(
-    _ request: Land_Gno_Gnomobile_V1_SetRemote.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetRemote_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetRemote.Request, Land_Gno_Gnomobile_V1_SetRemote.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetRemote_Request, Land_Gno_Gnomobile_V1_SetRemote_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setRemote.path,
       request: request,
@@ -96,9 +96,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func setChainID(
-    _ request: Land_Gno_Gnomobile_V1_SetChainID.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetChainID_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetChainID.Request, Land_Gno_Gnomobile_V1_SetChainID.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetChainID_Request, Land_Gno_Gnomobile_V1_SetChainID_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setChainID.path,
       request: request,
@@ -115,9 +115,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func setNameOrBech32(
-    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32.Request, Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setNameOrBech32.path,
       request: request,
@@ -133,9 +133,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPassword.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetPassword_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPassword.Request, Land_Gno_Gnomobile_V1_SetPassword.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
       request: request,
@@ -206,9 +206,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func query(
-    _ request: Land_Gno_Gnomobile_V1_Query.Request,
+    _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Query.Request, Land_Gno_Gnomobile_V1_Query.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query.path,
       request: request,
@@ -224,9 +224,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func call(
-    _ request: Land_Gno_Gnomobile_V1_Call.Request,
+    _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Call.Request, Land_Gno_Gnomobile_V1_Call.Reply> {
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply> {
     return self.makeUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call.path,
       request: request,
@@ -300,24 +300,24 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
   var interceptors: Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactoryProtocol? { get }
 
   func makeSetRemoteCall(
-    _ request: Land_Gno_Gnomobile_V1_SetRemote.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetRemote_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetRemote.Request, Land_Gno_Gnomobile_V1_SetRemote.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetRemote_Request, Land_Gno_Gnomobile_V1_SetRemote_Reply>
 
   func makeSetChainIDCall(
-    _ request: Land_Gno_Gnomobile_V1_SetChainID.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetChainID_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetChainID.Request, Land_Gno_Gnomobile_V1_SetChainID.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetChainID_Request, Land_Gno_Gnomobile_V1_SetChainID_Reply>
 
   func makeSetNameOrBech32Call(
-    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32.Request, Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply>
 
   func makeSetPasswordCall(
-    _ request: Land_Gno_Gnomobile_V1_SetPassword.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetPassword_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPassword.Request, Land_Gno_Gnomobile_V1_SetPassword.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>
 
   func makeListKeyInfoCall(
     _ request: Land_Gno_Gnomobile_V1_ListKeyInfo.Request,
@@ -335,14 +335,14 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>
 
   func makeQueryCall(
-    _ request: Land_Gno_Gnomobile_V1_Query.Request,
+    _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Query.Request, Land_Gno_Gnomobile_V1_Query.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply>
 
   func makeCallCall(
-    _ request: Land_Gno_Gnomobile_V1_Call.Request,
+    _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Call.Request, Land_Gno_Gnomobile_V1_Call.Reply>
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -356,9 +356,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeSetRemoteCall(
-    _ request: Land_Gno_Gnomobile_V1_SetRemote.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetRemote_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetRemote.Request, Land_Gno_Gnomobile_V1_SetRemote.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetRemote_Request, Land_Gno_Gnomobile_V1_SetRemote_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setRemote.path,
       request: request,
@@ -368,9 +368,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeSetChainIDCall(
-    _ request: Land_Gno_Gnomobile_V1_SetChainID.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetChainID_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetChainID.Request, Land_Gno_Gnomobile_V1_SetChainID.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetChainID_Request, Land_Gno_Gnomobile_V1_SetChainID_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setChainID.path,
       request: request,
@@ -380,9 +380,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeSetNameOrBech32Call(
-    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32.Request, Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setNameOrBech32.path,
       request: request,
@@ -392,9 +392,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeSetPasswordCall(
-    _ request: Land_Gno_Gnomobile_V1_SetPassword.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetPassword_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPassword.Request, Land_Gno_Gnomobile_V1_SetPassword.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
       request: request,
@@ -440,9 +440,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeQueryCall(
-    _ request: Land_Gno_Gnomobile_V1_Query.Request,
+    _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Query.Request, Land_Gno_Gnomobile_V1_Query.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query.path,
       request: request,
@@ -452,9 +452,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func makeCallCall(
-    _ request: Land_Gno_Gnomobile_V1_Call.Request,
+    _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Call.Request, Land_Gno_Gnomobile_V1_Call.Reply> {
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply> {
     return self.makeAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call.path,
       request: request,
@@ -467,9 +467,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   internal func setRemote(
-    _ request: Land_Gno_Gnomobile_V1_SetRemote.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetRemote_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_SetRemote.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_SetRemote_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setRemote.path,
       request: request,
@@ -479,9 +479,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func setChainID(
-    _ request: Land_Gno_Gnomobile_V1_SetChainID.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetChainID_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_SetChainID.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_SetChainID_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setChainID.path,
       request: request,
@@ -491,9 +491,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func setNameOrBech32(
-    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setNameOrBech32.path,
       request: request,
@@ -503,9 +503,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPassword.Request,
+    _ request: Land_Gno_Gnomobile_V1_SetPassword_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_SetPassword.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_SetPassword_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
       request: request,
@@ -551,9 +551,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func query(
-    _ request: Land_Gno_Gnomobile_V1_Query.Request,
+    _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_Query.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_Query_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query.path,
       request: request,
@@ -563,9 +563,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
   }
 
   internal func call(
-    _ request: Land_Gno_Gnomobile_V1_Call.Request,
+    _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_Call.Reply {
+  ) async throws -> Land_Gno_Gnomobile_V1_Call_Reply {
     return try await self.performAsyncUnaryCall(
       path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call.path,
       request: request,
@@ -595,16 +595,16 @@ internal struct Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClient: Land_Gno_Gnom
 internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactoryProtocol: Sendable {
 
   /// - Returns: Interceptors to use when invoking 'setRemote'.
-  func makeSetRemoteInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetRemote.Request, Land_Gno_Gnomobile_V1_SetRemote.Reply>]
+  func makeSetRemoteInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetRemote_Request, Land_Gno_Gnomobile_V1_SetRemote_Reply>]
 
   /// - Returns: Interceptors to use when invoking 'setChainID'.
-  func makeSetChainIDInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetChainID.Request, Land_Gno_Gnomobile_V1_SetChainID.Reply>]
+  func makeSetChainIDInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetChainID_Request, Land_Gno_Gnomobile_V1_SetChainID_Reply>]
 
   /// - Returns: Interceptors to use when invoking 'setNameOrBech32'.
-  func makeSetNameOrBech32Interceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetNameOrBech32.Request, Land_Gno_Gnomobile_V1_SetNameOrBech32.Reply>]
+  func makeSetNameOrBech32Interceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply>]
 
   /// - Returns: Interceptors to use when invoking 'setPassword'.
-  func makeSetPasswordInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetPassword.Request, Land_Gno_Gnomobile_V1_SetPassword.Reply>]
+  func makeSetPasswordInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>]
 
   /// - Returns: Interceptors to use when invoking 'listKeyInfo'.
   func makeListKeyInfoInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_ListKeyInfo.Request, Land_Gno_Gnomobile_V1_ListKeyInfo.Reply>]
@@ -616,10 +616,10 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   func makeSelectAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>]
 
   /// - Returns: Interceptors to use when invoking 'query'.
-  func makeQueryInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Query.Request, Land_Gno_Gnomobile_V1_Query.Reply>]
+  func makeQueryInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply>]
 
   /// - Returns: Interceptors to use when invoking 'call'.
-  func makeCallInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Call.Request, Land_Gno_Gnomobile_V1_Call.Reply>]
+  func makeCallInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>]
 }
 
 internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {

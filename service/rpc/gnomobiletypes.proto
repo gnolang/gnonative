@@ -1,0 +1,55 @@
+syntax = "proto3";
+package land.gno.gnomobile.v1;
+
+option go_package = "github.com/gnolang/gnomobile/service/rpc";
+
+// messages
+message SetRemote_Request {
+	string Remote = 1;
+}
+
+message SetRemote_Reply {
+}
+
+message SetChainID_Request {
+	string ChainID = 1;
+}
+
+message SetChainID_Reply {
+}
+
+message SetNameOrBech32_Request {
+	string NameOrBech32 = 1;
+}
+
+message SetNameOrBech32_Reply {
+}
+
+message SetPassword_Request {
+	string Password = 1;
+}
+
+message SetPassword_Reply {
+}
+
+message Query_Request {
+	string Path = 1;
+	string Data = 2;
+}
+
+message Query_Reply {
+	bytes Result = 1;
+}
+
+message Call_Request {
+	string PackagePath = 1;
+	string Fnc = 2;
+	repeated string Args = 3;
+	string GasFee = 4;
+	sint64 GasWanted = 5;
+	string Password = 6;
+}
+
+message Call_Reply {
+	bytes Result = 1;
+}

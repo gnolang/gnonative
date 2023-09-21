@@ -22,6 +22,7 @@ import android.net.LocalSocketAddress.Namespace;
 import io.grpc.StatusRuntimeException;
 import land.gno.gnomobile.v1.GnomobileServiceGrpc;
 import land.gno.gnomobile.v1.Rpc;
+import land.gno.gnomobile.v1.Gnomobiletypes;
 import land.gno.udschannel.UdsChannelBuilder;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
@@ -138,7 +139,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             argList.add(args.getString(i));
         }
 
-        Rpc.Call.Request request = Rpc.Call.Request.newBuilder()
+        Gnomobiletypes.Call_Request request = Gnomobiletypes.Call_Request.newBuilder()
             .setPackagePath(packagePath)
             .setFnc(fnc)
             .addAllArgs(argList)
@@ -147,7 +148,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .setPassword(password)
             .build();
 
-        Rpc.Call.Reply reply;
+        Gnomobiletypes.Call_Reply reply;
         try {
             reply = blockingStub.call(request);
         } catch (StatusRuntimeException e) {

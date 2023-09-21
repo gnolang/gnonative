@@ -18,29 +18,29 @@ public final class GnomobileServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "land.gno.gnomobile.v1.GnomobileService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetRemote.Request,
-      land.gno.gnomobile.v1.Rpc.SetRemote.Reply> getSetRemoteMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> getSetRemoteMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SetRemote",
-      requestType = land.gno.gnomobile.v1.Rpc.SetRemote.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.SetRemote.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetRemote.Request,
-      land.gno.gnomobile.v1.Rpc.SetRemote.Reply> getSetRemoteMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetRemote.Request, land.gno.gnomobile.v1.Rpc.SetRemote.Reply> getSetRemoteMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> getSetRemoteMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> getSetRemoteMethod;
     if ((getSetRemoteMethod = GnomobileServiceGrpc.getSetRemoteMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getSetRemoteMethod = GnomobileServiceGrpc.getSetRemoteMethod) == null) {
           GnomobileServiceGrpc.getSetRemoteMethod = getSetRemoteMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.SetRemote.Request, land.gno.gnomobile.v1.Rpc.SetRemote.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetRemote"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetRemote.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetRemote.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -48,29 +48,29 @@ public final class GnomobileServiceGrpc {
     return getSetRemoteMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetChainID.Request,
-      land.gno.gnomobile.v1.Rpc.SetChainID.Reply> getSetChainIDMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> getSetChainIDMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SetChainID",
-      requestType = land.gno.gnomobile.v1.Rpc.SetChainID.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.SetChainID.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetChainID.Request,
-      land.gno.gnomobile.v1.Rpc.SetChainID.Reply> getSetChainIDMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetChainID.Request, land.gno.gnomobile.v1.Rpc.SetChainID.Reply> getSetChainIDMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> getSetChainIDMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> getSetChainIDMethod;
     if ((getSetChainIDMethod = GnomobileServiceGrpc.getSetChainIDMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getSetChainIDMethod = GnomobileServiceGrpc.getSetChainIDMethod) == null) {
           GnomobileServiceGrpc.getSetChainIDMethod = getSetChainIDMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.SetChainID.Request, land.gno.gnomobile.v1.Rpc.SetChainID.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetChainID"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetChainID.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetChainID.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -78,29 +78,29 @@ public final class GnomobileServiceGrpc {
     return getSetChainIDMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request,
-      land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> getSetNameOrBech32Method;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SetNameOrBech32",
-      requestType = land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request,
-      land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> getSetNameOrBech32Method() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request, land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> getSetNameOrBech32Method;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method;
     if ((getSetNameOrBech32Method = GnomobileServiceGrpc.getSetNameOrBech32Method) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getSetNameOrBech32Method = GnomobileServiceGrpc.getSetNameOrBech32Method) == null) {
           GnomobileServiceGrpc.getSetNameOrBech32Method = getSetNameOrBech32Method =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request, land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetNameOrBech32"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -108,29 +108,29 @@ public final class GnomobileServiceGrpc {
     return getSetNameOrBech32Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetPassword.Request,
-      land.gno.gnomobile.v1.Rpc.SetPassword.Reply> getSetPasswordMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> getSetPasswordMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SetPassword",
-      requestType = land.gno.gnomobile.v1.Rpc.SetPassword.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.SetPassword.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetPassword.Request,
-      land.gno.gnomobile.v1.Rpc.SetPassword.Reply> getSetPasswordMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SetPassword.Request, land.gno.gnomobile.v1.Rpc.SetPassword.Reply> getSetPasswordMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> getSetPasswordMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> getSetPasswordMethod;
     if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
           GnomobileServiceGrpc.getSetPasswordMethod = getSetPasswordMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.SetPassword.Request, land.gno.gnomobile.v1.Rpc.SetPassword.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetPassword"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetPassword.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SetPassword.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -228,29 +228,29 @@ public final class GnomobileServiceGrpc {
     return getSelectAccountMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Query.Request,
-      land.gno.gnomobile.v1.Rpc.Query.Reply> getQueryMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Query_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> getQueryMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Query",
-      requestType = land.gno.gnomobile.v1.Rpc.Query.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.Query.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.Query_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Query.Request,
-      land.gno.gnomobile.v1.Rpc.Query.Reply> getQueryMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Query.Request, land.gno.gnomobile.v1.Rpc.Query.Reply> getQueryMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Query_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> getQueryMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Query_Request, land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> getQueryMethod;
     if ((getQueryMethod = GnomobileServiceGrpc.getQueryMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getQueryMethod = GnomobileServiceGrpc.getQueryMethod) == null) {
           GnomobileServiceGrpc.getQueryMethod = getQueryMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.Query.Request, land.gno.gnomobile.v1.Rpc.Query.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.Query_Request, land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Query"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.Query.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.Query_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.Query.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -258,29 +258,29 @@ public final class GnomobileServiceGrpc {
     return getQueryMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Call.Request,
-      land.gno.gnomobile.v1.Rpc.Call.Reply> getCallMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Call_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> getCallMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Call",
-      requestType = land.gno.gnomobile.v1.Rpc.Call.Request.class,
-      responseType = land.gno.gnomobile.v1.Rpc.Call.Reply.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.Call_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Call.Request,
-      land.gno.gnomobile.v1.Rpc.Call.Reply> getCallMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.Call.Request, land.gno.gnomobile.v1.Rpc.Call.Reply> getCallMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Call_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> getCallMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Call_Request, land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> getCallMethod;
     if ((getCallMethod = GnomobileServiceGrpc.getCallMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getCallMethod = GnomobileServiceGrpc.getCallMethod) == null) {
           GnomobileServiceGrpc.getCallMethod = getCallMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.Call.Request, land.gno.gnomobile.v1.Rpc.Call.Reply>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.Call_Request, land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Call"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.Call.Request.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.Call_Request.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.Call.Reply.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply.getDefaultInstance()))
               .build();
         }
       }
@@ -345,8 +345,8 @@ public final class GnomobileServiceGrpc {
      * the default is "127.0.0.1:26657"
      * </pre>
      */
-    default void setRemote(land.gno.gnomobile.v1.Rpc.SetRemote.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetRemote.Reply> responseObserver) {
+    default void setRemote(land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetRemoteMethod(), responseObserver);
     }
 
@@ -356,8 +356,8 @@ public final class GnomobileServiceGrpc {
      * is "dev"
      * </pre>
      */
-    default void setChainID(land.gno.gnomobile.v1.Rpc.SetChainID.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetChainID.Reply> responseObserver) {
+    default void setChainID(land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetChainIDMethod(), responseObserver);
     }
 
@@ -367,8 +367,8 @@ public final class GnomobileServiceGrpc {
      * operations
      * </pre>
      */
-    default void setNameOrBech32(land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> responseObserver) {
+    default void setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetNameOrBech32Method(), responseObserver);
     }
 
@@ -377,8 +377,8 @@ public final class GnomobileServiceGrpc {
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
-    default void setPassword(land.gno.gnomobile.v1.Rpc.SetPassword.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetPassword.Reply> responseObserver) {
+    default void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetPasswordMethod(), responseObserver);
     }
 
@@ -418,8 +418,8 @@ public final class GnomobileServiceGrpc {
      * Make an ABCI query to the remote node.
      * </pre>
      */
-    default void query(land.gno.gnomobile.v1.Rpc.Query.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Query.Reply> responseObserver) {
+    default void query(land.gno.gnomobile.v1.Gnomobiletypes.Query_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getQueryMethod(), responseObserver);
     }
 
@@ -428,8 +428,8 @@ public final class GnomobileServiceGrpc {
      * Call a specific realm function.
      * </pre>
      */
-    default void call(land.gno.gnomobile.v1.Rpc.Call.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Call.Reply> responseObserver) {
+    default void call(land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCallMethod(), responseObserver);
     }
   }
@@ -473,8 +473,8 @@ public final class GnomobileServiceGrpc {
      * the default is "127.0.0.1:26657"
      * </pre>
      */
-    public void setRemote(land.gno.gnomobile.v1.Rpc.SetRemote.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetRemote.Reply> responseObserver) {
+    public void setRemote(land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSetRemoteMethod(), getCallOptions()), request, responseObserver);
     }
@@ -485,8 +485,8 @@ public final class GnomobileServiceGrpc {
      * is "dev"
      * </pre>
      */
-    public void setChainID(land.gno.gnomobile.v1.Rpc.SetChainID.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetChainID.Reply> responseObserver) {
+    public void setChainID(land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSetChainIDMethod(), getCallOptions()), request, responseObserver);
     }
@@ -497,8 +497,8 @@ public final class GnomobileServiceGrpc {
      * operations
      * </pre>
      */
-    public void setNameOrBech32(land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> responseObserver) {
+    public void setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSetNameOrBech32Method(), getCallOptions()), request, responseObserver);
     }
@@ -508,8 +508,8 @@ public final class GnomobileServiceGrpc {
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
-    public void setPassword(land.gno.gnomobile.v1.Rpc.SetPassword.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetPassword.Reply> responseObserver) {
+    public void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request, responseObserver);
     }
@@ -553,8 +553,8 @@ public final class GnomobileServiceGrpc {
      * Make an ABCI query to the remote node.
      * </pre>
      */
-    public void query(land.gno.gnomobile.v1.Rpc.Query.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Query.Reply> responseObserver) {
+    public void query(land.gno.gnomobile.v1.Gnomobiletypes.Query_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getQueryMethod(), getCallOptions()), request, responseObserver);
     }
@@ -564,8 +564,8 @@ public final class GnomobileServiceGrpc {
      * Call a specific realm function.
      * </pre>
      */
-    public void call(land.gno.gnomobile.v1.Rpc.Call.Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Call.Reply> responseObserver) {
+    public void call(land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCallMethod(), getCallOptions()), request, responseObserver);
     }
@@ -596,7 +596,7 @@ public final class GnomobileServiceGrpc {
      * the default is "127.0.0.1:26657"
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.SetRemote.Reply setRemote(land.gno.gnomobile.v1.Rpc.SetRemote.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply setRemote(land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetRemoteMethod(), getCallOptions(), request);
     }
@@ -607,7 +607,7 @@ public final class GnomobileServiceGrpc {
      * is "dev"
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.SetChainID.Reply setChainID(land.gno.gnomobile.v1.Rpc.SetChainID.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply setChainID(land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetChainIDMethod(), getCallOptions(), request);
     }
@@ -618,7 +618,7 @@ public final class GnomobileServiceGrpc {
      * operations
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply setNameOrBech32(land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetNameOrBech32Method(), getCallOptions(), request);
     }
@@ -628,7 +628,7 @@ public final class GnomobileServiceGrpc {
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.SetPassword.Reply setPassword(land.gno.gnomobile.v1.Rpc.SetPassword.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetPasswordMethod(), getCallOptions(), request);
     }
@@ -669,7 +669,7 @@ public final class GnomobileServiceGrpc {
      * Make an ABCI query to the remote node.
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.Query.Reply query(land.gno.gnomobile.v1.Rpc.Query.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply query(land.gno.gnomobile.v1.Gnomobiletypes.Query_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getQueryMethod(), getCallOptions(), request);
     }
@@ -679,7 +679,7 @@ public final class GnomobileServiceGrpc {
      * Call a specific realm function.
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.Call.Reply call(land.gno.gnomobile.v1.Rpc.Call.Request request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply call(land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCallMethod(), getCallOptions(), request);
     }
@@ -710,8 +710,8 @@ public final class GnomobileServiceGrpc {
      * the default is "127.0.0.1:26657"
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SetRemote.Reply> setRemote(
-        land.gno.gnomobile.v1.Rpc.SetRemote.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply> setRemote(
+        land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSetRemoteMethod(), getCallOptions()), request);
     }
@@ -722,8 +722,8 @@ public final class GnomobileServiceGrpc {
      * is "dev"
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SetChainID.Reply> setChainID(
-        land.gno.gnomobile.v1.Rpc.SetChainID.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply> setChainID(
+        land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSetChainIDMethod(), getCallOptions()), request);
     }
@@ -734,8 +734,8 @@ public final class GnomobileServiceGrpc {
      * operations
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply> setNameOrBech32(
-        land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> setNameOrBech32(
+        land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSetNameOrBech32Method(), getCallOptions()), request);
     }
@@ -745,8 +745,8 @@ public final class GnomobileServiceGrpc {
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SetPassword.Reply> setPassword(
-        land.gno.gnomobile.v1.Rpc.SetPassword.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> setPassword(
+        land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request);
     }
@@ -790,8 +790,8 @@ public final class GnomobileServiceGrpc {
      * Make an ABCI query to the remote node.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.Query.Reply> query(
-        land.gno.gnomobile.v1.Rpc.Query.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> query(
+        land.gno.gnomobile.v1.Gnomobiletypes.Query_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getQueryMethod(), getCallOptions()), request);
     }
@@ -801,8 +801,8 @@ public final class GnomobileServiceGrpc {
      * Call a specific realm function.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.Call.Reply> call(
-        land.gno.gnomobile.v1.Rpc.Call.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> call(
+        land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCallMethod(), getCallOptions()), request);
     }
@@ -836,20 +836,20 @@ public final class GnomobileServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SET_REMOTE:
-          serviceImpl.setRemote((land.gno.gnomobile.v1.Rpc.SetRemote.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetRemote.Reply>) responseObserver);
+          serviceImpl.setRemote((land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply>) responseObserver);
           break;
         case METHODID_SET_CHAIN_ID:
-          serviceImpl.setChainID((land.gno.gnomobile.v1.Rpc.SetChainID.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetChainID.Reply>) responseObserver);
+          serviceImpl.setChainID((land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply>) responseObserver);
           break;
         case METHODID_SET_NAME_OR_BECH32:
-          serviceImpl.setNameOrBech32((land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply>) responseObserver);
+          serviceImpl.setNameOrBech32((land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>) responseObserver);
           break;
         case METHODID_SET_PASSWORD:
-          serviceImpl.setPassword((land.gno.gnomobile.v1.Rpc.SetPassword.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SetPassword.Reply>) responseObserver);
+          serviceImpl.setPassword((land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply>) responseObserver);
           break;
         case METHODID_LIST_KEY_INFO:
           serviceImpl.listKeyInfo((land.gno.gnomobile.v1.Rpc.ListKeyInfo.Request) request,
@@ -864,12 +864,12 @@ public final class GnomobileServiceGrpc {
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply>) responseObserver);
           break;
         case METHODID_QUERY:
-          serviceImpl.query((land.gno.gnomobile.v1.Rpc.Query.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Query.Reply>) responseObserver);
+          serviceImpl.query((land.gno.gnomobile.v1.Gnomobiletypes.Query_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply>) responseObserver);
           break;
         case METHODID_CALL:
-          serviceImpl.call((land.gno.gnomobile.v1.Rpc.Call.Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.Call.Reply>) responseObserver);
+          serviceImpl.call((land.gno.gnomobile.v1.Gnomobiletypes.Call_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -893,29 +893,29 @@ public final class GnomobileServiceGrpc {
           getSetRemoteMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.SetRemote.Request,
-              land.gno.gnomobile.v1.Rpc.SetRemote.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.SetRemote_Reply>(
                 service, METHODID_SET_REMOTE)))
         .addMethod(
           getSetChainIDMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.SetChainID.Request,
-              land.gno.gnomobile.v1.Rpc.SetChainID.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply>(
                 service, METHODID_SET_CHAIN_ID)))
         .addMethod(
           getSetNameOrBech32Method(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Request,
-              land.gno.gnomobile.v1.Rpc.SetNameOrBech32.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>(
                 service, METHODID_SET_NAME_OR_BECH32)))
         .addMethod(
           getSetPasswordMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.SetPassword.Request,
-              land.gno.gnomobile.v1.Rpc.SetPassword.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply>(
                 service, METHODID_SET_PASSWORD)))
         .addMethod(
           getListKeyInfoMethod(),
@@ -942,15 +942,15 @@ public final class GnomobileServiceGrpc {
           getQueryMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.Query.Request,
-              land.gno.gnomobile.v1.Rpc.Query.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.Query_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply>(
                 service, METHODID_QUERY)))
         .addMethod(
           getCallMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.Call.Request,
-              land.gno.gnomobile.v1.Rpc.Call.Reply>(
+              land.gno.gnomobile.v1.Gnomobiletypes.Call_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply>(
                 service, METHODID_CALL)))
         .build();
   }
