@@ -1,5 +1,5 @@
-import { NativeModules } from 'react-native'
+import { NativeModules } from 'react-native';
 
-import { GoBridgeInterface } from './GoBridgeInterface'
+import { GoBridgeInterface } from './GoBridgeInterface';
 
-export const GoBridge: GoBridgeInterface = NativeModules.GoBridge
+export const GoBridge: GoBridgeInterface = NativeModules.GoBridge;

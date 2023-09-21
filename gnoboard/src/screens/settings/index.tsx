@@ -1,9 +1,9 @@
-import TextInput from "@gno/components/textinput";
-import { GoBridge } from "@gno/native_modules";
-import { GnoConfig } from "@gno/native_modules/types";
-import { screenStyleSheet as styles } from "@gno/styles";
-import React, { useEffect } from "react";
-import { Text, ActivityIndicator, ScrollView } from "react-native";
+import TextInput from '@gno/components/textinput';
+import { GoBridge } from '@gno/native_modules';
+import { GnoConfig } from '@gno/native_modules/types';
+import { screenStyleSheet as styles } from '@gno/styles';
+import React, { useEffect } from 'react';
+import { Text, ActivityIndicator, ScrollView } from 'react-native';
 
 function SettingsScreen() {
   const [config, setConfig] = React.useState<GnoConfig | null>(null);
