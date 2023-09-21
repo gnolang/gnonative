@@ -3,41 +3,65 @@ import { ConsoleView } from "@gno/components/consoleview";
 import TextInput from "@gno/components/textinput";
 import { GoBridge } from "@gno/native_modules";
 import { screenStyleSheet as styles } from "@gno/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
+import { initBridge } from "@gno/utils/bridge";
 
 function HomeScreen() {
   const [postContent, setPostContent] = useState("");
   const [appConsole, setAppConsole] = useState<string>("");
   const [loading, setLoading] = useState<string | undefined>(undefined);
 
+  useEffect(() => {
+  	const init = async () => {
+	  await initBridge()
+	}
+	init()
+
+	return () => {
+		const deinit = async () => {
+		  await GoBridge.closeBridge()
+		}
+		deinit()
+	}
+  }, [])
+
   const onPostPress = async () => {
     setLoading("Replying to a post...");
     setAppConsole("replying to a post...");
-
-    try {
-      const data = await GoBridge.createReply(postContent, "");
-      setAppConsole(data);
-      setPostContent("");
-    } catch (err) {
-      setAppConsole(err as any);
-    } finally {
-      setLoading(undefined);
-    }
+    var gasFee = "1000000ugnot"
+    var gasWanted = 2000000
+	var args: Array<string> = ["2", "1", "1", postContent]
+    GoBridge.call(
+		"gno.land/r/demo/boards",
+		"CreateReply",
+		args,
+		gasFee,
+		gasWanted,
+		"password"
+	)
+      .then((data) => {
+        setAppConsole(data);
+        setPostContent("");
+      })
+      .catch((err) => {
+        setAppConsole(err);
+      })
+      .finally(() => setLoading(undefined));
   };
 
   const onCreateAccountPress = async () => {
     setLoading("Creating default account...");
     setAppConsole("Creating default account...");
 
-    try {
-      const data = await GoBridge.createDefaultAccount("create account");
-      setAppConsole(data);
-    } catch (err) {
-      setAppConsole(err as any);
-    } finally {
-      setLoading(undefined);
-    }
+    // try {
+    //   const data = await GoBridge.createDefaultAccount("create account");
+    //   setAppConsole(data);
+    // } catch (err) {
+    //   setAppConsole(err as any);
+    // } finally {
+    //   setLoading(undefined);
+    // }
   };
 
   const loadInBrowser = () => {

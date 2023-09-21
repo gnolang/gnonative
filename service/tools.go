@@ -1,6 +1,6 @@
 //go:build tools
 
-package gnomobile
+package service
 
 import (
 	_ "golang.org/x/mobile/cmd/gomobile"

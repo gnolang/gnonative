@@ -1,7 +1,6 @@
 export interface GoBridgeInterface {
   initBridge(): Promise<void>;
   closeBridge(): Promise<void>;
-  createDefaultAccount(name: string): Promise<string>;
+  call(packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: Number, password: string): Promise<string>;
   exportJsonConfig(): Promise<string>;
-  createReply(message: string, _: string | null): Promise<string>;
 }

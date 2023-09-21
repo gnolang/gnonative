@@ -1,5 +1,6 @@
 #import <React/RCTBridgeModule.h>
 
+
 @interface RCT_EXTERN_MODULE(GoBridge, NSObject)
 
 RCT_EXTERN_METHOD(initBridge:(RCTPromiseResolveBlock)resolve
@@ -8,25 +9,26 @@ RCT_EXTERN_METHOD(initBridge:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(closeBridge:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(hello:(NSString)name
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject);
-
-RCT_EXTERN_METHOD(createDefaultAccount:(NSString)name
+RCT_EXTERN_METHOD(call:(NSString *)packagePath
+                  fnc:(NSString *)fnc
+                  args:(NSArray *)args
+                  gasFee:(NSString *)gasFee
+                  gasWanted:(nonnull NSNumber *)gasWanted
+                  password:(NSString *)password
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
 RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(createReply:(NSString)message
-                  rootdir:(NSString)rootdir
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject);
-
 + (BOOL)requiresMainQueueSetup
 {
- return YES;  // only do this if your module initialization relies on calling UIKit!
+  return NO;  // only do this if your module initialization relies on calling UIKit!
+}
+
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_queue_create("com.facebook.React.AsyncLocalStorageQueue", DISPATCH_QUEUE_SERIAL);
 }
 
 @end

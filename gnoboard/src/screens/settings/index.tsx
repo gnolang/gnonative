@@ -23,32 +23,21 @@ function SettingsScreen() {
     return <ActivityIndicator />;
   }
 
-  // view with scrool view inside to avoid keyboard covering the input
+  // view with scroll view inside to avoid keyboard covering the input
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <Text>Home:</Text>
-      <TextInput value={config.TxCfg.RootCfg.Home} />
       <Text>Remote:</Text>
-      <TextInput value={config.TxCfg.RootCfg.Remote} />
-      <Text>Quiet:</Text>
-      <TextInput value={String(config.TxCfg.RootCfg.Quiet)} />
-      <Text>Insecure Password Stdin:</Text>
-      <TextInput value={String(config.TxCfg.RootCfg.InsecurePasswordStdin)} />
-      <Text>Config:</Text>
-      <TextInput value={config.TxCfg.RootCfg.Config} />
-
-      <Text>Broadcast:</Text>
-      <TextInput value={String(config.TxCfg.Broadcast)} />
+      <TextInput value={config.Remote} />
       <Text>ChainID:</Text>
-      <TextInput value={config.TxCfg.ChainID} />
-      <Text>Gas Fee:</Text>
-      <TextInput value={config.TxCfg.GasFee} />
-      <Text>Gas Wanted:</Text>
-      <TextInput value={String(config.TxCfg.GasWanted)} />
-      <Text>Memo:</Text>
-      <TextInput value={String(config.TxCfg.Memo)} />
+      <TextInput value={config.ChainID} />
+      <Text>KeyName:</Text>
+      <TextInput value={String(config.KeyName)} />
       <Text>Password:</Text>
       <TextInput value={config.Password} />
+      <Text>Gas Fee:</Text>
+      <TextInput value={config.GasFee} />
+      <Text>Gas Wanted:</Text>
+      <TextInput value={String(config.GasWanted)} />
     </ScrollView>
   );
 }

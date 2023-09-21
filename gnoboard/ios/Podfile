@@ -47,6 +47,12 @@ target 'gnoboard' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  # gRPC-Swift needs to set use_frameworks!
+  use_frameworks!
+
+  # Additionnal dependencies
+  pod 'gRPC-Swift', '~> 1.8'
+
   use_react_native!(
     :path => config[:reactNativePath],
     :hermes_enabled => podfile_properties['expo.jsEngine'] == nil || podfile_properties['expo.jsEngine'] == 'hermes',

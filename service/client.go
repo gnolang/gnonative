@@ -1,7 +1,8 @@
-package gnomobile
+// This is a temporary shadow of the Client struct to be provided by https://github.com/gnolang/gno/pull/1047 .
+
+package service
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/gnolang/gno/tm2/pkg/amino"
@@ -14,139 +15,117 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/std"
 )
 
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/common.go
-type BaseOptions struct {
-	Home                  string
-	Remote                string
-	Quiet                 bool
-	InsecurePasswordStdin bool
-	Config                string
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/root.go
-type baseCfg struct {
-	BaseOptions
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/maketx.go
-type makeTxCfg struct {
-	rootCfg *baseCfg
-
-	gasWanted int64
-	gasFee    string
-	memo      string
-
-	broadcast bool
-	chainID   string
-}
-
-func (m *makeTxCfg) MarshalJSON() ([]byte, error) {
-    return json.Marshal(struct {
-		RootCfg *baseCfg
-
-		GasWanted int64
-		GasFee    string
-		Memo      string
-
-		Broadcast bool
-		ChainID   string
-	}{
-		RootCfg: m.rootCfg,
-		GasWanted: m.gasWanted,
-		GasFee: m.gasFee,
-		Memo: m.memo,
-		Broadcast: m.broadcast,
-		ChainID: m.chainID,
-	})
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go
-type queryCfg struct {
-	rootCfg *baseCfg
-
-	data   string
-	height int64
-	prove  bool
-
-	// internal
-	path string
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/sign.go
-type signCfg struct {
-	rootCfg *baseCfg
-
-	txPath        string
-	chainID       string
-	accountNumber uint64
-	sequence      uint64
-	showSignBytes bool
-
-	// internal flags, when called programmatically
+// Client represents the Gno.land RPC API client.
+type Client struct {
+	remote       string
+	chainID      string
+	keybase      keys.Keybase
 	nameOrBech32 string
-	txJSON       []byte
-	pass         string
+	password     string
 }
 
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/broadcast.go
-type broadcastCfg struct {
-	rootCfg *baseCfg
-
-	dryRun bool
-
-	// internal
-	tx *std.Tx
+type Opts struct {
+	Remote       string
+	ChainID      string
+	NameOrBech32 string
+	Password     string
 }
 
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/call.go
-type callCfg struct {
-	rootCfg *makeTxCfg
+func (o *Opts) ApplyDefaults() {
+	if o.Remote == "" {
+		o.Remote = "127.0.0.1:26657"
+	}
 
-	send     string
-	pkgPath  string
-	funcName string
-	args     commands.StringArr
+	if o.ChainID == "" {
+		o.ChainID = "dev"
+	}
 }
 
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/call.go
-func execCall(cfg *callCfg, nameOrBech32 string, password string) error {
-	if cfg.pkgPath == "" {
-		return errors.New("pkgpath not specified")
-	}
-	if cfg.funcName == "" {
-		return errors.New("func not specified")
-	}
-	if cfg.rootCfg.gasWanted == 0 {
-		return errors.New("gas-wanted not specified")
-	}
-	if cfg.rootCfg.gasFee == "" {
-		return errors.New("gas-fee not specified")
-	}
+func NewClient(opts Opts) *Client {
+	opts.ApplyDefaults()
 
-	// read statement.
-	fnc := cfg.funcName
+	return &Client{
+		remote:       opts.Remote,
+		chainID:      opts.ChainID,
+		nameOrBech32: opts.NameOrBech32,
+		password:     opts.Password,
+	}
+}
 
-	// read account pubkey.
-	kb, err := keys.NewKeyBaseFromDir(cfg.rootCfg.rootCfg.Home)
-	if err != nil {
+func (c *Client) SetRemote(remote string) {
+	c.remote = remote
+}
+
+func (c *Client) SetChainID(chainID string) {
+	c.chainID = chainID
+}
+
+func (c *Client) InitKeyBaseFromDir(rootDir string) error {
+	var err error
+	if c.keybase, err = keys.NewKeyBaseFromDir(rootDir); err != nil {
 		return err
 	}
-	info, err := kb.GetByNameOrAddress(nameOrBech32)
+	return nil
+}
+
+func (c *Client) SetNameOrBech32(nameOrBech32 string) {
+	c.nameOrBech32 = nameOrBech32
+}
+
+func (c *Client) SetPassword(password string) {
+	c.password = password
+}
+
+func (c *Client) GetKeys() ([]keys.Info, error) {
+	keyList, err := c.keybase.List()
+	if err != nil {
+		return nil, err
+	}
+	return keyList, nil
+}
+
+func (c *Client) GetKeyByNameOrBech32(nameOrBech32 string) (keys.Info, error) {
+	return c.keybase.GetByNameOrAddress(nameOrBech32)
+}
+
+func (c *Client) CreateAccount(nameOrBech32 string, mnemonic string, bip39Passwd string, password string, account uint32, index uint32) (keys.Info, error) {
+	info, err := c.keybase.CreateAccount(nameOrBech32, mnemonic, bip39Passwd, password, account, index)
+	if err != nil {
+		return nil, err
+	}
+
+	return info, err
+}
+
+// TODO: port existing code, i.e. faucet?
+// TODO: create right now a tm2 generic go client and a gnovm generic go client?
+// TODO: Command: Send
+// TODO: Command: AddPkg
+// TODO: Command: Query
+// TODO: Command: Eval
+// TODO: Command: Exec
+// TODO: Command: Package
+// TODO: Command: QFile
+// TODO: examples and unit tests
+// TODO: Mock
+// TODO: alternative configuration (pass existing websocket?)
+// TODO: minimal go.mod to make it light to import
+
+func (c *Client) Call(pkgPath string, fnc string, args commands.StringArr, gasFee string, gasWanted int64, send string, nameOrBech32 string, password string) error {
+	info, err := c.keybase.GetByNameOrAddress(nameOrBech32)
 	if err != nil {
 		return err
 	}
 	caller := info.GetAddress()
-	// info.GetPubKey()
 
 	// Parse send amount.
-	send, err := std.ParseCoins(cfg.send)
+	sendCoins, err := std.ParseCoins(send)
 	if err != nil {
 		return errors.Wrap(err, "parsing send coins")
 	}
 
 	// parse gas wanted & fee.
-	gaswanted := cfg.rootCfg.gasWanted
-	gasfee, err := std.ParseCoin(cfg.rootCfg.gasFee)
+	gasFeeCoins, err := std.ParseCoin(gasFee)
 	if err != nil {
 		return errors.Wrap(err, "parsing gas fee coin")
 	}
@@ -154,54 +133,21 @@ func execCall(cfg *callCfg, nameOrBech32 string, password string) error {
 	// construct msg & tx and marshal.
 	msg := vm.MsgCall{
 		Caller:  caller,
-		Send:    send,
-		PkgPath: cfg.pkgPath,
+		Send:    sendCoins,
+		PkgPath: pkgPath,
 		Func:    fnc,
-		Args:    cfg.args,
+		Args:    args,
 	}
 	tx := std.Tx{
 		Msgs:       []std.Msg{msg},
-		Fee:        std.NewFee(gaswanted, gasfee),
+		Fee:        std.NewFee(gasWanted, gasFeeCoins),
 		Signatures: nil,
-		Memo:       cfg.rootCfg.memo,
+		Memo:       "",
 	}
-
-	if cfg.rootCfg.broadcast {
-		err := signAndBroadcast(cfg.rootCfg, tx, kb, nameOrBech32, password)
-		if err != nil {
-			return err
-		}
-	} else {
-		errors.New(string(amino.MustMarshalJSON(tx)))
-	}
-	return nil
-}
-
-// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/addpkg.go
-func signAndBroadcast(
-	cfg *makeTxCfg,
-	tx std.Tx,
-	kb keys.Keybase,
-	nameOrBech32 string,
-	password string,
-) error {
-	baseopts := cfg.rootCfg
-	txopts := cfg
-
-	// query account
-	kb, err := keys.NewKeyBaseFromDir(baseopts.Home)
-	if err != nil {
-		return err
-	}
-	info, err := kb.GetByNameOrAddress(nameOrBech32)
-	if err != nil {
-		return err
-	}
-	accountAddr := info.GetAddress()
 
 	qopts := &queryCfg{
-		rootCfg: baseopts,
-		path:    fmt.Sprintf("auth/accounts/%s", accountAddr),
+		remote: c.remote,
+		path:   fmt.Sprintf("auth/accounts/%s", caller),
 	}
 	qres, err := queryHandler(qopts)
 	if err != nil {
@@ -217,10 +163,10 @@ func signAndBroadcast(
 	accountNumber := qret.BaseAccount.AccountNumber
 	sequence := qret.BaseAccount.Sequence
 	sopts := &signCfg{
-		rootCfg:       baseopts,
+		kb:            c.keybase,
 		sequence:      sequence,
 		accountNumber: accountNumber,
-		chainID:       txopts.chainID,
+		chainID:       c.chainID,
 		nameOrBech32:  nameOrBech32,
 		txJSON:        amino.MustMarshalJSON(tx),
 		pass:          password,
@@ -233,8 +179,8 @@ func signAndBroadcast(
 
 	// broadcast signed tx
 	bopts := &broadcastCfg{
-		rootCfg: baseopts,
-		tx:      signedTx,
+		remote: c.remote,
+		tx:     signedTx,
 	}
 	bres, err := broadcastHandler(bopts)
 	if err != nil {
@@ -251,8 +197,46 @@ func signAndBroadcast(
 }
 
 // From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go
+type queryCfg struct {
+	remote string
+
+	data   string
+	height int64
+	prove  bool
+
+	// internal
+	path string
+}
+
+// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/sign.go
+type signCfg struct {
+	kb keys.Keybase
+
+	txPath        string
+	chainID       string
+	accountNumber uint64
+	sequence      uint64
+	showSignBytes bool
+
+	// internal flags, when called programmatically
+	nameOrBech32 string
+	txJSON       []byte
+	pass         string
+}
+
+// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/broadcast.go
+type broadcastCfg struct {
+	remote string
+
+	dryRun bool
+
+	// internal
+	tx *std.Tx
+}
+
+// From https://github.com/gnolang/gno/blob/master/tm2/pkg/crypto/keys/client/query.go
 func queryHandler(cfg *queryCfg) (*ctypes.ResultABCIQuery, error) {
-	remote := cfg.rootCfg.Remote
+	remote := cfg.remote
 	if remote == "" || remote == "y" {
 		return nil, errors.New("missing remote url")
 	}
@@ -278,7 +262,7 @@ func broadcastHandler(cfg *broadcastCfg) (*ctypes.ResultBroadcastTxCommit, error
 		return nil, errors.New("invalid tx")
 	}
 
-	remote := cfg.rootCfg.Remote
+	remote := cfg.remote
 	if remote == "" || remote == "y" {
 		return nil, errors.New("missing remote url")
 	}
@@ -314,11 +298,6 @@ func SignHandler(cfg *signCfg) (*std.Tx, error) {
 		return nil, errors.New("invalid tx content")
 	}
 
-	kb, err := keys.NewKeyBaseFromDir(cfg.rootCfg.Home)
-	if err != nil {
-		return nil, err
-	}
-
 	err = amino.UnmarshalJSON(cfg.txJSON, &tx)
 	if err != nil {
 		return nil, err
@@ -351,7 +330,7 @@ func SignHandler(cfg *signCfg) (*std.Tx, error) {
 		return nil, nil
 	}
 
-	sig, pub, err := kb.Sign(cfg.nameOrBech32, cfg.pass, signbz)
+	sig, pub, err := cfg.kb.Sign(cfg.nameOrBech32, cfg.pass, signbz)
 	if err != nil {
 		return nil, err
 	}
