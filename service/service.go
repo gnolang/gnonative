@@ -9,7 +9,7 @@ import (
 	"sync"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
-	"github.com/gnolang/gnomobile/service/gnomobiletypes"
+	"github.com/gnolang/gnomobile/service/rpc"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -19,7 +19,7 @@ const SOCKET_SUBDIR = "s"
 const SOCKET_FILE = "gno"
 
 type GnomobileService interface {
-	gnomobiletypes.GnomobileServiceServer
+	rpc.GnomobileServiceServer
 
 	GetSocketPath() string
 	GetTcpPort() int
@@ -45,7 +45,7 @@ type gnomobileService struct {
 	listener net.Listener
 	server   *grpc.Server
 
-	gnomobiletypes.UnimplementedGnomobileServiceServer
+	rpc.UnimplementedGnomobileServiceServer
 }
 
 var _ GnomobileService = (*gnomobileService)(nil)
@@ -131,7 +131,7 @@ func (s *gnomobileService) createUDSListener() error {
 	// create a socket subdirectory
 	sockDir := filepath.Join(s.tmpDir, SOCKET_SUBDIR)
 	if err := os.MkdirAll(sockDir, 0700); err != nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.socketPath = filepath.Join(sockDir, SOCKET_FILE)
@@ -139,13 +139,13 @@ func (s *gnomobileService) createUDSListener() error {
 	// delete socket if it already exists
 	if _, err := os.Stat(s.socketPath); !os.IsNotExist(err) {
 		if err := os.RemoveAll(s.socketPath); err != nil {
-			return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+			return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 		}
 	}
 
 	listener, err := net.Listen("unix", s.socketPath)
 	if err != nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.listener = listener
@@ -157,7 +157,7 @@ func (s *gnomobileService) createTcpListener() error {
 	tcpAddr := fmt.Sprintf(":%d", s.tcpPort)
 	listener, err := net.Listen("tcp", tcpAddr)
 	if err != nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.listener = listener
@@ -167,12 +167,12 @@ func (s *gnomobileService) createTcpListener() error {
 
 	_, portStr, err := net.SplitHostPort(addr)
 	if err != nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	portInt, err := net.LookupPort("tcp", portStr)
 	if err != nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.logger.Info("gRPC server listen on", zap.Int("port", portInt))
@@ -183,11 +183,11 @@ func (s *gnomobileService) createTcpListener() error {
 
 func (s *gnomobileService) runGRPCServer() error {
 	if s.listener == nil {
-		return gnomobiletypes.ErrCode_ErrRunGRPCServer.Wrap(errors.New("listener is not initialized"))
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(errors.New("listener is not initialized"))
 	}
 	server := grpc.NewServer()
 
-	gnomobiletypes.RegisterGnomobileServiceServer(server, s)
+	rpc.RegisterGnomobileServiceServer(server, s)
 	go func() {
 		// we dont need to log the error
 		err := server.Serve(s.listener)

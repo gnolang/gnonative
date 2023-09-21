@@ -10,10 +10,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1AC57C9E2ABC742E00EBCC55 /* rpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC57C9C2ABC742E00EBCC55 /* rpc.pb.swift */; };
+		1AC57C9F2ABC742E00EBCC55 /* rpc.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC57C9D2ABC742E00EBCC55 /* rpc.grpc.swift */; };
+		1AC57CA12ABC78CE00EBCC55 /* gnomobiletypes.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC57CA02ABC78CE00EBCC55 /* gnomobiletypes.pb.swift */; };
 		3310DF473105470FBA4883B6 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26928F07A2B14F638F3E7CF3 /* noop-file.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8AA0F8242AAF70FA00859B10 /* gnomobiletypes.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA0F8222AAF70FA00859B10 /* gnomobiletypes.grpc.swift */; };
-		8AA0F8252AAF70FA00859B10 /* gnomobiletypes.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA0F8232AAF70FA00859B10 /* gnomobiletypes.pb.swift */; };
 		8AB390522A85415D00CB681E /* GnoCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB390512A85415D00CB681E /* GnoCore.xcframework */; };
 		8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905B2A85BA7C00CB681E /* GoBridge.m */; };
 		8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905C2A85BA7C00CB681E /* GoBridge.swift */; };
@@ -33,11 +34,12 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = gnoboard/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = gnoboard/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = gnoboard/main.m; sourceTree = "<group>"; };
+		1AC57C9C2ABC742E00EBCC55 /* rpc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rpc.pb.swift; sourceTree = "<group>"; };
+		1AC57C9D2ABC742E00EBCC55 /* rpc.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rpc.grpc.swift; sourceTree = "<group>"; };
+		1AC57CA02ABC78CE00EBCC55 /* gnomobiletypes.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gnomobiletypes.pb.swift; sourceTree = "<group>"; };
 		26928F07A2B14F638F3E7CF3 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "gnoboard/noop-file.swift"; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-gnoboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gnoboard.debug.xcconfig"; path = "Target Support Files/Pods-gnoboard/Pods-gnoboard.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-gnoboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gnoboard.release.xcconfig"; path = "Target Support Files/Pods-gnoboard/Pods-gnoboard.release.xcconfig"; sourceTree = "<group>"; };
-		8AA0F8222AAF70FA00859B10 /* gnomobiletypes.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gnomobiletypes.grpc.swift; sourceTree = "<group>"; };
-		8AA0F8232AAF70FA00859B10 /* gnomobiletypes.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gnomobiletypes.pb.swift; sourceTree = "<group>"; };
 		8AB390512A85415D00CB681E /* GnoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GnoCore.xcframework; path = Frameworks/GnoCore.xcframework; sourceTree = "<group>"; };
 		8AB3905B2A85BA7C00CB681E /* GoBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoBridge.m; sourceTree = "<group>"; };
 		8AB3905C2A85BA7C00CB681E /* GoBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoBridge.swift; sourceTree = "<group>"; };
@@ -84,6 +86,16 @@
 			name = gnoboard;
 			sourceTree = "<group>";
 		};
+		1AC57C9B2ABC73F000EBCC55 /* rpc */ = {
+			isa = PBXGroup;
+			children = (
+				1AC57CA02ABC78CE00EBCC55 /* gnomobiletypes.pb.swift */,
+				1AC57C9D2ABC742E00EBCC55 /* rpc.grpc.swift */,
+				1AC57C9C2ABC742E00EBCC55 /* rpc.pb.swift */,
+			);
+			path = rpc;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,19 +137,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8AA0F8212AAF70FA00859B10 /* api */ = {
-			isa = PBXGroup;
-			children = (
-				8AA0F8222AAF70FA00859B10 /* gnomobiletypes.grpc.swift */,
-				8AA0F8232AAF70FA00859B10 /* gnomobiletypes.pb.swift */,
-			);
-			path = api;
-			sourceTree = "<group>";
-		};
 		8AB390582A85B9B800CB681E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8AA0F8212AAF70FA00859B10 /* api */,
+				1AC57C9B2ABC73F000EBCC55 /* rpc */,
 				8AF1F6862A98ABBA0073D4D1 /* RootDir */,
 				8AB3905A2A85BA7C00CB681E /* Bridge */,
 			);
@@ -504,16 +507,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC57C9F2ABC742E00EBCC55 /* rpc.grpc.swift in Sources */,
 				8AB390602A85BD6000CB681E /* PromiseBlock.swift in Sources */,
 				8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */,
 				8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				1AC57C9E2ABC742E00EBCC55 /* rpc.pb.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				8AA0F8242AAF70FA00859B10 /* gnomobiletypes.grpc.swift in Sources */,
+				1AC57CA12ABC78CE00EBCC55 /* gnomobiletypes.pb.swift in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
 				3310DF473105470FBA4883B6 /* noop-file.swift in Sources */,
 				8AF1F68A2A98ABBA0073D4D1 /* RootDir.swift in Sources */,
-				8AA0F8252AAF70FA00859B10 /* gnomobiletypes.pb.swift in Sources */,
 				8AF1F6892A98ABBA0073D4D1 /* RootDir.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

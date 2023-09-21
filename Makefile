@@ -66,22 +66,23 @@ fclean: clean
 api.generate: _api.generate.protocol
 api.clean: _api.clean.protocol
 
-# - API - gnomobiletypes
+# - API - rpc
 
-protos_src := $(wildcard api/*.proto)
-gen_src := $(protos_src) Makefile
+protos_src := $(wildcard service/rpc/*.proto)
+gen_src := $(protos_src) Makefile $(wildcard service/gnomobiletypes/*.go)
 gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
-	rm -f framework/service/gnomobiletypes/*.pb.go
-	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/*.java
+	rm -f framework/service/rpc/*.pb.go
+	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/v1/*.java
 
 $(gen_sum): $(gen_src)
 	$(call check-program, shasum buf)
 	@shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp
 	@diff -q $(gen_sum).tmp $(gen_sum) || ( \
-		buf generate api; \
+	    cd misc/genproto && go run . && cd ../.. \
+		buf generate service/rpc; \
 		shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp; \
 		mv $(gen_sum).tmp $(gen_sum); \
 		go mod tidy \

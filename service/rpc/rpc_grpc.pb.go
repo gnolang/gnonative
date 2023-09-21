@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: gnomobiletypes.proto
+// source: rpc.proto
 
-package gnomobiletypes
+package rpc
 
 import (
 	context "context"
@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GnomobileService_SetRemote_FullMethodName       = "/gnomobile.v1.GnomobileService/SetRemote"
-	GnomobileService_SetChainID_FullMethodName      = "/gnomobile.v1.GnomobileService/SetChainID"
-	GnomobileService_SetNameOrBech32_FullMethodName = "/gnomobile.v1.GnomobileService/SetNameOrBech32"
-	GnomobileService_SetPassword_FullMethodName     = "/gnomobile.v1.GnomobileService/SetPassword"
-	GnomobileService_ListKeyInfo_FullMethodName     = "/gnomobile.v1.GnomobileService/ListKeyInfo"
-	GnomobileService_CreateAccount_FullMethodName   = "/gnomobile.v1.GnomobileService/CreateAccount"
-	GnomobileService_SelectAccount_FullMethodName   = "/gnomobile.v1.GnomobileService/SelectAccount"
-	GnomobileService_Query_FullMethodName           = "/gnomobile.v1.GnomobileService/Query"
-	GnomobileService_Call_FullMethodName            = "/gnomobile.v1.GnomobileService/Call"
+	GnomobileService_SetRemote_FullMethodName       = "/land.gno.gnomobile.v1.GnomobileService/SetRemote"
+	GnomobileService_SetChainID_FullMethodName      = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
+	GnomobileService_SetNameOrBech32_FullMethodName = "/land.gno.gnomobile.v1.GnomobileService/SetNameOrBech32"
+	GnomobileService_SetPassword_FullMethodName     = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
+	GnomobileService_ListKeyInfo_FullMethodName     = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
+	GnomobileService_CreateAccount_FullMethodName   = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
+	GnomobileService_SelectAccount_FullMethodName   = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
+	GnomobileService_Query_FullMethodName           = "/land.gno.gnomobile.v1.GnomobileService/Query"
+	GnomobileService_Call_FullMethodName            = "/land.gno.gnomobile.v1.GnomobileService/Call"
 )
 
 // GnomobileServiceClient is the client API for GnomobileService service.
@@ -386,7 +386,7 @@ func _GnomobileService_Call_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GnomobileService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "gnomobile.v1.GnomobileService",
+	ServiceName: "land.gno.gnomobile.v1.GnomobileService",
 	HandlerType: (*GnomobileServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -427,5 +427,5 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "gnomobiletypes.proto",
+	Metadata: "rpc.proto",
 }

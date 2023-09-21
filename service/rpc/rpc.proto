@@ -1,27 +1,28 @@
 syntax = "proto3";
 
-package gnomobile.v1;
+package land.gno.gnomobile.v1;
 
-option go_package = "github.com/gnolang/gnomobile/service/gnomobiletypes";
-option java_package = "land.gno.gnomobile";
+option go_package = "github.com/gnolang/gnomobile/service/rpc";
 option objc_class_prefix = "RTG";
+
+import "gnomobiletypes.proto";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
   // Set the connection addresse for the remote node. If you don't call this,
   // the default is "127.0.0.1:26657"
-  rpc SetRemote(SetRemote.Request) returns (SetRemote.Reply);
+  rpc SetRemote(SetRemote_Request) returns (SetRemote_Reply);
 
   // Set the chain ID for the remote node. If you don't call this, the default
   // is "dev"
-  rpc SetChainID(SetChainID.Request) returns (SetChainID.Reply);
+  rpc SetChainID(SetChainID_Request) returns (SetChainID_Reply);
 
   // Set the nameOrBech32 for the account in the keybase, used for later
   // operations
-  rpc SetNameOrBech32(SetNameOrBech32.Request) returns (SetNameOrBech32.Reply);
+  rpc SetNameOrBech32(SetNameOrBech32_Request) returns (SetNameOrBech32_Reply);
 
   // Set the password for the account in the keybase, used for later operations
-  rpc SetPassword(SetPassword.Request) returns (SetPassword.Reply);
+  rpc SetPassword(SetPassword_Request) returns (SetPassword_Reply);
 
   // Get the keys informations in the keybase
   rpc ListKeyInfo(ListKeyInfo.Request) returns (ListKeyInfo.Reply);
@@ -34,30 +35,10 @@ service GnomobileService {
   rpc SelectAccount(SelectAccount.Request) returns (SelectAccount.Reply);
 
   // Make an ABCI query to the remote node.
-  rpc Query(Query.Request) returns (Query.Reply);
+  rpc Query(Query_Request) returns (Query_Reply);
 
   // Call a specific realm function.
-  rpc Call(Call.Request) returns (Call.Reply);
-}
-
-message SetRemote {
-  message Request { string remote = 1; }
-  message Reply {}
-}
-
-message SetChainID {
-  message Request { string chainID = 1; }
-  message Reply {}
-}
-
-message SetNameOrBech32 {
-  message Request { string nameOrBech32 = 1; }
-  message Reply {}
-}
-
-message SetPassword {
-  message Request { string password = 1; }
-  message Reply {}
+  rpc Call(Call_Request) returns (Call_Reply);
 }
 
 enum KeyType {
@@ -95,26 +76,6 @@ message CreateAccount {
 message SelectAccount {
   message Request { string nameOrBech32 = 1; }
   message Reply { KeyInfo key = 1; }
-}
-
-message Query {
-  message Request {
-    string path = 1; // Example: "vm/qrender"
-    string data = 2; // Example: "gno.land/r/demo/boards\ntestboard"
-  }
-  message Reply { bytes result = 1; }
-}
-
-message Call {
-  message Request {
-    string packagePath = 1;   // Example: "gno.land/r/demo/boards"
-    string fnc = 2;           // Example: "CreateReply"
-    repeated string args = 3; // list of arguments specific to the function
-    string gasFee = 4;
-    int64 gasWanted = 5;
-    string password = 6;
-  }
-  message Reply { bytes result = 1; }
 }
 
 enum ErrCode {
