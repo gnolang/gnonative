@@ -2,11 +2,13 @@ package land.gno.gobridge;
 
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableArray;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,53 +68,6 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             Channel channel = UdsChannelBuilder.forPath(socketPath, Namespace.FILESYSTEM).build();
             blockingStub = GnomobileServiceGrpc.newBlockingStub(channel);
 
-            // TODO: to remove
-            // Simulate account creation
-            // To be handled by the frontend
-
-            // Get the list of account and determine if we have to create a account
-            Rpc.ListKeyInfo.Request listKeyReq = Rpc.ListKeyInfo.Request.newBuilder().build();
-            Rpc.ListKeyInfo.Reply listKeyRep;
-            try {
-                listKeyRep = blockingStub.listKeyInfo(listKeyReq);
-            } catch (StatusRuntimeException e) {
-                Log.d(TAG, String.format("RPC failed: {%s}", e.getStatus()));
-                return;
-            }
-
-            Log.i(TAG, String.format("list accounts size: %d", listKeyRep.getKeysCount()));
-
-                // if no account, create a new one
-            if (listKeyRep.getKeysCount() == 0) {
-                Rpc.CreateAccount.Request createAccReq = Rpc.CreateAccount.Request.newBuilder()
-                    .setNameOrBech32("jefft0")
-                    .setMnemonic("enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee")
-                    .setBip39Passwd("")
-                    .setPassword("password")
-                    .setAccount(0)
-                    .setIndex(0)
-                    .build();
-                Rpc.CreateAccount.Reply createAccRep;
-                try {
-                    createAccRep = blockingStub.createAccount(createAccReq);
-                } catch (StatusRuntimeException e) {
-                    Log.d(TAG, String.format("RPC failed: {%s}", e.getStatus()));
-                    return;
-                }
-            }
-
-            // select the account
-            Rpc.SelectAccount.Request selectAccReq = Rpc.SelectAccount.Request.newBuilder()
-                .setNameOrBech32("jefft0")
-                .build();
-            Rpc.SelectAccount.Reply selectAccRep;
-            try {
-                selectAccRep = blockingStub.selectAccount(selectAccReq);
-            } catch (StatusRuntimeException e) {
-                Log.d(TAG, String.format("RPC failed: {%s}", e.getStatus()));
-                return;
-            }
-
             promise.resolve(true);
         } catch (Exception err) {
             promise.reject(err);
@@ -130,6 +85,69 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
         } catch (Exception err) {
             promise.reject(err);
         }
+    }
+
+    @ReactMethod
+    public void listKeyInfo(Promise promise) {
+        Rpc.ListKeyInfo.Request request = Rpc.ListKeyInfo.Request.newBuilder()
+            .build();
+        Rpc.ListKeyInfo.Reply reply;
+        try {
+            reply = blockingStub.listKeyInfo(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC listKeyInfo failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+
+        List<Rpc.KeyInfo> listKey = reply.getKeysList();
+        WritableArray promiseArray= Arguments.createArray();
+        for(int i=0;i<listKey.size();i++){
+            promiseArray.pushString(listKey.get(i).getName());
+        }
+
+        promise.resolve(promiseArray);
+    }
+
+    @ReactMethod
+    public void createAccount(String nameOrBech32, String mnemonic, String bip39Passwd, String password, int account, int index, Promise promise) {
+        Rpc.CreateAccount.Request request = Rpc.CreateAccount.Request.newBuilder()
+            .setNameOrBech32(nameOrBech32)
+            .setMnemonic(mnemonic)
+            .setBip39Passwd(bip39Passwd)
+            .setPassword(password)
+            .setAccount(account)
+            .setIndex(index)
+            .build();
+
+        Rpc.CreateAccount.Reply reply;
+        try {
+            reply = blockingStub.createAccount(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC createAccount failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+
+        // TODO: send the whole Key struct
+        promise.resolve(reply.getKey().getAddress().toString());
+    }
+
+    @ReactMethod
+    public void selectAccount(String nameOrBech32, Promise promise) {
+        Rpc.SelectAccount.Request request = Rpc.SelectAccount.Request.newBuilder()
+            .setNameOrBech32(nameOrBech32)
+            .build();
+
+        Rpc.SelectAccount.Reply reply;
+        try {
+            reply = blockingStub.selectAccount(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC selectAccount failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(reply.getKey().getAddress().toString());
     }
 
     @ReactMethod
@@ -152,7 +170,8 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
         try {
             reply = blockingStub.call(request);
         } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC failed: {%s}", e.getStatus()));
+            Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
+            promise.reject(e);
             return;
         }
         promise.resolve(reply.getResult().toString());
