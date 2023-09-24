@@ -23,7 +23,7 @@ func (s *gnomobileService) SetChainID(ctx context.Context, req *rpc.SetChainID_R
 }
 
 // Set the nameOrBech32 for the account in the keybase, used for later operations
-func (s *gnomobileService) SetNameOrBench32(ctx context.Context, req *rpc.SetNameOrBech32_Request) (*rpc.SetNameOrBech32_Reply, error) {
+func (s *gnomobileService) SetNameOrBech32(ctx context.Context, req *rpc.SetNameOrBech32_Request) (*rpc.SetNameOrBech32_Reply, error) {
 	s.client.SetNameOrBech32(req.NameOrBech32)
 	return &rpc.SetNameOrBech32_Reply{}, nil
 }
@@ -60,6 +60,8 @@ func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {
 
 // Get the keys informations in the keybase
 func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *rpc.ListKeyInfo_Request) (*rpc.ListKeyInfo_Reply, error) {
+	s.logger.Debug("ListKeyInfo called")
+
 	keys, err := s.client.GetKeys()
 	if err != nil {
 		return nil, err
@@ -81,6 +83,8 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *rpc.ListKeyInfo
 
 // Create a new account in the keybase
 func (s *gnomobileService) CreateAccount(ctx context.Context, req *rpc.CreateAccount_Request) (*rpc.CreateAccount_Reply, error) {
+	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.NameOrBech32))
+
 	key, err := s.client.CreateAccount(req.NameOrBech32, req.Mnemonic, req.Bip39Passwd, req.Password, req.Account, req.Index)
 	if err != nil {
 		return nil, err
@@ -96,6 +100,8 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *rpc.CreateAcc
 
 // SelectAccount selects the account to use for later operations
 func (s *gnomobileService) SelectAccount(ctx context.Context, req *rpc.SelectAccount_Request) (*rpc.SelectAccount_Reply, error) {
+	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.NameOrBech32))
+
 	key, err := s.client.GetKeyByNameOrBech32(req.NameOrBech32)
 	if err != nil {
 		return nil, rpc.ErrCode_ErrCryptoKeyNotFound

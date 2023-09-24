@@ -9,7 +9,33 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
-  call(packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: Number, password: string): Promise<string> {
+  listKeyInfo(): Promise<Array<string>> {
+    return Promise.reject();
+  }
+
+  createAccount(
+    _nameOrBech32: string,
+    _mnemonic: string,
+    _bip39Passw: string,
+    _password: string,
+    _account: Number,
+    _index: Number,
+  ): Promise<string> {
+    return Promise.reject();
+  }
+
+  selectAccount(_nameOrBech32: string): Promise<string> {
+    return Promise.reject();
+  }
+
+  call(
+    _packagePath: string,
+    _fnc: string,
+    _args: Array<string>,
+    _gasFee: string,
+    _gasWanted: Number,
+    _password: string,
+  ): Promise<string> {
     return Promise.reject();
   }
 

@@ -3,9 +3,14 @@ import { ConsoleView } from "@gno/components/consoleview";
 import TextInput from "@gno/components/textinput";
 import { GoBridge } from "@gno/native_modules";
 import { screenStyleSheet as styles } from "@gno/styles";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
-import { initBridge } from "@gno/utils/bridge";
+import {
+  createAccount,
+  initBridge,
+  listKeyInfo,
+  selectAccount,
+} from "@gno/utils/bridge";
 
 function HomeScreen() {
   const [postContent, setPostContent] = useState("");
@@ -13,33 +18,45 @@ function HomeScreen() {
   const [loading, setLoading] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-  	const init = async () => {
-	  await initBridge()
-	}
-	init()
+    const init = async () => {
+      await initBridge();
+      let listKey = await listKeyInfo();
+      if (listKey.length === 0) {
+        await createAccount(
+          "jefft0",
+          "enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee",
+          "",
+          "password",
+          0,
+          0,
+        );
+      }
+      await selectAccount("jefft0");
+    };
+    init();
 
-	return () => {
-		const deinit = async () => {
-		  await GoBridge.closeBridge()
-		}
-		deinit()
-	}
-  }, [])
+    return () => {
+      const deinit = async () => {
+        await GoBridge.closeBridge();
+      };
+      deinit();
+    };
+  }, []);
 
   const onPostPress = async () => {
     setLoading("Replying to a post...");
     setAppConsole("replying to a post...");
-    var gasFee = "1000000ugnot"
-    var gasWanted = 2000000
-	var args: Array<string> = ["2", "1", "1", postContent]
+    var gasFee = "1000000ugnot";
+    var gasWanted = 2000000;
+    var args: Array<string> = ["2", "1", "1", postContent];
     GoBridge.call(
-		"gno.land/r/demo/boards",
-		"CreateReply",
-		args,
-		gasFee,
-		gasWanted,
-		"password"
-	)
+      "gno.land/r/demo/boards",
+      "CreateReply",
+      args,
+      gasFee,
+      gasWanted,
+      "password",
+    )
       .then((data) => {
         setAppConsole(data);
         setPostContent("");
@@ -66,7 +83,7 @@ function HomeScreen() {
 
   const loadInBrowser = () => {
     Linking.openURL(
-      "http://testnet.gno.berty.io/r/demo/boards:gnomobile/1"
+      "http://testnet.gno.berty.io/r/demo/boards:gnomobile/1",
     ).catch((err) => console.error("Couldn't load page", err));
   };
 

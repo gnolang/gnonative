@@ -19,8 +19,7 @@ public class RootDirModule extends ReactContextBaseJavaModule {
     }
 
     public String getRootDir() {
-        String rootDir = getReactApplicationContext().getFilesDir().getAbsolutePath();
-        return new File(rootDir + "/" + nameFolder).getAbsolutePath();
+        return getReactApplicationContext().getFilesDir().getAbsolutePath();
     }
 
     @NonNull

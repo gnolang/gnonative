@@ -119,64 +119,83 @@ class GoBridge: NSObject {
       
       self.client = Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClient(channel: self.channel!)
       
-      // TODO: restore resolve when deleting the temporary account create below
-      //            resolve(true)
+      resolve(true)
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.localizedDescription, error)
       return
     }
-    
-    // TODO: to remove
-    // Simulate account creation
-    // To be handled by the frontend
-    
-    Task {
-      // Get the list of account and determine if we have to create a account
-      let listKeyReq = Land_Gno_Gnomobile_V1_ListKeyInfo.Request()
-      var listKeyRep: Land_Gno_Gnomobile_V1_ListKeyInfo.Reply?;
-      
-      do {
-        listKeyRep = try await self.client?.listKeyInfo(listKeyReq)
-      } catch let error as NSError {
-        reject("\(String(describing: error.code))", error.localizedDescription, error)
-        return
-      }
-      
-      self.logger.info("list account size: \(listKeyRep!.keys.count)")
-      
-      // if no account, create a new one
-      let createAccountReq = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
-        $0.nameOrBech32 = "jefft0"
-        $0.mnemonic = "enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee"
-        $0.bip39Passwd = ""
-        $0.password = "password"
-        $0.account = 0
-        $0.index = 0
-      }
-      
-      do {
-        try await self.client?.createAccount(createAccountReq)
-      } catch let error as NSError {
-        reject("\(String(describing: error.code))", error.localizedDescription, error)
-        return
-      }
-      
-      // select the account
-      let selectAccountReq = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
-        $0.nameOrBech32 = "jefft0"
-      }
-      
-      do {
-        try await self.client?.selectAccount(selectAccountReq)
-      } catch let error as NSError {
-        reject("\(String(describing: error.code))", error.localizedDescription, error)
-        return
-      }
-      
-      resolve(true)
-    }
   }
   
+  @objc func listKeyInfo(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    Task {
+      do {
+        let resp = try await client!.listKeyInfo(Land_Gno_Gnomobile_V1_ListKeyInfo.Request())
+        resolve(resp.keys as NSArray)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
+  @objc func createAccount(_ nameOrBech32: NSString, mnemonic: NSString, bip39Passwd: NSString, password: NSString, account: NSNumber, index: NSNumber, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    let req = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
+      $0.nameOrBech32 = nameOrBech32 as String
+      $0.mnemonic = mnemonic as String
+      $0.bip39Passwd = bip39Passwd as String
+      $0.password = password as String
+      $0.account = account as? UInt32 ?? 0
+      $0.index = index as? UInt32 ?? 0
+    }
+
+    Task {
+      do {
+        let resp = try await client!.createAccount(req)
+        resolve(resp.key.address)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
+  @objc func selectAccount(_ nameOrBech32: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    let req = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
+      $0.nameOrBech32 = nameOrBech32 as String
+    }
+
+    Task {
+      do {
+        let resp = try await client!.selectAccount(req)
+        resolve(resp.key.address)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
   @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {
