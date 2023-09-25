@@ -1,6 +1,6 @@
 // This is a temporary shadow of the Client struct to be provided by https://github.com/gnolang/gno/pull/1047 .
 
-package service
+package gnoclient
 
 import (
 	"fmt"

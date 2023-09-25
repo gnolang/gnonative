@@ -9,6 +9,7 @@ import (
 	"sync"
 
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
+	"github.com/gnolang/gnomobile/gnoclient"
 	"github.com/gnolang/gnomobile/service/rpc"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
@@ -29,7 +30,7 @@ type GnomobileService interface {
 
 type gnomobileService struct {
 	logger         *zap.Logger
-	client         *Client
+	client         *gnoclient.Client
 	rootDir        string
 	tmpDir         string
 	tcpPort        int
@@ -83,7 +84,7 @@ func initService(opts ...GnomobileOption) (*gnomobileService, error) {
 		return nil, err
 	}
 
-	svc.client = NewClient(Opts{
+	svc.client = gnoclient.NewClient(gnoclient.Opts{
 		Remote:  svc.remote,
 		ChainID: svc.chainID,
 	})
