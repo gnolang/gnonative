@@ -81,7 +81,7 @@ $(gen_sum): $(gen_src)
 	$(call check-program, shasum buf)
 	@shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp
 	@diff -q $(gen_sum).tmp $(gen_sum) || ( \
-	    cd misc/genproto && go run . && cd ../.. \
+		cd misc/genproto && go run . && cd ../.. ; \
 		buf generate service/rpc; \
 		shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp; \
 		mv $(gen_sum).tmp $(gen_sum); \
