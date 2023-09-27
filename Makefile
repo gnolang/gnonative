@@ -69,7 +69,7 @@ api.clean: _api.clean.protocol
 # - API - rpc
 
 protos_src := $(wildcard service/rpc/*.proto)
-gen_src := $(protos_src) Makefile $(wildcard service/gnomobiletypes/*.go)
+gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard service/gnomobiletypes/*.go)
 gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)

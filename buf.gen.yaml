@@ -19,3 +19,9 @@ plugins:
   - plugin: buf.build/apple/swift
     out: gnoboard/ios/Sources/rpc
     opt: Visibility=Public
+  - plugin: buf.build/bufbuild/es
+    out: gnoboard/src/api
+    opt: target=ts
+  - plugin: buf.build/connectrpc/es
+    out: gnoboard/src/api
+    opt: target=ts
