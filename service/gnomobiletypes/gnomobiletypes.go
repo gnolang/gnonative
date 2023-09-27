@@ -28,6 +28,13 @@ type SetPasswordRequest struct {
 type SetPasswordReply struct {
 }
 
+type GenerateRecoveryPhraseRequest struct {
+}
+
+type GenerateRecoveryPhraseReply struct {
+	Phrase string `json:"phrase" yaml:"phrase"`
+}
+
 type QueryRequest struct {
 	// Example: "vm/qrender"
 	Path string `json:"path" yaml:"path"`

@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GnomobileService_SetRemote_FullMethodName       = "/land.gno.gnomobile.v1.GnomobileService/SetRemote"
-	GnomobileService_SetChainID_FullMethodName      = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
-	GnomobileService_SetNameOrBech32_FullMethodName = "/land.gno.gnomobile.v1.GnomobileService/SetNameOrBech32"
-	GnomobileService_SetPassword_FullMethodName     = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
-	GnomobileService_ListKeyInfo_FullMethodName     = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
-	GnomobileService_CreateAccount_FullMethodName   = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
-	GnomobileService_SelectAccount_FullMethodName   = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
-	GnomobileService_Query_FullMethodName           = "/land.gno.gnomobile.v1.GnomobileService/Query"
-	GnomobileService_Call_FullMethodName            = "/land.gno.gnomobile.v1.GnomobileService/Call"
+	GnomobileService_SetRemote_FullMethodName              = "/land.gno.gnomobile.v1.GnomobileService/SetRemote"
+	GnomobileService_SetChainID_FullMethodName             = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
+	GnomobileService_SetNameOrBech32_FullMethodName        = "/land.gno.gnomobile.v1.GnomobileService/SetNameOrBech32"
+	GnomobileService_SetPassword_FullMethodName            = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
+	GnomobileService_GenerateRecoveryPhrase_FullMethodName = "/land.gno.gnomobile.v1.GnomobileService/GenerateRecoveryPhrase"
+	GnomobileService_ListKeyInfo_FullMethodName            = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
+	GnomobileService_CreateAccount_FullMethodName          = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
+	GnomobileService_SelectAccount_FullMethodName          = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
+	GnomobileService_Query_FullMethodName                  = "/land.gno.gnomobile.v1.GnomobileService/Query"
+	GnomobileService_Call_FullMethodName                   = "/land.gno.gnomobile.v1.GnomobileService/Call"
 )
 
 // GnomobileServiceClient is the client API for GnomobileService service.
@@ -45,6 +46,9 @@ type GnomobileServiceClient interface {
 	SetNameOrBech32(ctx context.Context, in *SetNameOrBech32_Request, opts ...grpc.CallOption) (*SetNameOrBech32_Reply, error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(ctx context.Context, in *SetPassword_Request, opts ...grpc.CallOption) (*SetPassword_Reply, error)
+	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+	// random number generator. This can be used as the mnemonic in CreateAccount.
+	GenerateRecoveryPhrase(ctx context.Context, in *GenerateRecoveryPhrase_Request, opts ...grpc.CallOption) (*GenerateRecoveryPhrase_Reply, error)
 	// Get the keys informations in the keybase
 	ListKeyInfo(ctx context.Context, in *ListKeyInfo_Request, opts ...grpc.CallOption) (*ListKeyInfo_Reply, error)
 	// Create a new account the keybase using the name an password specified by
@@ -96,6 +100,15 @@ func (c *gnomobileServiceClient) SetNameOrBech32(ctx context.Context, in *SetNam
 func (c *gnomobileServiceClient) SetPassword(ctx context.Context, in *SetPassword_Request, opts ...grpc.CallOption) (*SetPassword_Reply, error) {
 	out := new(SetPassword_Reply)
 	err := c.cc.Invoke(ctx, GnomobileService_SetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, in *GenerateRecoveryPhrase_Request, opts ...grpc.CallOption) (*GenerateRecoveryPhrase_Reply, error) {
+	out := new(GenerateRecoveryPhrase_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_GenerateRecoveryPhrase_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +175,9 @@ type GnomobileServiceServer interface {
 	SetNameOrBech32(context.Context, *SetNameOrBech32_Request) (*SetNameOrBech32_Reply, error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(context.Context, *SetPassword_Request) (*SetPassword_Reply, error)
+	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+	// random number generator. This can be used as the mnemonic in CreateAccount.
+	GenerateRecoveryPhrase(context.Context, *GenerateRecoveryPhrase_Request) (*GenerateRecoveryPhrase_Reply, error)
 	// Get the keys informations in the keybase
 	ListKeyInfo(context.Context, *ListKeyInfo_Request) (*ListKeyInfo_Reply, error)
 	// Create a new account the keybase using the name an password specified by
@@ -191,6 +207,9 @@ func (UnimplementedGnomobileServiceServer) SetNameOrBech32(context.Context, *Set
 }
 func (UnimplementedGnomobileServiceServer) SetPassword(context.Context, *SetPassword_Request) (*SetPassword_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetPassword not implemented")
+}
+func (UnimplementedGnomobileServiceServer) GenerateRecoveryPhrase(context.Context, *GenerateRecoveryPhrase_Request) (*GenerateRecoveryPhrase_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateRecoveryPhrase not implemented")
 }
 func (UnimplementedGnomobileServiceServer) ListKeyInfo(context.Context, *ListKeyInfo_Request) (*ListKeyInfo_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListKeyInfo not implemented")
@@ -288,6 +307,24 @@ func _GnomobileService_SetPassword_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GnomobileServiceServer).SetPassword(ctx, req.(*SetPassword_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GnomobileService_GenerateRecoveryPhrase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateRecoveryPhrase_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GnomobileServiceServer).GenerateRecoveryPhrase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GnomobileService_GenerateRecoveryPhrase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GnomobileServiceServer).GenerateRecoveryPhrase(ctx, req.(*GenerateRecoveryPhrase_Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -404,6 +441,10 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetPassword",
 			Handler:    _GnomobileService_SetPassword_Handler,
+		},
+		{
+			MethodName: "GenerateRecoveryPhrase",
+			Handler:    _GnomobileService_GenerateRecoveryPhrase_Handler,
 		},
 		{
 			MethodName: "ListKeyInfo",

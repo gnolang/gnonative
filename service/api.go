@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 
+	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"go.uber.org/zap"
 
@@ -34,6 +35,23 @@ func (s *gnomobileService) SetNameOrBech32(ctx context.Context, req *rpc.SetName
 func (s *gnomobileService) SetPassword(ctx context.Context, req *rpc.SetPassword_Request) (*rpc.SetPassword_Reply, error) {
 	s.getSigner().Password = req.Password
 	return &rpc.SetPassword_Reply{}, nil
+}
+
+// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+// random number generator. This can be used as the mnemonic in CreateAccount.
+func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *rpc.GenerateRecoveryPhrase_Request) (*rpc.GenerateRecoveryPhrase_Reply, error) {
+	const mnemonicEntropySize = 256
+	entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
+	if err != nil {
+		return nil, err
+	}
+
+	phrase, err := bip39.NewMnemonic(entropySeed[:])
+	if err != nil {
+		return nil, err
+	}
+
+	return &rpc.GenerateRecoveryPhrase_Reply{Phrase: phrase}, nil
 }
 
 func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {

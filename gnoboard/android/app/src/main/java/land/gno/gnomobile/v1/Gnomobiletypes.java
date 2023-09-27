@@ -1920,6 +1920,482 @@ public final class Gnomobiletypes {
     }
   }
 
+  public interface GenerateRecoveryPhrase_RequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+      com.google.protobuf.MessageLiteOrBuilder {
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request}
+   */
+  public  static final class GenerateRecoveryPhrase_Request extends
+      com.google.protobuf.GeneratedMessageLite<
+          GenerateRecoveryPhrase_Request, GenerateRecoveryPhrase_Request.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+      GenerateRecoveryPhrase_RequestOrBuilder {
+    private GenerateRecoveryPhrase_Request() {
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+        land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_RequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request DEFAULT_INSTANCE;
+    static {
+      GenerateRecoveryPhrase_Request defaultInstance = new GenerateRecoveryPhrase_Request();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GenerateRecoveryPhrase_Request.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GenerateRecoveryPhrase_Request> PARSER;
+
+    public static com.google.protobuf.Parser<GenerateRecoveryPhrase_Request> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface GenerateRecoveryPhrase_ReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The phrase.
+     */
+    java.lang.String getPhrase();
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The bytes for phrase.
+     */
+    com.google.protobuf.ByteString
+        getPhraseBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply}
+   */
+  public  static final class GenerateRecoveryPhrase_Reply extends
+      com.google.protobuf.GeneratedMessageLite<
+          GenerateRecoveryPhrase_Reply, GenerateRecoveryPhrase_Reply.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+      GenerateRecoveryPhrase_ReplyOrBuilder {
+    private GenerateRecoveryPhrase_Reply() {
+      phrase_ = "";
+    }
+    public static final int PHRASE_FIELD_NUMBER = 1;
+    private java.lang.String phrase_;
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The phrase.
+     */
+    @java.lang.Override
+    public java.lang.String getPhrase() {
+      return phrase_;
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The bytes for phrase.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPhraseBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(phrase_);
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @param value The phrase to set.
+     */
+    private void setPhrase(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      phrase_ = value;
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     */
+    private void clearPhrase() {
+
+      phrase_ = getDefaultInstance().getPhrase();
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @param value The bytes for phrase to set.
+     */
+    private void setPhraseBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      phrase_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+        land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_ReplyOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return The phrase.
+       */
+      @java.lang.Override
+      public java.lang.String getPhrase() {
+        return instance.getPhrase();
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return The bytes for phrase.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPhraseBytes() {
+        return instance.getPhraseBytes();
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @param value The phrase to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPhrase(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPhrase(value);
+        return this;
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPhrase() {
+        copyOnWrite();
+        instance.clearPhrase();
+        return this;
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @param value The bytes for phrase to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPhraseBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPhraseBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "phrase_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply DEFAULT_INSTANCE;
+    static {
+      GenerateRecoveryPhrase_Reply defaultInstance = new GenerateRecoveryPhrase_Reply();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GenerateRecoveryPhrase_Reply.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GenerateRecoveryPhrase_Reply> PARSER;
+
+    public static com.google.protobuf.Parser<GenerateRecoveryPhrase_Reply> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface Query_RequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.Query_Request)
       com.google.protobuf.MessageLiteOrBuilder {

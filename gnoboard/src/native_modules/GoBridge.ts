@@ -13,6 +13,10 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  generateRecoveryPhrase(): Promise<string> {
+    return Promise.reject();
+  }
+
   listKeyInfo(): Promise<Array<string>> {
     return Promise.reject();
   }

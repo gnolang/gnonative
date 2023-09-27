@@ -39,6 +39,16 @@ export const setPassword = async (password: string): Promise<boolean> => {
   }
 };
 
+export const generateRecoveryPhrase = async (): Promise<string> => {
+  try {
+    const phrase = await GoBridge.generateRecoveryPhrase();
+    return phrase;
+  } catch (err: any) {
+    console.error("unable to close bridge: ", err);
+    return "";
+  }
+};
+
 export const listKeyInfo = async (): Promise<string[]> => {
   try {
     const keys = await GoBridge.listKeyInfo();

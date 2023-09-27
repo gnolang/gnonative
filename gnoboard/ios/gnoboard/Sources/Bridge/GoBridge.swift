@@ -149,6 +149,25 @@ class GoBridge: NSObject {
     }
   }
 
+  @objc func generateRecoveryPhrase(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    Task {
+      do {
+        let resp = try await client!.generateRecoveryPhrase(Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request())
+        resolve(resp.phrase)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
   @objc func listKeyInfo(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {

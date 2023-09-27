@@ -9,6 +9,7 @@ import {
   createAccount,
   initBridge,
   setPassword,
+  generateRecoveryPhrase,
   listKeyInfo,
   selectAccount,
 } from "@gno/utils/bridge";

@@ -24,6 +24,10 @@ service GnomobileService {
   // Set the password for the account in the keybase, used for later operations
   rpc SetPassword(SetPassword_Request) returns (SetPassword_Reply);
 
+  // Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+  // random number generator. This can be used as the mnemonic in CreateAccount.
+  rpc GenerateRecoveryPhrase(GenerateRecoveryPhrase_Request) returns (GenerateRecoveryPhrase_Reply);
+
   // Get the keys informations in the keybase
   rpc ListKeyInfo(ListKeyInfo.Request) returns (ListKeyInfo.Reply);
 

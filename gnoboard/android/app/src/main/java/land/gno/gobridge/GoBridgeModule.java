@@ -105,6 +105,21 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void generateRecoveryPhrase(Promise promise) {
+        Gnomobiletypes.GenerateRecoveryPhrase_Request request = Gnomobiletypes.GenerateRecoveryPhrase_Request.newBuilder()
+            .build();
+        Gnomobiletypes.GenerateRecoveryPhrase_Reply reply;
+        try {
+            reply = blockingStub.generateRecoveryPhrase(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC generateRecoveryPhrase failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(reply.getPhrase().toString());
+    }
+
+    @ReactMethod
     public void listKeyInfo(Promise promise) {
         Rpc.ListKeyInfo.Request request = Rpc.ListKeyInfo.Request.newBuilder()
             .build();

@@ -13,6 +13,9 @@ RCT_EXTERN_METHOD(setPassword:(NSString *)password
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(generateRecoveryPhrase:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 RCT_EXTERN_METHOD(listKeyInfo:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
