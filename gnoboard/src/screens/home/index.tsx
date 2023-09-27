@@ -58,7 +58,6 @@ function HomeScreen() {
       args,
       gasFee,
       gasWanted,
-      "password",
     )
       .then((data) => {
         setAppConsole(data);

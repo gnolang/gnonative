@@ -18,7 +18,6 @@ export interface GoBridgeInterface {
     args: Array<string>,
     gasFee: string,
     gasWanted: Number,
-    password: string,
   ): Promise<string>;
   exportJsonConfig(): Promise<string>;
 }

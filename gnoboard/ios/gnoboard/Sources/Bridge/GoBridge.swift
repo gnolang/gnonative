@@ -219,7 +219,7 @@ class GoBridge: NSObject {
     }
   }
 
-  @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+  @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {
         throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
@@ -240,7 +240,6 @@ class GoBridge: NSObject {
       $0.args = argArray
       $0.gasFee = gasFee as String
       $0.gasWanted = gasWanted as? Int64 ?? 0
-      $0.password = password as String
     }
     
     Task {

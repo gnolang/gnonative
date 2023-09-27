@@ -38,7 +38,6 @@ class NoopGoBridge implements GoBridgeInterface {
     _args: Array<string>,
     _gasFee: string,
     _gasWanted: Number,
-    _password: string,
   ): Promise<string> {
     return Promise.reject();
   }

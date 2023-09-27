@@ -48,7 +48,8 @@ type CallRequest struct {
 	Args      []string `json:"args" yaml:"args"`
 	GasFee    string   `json:"gas_fee" yaml:"gas_fee"`
 	GasWanted int64    `json:"gas_wanted" yaml:"gas_wanted"`
-	Password  string   `json:"password" yaml:"password"`
+	Send      string   `json:"send" yaml:"send"`
+	Memo      string   `json:"memo" yaml:"memo"`
 }
 
 type CallReply struct {

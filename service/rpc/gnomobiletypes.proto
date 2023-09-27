@@ -47,7 +47,8 @@ message Call_Request {
 	repeated string Args = 3;
 	string GasFee = 4;
 	sint64 GasWanted = 5;
-	string Password = 6;
+	string Send = 6;
+	string Memo = 7;
 }
 
 message Call_Reply {

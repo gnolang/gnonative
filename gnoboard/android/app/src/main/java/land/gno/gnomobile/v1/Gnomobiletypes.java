@@ -2644,16 +2644,28 @@ public final class Gnomobiletypes {
     long getGasWanted();
 
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The send.
      */
-    java.lang.String getPassword();
+    java.lang.String getSend();
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The bytes for password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The bytes for send.
      */
     com.google.protobuf.ByteString
-        getPasswordBytes();
+        getSendBytes();
+
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The memo.
+     */
+    java.lang.String getMemo();
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The bytes for memo.
+     */
+    com.google.protobuf.ByteString
+        getMemoBytes();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.Call_Request}
@@ -2668,7 +2680,8 @@ public final class Gnomobiletypes {
       fnc_ = "";
       args_ = com.google.protobuf.GeneratedMessageLite.emptyProtobufList();
       gasFee_ = "";
-      password_ = "";
+      send_ = "";
+      memo_ = "";
     }
     public static final int PACKAGEPATH_FIELD_NUMBER = 1;
     private java.lang.String packagePath_;
@@ -2930,50 +2943,97 @@ public final class Gnomobiletypes {
       gasWanted_ = 0L;
     }
 
-    public static final int PASSWORD_FIELD_NUMBER = 6;
-    private java.lang.String password_;
+    public static final int SEND_FIELD_NUMBER = 6;
+    private java.lang.String send_;
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The send.
      */
     @java.lang.Override
-    public java.lang.String getPassword() {
-      return password_;
+    public java.lang.String getSend() {
+      return send_;
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The bytes for password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The bytes for send.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(password_);
+        getSendBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(send_);
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @param value The password to set.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @param value The send to set.
      */
-    private void setPassword(
+    private void setSend(
         java.lang.String value) {
       java.lang.Class<?> valueClass = value.getClass();
   
-      password_ = value;
+      send_ = value;
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
+     * <code>string Send = 6 [json_name = "Send"];</code>
      */
-    private void clearPassword() {
+    private void clearSend() {
 
-      password_ = getDefaultInstance().getPassword();
+      send_ = getDefaultInstance().getSend();
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @param value The bytes for password to set.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @param value The bytes for send to set.
      */
-    private void setPasswordBytes(
+    private void setSendBytes(
         com.google.protobuf.ByteString value) {
       checkByteStringIsUtf8(value);
-      password_ = value.toStringUtf8();
+      send_ = value.toStringUtf8();
+
+    }
+
+    public static final int MEMO_FIELD_NUMBER = 7;
+    private java.lang.String memo_;
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The memo.
+     */
+    @java.lang.Override
+    public java.lang.String getMemo() {
+      return memo_;
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The bytes for memo.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMemoBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(memo_);
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @param value The memo to set.
+     */
+    private void setMemo(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      memo_ = value;
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     */
+    private void clearMemo() {
+
+      memo_ = getDefaultInstance().getMemo();
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @param value The bytes for memo to set.
+     */
+    private void setMemoBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      memo_ = value.toStringUtf8();
 
     }
 
@@ -3342,51 +3402,100 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @return The password.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @return The send.
        */
       @java.lang.Override
-      public java.lang.String getPassword() {
-        return instance.getPassword();
+      public java.lang.String getSend() {
+        return instance.getSend();
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @return The bytes for password.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @return The bytes for send.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getPasswordBytes() {
-        return instance.getPasswordBytes();
+          getSendBytes() {
+        return instance.getSendBytes();
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @param value The password to set.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @param value The send to set.
        * @return This builder for chaining.
        */
-      public Builder setPassword(
+      public Builder setSend(
           java.lang.String value) {
         copyOnWrite();
-        instance.setPassword(value);
+        instance.setSend(value);
         return this;
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
+       * <code>string Send = 6 [json_name = "Send"];</code>
        * @return This builder for chaining.
        */
-      public Builder clearPassword() {
+      public Builder clearSend() {
         copyOnWrite();
-        instance.clearPassword();
+        instance.clearSend();
         return this;
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @param value The bytes for password to set.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @param value The bytes for send to set.
        * @return This builder for chaining.
        */
-      public Builder setPasswordBytes(
+      public Builder setSendBytes(
           com.google.protobuf.ByteString value) {
         copyOnWrite();
-        instance.setPasswordBytes(value);
+        instance.setSendBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return The memo.
+       */
+      @java.lang.Override
+      public java.lang.String getMemo() {
+        return instance.getMemo();
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return The bytes for memo.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getMemoBytes() {
+        return instance.getMemoBytes();
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @param value The memo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMemo(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setMemo(value);
+        return this;
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMemo() {
+        copyOnWrite();
+        instance.clearMemo();
+        return this;
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @param value The bytes for memo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMemoBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setMemoBytes(value);
         return this;
       }
 
@@ -3411,11 +3520,12 @@ public final class Gnomobiletypes {
               "args_",
               "gasFee_",
               "gasWanted_",
-              "password_",
+              "send_",
+              "memo_",
             };
             java.lang.String info =
-                "\u0000\u0006\u0000\u0000\u0001\u0006\u0006\u0000\u0001\u0000\u0001\u0208\u0002\u0208" +
-                "\u0003\u021a\u0004\u0208\u0005\u0010\u0006\u0208";
+                "\u0000\u0007\u0000\u0000\u0001\u0007\u0007\u0000\u0001\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u021a\u0004\u0208\u0005\u0010\u0006\u0208\u0007\u0208";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }
         // fall through

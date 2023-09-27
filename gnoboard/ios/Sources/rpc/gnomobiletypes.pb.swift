@@ -150,7 +150,9 @@ public struct Land_Gno_Gnomobile_V1_Call_Request {
 
   public var gasWanted: Int64 = 0
 
-  public var password: String = String()
+  public var send: String = String()
+
+  public var memo: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -470,7 +472,8 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
     3: .same(proto: "Args"),
     4: .same(proto: "GasFee"),
     5: .same(proto: "GasWanted"),
-    6: .same(proto: "Password"),
+    6: .same(proto: "Send"),
+    7: .same(proto: "Memo"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -484,7 +487,8 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
       case 3: try { try decoder.decodeRepeatedStringField(value: &self.args) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.gasFee) }()
       case 5: try { try decoder.decodeSingularSInt64Field(value: &self.gasWanted) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.send) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.memo) }()
       default: break
       }
     }
@@ -506,8 +510,11 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
     if self.gasWanted != 0 {
       try visitor.visitSingularSInt64Field(value: self.gasWanted, fieldNumber: 5)
     }
-    if !self.password.isEmpty {
-      try visitor.visitSingularStringField(value: self.password, fieldNumber: 6)
+    if !self.send.isEmpty {
+      try visitor.visitSingularStringField(value: self.send, fieldNumber: 6)
+    }
+    if !self.memo.isEmpty {
+      try visitor.visitSingularStringField(value: self.memo, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -518,7 +525,8 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
     if lhs.args != rhs.args {return false}
     if lhs.gasFee != rhs.gasFee {return false}
     if lhs.gasWanted != rhs.gasWanted {return false}
-    if lhs.password != rhs.password {return false}
+    if lhs.send != rhs.send {return false}
+    if lhs.memo != rhs.memo {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

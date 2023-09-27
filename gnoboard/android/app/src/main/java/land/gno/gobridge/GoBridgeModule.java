@@ -168,7 +168,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, String password, Promise promise) {
+    public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, Promise promise) {
         List<String> argList = new ArrayList<>();
         for (int i = 0; i < args.size(); i++) {
             argList.add(args.getString(i));
@@ -180,7 +180,6 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .addAllArgs(argList)
             .setGasFee(gasFee)
             .setGasWanted(gasWanted)
-            .setPassword(password)
             .build();
 
         Gnomobiletypes.Call_Reply reply;
