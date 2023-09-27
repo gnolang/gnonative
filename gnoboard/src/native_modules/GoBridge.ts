@@ -9,6 +9,14 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  setPassword(_password: string): Promise<void> {
+    return Promise.reject();
+  }
+
+  generateRecoveryPhrase(): Promise<string> {
+    return Promise.reject();
+  }
+
   listKeyInfo(): Promise<Array<string>> {
     return Promise.reject();
   }
@@ -34,7 +42,6 @@ class NoopGoBridge implements GoBridgeInterface {
     _args: Array<string>,
     _gasFee: string,
     _gasWanted: Number,
-    _password: string,
   ): Promise<string> {
     return Promise.reject();
   }

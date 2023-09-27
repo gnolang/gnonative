@@ -88,6 +88,38 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setPassword(String password, Promise promise) {
+        Gnomobiletypes.SetPassword_Request request = Gnomobiletypes.SetPassword_Request.newBuilder()
+            .setPassword(password)
+            .build();
+
+        Gnomobiletypes.SetPassword_Reply reply;
+        try {
+            reply = blockingStub.setPassword(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC setPassword failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(true);
+    }
+
+    @ReactMethod
+    public void generateRecoveryPhrase(Promise promise) {
+        Gnomobiletypes.GenerateRecoveryPhrase_Request request = Gnomobiletypes.GenerateRecoveryPhrase_Request.newBuilder()
+            .build();
+        Gnomobiletypes.GenerateRecoveryPhrase_Reply reply;
+        try {
+            reply = blockingStub.generateRecoveryPhrase(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC generateRecoveryPhrase failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(reply.getPhrase().toString());
+    }
+
+    @ReactMethod
     public void listKeyInfo(Promise promise) {
         Rpc.ListKeyInfo.Request request = Rpc.ListKeyInfo.Request.newBuilder()
             .build();
@@ -151,7 +183,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, String password, Promise promise) {
+    public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, Promise promise) {
         List<String> argList = new ArrayList<>();
         for (int i = 0; i < args.size(); i++) {
             argList.add(args.getString(i));
@@ -163,7 +195,6 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .addAllArgs(argList)
             .setGasFee(gasFee)
             .setGasWanted(gasWanted)
-            .setPassword(password)
             .build();
 
         Gnomobiletypes.Call_Reply reply;

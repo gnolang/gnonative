@@ -126,6 +126,48 @@ class GoBridge: NSObject {
     }
   }
   
+  @objc func setPassword(_ password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    let req = Land_Gno_Gnomobile_V1_SetPassword_Request.with {
+      $0.password = password as String
+    }
+
+    Task {
+      do {
+        try await client!.setPassword(req)
+        resolve(true)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
+  @objc func generateRecoveryPhrase(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    Task {
+      do {
+        let resp = try await client!.generateRecoveryPhrase(Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request())
+        resolve(resp.phrase)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
   @objc func listKeyInfo(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {
@@ -196,7 +238,7 @@ class GoBridge: NSObject {
     }
   }
 
-  @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+  @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {
         throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
@@ -217,7 +259,6 @@ class GoBridge: NSObject {
       $0.args = argArray
       $0.gasFee = gasFee as String
       $0.gasWanted = gasWanted as? Int64 ?? 0
-      $0.password = password as String
     }
     
     Task {

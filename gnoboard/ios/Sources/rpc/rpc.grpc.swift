@@ -38,6 +38,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>
 
+  func generateRecoveryPhrase(
+    _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply>
+
   func listKeyInfo(
     _ request: Land_Gno_Gnomobile_V1_ListKeyInfo.Request,
     callOptions: CallOptions?
@@ -141,6 +146,25 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
+    )
+  }
+
+  /// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+  /// random number generator. This can be used as the mnemonic in CreateAccount.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GenerateRecoveryPhrase.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func generateRecoveryPhrase(
+    _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.generateRecoveryPhrase.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGenerateRecoveryPhraseInterceptors() ?? []
     )
   }
 
@@ -319,6 +343,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>
 
+  func makeGenerateRecoveryPhraseCall(
+    _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply>
+
   func makeListKeyInfoCall(
     _ request: Land_Gno_Gnomobile_V1_ListKeyInfo.Request,
     callOptions: CallOptions?
@@ -400,6 +429,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
+    )
+  }
+
+  internal func makeGenerateRecoveryPhraseCall(
+    _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.generateRecoveryPhrase.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGenerateRecoveryPhraseInterceptors() ?? []
     )
   }
 
@@ -514,6 +555,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func generateRecoveryPhrase(
+    _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.generateRecoveryPhrase.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGenerateRecoveryPhraseInterceptors() ?? []
+    )
+  }
+
   internal func listKeyInfo(
     _ request: Land_Gno_Gnomobile_V1_ListKeyInfo.Request,
     callOptions: CallOptions? = nil
@@ -606,6 +659,9 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'setPassword'.
   func makeSetPasswordInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetPassword_Request, Land_Gno_Gnomobile_V1_SetPassword_Reply>]
 
+  /// - Returns: Interceptors to use when invoking 'generateRecoveryPhrase'.
+  func makeGenerateRecoveryPhraseInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply>]
+
   /// - Returns: Interceptors to use when invoking 'listKeyInfo'.
   func makeListKeyInfoInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_ListKeyInfo.Request, Land_Gno_Gnomobile_V1_ListKeyInfo.Reply>]
 
@@ -631,6 +687,7 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setChainID,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setNameOrBech32,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.generateRecoveryPhrase,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.listKeyInfo,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.createAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.selectAccount,
@@ -661,6 +718,12 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let setPassword = GRPCMethodDescriptor(
       name: "SetPassword",
       path: "/land.gno.gnomobile.v1.GnomobileService/SetPassword",
+      type: GRPCCallType.unary
+    )
+
+    internal static let generateRecoveryPhrase = GRPCMethodDescriptor(
+      name: "GenerateRecoveryPhrase",
+      path: "/land.gno.gnomobile.v1.GnomobileService/GenerateRecoveryPhrase",
       type: GRPCCallType.unary
     )
 

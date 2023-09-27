@@ -138,6 +138,36 @@ public final class GnomobileServiceGrpc {
     return getSetPasswordMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> getGenerateRecoveryPhraseMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateRecoveryPhrase",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> getGenerateRecoveryPhraseMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request, land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> getGenerateRecoveryPhraseMethod;
+    if ((getGenerateRecoveryPhraseMethod = GnomobileServiceGrpc.getGenerateRecoveryPhraseMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getGenerateRecoveryPhraseMethod = GnomobileServiceGrpc.getGenerateRecoveryPhraseMethod) == null) {
+          GnomobileServiceGrpc.getGenerateRecoveryPhraseMethod = getGenerateRecoveryPhraseMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request, land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateRecoveryPhrase"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getGenerateRecoveryPhraseMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.ListKeyInfo.Request,
       land.gno.gnomobile.v1.Rpc.ListKeyInfo.Reply> getListKeyInfoMethod;
 
@@ -384,6 +414,17 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * </pre>
+     */
+    default void generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateRecoveryPhraseMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Get the keys informations in the keybase
      * </pre>
      */
@@ -516,6 +557,18 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * </pre>
+     */
+    public void generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGenerateRecoveryPhraseMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Get the keys informations in the keybase
      * </pre>
      */
@@ -631,6 +684,17 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetPasswordMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGenerateRecoveryPhraseMethod(), getCallOptions(), request);
     }
 
     /**
@@ -753,6 +817,18 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
+     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> generateRecoveryPhrase(
+        land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGenerateRecoveryPhraseMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Get the keys informations in the keybase
      * </pre>
      */
@@ -812,11 +888,12 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_SET_CHAIN_ID = 1;
   private static final int METHODID_SET_NAME_OR_BECH32 = 2;
   private static final int METHODID_SET_PASSWORD = 3;
-  private static final int METHODID_LIST_KEY_INFO = 4;
-  private static final int METHODID_CREATE_ACCOUNT = 5;
-  private static final int METHODID_SELECT_ACCOUNT = 6;
-  private static final int METHODID_QUERY = 7;
-  private static final int METHODID_CALL = 8;
+  private static final int METHODID_GENERATE_RECOVERY_PHRASE = 4;
+  private static final int METHODID_LIST_KEY_INFO = 5;
+  private static final int METHODID_CREATE_ACCOUNT = 6;
+  private static final int METHODID_SELECT_ACCOUNT = 7;
+  private static final int METHODID_QUERY = 8;
+  private static final int METHODID_CALL = 9;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -850,6 +927,10 @@ public final class GnomobileServiceGrpc {
         case METHODID_SET_PASSWORD:
           serviceImpl.setPassword((land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply>) responseObserver);
+          break;
+        case METHODID_GENERATE_RECOVERY_PHRASE:
+          serviceImpl.generateRecoveryPhrase((land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply>) responseObserver);
           break;
         case METHODID_LIST_KEY_INFO:
           serviceImpl.listKeyInfo((land.gno.gnomobile.v1.Rpc.ListKeyInfo.Request) request,
@@ -918,6 +999,13 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply>(
                 service, METHODID_SET_PASSWORD)))
         .addMethod(
+          getGenerateRecoveryPhraseMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply>(
+                service, METHODID_GENERATE_RECOVERY_PHRASE)))
+        .addMethod(
           getListKeyInfoMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -968,6 +1056,7 @@ public final class GnomobileServiceGrpc {
               .addMethod(getSetChainIDMethod())
               .addMethod(getSetNameOrBech32Method())
               .addMethod(getSetPasswordMethod())
+              .addMethod(getGenerateRecoveryPhraseMethod())
               .addMethod(getListKeyInfoMethod())
               .addMethod(getCreateAccountMethod())
               .addMethod(getSelectAccountMethod())

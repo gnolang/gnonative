@@ -32,6 +32,13 @@ message SetPassword_Request {
 message SetPassword_Reply {
 }
 
+message GenerateRecoveryPhrase_Request {
+}
+
+message GenerateRecoveryPhrase_Reply {
+	string Phrase = 1;
+}
+
 message Query_Request {
 	string Path = 1;
 	string Data = 2;
@@ -47,7 +54,8 @@ message Call_Request {
 	repeated string Args = 3;
 	string GasFee = 4;
 	sint64 GasWanted = 5;
-	string Password = 6;
+	string Send = 6;
+	string Memo = 7;
 }
 
 message Call_Reply {

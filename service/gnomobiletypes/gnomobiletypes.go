@@ -28,6 +28,13 @@ type SetPasswordRequest struct {
 type SetPasswordReply struct {
 }
 
+type GenerateRecoveryPhraseRequest struct {
+}
+
+type GenerateRecoveryPhraseReply struct {
+	Phrase string `json:"phrase" yaml:"phrase"`
+}
+
 type QueryRequest struct {
 	// Example: "vm/qrender"
 	Path string `json:"path" yaml:"path"`
@@ -48,7 +55,8 @@ type CallRequest struct {
 	Args      []string `json:"args" yaml:"args"`
 	GasFee    string   `json:"gas_fee" yaml:"gas_fee"`
 	GasWanted int64    `json:"gas_wanted" yaml:"gas_wanted"`
-	Password  string   `json:"password" yaml:"password"`
+	Send      string   `json:"send" yaml:"send"`
+	Memo      string   `json:"memo" yaml:"memo"`
 }
 
 type CallReply struct {

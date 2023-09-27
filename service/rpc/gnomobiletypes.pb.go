@@ -361,6 +361,91 @@ func (*SetPassword_Reply) Descriptor() ([]byte, []int) {
 	return file_gnomobiletypes_proto_rawDescGZIP(), []int{7}
 }
 
+type GenerateRecoveryPhrase_Request struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GenerateRecoveryPhrase_Request) Reset() {
+	*x = GenerateRecoveryPhrase_Request{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnomobiletypes_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GenerateRecoveryPhrase_Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateRecoveryPhrase_Request) ProtoMessage() {}
+
+func (x *GenerateRecoveryPhrase_Request) ProtoReflect() protoreflect.Message {
+	mi := &file_gnomobiletypes_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateRecoveryPhrase_Request.ProtoReflect.Descriptor instead.
+func (*GenerateRecoveryPhrase_Request) Descriptor() ([]byte, []int) {
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{8}
+}
+
+type GenerateRecoveryPhrase_Reply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Phrase string `protobuf:"bytes,1,opt,name=Phrase,proto3" json:"Phrase,omitempty"`
+}
+
+func (x *GenerateRecoveryPhrase_Reply) Reset() {
+	*x = GenerateRecoveryPhrase_Reply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnomobiletypes_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GenerateRecoveryPhrase_Reply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateRecoveryPhrase_Reply) ProtoMessage() {}
+
+func (x *GenerateRecoveryPhrase_Reply) ProtoReflect() protoreflect.Message {
+	mi := &file_gnomobiletypes_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateRecoveryPhrase_Reply.ProtoReflect.Descriptor instead.
+func (*GenerateRecoveryPhrase_Reply) Descriptor() ([]byte, []int) {
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GenerateRecoveryPhrase_Reply) GetPhrase() string {
+	if x != nil {
+		return x.Phrase
+	}
+	return ""
+}
+
 type Query_Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -373,7 +458,7 @@ type Query_Request struct {
 func (x *Query_Request) Reset() {
 	*x = Query_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnomobiletypes_proto_msgTypes[8]
+		mi := &file_gnomobiletypes_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -386,7 +471,7 @@ func (x *Query_Request) String() string {
 func (*Query_Request) ProtoMessage() {}
 
 func (x *Query_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnomobiletypes_proto_msgTypes[8]
+	mi := &file_gnomobiletypes_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -399,7 +484,7 @@ func (x *Query_Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Query_Request.ProtoReflect.Descriptor instead.
 func (*Query_Request) Descriptor() ([]byte, []int) {
-	return file_gnomobiletypes_proto_rawDescGZIP(), []int{8}
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Query_Request) GetPath() string {
@@ -427,7 +512,7 @@ type Query_Reply struct {
 func (x *Query_Reply) Reset() {
 	*x = Query_Reply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnomobiletypes_proto_msgTypes[9]
+		mi := &file_gnomobiletypes_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -440,7 +525,7 @@ func (x *Query_Reply) String() string {
 func (*Query_Reply) ProtoMessage() {}
 
 func (x *Query_Reply) ProtoReflect() protoreflect.Message {
-	mi := &file_gnomobiletypes_proto_msgTypes[9]
+	mi := &file_gnomobiletypes_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -453,7 +538,7 @@ func (x *Query_Reply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Query_Reply.ProtoReflect.Descriptor instead.
 func (*Query_Reply) Descriptor() ([]byte, []int) {
-	return file_gnomobiletypes_proto_rawDescGZIP(), []int{9}
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Query_Reply) GetResult() []byte {
@@ -473,13 +558,14 @@ type Call_Request struct {
 	Args        []string `protobuf:"bytes,3,rep,name=Args,proto3" json:"Args,omitempty"`
 	GasFee      string   `protobuf:"bytes,4,opt,name=GasFee,proto3" json:"GasFee,omitempty"`
 	GasWanted   int64    `protobuf:"zigzag64,5,opt,name=GasWanted,proto3" json:"GasWanted,omitempty"`
-	Password    string   `protobuf:"bytes,6,opt,name=Password,proto3" json:"Password,omitempty"`
+	Send        string   `protobuf:"bytes,6,opt,name=Send,proto3" json:"Send,omitempty"`
+	Memo        string   `protobuf:"bytes,7,opt,name=Memo,proto3" json:"Memo,omitempty"`
 }
 
 func (x *Call_Request) Reset() {
 	*x = Call_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnomobiletypes_proto_msgTypes[10]
+		mi := &file_gnomobiletypes_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -492,7 +578,7 @@ func (x *Call_Request) String() string {
 func (*Call_Request) ProtoMessage() {}
 
 func (x *Call_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnomobiletypes_proto_msgTypes[10]
+	mi := &file_gnomobiletypes_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -505,7 +591,7 @@ func (x *Call_Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Call_Request.ProtoReflect.Descriptor instead.
 func (*Call_Request) Descriptor() ([]byte, []int) {
-	return file_gnomobiletypes_proto_rawDescGZIP(), []int{10}
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Call_Request) GetPackagePath() string {
@@ -543,9 +629,16 @@ func (x *Call_Request) GetGasWanted() int64 {
 	return 0
 }
 
-func (x *Call_Request) GetPassword() string {
+func (x *Call_Request) GetSend() string {
 	if x != nil {
-		return x.Password
+		return x.Send
+	}
+	return ""
+}
+
+func (x *Call_Request) GetMemo() string {
+	if x != nil {
+		return x.Memo
 	}
 	return ""
 }
@@ -561,7 +654,7 @@ type Call_Reply struct {
 func (x *Call_Reply) Reset() {
 	*x = Call_Reply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnomobiletypes_proto_msgTypes[11]
+		mi := &file_gnomobiletypes_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -574,7 +667,7 @@ func (x *Call_Reply) String() string {
 func (*Call_Reply) ProtoMessage() {}
 
 func (x *Call_Reply) ProtoReflect() protoreflect.Message {
-	mi := &file_gnomobiletypes_proto_msgTypes[11]
+	mi := &file_gnomobiletypes_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -587,7 +680,7 @@ func (x *Call_Reply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Call_Reply.ProtoReflect.Descriptor instead.
 func (*Call_Reply) Descriptor() ([]byte, []int) {
-	return file_gnomobiletypes_proto_rawDescGZIP(), []int{11}
+	return file_gnomobiletypes_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Call_Reply) GetResult() []byte {
@@ -621,29 +714,35 @@ var file_gnomobiletypes_proto_rawDesc = []byte{
 	0x12, 0x1a, 0x0a, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x13, 0x0a, 0x11,
 	0x53, 0x65, 0x74, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x5f, 0x52, 0x65, 0x70, 0x6c,
-	0x79, 0x22, 0x37, 0x0a, 0x0d, 0x51, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x50, 0x61, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x50, 0x61, 0x74, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x22, 0x25, 0x0a, 0x0b, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x5f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x52, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x22, 0xa8, 0x01, 0x0a, 0x0c, 0x43, 0x61, 0x6c, 0x6c, 0x5f, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x50, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x50, 0x61, 0x74,
-	0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x50, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65,
-	0x50, 0x61, 0x74, 0x68, 0x12, 0x10, 0x0a, 0x03, 0x46, 0x6e, 0x63, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x46, 0x6e, 0x63, 0x12, 0x12, 0x0a, 0x04, 0x41, 0x72, 0x67, 0x73, 0x18, 0x03,
-	0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x41, 0x72, 0x67, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x47, 0x61,
-	0x73, 0x46, 0x65, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x47, 0x61, 0x73, 0x46,
-	0x65, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x47, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x12, 0x52, 0x09, 0x47, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64,
-	0x12, 0x1a, 0x0a, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x24, 0x0a, 0x0a,
-	0x43, 0x61, 0x6c, 0x6c, 0x5f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x52, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x42, 0x2a, 0x5a, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69,
-	0x6c, 0x65, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x72, 0x70, 0x63, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x22, 0x20, 0x0a, 0x1e, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x52, 0x65, 0x63,
+	0x6f, 0x76, 0x65, 0x72, 0x79, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x5f, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x36, 0x0a, 0x1c, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x52,
+	0x65, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x79, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x5f, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x22, 0x37, 0x0a, 0x0d, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x5f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04,
+	0x50, 0x61, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x50, 0x61, 0x74, 0x68,
+	0x12, 0x12, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x44, 0x61, 0x74, 0x61, 0x22, 0x25, 0x0a, 0x0b, 0x51, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xb4, 0x01, 0x0a, 0x0c,
+	0x43, 0x61, 0x6c, 0x6c, 0x5f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x0b,
+	0x50, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x50, 0x61, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0b, 0x50, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x50, 0x61, 0x74, 0x68, 0x12, 0x10,
+	0x0a, 0x03, 0x46, 0x6e, 0x63, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x46, 0x6e, 0x63,
+	0x12, 0x12, 0x0a, 0x04, 0x41, 0x72, 0x67, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04,
+	0x41, 0x72, 0x67, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x47, 0x61, 0x73, 0x46, 0x65, 0x65, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x47, 0x61, 0x73, 0x46, 0x65, 0x65, 0x12, 0x1c, 0x0a, 0x09,
+	0x47, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x12, 0x52,
+	0x09, 0x47, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x53, 0x65,
+	0x6e, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x53, 0x65, 0x6e, 0x64, 0x12, 0x12,
+	0x0a, 0x04, 0x4d, 0x65, 0x6d, 0x6f, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4d, 0x65,
+	0x6d, 0x6f, 0x22, 0x24, 0x0a, 0x0a, 0x43, 0x61, 0x6c, 0x6c, 0x5f, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x16, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x2a, 0x5a, 0x28, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67,
+	0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x2f, 0x72, 0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -658,20 +757,22 @@ func file_gnomobiletypes_proto_rawDescGZIP() []byte {
 	return file_gnomobiletypes_proto_rawDescData
 }
 
-var file_gnomobiletypes_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_gnomobiletypes_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_gnomobiletypes_proto_goTypes = []interface{}{
-	(*SetRemote_Request)(nil),       // 0: land.gno.gnomobile.v1.SetRemote_Request
-	(*SetRemote_Reply)(nil),         // 1: land.gno.gnomobile.v1.SetRemote_Reply
-	(*SetChainID_Request)(nil),      // 2: land.gno.gnomobile.v1.SetChainID_Request
-	(*SetChainID_Reply)(nil),        // 3: land.gno.gnomobile.v1.SetChainID_Reply
-	(*SetNameOrBech32_Request)(nil), // 4: land.gno.gnomobile.v1.SetNameOrBech32_Request
-	(*SetNameOrBech32_Reply)(nil),   // 5: land.gno.gnomobile.v1.SetNameOrBech32_Reply
-	(*SetPassword_Request)(nil),     // 6: land.gno.gnomobile.v1.SetPassword_Request
-	(*SetPassword_Reply)(nil),       // 7: land.gno.gnomobile.v1.SetPassword_Reply
-	(*Query_Request)(nil),           // 8: land.gno.gnomobile.v1.Query_Request
-	(*Query_Reply)(nil),             // 9: land.gno.gnomobile.v1.Query_Reply
-	(*Call_Request)(nil),            // 10: land.gno.gnomobile.v1.Call_Request
-	(*Call_Reply)(nil),              // 11: land.gno.gnomobile.v1.Call_Reply
+	(*SetRemote_Request)(nil),              // 0: land.gno.gnomobile.v1.SetRemote_Request
+	(*SetRemote_Reply)(nil),                // 1: land.gno.gnomobile.v1.SetRemote_Reply
+	(*SetChainID_Request)(nil),             // 2: land.gno.gnomobile.v1.SetChainID_Request
+	(*SetChainID_Reply)(nil),               // 3: land.gno.gnomobile.v1.SetChainID_Reply
+	(*SetNameOrBech32_Request)(nil),        // 4: land.gno.gnomobile.v1.SetNameOrBech32_Request
+	(*SetNameOrBech32_Reply)(nil),          // 5: land.gno.gnomobile.v1.SetNameOrBech32_Reply
+	(*SetPassword_Request)(nil),            // 6: land.gno.gnomobile.v1.SetPassword_Request
+	(*SetPassword_Reply)(nil),              // 7: land.gno.gnomobile.v1.SetPassword_Reply
+	(*GenerateRecoveryPhrase_Request)(nil), // 8: land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request
+	(*GenerateRecoveryPhrase_Reply)(nil),   // 9: land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply
+	(*Query_Request)(nil),                  // 10: land.gno.gnomobile.v1.Query_Request
+	(*Query_Reply)(nil),                    // 11: land.gno.gnomobile.v1.Query_Reply
+	(*Call_Request)(nil),                   // 12: land.gno.gnomobile.v1.Call_Request
+	(*Call_Reply)(nil),                     // 13: land.gno.gnomobile.v1.Call_Reply
 }
 var file_gnomobiletypes_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -784,7 +885,7 @@ func file_gnomobiletypes_proto_init() {
 			}
 		}
 		file_gnomobiletypes_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Query_Request); i {
+			switch v := v.(*GenerateRecoveryPhrase_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -796,7 +897,7 @@ func file_gnomobiletypes_proto_init() {
 			}
 		}
 		file_gnomobiletypes_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Query_Reply); i {
+			switch v := v.(*GenerateRecoveryPhrase_Reply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -808,7 +909,7 @@ func file_gnomobiletypes_proto_init() {
 			}
 		}
 		file_gnomobiletypes_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Call_Request); i {
+			switch v := v.(*Query_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -820,6 +921,30 @@ func file_gnomobiletypes_proto_init() {
 			}
 		}
 		file_gnomobiletypes_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Query_Reply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnomobiletypes_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Call_Request); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnomobiletypes_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Call_Reply); i {
 			case 0:
 				return &v.state
@@ -838,7 +963,7 @@ func file_gnomobiletypes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_gnomobiletypes_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

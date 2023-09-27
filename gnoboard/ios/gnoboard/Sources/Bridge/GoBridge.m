@@ -9,6 +9,13 @@ RCT_EXTERN_METHOD(initBridge:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(closeBridge:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(setPassword:(NSString *)password
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
+RCT_EXTERN_METHOD(generateRecoveryPhrase:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 RCT_EXTERN_METHOD(listKeyInfo:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
@@ -30,7 +37,6 @@ RCT_EXTERN_METHOD(call:(NSString *)packagePath
                   args:(NSArray *)args
                   gasFee:(NSString *)gasFee
                   gasWanted:(nonnull NSNumber *)gasWanted
-                  password:(NSString *)password
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 

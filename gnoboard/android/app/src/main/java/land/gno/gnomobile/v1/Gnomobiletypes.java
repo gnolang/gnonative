@@ -1920,6 +1920,482 @@ public final class Gnomobiletypes {
     }
   }
 
+  public interface GenerateRecoveryPhrase_RequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+      com.google.protobuf.MessageLiteOrBuilder {
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request}
+   */
+  public  static final class GenerateRecoveryPhrase_Request extends
+      com.google.protobuf.GeneratedMessageLite<
+          GenerateRecoveryPhrase_Request, GenerateRecoveryPhrase_Request.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+      GenerateRecoveryPhrase_RequestOrBuilder {
+    private GenerateRecoveryPhrase_Request() {
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+        land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_RequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request DEFAULT_INSTANCE;
+    static {
+      GenerateRecoveryPhrase_Request defaultInstance = new GenerateRecoveryPhrase_Request();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GenerateRecoveryPhrase_Request.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GenerateRecoveryPhrase_Request> PARSER;
+
+    public static com.google.protobuf.Parser<GenerateRecoveryPhrase_Request> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface GenerateRecoveryPhrase_ReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The phrase.
+     */
+    java.lang.String getPhrase();
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The bytes for phrase.
+     */
+    com.google.protobuf.ByteString
+        getPhraseBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply}
+   */
+  public  static final class GenerateRecoveryPhrase_Reply extends
+      com.google.protobuf.GeneratedMessageLite<
+          GenerateRecoveryPhrase_Reply, GenerateRecoveryPhrase_Reply.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+      GenerateRecoveryPhrase_ReplyOrBuilder {
+    private GenerateRecoveryPhrase_Reply() {
+      phrase_ = "";
+    }
+    public static final int PHRASE_FIELD_NUMBER = 1;
+    private java.lang.String phrase_;
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The phrase.
+     */
+    @java.lang.Override
+    public java.lang.String getPhrase() {
+      return phrase_;
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @return The bytes for phrase.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPhraseBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(phrase_);
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @param value The phrase to set.
+     */
+    private void setPhrase(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      phrase_ = value;
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     */
+    private void clearPhrase() {
+
+      phrase_ = getDefaultInstance().getPhrase();
+    }
+    /**
+     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * @param value The bytes for phrase to set.
+     */
+    private void setPhraseBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      phrase_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+        land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_ReplyOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return The phrase.
+       */
+      @java.lang.Override
+      public java.lang.String getPhrase() {
+        return instance.getPhrase();
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return The bytes for phrase.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPhraseBytes() {
+        return instance.getPhraseBytes();
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @param value The phrase to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPhrase(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPhrase(value);
+        return this;
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPhrase() {
+        copyOnWrite();
+        instance.clearPhrase();
+        return this;
+      }
+      /**
+       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * @param value The bytes for phrase to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPhraseBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPhraseBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "phrase_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply DEFAULT_INSTANCE;
+    static {
+      GenerateRecoveryPhrase_Reply defaultInstance = new GenerateRecoveryPhrase_Reply();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GenerateRecoveryPhrase_Reply.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GenerateRecoveryPhrase_Reply> PARSER;
+
+    public static com.google.protobuf.Parser<GenerateRecoveryPhrase_Reply> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface Query_RequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.Query_Request)
       com.google.protobuf.MessageLiteOrBuilder {
@@ -2644,16 +3120,28 @@ public final class Gnomobiletypes {
     long getGasWanted();
 
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The send.
      */
-    java.lang.String getPassword();
+    java.lang.String getSend();
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The bytes for password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The bytes for send.
      */
     com.google.protobuf.ByteString
-        getPasswordBytes();
+        getSendBytes();
+
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The memo.
+     */
+    java.lang.String getMemo();
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The bytes for memo.
+     */
+    com.google.protobuf.ByteString
+        getMemoBytes();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.Call_Request}
@@ -2668,7 +3156,8 @@ public final class Gnomobiletypes {
       fnc_ = "";
       args_ = com.google.protobuf.GeneratedMessageLite.emptyProtobufList();
       gasFee_ = "";
-      password_ = "";
+      send_ = "";
+      memo_ = "";
     }
     public static final int PACKAGEPATH_FIELD_NUMBER = 1;
     private java.lang.String packagePath_;
@@ -2930,50 +3419,97 @@ public final class Gnomobiletypes {
       gasWanted_ = 0L;
     }
 
-    public static final int PASSWORD_FIELD_NUMBER = 6;
-    private java.lang.String password_;
+    public static final int SEND_FIELD_NUMBER = 6;
+    private java.lang.String send_;
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The send.
      */
     @java.lang.Override
-    public java.lang.String getPassword() {
-      return password_;
+    public java.lang.String getSend() {
+      return send_;
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @return The bytes for password.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @return The bytes for send.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(password_);
+        getSendBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(send_);
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @param value The password to set.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @param value The send to set.
      */
-    private void setPassword(
+    private void setSend(
         java.lang.String value) {
       java.lang.Class<?> valueClass = value.getClass();
   
-      password_ = value;
+      send_ = value;
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
+     * <code>string Send = 6 [json_name = "Send"];</code>
      */
-    private void clearPassword() {
+    private void clearSend() {
 
-      password_ = getDefaultInstance().getPassword();
+      send_ = getDefaultInstance().getSend();
     }
     /**
-     * <code>string Password = 6 [json_name = "Password"];</code>
-     * @param value The bytes for password to set.
+     * <code>string Send = 6 [json_name = "Send"];</code>
+     * @param value The bytes for send to set.
      */
-    private void setPasswordBytes(
+    private void setSendBytes(
         com.google.protobuf.ByteString value) {
       checkByteStringIsUtf8(value);
-      password_ = value.toStringUtf8();
+      send_ = value.toStringUtf8();
+
+    }
+
+    public static final int MEMO_FIELD_NUMBER = 7;
+    private java.lang.String memo_;
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The memo.
+     */
+    @java.lang.Override
+    public java.lang.String getMemo() {
+      return memo_;
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @return The bytes for memo.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMemoBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(memo_);
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @param value The memo to set.
+     */
+    private void setMemo(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      memo_ = value;
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     */
+    private void clearMemo() {
+
+      memo_ = getDefaultInstance().getMemo();
+    }
+    /**
+     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * @param value The bytes for memo to set.
+     */
+    private void setMemoBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      memo_ = value.toStringUtf8();
 
     }
 
@@ -3342,51 +3878,100 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @return The password.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @return The send.
        */
       @java.lang.Override
-      public java.lang.String getPassword() {
-        return instance.getPassword();
+      public java.lang.String getSend() {
+        return instance.getSend();
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @return The bytes for password.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @return The bytes for send.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getPasswordBytes() {
-        return instance.getPasswordBytes();
+          getSendBytes() {
+        return instance.getSendBytes();
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @param value The password to set.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @param value The send to set.
        * @return This builder for chaining.
        */
-      public Builder setPassword(
+      public Builder setSend(
           java.lang.String value) {
         copyOnWrite();
-        instance.setPassword(value);
+        instance.setSend(value);
         return this;
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
+       * <code>string Send = 6 [json_name = "Send"];</code>
        * @return This builder for chaining.
        */
-      public Builder clearPassword() {
+      public Builder clearSend() {
         copyOnWrite();
-        instance.clearPassword();
+        instance.clearSend();
         return this;
       }
       /**
-       * <code>string Password = 6 [json_name = "Password"];</code>
-       * @param value The bytes for password to set.
+       * <code>string Send = 6 [json_name = "Send"];</code>
+       * @param value The bytes for send to set.
        * @return This builder for chaining.
        */
-      public Builder setPasswordBytes(
+      public Builder setSendBytes(
           com.google.protobuf.ByteString value) {
         copyOnWrite();
-        instance.setPasswordBytes(value);
+        instance.setSendBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return The memo.
+       */
+      @java.lang.Override
+      public java.lang.String getMemo() {
+        return instance.getMemo();
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return The bytes for memo.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getMemoBytes() {
+        return instance.getMemoBytes();
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @param value The memo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMemo(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setMemo(value);
+        return this;
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMemo() {
+        copyOnWrite();
+        instance.clearMemo();
+        return this;
+      }
+      /**
+       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * @param value The bytes for memo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMemoBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setMemoBytes(value);
         return this;
       }
 
@@ -3411,11 +3996,12 @@ public final class Gnomobiletypes {
               "args_",
               "gasFee_",
               "gasWanted_",
-              "password_",
+              "send_",
+              "memo_",
             };
             java.lang.String info =
-                "\u0000\u0006\u0000\u0000\u0001\u0006\u0006\u0000\u0001\u0000\u0001\u0208\u0002\u0208" +
-                "\u0003\u021a\u0004\u0208\u0005\u0010\u0006\u0208";
+                "\u0000\u0007\u0000\u0000\u0001\u0007\u0007\u0000\u0001\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u021a\u0004\u0208\u0005\u0010\u0006\u0208\u0007\u0208";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }
         // fall through
