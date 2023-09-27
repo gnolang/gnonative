@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"sync"
 
+	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gnomobile/gnoclient"
 	"github.com/gnolang/gnomobile/service/rpc"
@@ -84,13 +85,17 @@ func initService(opts ...GnomobileOption) (*gnomobileService, error) {
 		return nil, err
 	}
 
-	svc.client = gnoclient.NewClient(gnoclient.Opts{
-		Remote:  svc.remote,
+	kb, _ := keys.NewKeyBaseFromDir(svc.rootDir)
+	signer := &gnoclient.SignerFromKeybase{
+		Keybase: kb,
 		ChainID: svc.chainID,
-	})
+	}
 
-	if err := svc.client.InitKeyBaseFromDir(svc.rootDir); err != nil {
-		return nil, err
+	rpcClient := rpcclient.NewHTTP(svc.remote, "/websocket")
+
+	svc.client = &gnoclient.Client{
+		Signer:    signer,
+		RPCClient: rpcClient,
 	}
 
 	return svc, nil
@@ -106,6 +111,16 @@ func (s *gnomobileService) applyOptions(opts ...GnomobileOption) error {
 		}
 	}
 	return nil
+}
+
+// Get s.client.Signer as a SignerFromKeybase.
+func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
+	signer, ok := s.client.Signer.(*gnoclient.SignerFromKeybase)
+	if !ok {
+		// We only set s.client.Signer in initService, so this shouldn't happen.
+		panic("signer is not gnoclient.SignerFromKeybase")
+	}
+	return signer
 }
 
 func (s *gnomobileService) checkDirs() error {
