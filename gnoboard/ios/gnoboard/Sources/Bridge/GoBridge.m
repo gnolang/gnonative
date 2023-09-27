@@ -9,6 +9,10 @@ RCT_EXTERN_METHOD(initBridge:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(closeBridge:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(setPassword:(NSString *)password
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 RCT_EXTERN_METHOD(listKeyInfo:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 

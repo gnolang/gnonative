@@ -126,6 +126,29 @@ class GoBridge: NSObject {
     }
   }
   
+  @objc func setPassword(_ password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+    }
+
+    let req = Land_Gno_Gnomobile_V1_SetPassword_Request.with {
+      $0.password = password as String
+    }
+
+    Task {
+      do {
+        try await client!.setPassword(req)
+        resolve(true)
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
   @objc func listKeyInfo(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {

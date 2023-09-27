@@ -9,6 +9,10 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  setPassword(_password: string): Promise<void> {
+    return Promise.reject();
+  }
+
   listKeyInfo(): Promise<Array<string>> {
     return Promise.reject();
   }

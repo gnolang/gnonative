@@ -8,6 +8,7 @@ import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   createAccount,
   initBridge,
+  setPassword,
   listKeyInfo,
   selectAccount,
 } from "@gno/utils/bridge";
@@ -21,17 +22,19 @@ function HomeScreen() {
     const init = async () => {
       await initBridge();
       let listKey = await listKeyInfo();
+      let password = "password"
       if (listKey.length === 0) {
         await createAccount(
           "jefft0",
           "enable until hover project know foam join table educate room better scrub clever powder virus army pitch ranch fix try cupboard scatter dune fee",
           "",
-          "password",
+          password,
           0,
           0,
         );
       }
       await selectAccount("jefft0");
+      await setPassword(password);
     };
     init();
 

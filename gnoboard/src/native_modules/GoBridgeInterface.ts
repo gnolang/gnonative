@@ -1,6 +1,7 @@
 export interface GoBridgeInterface {
   initBridge(): Promise<void>;
   closeBridge(): Promise<void>;
+  setPassword(password: string): Promise<void>;
   listKeyInfo(): Promise<Array<string>>;
   createAccount(
     nameOrBech32: string,

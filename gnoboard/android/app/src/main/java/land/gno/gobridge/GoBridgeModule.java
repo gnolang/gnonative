@@ -88,6 +88,23 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setPassword(String password, Promise promise) {
+        Gnomobiletypes.SetPassword_Request request = Gnomobiletypes.SetPassword_Request.newBuilder()
+            .setPassword(password)
+            .build();
+
+        Gnomobiletypes.SetPassword_Reply reply;
+        try {
+            reply = blockingStub.setPassword(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC setPassword failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(true);
+    }
+
+    @ReactMethod
     public void listKeyInfo(Promise promise) {
         Rpc.ListKeyInfo.Request request = Rpc.ListKeyInfo.Request.newBuilder()
             .build();

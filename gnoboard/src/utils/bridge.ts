@@ -29,6 +29,16 @@ export const closeBridge = async (): Promise<boolean> => {
   }
 };
 
+export const setPassword = async (password: string): Promise<boolean> => {
+  try {
+    await GoBridge.setPassword(password);
+    return true;
+  } catch (err: any) {
+    console.error("unable to close bridge: ", err);
+    return false;
+  }
+};
+
 export const listKeyInfo = async (): Promise<string[]> => {
   try {
     const keys = await GoBridge.listKeyInfo();
