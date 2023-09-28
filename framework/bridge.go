@@ -63,7 +63,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		svcOpts = append(svcOpts,
 			service.WithRootDir(config.RootDir),
 			service.WithTmpDir(config.TmpDir),
-			service.WithTcpListener(config.UseTcpListener),
+			service.WithUseTcpListener(config.UseTcpListener),
 		)
 
 		serviceServer, err := service.NewGnomobileService(svcOpts...)
