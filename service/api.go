@@ -87,7 +87,7 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *rpc.ListKeyInfo
 		return nil, err
 	}
 
-	formatedKeys := make([]*rpc.KeyInfo, len(keys))
+	formatedKeys := make([]*rpc.KeyInfo, 0)
 
 	for _, key := range keys {
 		info, err := convertKeyInfo(key)
