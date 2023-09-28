@@ -30,17 +30,11 @@ type GnomobileService interface {
 }
 
 type gnomobileService struct {
-	logger         *zap.Logger
-	client         *gnoclient.Client
-	rootDir        string
-	tmpDir         string
-	tcpPort        int
-	useTcpListener bool
-	socketPath     string
-	lock           sync.RWMutex
-
-	remote  string
-	chainID string
+	logger     *zap.Logger
+	client     *gnoclient.Client
+	tcpPort    int
+	socketPath string
+	lock       sync.RWMutex
 
 	activeAccount keys.Info
 
@@ -53,17 +47,22 @@ type gnomobileService struct {
 var _ GnomobileService = (*gnomobileService)(nil)
 
 func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
-	svc, err := initService(opts...)
+	cfg := &Config{}
+	if err := cfg.applyOptions(append(opts, WithFallbackDefaults)...); err != nil {
+		return nil, err
+	}
+
+	svc, err := initService(cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	if svc.useTcpListener {
+	if cfg.UseTcpListener {
 		if err := svc.createTcpListener(); err != nil {
 			return nil, err
 		}
 	} else {
-		if err := svc.createUDSListener(); err != nil {
+		if err := svc.createUDSListener(cfg); err != nil {
 			return nil, err
 		}
 	}
@@ -75,23 +74,23 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	return svc, nil
 }
 
-func initService(opts ...GnomobileOption) (*gnomobileService, error) {
-	svc := &gnomobileService{}
-	if err := svc.applyOptions(opts...); err != nil {
+func initService(cfg *Config) (*gnomobileService, error) {
+	svc := &gnomobileService{
+		logger:  cfg.Logger,
+		tcpPort: cfg.TcpPort,
+	}
+
+	if err := cfg.checkDirs(); err != nil {
 		return nil, err
 	}
 
-	if err := svc.checkDirs(); err != nil {
-		return nil, err
-	}
-
-	kb, _ := keys.NewKeyBaseFromDir(svc.rootDir)
+	kb, _ := keys.NewKeyBaseFromDir(cfg.RootDir)
 	signer := &gnoclient.SignerFromKeybase{
 		Keybase: kb,
-		ChainID: svc.chainID,
+		ChainID: cfg.ChainID,
 	}
 
-	rpcClient := rpcclient.NewHTTP(svc.remote, "/websocket")
+	rpcClient := rpcclient.NewHTTP(cfg.Remote, "/websocket")
 
 	svc.client = &gnoclient.Client{
 		Signer:    signer,
@@ -101,12 +100,12 @@ func initService(opts ...GnomobileOption) (*gnomobileService, error) {
 	return svc, nil
 }
 
-func (s *gnomobileService) applyOptions(opts ...GnomobileOption) error {
+func (cfg *Config) applyOptions(opts ...GnomobileOption) error {
 	withDefaultOpts := make([]GnomobileOption, len(opts))
 	copy(withDefaultOpts, opts)
 	withDefaultOpts = append(withDefaultOpts, WithFallbackDefaults)
 	for _, opt := range withDefaultOpts {
-		if err := opt(s); err != nil {
+		if err := opt(cfg); err != nil {
 			return err
 		}
 	}
@@ -123,10 +122,10 @@ func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
 	return signer
 }
 
-func (s *gnomobileService) checkDirs() error {
+func (cfg *Config) checkDirs() error {
 	// check if rootDir exists
 	{
-		_, err := os.Stat(s.rootDir)
+		_, err := os.Stat(cfg.RootDir)
 		if os.IsNotExist(err) {
 			return errors.Wrap(err, "rootDir folder doesn't exist")
 		}
@@ -134,7 +133,7 @@ func (s *gnomobileService) checkDirs() error {
 
 	// check if tmpDir exists
 	{
-		_, err := os.Stat(s.tmpDir)
+		_, err := os.Stat(cfg.TmpDir)
 		if os.IsNotExist(err) {
 			return errors.Wrap(err, "tmpDir folder doesn't exist")
 		}
@@ -143,9 +142,9 @@ func (s *gnomobileService) checkDirs() error {
 	return nil
 }
 
-func (s *gnomobileService) createUDSListener() error {
+func (s *gnomobileService) createUDSListener(cfg *Config) error {
 	// create a socket subdirectory
-	sockDir := filepath.Join(s.tmpDir, SOCKET_SUBDIR)
+	sockDir := filepath.Join(cfg.TmpDir, SOCKET_SUBDIR)
 	if err := os.MkdirAll(sockDir, 0700); err != nil {
 		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
@@ -233,11 +232,22 @@ func (s *gnomobileService) Close() error {
 	return nil
 }
 
-type GnomobileOption func(*gnomobileService) error
+// Config describes a set of settings for a GnomobileService
+type Config struct {
+	Logger         *zap.Logger
+	Remote         string
+	ChainID        string
+	RootDir        string
+	TmpDir         string
+	TcpPort        int
+	UseTcpListener bool
+}
 
-// FallBackOption is a structure that permit to fallback to a default option if the option is not set.
+type GnomobileOption func(cfg *Config) error
+
+// FallBackOption is a structure that permits to fallback to a default option if the option is not set.
 type FallBackOption struct {
-	fallback func(s *gnomobileService) bool
+	fallback func(cfg *Config) bool
 	opt      GnomobileOption
 }
 
@@ -245,182 +255,182 @@ type FallBackOption struct {
 
 // WithLogger set the given logger.
 var WithLogger = func(l *zap.Logger) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.logger = l
+	return func(cfg *Config) error {
+		cfg.Logger = l
 		return nil
 	}
 }
 
 // WithDefaultLogger init a noop logger.
-var WithDefaultLogger GnomobileOption = func(s *gnomobileService) error {
+var WithDefaultLogger GnomobileOption = func(cfg *Config) error {
 	logger, err := zap.NewDevelopment()
 	if err != nil {
 		return err
 	}
 
-	s.logger = logger
+	cfg.Logger = logger
 
 	return nil
 }
 
 var fallbackLogger = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.logger == nil },
+	fallback: func(cfg *Config) bool { return cfg.Logger == nil },
 	opt:      WithDefaultLogger,
 }
 
-// WithFallbackLogger set the logger if no logger is set.
-var WithFallbackLogger GnomobileOption = func(s *gnomobileService) error {
-	if fallbackLogger.fallback(s) {
-		return fallbackLogger.opt(s)
+// WithFallbackLogger sets the logger if no logger is set.
+var WithFallbackLogger GnomobileOption = func(cfg *Config) error {
+	if fallbackLogger.fallback(cfg) {
+		return fallbackLogger.opt(cfg)
 	}
 	return nil
 }
 
 // --- Remote options ---
 
-// WithRemote set the given remote node address.
+// WithRemote sets the given remote node address.
 var WithRemote = func(remote string) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.remote = remote
+	return func(cfg *Config) error {
+		cfg.Remote = remote
 		return nil
 	}
 }
 
-// WithDefaultRemote init a default remote node address.
-var WithDefaultRemote GnomobileOption = func(s *gnomobileService) error {
-	s.remote = "testnet.gno.berty.io:26657"
+// WithDefaultRemote inits a default remote node address.
+var WithDefaultRemote GnomobileOption = func(cfg *Config) error {
+	cfg.Remote = "testnet.gno.berty.io:26657"
 	return nil
 }
 
 var fallbackRemote = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.remote == "" },
+	fallback: func(cfg *Config) bool { return cfg.Remote == "" },
 	opt:      WithDefaultRemote,
 }
 
-// WithFallbackRemote set the remote node address if no address is set.
-var WithFallbacRemote GnomobileOption = func(s *gnomobileService) error {
-	if fallbackRemote.fallback(s) {
-		return fallbackRemote.opt(s)
+// WithFallbackRemote sets the remote node address if no address is set.
+var WithFallbacRemote GnomobileOption = func(cfg *Config) error {
+	if fallbackRemote.fallback(cfg) {
+		return fallbackRemote.opt(cfg)
 	}
 	return nil
 }
 
 // --- ChainID options ---
 
-// WithChainID set the given chain ID.
+// WithChainID sets the given chain ID.
 var WithChainID = func(chainID string) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.chainID = chainID
+	return func(cfg *Config) error {
+		cfg.ChainID = chainID
 		return nil
 	}
 }
 
-// WithDefaultChainID set a default chain ID.
-var WithDefaultChainID GnomobileOption = func(s *gnomobileService) error {
-	s.chainID = "dev"
+// WithDefaultChainID sets a default chain ID.
+var WithDefaultChainID GnomobileOption = func(cfg *Config) error {
+	cfg.ChainID = "dev"
 
 	return nil
 }
 
 var fallbackChainID = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.chainID == "" },
+	fallback: func(cfg *Config) bool { return cfg.ChainID == "" },
 	opt:      WithDefaultChainID,
 }
 
-// WithFallbackChainID set the chain ID if no chain ID is set.
-var WithFallbacChainID GnomobileOption = func(s *gnomobileService) error {
-	if fallbackChainID.fallback(s) {
-		return fallbackChainID.opt(s)
+// WithFallbackChainID sets the chain ID if no chain ID is set.
+var WithFallbacChainID GnomobileOption = func(cfg *Config) error {
+	if fallbackChainID.fallback(cfg) {
+		return fallbackChainID.opt(cfg)
 	}
 	return nil
 }
 
 // --- RootDir options ---
 
-// WithRootDir set the given root directory path.
+// WithRootDir sets the given root directory path.
 var WithRootDir = func(rootDir string) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.rootDir = rootDir
+	return func(cfg *Config) error {
+		cfg.RootDir = rootDir
 		return nil
 	}
 }
 
-// WithDefaultRootDir set a default root directory in a temporary folder.
-var WithDefaultRootDir GnomobileOption = func(s *gnomobileService) error {
+// WithDefaultRootDir sets a default root directory in a temporary folder.
+var WithDefaultRootDir GnomobileOption = func(cfg *Config) error {
 	rootDir, err := os.MkdirTemp("", "gnomobile")
 	if err != nil {
 		return err
 	}
 
-	s.rootDir = rootDir
+	cfg.RootDir = rootDir
 
 	return nil
 }
 
 var fallbackRootDir = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.rootDir == "" },
+	fallback: func(cfg *Config) bool { return cfg.RootDir == "" },
 	opt:      WithDefaultRootDir,
 }
 
-// WithFallbackRootDir set the default root directory if no directory is set.
-var WithFallbackRootDir GnomobileOption = func(s *gnomobileService) error {
-	if fallbackRootDir.fallback(s) {
-		return fallbackRootDir.opt(s)
+// WithFallbackRootDir sets the default root directory if no directory is set.
+var WithFallbackRootDir GnomobileOption = func(cfg *Config) error {
+	if fallbackRootDir.fallback(cfg) {
+		return fallbackRootDir.opt(cfg)
 	}
 	return nil
 }
 
 // --- tmpDir options ---
 
-// WithTmpDir set the given temporary path.
+// WithTmpDir sets the given temporary path.
 var WithTmpDir = func(path string) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.tmpDir = path
+	return func(cfg *Config) error {
+		cfg.TmpDir = path
 		return nil
 	}
 }
 
-// WithDefaultTmpDir set a default temporary path.
-var WithDefaultTmpDir GnomobileOption = func(s *gnomobileService) error {
+// WithDefaultTmpDir sets a default temporary path.
+var WithDefaultTmpDir GnomobileOption = func(cfg *Config) error {
 	// dependency
-	if err := WithFallbackRootDir(s); err != nil {
+	if err := WithFallbackRootDir(cfg); err != nil {
 		return err
 	}
 
-	s.tmpDir = s.rootDir
+	cfg.TmpDir = cfg.RootDir
 
 	return nil
 }
 
 var fallbackTmpDir = FallBackOption{
-	fallback: func(s *gnomobileService) bool { return s.tmpDir == "" },
+	fallback: func(cfg *Config) bool { return cfg.TmpDir == "" },
 	opt:      WithDefaultTmpDir,
 }
 
-// WithFallbackTmpDir set the default temporary path if no path is set.
-var WithFallbackTmpDir GnomobileOption = func(s *gnomobileService) error {
-	if fallbackTmpDir.fallback(s) {
-		return fallbackTmpDir.opt(s)
+// WithFallbackTmpDir sets the default temporary path if no path is set.
+var WithFallbackTmpDir GnomobileOption = func(cfg *Config) error {
+	if fallbackTmpDir.fallback(cfg) {
+		return fallbackTmpDir.opt(cfg)
 	}
 	return nil
 }
 
 // --- tcpPort options ---
 
-// WithTcpPort set the given tcp port to serve the gRPC server.
+// WithTcpPort sets the given tcp port to serve the gRPC server.
 var WithTcpPort = func(port int) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.tcpPort = port
+	return func(cfg *Config) error {
+		cfg.TcpPort = port
 		return nil
 	}
 }
 
 // --- useTcpListener options ---
 
-// WithTcpListener set the given tcp port to serve the gRPC server.
-var WithTcpListener = func(choice bool) GnomobileOption {
-	return func(s *gnomobileService) error {
-		s.useTcpListener = choice
+// WithUseTcpListener sets the given tcp port to serve the gRPC server.
+var WithUseTcpListener = func(choice bool) GnomobileOption {
+	return func(cfg *Config) error {
+		cfg.UseTcpListener = choice
 		return nil
 	}
 }
@@ -435,13 +445,13 @@ var defaults = []FallBackOption{
 	fallbackTmpDir,
 }
 
-// WithFallbackDefaults set the default options if no option is set.
-var WithFallbackDefaults GnomobileOption = func(s *gnomobileService) error {
+// WithFallbackDefaults sets the default options if no option is set.
+var WithFallbackDefaults GnomobileOption = func(cfg *Config) error {
 	for _, def := range defaults {
-		if !def.fallback(s) {
+		if !def.fallback(cfg) {
 			continue
 		}
-		if err := def.opt(s); err != nil {
+		if err := def.opt(cfg); err != nil {
 			return err
 		}
 	}
