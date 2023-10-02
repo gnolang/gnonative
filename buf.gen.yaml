@@ -3,7 +3,7 @@ plugins:
   - plugin: buf.build/protocolbuffers/go
     out: ./
     opt: module=github.com/gnolang/gnomobile
-  - plugin: buf.build/grpc/go
+  - plugin: buf.build/connectrpc/go
     out: ./
     opt: module=github.com/gnolang/gnomobile
   - plugin: buf.build/grpc/java:v1.57.2
@@ -21,7 +21,5 @@ plugins:
     opt: Visibility=Public
   - plugin: buf.build/bufbuild/es
     out: gnoboard/src/api
-    opt: target=ts
   - plugin: buf.build/connectrpc/es
     out: gnoboard/src/api
-    opt: target=ts

@@ -348,6 +348,36 @@ public final class GnomobileServiceGrpc {
     return getCallMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest,
+      land.gno.gnomobile.v1.Rpc.HelloReply> getHelloMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Hello",
+      requestType = land.gno.gnomobile.v1.Rpc.HelloRequest.class,
+      responseType = land.gno.gnomobile.v1.Rpc.HelloReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest,
+      land.gno.gnomobile.v1.Rpc.HelloReply> getHelloMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest, land.gno.gnomobile.v1.Rpc.HelloReply> getHelloMethod;
+    if ((getHelloMethod = GnomobileServiceGrpc.getHelloMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getHelloMethod = GnomobileServiceGrpc.getHelloMethod) == null) {
+          GnomobileServiceGrpc.getHelloMethod = getHelloMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.HelloRequest, land.gno.gnomobile.v1.Rpc.HelloReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Hello"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Rpc.HelloRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Rpc.HelloReply.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getHelloMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -444,8 +474,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
+     * crypto library random number generator. This can be used as the mnemonic in
+     * CreateAccount.
      * </pre>
      */
     default void generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request,
@@ -488,7 +519,8 @@ public final class GnomobileServiceGrpc {
      * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
-     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * (To check if there is an active account, use ListKeyInfo and check the
+     * length of the result.)
      * </pre>
      */
     default void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request,
@@ -514,6 +546,16 @@ public final class GnomobileServiceGrpc {
     default void call(land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCallMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Hello is for debug purposes
+     * </pre>
+     */
+    default void hello(land.gno.gnomobile.v1.Rpc.HelloRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHelloMethod(), responseObserver);
     }
   }
 
@@ -599,8 +641,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
+     * crypto library random number generator. This can be used as the mnemonic in
+     * CreateAccount.
      * </pre>
      */
     public void generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request,
@@ -647,7 +690,8 @@ public final class GnomobileServiceGrpc {
      * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
-     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * (To check if there is an active account, use ListKeyInfo and check the
+     * length of the result.)
      * </pre>
      */
     public void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request,
@@ -676,6 +720,17 @@ public final class GnomobileServiceGrpc {
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCallMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Hello is for debug purposes
+     * </pre>
+     */
+    public void hello(land.gno.gnomobile.v1.Rpc.HelloRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloReply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getHelloMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -743,8 +798,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
+     * crypto library random number generator. This can be used as the mnemonic in
+     * CreateAccount.
      * </pre>
      */
     public land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply generateRecoveryPhrase(land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Request request) {
@@ -787,7 +843,8 @@ public final class GnomobileServiceGrpc {
      * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
-     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * (To check if there is an active account, use ListKeyInfo and check the
+     * length of the result.)
      * </pre>
      */
     public land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request) {
@@ -813,6 +870,16 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply call(land.gno.gnomobile.v1.Gnomobiletypes.Call_Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCallMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Hello is for debug purposes
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Rpc.HelloReply hello(land.gno.gnomobile.v1.Rpc.HelloRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getHelloMethod(), getCallOptions(), request);
     }
   }
 
@@ -884,8 +951,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-     * random number generator. This can be used as the mnemonic in CreateAccount.
+     * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
+     * crypto library random number generator. This can be used as the mnemonic in
+     * CreateAccount.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhrase_Reply> generateRecoveryPhrase(
@@ -932,7 +1000,8 @@ public final class GnomobileServiceGrpc {
      * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
-     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * (To check if there is an active account, use ListKeyInfo and check the
+     * length of the result.)
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> getActiveAccount(
@@ -962,6 +1031,17 @@ public final class GnomobileServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCallMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Hello is for debug purposes
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.HelloReply> hello(
+        land.gno.gnomobile.v1.Rpc.HelloRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getHelloMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SET_REMOTE = 0;
@@ -975,6 +1055,7 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_GET_ACTIVE_ACCOUNT = 8;
   private static final int METHODID_QUERY = 9;
   private static final int METHODID_CALL = 10;
+  private static final int METHODID_HELLO = 11;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1036,6 +1117,10 @@ public final class GnomobileServiceGrpc {
         case METHODID_CALL:
           serviceImpl.call((land.gno.gnomobile.v1.Gnomobiletypes.Call_Request) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply>) responseObserver);
+          break;
+        case METHODID_HELLO:
+          serviceImpl.hello((land.gno.gnomobile.v1.Rpc.HelloRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1132,6 +1217,13 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.Call_Request,
               land.gno.gnomobile.v1.Gnomobiletypes.Call_Reply>(
                 service, METHODID_CALL)))
+        .addMethod(
+          getHelloMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Rpc.HelloRequest,
+              land.gno.gnomobile.v1.Rpc.HelloReply>(
+                service, METHODID_HELLO)))
         .build();
   }
 
@@ -1155,6 +1247,7 @@ public final class GnomobileServiceGrpc {
               .addMethod(getGetActiveAccountMethod())
               .addMethod(getQueryMethod())
               .addMethod(getCallMethod())
+              .addMethod(getHelloMethod())
               .build();
         }
       }
