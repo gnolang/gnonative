@@ -13,6 +13,7 @@ export interface GoBridgeInterface {
     index: Number,
   ): Promise<Object>;
   selectAccount(nameOrBech32: string): Promise<Object>;
+  getActiveAccount(): Promise<Object>;
   call(
     packagePath: string,
     fnc: string,

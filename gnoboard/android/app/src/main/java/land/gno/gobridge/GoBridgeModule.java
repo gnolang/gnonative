@@ -185,6 +185,21 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getActiveAccount(Promise promise) {
+        Rpc.GetActiveAccount.Request request = Rpc.GetActiveAccount.Request.newBuilder()
+            .build();
+        Rpc.GetActiveAccount.Reply reply;
+        try {
+            reply = blockingStub.getActiveAccount(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC getActiveAccount failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(convertKeyInfo(reply.getKey()));
+    }
+
+    @ReactMethod
     public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, Promise promise) {
         List<String> argList = new ArrayList<>();
         for (int i = 0; i < args.size(); i++) {

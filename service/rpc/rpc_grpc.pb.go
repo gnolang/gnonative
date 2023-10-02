@@ -27,6 +27,7 @@ const (
 	GnomobileService_ListKeyInfo_FullMethodName            = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
 	GnomobileService_CreateAccount_FullMethodName          = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
 	GnomobileService_SelectAccount_FullMethodName          = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
+	GnomobileService_GetActiveAccount_FullMethodName       = "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount"
 	GnomobileService_Query_FullMethodName                  = "/land.gno.gnomobile.v1.GnomobileService/Query"
 	GnomobileService_Call_FullMethodName                   = "/land.gno.gnomobile.v1.GnomobileService/Call"
 )
@@ -56,6 +57,10 @@ type GnomobileServiceClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(ctx context.Context, in *SelectAccount_Request, opts ...grpc.CallOption) (*SelectAccount_Reply, error)
+	// GetActiveAccount gets the active account which was set by SelectAccount.
+	// If there is no active account, then return ErrNoActiveAccount.
+	// (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+	GetActiveAccount(ctx context.Context, in *GetActiveAccount_Request, opts ...grpc.CallOption) (*GetActiveAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error)
 	// Call a specific realm function.
@@ -142,6 +147,15 @@ func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, in *SelectAc
 	return out, nil
 }
 
+func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, in *GetActiveAccount_Request, opts ...grpc.CallOption) (*GetActiveAccount_Reply, error) {
+	out := new(GetActiveAccount_Reply)
+	err := c.cc.Invoke(ctx, GnomobileService_GetActiveAccount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gnomobileServiceClient) Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error) {
 	out := new(Query_Reply)
 	err := c.cc.Invoke(ctx, GnomobileService_Query_FullMethodName, in, out, opts...)
@@ -185,6 +199,10 @@ type GnomobileServiceServer interface {
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error)
+	// GetActiveAccount gets the active account which was set by SelectAccount.
+	// If there is no active account, then return ErrNoActiveAccount.
+	// (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+	GetActiveAccount(context.Context, *GetActiveAccount_Request) (*GetActiveAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *Query_Request) (*Query_Reply, error)
 	// Call a specific realm function.
@@ -219,6 +237,9 @@ func (UnimplementedGnomobileServiceServer) CreateAccount(context.Context, *Creat
 }
 func (UnimplementedGnomobileServiceServer) SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SelectAccount not implemented")
+}
+func (UnimplementedGnomobileServiceServer) GetActiveAccount(context.Context, *GetActiveAccount_Request) (*GetActiveAccount_Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetActiveAccount not implemented")
 }
 func (UnimplementedGnomobileServiceServer) Query(context.Context, *Query_Request) (*Query_Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Query not implemented")
@@ -383,6 +404,24 @@ func _GnomobileService_SelectAccount_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GnomobileService_GetActiveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveAccount_Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GnomobileServiceServer).GetActiveAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GnomobileService_GetActiveAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GnomobileServiceServer).GetActiveAccount(ctx, req.(*GetActiveAccount_Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GnomobileService_Query_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Query_Request)
 	if err := dec(in); err != nil {
@@ -457,6 +496,10 @@ var GnomobileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SelectAccount",
 			Handler:    _GnomobileService_SelectAccount_Handler,
+		},
+		{
+			MethodName: "GetActiveAccount",
+			Handler:    _GnomobileService_GetActiveAccount_Handler,
 		},
 		{
 			MethodName: "Query",

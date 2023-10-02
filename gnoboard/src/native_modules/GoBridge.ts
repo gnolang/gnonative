@@ -36,6 +36,10 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  getActiveAccount(): Promise<Object> {
+    return Promise.reject();
+  }
+
   call(
     _packagePath: string,
     _fnc: string,

@@ -63,3 +63,7 @@ export const createAccount = async (
 export const selectAccount = async (nameOrBech32: string): Promise<Object> => {
   return await GoBridge.selectAccount(nameOrBech32);
 };
+
+export const getActiveAccount = async (): Promise<Object> => {
+  return await GoBridge.getActiveAccount();
+};

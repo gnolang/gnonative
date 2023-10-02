@@ -140,6 +140,26 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *rpc.SelectAcc
 	return &rpc.SelectAccount_Reply{Key: info}, nil
 }
 
+// GetActiveAccount gets the active account which was set by SelectAccount
+func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *rpc.GetActiveAccount_Request) (*rpc.GetActiveAccount_Reply, error) {
+	s.logger.Debug("GetActiveAccount called")
+
+	s.lock.Lock()
+	key := s.activeAccount
+	s.lock.Unlock()
+
+	if key == nil {
+		return nil, rpc.ErrCode_ErrNoActiveAccount
+	}
+
+	info, err := convertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return &rpc.GetActiveAccount_Reply{Key: info}, nil
+}
+
 // Make an ABCI query to the remote node.
 func (s *gnomobileService) Query(ctx context.Context, req *rpc.Query_Request) (*rpc.Query_Reply, error) {
 	return &rpc.Query_Reply{}, nil

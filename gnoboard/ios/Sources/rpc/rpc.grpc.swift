@@ -58,6 +58,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>
 
+  func getActiveAccount(
+    _ request: Land_Gno_Gnomobile_V1_GetActiveAccount.Request,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccount.Request, Land_Gno_Gnomobile_V1_GetActiveAccount.Reply>
+
   func query(
     _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions?
@@ -223,6 +228,26 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
+  /// GetActiveAccount gets the active account which was set by SelectAccount.
+  /// If there is no active account, then return ErrNoActiveAccount.
+  /// (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetActiveAccount.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getActiveAccount(
+    _ request: Land_Gno_Gnomobile_V1_GetActiveAccount.Request,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccount.Request, Land_Gno_Gnomobile_V1_GetActiveAccount.Reply> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
   /// Make an ABCI query to the remote node.
   ///
   /// - Parameters:
@@ -363,6 +388,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>
 
+  func makeGetActiveAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_GetActiveAccount.Request,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccount.Request, Land_Gno_Gnomobile_V1_GetActiveAccount.Reply>
+
   func makeQueryCall(
     _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions?
@@ -477,6 +507,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSelectAccountInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetActiveAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_GetActiveAccount.Request,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccount.Request, Land_Gno_Gnomobile_V1_GetActiveAccount.Reply> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
     )
   }
 
@@ -603,6 +645,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func getActiveAccount(
+    _ request: Land_Gno_Gnomobile_V1_GetActiveAccount.Request,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_GetActiveAccount.Reply {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
   internal func query(
     _ request: Land_Gno_Gnomobile_V1_Query_Request,
     callOptions: CallOptions? = nil
@@ -671,6 +725,9 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'selectAccount'.
   func makeSelectAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SelectAccount.Request, Land_Gno_Gnomobile_V1_SelectAccount.Reply>]
 
+  /// - Returns: Interceptors to use when invoking 'getActiveAccount'.
+  func makeGetActiveAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_GetActiveAccount.Request, Land_Gno_Gnomobile_V1_GetActiveAccount.Reply>]
+
   /// - Returns: Interceptors to use when invoking 'query'.
   func makeQueryInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Query_Request, Land_Gno_Gnomobile_V1_Query_Reply>]
 
@@ -691,6 +748,7 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.listKeyInfo,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.createAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.selectAccount,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call,
     ]
@@ -742,6 +800,12 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let selectAccount = GRPCMethodDescriptor(
       name: "SelectAccount",
       path: "/land.gno.gnomobile.v1.GnomobileService/SelectAccount",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getActiveAccount = GRPCMethodDescriptor(
+      name: "GetActiveAccount",
+      path: "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount",
       type: GRPCCallType.unary
     )
 
