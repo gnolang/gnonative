@@ -3,7 +3,7 @@ export interface GoBridgeInterface {
   closeBridge(): Promise<void>;
   setPassword(password: string): Promise<void>;
   generateRecoveryPhrase(): Promise<string>;
-  listKeyInfo(): Promise<Array<string>>;
+  listKeyInfo(): Promise<Array<Object>>;
   createAccount(
     nameOrBech32: string,
     mnemonic: string,
@@ -11,8 +11,9 @@ export interface GoBridgeInterface {
     password: string,
     account: Number,
     index: Number,
-  ): Promise<string>;
-  selectAccount(nameOrBech32: string): Promise<string>;
+  ): Promise<Object>;
+  selectAccount(nameOrBech32: string): Promise<Object>;
+  getActiveAccount(): Promise<Object>;
   call(
     packagePath: string,
     fnc: string,

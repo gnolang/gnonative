@@ -29,34 +29,16 @@ export const closeBridge = async (): Promise<boolean> => {
   }
 };
 
-export const setPassword = async (password: string): Promise<boolean> => {
-  try {
-    await GoBridge.setPassword(password);
-    return true;
-  } catch (err: any) {
-    console.error("unable to close bridge: ", err);
-    return false;
-  }
+export const setPassword = async (password: string): Promise<void> => {
+  return await GoBridge.setPassword(password);
 };
 
 export const generateRecoveryPhrase = async (): Promise<string> => {
-  try {
-    const phrase = await GoBridge.generateRecoveryPhrase();
-    return phrase;
-  } catch (err: any) {
-    console.error("unable to close bridge: ", err);
-    return "";
-  }
+  return await GoBridge.generateRecoveryPhrase();
 };
 
-export const listKeyInfo = async (): Promise<string[]> => {
-  try {
-    const keys = await GoBridge.listKeyInfo();
-    return keys;
-  } catch (err: any) {
-    console.error("unable to list keys: ", err);
-    return [];
-  }
+export const listKeyInfo = async (): Promise<Object[]> => {
+  return await GoBridge.listKeyInfo();
 };
 
 export const createAccount = async (
@@ -66,29 +48,21 @@ export const createAccount = async (
   password: string,
   account: Number,
   index: Number,
-): Promise<string> => {
-  try {
-    const addr = await GoBridge.createAccount(
-      nameOrBech32,
-      mnemonic,
-      bip39Passw,
-      password,
-      account,
-      index,
-    );
-    return addr;
-  } catch (err: any) {
-    console.error("unable to close bridge: ", err);
-    return "";
-  }
+): Promise<Object> => {
+  return await GoBridge.createAccount(
+    nameOrBech32,
+    mnemonic,
+    bip39Passw,
+    password,
+    account,
+    index,
+  );
 };
 
-export const selectAccount = async (nameOrBech32: string): Promise<string> => {
-  try {
-    const addr = await GoBridge.selectAccount(nameOrBech32);
-    return addr;
-  } catch (err: any) {
-    console.error("unable to close bridge: ", err);
-    return "";
-  }
+export const selectAccount = async (nameOrBech32: string): Promise<Object> => {
+  return await GoBridge.selectAccount(nameOrBech32);
+};
+
+export const getActiveAccount = async (): Promise<Object> => {
+  return await GoBridge.getActiveAccount();
 };

@@ -118,7 +118,7 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *rpc.CreateAcc
 	return &rpc.CreateAccount_Reply{Key: info}, nil
 }
 
-// SelectAccount selects the account to use for later operations
+// SelectAccount selects the active account to use for later operations
 func (s *gnomobileService) SelectAccount(ctx context.Context, req *rpc.SelectAccount_Request) (*rpc.SelectAccount_Reply, error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.NameOrBech32))
 
@@ -138,6 +138,26 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *rpc.SelectAcc
 
 	s.getSigner().Account = req.NameOrBech32
 	return &rpc.SelectAccount_Reply{Key: info}, nil
+}
+
+// GetActiveAccount gets the active account which was set by SelectAccount
+func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *rpc.GetActiveAccount_Request) (*rpc.GetActiveAccount_Reply, error) {
+	s.logger.Debug("GetActiveAccount called")
+
+	s.lock.Lock()
+	key := s.activeAccount
+	s.lock.Unlock()
+
+	if key == nil {
+		return nil, rpc.ErrCode_ErrNoActiveAccount
+	}
+
+	info, err := convertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return &rpc.GetActiveAccount_Reply{Key: info}, nil
 }
 
 // Make an ABCI query to the remote node.

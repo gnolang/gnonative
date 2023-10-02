@@ -258,6 +258,36 @@ public final class GnomobileServiceGrpc {
     return getSelectAccountMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request,
+      land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> getGetActiveAccountMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetActiveAccount",
+      requestType = land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request.class,
+      responseType = land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request,
+      land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> getGetActiveAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request, land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> getGetActiveAccountMethod;
+    if ((getGetActiveAccountMethod = GnomobileServiceGrpc.getGetActiveAccountMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getGetActiveAccountMethod = GnomobileServiceGrpc.getGetActiveAccountMethod) == null) {
+          GnomobileServiceGrpc.getGetActiveAccountMethod = getGetActiveAccountMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request, land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetActiveAccount"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getGetActiveAccountMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.Query_Request,
       land.gno.gnomobile.v1.Gnomobiletypes.Query_Reply> getQueryMethod;
 
@@ -446,12 +476,24 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     default void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSelectAccountMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * GetActiveAccount gets the active account which was set by SelectAccount.
+     * If there is no active account, then return ErrNoActiveAccount.
+     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * </pre>
+     */
+    default void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetActiveAccountMethod(), responseObserver);
     }
 
     /**
@@ -592,13 +634,26 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSelectAccountMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * GetActiveAccount gets the active account which was set by SelectAccount.
+     * If there is no active account, then return ErrNoActiveAccount.
+     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * </pre>
+     */
+    public void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -720,12 +775,24 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public land.gno.gnomobile.v1.Rpc.SelectAccount.Reply selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSelectAccountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * GetActiveAccount gets the active account which was set by SelectAccount.
+     * If there is no active account, then return ErrNoActiveAccount.
+     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetActiveAccountMethod(), getCallOptions(), request);
     }
 
     /**
@@ -852,13 +919,26 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply> selectAccount(
         land.gno.gnomobile.v1.Rpc.SelectAccount.Request request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSelectAccountMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * GetActiveAccount gets the active account which was set by SelectAccount.
+     * If there is no active account, then return ErrNoActiveAccount.
+     * (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply> getActiveAccount(
+        land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request);
     }
 
     /**
@@ -892,8 +972,9 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_LIST_KEY_INFO = 5;
   private static final int METHODID_CREATE_ACCOUNT = 6;
   private static final int METHODID_SELECT_ACCOUNT = 7;
-  private static final int METHODID_QUERY = 8;
-  private static final int METHODID_CALL = 9;
+  private static final int METHODID_GET_ACTIVE_ACCOUNT = 8;
+  private static final int METHODID_QUERY = 9;
+  private static final int METHODID_CALL = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -943,6 +1024,10 @@ public final class GnomobileServiceGrpc {
         case METHODID_SELECT_ACCOUNT:
           serviceImpl.selectAccount((land.gno.gnomobile.v1.Rpc.SelectAccount.Request) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply>) responseObserver);
+          break;
+        case METHODID_GET_ACTIVE_ACCOUNT:
+          serviceImpl.getActiveAccount((land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply>) responseObserver);
           break;
         case METHODID_QUERY:
           serviceImpl.query((land.gno.gnomobile.v1.Gnomobiletypes.Query_Request) request,
@@ -1027,6 +1112,13 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Rpc.SelectAccount.Reply>(
                 service, METHODID_SELECT_ACCOUNT)))
         .addMethod(
+          getGetActiveAccountMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Rpc.GetActiveAccount.Request,
+              land.gno.gnomobile.v1.Rpc.GetActiveAccount.Reply>(
+                service, METHODID_GET_ACTIVE_ACCOUNT)))
+        .addMethod(
           getQueryMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1060,6 +1152,7 @@ public final class GnomobileServiceGrpc {
               .addMethod(getListKeyInfoMethod())
               .addMethod(getCreateAccountMethod())
               .addMethod(getSelectAccountMethod())
+              .addMethod(getGetActiveAccountMethod())
               .addMethod(getQueryMethod())
               .addMethod(getCallMethod())
               .build();

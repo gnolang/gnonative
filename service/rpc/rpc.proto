@@ -35,8 +35,13 @@ service GnomobileService {
   // SetAccount
   rpc CreateAccount(CreateAccount.Request) returns (CreateAccount.Reply);
 
-  // SelectAccount selects the account to use for later operations
+  // SelectAccount selects the active account to use for later operations
   rpc SelectAccount(SelectAccount.Request) returns (SelectAccount.Reply);
+
+  // GetActiveAccount gets the active account which was set by SelectAccount.
+  // If there is no active account, then return ErrNoActiveAccount.
+  // (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+  rpc GetActiveAccount(GetActiveAccount.Request) returns (GetActiveAccount.Reply);
 
   // Make an ABCI query to the remote node.
   rpc Query(Query_Request) returns (Query_Reply);
@@ -57,7 +62,6 @@ message KeyInfo {
   string name = 2;
   bytes pubKey = 3;
   bytes address = 4;
-  bytes path = 5;
 }
 
 message ListKeyInfo {
@@ -79,6 +83,11 @@ message CreateAccount {
 
 message SelectAccount {
   message Request { string nameOrBech32 = 1; }
+  message Reply { KeyInfo key = 1; }
+}
+
+message GetActiveAccount {
+  message Request {}
   message Reply { KeyInfo key = 1; }
 }
 

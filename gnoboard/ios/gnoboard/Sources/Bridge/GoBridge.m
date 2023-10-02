@@ -32,6 +32,9 @@ RCT_EXTERN_METHOD(selectAccount:(NSString *)nameOrBech32
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(getActiveAccount:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 RCT_EXTERN_METHOD(call:(NSString *)packagePath
                   fnc:(NSString *)fnc
                   args:(NSArray *)args
