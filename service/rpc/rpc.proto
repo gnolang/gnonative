@@ -35,7 +35,7 @@ service GnomobileService {
   // SetAccount
   rpc CreateAccount(CreateAccount.Request) returns (CreateAccount.Reply);
 
-  // SelectAccount selects the account to use for later operations
+  // SelectAccount selects the active account to use for later operations
   rpc SelectAccount(SelectAccount.Request) returns (SelectAccount.Reply);
 
   // Make an ABCI query to the remote node.
@@ -57,7 +57,6 @@ message KeyInfo {
   string name = 2;
   bytes pubKey = 3;
   bytes address = 4;
-  bytes path = 5;
 }
 
 message ListKeyInfo {

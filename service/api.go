@@ -118,7 +118,7 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *rpc.CreateAcc
 	return &rpc.CreateAccount_Reply{Key: info}, nil
 }
 
-// SelectAccount selects the account to use for later operations
+// SelectAccount selects the active account to use for later operations
 func (s *gnomobileService) SelectAccount(ctx context.Context, req *rpc.SelectAccount_Request) (*rpc.SelectAccount_Reply, error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.NameOrBech32))
 

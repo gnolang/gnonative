@@ -205,7 +205,7 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// SelectAccount selects the account to use for later operations
+  /// SelectAccount selects the active account to use for later operations
   ///
   /// - Parameters:
   ///   - request: Request to send to SelectAccount.

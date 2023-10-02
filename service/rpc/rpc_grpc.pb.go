@@ -54,7 +54,7 @@ type GnomobileServiceClient interface {
 	// Create a new account the keybase using the name an password specified by
 	// SetAccount
 	CreateAccount(ctx context.Context, in *CreateAccount_Request, opts ...grpc.CallOption) (*CreateAccount_Reply, error)
-	// SelectAccount selects the account to use for later operations
+	// SelectAccount selects the active account to use for later operations
 	SelectAccount(ctx context.Context, in *SelectAccount_Request, opts ...grpc.CallOption) (*SelectAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(ctx context.Context, in *Query_Request, opts ...grpc.CallOption) (*Query_Reply, error)
@@ -183,7 +183,7 @@ type GnomobileServiceServer interface {
 	// Create a new account the keybase using the name an password specified by
 	// SetAccount
 	CreateAccount(context.Context, *CreateAccount_Request) (*CreateAccount_Reply, error)
-	// SelectAccount selects the account to use for later operations
+	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *SelectAccount_Request) (*SelectAccount_Reply, error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *Query_Request) (*Query_Reply, error)

@@ -38,7 +38,7 @@ export const generateRecoveryPhrase = async (): Promise<string> => {
   return await GoBridge.generateRecoveryPhrase();
 };
 
-export const listKeyInfo = async (): Promise<string[]> => {
+export const listKeyInfo = async (): Promise<Object[]> => {
   return await GoBridge.listKeyInfo();
 };
 
@@ -49,7 +49,7 @@ export const createAccount = async (
   password: string,
   account: Number,
   index: Number,
-): Promise<string> => {
+): Promise<Object> => {
   return await GoBridge.createAccount(
     nameOrBech32,
     mnemonic,
@@ -60,6 +60,6 @@ export const createAccount = async (
   );
 };
 
-export const selectAccount = async (nameOrBech32: string): Promise<string> => {
+export const selectAccount = async (nameOrBech32: string): Promise<Object> => {
   return await GoBridge.selectAccount(nameOrBech32);
 };

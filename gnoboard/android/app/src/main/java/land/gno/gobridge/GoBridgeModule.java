@@ -9,9 +9,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 
 import java.io.File;
 import java.util.ArrayList;
+import android.util.Base64 ;
 import java.util.List;
 
 import gnolang.gno.gnomobile.Gnomobile;
@@ -25,6 +27,7 @@ import io.grpc.StatusRuntimeException;
 import land.gno.gnomobile.v1.GnomobileServiceGrpc;
 import land.gno.gnomobile.v1.Rpc;
 import land.gno.gnomobile.v1.Gnomobiletypes;
+import land.gno.gnomobile.v1.Rpc.KeyInfo;
 import land.gno.udschannel.UdsChannelBuilder;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
@@ -135,7 +138,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
         List<Rpc.KeyInfo> listKey = reply.getKeysList();
         WritableArray promiseArray= Arguments.createArray();
         for(int i=0;i<listKey.size();i++){
-            promiseArray.pushString(listKey.get(i).getName());
+            promiseArray.pushMap(convertKeyInfo(listKey.get(i)));
         }
 
         promise.resolve(promiseArray);
@@ -161,8 +164,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        // TODO: send the whole Key struct
-        promise.resolve(reply.getKey().getAddress().toString());
+        promise.resolve(convertKeyInfo(reply.getKey()));
     }
 
     @ReactMethod
@@ -179,7 +181,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             promise.reject(e);
             return;
         }
-        promise.resolve(reply.getKey().getAddress().toString());
+        promise.resolve(convertKeyInfo(reply.getKey()));
     }
 
     @ReactMethod
@@ -216,6 +218,18 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
         } catch (Exception err) {
             promise.reject(err);
         }
+    }
+
+    /**
+     * Convert the gRPC type KeyInfo into a WritableMap for passing to ReactNative.
+     */
+    public static WritableMap convertKeyInfo(KeyInfo keyInfo) {
+        WritableMap map = Arguments.createMap();
+        map.putInt("type", keyInfo.getType().getNumber());
+        map.putString("name", keyInfo.getName());
+        map.putString("address_b64", Base64.encodeToString(keyInfo.getAddress().toByteArray(), Base64.NO_WRAP));
+        map.putString("pubKey_b64", Base64.encodeToString(keyInfo.getPubKey().toByteArray(), Base64.NO_WRAP));
+        return map;
     }
 
     @Override

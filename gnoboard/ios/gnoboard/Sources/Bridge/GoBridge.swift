@@ -77,7 +77,7 @@ class GoBridge: NSObject {
       config.tmpDir = self.tmpDir
 
       // On simulator we can't create an UDS, see comment below
-		      #if targetEnvironment(simulator)
+      #if targetEnvironment(simulator)
       config.useTcpListener = true
       #endif
       
@@ -180,7 +180,11 @@ class GoBridge: NSObject {
     Task {
       do {
         let resp = try await client!.listKeyInfo(Land_Gno_Gnomobile_V1_ListKeyInfo.Request())
-        resolve(resp.keys as NSArray)
+        var list = [NSDictionary]()
+        for keyInfo in resp.keys {
+          list.append(GoBridge.convertKeyInfo(keyInfo))
+        }
+        resolve(list as NSArray)
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
       }
@@ -208,7 +212,7 @@ class GoBridge: NSObject {
     Task {
       do {
         let resp = try await client!.createAccount(req)
-        resolve(resp.key.address)
+        resolve(GoBridge.convertKeyInfo(resp.key))
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
       }
@@ -231,7 +235,7 @@ class GoBridge: NSObject {
     Task {
       do {
         let resp = try await client!.selectAccount(req)
-        resolve(resp.key.address)
+        resolve(GoBridge.convertKeyInfo(resp.key))
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
       }
@@ -294,5 +298,17 @@ class GoBridge: NSObject {
     } catch let error as NSError {
       self.logger.error("\(String(describing: error.code))")
     }
+  }
+  
+  /**
+   * Convert the gRPC type KeyInfo into an NSDictionary for passing to ReactNative.
+   */
+  public static func convertKeyInfo(_ keyInfo: Land_Gno_Gnomobile_V1_KeyInfo) -> NSDictionary {
+    let dict: NSMutableDictionary = [:]
+    dict["type"] = keyInfo.type.rawValue;
+    dict["name"] = keyInfo.name;
+    dict["address_b64"] = keyInfo.address.base64EncodedString()
+    dict["pubKey_b64"] = keyInfo.pubKey.base64EncodedString();
+    return dict;
   }
 }

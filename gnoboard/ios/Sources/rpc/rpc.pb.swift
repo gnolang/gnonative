@@ -176,8 +176,6 @@ public struct Land_Gno_Gnomobile_V1_KeyInfo {
 
   public var address: Data = Data()
 
-  public var path: Data = Data()
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -377,7 +375,6 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
     2: .same(proto: "name"),
     3: .same(proto: "pubKey"),
     4: .same(proto: "address"),
-    5: .same(proto: "path"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -390,7 +387,6 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
       case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self.pubKey) }()
       case 4: try { try decoder.decodeSingularBytesField(value: &self.address) }()
-      case 5: try { try decoder.decodeSingularBytesField(value: &self.path) }()
       default: break
       }
     }
@@ -409,9 +405,6 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.address.isEmpty {
       try visitor.visitSingularBytesField(value: self.address, fieldNumber: 4)
     }
-    if !self.path.isEmpty {
-      try visitor.visitSingularBytesField(value: self.path, fieldNumber: 5)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -420,7 +413,6 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.name != rhs.name {return false}
     if lhs.pubKey != rhs.pubKey {return false}
     if lhs.address != rhs.address {return false}
-    if lhs.path != rhs.path {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

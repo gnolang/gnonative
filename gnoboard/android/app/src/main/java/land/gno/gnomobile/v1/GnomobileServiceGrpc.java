@@ -446,7 +446,7 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     default void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request,
@@ -592,7 +592,7 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request,
@@ -720,7 +720,7 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public land.gno.gnomobile.v1.Rpc.SelectAccount.Reply selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccount.Request request) {
@@ -852,7 +852,7 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * SelectAccount selects the account to use for later operations
+     * SelectAccount selects the active account to use for later operations
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SelectAccount.Reply> selectAccount(

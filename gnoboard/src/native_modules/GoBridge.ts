@@ -17,7 +17,7 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
-  listKeyInfo(): Promise<Array<string>> {
+  listKeyInfo(): Promise<Array<Object>> {
     return Promise.reject();
   }
 
@@ -28,11 +28,11 @@ class NoopGoBridge implements GoBridgeInterface {
     _password: string,
     _account: Number,
     _index: Number,
-  ): Promise<string> {
+  ): Promise<Object> {
     return Promise.reject();
   }
 
-  selectAccount(_nameOrBech32: string): Promise<string> {
+  selectAccount(_nameOrBech32: string): Promise<Object> {
     return Promise.reject();
   }
 

@@ -379,12 +379,6 @@ public final class Rpc {
      * @return The address.
      */
     com.google.protobuf.ByteString getAddress();
-
-    /**
-     * <code>bytes path = 5 [json_name = "path"];</code>
-     * @return The path.
-     */
-    com.google.protobuf.ByteString getPath();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.KeyInfo}
@@ -398,7 +392,6 @@ public final class Rpc {
       name_ = "";
       pubKey_ = com.google.protobuf.ByteString.EMPTY;
       address_ = com.google.protobuf.ByteString.EMPTY;
-      path_ = com.google.protobuf.ByteString.EMPTY;
     }
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_;
@@ -541,33 +534,6 @@ public final class Rpc {
     private void clearAddress() {
 
       address_ = getDefaultInstance().getAddress();
-    }
-
-    public static final int PATH_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString path_;
-    /**
-     * <code>bytes path = 5 [json_name = "path"];</code>
-     * @return The path.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString getPath() {
-      return path_;
-    }
-    /**
-     * <code>bytes path = 5 [json_name = "path"];</code>
-     * @param value The path to set.
-     */
-    private void setPath(com.google.protobuf.ByteString value) {
-      java.lang.Class<?> valueClass = value.getClass();
-  
-      path_ = value;
-    }
-    /**
-     * <code>bytes path = 5 [json_name = "path"];</code>
-     */
-    private void clearPath() {
-
-      path_ = getDefaultInstance().getPath();
     }
 
     public static land.gno.gnomobile.v1.Rpc.KeyInfo parseFrom(
@@ -818,34 +784,6 @@ public final class Rpc {
         return this;
       }
 
-      /**
-       * <code>bytes path = 5 [json_name = "path"];</code>
-       * @return The path.
-       */
-      @java.lang.Override
-      public com.google.protobuf.ByteString getPath() {
-        return instance.getPath();
-      }
-      /**
-       * <code>bytes path = 5 [json_name = "path"];</code>
-       * @param value The path to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPath(com.google.protobuf.ByteString value) {
-        copyOnWrite();
-        instance.setPath(value);
-        return this;
-      }
-      /**
-       * <code>bytes path = 5 [json_name = "path"];</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPath() {
-        copyOnWrite();
-        instance.clearPath();
-        return this;
-      }
-
       // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.KeyInfo)
     }
     @java.lang.Override
@@ -866,11 +804,10 @@ public final class Rpc {
               "name_",
               "pubKey_",
               "address_",
-              "path_",
             };
             java.lang.String info =
-                "\u0000\u0005\u0000\u0000\u0001\u0005\u0005\u0000\u0000\u0000\u0001\f\u0002\u0208" +
-                "\u0003\n\u0004\n\u0005\n";
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0000\u0000\u0001\f\u0002\u0208" +
+                "\u0003\n\u0004\n";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }
         // fall through
