@@ -29,9 +29,8 @@ export const closeBridge = async (): Promise<boolean> => {
   }
 };
 
-export const setPassword = async (password: string): Promise<boolean> => {
-  await GoBridge.setPassword(password);
-  return true;
+export const setPassword = async (password: string): Promise<void> => {
+  return await GoBridge.setPassword(password);
 };
 
 export const generateRecoveryPhrase = async (): Promise<string> => {
