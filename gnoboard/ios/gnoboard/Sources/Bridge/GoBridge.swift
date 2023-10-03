@@ -133,6 +133,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_SetPassword_Request.with {
@@ -156,6 +157,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     Task {
@@ -175,6 +177,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     Task {
@@ -198,6 +201,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
@@ -226,6 +230,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
@@ -249,6 +254,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
     
     Task {
@@ -268,6 +274,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
     
     var argArray: [String] = []
