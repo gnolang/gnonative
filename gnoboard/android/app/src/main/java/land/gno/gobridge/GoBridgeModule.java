@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.google.protobuf.ByteString;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -197,6 +198,24 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             return;
         }
         promise.resolve(convertKeyInfo(reply.getKey()));
+    }
+
+    @ReactMethod
+    public void query(String path, String data_b64, Promise promise) {
+        Gnomobiletypes.Query_Request request = Gnomobiletypes.Query_Request.newBuilder()
+            .setPath(path)
+            .setData(ByteString.copyFrom(Base64.decode(data_b64, Base64.DEFAULT)))
+            .build();
+
+        Gnomobiletypes.Query_Reply reply;
+        try {
+            reply = blockingStub.query(request);
+        } catch (StatusRuntimeException e) {
+            Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
+            promise.reject(e);
+            return;
+        }
+        promise.resolve(Base64.encodeToString(reply.getResult().toByteArray(), Base64.NO_WRAP));
     }
 
     @ReactMethod

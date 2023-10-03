@@ -14,6 +14,10 @@ export interface GoBridgeInterface {
   ): Promise<Object>;
   selectAccount(nameOrBech32: string): Promise<Object>;
   getActiveAccount(): Promise<Object>;
+  query(
+    _path: string,
+    _data_b64: string,
+  ): Promise<string>;
   call(
     packagePath: string,
     fnc: string,

@@ -40,6 +40,13 @@ class NoopGoBridge implements GoBridgeInterface {
     return Promise.reject();
   }
 
+  query(
+    _path: string,
+    _data_b64: string,
+  ): Promise<string> {
+    return Promise.reject();
+  }
+
   call(
     _packagePath: string,
     _fnc: string,
