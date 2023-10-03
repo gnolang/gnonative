@@ -39,7 +39,7 @@ type QueryRequest struct {
 	// Example: "vm/qrender"
 	Path string `json:"path" yaml:"path"`
 	// Example: "gno.land/r/demo/boards\ntestboard"
-	Data string `json:"data" yaml:"data"`
+	Data []byte `json:"data" yaml:"data"`
 }
 
 type QueryReply struct {

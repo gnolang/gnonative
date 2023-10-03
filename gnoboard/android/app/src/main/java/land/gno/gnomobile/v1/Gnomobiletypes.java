@@ -2413,16 +2413,10 @@ public final class Gnomobiletypes {
         getPathBytes();
 
     /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
+     * <code>bytes Data = 2 [json_name = "Data"];</code>
      * @return The data.
      */
-    java.lang.String getData();
-    /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
-     * @return The bytes for data.
-     */
-    com.google.protobuf.ByteString
-        getDataBytes();
+    com.google.protobuf.ByteString getData();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.Query_Request}
@@ -2434,7 +2428,7 @@ public final class Gnomobiletypes {
       Query_RequestOrBuilder {
     private Query_Request() {
       path_ = "";
-      data_ = "";
+      data_ = com.google.protobuf.ByteString.EMPTY;
     }
     public static final int PATH_FIELD_NUMBER = 1;
     private java.lang.String path_;
@@ -2484,50 +2478,30 @@ public final class Gnomobiletypes {
     }
 
     public static final int DATA_FIELD_NUMBER = 2;
-    private java.lang.String data_;
+    private com.google.protobuf.ByteString data_;
     /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
+     * <code>bytes Data = 2 [json_name = "Data"];</code>
      * @return The data.
      */
     @java.lang.Override
-    public java.lang.String getData() {
+    public com.google.protobuf.ByteString getData() {
       return data_;
     }
     /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
-     * @return The bytes for data.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getDataBytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(data_);
-    }
-    /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
+     * <code>bytes Data = 2 [json_name = "Data"];</code>
      * @param value The data to set.
      */
-    private void setData(
-        java.lang.String value) {
+    private void setData(com.google.protobuf.ByteString value) {
       java.lang.Class<?> valueClass = value.getClass();
   
       data_ = value;
     }
     /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
+     * <code>bytes Data = 2 [json_name = "Data"];</code>
      */
     private void clearData() {
 
       data_ = getDefaultInstance().getData();
-    }
-    /**
-     * <code>string Data = 2 [json_name = "Data"];</code>
-     * @param value The bytes for data to set.
-     */
-    private void setDataBytes(
-        com.google.protobuf.ByteString value) {
-      checkByteStringIsUtf8(value);
-      data_ = value.toStringUtf8();
-
     }
 
     public static land.gno.gnomobile.v1.Gnomobiletypes.Query_Request parseFrom(
@@ -2677,51 +2651,30 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Data = 2 [json_name = "Data"];</code>
+       * <code>bytes Data = 2 [json_name = "Data"];</code>
        * @return The data.
        */
       @java.lang.Override
-      public java.lang.String getData() {
+      public com.google.protobuf.ByteString getData() {
         return instance.getData();
       }
       /**
-       * <code>string Data = 2 [json_name = "Data"];</code>
-       * @return The bytes for data.
-       */
-      @java.lang.Override
-      public com.google.protobuf.ByteString
-          getDataBytes() {
-        return instance.getDataBytes();
-      }
-      /**
-       * <code>string Data = 2 [json_name = "Data"];</code>
+       * <code>bytes Data = 2 [json_name = "Data"];</code>
        * @param value The data to set.
        * @return This builder for chaining.
        */
-      public Builder setData(
-          java.lang.String value) {
+      public Builder setData(com.google.protobuf.ByteString value) {
         copyOnWrite();
         instance.setData(value);
         return this;
       }
       /**
-       * <code>string Data = 2 [json_name = "Data"];</code>
+       * <code>bytes Data = 2 [json_name = "Data"];</code>
        * @return This builder for chaining.
        */
       public Builder clearData() {
         copyOnWrite();
         instance.clearData();
-        return this;
-      }
-      /**
-       * <code>string Data = 2 [json_name = "Data"];</code>
-       * @param value The bytes for data to set.
-       * @return This builder for chaining.
-       */
-      public Builder setDataBytes(
-          com.google.protobuf.ByteString value) {
-        copyOnWrite();
-        instance.setDataBytes(value);
         return this;
       }
 
@@ -2745,7 +2698,7 @@ public final class Gnomobiletypes {
               "data_",
             };
             java.lang.String info =
-                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\n" +
                 "";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }

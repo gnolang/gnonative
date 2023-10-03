@@ -162,7 +162,19 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *rpc.GetAct
 
 // Make an ABCI query to the remote node.
 func (s *gnomobileService) Query(ctx context.Context, req *rpc.Query_Request) (*rpc.Query_Reply, error) {
-	return &rpc.Query_Reply{}, nil
+	s.logger.Debug("Query", zap.String("path", req.Path), zap.ByteString("data", req.Data))
+
+	cfg := gnoclient.QueryCfg{
+		Path: req.Path,
+		Data: req.Data,
+	}
+
+	bres, err := s.client.Query(cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return &rpc.Query_Reply{Result: bres.Response.Data}, nil
 }
 
 // Call a specific realm function.

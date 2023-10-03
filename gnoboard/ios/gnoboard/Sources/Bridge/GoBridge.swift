@@ -133,6 +133,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_SetPassword_Request.with {
@@ -156,6 +157,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     Task {
@@ -175,6 +177,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     Task {
@@ -198,6 +201,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
@@ -226,6 +230,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
 
     let req = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
@@ -249,6 +254,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
     
     Task {
@@ -261,6 +267,41 @@ class GoBridge: NSObject {
     }
   }
   
+  @objc func query(_ path: NSString, data_b64: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    var data: Data?
+    do {
+      guard self.client != nil else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "gRPC client not init"])
+      }
+
+      if let asData = (data_b64 as String).data(using: .utf8) {
+        data = Data(base64Encoded: asData)
+      } else {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "query: can't get data_b64 as Data"])
+      }
+      if data == nil {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "query: data_b64 must be valid base64"])
+      }
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
+    }
+
+    let request = Land_Gno_Gnomobile_V1_Query_Request.with {
+      $0.path = path as String
+      $0.data = data!
+    }
+    
+    Task {
+      do {
+        let resp = try await client!.query(request)
+        resolve(resp.result.base64EncodedString())
+      } catch let error as NSError {
+        reject("\(String(describing: error.code))", error.localizedDescription, error)
+      }
+    }
+  }
+
   @objc func call(_ packagePath: NSString, fnc: NSString, args: NSArray, gasFee: NSString, gasWanted: NSNumber, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {
@@ -268,6 +309,7 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       reject("\(String(describing: error.code))", error.userInfo.description, error)
+      return
     }
     
     var argArray: [String] = []
@@ -287,7 +329,7 @@ class GoBridge: NSObject {
     Task {
       do {
         let resp = try await client!.call(request)
-        resolve(resp.result)
+        resolve(resp.result.base64EncodedString())
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
       }

@@ -138,7 +138,7 @@ public struct Land_Gno_Gnomobile_V1_Query_Request {
 
   public var path: String = String()
 
-  public var data: String = String()
+  public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -483,7 +483,7 @@ extension Land_Gno_Gnomobile_V1_Query_Request: SwiftProtobuf.Message, SwiftProto
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.path) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.data) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -494,7 +494,7 @@ extension Land_Gno_Gnomobile_V1_Query_Request: SwiftProtobuf.Message, SwiftProto
       try visitor.visitSingularStringField(value: self.path, fieldNumber: 1)
     }
     if !self.data.isEmpty {
-      try visitor.visitSingularStringField(value: self.data, fieldNumber: 2)
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
