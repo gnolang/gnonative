@@ -7,12 +7,21 @@ import { useEffect, useState } from "react";
 import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   createAccount,
-  initBridge,
-  setPassword,
   generateRecoveryPhrase,
+  getTcpPort,
+  initBridge,
   listKeyInfo,
   selectAccount,
+  setPassword,
 } from "@gno/utils/bridge";
+import { PromiseClient } from "@connectrpc/connect";
+import { createClient } from "@gno/grpc/client";
+import {
+  Call_Reply,
+  Call_Request,
+  SetPassword_Reply,
+  SetPassword_Request,
+} from "@gno/api/gnomobiletypes_pb";
 
 function HomeScreen() {
   const [postContent, setPostContent] = useState("");
@@ -23,7 +32,7 @@ function HomeScreen() {
     const init = async () => {
       await initBridge();
       let listKey = await listKeyInfo();
-      let password = "password"
+      let password = "password";
       if (listKey.length === 0) {
         await createAccount(
           "jefft0",
@@ -35,7 +44,16 @@ function HomeScreen() {
         );
       }
       await selectAccount("jefft0");
-      await setPassword(password);
+
+      // TODO: put the client globally
+      let port = await getTcpPort();
+      let client = createClient(port);
+
+      await client.setPassword(
+        new SetPassword_Request({
+          Password: "password",
+        }),
+      );
     };
     init();
 
