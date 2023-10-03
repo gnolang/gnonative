@@ -1,5 +1,5 @@
 bf136469c875db1905eba66bc35779a3d750fa0c  Makefile
-59987ede22af12d66d6af006fdfdb28690d049c9  service/gnomobiletypes/gnomobiletypes.go
+82c4cbaf8277b16a5988d4621f4ace67e5ebe156  service/gnomobiletypes/gnomobiletypes.go
 e665f858002fb1b90fdc0beaebb262d7ae5a35fc  service/gnomobiletypes/package.go
-eb42181cdf147d0a3507942e9c4c6790e25b6e4c  service/rpc/gnomobiletypes.proto
+57aae132c50388b70518053861bcb8be547a5e25  service/rpc/gnomobiletypes.proto
 03e805890e77130aa4f813067479712424afdd0c  service/rpc/rpc.proto

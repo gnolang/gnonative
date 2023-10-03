@@ -41,7 +41,7 @@ message GenerateRecoveryPhrase_Reply {
 
 message Query_Request {
 	string Path = 1;
-	string Data = 2;
+	bytes Data = 2;
 }
 
 message Query_Reply {

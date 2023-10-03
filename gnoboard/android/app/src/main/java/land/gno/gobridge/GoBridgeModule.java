@@ -222,7 +222,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             promise.reject(e);
             return;
         }
-        promise.resolve(reply.getResult().toString());
+        promise.resolve(Base64.encodeToString(reply.getResult().toByteArray(), Base64.NO_WRAP));
     }
 
     @ReactMethod

@@ -287,7 +287,7 @@ class GoBridge: NSObject {
     Task {
       do {
         let resp = try await client!.call(request)
-        resolve(resp.result)
+        resolve(resp.result.base64EncodedString())
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
       }
