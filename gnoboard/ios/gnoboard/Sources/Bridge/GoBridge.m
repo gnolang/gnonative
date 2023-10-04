@@ -51,6 +51,9 @@ RCT_EXTERN_METHOD(call:(NSString *)packagePath
 RCT_EXTERN_METHOD(exportJsonConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(getTcpPort:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;  // only do this if your module initialization relies on calling UIKit!

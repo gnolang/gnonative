@@ -3,12 +3,17 @@ module github.com/gnolang/gnomobile
 go 1.20
 
 require (
+	connectrpc.com/connect v1.11.1
+	connectrpc.com/grpchealth v1.2.0
+	connectrpc.com/grpcreflect v1.2.0
 	github.com/gnolang/gno v0.0.0-20230922195728-5a7d005fc14f
 	github.com/oklog/run v1.1.0
 	github.com/pkg/errors v0.9.1
+	github.com/rs/cors v1.10.1
 	go.uber.org/multierr v1.11.0
 	go.uber.org/zap v1.25.0
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
+	golang.org/x/net v0.15.0
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	google.golang.org/grpc v1.50.1
 	google.golang.org/protobuf v1.31.0
@@ -32,7 +37,6 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/flatbuffers v1.12.1 // indirect
-	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/jmhodges/levigo v1.0.0 // indirect
 	github.com/klauspost/compress v1.16.4 // indirect
@@ -40,13 +44,11 @@ require (
 	github.com/linxGnu/grocksdb v1.8.4 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/peterbourgon/ff/v3 v3.4.0 // indirect
-	github.com/rs/cors v1.10.0 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
 	go.etcd.io/bbolt v1.3.7 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
 	golang.org/x/mod v0.12.0 // indirect
-	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/term v0.12.0 // indirect

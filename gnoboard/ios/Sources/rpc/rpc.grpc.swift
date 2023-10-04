@@ -72,6 +72,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>
+
+  func hello(
+    _ request: Land_Gno_Gnomobile_V1_HelloRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloReply>
 }
 
 extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
@@ -154,8 +159,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-  /// random number generator. This can be used as the mnemonic in CreateAccount.
+  /// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
+  /// crypto library random number generator. This can be used as the mnemonic in
+  /// CreateAccount.
   ///
   /// - Parameters:
   ///   - request: Request to send to GenerateRecoveryPhrase.
@@ -230,7 +236,8 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
 
   /// GetActiveAccount gets the active account which was set by SelectAccount.
   /// If there is no active account, then return ErrNoActiveAccount.
-  /// (To check if there is an active account, use ListKeyInfo and check the length of the result.)
+  /// (To check if there is an active account, use ListKeyInfo and check the
+  /// length of the result.)
   ///
   /// - Parameters:
   ///   - request: Request to send to GetActiveAccount.
@@ -281,6 +288,24 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeCallInterceptors() ?? []
+    )
+  }
+
+  /// Hello is for debug purposes
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Hello.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func hello(
+    _ request: Land_Gno_Gnomobile_V1_HelloRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloReply> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloInterceptors() ?? []
     )
   }
 }
@@ -402,6 +427,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     _ request: Land_Gno_Gnomobile_V1_Call_Request,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>
+
+  func makeHelloCall(
+    _ request: Land_Gno_Gnomobile_V1_HelloRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloReply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -545,6 +575,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       interceptors: self.interceptors?.makeCallInterceptors() ?? []
     )
   }
+
+  internal func makeHelloCall(
+    _ request: Land_Gno_Gnomobile_V1_HelloRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloReply> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -680,6 +722,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       interceptors: self.interceptors?.makeCallInterceptors() ?? []
     )
   }
+
+  internal func hello(
+    _ request: Land_Gno_Gnomobile_V1_HelloRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_HelloReply {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -733,6 +787,9 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
 
   /// - Returns: Interceptors to use when invoking 'call'.
   func makeCallInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_Call_Request, Land_Gno_Gnomobile_V1_Call_Reply>]
+
+  /// - Returns: Interceptors to use when invoking 'hello'.
+  func makeHelloInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloReply>]
 }
 
 internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
@@ -751,6 +808,7 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello,
     ]
   )
 
@@ -818,6 +876,12 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let call = GRPCMethodDescriptor(
       name: "Call",
       path: "/land.gno.gnomobile.v1.GnomobileService/Call",
+      type: GRPCCallType.unary
+    )
+
+    internal static let hello = GRPCMethodDescriptor(
+      name: "Hello",
+      path: "/land.gno.gnomobile.v1.GnomobileService/Hello",
       type: GRPCCallType.unary
     )
   }

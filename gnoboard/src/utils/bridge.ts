@@ -66,3 +66,13 @@ export const selectAccount = async (nameOrBech32: string): Promise<Object> => {
 export const getActiveAccount = async (): Promise<Object> => {
   return await GoBridge.getActiveAccount();
 };
+
+export const getTcpPort = async (): Promise<Number> => {
+  try {
+    const port = await GoBridge.getTcpPort();
+    return port;
+  } catch (err: any) {
+    console.error("unable to close bridge: ", err);
+    return 0;
+  }
+};

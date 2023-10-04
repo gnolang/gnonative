@@ -60,6 +60,10 @@ class NoopGoBridge implements GoBridgeInterface {
   exportJsonConfig() {
     return Promise.reject();
   }
+
+  getTcpPort() {
+    return Promise.reject();
+  }
 }
 
 export const GoBridge: GoBridgeInterface = new NoopGoBridge();

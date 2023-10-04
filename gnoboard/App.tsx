@@ -4,6 +4,7 @@ import HomeScreen from "@gno/screens/home";
 import SettingsScreen from "@gno/screens/settings";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import "fast-text-encoding";
 
 const Tab = createBottomTabNavigator();
 

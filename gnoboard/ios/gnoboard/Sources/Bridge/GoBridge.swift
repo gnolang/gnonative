@@ -11,6 +11,7 @@ class GoBridge: NSObject {
   let appRootDir: String
   let tmpDir: String
   var bridge: GnoGnomobileBridge?
+  var socketPort: Int = 0
 
   var eventLoopGroup: EventLoopGroup?
   var channel: GRPCChannel?
@@ -77,10 +78,12 @@ class GoBridge: NSObject {
       config.tmpDir = self.tmpDir
 
       // On simulator we can't create an UDS, see comment below
-      #if targetEnvironment(simulator)
-      config.useTcpListener = true
+      #if !targetEnvironment(simulator)
+      config.useUdsListener = true
       #endif
-      
+
+      config.useTcpListener = true
+
       let bridge = GnoGnomobileNewBridge(config, &err);
       if err != nil {
         throw err!
@@ -99,9 +102,9 @@ class GoBridge: NSObject {
       self.logger.info("gRPC server socket path: \(socketPath)")
       let target: ConnectionTarget = .unixDomainSocket(socketPath)
       #else
-      let port = bridge!.getTcpPort()
-      self.logger.info("gRPC server port: \(port)")
-      let target: ConnectionTarget = .host("localhost", port: port)
+      self.socketPort = bridge!.getTcpPort()
+      self.logger.info("gRPC server port: \(self.socketPort)")
+      let target: ConnectionTarget = .host("localhost", port: self.socketPort)
       #endif
       
       // init the gPRC client
@@ -125,7 +128,18 @@ class GoBridge: NSObject {
       return
     }
   }
-  
+
+  @objc func getTcpPort(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      if self.bridge == nil {
+        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+      }
+      resolve(self.socketPort)
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
+    }
+  }
+
   @objc func setPassword(_ password: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       guard self.client != nil else {

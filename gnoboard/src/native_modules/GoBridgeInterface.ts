@@ -26,4 +26,5 @@ export interface GoBridgeInterface {
     gasWanted: Number,
   ): Promise<string>;
   exportJsonConfig(): Promise<string>;
+  getTcpPort(): Promise<Number>;
 }

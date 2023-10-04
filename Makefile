@@ -52,7 +52,7 @@ build.android: generate $(gnocore_aar) $(gnocore_jar)
 generate: api.generate
 
 # Clean all generated files
-clean: bind.clean
+clean: bind.clean api.clean
 
 # Force clean (clean and remove node_modules)
 fclean: clean
@@ -69,13 +69,16 @@ api.clean: _api.clean.protocol
 # - API - rpc
 
 protos_src := $(wildcard service/rpc/*.proto)
-gen_src := $(protos_src) Makefile $(wildcard service/gnomobiletypes/*.go)
+gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard service/gnomobiletypes/*.go)
 gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
-	rm -f framework/service/rpc/*.pb.go
+	rm -f service/rpc/*.pb.go
+	rm -f service/rpc/rpcconnect/*.connect.go
 	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/v1/*.java
+	rm -f gnoboard/ios/Sources/rpc/*.{grpc,pb}.swift
+	rm -f gnoboard/src/api/*.{ts,js}
 
 $(gen_sum): $(gen_src)
 	$(call check-program, shasum buf)
@@ -115,7 +118,7 @@ $(TEMPDIR)/.tool-versions: .tool-versions
 
 $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@)
-    # need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
+	# need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/ios-gmomobile \
 		-tags 'nowatchdog' -prefix=Gno \

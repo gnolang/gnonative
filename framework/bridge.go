@@ -22,6 +22,7 @@ type BridgeConfig struct {
 	RootDir        string
 	TmpDir         string
 	UseTcpListener bool
+	UseUdsListener bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -63,8 +64,15 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		svcOpts = append(svcOpts,
 			service.WithRootDir(config.RootDir),
 			service.WithTmpDir(config.TmpDir),
-			service.WithUseTcpListener(config.UseTcpListener),
 		)
+
+		if config.UseTcpListener {
+			svcOpts = append(svcOpts, service.WithUseTcpListener())
+		}
+
+		if config.UseUdsListener {
+			svcOpts = append(svcOpts, service.WithUseUdsListener())
+		}
 
 		serviceServer, err := service.NewGnomobileService(svcOpts...)
 		if err != nil {

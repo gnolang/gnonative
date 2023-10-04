@@ -21,9 +21,13 @@ import gnolang.gno.gnomobile.Gnomobile;
 import gnolang.gno.gnomobile.Bridge;
 import gnolang.gno.gnomobile.BridgeConfig;
 
+import io.grpc.CallOptions;
 import io.grpc.Channel;
 import android.net.LocalSocketAddress.Namespace;
 
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.MethodDescriptor;
 import io.grpc.StatusRuntimeException;
 import land.gno.gnomobile.v1.GnomobileServiceGrpc;
 import land.gno.gnomobile.v1.Rpc;
@@ -36,6 +40,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
     private final File rootDir;
     private String socketPath;
+    private int socketPort;
     private GnomobileServiceGrpc.GnomobileServiceBlockingStub blockingStub;
     private static Bridge bridgeGnomobile = null;
 
@@ -64,10 +69,13 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             }
 
             config.setRootDir(rootDir.getAbsolutePath());
+            config.setUseTcpListener(true);
+            config.setUseUdsListener(true);
 
             bridgeGnomobile = Gnomobile.newBridge(config);
 
             socketPath = bridgeGnomobile.getSocketPath();
+            socketPort = (int)bridgeGnomobile.getTcpPort();
 
             Channel channel = UdsChannelBuilder.forPath(socketPath, Namespace.FILESYSTEM).build();
             blockingStub = GnomobileServiceGrpc.newBlockingStub(channel);
@@ -121,6 +129,15 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             return;
         }
         promise.resolve(reply.getPhrase().toString());
+    }
+
+    @ReactMethod
+    public void getTcpPort(Promise promise) {
+        if (bridgeGnomobile == null) {
+            promise.reject(new Exception("bridge not init"));
+            return ;
+        }
+        promise.resolve(socketPort);
     }
 
     @ReactMethod
