@@ -18,13 +18,6 @@ message SetChainID_Request {
 message SetChainID_Reply {
 }
 
-message SetNameOrBech32_Request {
-	string NameOrBech32 = 1;
-}
-
-message SetNameOrBech32_Reply {
-}
-
 message SetPassword_Request {
 	string Password = 1;
 }

@@ -26,12 +26,6 @@ func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[
 	return connect.NewResponse(&rpc.SetChainID_Reply{}), nil
 }
 
-// Set the nameOrBech32 for the account in the keybase, used for later operations
-func (s *gnomobileService) SetNameOrBech32(ctx context.Context, req *connect.Request[rpc.SetNameOrBech32_Request]) (*connect.Response[rpc.SetNameOrBech32_Reply], error) {
-	s.getSigner().Account = req.Msg.NameOrBech32
-	return connect.NewResponse(&rpc.SetNameOrBech32_Reply{}), nil
-}
-
 // Set the password for the account in the keybase, used for later operations
 func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error) {
 	s.getSigner().Password = req.Msg.Password

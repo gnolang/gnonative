@@ -78,36 +78,6 @@ public final class GnomobileServiceGrpc {
     return getSetChainIDMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
-      land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "SetNameOrBech32",
-      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request.class,
-      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
-      land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> getSetNameOrBech32Method;
-    if ((getSetNameOrBech32Method = GnomobileServiceGrpc.getSetNameOrBech32Method) == null) {
-      synchronized (GnomobileServiceGrpc.class) {
-        if ((getSetNameOrBech32Method = GnomobileServiceGrpc.getSetNameOrBech32Method) == null) {
-          GnomobileServiceGrpc.getSetNameOrBech32Method = getSetNameOrBech32Method =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request, land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetNameOrBech32"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply.getDefaultInstance()))
-              .build();
-        }
-      }
-    }
-    return getSetNameOrBech32Method;
-  }
-
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request,
       land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Reply> getSetPasswordMethod;
 
@@ -453,17 +423,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later
-     * operations
-     * </pre>
-     */
-    default void setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetNameOrBech32Method(), responseObserver);
-    }
-
-    /**
-     * <pre>
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
@@ -618,18 +577,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later
-     * operations
-     * </pre>
-     */
-    public void setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getSetNameOrBech32Method(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
@@ -777,17 +724,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later
-     * operations
-     * </pre>
-     */
-    public land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply setNameOrBech32(land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getSetNameOrBech32Method(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
@@ -928,18 +864,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the nameOrBech32 for the account in the keybase, used for later
-     * operations
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply> setNameOrBech32(
-        land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getSetNameOrBech32Method(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
      * Set the password for the account in the keybase, used for later operations
      * </pre>
      */
@@ -1046,16 +970,15 @@ public final class GnomobileServiceGrpc {
 
   private static final int METHODID_SET_REMOTE = 0;
   private static final int METHODID_SET_CHAIN_ID = 1;
-  private static final int METHODID_SET_NAME_OR_BECH32 = 2;
-  private static final int METHODID_SET_PASSWORD = 3;
-  private static final int METHODID_GENERATE_RECOVERY_PHRASE = 4;
-  private static final int METHODID_LIST_KEY_INFO = 5;
-  private static final int METHODID_CREATE_ACCOUNT = 6;
-  private static final int METHODID_SELECT_ACCOUNT = 7;
-  private static final int METHODID_GET_ACTIVE_ACCOUNT = 8;
-  private static final int METHODID_QUERY = 9;
-  private static final int METHODID_CALL = 10;
-  private static final int METHODID_HELLO = 11;
+  private static final int METHODID_SET_PASSWORD = 2;
+  private static final int METHODID_GENERATE_RECOVERY_PHRASE = 3;
+  private static final int METHODID_LIST_KEY_INFO = 4;
+  private static final int METHODID_CREATE_ACCOUNT = 5;
+  private static final int METHODID_SELECT_ACCOUNT = 6;
+  private static final int METHODID_GET_ACTIVE_ACCOUNT = 7;
+  private static final int METHODID_QUERY = 8;
+  private static final int METHODID_CALL = 9;
+  private static final int METHODID_HELLO = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1081,10 +1004,6 @@ public final class GnomobileServiceGrpc {
         case METHODID_SET_CHAIN_ID:
           serviceImpl.setChainID((land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply>) responseObserver);
-          break;
-        case METHODID_SET_NAME_OR_BECH32:
-          serviceImpl.setNameOrBech32((land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>) responseObserver);
           break;
         case METHODID_SET_PASSWORD:
           serviceImpl.setPassword((land.gno.gnomobile.v1.Gnomobiletypes.SetPassword_Request) request,
@@ -1154,13 +1073,6 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Request,
               land.gno.gnomobile.v1.Gnomobiletypes.SetChainID_Reply>(
                 service, METHODID_SET_CHAIN_ID)))
-        .addMethod(
-          getSetNameOrBech32Method(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Request,
-              land.gno.gnomobile.v1.Gnomobiletypes.SetNameOrBech32_Reply>(
-                service, METHODID_SET_NAME_OR_BECH32)))
         .addMethod(
           getSetPasswordMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1238,7 +1150,6 @@ public final class GnomobileServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .addMethod(getSetRemoteMethod())
               .addMethod(getSetChainIDMethod())
-              .addMethod(getSetNameOrBech32Method())
               .addMethod(getSetPasswordMethod())
               .addMethod(getGenerateRecoveryPhraseMethod())
               .addMethod(getListKeyInfoMethod())

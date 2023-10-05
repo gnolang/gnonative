@@ -65,28 +65,6 @@ public struct Land_Gno_Gnomobile_V1_SetChainID_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetNameOrBech32_Request {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var nameOrBech32: String = String()
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
-public struct Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-}
-
 public struct Land_Gno_Gnomobile_V1_SetPassword_Request {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -198,8 +176,6 @@ extension Land_Gno_Gnomobile_V1_SetRemote_Request: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetRemote_Reply: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetChainID_Request: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetChainID_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetNameOrBech32_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetPassword_Request: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetPassword_Reply: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request: @unchecked Sendable {}
@@ -311,57 +287,6 @@ extension Land_Gno_Gnomobile_V1_SetChainID_Reply: SwiftProtobuf.Message, SwiftPr
   }
 
   public static func ==(lhs: Land_Gno_Gnomobile_V1_SetChainID_Reply, rhs: Land_Gno_Gnomobile_V1_SetChainID_Reply) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_SetNameOrBech32_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetNameOrBech32_Request"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "NameOrBech32"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.nameOrBech32) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.nameOrBech32.isEmpty {
-      try visitor.visitSingularStringField(value: self.nameOrBech32, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request, rhs: Land_Gno_Gnomobile_V1_SetNameOrBech32_Request) -> Bool {
-    if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetNameOrBech32_Reply"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply, rhs: Land_Gno_Gnomobile_V1_SetNameOrBech32_Reply) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
