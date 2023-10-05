@@ -17,10 +17,6 @@ service GnomobileService {
   // is "dev"
   rpc SetChainID(SetChainID_Request) returns (SetChainID_Reply);
 
-  // Set the nameOrBech32 for the account in the keybase, used for later
-  // operations
-  rpc SetNameOrBech32(SetNameOrBech32_Request) returns (SetNameOrBech32_Reply);
-
   // Set the password for the account in the keybase, used for later operations
   rpc SetPassword(SetPassword_Request) returns (SetPassword_Reply);
 

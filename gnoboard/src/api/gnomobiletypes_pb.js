@@ -44,24 +44,6 @@ export const SetChainID_Reply = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetNameOrBech32_Request
- */
-export const SetNameOrBech32_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetNameOrBech32_Request",
-  () => [
-    { no: 1, name: "NameOrBech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.SetNameOrBech32_Reply
- */
-export const SetNameOrBech32_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetNameOrBech32_Reply",
-  [],
-);
-
-/**
  * @generated from message land.gno.gnomobile.v1.SetPassword_Request
  */
 export const SetPassword_Request = proto3.makeMessageType(

@@ -14,13 +14,6 @@ type SetChainIDRequest struct {
 type SetChainIDReply struct {
 }
 
-type SetNameOrBech32Request struct {
-	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
-}
-
-type SetNameOrBech32Reply struct {
-}
-
 type SetPasswordRequest struct {
 	Password string `json:"password" yaml:"password"`
 }

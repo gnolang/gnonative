@@ -39,9 +39,6 @@ const (
 	// GnomobileServiceSetChainIDProcedure is the fully-qualified name of the GnomobileService's
 	// SetChainID RPC.
 	GnomobileServiceSetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
-	// GnomobileServiceSetNameOrBech32Procedure is the fully-qualified name of the GnomobileService's
-	// SetNameOrBech32 RPC.
-	GnomobileServiceSetNameOrBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/SetNameOrBech32"
 	// GnomobileServiceSetPasswordProcedure is the fully-qualified name of the GnomobileService's
 	// SetPassword RPC.
 	GnomobileServiceSetPasswordProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
@@ -76,9 +73,6 @@ type GnomobileServiceClient interface {
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error)
-	// Set the nameOrBech32 for the account in the keybase, used for later
-	// operations
-	SetNameOrBech32(context.Context, *connect.Request[rpc.SetNameOrBech32_Request]) (*connect.Response[rpc.SetNameOrBech32_Reply], error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
@@ -123,11 +117,6 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 		setChainID: connect.NewClient[rpc.SetChainID_Request, rpc.SetChainID_Reply](
 			httpClient,
 			baseURL+GnomobileServiceSetChainIDProcedure,
-			opts...,
-		),
-		setNameOrBech32: connect.NewClient[rpc.SetNameOrBech32_Request, rpc.SetNameOrBech32_Reply](
-			httpClient,
-			baseURL+GnomobileServiceSetNameOrBech32Procedure,
 			opts...,
 		),
 		setPassword: connect.NewClient[rpc.SetPassword_Request, rpc.SetPassword_Reply](
@@ -182,7 +171,6 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 type gnomobileServiceClient struct {
 	setRemote              *connect.Client[rpc.SetRemote_Request, rpc.SetRemote_Reply]
 	setChainID             *connect.Client[rpc.SetChainID_Request, rpc.SetChainID_Reply]
-	setNameOrBech32        *connect.Client[rpc.SetNameOrBech32_Request, rpc.SetNameOrBech32_Reply]
 	setPassword            *connect.Client[rpc.SetPassword_Request, rpc.SetPassword_Reply]
 	generateRecoveryPhrase *connect.Client[rpc.GenerateRecoveryPhrase_Request, rpc.GenerateRecoveryPhrase_Reply]
 	listKeyInfo            *connect.Client[rpc.ListKeyInfo_Request, rpc.ListKeyInfo_Reply]
@@ -202,11 +190,6 @@ func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Req
 // SetChainID calls land.gno.gnomobile.v1.GnomobileService.SetChainID.
 func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error) {
 	return c.setChainID.CallUnary(ctx, req)
-}
-
-// SetNameOrBech32 calls land.gno.gnomobile.v1.GnomobileService.SetNameOrBech32.
-func (c *gnomobileServiceClient) SetNameOrBech32(ctx context.Context, req *connect.Request[rpc.SetNameOrBech32_Request]) (*connect.Response[rpc.SetNameOrBech32_Reply], error) {
-	return c.setNameOrBech32.CallUnary(ctx, req)
 }
 
 // SetPassword calls land.gno.gnomobile.v1.GnomobileService.SetPassword.
@@ -263,9 +246,6 @@ type GnomobileServiceHandler interface {
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error)
-	// Set the nameOrBech32 for the account in the keybase, used for later
-	// operations
-	SetNameOrBech32(context.Context, *connect.Request[rpc.SetNameOrBech32_Request]) (*connect.Response[rpc.SetNameOrBech32_Reply], error)
 	// Set the password for the account in the keybase, used for later operations
 	SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
@@ -306,11 +286,6 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 	gnomobileServiceSetChainIDHandler := connect.NewUnaryHandler(
 		GnomobileServiceSetChainIDProcedure,
 		svc.SetChainID,
-		opts...,
-	)
-	gnomobileServiceSetNameOrBech32Handler := connect.NewUnaryHandler(
-		GnomobileServiceSetNameOrBech32Procedure,
-		svc.SetNameOrBech32,
 		opts...,
 	)
 	gnomobileServiceSetPasswordHandler := connect.NewUnaryHandler(
@@ -364,8 +339,6 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceSetRemoteHandler.ServeHTTP(w, r)
 		case GnomobileServiceSetChainIDProcedure:
 			gnomobileServiceSetChainIDHandler.ServeHTTP(w, r)
-		case GnomobileServiceSetNameOrBech32Procedure:
-			gnomobileServiceSetNameOrBech32Handler.ServeHTTP(w, r)
 		case GnomobileServiceSetPasswordProcedure:
 			gnomobileServiceSetPasswordHandler.ServeHTTP(w, r)
 		case GnomobileServiceGenerateRecoveryPhraseProcedure:
@@ -399,10 +372,6 @@ func (UnimplementedGnomobileServiceHandler) SetRemote(context.Context, *connect.
 
 func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetChainID is not implemented"))
-}
-
-func (UnimplementedGnomobileServiceHandler) SetNameOrBech32(context.Context, *connect.Request[rpc.SetNameOrBech32_Request]) (*connect.Response[rpc.SetNameOrBech32_Reply], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetNameOrBech32 is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error) {

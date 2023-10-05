@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Call_Reply, Call_Request, GenerateRecoveryPhrase_Reply, GenerateRecoveryPhrase_Request, Query_Reply, Query_Request, SetChainID_Reply, SetChainID_Request, SetNameOrBech32_Reply, SetNameOrBech32_Request, SetPassword_Reply, SetPassword_Request, SetRemote_Reply, SetRemote_Request } from "./gnomobiletypes_pb.js";
+import { Call_Reply, Call_Request, GenerateRecoveryPhrase_Reply, GenerateRecoveryPhrase_Request, Query_Reply, Query_Request, SetChainID_Reply, SetChainID_Request, SetPassword_Reply, SetPassword_Request, SetRemote_Reply, SetRemote_Request } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { CreateAccount_Reply, CreateAccount_Request, GetActiveAccount_Reply, GetActiveAccount_Request, HelloReply, HelloRequest, ListKeyInfo_Reply, ListKeyInfo_Request, SelectAccount_Reply, SelectAccount_Request } from "./rpc_pb.js";
 
@@ -37,18 +37,6 @@ export declare const GnomobileService: {
       readonly name: "SetChainID",
       readonly I: typeof SetChainID_Request,
       readonly O: typeof SetChainID_Reply,
-      readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Set the nameOrBech32 for the account in the keybase, used for later
-     * operations
-     *
-     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetNameOrBech32
-     */
-    readonly setNameOrBech32: {
-      readonly name: "SetNameOrBech32",
-      readonly I: typeof SetNameOrBech32_Request,
-      readonly O: typeof SetNameOrBech32_Reply,
       readonly kind: MethodKind.Unary,
     },
     /**

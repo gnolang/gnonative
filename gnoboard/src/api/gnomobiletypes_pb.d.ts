@@ -95,49 +95,6 @@ export declare class SetChainID_Reply extends Message<SetChainID_Reply> {
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetNameOrBech32_Request
- */
-export declare class SetNameOrBech32_Request extends Message<SetNameOrBech32_Request> {
-  /**
-   * @generated from field: string NameOrBech32 = 1;
-   */
-  NameOrBech32: string;
-
-  constructor(data?: PartialMessage<SetNameOrBech32_Request>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetNameOrBech32_Request";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetNameOrBech32_Request;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetNameOrBech32_Request;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetNameOrBech32_Request;
-
-  static equals(a: SetNameOrBech32_Request | PlainMessage<SetNameOrBech32_Request> | undefined, b: SetNameOrBech32_Request | PlainMessage<SetNameOrBech32_Request> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnomobile.v1.SetNameOrBech32_Reply
- */
-export declare class SetNameOrBech32_Reply extends Message<SetNameOrBech32_Reply> {
-  constructor(data?: PartialMessage<SetNameOrBech32_Reply>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetNameOrBech32_Reply";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetNameOrBech32_Reply;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetNameOrBech32_Reply;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetNameOrBech32_Reply;
-
-  static equals(a: SetNameOrBech32_Reply | PlainMessage<SetNameOrBech32_Reply> | undefined, b: SetNameOrBech32_Reply | PlainMessage<SetNameOrBech32_Reply> | undefined): boolean;
-}
-
-/**
  * @generated from message land.gno.gnomobile.v1.SetPassword_Request
  */
 export declare class SetPassword_Request extends Message<SetPassword_Request> {

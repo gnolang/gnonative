@@ -16,8 +16,6 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	SetRemoteReply{}, "SetRemote_Reply",
 	SetChainIDRequest{}, "SetChainID_Request",
 	SetChainIDReply{}, "SetChainID_Reply",
-	SetNameOrBech32Request{}, "SetNameOrBech32_Request",
-	SetNameOrBech32Reply{}, "SetNameOrBech32_Reply",
 	SetPasswordRequest{}, "SetPassword_Request",
 	SetPasswordReply{}, "SetPassword_Reply",
 	GenerateRecoveryPhraseRequest{}, "GenerateRecoveryPhrase_Request",
