@@ -150,7 +150,7 @@ class GoBridge: NSObject {
       return
     }
 
-    let req = Land_Gno_Gnomobile_V1_SetPassword_Request.with {
+    let req = Land_Gno_Gnomobile_V1_SetPasswordRequest.with {
       $0.password = password as String
     }
 
@@ -176,7 +176,7 @@ class GoBridge: NSObject {
 
     Task {
       do {
-        let resp = try await client!.generateRecoveryPhrase(Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request())
+        let resp = try await client!.generateRecoveryPhrase(Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest())
         resolve(resp.phrase)
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
@@ -196,7 +196,7 @@ class GoBridge: NSObject {
 
     Task {
       do {
-        let resp = try await client!.listKeyInfo(Land_Gno_Gnomobile_V1_ListKeyInfo.Request())
+        let resp = try await client!.listKeyInfo(Land_Gno_Gnomobile_V1_ListKeyInfoRequest())
         var list = [NSDictionary]()
         for keyInfo in resp.keys {
           list.append(GoBridge.convertKeyInfo(keyInfo))
@@ -218,7 +218,7 @@ class GoBridge: NSObject {
       return
     }
 
-    let req = Land_Gno_Gnomobile_V1_CreateAccount.Request.with {
+    let req = Land_Gno_Gnomobile_V1_CreateAccountRequest.with {
       $0.nameOrBech32 = nameOrBech32 as String
       $0.mnemonic = mnemonic as String
       $0.bip39Passwd = bip39Passwd as String
@@ -247,7 +247,7 @@ class GoBridge: NSObject {
       return
     }
 
-    let req = Land_Gno_Gnomobile_V1_SelectAccount.Request.with {
+    let req = Land_Gno_Gnomobile_V1_SelectAccountRequest.with {
       $0.nameOrBech32 = nameOrBech32 as String
     }
 
@@ -273,7 +273,7 @@ class GoBridge: NSObject {
     
     Task {
       do {
-        let resp = try await client!.getActiveAccount(Land_Gno_Gnomobile_V1_GetActiveAccount.Request())
+        let resp = try await client!.getActiveAccount(Land_Gno_Gnomobile_V1_GetActiveAccountRequest())
         resolve(GoBridge.convertKeyInfo(resp.key))
       } catch let error as NSError {
         reject("\(String(describing: error.code))", error.localizedDescription, error)
@@ -301,7 +301,7 @@ class GoBridge: NSObject {
       return
     }
 
-    let request = Land_Gno_Gnomobile_V1_Query_Request.with {
+    let request = Land_Gno_Gnomobile_V1_QueryRequest.with {
       $0.path = path as String
       $0.data = data!
     }
@@ -332,7 +332,7 @@ class GoBridge: NSObject {
       argArray.append(arg as? String ?? "")
     }
     
-    let request = Land_Gno_Gnomobile_V1_Call_Request.with {
+    let request = Land_Gno_Gnomobile_V1_CallRequest.with {
       $0.packagePath = packagePath as String
       $0.fnc = fnc as String
       $0.args = argArray

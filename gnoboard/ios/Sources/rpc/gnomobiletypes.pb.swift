@@ -21,7 +21,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// messages
-public struct Land_Gno_Gnomobile_V1_SetRemote_Request {
+public struct Land_Gno_Gnomobile_V1_SetRemoteRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -33,7 +33,7 @@ public struct Land_Gno_Gnomobile_V1_SetRemote_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetRemote_Reply {
+public struct Land_Gno_Gnomobile_V1_SetRemoteResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -43,7 +43,7 @@ public struct Land_Gno_Gnomobile_V1_SetRemote_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetChainID_Request {
+public struct Land_Gno_Gnomobile_V1_SetChainIDRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -55,7 +55,7 @@ public struct Land_Gno_Gnomobile_V1_SetChainID_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetChainID_Reply {
+public struct Land_Gno_Gnomobile_V1_SetChainIDResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -65,7 +65,7 @@ public struct Land_Gno_Gnomobile_V1_SetChainID_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetPassword_Request {
+public struct Land_Gno_Gnomobile_V1_SetPasswordRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -77,7 +77,7 @@ public struct Land_Gno_Gnomobile_V1_SetPassword_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SetPassword_Reply {
+public struct Land_Gno_Gnomobile_V1_SetPasswordResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -87,7 +87,7 @@ public struct Land_Gno_Gnomobile_V1_SetPassword_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request {
+public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -97,7 +97,7 @@ public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply {
+public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -109,7 +109,7 @@ public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_Query_Request {
+public struct Land_Gno_Gnomobile_V1_QueryRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -123,7 +123,7 @@ public struct Land_Gno_Gnomobile_V1_Query_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_Query_Reply {
+public struct Land_Gno_Gnomobile_V1_QueryResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -135,7 +135,7 @@ public struct Land_Gno_Gnomobile_V1_Query_Reply {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_Call_Request {
+public struct Land_Gno_Gnomobile_V1_CallRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -159,7 +159,7 @@ public struct Land_Gno_Gnomobile_V1_Call_Request {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_Call_Reply {
+public struct Land_Gno_Gnomobile_V1_CallResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -172,26 +172,26 @@ public struct Land_Gno_Gnomobile_V1_Call_Reply {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension Land_Gno_Gnomobile_V1_SetRemote_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetRemote_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetChainID_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetChainID_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetPassword_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SetPassword_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_Query_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_Query_Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_Call_Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_Call_Reply: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetRemoteRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetRemoteResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetChainIDRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetChainIDResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetPasswordRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SetPasswordResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_QueryRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_QueryResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CallRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CallResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "land.gno.gnomobile.v1"
 
-extension Land_Gno_Gnomobile_V1_SetRemote_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetRemote_Request"
+extension Land_Gno_Gnomobile_V1_SetRemoteRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetRemoteRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Remote"),
   ]
@@ -215,15 +215,15 @@ extension Land_Gno_Gnomobile_V1_SetRemote_Request: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetRemote_Request, rhs: Land_Gno_Gnomobile_V1_SetRemote_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetRemoteRequest, rhs: Land_Gno_Gnomobile_V1_SetRemoteRequest) -> Bool {
     if lhs.remote != rhs.remote {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SetRemote_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetRemote_Reply"
+extension Land_Gno_Gnomobile_V1_SetRemoteResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetRemoteResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -235,14 +235,14 @@ extension Land_Gno_Gnomobile_V1_SetRemote_Reply: SwiftProtobuf.Message, SwiftPro
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetRemote_Reply, rhs: Land_Gno_Gnomobile_V1_SetRemote_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetRemoteResponse, rhs: Land_Gno_Gnomobile_V1_SetRemoteResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SetChainID_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetChainID_Request"
+extension Land_Gno_Gnomobile_V1_SetChainIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetChainIDRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "ChainID"),
   ]
@@ -266,15 +266,15 @@ extension Land_Gno_Gnomobile_V1_SetChainID_Request: SwiftProtobuf.Message, Swift
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetChainID_Request, rhs: Land_Gno_Gnomobile_V1_SetChainID_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetChainIDRequest, rhs: Land_Gno_Gnomobile_V1_SetChainIDRequest) -> Bool {
     if lhs.chainID != rhs.chainID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SetChainID_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetChainID_Reply"
+extension Land_Gno_Gnomobile_V1_SetChainIDResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetChainIDResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -286,14 +286,14 @@ extension Land_Gno_Gnomobile_V1_SetChainID_Reply: SwiftProtobuf.Message, SwiftPr
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetChainID_Reply, rhs: Land_Gno_Gnomobile_V1_SetChainID_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetChainIDResponse, rhs: Land_Gno_Gnomobile_V1_SetChainIDResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SetPassword_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetPassword_Request"
+extension Land_Gno_Gnomobile_V1_SetPasswordRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetPasswordRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Password"),
   ]
@@ -317,15 +317,15 @@ extension Land_Gno_Gnomobile_V1_SetPassword_Request: SwiftProtobuf.Message, Swif
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetPassword_Request, rhs: Land_Gno_Gnomobile_V1_SetPassword_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetPasswordRequest, rhs: Land_Gno_Gnomobile_V1_SetPasswordRequest) -> Bool {
     if lhs.password != rhs.password {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SetPassword_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SetPassword_Reply"
+extension Land_Gno_Gnomobile_V1_SetPasswordResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetPasswordResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -337,14 +337,14 @@ extension Land_Gno_Gnomobile_V1_SetPassword_Reply: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetPassword_Reply, rhs: Land_Gno_Gnomobile_V1_SetPassword_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SetPasswordResponse, rhs: Land_Gno_Gnomobile_V1_SetPasswordResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GenerateRecoveryPhrase_Request"
+extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GenerateRecoveryPhraseRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -356,14 +356,14 @@ extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request: SwiftProtobuf.Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request, rhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest, rhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GenerateRecoveryPhrase_Reply"
+extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GenerateRecoveryPhraseResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Phrase"),
   ]
@@ -387,15 +387,15 @@ extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply: SwiftProtobuf.Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply, rhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhrase_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse, rhs: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse) -> Bool {
     if lhs.phrase != rhs.phrase {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_Query_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Query_Request"
+extension Land_Gno_Gnomobile_V1_QueryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".QueryRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Path"),
     2: .same(proto: "Data"),
@@ -424,7 +424,7 @@ extension Land_Gno_Gnomobile_V1_Query_Request: SwiftProtobuf.Message, SwiftProto
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_Query_Request, rhs: Land_Gno_Gnomobile_V1_Query_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_QueryRequest, rhs: Land_Gno_Gnomobile_V1_QueryRequest) -> Bool {
     if lhs.path != rhs.path {return false}
     if lhs.data != rhs.data {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -432,8 +432,8 @@ extension Land_Gno_Gnomobile_V1_Query_Request: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension Land_Gno_Gnomobile_V1_Query_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Query_Reply"
+extension Land_Gno_Gnomobile_V1_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".QueryResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
@@ -457,15 +457,15 @@ extension Land_Gno_Gnomobile_V1_Query_Reply: SwiftProtobuf.Message, SwiftProtobu
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_Query_Reply, rhs: Land_Gno_Gnomobile_V1_Query_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_QueryResponse, rhs: Land_Gno_Gnomobile_V1_QueryResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Call_Request"
+extension Land_Gno_Gnomobile_V1_CallRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CallRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "PackagePath"),
     2: .same(proto: "Fnc"),
@@ -519,7 +519,7 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_Call_Request, rhs: Land_Gno_Gnomobile_V1_Call_Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CallRequest, rhs: Land_Gno_Gnomobile_V1_CallRequest) -> Bool {
     if lhs.packagePath != rhs.packagePath {return false}
     if lhs.fnc != rhs.fnc {return false}
     if lhs.args != rhs.args {return false}
@@ -532,8 +532,8 @@ extension Land_Gno_Gnomobile_V1_Call_Request: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Land_Gno_Gnomobile_V1_Call_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Call_Reply"
+extension Land_Gno_Gnomobile_V1_CallResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CallResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
@@ -557,7 +557,7 @@ extension Land_Gno_Gnomobile_V1_Call_Reply: SwiftProtobuf.Message, SwiftProtobuf
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_Call_Reply, rhs: Land_Gno_Gnomobile_V1_Call_Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CallResponse, rhs: Land_Gno_Gnomobile_V1_CallResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

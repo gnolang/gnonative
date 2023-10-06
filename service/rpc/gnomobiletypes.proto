@@ -4,44 +4,44 @@ package land.gno.gnomobile.v1;
 option go_package = "github.com/gnolang/gnomobile/service/rpc";
 
 // messages
-message SetRemote_Request {
+message SetRemoteRequest {
 	string Remote = 1;
 }
 
-message SetRemote_Reply {
+message SetRemoteResponse {
 }
 
-message SetChainID_Request {
+message SetChainIDRequest {
 	string ChainID = 1;
 }
 
-message SetChainID_Reply {
+message SetChainIDResponse {
 }
 
-message SetPassword_Request {
+message SetPasswordRequest {
 	string Password = 1;
 }
 
-message SetPassword_Reply {
+message SetPasswordResponse {
 }
 
-message GenerateRecoveryPhrase_Request {
+message GenerateRecoveryPhraseRequest {
 }
 
-message GenerateRecoveryPhrase_Reply {
+message GenerateRecoveryPhraseResponse {
 	string Phrase = 1;
 }
 
-message Query_Request {
+message QueryRequest {
 	string Path = 1;
 	bytes Data = 2;
 }
 
-message Query_Reply {
+message QueryResponse {
 	bytes Result = 1;
 }
 
-message Call_Request {
+message CallRequest {
 	string PackagePath = 1;
 	string Fnc = 2;
 	repeated string Args = 3;
@@ -51,6 +51,6 @@ message Call_Request {
 	string Memo = 7;
 }
 
-message Call_Reply {
+message CallResponse {
 	bytes Result = 1;
 }

@@ -4,27 +4,27 @@ type SetRemoteRequest struct {
 	Remote string `json:"remote" yaml:"remote"`
 }
 
-type SetRemoteReply struct {
+type SetRemoteResponse struct {
 }
 
 type SetChainIDRequest struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
 }
 
-type SetChainIDReply struct {
+type SetChainIDResponse struct {
 }
 
 type SetPasswordRequest struct {
 	Password string `json:"password" yaml:"password"`
 }
 
-type SetPasswordReply struct {
+type SetPasswordResponse struct {
 }
 
 type GenerateRecoveryPhraseRequest struct {
 }
 
-type GenerateRecoveryPhraseReply struct {
+type GenerateRecoveryPhraseResponse struct {
 	Phrase string `json:"phrase" yaml:"phrase"`
 }
 
@@ -35,7 +35,7 @@ type QueryRequest struct {
 	Data []byte `json:"data" yaml:"data"`
 }
 
-type QueryReply struct {
+type QueryResponse struct {
 	Result []byte `json:"result" yaml:"result"`
 }
 
@@ -52,6 +52,6 @@ type CallRequest struct {
 	Memo      string   `json:"memo" yaml:"memo"`
 }
 
-type CallReply struct {
+type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
 }

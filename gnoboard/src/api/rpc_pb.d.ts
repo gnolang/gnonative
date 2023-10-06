@@ -128,7 +128,7 @@ export declare class KeyInfo extends Message<KeyInfo> {
   name: string;
 
   /**
-   * @generated from field: bytes pubKey = 3;
+   * @generated from field: bytes pub_key = 3;
    */
   pubKey: Uint8Array;
 
@@ -153,92 +153,54 @@ export declare class KeyInfo extends Message<KeyInfo> {
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoRequest
  */
-export declare class ListKeyInfo extends Message<ListKeyInfo> {
-  constructor(data?: PartialMessage<ListKeyInfo>);
+export declare class ListKeyInfoRequest extends Message<ListKeyInfoRequest> {
+  constructor(data?: PartialMessage<ListKeyInfoRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.ListKeyInfo";
+  static readonly typeName = "land.gno.gnomobile.v1.ListKeyInfoRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListKeyInfo;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListKeyInfoRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListKeyInfo;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListKeyInfoRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfo;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfoRequest;
 
-  static equals(a: ListKeyInfo | PlainMessage<ListKeyInfo> | undefined, b: ListKeyInfo | PlainMessage<ListKeyInfo> | undefined): boolean;
+  static equals(a: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined, b: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo.Request
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoResponse
  */
-export declare class ListKeyInfo_Request extends Message<ListKeyInfo_Request> {
-  constructor(data?: PartialMessage<ListKeyInfo_Request>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.ListKeyInfo.Request";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListKeyInfo_Request;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListKeyInfo_Request;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfo_Request;
-
-  static equals(a: ListKeyInfo_Request | PlainMessage<ListKeyInfo_Request> | undefined, b: ListKeyInfo_Request | PlainMessage<ListKeyInfo_Request> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo.Reply
- */
-export declare class ListKeyInfo_Reply extends Message<ListKeyInfo_Reply> {
+export declare class ListKeyInfoResponse extends Message<ListKeyInfoResponse> {
   /**
    * @generated from field: repeated land.gno.gnomobile.v1.KeyInfo keys = 1;
    */
   keys: KeyInfo[];
 
-  constructor(data?: PartialMessage<ListKeyInfo_Reply>);
+  constructor(data?: PartialMessage<ListKeyInfoResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.ListKeyInfo.Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.ListKeyInfoResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListKeyInfo_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListKeyInfoResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListKeyInfo_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListKeyInfoResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfo_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfoResponse;
 
-  static equals(a: ListKeyInfo_Reply | PlainMessage<ListKeyInfo_Reply> | undefined, b: ListKeyInfo_Reply | PlainMessage<ListKeyInfo_Reply> | undefined): boolean;
+  static equals(a: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined, b: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.CreateAccount
+ * @generated from message land.gno.gnomobile.v1.CreateAccountRequest
  */
-export declare class CreateAccount extends Message<CreateAccount> {
-  constructor(data?: PartialMessage<CreateAccount>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.CreateAccount";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAccount;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAccount;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccount;
-
-  static equals(a: CreateAccount | PlainMessage<CreateAccount> | undefined, b: CreateAccount | PlainMessage<CreateAccount> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnomobile.v1.CreateAccount.Request
- */
-export declare class CreateAccount_Request extends Message<CreateAccount_Request> {
+export declare class CreateAccountRequest extends Message<CreateAccountRequest> {
   /**
-   * @generated from field: string nameOrBech32 = 1;
+   * @generated from field: string name_or_bech32 = 1;
    */
   nameOrBech32: string;
 
@@ -248,7 +210,7 @@ export declare class CreateAccount_Request extends Message<CreateAccount_Request
   mnemonic: string;
 
   /**
-   * @generated from field: string bip39Passwd = 3;
+   * @generated from field: string bip39_passwd = 3;
    */
   bip39Passwd: string;
 
@@ -267,172 +229,134 @@ export declare class CreateAccount_Request extends Message<CreateAccount_Request
    */
   index: number;
 
-  constructor(data?: PartialMessage<CreateAccount_Request>);
+  constructor(data?: PartialMessage<CreateAccountRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.CreateAccount.Request";
+  static readonly typeName = "land.gno.gnomobile.v1.CreateAccountRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAccount_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAccountRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAccount_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAccountRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccount_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccountRequest;
 
-  static equals(a: CreateAccount_Request | PlainMessage<CreateAccount_Request> | undefined, b: CreateAccount_Request | PlainMessage<CreateAccount_Request> | undefined): boolean;
+  static equals(a: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined, b: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.CreateAccount.Reply
+ * @generated from message land.gno.gnomobile.v1.CreateAccountResponse
  */
-export declare class CreateAccount_Reply extends Message<CreateAccount_Reply> {
+export declare class CreateAccountResponse extends Message<CreateAccountResponse> {
   /**
    * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
    */
   key?: KeyInfo;
 
-  constructor(data?: PartialMessage<CreateAccount_Reply>);
+  constructor(data?: PartialMessage<CreateAccountResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.CreateAccount.Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.CreateAccountResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAccount_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAccountResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAccount_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAccountResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccount_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccountResponse;
 
-  static equals(a: CreateAccount_Reply | PlainMessage<CreateAccount_Reply> | undefined, b: CreateAccount_Reply | PlainMessage<CreateAccount_Reply> | undefined): boolean;
+  static equals(a: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined, b: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SelectAccount
+ * @generated from message land.gno.gnomobile.v1.SelectAccountRequest
  */
-export declare class SelectAccount extends Message<SelectAccount> {
-  constructor(data?: PartialMessage<SelectAccount>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SelectAccount";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccount;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccount;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccount;
-
-  static equals(a: SelectAccount | PlainMessage<SelectAccount> | undefined, b: SelectAccount | PlainMessage<SelectAccount> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnomobile.v1.SelectAccount.Request
- */
-export declare class SelectAccount_Request extends Message<SelectAccount_Request> {
+export declare class SelectAccountRequest extends Message<SelectAccountRequest> {
   /**
-   * @generated from field: string nameOrBech32 = 1;
+   * @generated from field: string name_or_bech32 = 1;
    */
   nameOrBech32: string;
 
-  constructor(data?: PartialMessage<SelectAccount_Request>);
+  constructor(data?: PartialMessage<SelectAccountRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SelectAccount.Request";
+  static readonly typeName = "land.gno.gnomobile.v1.SelectAccountRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccount_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccountRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccount_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccountRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccount_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountRequest;
 
-  static equals(a: SelectAccount_Request | PlainMessage<SelectAccount_Request> | undefined, b: SelectAccount_Request | PlainMessage<SelectAccount_Request> | undefined): boolean;
+  static equals(a: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined, b: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SelectAccount.Reply
+ * @generated from message land.gno.gnomobile.v1.SelectAccountResponse
  */
-export declare class SelectAccount_Reply extends Message<SelectAccount_Reply> {
+export declare class SelectAccountResponse extends Message<SelectAccountResponse> {
   /**
    * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
    */
   key?: KeyInfo;
 
-  constructor(data?: PartialMessage<SelectAccount_Reply>);
+  constructor(data?: PartialMessage<SelectAccountResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SelectAccount.Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.SelectAccountResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccount_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccountResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccount_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccountResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccount_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountResponse;
 
-  static equals(a: SelectAccount_Reply | PlainMessage<SelectAccount_Reply> | undefined, b: SelectAccount_Reply | PlainMessage<SelectAccount_Reply> | undefined): boolean;
+  static equals(a: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined, b: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountRequest
  */
-export declare class GetActiveAccount extends Message<GetActiveAccount> {
-  constructor(data?: PartialMessage<GetActiveAccount>);
+export declare class GetActiveAccountRequest extends Message<GetActiveAccountRequest> {
+  constructor(data?: PartialMessage<GetActiveAccountRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.GetActiveAccount";
+  static readonly typeName = "land.gno.gnomobile.v1.GetActiveAccountRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccount;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccountRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccount;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccountRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccount;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountRequest;
 
-  static equals(a: GetActiveAccount | PlainMessage<GetActiveAccount> | undefined, b: GetActiveAccount | PlainMessage<GetActiveAccount> | undefined): boolean;
+  static equals(a: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined, b: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount.Request
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountResponse
  */
-export declare class GetActiveAccount_Request extends Message<GetActiveAccount_Request> {
-  constructor(data?: PartialMessage<GetActiveAccount_Request>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.GetActiveAccount.Request";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccount_Request;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccount_Request;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccount_Request;
-
-  static equals(a: GetActiveAccount_Request | PlainMessage<GetActiveAccount_Request> | undefined, b: GetActiveAccount_Request | PlainMessage<GetActiveAccount_Request> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount.Reply
- */
-export declare class GetActiveAccount_Reply extends Message<GetActiveAccount_Reply> {
+export declare class GetActiveAccountResponse extends Message<GetActiveAccountResponse> {
   /**
    * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
    */
   key?: KeyInfo;
 
-  constructor(data?: PartialMessage<GetActiveAccount_Reply>);
+  constructor(data?: PartialMessage<GetActiveAccountResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.GetActiveAccount.Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.GetActiveAccountResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccount_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccountResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccount_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccountResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccount_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountResponse;
 
-  static equals(a: GetActiveAccount_Reply | PlainMessage<GetActiveAccount_Reply> | undefined, b: GetActiveAccount_Reply | PlainMessage<GetActiveAccount_Reply> | undefined): boolean;
+  static equals(a: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined, b: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined): boolean;
 }
 
 /**
@@ -460,27 +384,27 @@ export declare class HelloRequest extends Message<HelloRequest> {
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.HelloReply
+ * @generated from message land.gno.gnomobile.v1.HelloResponse
  */
-export declare class HelloReply extends Message<HelloReply> {
+export declare class HelloResponse extends Message<HelloResponse> {
   /**
    * @generated from field: string greeting = 1;
    */
   greeting: string;
 
-  constructor(data?: PartialMessage<HelloReply>);
+  constructor(data?: PartialMessage<HelloResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.HelloReply";
+  static readonly typeName = "land.gno.gnomobile.v1.HelloResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HelloReply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HelloResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HelloReply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HelloResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloReply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloResponse;
 
-  static equals(a: HelloReply | PlainMessage<HelloReply> | undefined, b: HelloReply | PlainMessage<HelloReply> | undefined): boolean;
+  static equals(a: HelloResponse | PlainMessage<HelloResponse> | undefined, b: HelloResponse | PlainMessage<HelloResponse> | undefined): boolean;
 }
 
 /**

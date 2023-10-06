@@ -15,26 +15,26 @@ import (
 
 // Set the connection addresse for the remote node. If you don't call this, the default is
 // "127.0.0.1:26657"
-func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemote_Request]) (*connect.Response[rpc.SetRemote_Reply], error) {
+func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error) {
 	s.client.RPCClient = rpcclient.NewHTTP(req.Msg.Remote, "/websocket")
-	return connect.NewResponse(&rpc.SetRemote_Reply{}), nil
+	return connect.NewResponse(&rpc.SetRemoteResponse{}), nil
 }
 
 // Set the chain ID for the remote node. If you don't call this, the default is "dev"
-func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error) {
+func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	s.getSigner().ChainID = req.Msg.ChainID
-	return connect.NewResponse(&rpc.SetChainID_Reply{}), nil
+	return connect.NewResponse(&rpc.SetChainIDResponse{}), nil
 }
 
 // Set the password for the account in the keybase, used for later operations
-func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error) {
+func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
 	s.getSigner().Password = req.Msg.Password
-	return connect.NewResponse(&rpc.SetPassword_Reply{}), nil
+	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
 
 // Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
 // random number generator. This can be used as the mnemonic in CreateAccount.
-func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhrase_Request]) (*connect.Response[rpc.GenerateRecoveryPhrase_Reply], error) {
+func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
 	const mnemonicEntropySize = 256
 	entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
 	if err != nil {
@@ -46,7 +46,7 @@ func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *conn
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.GenerateRecoveryPhrase_Reply{Phrase: phrase}), nil
+	return connect.NewResponse(&rpc.GenerateRecoveryPhraseResponse{Phrase: phrase}), nil
 }
 
 func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {
@@ -74,7 +74,7 @@ func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {
 }
 
 // Get the keys informations in the keybase
-func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfo_Request]) (*connect.Response[rpc.ListKeyInfo_Reply], error) {
+func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
 
 	keys, err := s.getSigner().Keybase.List()
@@ -93,11 +93,11 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request
 		formatedKeys = append(formatedKeys, info)
 	}
 
-	return connect.NewResponse(&rpc.ListKeyInfo_Reply{Keys: formatedKeys}), nil
+	return connect.NewResponse(&rpc.ListKeyInfoResponse{Keys: formatedKeys}), nil
 }
 
 // Create a new account in the keybase
-func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccount_Request]) (*connect.Response[rpc.CreateAccount_Reply], error) {
+func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {
 	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	key, err := s.getSigner().Keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
@@ -110,11 +110,11 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Reque
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.CreateAccount_Reply{Key: info}), nil
+	return connect.NewResponse(&rpc.CreateAccountResponse{Key: info}), nil
 }
 
 // SelectAccount selects the active account to use for later operations
-func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccount_Request]) (*connect.Response[rpc.SelectAccount_Reply], error) {
+func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
@@ -132,11 +132,11 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	}
 
 	s.getSigner().Account = req.Msg.NameOrBech32
-	return connect.NewResponse(&rpc.SelectAccount_Reply{Key: info}), nil
+	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
 }
 
 // GetActiveAccount gets the active account which was set by SelectAccount
-func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccount_Request]) (*connect.Response[rpc.GetActiveAccount_Reply], error) {
+func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
 
 	s.lock.Lock()
@@ -152,11 +152,11 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.GetActiveAccount_Reply{Key: info}), nil
+	return connect.NewResponse(&rpc.GetActiveAccountResponse{Key: info}), nil
 }
 
 // Make an ABCI query to the remote node.
-func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.Query_Request]) (*connect.Response[rpc.Query_Reply], error) {
+func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	s.logger.Debug("Query", zap.String("path", req.Msg.Path), zap.ByteString("data", req.Msg.Data))
 
 	cfg := gnoclient.QueryCfg{
@@ -169,11 +169,11 @@ func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.Q
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.Query_Reply{Result: bres.Response.Data}), nil
+	return connect.NewResponse(&rpc.QueryResponse{Result: bres.Response.Data}), nil
 }
 
 // Call a specific realm function.
-func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Call_Request]) (*connect.Response[rpc.Call_Reply], error) {
+func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
 	if s.activeAccount == nil {
@@ -195,12 +195,12 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.Call_Reply{Result: bres.DeliverTx.Data}), nil
+	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil
 }
 
 // Hello is for debug purposes
-func (s *gnomobileService) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloReply], error) {
-	return connect.NewResponse(&rpc.HelloReply{
+func (s *gnomobileService) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
+	return connect.NewResponse(&rpc.HelloResponse{
 		Greeting: "Hello " + req.Msg.Name,
 	}), nil
 }

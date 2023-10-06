@@ -9,181 +9,181 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 /**
  * messages
  *
- * @generated from message land.gno.gnomobile.v1.SetRemote_Request
+ * @generated from message land.gno.gnomobile.v1.SetRemoteRequest
  */
-export declare class SetRemote_Request extends Message<SetRemote_Request> {
+export declare class SetRemoteRequest extends Message<SetRemoteRequest> {
   /**
    * @generated from field: string Remote = 1;
    */
   Remote: string;
 
-  constructor(data?: PartialMessage<SetRemote_Request>);
+  constructor(data?: PartialMessage<SetRemoteRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetRemote_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.SetRemoteRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetRemote_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetRemoteRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetRemote_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetRemoteRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemote_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemoteRequest;
 
-  static equals(a: SetRemote_Request | PlainMessage<SetRemote_Request> | undefined, b: SetRemote_Request | PlainMessage<SetRemote_Request> | undefined): boolean;
+  static equals(a: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined, b: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetRemote_Reply
+ * @generated from message land.gno.gnomobile.v1.SetRemoteResponse
  */
-export declare class SetRemote_Reply extends Message<SetRemote_Reply> {
-  constructor(data?: PartialMessage<SetRemote_Reply>);
+export declare class SetRemoteResponse extends Message<SetRemoteResponse> {
+  constructor(data?: PartialMessage<SetRemoteResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetRemote_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.SetRemoteResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetRemote_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetRemoteResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetRemote_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetRemoteResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemote_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemoteResponse;
 
-  static equals(a: SetRemote_Reply | PlainMessage<SetRemote_Reply> | undefined, b: SetRemote_Reply | PlainMessage<SetRemote_Reply> | undefined): boolean;
+  static equals(a: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined, b: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetChainID_Request
+ * @generated from message land.gno.gnomobile.v1.SetChainIDRequest
  */
-export declare class SetChainID_Request extends Message<SetChainID_Request> {
+export declare class SetChainIDRequest extends Message<SetChainIDRequest> {
   /**
    * @generated from field: string ChainID = 1;
    */
   ChainID: string;
 
-  constructor(data?: PartialMessage<SetChainID_Request>);
+  constructor(data?: PartialMessage<SetChainIDRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetChainID_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.SetChainIDRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetChainID_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetChainIDRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetChainID_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetChainIDRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainID_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainIDRequest;
 
-  static equals(a: SetChainID_Request | PlainMessage<SetChainID_Request> | undefined, b: SetChainID_Request | PlainMessage<SetChainID_Request> | undefined): boolean;
+  static equals(a: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined, b: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetChainID_Reply
+ * @generated from message land.gno.gnomobile.v1.SetChainIDResponse
  */
-export declare class SetChainID_Reply extends Message<SetChainID_Reply> {
-  constructor(data?: PartialMessage<SetChainID_Reply>);
+export declare class SetChainIDResponse extends Message<SetChainIDResponse> {
+  constructor(data?: PartialMessage<SetChainIDResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetChainID_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.SetChainIDResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetChainID_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetChainIDResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetChainID_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetChainIDResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainID_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainIDResponse;
 
-  static equals(a: SetChainID_Reply | PlainMessage<SetChainID_Reply> | undefined, b: SetChainID_Reply | PlainMessage<SetChainID_Reply> | undefined): boolean;
+  static equals(a: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined, b: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetPassword_Request
+ * @generated from message land.gno.gnomobile.v1.SetPasswordRequest
  */
-export declare class SetPassword_Request extends Message<SetPassword_Request> {
+export declare class SetPasswordRequest extends Message<SetPasswordRequest> {
   /**
    * @generated from field: string Password = 1;
    */
   Password: string;
 
-  constructor(data?: PartialMessage<SetPassword_Request>);
+  constructor(data?: PartialMessage<SetPasswordRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetPassword_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.SetPasswordRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetPassword_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetPasswordRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetPassword_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetPasswordRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPassword_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPasswordRequest;
 
-  static equals(a: SetPassword_Request | PlainMessage<SetPassword_Request> | undefined, b: SetPassword_Request | PlainMessage<SetPassword_Request> | undefined): boolean;
+  static equals(a: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined, b: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetPassword_Reply
+ * @generated from message land.gno.gnomobile.v1.SetPasswordResponse
  */
-export declare class SetPassword_Reply extends Message<SetPassword_Reply> {
-  constructor(data?: PartialMessage<SetPassword_Reply>);
+export declare class SetPasswordResponse extends Message<SetPasswordResponse> {
+  constructor(data?: PartialMessage<SetPasswordResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.SetPassword_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.SetPasswordResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetPassword_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetPasswordResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetPassword_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetPasswordResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPassword_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPasswordResponse;
 
-  static equals(a: SetPassword_Reply | PlainMessage<SetPassword_Reply> | undefined, b: SetPassword_Reply | PlainMessage<SetPassword_Reply> | undefined): boolean;
+  static equals(a: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined, b: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request
+ * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest
  */
-export declare class GenerateRecoveryPhrase_Request extends Message<GenerateRecoveryPhrase_Request> {
-  constructor(data?: PartialMessage<GenerateRecoveryPhrase_Request>);
+export declare class GenerateRecoveryPhraseRequest extends Message<GenerateRecoveryPhraseRequest> {
+  constructor(data?: PartialMessage<GenerateRecoveryPhraseRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GenerateRecoveryPhrase_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GenerateRecoveryPhraseRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GenerateRecoveryPhrase_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhrase_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseRequest;
 
-  static equals(a: GenerateRecoveryPhrase_Request | PlainMessage<GenerateRecoveryPhrase_Request> | undefined, b: GenerateRecoveryPhrase_Request | PlainMessage<GenerateRecoveryPhrase_Request> | undefined): boolean;
+  static equals(a: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined, b: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply
+ * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
  */
-export declare class GenerateRecoveryPhrase_Reply extends Message<GenerateRecoveryPhrase_Reply> {
+export declare class GenerateRecoveryPhraseResponse extends Message<GenerateRecoveryPhraseResponse> {
   /**
    * @generated from field: string Phrase = 1;
    */
   Phrase: string;
 
-  constructor(data?: PartialMessage<GenerateRecoveryPhrase_Reply>);
+  constructor(data?: PartialMessage<GenerateRecoveryPhraseResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GenerateRecoveryPhrase_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GenerateRecoveryPhraseResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GenerateRecoveryPhrase_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhrase_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseResponse;
 
-  static equals(a: GenerateRecoveryPhrase_Reply | PlainMessage<GenerateRecoveryPhrase_Reply> | undefined, b: GenerateRecoveryPhrase_Reply | PlainMessage<GenerateRecoveryPhrase_Reply> | undefined): boolean;
+  static equals(a: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined, b: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.Query_Request
+ * @generated from message land.gno.gnomobile.v1.QueryRequest
  */
-export declare class Query_Request extends Message<Query_Request> {
+export declare class QueryRequest extends Message<QueryRequest> {
   /**
    * @generated from field: string Path = 1;
    */
@@ -194,49 +194,49 @@ export declare class Query_Request extends Message<Query_Request> {
    */
   Data: Uint8Array;
 
-  constructor(data?: PartialMessage<Query_Request>);
+  constructor(data?: PartialMessage<QueryRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.Query_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.QueryRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Query_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Query_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Query_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryRequest;
 
-  static equals(a: Query_Request | PlainMessage<Query_Request> | undefined, b: Query_Request | PlainMessage<Query_Request> | undefined): boolean;
+  static equals(a: QueryRequest | PlainMessage<QueryRequest> | undefined, b: QueryRequest | PlainMessage<QueryRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.Query_Reply
+ * @generated from message land.gno.gnomobile.v1.QueryResponse
  */
-export declare class Query_Reply extends Message<Query_Reply> {
+export declare class QueryResponse extends Message<QueryResponse> {
   /**
    * @generated from field: bytes Result = 1;
    */
   Result: Uint8Array;
 
-  constructor(data?: PartialMessage<Query_Reply>);
+  constructor(data?: PartialMessage<QueryResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.Query_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.QueryResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Query_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Query_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Query_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryResponse;
 
-  static equals(a: Query_Reply | PlainMessage<Query_Reply> | undefined, b: Query_Reply | PlainMessage<Query_Reply> | undefined): boolean;
+  static equals(a: QueryResponse | PlainMessage<QueryResponse> | undefined, b: QueryResponse | PlainMessage<QueryResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.Call_Request
+ * @generated from message land.gno.gnomobile.v1.CallRequest
  */
-export declare class Call_Request extends Message<Call_Request> {
+export declare class CallRequest extends Message<CallRequest> {
   /**
    * @generated from field: string PackagePath = 1;
    */
@@ -272,42 +272,42 @@ export declare class Call_Request extends Message<Call_Request> {
    */
   Memo: string;
 
-  constructor(data?: PartialMessage<Call_Request>);
+  constructor(data?: PartialMessage<CallRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.Call_Request";
+  static readonly typeName = "land.gno.gnomobile.v1.CallRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Call_Request;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CallRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Call_Request;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CallRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Call_Request;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CallRequest;
 
-  static equals(a: Call_Request | PlainMessage<Call_Request> | undefined, b: Call_Request | PlainMessage<Call_Request> | undefined): boolean;
+  static equals(a: CallRequest | PlainMessage<CallRequest> | undefined, b: CallRequest | PlainMessage<CallRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnomobile.v1.Call_Reply
+ * @generated from message land.gno.gnomobile.v1.CallResponse
  */
-export declare class Call_Reply extends Message<Call_Reply> {
+export declare class CallResponse extends Message<CallResponse> {
   /**
    * @generated from field: bytes Result = 1;
    */
   Result: Uint8Array;
 
-  constructor(data?: PartialMessage<Call_Reply>);
+  constructor(data?: PartialMessage<CallResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnomobile.v1.Call_Reply";
+  static readonly typeName = "land.gno.gnomobile.v1.CallResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Call_Reply;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CallResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Call_Reply;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CallResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Call_Reply;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CallResponse;
 
-  static equals(a: Call_Reply | PlainMessage<Call_Reply> | undefined, b: Call_Reply | PlainMessage<Call_Reply> | undefined): boolean;
+  static equals(a: CallResponse | PlainMessage<CallResponse> | undefined, b: CallResponse | PlainMessage<CallResponse> | undefined): boolean;
 }
 

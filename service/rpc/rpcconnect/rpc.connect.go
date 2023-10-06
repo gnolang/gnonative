@@ -69,34 +69,34 @@ const (
 type GnomobileServiceClient interface {
 	// Set the connection addresse for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
-	SetRemote(context.Context, *connect.Request[rpc.SetRemote_Request]) (*connect.Response[rpc.SetRemote_Reply], error)
+	SetRemote(context.Context, *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error)
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
-	SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error)
+	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
 	// Set the password for the account in the keybase, used for later operations
-	SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error)
+	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
-	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhrase_Request]) (*connect.Response[rpc.GenerateRecoveryPhrase_Reply], error)
+	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
 	// Get the keys informations in the keybase
-	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfo_Request]) (*connect.Response[rpc.ListKeyInfo_Reply], error)
+	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
 	// Create a new account the keybase using the name an password specified by
 	// SetAccount
-	CreateAccount(context.Context, *connect.Request[rpc.CreateAccount_Request]) (*connect.Response[rpc.CreateAccount_Reply], error)
+	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
-	SelectAccount(context.Context, *connect.Request[rpc.SelectAccount_Request]) (*connect.Response[rpc.SelectAccount_Reply], error)
+	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
-	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccount_Request]) (*connect.Response[rpc.GetActiveAccount_Reply], error)
+	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
 	// Make an ABCI query to the remote node.
-	Query(context.Context, *connect.Request[rpc.Query_Request]) (*connect.Response[rpc.Query_Reply], error)
+	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
-	Call(context.Context, *connect.Request[rpc.Call_Request]) (*connect.Response[rpc.Call_Reply], error)
+	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Hello is for debug purposes
-	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloReply], error)
+	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
 }
 
 // NewGnomobileServiceClient constructs a client for the land.gno.gnomobile.v1.GnomobileService
@@ -109,57 +109,57 @@ type GnomobileServiceClient interface {
 func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GnomobileServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &gnomobileServiceClient{
-		setRemote: connect.NewClient[rpc.SetRemote_Request, rpc.SetRemote_Reply](
+		setRemote: connect.NewClient[rpc.SetRemoteRequest, rpc.SetRemoteResponse](
 			httpClient,
 			baseURL+GnomobileServiceSetRemoteProcedure,
 			opts...,
 		),
-		setChainID: connect.NewClient[rpc.SetChainID_Request, rpc.SetChainID_Reply](
+		setChainID: connect.NewClient[rpc.SetChainIDRequest, rpc.SetChainIDResponse](
 			httpClient,
 			baseURL+GnomobileServiceSetChainIDProcedure,
 			opts...,
 		),
-		setPassword: connect.NewClient[rpc.SetPassword_Request, rpc.SetPassword_Reply](
+		setPassword: connect.NewClient[rpc.SetPasswordRequest, rpc.SetPasswordResponse](
 			httpClient,
 			baseURL+GnomobileServiceSetPasswordProcedure,
 			opts...,
 		),
-		generateRecoveryPhrase: connect.NewClient[rpc.GenerateRecoveryPhrase_Request, rpc.GenerateRecoveryPhrase_Reply](
+		generateRecoveryPhrase: connect.NewClient[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse](
 			httpClient,
 			baseURL+GnomobileServiceGenerateRecoveryPhraseProcedure,
 			opts...,
 		),
-		listKeyInfo: connect.NewClient[rpc.ListKeyInfo_Request, rpc.ListKeyInfo_Reply](
+		listKeyInfo: connect.NewClient[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse](
 			httpClient,
 			baseURL+GnomobileServiceListKeyInfoProcedure,
 			opts...,
 		),
-		createAccount: connect.NewClient[rpc.CreateAccount_Request, rpc.CreateAccount_Reply](
+		createAccount: connect.NewClient[rpc.CreateAccountRequest, rpc.CreateAccountResponse](
 			httpClient,
 			baseURL+GnomobileServiceCreateAccountProcedure,
 			opts...,
 		),
-		selectAccount: connect.NewClient[rpc.SelectAccount_Request, rpc.SelectAccount_Reply](
+		selectAccount: connect.NewClient[rpc.SelectAccountRequest, rpc.SelectAccountResponse](
 			httpClient,
 			baseURL+GnomobileServiceSelectAccountProcedure,
 			opts...,
 		),
-		getActiveAccount: connect.NewClient[rpc.GetActiveAccount_Request, rpc.GetActiveAccount_Reply](
+		getActiveAccount: connect.NewClient[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse](
 			httpClient,
 			baseURL+GnomobileServiceGetActiveAccountProcedure,
 			opts...,
 		),
-		query: connect.NewClient[rpc.Query_Request, rpc.Query_Reply](
+		query: connect.NewClient[rpc.QueryRequest, rpc.QueryResponse](
 			httpClient,
 			baseURL+GnomobileServiceQueryProcedure,
 			opts...,
 		),
-		call: connect.NewClient[rpc.Call_Request, rpc.Call_Reply](
+		call: connect.NewClient[rpc.CallRequest, rpc.CallResponse](
 			httpClient,
 			baseURL+GnomobileServiceCallProcedure,
 			opts...,
 		),
-		hello: connect.NewClient[rpc.HelloRequest, rpc.HelloReply](
+		hello: connect.NewClient[rpc.HelloRequest, rpc.HelloResponse](
 			httpClient,
 			baseURL+GnomobileServiceHelloProcedure,
 			opts...,
@@ -169,71 +169,71 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // gnomobileServiceClient implements GnomobileServiceClient.
 type gnomobileServiceClient struct {
-	setRemote              *connect.Client[rpc.SetRemote_Request, rpc.SetRemote_Reply]
-	setChainID             *connect.Client[rpc.SetChainID_Request, rpc.SetChainID_Reply]
-	setPassword            *connect.Client[rpc.SetPassword_Request, rpc.SetPassword_Reply]
-	generateRecoveryPhrase *connect.Client[rpc.GenerateRecoveryPhrase_Request, rpc.GenerateRecoveryPhrase_Reply]
-	listKeyInfo            *connect.Client[rpc.ListKeyInfo_Request, rpc.ListKeyInfo_Reply]
-	createAccount          *connect.Client[rpc.CreateAccount_Request, rpc.CreateAccount_Reply]
-	selectAccount          *connect.Client[rpc.SelectAccount_Request, rpc.SelectAccount_Reply]
-	getActiveAccount       *connect.Client[rpc.GetActiveAccount_Request, rpc.GetActiveAccount_Reply]
-	query                  *connect.Client[rpc.Query_Request, rpc.Query_Reply]
-	call                   *connect.Client[rpc.Call_Request, rpc.Call_Reply]
-	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloReply]
+	setRemote              *connect.Client[rpc.SetRemoteRequest, rpc.SetRemoteResponse]
+	setChainID             *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
+	setPassword            *connect.Client[rpc.SetPasswordRequest, rpc.SetPasswordResponse]
+	generateRecoveryPhrase *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
+	listKeyInfo            *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
+	createAccount          *connect.Client[rpc.CreateAccountRequest, rpc.CreateAccountResponse]
+	selectAccount          *connect.Client[rpc.SelectAccountRequest, rpc.SelectAccountResponse]
+	getActiveAccount       *connect.Client[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse]
+	query                  *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
+	call                   *connect.Client[rpc.CallRequest, rpc.CallResponse]
+	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
 }
 
 // SetRemote calls land.gno.gnomobile.v1.GnomobileService.SetRemote.
-func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemote_Request]) (*connect.Response[rpc.SetRemote_Reply], error) {
+func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error) {
 	return c.setRemote.CallUnary(ctx, req)
 }
 
 // SetChainID calls land.gno.gnomobile.v1.GnomobileService.SetChainID.
-func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error) {
+func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	return c.setChainID.CallUnary(ctx, req)
 }
 
 // SetPassword calls land.gno.gnomobile.v1.GnomobileService.SetPassword.
-func (c *gnomobileServiceClient) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error) {
+func (c *gnomobileServiceClient) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
 	return c.setPassword.CallUnary(ctx, req)
 }
 
 // GenerateRecoveryPhrase calls land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase.
-func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhrase_Request]) (*connect.Response[rpc.GenerateRecoveryPhrase_Reply], error) {
+func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
 	return c.generateRecoveryPhrase.CallUnary(ctx, req)
 }
 
 // ListKeyInfo calls land.gno.gnomobile.v1.GnomobileService.ListKeyInfo.
-func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfo_Request]) (*connect.Response[rpc.ListKeyInfo_Reply], error) {
+func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return c.listKeyInfo.CallUnary(ctx, req)
 }
 
 // CreateAccount calls land.gno.gnomobile.v1.GnomobileService.CreateAccount.
-func (c *gnomobileServiceClient) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccount_Request]) (*connect.Response[rpc.CreateAccount_Reply], error) {
+func (c *gnomobileServiceClient) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {
 	return c.createAccount.CallUnary(ctx, req)
 }
 
 // SelectAccount calls land.gno.gnomobile.v1.GnomobileService.SelectAccount.
-func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccount_Request]) (*connect.Response[rpc.SelectAccount_Reply], error) {
+func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error) {
 	return c.selectAccount.CallUnary(ctx, req)
 }
 
 // GetActiveAccount calls land.gno.gnomobile.v1.GnomobileService.GetActiveAccount.
-func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccount_Request]) (*connect.Response[rpc.GetActiveAccount_Reply], error) {
+func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	return c.getActiveAccount.CallUnary(ctx, req)
 }
 
 // Query calls land.gno.gnomobile.v1.GnomobileService.Query.
-func (c *gnomobileServiceClient) Query(ctx context.Context, req *connect.Request[rpc.Query_Request]) (*connect.Response[rpc.Query_Reply], error) {
+func (c *gnomobileServiceClient) Query(ctx context.Context, req *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	return c.query.CallUnary(ctx, req)
 }
 
 // Call calls land.gno.gnomobile.v1.GnomobileService.Call.
-func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[rpc.Call_Request]) (*connect.Response[rpc.Call_Reply], error) {
+func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	return c.call.CallUnary(ctx, req)
 }
 
 // Hello calls land.gno.gnomobile.v1.GnomobileService.Hello.
-func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloReply], error) {
+func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
 }
 
@@ -242,34 +242,34 @@ func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request
 type GnomobileServiceHandler interface {
 	// Set the connection addresse for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
-	SetRemote(context.Context, *connect.Request[rpc.SetRemote_Request]) (*connect.Response[rpc.SetRemote_Reply], error)
+	SetRemote(context.Context, *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error)
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
-	SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error)
+	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
 	// Set the password for the account in the keybase, used for later operations
-	SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error)
+	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
-	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhrase_Request]) (*connect.Response[rpc.GenerateRecoveryPhrase_Reply], error)
+	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
 	// Get the keys informations in the keybase
-	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfo_Request]) (*connect.Response[rpc.ListKeyInfo_Reply], error)
+	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
 	// Create a new account the keybase using the name an password specified by
 	// SetAccount
-	CreateAccount(context.Context, *connect.Request[rpc.CreateAccount_Request]) (*connect.Response[rpc.CreateAccount_Reply], error)
+	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
-	SelectAccount(context.Context, *connect.Request[rpc.SelectAccount_Request]) (*connect.Response[rpc.SelectAccount_Reply], error)
+	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
-	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccount_Request]) (*connect.Response[rpc.GetActiveAccount_Reply], error)
+	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
 	// Make an ABCI query to the remote node.
-	Query(context.Context, *connect.Request[rpc.Query_Request]) (*connect.Response[rpc.Query_Reply], error)
+	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
-	Call(context.Context, *connect.Request[rpc.Call_Request]) (*connect.Response[rpc.Call_Reply], error)
+	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Hello is for debug purposes
-	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloReply], error)
+	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
 }
 
 // NewGnomobileServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -366,46 +366,46 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 // UnimplementedGnomobileServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedGnomobileServiceHandler struct{}
 
-func (UnimplementedGnomobileServiceHandler) SetRemote(context.Context, *connect.Request[rpc.SetRemote_Request]) (*connect.Response[rpc.SetRemote_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) SetRemote(context.Context, *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetRemote is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect.Request[rpc.SetChainID_Request]) (*connect.Response[rpc.SetChainID_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetChainID is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[rpc.SetPassword_Request]) (*connect.Response[rpc.SetPassword_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetPassword is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhrase_Request]) (*connect.Response[rpc.GenerateRecoveryPhrase_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfo_Request]) (*connect.Response[rpc.ListKeyInfo_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.ListKeyInfo is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) CreateAccount(context.Context, *connect.Request[rpc.CreateAccount_Request]) (*connect.Response[rpc.CreateAccount_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.CreateAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SelectAccount(context.Context, *connect.Request[rpc.SelectAccount_Request]) (*connect.Response[rpc.SelectAccount_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SelectAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccount_Request]) (*connect.Response[rpc.GetActiveAccount_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetActiveAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Request[rpc.Query_Request]) (*connect.Response[rpc.Query_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Query is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.Call_Request]) (*connect.Response[rpc.Call_Reply], error) {
+func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Call is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloReply], error) {
+func (UnimplementedGnomobileServiceHandler) Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Hello is not implemented"))
 }
