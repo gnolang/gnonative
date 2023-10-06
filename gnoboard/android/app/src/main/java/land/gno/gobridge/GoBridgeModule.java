@@ -101,11 +101,11 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setPassword(String password, Promise promise) {
-        Gnomobiletypes.SetPassword_Request request = Gnomobiletypes.SetPassword_Request.newBuilder()
+        Gnomobiletypes.SetPasswordRequest request = Gnomobiletypes.SetPasswordRequest.newBuilder()
             .setPassword(password)
             .build();
 
-        Gnomobiletypes.SetPassword_Reply reply;
+        Gnomobiletypes.SetPasswordResponse reply;
         try {
             reply = blockingStub.setPassword(request);
         } catch (StatusRuntimeException e) {
@@ -118,9 +118,9 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void generateRecoveryPhrase(Promise promise) {
-        Gnomobiletypes.GenerateRecoveryPhrase_Request request = Gnomobiletypes.GenerateRecoveryPhrase_Request.newBuilder()
+        Gnomobiletypes.GenerateRecoveryPhraseRequest request = Gnomobiletypes.GenerateRecoveryPhraseRequest.newBuilder()
             .build();
-        Gnomobiletypes.GenerateRecoveryPhrase_Reply reply;
+        Gnomobiletypes.GenerateRecoveryPhraseResponse reply;
         try {
             reply = blockingStub.generateRecoveryPhrase(request);
         } catch (StatusRuntimeException e) {
@@ -142,9 +142,9 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void listKeyInfo(Promise promise) {
-        Rpc.ListKeyInfo.Request request = Rpc.ListKeyInfo.Request.newBuilder()
+        Rpc.ListKeyInfoRequest request = Rpc.ListKeyInfoRequest.newBuilder()
             .build();
-        Rpc.ListKeyInfo.Reply reply;
+        Rpc.ListKeyInfoResponse reply;
         try {
             reply = blockingStub.listKeyInfo(request);
         } catch (StatusRuntimeException e) {
@@ -164,7 +164,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void createAccount(String nameOrBech32, String mnemonic, String bip39Passwd, String password, int account, int index, Promise promise) {
-        Rpc.CreateAccount.Request request = Rpc.CreateAccount.Request.newBuilder()
+        Rpc.CreateAccountRequest request = Rpc.CreateAccountRequest.newBuilder()
             .setNameOrBech32(nameOrBech32)
             .setMnemonic(mnemonic)
             .setBip39Passwd(bip39Passwd)
@@ -173,7 +173,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .setIndex(index)
             .build();
 
-        Rpc.CreateAccount.Reply reply;
+        Rpc.CreateAccountResponse reply;
         try {
             reply = blockingStub.createAccount(request);
         } catch (StatusRuntimeException e) {
@@ -187,11 +187,11 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void selectAccount(String nameOrBech32, Promise promise) {
-        Rpc.SelectAccount.Request request = Rpc.SelectAccount.Request.newBuilder()
+        Rpc.SelectAccountRequest request = Rpc.SelectAccountRequest.newBuilder()
             .setNameOrBech32(nameOrBech32)
             .build();
 
-        Rpc.SelectAccount.Reply reply;
+        Rpc.SelectAccountResponse reply;
         try {
             reply = blockingStub.selectAccount(request);
         } catch (StatusRuntimeException e) {
@@ -204,9 +204,9 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getActiveAccount(Promise promise) {
-        Rpc.GetActiveAccount.Request request = Rpc.GetActiveAccount.Request.newBuilder()
+        Rpc.GetActiveAccountRequest request = Rpc.GetActiveAccountRequest.newBuilder()
             .build();
-        Rpc.GetActiveAccount.Reply reply;
+        Rpc.GetActiveAccountResponse reply;
         try {
             reply = blockingStub.getActiveAccount(request);
         } catch (StatusRuntimeException e) {
@@ -219,20 +219,20 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void query(String path, String data_b64, Promise promise) {
-        Gnomobiletypes.Query_Request request = Gnomobiletypes.Query_Request.newBuilder()
+        Gnomobiletypes.QueryRequest request = Gnomobiletypes.QueryRequest.newBuilder()
             .setPath(path)
             .setData(ByteString.copyFrom(Base64.decode(data_b64, Base64.DEFAULT)))
             .build();
 
-        Gnomobiletypes.Query_Reply reply;
+        Gnomobiletypes.QueryResponse response;
         try {
-            reply = blockingStub.query(request);
+            response = blockingStub.query(request);
         } catch (StatusRuntimeException e) {
             Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
             promise.reject(e);
             return;
         }
-        promise.resolve(Base64.encodeToString(reply.getResult().toByteArray(), Base64.NO_WRAP));
+        promise.resolve(Base64.encodeToString(response.getResult().toByteArray(), Base64.NO_WRAP));
     }
 
     @ReactMethod
@@ -242,7 +242,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             argList.add(args.getString(i));
         }
 
-        Gnomobiletypes.Call_Request request = Gnomobiletypes.Call_Request.newBuilder()
+        Gnomobiletypes.CallRequest request = Gnomobiletypes.CallRequest.newBuilder()
             .setPackagePath(packagePath)
             .setFnc(fnc)
             .addAllArgs(argList)
@@ -250,15 +250,15 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             .setGasWanted(gasWanted)
             .build();
 
-        Gnomobiletypes.Call_Reply reply;
+        Gnomobiletypes.CallResponse response;
         try {
-            reply = blockingStub.call(request);
+            response = blockingStub.call(request);
         } catch (StatusRuntimeException e) {
             Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
             promise.reject(e);
             return;
         }
-        promise.resolve(Base64.encodeToString(reply.getResult().toByteArray(), Base64.NO_WRAP));
+        promise.resolve(Base64.encodeToString(response.getResult().toByteArray(), Base64.NO_WRAP));
     }
 
     @ReactMethod

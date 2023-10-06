@@ -1,6 +1,6 @@
 ceb2922aa6e25cc4b9256163c5a31443770af3a6  Makefile
 3f8e7619fa38e476bb3d35923f6c2676cfe8809b  buf.gen.yaml
-4e57165005d7c4afae731b3311e9c62746f5a890  service/gnomobiletypes/gnomobiletypes.go
-4306c1e8d4f120175823c905633dcab4f4974acc  service/gnomobiletypes/package.go
-07225217fa6e653f296390d7a9ecca3cb7adddca  service/rpc/gnomobiletypes.proto
-a03e98cf8e399bac2bfcae99544a8dc9b869d0f1  service/rpc/rpc.proto
+f09c6e6a1c9c07263badedc8da8d96911a2ac53f  service/gnomobiletypes/gnomobiletypes.go
+24ece99275cb9cff74625908cb3a01e0db8fcf01  service/gnomobiletypes/package.go
+91ea6c9f258475f7a1291a6743f90e76f70dde88  service/rpc/gnomobiletypes.proto
+a099b6098eca1c850a890bd969f13941362e078a  service/rpc/rpc.proto

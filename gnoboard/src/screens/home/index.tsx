@@ -17,10 +17,10 @@ import {
 import { PromiseClient } from "@connectrpc/connect";
 import { createClient } from "@gno/grpc/client";
 import {
-  Call_Reply,
-  Call_Request,
-  SetPassword_Reply,
-  SetPassword_Request,
+  CallReply,
+  CallRequest,
+  SetPasswordReply,
+  SetPasswordRequest,
 } from "@gno/api/gnomobiletypes_pb";
 
 function HomeScreen() {
@@ -50,7 +50,7 @@ function HomeScreen() {
       let client = createClient(port);
 
       await client.setPassword(
-        new SetPassword_Request({
+        new SetPasswordRequest({
           Password: "password",
         }),
       );

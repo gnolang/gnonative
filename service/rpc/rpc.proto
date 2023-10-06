@@ -2,55 +2,53 @@ syntax = "proto3";
 
 package land.gno.gnomobile.v1;
 
+import "gnomobiletypes.proto";
+
 option go_package = "github.com/gnolang/gnomobile/service/rpc";
 option objc_class_prefix = "RTG";
-
-import "gnomobiletypes.proto";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
   // Set the connection addresse for the remote node. If you don't call this,
   // the default is "127.0.0.1:26657"
-  rpc SetRemote(SetRemote_Request) returns (SetRemote_Reply);
+  rpc SetRemote(SetRemoteRequest) returns (SetRemoteResponse);
 
   // Set the chain ID for the remote node. If you don't call this, the default
   // is "dev"
-  rpc SetChainID(SetChainID_Request) returns (SetChainID_Reply);
+  rpc SetChainID(SetChainIDRequest) returns (SetChainIDResponse);
 
   // Set the password for the account in the keybase, used for later operations
-  rpc SetPassword(SetPassword_Request) returns (SetPassword_Reply);
+  rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
   // Generate a recovery phrase of BIP39 mnemonic words using entropy from the
   // crypto library random number generator. This can be used as the mnemonic in
   // CreateAccount.
-  rpc GenerateRecoveryPhrase(GenerateRecoveryPhrase_Request)
-      returns (GenerateRecoveryPhrase_Reply);
+  rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest) returns (GenerateRecoveryPhraseResponse);
 
   // Get the keys informations in the keybase
-  rpc ListKeyInfo(ListKeyInfo.Request) returns (ListKeyInfo.Reply);
+  rpc ListKeyInfo(ListKeyInfoRequest) returns (ListKeyInfoResponse);
 
   // Create a new account the keybase using the name an password specified by
   // SetAccount
-  rpc CreateAccount(CreateAccount.Request) returns (CreateAccount.Reply);
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 
   // SelectAccount selects the active account to use for later operations
-  rpc SelectAccount(SelectAccount.Request) returns (SelectAccount.Reply);
+  rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
   // If there is no active account, then return ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
-  rpc GetActiveAccount(GetActiveAccount.Request)
-      returns (GetActiveAccount.Reply);
+  rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
 
   // Make an ABCI query to the remote node.
-  rpc Query(Query_Request) returns (Query_Reply);
+  rpc Query(QueryRequest) returns (QueryResponse);
 
   // Call a specific realm function.
-  rpc Call(Call_Request) returns (Call_Reply);
+  rpc Call(CallRequest) returns (CallResponse);
 
   // Hello is for debug purposes
-  rpc Hello(HelloRequest) returns (HelloReply);
+  rpc Hello(HelloRequest) returns (HelloResponse);
 }
 
 enum KeyType {
@@ -63,40 +61,50 @@ enum KeyType {
 message KeyInfo {
   KeyType type = 1;
   string name = 2;
-  bytes pubKey = 3;
+  bytes pub_key = 3;
   bytes address = 4;
 }
 
-message ListKeyInfo {
-  message Request {}
-  message Reply { repeated KeyInfo keys = 1; }
+message ListKeyInfoRequest {}
+
+message ListKeyInfoResponse {
+  repeated KeyInfo keys = 1;
 }
 
-message CreateAccount {
-  message Request {
-    string nameOrBech32 = 1;
-    string mnemonic = 2;
-    string bip39Passwd = 3;
-    string password = 4;
-    uint32 account = 5;
-    uint32 index = 6;
-  }
-  message Reply { KeyInfo key = 1; }
+message CreateAccountRequest {
+  string name_or_bech32 = 1;
+  string mnemonic = 2;
+  string bip39_passwd = 3;
+  string password = 4;
+  uint32 account = 5;
+  uint32 index = 6;
 }
 
-message SelectAccount {
-  message Request { string nameOrBech32 = 1; }
-  message Reply { KeyInfo key = 1; }
+message CreateAccountResponse {
+  KeyInfo key = 1;
 }
 
-message GetActiveAccount {
-  message Request {}
-  message Reply { KeyInfo key = 1; }
+message SelectAccountRequest {
+  string name_or_bech32 = 1;
 }
 
-message HelloRequest { string name = 1; }
+message SelectAccountResponse {
+  KeyInfo key = 1;
+}
 
-message HelloReply { string greeting = 1; }
+message GetActiveAccountRequest {}
+
+message GetActiveAccountResponse {
+  KeyInfo key = 1;
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string greeting = 1;
+}
 
 enum ErrCode {
   //----------------
@@ -105,7 +113,7 @@ enum ErrCode {
 
   Undefined = 0; // default value, should never be set manually
 
-  TODO = 1;              // indicates that you plan to create an error later
+  TODO = 1; // indicates that you plan to create an error later
   ErrNotImplemented = 2; // indicates that a method is not implemented yet
   ErrInternal = 3; // indicates an unknown error (without Code), i.e. in gRPC
 
@@ -126,4 +134,6 @@ enum ErrCode {
   ErrRunGRPCServer = 108;
 }
 
-message ErrDetails { repeated ErrCode codes = 1; }
+message ErrDetails {
+  repeated ErrCode codes = 1;
+}

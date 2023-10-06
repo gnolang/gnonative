@@ -8,82 +8,82 @@ import { proto3 } from "@bufbuild/protobuf";
 /**
  * messages
  *
- * @generated from message land.gno.gnomobile.v1.SetRemote_Request
+ * @generated from message land.gno.gnomobile.v1.SetRemoteRequest
  */
-export const SetRemote_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetRemote_Request",
+export const SetRemoteRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetRemoteRequest",
   () => [
     { no: 1, name: "Remote", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetRemote_Reply
+ * @generated from message land.gno.gnomobile.v1.SetRemoteResponse
  */
-export const SetRemote_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetRemote_Reply",
+export const SetRemoteResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetRemoteResponse",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetChainID_Request
+ * @generated from message land.gno.gnomobile.v1.SetChainIDRequest
  */
-export const SetChainID_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetChainID_Request",
+export const SetChainIDRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetChainIDRequest",
   () => [
     { no: 1, name: "ChainID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetChainID_Reply
+ * @generated from message land.gno.gnomobile.v1.SetChainIDResponse
  */
-export const SetChainID_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetChainID_Reply",
+export const SetChainIDResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetChainIDResponse",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetPassword_Request
+ * @generated from message land.gno.gnomobile.v1.SetPasswordRequest
  */
-export const SetPassword_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetPassword_Request",
+export const SetPasswordRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetPasswordRequest",
   () => [
     { no: 1, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SetPassword_Reply
+ * @generated from message land.gno.gnomobile.v1.SetPasswordResponse
  */
-export const SetPassword_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetPassword_Reply",
+export const SetPasswordResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SetPasswordResponse",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request
+ * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest
  */
-export const GenerateRecoveryPhrase_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GenerateRecoveryPhrase_Request",
+export const GenerateRecoveryPhraseRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply
+ * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
  */
-export const GenerateRecoveryPhrase_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GenerateRecoveryPhrase_Reply",
+export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse",
   () => [
     { no: 1, name: "Phrase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.Query_Request
+ * @generated from message land.gno.gnomobile.v1.QueryRequest
  */
-export const Query_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.Query_Request",
+export const QueryRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QueryRequest",
   () => [
     { no: 1, name: "Path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "Data", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
@@ -91,20 +91,20 @@ export const Query_Request = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.Query_Reply
+ * @generated from message land.gno.gnomobile.v1.QueryResponse
  */
-export const Query_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.Query_Reply",
+export const QueryResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QueryResponse",
   () => [
     { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.Call_Request
+ * @generated from message land.gno.gnomobile.v1.CallRequest
  */
-export const Call_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.Call_Request",
+export const CallRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CallRequest",
   () => [
     { no: 1, name: "PackagePath", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "Fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
@@ -117,10 +117,10 @@ export const Call_Request = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.Call_Reply
+ * @generated from message land.gno.gnomobile.v1.CallResponse
  */
-export const Call_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.Call_Reply",
+export const CallResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CallResponse",
   () => [
     { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],

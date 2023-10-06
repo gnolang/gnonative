@@ -181,173 +181,133 @@ public struct Land_Gno_Gnomobile_V1_KeyInfo {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_ListKeyInfo {
+public struct Land_Gno_Gnomobile_V1_ListKeyInfoRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public struct Request {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-  }
-
-  public struct Reply {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var keys: [Land_Gno_Gnomobile_V1_KeyInfo] = []
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-  }
 
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_CreateAccount {
+public struct Land_Gno_Gnomobile_V1_ListKeyInfoResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var keys: [Land_Gno_Gnomobile_V1_KeyInfo] = []
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public struct Request {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var nameOrBech32: String = String()
-
-    public var mnemonic: String = String()
-
-    public var bip39Passwd: String = String()
-
-    public var password: String = String()
-
-    public var account: UInt32 = 0
-
-    public var index: UInt32 = 0
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-  }
-
-  public struct Reply {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var key: Land_Gno_Gnomobile_V1_KeyInfo {
-      get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
-      set {_key = newValue}
-    }
-    /// Returns true if `key` has been explicitly set.
-    public var hasKey: Bool {return self._key != nil}
-    /// Clears the value of `key`. Subsequent reads from it will return its default value.
-    public mutating func clearKey() {self._key = nil}
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-
-    fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
-  }
 
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_SelectAccount {
+public struct Land_Gno_Gnomobile_V1_CreateAccountRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var nameOrBech32: String = String()
+
+  public var mnemonic: String = String()
+
+  public var bip39Passwd: String = String()
+
+  public var password: String = String()
+
+  public var account: UInt32 = 0
+
+  public var index: UInt32 = 0
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public struct Request {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var nameOrBech32: String = String()
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-  }
-
-  public struct Reply {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var key: Land_Gno_Gnomobile_V1_KeyInfo {
-      get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
-      set {_key = newValue}
-    }
-    /// Returns true if `key` has been explicitly set.
-    public var hasKey: Bool {return self._key != nil}
-    /// Clears the value of `key`. Subsequent reads from it will return its default value.
-    public mutating func clearKey() {self._key = nil}
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-
-    fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
-  }
 
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_GetActiveAccount {
+public struct Land_Gno_Gnomobile_V1_CreateAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
+  }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
+}
+
+public struct Land_Gno_Gnomobile_V1_SelectAccountRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var nameOrBech32: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_SelectAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
+  }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
+}
+
+public struct Land_Gno_Gnomobile_V1_GetActiveAccountRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public struct Request {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
+  public init() {}
+}
 
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
+public struct Land_Gno_Gnomobile_V1_GetActiveAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
-    public init() {}
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
   }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
 
-  public struct Reply {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    public var key: Land_Gno_Gnomobile_V1_KeyInfo {
-      get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
-      set {_key = newValue}
-    }
-    /// Returns true if `key` has been explicitly set.
-    public var hasKey: Bool {return self._key != nil}
-    /// Clears the value of `key`. Subsequent reads from it will return its default value.
-    public mutating func clearKey() {self._key = nil}
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-
-    fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
-  }
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
 }
 
 public struct Land_Gno_Gnomobile_V1_HelloRequest {
@@ -362,7 +322,7 @@ public struct Land_Gno_Gnomobile_V1_HelloRequest {
   public init() {}
 }
 
-public struct Land_Gno_Gnomobile_V1_HelloReply {
+public struct Land_Gno_Gnomobile_V1_HelloResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -390,20 +350,16 @@ public struct Land_Gno_Gnomobile_V1_ErrDetails {
 extension Land_Gno_Gnomobile_V1_KeyType: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_ErrCode: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_KeyInfo: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_ListKeyInfo: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_ListKeyInfo.Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_ListKeyInfo.Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_CreateAccount: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_CreateAccount.Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_CreateAccount.Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SelectAccount: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SelectAccount.Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_SelectAccount.Reply: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_GetActiveAccount: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_GetActiveAccount.Request: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_GetActiveAccount.Reply: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_ListKeyInfoRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_ListKeyInfoResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CreateAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CreateAccountResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SelectAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SelectAccountResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GetActiveAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GetActiveAccountResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_HelloRequest: @unchecked Sendable {}
-extension Land_Gno_Gnomobile_V1_HelloReply: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_HelloResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_ErrDetails: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
@@ -443,7 +399,7 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "name"),
-    3: .same(proto: "pubKey"),
+    3: .standard(proto: "pub_key"),
     4: .same(proto: "address"),
   ]
 
@@ -488,8 +444,8 @@ extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension Land_Gno_Gnomobile_V1_ListKeyInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".ListKeyInfo"
+extension Land_Gno_Gnomobile_V1_ListKeyInfoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ListKeyInfoRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -501,33 +457,14 @@ extension Land_Gno_Gnomobile_V1_ListKeyInfo: SwiftProtobuf.Message, SwiftProtobu
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfo, rhs: Land_Gno_Gnomobile_V1_ListKeyInfo) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfoRequest, rhs: Land_Gno_Gnomobile_V1_ListKeyInfoRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_ListKeyInfo.Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_ListKeyInfo.protoMessageName + ".Request"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfo.Request, rhs: Land_Gno_Gnomobile_V1_ListKeyInfo.Request) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_ListKeyInfo.Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_ListKeyInfo.protoMessageName + ".Reply"
+extension Land_Gno_Gnomobile_V1_ListKeyInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ListKeyInfoResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "keys"),
   ]
@@ -551,38 +488,19 @@ extension Land_Gno_Gnomobile_V1_ListKeyInfo.Reply: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfo.Reply, rhs: Land_Gno_Gnomobile_V1_ListKeyInfo.Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfoResponse, rhs: Land_Gno_Gnomobile_V1_ListKeyInfoResponse) -> Bool {
     if lhs.keys != rhs.keys {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_CreateAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".CreateAccount"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccount, rhs: Land_Gno_Gnomobile_V1_CreateAccount) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_CreateAccount.Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_CreateAccount.protoMessageName + ".Request"
+extension Land_Gno_Gnomobile_V1_CreateAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateAccountRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "nameOrBech32"),
+    1: .standard(proto: "name_or_bech32"),
     2: .same(proto: "mnemonic"),
-    3: .same(proto: "bip39Passwd"),
+    3: .standard(proto: "bip39_passwd"),
     4: .same(proto: "password"),
     5: .same(proto: "account"),
     6: .same(proto: "index"),
@@ -627,7 +545,7 @@ extension Land_Gno_Gnomobile_V1_CreateAccount.Request: SwiftProtobuf.Message, Sw
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccount.Request, rhs: Land_Gno_Gnomobile_V1_CreateAccount.Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccountRequest, rhs: Land_Gno_Gnomobile_V1_CreateAccountRequest) -> Bool {
     if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
     if lhs.mnemonic != rhs.mnemonic {return false}
     if lhs.bip39Passwd != rhs.bip39Passwd {return false}
@@ -639,8 +557,8 @@ extension Land_Gno_Gnomobile_V1_CreateAccount.Request: SwiftProtobuf.Message, Sw
   }
 }
 
-extension Land_Gno_Gnomobile_V1_CreateAccount.Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_CreateAccount.protoMessageName + ".Reply"
+extension Land_Gno_Gnomobile_V1_CreateAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateAccountResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "key"),
   ]
@@ -668,36 +586,17 @@ extension Land_Gno_Gnomobile_V1_CreateAccount.Reply: SwiftProtobuf.Message, Swif
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccount.Reply, rhs: Land_Gno_Gnomobile_V1_CreateAccount.Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccountResponse, rhs: Land_Gno_Gnomobile_V1_CreateAccountResponse) -> Bool {
     if lhs._key != rhs._key {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SelectAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SelectAccount"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccount, rhs: Land_Gno_Gnomobile_V1_SelectAccount) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_SelectAccount.Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_SelectAccount.protoMessageName + ".Request"
+extension Land_Gno_Gnomobile_V1_SelectAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SelectAccountRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "nameOrBech32"),
+    1: .standard(proto: "name_or_bech32"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -719,15 +618,15 @@ extension Land_Gno_Gnomobile_V1_SelectAccount.Request: SwiftProtobuf.Message, Sw
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccount.Request, rhs: Land_Gno_Gnomobile_V1_SelectAccount.Request) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccountRequest, rhs: Land_Gno_Gnomobile_V1_SelectAccountRequest) -> Bool {
     if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_SelectAccount.Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_SelectAccount.protoMessageName + ".Reply"
+extension Land_Gno_Gnomobile_V1_SelectAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SelectAccountResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "key"),
   ]
@@ -755,15 +654,15 @@ extension Land_Gno_Gnomobile_V1_SelectAccount.Reply: SwiftProtobuf.Message, Swif
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccount.Reply, rhs: Land_Gno_Gnomobile_V1_SelectAccount.Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccountResponse, rhs: Land_Gno_Gnomobile_V1_SelectAccountResponse) -> Bool {
     if lhs._key != rhs._key {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_GetActiveAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".GetActiveAccount"
+extension Land_Gno_Gnomobile_V1_GetActiveAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetActiveAccountRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -775,33 +674,14 @@ extension Land_Gno_Gnomobile_V1_GetActiveAccount: SwiftProtobuf.Message, SwiftPr
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccount, rhs: Land_Gno_Gnomobile_V1_GetActiveAccount) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccountRequest, rhs: Land_Gno_Gnomobile_V1_GetActiveAccountRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Land_Gno_Gnomobile_V1_GetActiveAccount.Request: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_GetActiveAccount.protoMessageName + ".Request"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccount.Request, rhs: Land_Gno_Gnomobile_V1_GetActiveAccount.Request) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Land_Gno_Gnomobile_V1_GetActiveAccount.Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Land_Gno_Gnomobile_V1_GetActiveAccount.protoMessageName + ".Reply"
+extension Land_Gno_Gnomobile_V1_GetActiveAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetActiveAccountResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "key"),
   ]
@@ -829,7 +709,7 @@ extension Land_Gno_Gnomobile_V1_GetActiveAccount.Reply: SwiftProtobuf.Message, S
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccount.Reply, rhs: Land_Gno_Gnomobile_V1_GetActiveAccount.Reply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccountResponse, rhs: Land_Gno_Gnomobile_V1_GetActiveAccountResponse) -> Bool {
     if lhs._key != rhs._key {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -868,8 +748,8 @@ extension Land_Gno_Gnomobile_V1_HelloRequest: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Land_Gno_Gnomobile_V1_HelloReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".HelloReply"
+extension Land_Gno_Gnomobile_V1_HelloResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".HelloResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "greeting"),
   ]
@@ -893,7 +773,7 @@ extension Land_Gno_Gnomobile_V1_HelloReply: SwiftProtobuf.Message, SwiftProtobuf
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Land_Gno_Gnomobile_V1_HelloReply, rhs: Land_Gno_Gnomobile_V1_HelloReply) -> Bool {
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_HelloResponse, rhs: Land_Gno_Gnomobile_V1_HelloResponse) -> Bool {
     if lhs.greeting != rhs.greeting {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

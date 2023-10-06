@@ -52,130 +52,90 @@ export const KeyInfo = proto3.makeMessageType(
   () => [
     { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(KeyType) },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "pubKey", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 3, name: "pub_key", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
     { no: 4, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoRequest
  */
-export const ListKeyInfo = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.ListKeyInfo",
+export const ListKeyInfoRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.ListKeyInfoRequest",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo.Request
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoResponse
  */
-export const ListKeyInfo_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.ListKeyInfo.Request",
-  [],
-  {localName: "ListKeyInfo_Request"},
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.ListKeyInfo.Reply
- */
-export const ListKeyInfo_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.ListKeyInfo.Reply",
+export const ListKeyInfoResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.ListKeyInfoResponse",
   () => [
     { no: 1, name: "keys", kind: "message", T: KeyInfo, repeated: true },
   ],
-  {localName: "ListKeyInfo_Reply"},
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.CreateAccount
+ * @generated from message land.gno.gnomobile.v1.CreateAccountRequest
  */
-export const CreateAccount = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.CreateAccount",
-  [],
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.CreateAccount.Request
- */
-export const CreateAccount_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.CreateAccount.Request",
+export const CreateAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CreateAccountRequest",
   () => [
-    { no: 1, name: "nameOrBech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "mnemonic", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "bip39Passwd", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "bip39_passwd", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "account", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 6, name: "index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ],
-  {localName: "CreateAccount_Request"},
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.CreateAccount.Reply
+ * @generated from message land.gno.gnomobile.v1.CreateAccountResponse
  */
-export const CreateAccount_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.CreateAccount.Reply",
+export const CreateAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CreateAccountResponse",
   () => [
     { no: 1, name: "key", kind: "message", T: KeyInfo },
   ],
-  {localName: "CreateAccount_Reply"},
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SelectAccount
+ * @generated from message land.gno.gnomobile.v1.SelectAccountRequest
  */
-export const SelectAccount = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SelectAccount",
+export const SelectAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SelectAccountRequest",
+  () => [
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.SelectAccountResponse
+ */
+export const SelectAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SelectAccountResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountRequest
+ */
+export const GetActiveAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetActiveAccountRequest",
   [],
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.SelectAccount.Request
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountResponse
  */
-export const SelectAccount_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SelectAccount.Request",
-  () => [
-    { no: 1, name: "nameOrBech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-  {localName: "SelectAccount_Request"},
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.SelectAccount.Reply
- */
-export const SelectAccount_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SelectAccount.Reply",
+export const GetActiveAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetActiveAccountResponse",
   () => [
     { no: 1, name: "key", kind: "message", T: KeyInfo },
   ],
-  {localName: "SelectAccount_Reply"},
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount
- */
-export const GetActiveAccount = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GetActiveAccount",
-  [],
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount.Request
- */
-export const GetActiveAccount_Request = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GetActiveAccount.Request",
-  [],
-  {localName: "GetActiveAccount_Request"},
-);
-
-/**
- * @generated from message land.gno.gnomobile.v1.GetActiveAccount.Reply
- */
-export const GetActiveAccount_Reply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GetActiveAccount.Reply",
-  () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
-  ],
-  {localName: "GetActiveAccount_Reply"},
 );
 
 /**
@@ -189,10 +149,10 @@ export const HelloRequest = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnomobile.v1.HelloReply
+ * @generated from message land.gno.gnomobile.v1.HelloResponse
  */
-export const HelloReply = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.HelloReply",
+export const HelloResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.HelloResponse",
   () => [
     { no: 1, name: "greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
