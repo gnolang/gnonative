@@ -2,6 +2,7 @@ import { useGno } from '@gno/hooks/use-gno';
 import Loading from '@gno/screens/loading';
 import CustomRouter from '@gno/router/custom-router';
 import { useEffect, useState } from 'react';
+import 'fast-text-encoding';
 
 export default function App() {
   const gno = useGno();
