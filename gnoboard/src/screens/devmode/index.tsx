@@ -4,9 +4,11 @@ import { GoBridge } from '@gno/native_modules';
 import { screenStyleSheet as styles } from '@gno/styles';
 import { useState } from 'react';
 import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { listKeyInfo } from '@gno/utils/bridge';
+import { getTcpPort } from '@gno/utils/bridge';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
+import { createClient } from '@gno/grpc/client';
+import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
@@ -35,12 +37,17 @@ function DevMode() {
     setAppConsole('Loading account...');
 
     try {
-      const response = await listKeyInfo();
-      console.log(response);
+      const port = await getTcpPort();
+      console.log('port: ', port);
+      const client = await createClient(port);
+
+      const response = await client.listKeyInfo(new ListKeyInfoRequest())
+      console.log('response: ', response);
       setAppConsole(JSON.stringify(response));
       console.log(response);
     } catch (error) {
-      setAppConsole('error');
+      console.log(error)
+      setAppConsole('error' + JSON.stringify(error));
     } finally {
       setAppConsole('done');
     }
