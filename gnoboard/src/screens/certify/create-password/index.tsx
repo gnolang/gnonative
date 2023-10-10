@@ -9,6 +9,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { RoutePath } from '@gno/router/path';
 import SeedBox from '@gno/components/seedbox';
+import Alert from '@gno/components/alert';
 
 const text = {
   title: 'Create\na Password',
@@ -22,6 +23,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const gno = useGno();
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -30,6 +32,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
     if (!name || !password || !confirmPassword) return;
 
     if (password !== confirmPassword) {
+      setError('Passwords do not match.');
       console.log('password and confirmPassword are not the same');
       return;
     }
@@ -51,9 +54,16 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
       <Layout.Body>
         <Text.Title>{text.title}</Text.Title>
         <Text.Body>{text.desc}</Text.Body>
+        <Alert severity='error' message={error} />
         <TextInput placeholder='Account Name' value={name} onChangeText={setName} />
-        <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry={true} />
-        <TextInput placeholder='Confirm Password' value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry={true} />
+        <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry={true} error={error} />
+        <TextInput
+          placeholder='Confirm Password'
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry={true}
+          error={error}
+        />
         <SeedBox placeholder='Your seed phrase' value={phrase} editable={false} />
         <Button title='Save' onPress={onSaveHandler} />
       </Layout.Body>

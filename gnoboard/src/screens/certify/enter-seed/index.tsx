@@ -8,6 +8,7 @@ import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';
 import SeedBox from '@gno/components/seedbox';
 import TextInput from '@gno/components/textinput';
+import Alert from '@gno/components/alert';
 
 const walletContent = {
   title: 'Import with Seed Phrase',
@@ -20,6 +21,7 @@ const EnterSeedPharse = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const gno = useGno();
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -28,6 +30,7 @@ const EnterSeedPharse = () => {
     if (!recoveryPhrase || !name || !password || !confirmPassword) return;
 
     if (password !== confirmPassword) {
+      setError('Passwords do not match.');
       console.log('password and confirmPassword are not the same');
       return;
     }
@@ -49,10 +52,11 @@ const EnterSeedPharse = () => {
       <Layout.Body>
         <Text.Title>{walletContent.title}</Text.Title>
         <Text.Body>{walletContent.desc}</Text.Body>
+        <Alert severity='error' message={error} />
         <SeedBox placeholder='Enter your seed phrase' value={recoveryPhrase} onChangeText={(value) => setRecoveryPhrase(value.trim())} />
         <TextInput placeholder='Account Name' value={name} onChangeText={setName} />
-        <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry={true} />
-        <TextInput placeholder='Confirm Password' value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry={true} />
+        <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry={true} error={error} />
+        <TextInput placeholder='Confirm Password' value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry={true} error={error} />
         <Button title='Import' onPress={nextHandler} />
       </Layout.Body>
     </Layout.Container>

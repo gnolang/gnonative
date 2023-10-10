@@ -1,6 +1,6 @@
 export const colors = {
   main: '#37474f',
-  danger: '#ff1744',
+  danger: '#FFE5E6',
   success: '#00e676',
   warning: '#ff9100',
   dark: '#263238',
