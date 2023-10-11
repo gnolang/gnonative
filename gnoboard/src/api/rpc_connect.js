@@ -3,9 +3,33 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, QueryRequest, QueryResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import {
+  CallRequest,
+  CallResponse,
+  GenerateRecoveryPhraseRequest,
+  GenerateRecoveryPhraseResponse,
+  QueryRequest,
+  QueryResponse,
+  SetChainIDRequest,
+  SetChainIDResponse,
+  SetPasswordRequest,
+  SetPasswordResponse,
+  SetRemoteRequest,
+  SetRemoteResponse,
+} from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
-import { CreateAccountRequest, CreateAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, SelectAccountRequest, SelectAccountResponse } from "./rpc_pb.js";
+import {
+  CreateAccountRequest,
+  CreateAccountResponse,
+  GetActiveAccountRequest,
+  GetActiveAccountResponse,
+  HelloRequest,
+  HelloResponse,
+  ListKeyInfoRequest,
+  ListKeyInfoResponse,
+  SelectAccountRequest,
+  SelectAccountResponse,
+} from "./rpc_pb.js";
 
 /**
  * GnomobileService is the service to interact with the Gno blockchain
@@ -144,6 +168,5 @@ export const GnomobileService = {
       O: HelloResponse,
       kind: MethodKind.Unary,
     },
-  }
+  },
 };
-

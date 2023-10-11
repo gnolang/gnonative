@@ -1,5 +1,5 @@
-import { GnoAccount } from '@gno/native_modules/types';
-import SideMenuAccountItem from '../side-menu-account-item/side-menu-account-item';
+import { GnoAccount } from "@gno/native_modules/types";
+import SideMenuAccountItem from "../side-menu-account-item/side-menu-account-item";
 
 interface SideMenuAccountListProps {
   accounts: GnoAccount[];

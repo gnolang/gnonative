@@ -1,12 +1,12 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { RoutePath } from './path';
-import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
-import WalletCreate from '@gno/screens/wallet/wallet-create';
-import YourSeedPhrase from '@gno/screens/certify/your-seed-phrase';
-import EnterSeedPharse from '@gno/screens/certify/enter-seed';
-import CreatePassword from '@gno/screens/certify/create-password';
-import DevMode from '@gno/screens/devmode';
-import SwitchAccounts from '@gno/screens/switch-accounts';
+import { NavigationContainer } from "@react-navigation/native";
+import { RoutePath } from "./path";
+import { NativeStackNavigationProp, createNativeStackNavigator } from "@react-navigation/native-stack";
+import WalletCreate from "@gno/screens/wallet/wallet-create";
+import YourSeedPhrase from "@gno/screens/certify/your-seed-phrase";
+import EnterSeedPharse from "@gno/screens/certify/enter-seed";
+import CreatePassword from "@gno/screens/certify/create-password";
+import DevMode from "@gno/screens/devmode";
+import SwitchAccounts from "@gno/screens/switch-accounts";
 
 export type RouterWelcomeStack = {
   CreatePassword: { phrase: string };

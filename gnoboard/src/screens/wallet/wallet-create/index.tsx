@@ -1,27 +1,13 @@
-import React, { useEffect } from 'react';
-import Layout from '@gno/components/pages';
-import Button from '@gno/components/buttons';
-import { useNavigation } from '@react-navigation/native';
-import { RoutePath } from '@gno/router/path';
-import { RouterWelcomeStackProp } from '@gno/router/custom-router';
-import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
+import React from "react";
+import Layout from "@gno/components/pages";
+import Button from "@gno/components/buttons";
+import { useNavigation } from "@react-navigation/native";
+import { RoutePath } from "@gno/router/path";
+import { RouterWelcomeStackProp } from "@gno/router/custom-router";
+import Text from "@gno/components/texts";
 
 export const WalletCreate: React.FC = () => {
-  const gno = useGno();
   const navigation = useNavigation<RouterWelcomeStackProp>();
-
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', async () => {
-  //     try {
-  //       const info = await gno.listKeyInfo();
-  //       console.log('accounts ok keybase:', info);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, [navigation]);
 
   return (
     <Layout.Container>

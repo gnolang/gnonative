@@ -1,7 +1,7 @@
-import React from 'react';
-import { ActivityIndicator, TouchableOpacity, Text, View } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { colors } from '@gno/styles/colors';
+import React from "react";
+import { ActivityIndicator, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { colors } from "@gno/styles/colors";
 
 const styles = StyleSheet.create({
   button: {
@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: colors.white,
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 
@@ -27,13 +27,7 @@ type Props = {
 const Button: React.FC<Props> = ({ title, onPress, loading = false }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.button}>
-        {loading ? (
-          <ActivityIndicator size='small' />
-        ) : (
-          <Text style={styles.buttonText}>{title}</Text>
-        )}
-      </View>
+      <View style={styles.button}>{loading ? <ActivityIndicator size='small' /> : <Text style={styles.buttonText}>{title}</Text>}</View>
     </TouchableOpacity>
   );
 };

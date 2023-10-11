@@ -1,12 +1,12 @@
-import Layout from '@gno/components/pages';
-import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
-import { RouterWelcomeStackProp } from '@gno/router/custom-router';
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import Loading from '../loading';
-import SideMenuAccountList from '@gno/components/common/side-menu-account-list/side-menu-account-list';
-import { GnoAccount } from '@gno/native_modules/types';
+import Layout from "@gno/components/pages";
+import Text from "@gno/components/texts";
+import { useGno } from "@gno/hooks/use-gno";
+import { RouterWelcomeStackProp } from "@gno/router/custom-router";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import Loading from "../loading";
+import SideMenuAccountList from "@gno/components/common/side-menu-account-list/side-menu-account-list";
+import { GnoAccount } from "@gno/native_modules/types";
 
 const SwitchAccounts = () => {
   const gno = useGno();
@@ -15,9 +15,9 @@ const SwitchAccounts = () => {
   const [accounts, setAccounts] = useState<GnoAccount[]>([]);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
+    const unsubscribe = navigation.addListener("focus", async () => {
       try {
-        setLoading('Loading accounts...');
+        setLoading("Loading accounts...");
         const response = await gno.listKeyInfo();
 
         setAccounts(response);
@@ -32,10 +32,10 @@ const SwitchAccounts = () => {
 
   const onChangeAccountHandler = async (value: GnoAccount) => {
     try {
-      setLoading('Changing account...');
+      setLoading("Changing account...");
       await gno.selectAccount(value.name);
       setLoading(undefined);
-      navigation.navigate('WalletCreate');
+      navigation.navigate("WalletCreate");
     } catch (error: unknown | Error) {
       setLoading(error?.toString());
       console.log(error);

@@ -3,9 +3,33 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, QueryRequest, QueryResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import {
+  CallRequest,
+  CallResponse,
+  GenerateRecoveryPhraseRequest,
+  GenerateRecoveryPhraseResponse,
+  QueryRequest,
+  QueryResponse,
+  SetChainIDRequest,
+  SetChainIDResponse,
+  SetPasswordRequest,
+  SetPasswordResponse,
+  SetRemoteRequest,
+  SetRemoteResponse,
+} from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
-import { CreateAccountRequest, CreateAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, SelectAccountRequest, SelectAccountResponse } from "./rpc_pb.js";
+import {
+  CreateAccountRequest,
+  CreateAccountResponse,
+  GetActiveAccountRequest,
+  GetActiveAccountResponse,
+  HelloRequest,
+  HelloResponse,
+  ListKeyInfoRequest,
+  ListKeyInfoResponse,
+  SelectAccountRequest,
+  SelectAccountResponse,
+} from "./rpc_pb.js";
 
 /**
  * GnomobileService is the service to interact with the Gno blockchain
@@ -13,7 +37,7 @@ import { CreateAccountRequest, CreateAccountResponse, GetActiveAccountRequest, G
  * @generated from service land.gno.gnomobile.v1.GnomobileService
  */
 export declare const GnomobileService: {
-  readonly typeName: "land.gno.gnomobile.v1.GnomobileService",
+  readonly typeName: "land.gno.gnomobile.v1.GnomobileService";
   readonly methods: {
     /**
      * Set the connection addresse for the remote node. If you don't call this,
@@ -22,11 +46,11 @@ export declare const GnomobileService: {
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetRemote
      */
     readonly setRemote: {
-      readonly name: "SetRemote",
-      readonly I: typeof SetRemoteRequest,
-      readonly O: typeof SetRemoteResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "SetRemote";
+      readonly I: typeof SetRemoteRequest;
+      readonly O: typeof SetRemoteResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Set the chain ID for the remote node. If you don't call this, the default
      * is "dev"
@@ -34,22 +58,22 @@ export declare const GnomobileService: {
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetChainID
      */
     readonly setChainID: {
-      readonly name: "SetChainID",
-      readonly I: typeof SetChainIDRequest,
-      readonly O: typeof SetChainIDResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "SetChainID";
+      readonly I: typeof SetChainIDRequest;
+      readonly O: typeof SetChainIDResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Set the password for the account in the keybase, used for later operations
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
      */
     readonly setPassword: {
-      readonly name: "SetPassword",
-      readonly I: typeof SetPasswordRequest,
-      readonly O: typeof SetPasswordResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "SetPassword";
+      readonly I: typeof SetPasswordRequest;
+      readonly O: typeof SetPasswordResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
      * crypto library random number generator. This can be used as the mnemonic in
@@ -58,22 +82,22 @@ export declare const GnomobileService: {
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase
      */
     readonly generateRecoveryPhrase: {
-      readonly name: "GenerateRecoveryPhrase",
-      readonly I: typeof GenerateRecoveryPhraseRequest,
-      readonly O: typeof GenerateRecoveryPhraseResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "GenerateRecoveryPhrase";
+      readonly I: typeof GenerateRecoveryPhraseRequest;
+      readonly O: typeof GenerateRecoveryPhraseResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Get the keys informations in the keybase
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.ListKeyInfo
      */
     readonly listKeyInfo: {
-      readonly name: "ListKeyInfo",
-      readonly I: typeof ListKeyInfoRequest,
-      readonly O: typeof ListKeyInfoResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "ListKeyInfo";
+      readonly I: typeof ListKeyInfoRequest;
+      readonly O: typeof ListKeyInfoResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Create a new account the keybase using the name an password specified by
      * SetAccount
@@ -81,22 +105,22 @@ export declare const GnomobileService: {
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.CreateAccount
      */
     readonly createAccount: {
-      readonly name: "CreateAccount",
-      readonly I: typeof CreateAccountRequest,
-      readonly O: typeof CreateAccountResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "CreateAccount";
+      readonly I: typeof CreateAccountRequest;
+      readonly O: typeof CreateAccountResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * SelectAccount selects the active account to use for later operations
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SelectAccount
      */
     readonly selectAccount: {
-      readonly name: "SelectAccount",
-      readonly I: typeof SelectAccountRequest,
-      readonly O: typeof SelectAccountResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "SelectAccount";
+      readonly I: typeof SelectAccountRequest;
+      readonly O: typeof SelectAccountResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
@@ -106,44 +130,43 @@ export declare const GnomobileService: {
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetActiveAccount
      */
     readonly getActiveAccount: {
-      readonly name: "GetActiveAccount",
-      readonly I: typeof GetActiveAccountRequest,
-      readonly O: typeof GetActiveAccountResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "GetActiveAccount";
+      readonly I: typeof GetActiveAccountRequest;
+      readonly O: typeof GetActiveAccountResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Make an ABCI query to the remote node.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Query
      */
     readonly query: {
-      readonly name: "Query",
-      readonly I: typeof QueryRequest,
-      readonly O: typeof QueryResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "Query";
+      readonly I: typeof QueryRequest;
+      readonly O: typeof QueryResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Call a specific realm function.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Call
      */
     readonly call: {
-      readonly name: "Call",
-      readonly I: typeof CallRequest,
-      readonly O: typeof CallResponse,
-      readonly kind: MethodKind.Unary,
-    },
+      readonly name: "Call";
+      readonly I: typeof CallRequest;
+      readonly O: typeof CallResponse;
+      readonly kind: MethodKind.Unary;
+    };
     /**
      * Hello is for debug purposes
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Hello
      */
     readonly hello: {
-      readonly name: "Hello",
-      readonly I: typeof HelloRequest,
-      readonly O: typeof HelloResponse,
-      readonly kind: MethodKind.Unary,
-    },
-  }
+      readonly name: "Hello";
+      readonly I: typeof HelloRequest;
+      readonly O: typeof HelloResponse;
+      readonly kind: MethodKind.Unary;
+    };
+  };
 };
-

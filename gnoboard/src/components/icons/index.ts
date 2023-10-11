@@ -1,5 +1,5 @@
-import Close from './Close';
-import ArrowLeft from './ArrowLeft';
+import Close from "./Close";
+import ArrowLeft from "./ArrowLeft";
 
 const Icons = {
   ArrowLeft,

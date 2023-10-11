@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import Layout from '@gno/components/pages';
-import Text from '@gno/components/texts';
-import TextInput from '@gno/components/textinput';
-import Button from '@gno/components/buttons';
-import { useGno } from '@gno/hooks/use-gno';
-import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
-import { RoutePath } from '@gno/router/path';
-import SeedBox from '@gno/components/seedbox';
+import React, { useState } from "react";
+import Layout from "@gno/components/pages";
+import Text from "@gno/components/texts";
+import TextInput from "@gno/components/textinput";
+import Button from "@gno/components/buttons";
+import { useGno } from "@gno/hooks/use-gno";
+import { RouterWelcomeStack, RouterWelcomeStackProp } from "@gno/router/custom-router";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { RoutePath } from "@gno/router/path";
+import SeedBox from "@gno/components/seedbox";
 
 const text = {
-  title: 'Create\na Password',
-  desc: 'This will be used to unlock your wallet.',
+  title: "Create\na Password",
+  desc: "This will be used to unlock your wallet.",
 };
 
-export type Props = NativeStackScreenProps<RouterWelcomeStack, 'CreatePassword'>;
+export type Props = NativeStackScreenProps<RouterWelcomeStack, "CreatePassword">;
 
 const CreatePassword: React.FC<Props> = ({ route }) => {
   const phrase = route.params.phrase;
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const gno = useGno();
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -30,13 +30,13 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
     if (!name || !password || !confirmPassword) return;
 
     if (password !== confirmPassword) {
-      console.log('password and confirmPassword are not the same');
+      console.log("password and confirmPassword are not the same");
       return;
     }
 
     try {
       const response = await gno.createAccount(name, phrase, password);
-      console.log('createAccount response: ' + response);
+      console.log("createAccount response: " + response);
       await gno.selectAccount(name);
       await gno.setPassword(password);
       navigation.navigate(RoutePath.WalletCreate);

@@ -168,7 +168,10 @@ export declare class ListKeyInfoRequest extends Message<ListKeyInfoRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfoRequest;
 
-  static equals(a: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined, b: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined): boolean;
+  static equals(
+    a: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined,
+    b: ListKeyInfoRequest | PlainMessage<ListKeyInfoRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -192,7 +195,10 @@ export declare class ListKeyInfoResponse extends Message<ListKeyInfoResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListKeyInfoResponse;
 
-  static equals(a: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined, b: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined): boolean;
+  static equals(
+    a: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined,
+    b: ListKeyInfoResponse | PlainMessage<ListKeyInfoResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -241,7 +247,10 @@ export declare class CreateAccountRequest extends Message<CreateAccountRequest> 
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccountRequest;
 
-  static equals(a: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined, b: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined): boolean;
+  static equals(
+    a: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined,
+    b: CreateAccountRequest | PlainMessage<CreateAccountRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -265,7 +274,10 @@ export declare class CreateAccountResponse extends Message<CreateAccountResponse
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAccountResponse;
 
-  static equals(a: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined, b: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined): boolean;
+  static equals(
+    a: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined,
+    b: CreateAccountResponse | PlainMessage<CreateAccountResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -289,7 +301,10 @@ export declare class SelectAccountRequest extends Message<SelectAccountRequest> 
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountRequest;
 
-  static equals(a: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined, b: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined): boolean;
+  static equals(
+    a: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined,
+    b: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -313,7 +328,10 @@ export declare class SelectAccountResponse extends Message<SelectAccountResponse
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountResponse;
 
-  static equals(a: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined, b: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined): boolean;
+  static equals(
+    a: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined,
+    b: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -332,7 +350,10 @@ export declare class GetActiveAccountRequest extends Message<GetActiveAccountReq
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountRequest;
 
-  static equals(a: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined, b: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined): boolean;
+  static equals(
+    a: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined,
+    b: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -356,7 +377,10 @@ export declare class GetActiveAccountResponse extends Message<GetActiveAccountRe
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountResponse;
 
-  static equals(a: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined, b: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined): boolean;
+  static equals(
+    a: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined,
+    b: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -380,7 +404,10 @@ export declare class HelloRequest extends Message<HelloRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloRequest;
 
-  static equals(a: HelloRequest | PlainMessage<HelloRequest> | undefined, b: HelloRequest | PlainMessage<HelloRequest> | undefined): boolean;
+  static equals(
+    a: HelloRequest | PlainMessage<HelloRequest> | undefined,
+    b: HelloRequest | PlainMessage<HelloRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -404,7 +431,10 @@ export declare class HelloResponse extends Message<HelloResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloResponse;
 
-  static equals(a: HelloResponse | PlainMessage<HelloResponse> | undefined, b: HelloResponse | PlainMessage<HelloResponse> | undefined): boolean;
+  static equals(
+    a: HelloResponse | PlainMessage<HelloResponse> | undefined,
+    b: HelloResponse | PlainMessage<HelloResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -430,4 +460,3 @@ export declare class ErrDetails extends Message<ErrDetails> {
 
   static equals(a: ErrDetails | PlainMessage<ErrDetails> | undefined, b: ErrDetails | PlainMessage<ErrDetails> | undefined): boolean;
 }
-

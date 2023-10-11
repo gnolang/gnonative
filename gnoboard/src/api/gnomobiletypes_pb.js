@@ -10,119 +10,82 @@ import { proto3 } from "@bufbuild/protobuf";
  *
  * @generated from message land.gno.gnomobile.v1.SetRemoteRequest
  */
-export const SetRemoteRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetRemoteRequest",
-  () => [
-    { no: 1, name: "Remote", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
+export const SetRemoteRequest = proto3.makeMessageType("land.gno.gnomobile.v1.SetRemoteRequest", () => [
+  { no: 1, name: "Remote", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.SetRemoteResponse
  */
-export const SetRemoteResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetRemoteResponse",
-  [],
-);
+export const SetRemoteResponse = proto3.makeMessageType("land.gno.gnomobile.v1.SetRemoteResponse", []);
 
 /**
  * @generated from message land.gno.gnomobile.v1.SetChainIDRequest
  */
-export const SetChainIDRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetChainIDRequest",
-  () => [
-    { no: 1, name: "ChainID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
+export const SetChainIDRequest = proto3.makeMessageType("land.gno.gnomobile.v1.SetChainIDRequest", () => [
+  { no: 1, name: "ChainID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.SetChainIDResponse
  */
-export const SetChainIDResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetChainIDResponse",
-  [],
-);
+export const SetChainIDResponse = proto3.makeMessageType("land.gno.gnomobile.v1.SetChainIDResponse", []);
 
 /**
  * @generated from message land.gno.gnomobile.v1.SetPasswordRequest
  */
-export const SetPasswordRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetPasswordRequest",
-  () => [
-    { no: 1, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
+export const SetPasswordRequest = proto3.makeMessageType("land.gno.gnomobile.v1.SetPasswordRequest", () => [
+  { no: 1, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.SetPasswordResponse
  */
-export const SetPasswordResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.SetPasswordResponse",
-  [],
-);
+export const SetPasswordResponse = proto3.makeMessageType("land.gno.gnomobile.v1.SetPasswordResponse", []);
 
 /**
  * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest
  */
-export const GenerateRecoveryPhraseRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest",
-  [],
-);
+export const GenerateRecoveryPhraseRequest = proto3.makeMessageType("land.gno.gnomobile.v1.GenerateRecoveryPhraseRequest", []);
 
 /**
  * @generated from message land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
  */
-export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse",
-  () => [
-    { no: 1, name: "Phrase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
+export const GenerateRecoveryPhraseResponse = proto3.makeMessageType("land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse", () => [
+  { no: 1, name: "Phrase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.QueryRequest
  */
-export const QueryRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.QueryRequest",
-  () => [
-    { no: 1, name: "Path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "Data", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ],
-);
+export const QueryRequest = proto3.makeMessageType("land.gno.gnomobile.v1.QueryRequest", () => [
+  { no: 1, name: "Path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  { no: 2, name: "Data", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.QueryResponse
  */
-export const QueryResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.QueryResponse",
-  () => [
-    { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ],
-);
+export const QueryResponse = proto3.makeMessageType("land.gno.gnomobile.v1.QueryResponse", () => [
+  { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.CallRequest
  */
-export const CallRequest = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.CallRequest",
-  () => [
-    { no: 1, name: "PackagePath", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "Fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "Args", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 4, name: "GasFee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "GasWanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
-    { no: 6, name: "Send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 7, name: "Memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
+export const CallRequest = proto3.makeMessageType("land.gno.gnomobile.v1.CallRequest", () => [
+  { no: 1, name: "PackagePath", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  { no: 2, name: "Fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  { no: 3, name: "Args", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  { no: 4, name: "GasFee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  { no: 5, name: "GasWanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+  { no: 6, name: "Send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  { no: 7, name: "Memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+]);
 
 /**
  * @generated from message land.gno.gnomobile.v1.CallResponse
  */
-export const CallResponse = proto3.makeMessageType(
-  "land.gno.gnomobile.v1.CallResponse",
-  () => [
-    { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ],
-);
-
+export const CallResponse = proto3.makeMessageType("land.gno.gnomobile.v1.CallResponse", () => [
+  { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+]);

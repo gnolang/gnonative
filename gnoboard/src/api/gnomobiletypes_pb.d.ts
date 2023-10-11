@@ -29,7 +29,10 @@ export declare class SetRemoteRequest extends Message<SetRemoteRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemoteRequest;
 
-  static equals(a: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined, b: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined): boolean;
+  static equals(
+    a: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined,
+    b: SetRemoteRequest | PlainMessage<SetRemoteRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -48,7 +51,10 @@ export declare class SetRemoteResponse extends Message<SetRemoteResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetRemoteResponse;
 
-  static equals(a: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined, b: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined): boolean;
+  static equals(
+    a: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined,
+    b: SetRemoteResponse | PlainMessage<SetRemoteResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -72,7 +78,10 @@ export declare class SetChainIDRequest extends Message<SetChainIDRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainIDRequest;
 
-  static equals(a: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined, b: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined): boolean;
+  static equals(
+    a: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined,
+    b: SetChainIDRequest | PlainMessage<SetChainIDRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -91,7 +100,10 @@ export declare class SetChainIDResponse extends Message<SetChainIDResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetChainIDResponse;
 
-  static equals(a: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined, b: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined): boolean;
+  static equals(
+    a: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined,
+    b: SetChainIDResponse | PlainMessage<SetChainIDResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -115,7 +127,10 @@ export declare class SetPasswordRequest extends Message<SetPasswordRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPasswordRequest;
 
-  static equals(a: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined, b: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined): boolean;
+  static equals(
+    a: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined,
+    b: SetPasswordRequest | PlainMessage<SetPasswordRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -134,7 +149,10 @@ export declare class SetPasswordResponse extends Message<SetPasswordResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetPasswordResponse;
 
-  static equals(a: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined, b: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined): boolean;
+  static equals(
+    a: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined,
+    b: SetPasswordResponse | PlainMessage<SetPasswordResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -153,7 +171,10 @@ export declare class GenerateRecoveryPhraseRequest extends Message<GenerateRecov
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseRequest;
 
-  static equals(a: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined, b: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined): boolean;
+  static equals(
+    a: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined,
+    b: GenerateRecoveryPhraseRequest | PlainMessage<GenerateRecoveryPhraseRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -177,7 +198,10 @@ export declare class GenerateRecoveryPhraseResponse extends Message<GenerateReco
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GenerateRecoveryPhraseResponse;
 
-  static equals(a: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined, b: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined): boolean;
+  static equals(
+    a: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined,
+    b: GenerateRecoveryPhraseResponse | PlainMessage<GenerateRecoveryPhraseResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -206,7 +230,10 @@ export declare class QueryRequest extends Message<QueryRequest> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryRequest;
 
-  static equals(a: QueryRequest | PlainMessage<QueryRequest> | undefined, b: QueryRequest | PlainMessage<QueryRequest> | undefined): boolean;
+  static equals(
+    a: QueryRequest | PlainMessage<QueryRequest> | undefined,
+    b: QueryRequest | PlainMessage<QueryRequest> | undefined,
+  ): boolean;
 }
 
 /**
@@ -230,7 +257,10 @@ export declare class QueryResponse extends Message<QueryResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryResponse;
 
-  static equals(a: QueryResponse | PlainMessage<QueryResponse> | undefined, b: QueryResponse | PlainMessage<QueryResponse> | undefined): boolean;
+  static equals(
+    a: QueryResponse | PlainMessage<QueryResponse> | undefined,
+    b: QueryResponse | PlainMessage<QueryResponse> | undefined,
+  ): boolean;
 }
 
 /**
@@ -308,6 +338,8 @@ export declare class CallResponse extends Message<CallResponse> {
 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CallResponse;
 
-  static equals(a: CallResponse | PlainMessage<CallResponse> | undefined, b: CallResponse | PlainMessage<CallResponse> | undefined): boolean;
+  static equals(
+    a: CallResponse | PlainMessage<CallResponse> | undefined,
+    b: CallResponse | PlainMessage<CallResponse> | undefined,
+  ): boolean;
 }
-

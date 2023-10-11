@@ -1,28 +1,12 @@
 import { Message } from "@bufbuild/protobuf";
 
-import type {
-  AnyMessage,
-  MethodInfo,
-  PartialMessage,
-  ServiceType,
-} from "@bufbuild/protobuf";
+import type { AnyMessage, MethodInfo, PartialMessage, ServiceType } from "@bufbuild/protobuf";
 
 import type { UnaryRequest } from "@connectrpc/connect";
 import { Code, ConnectError } from "@connectrpc/connect";
 import type { Transport, UnaryResponse } from "@connectrpc/connect";
-import {
-  createClientMethodSerializers,
-  createMethodUrl,
-  encodeEnvelope,
-  runUnaryCall,
-} from "@connectrpc/connect/protocol";
-import {
-  requestHeader,
-  trailerFlag,
-  trailerParse,
-  validateResponse,
-  validateTrailer,
-} from "@connectrpc/connect/protocol-grpc-web";
+import { createClientMethodSerializers, createMethodUrl, encodeEnvelope, runUnaryCall } from "@connectrpc/connect/protocol";
+import { requestHeader, trailerFlag, trailerParse, validateResponse, validateTrailer } from "@connectrpc/connect/protocol-grpc-web";
 import { GrpcWebTransportOptions } from "@connectrpc/connect-web";
 
 class AbortError extends Error {
@@ -48,11 +32,11 @@ function parseHeaders(allHeaders: string): Headers {
 
 function extractDataChunks(initialData: Uint8Array) {
   let buffer = initialData;
-  let dataChunks: { flags: number; data: Uint8Array }[] = [];
+  const dataChunks: { flags: number; data: Uint8Array }[] = [];
 
   while (buffer.byteLength >= 5) {
     let length = 0;
-    let flags = buffer[0];
+    const flags = buffer[0];
 
     for (let i = 1; i < 5; i++) {
       length = (length << 8) + buffer[i]; // eslint-disable-line no-bitwise
@@ -66,15 +50,10 @@ function extractDataChunks(initialData: Uint8Array) {
   return dataChunks;
 }
 
-export function createXHRGrpcWebTransport(
-  options: GrpcWebTransportOptions,
-): Transport {
+export function createXHRGrpcWebTransport(options: GrpcWebTransportOptions): Transport {
   const useBinaryFormat = options.useBinaryFormat ?? true;
   return {
-    async unary<
-      I extends Message<I> = AnyMessage,
-      O extends Message<O> = AnyMessage,
-    >(
+    async unary<I extends Message<I> = AnyMessage, O extends Message<O> = AnyMessage>(
       service: ServiceType,
       method: MethodInfo<I, O>,
       signal: AbortSignal | undefined,
@@ -82,12 +61,7 @@ export function createXHRGrpcWebTransport(
       header: Headers,
       message: PartialMessage<I>,
     ): Promise<UnaryResponse<I, O>> {
-      const { serialize, parse } = createClientMethodSerializers(
-        method,
-        useBinaryFormat,
-        options.jsonOptions,
-        options.binaryOptions,
-      );
+      const { serialize, parse } = createClientMethodSerializers(method, useBinaryFormat, options.jsonOptions, options.binaryOptions);
 
       return await runUnaryCall<I, O>({
         signal,
@@ -139,9 +113,7 @@ export function createXHRGrpcWebTransport(
 
               xhr.responseType = "arraybuffer";
 
-              req.header.forEach((value: string, key: string) =>
-                xhr.setRequestHeader(key, value)
-              );
+              req.header.forEach((value: string, key: string) => xhr.setRequestHeader(key, value));
 
               xhr.send(encodeEnvelope(0, serialize(req.message)));
             });
@@ -185,7 +157,7 @@ export function createXHRGrpcWebTransport(
             throw "missing message";
           }
 
-          return <UnaryResponse<I, O>> {
+          return <UnaryResponse<I, O>>{
             stream: false,
             header: response.headers,
             message,
@@ -195,11 +167,10 @@ export function createXHRGrpcWebTransport(
       });
     },
     stream(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ..._args: unknown[]
     ) {
-      return Promise.reject(
-        new ConnectError("streaming is not implemented", Code.Unimplemented),
-      );
+      return Promise.reject(new ConnectError("streaming is not implemented", Code.Unimplemented));
     },
   };
 }

@@ -1,5 +1,5 @@
-import Button from '@gno/components/buttons';
-import { GnoAccount } from '@gno/native_modules/types';
+import Button from "@gno/components/buttons";
+import { GnoAccount } from "@gno/native_modules/types";
 
 interface SideMenuAccountItemProps {
   account: GnoAccount;

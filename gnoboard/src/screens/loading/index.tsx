@@ -1,8 +1,8 @@
-import React from 'react';
-import Layout from '@gno/components/pages';
-import Text from '@gno/components/texts';
-import { ActivityIndicator } from 'react-native';
-import styled from 'styled-components/native';
+import React from "react";
+import Layout from "@gno/components/pages";
+import Text from "@gno/components/texts";
+import { ActivityIndicator } from "react-native";
+import styled from "styled-components/native";
 
 type Props = {
   message: string;

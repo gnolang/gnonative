@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { ReactNode } from "react";
+import { SafeAreaView } from "react-native";
 
 interface Props {
   children: ReactNode;

@@ -10,4 +10,4 @@ export type GnoConfig = {
   Mnemonic: string;
 };
 
-export type GnoAccount = KeyInfo
+export type GnoAccount = KeyInfo;

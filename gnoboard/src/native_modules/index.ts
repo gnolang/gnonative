@@ -1,1 +1,1 @@
-export { GoBridge } from './GoBridge';
+export { GoBridge } from "./GoBridge";

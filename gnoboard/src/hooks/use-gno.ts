@@ -1,15 +1,15 @@
-import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
-import { SelectAccountRequest } from '@gno/api/rpc_pb';
-import { CreateAccountRequest } from '@gno/api/rpc_pb';
-import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
-import { CallRequest } from '@gno/api/gnomobiletypes_pb';
-import { CallResponse } from '@gno/api/gnomobiletypes_pb';
-import * as Grpc from '@gno/grpc/client';
-import { GnoAccount } from '@gno/native_modules/types';
-import { GoBridge } from '@gno/native_modules';
-import { PromiseClient } from '@connectrpc/connect';
-import { GnomobileService } from '@gno/api/rpc_connect';
-import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
+import { SetPasswordRequest, SetPasswordResponse } from "@gno/api/gnomobiletypes_pb";
+import { SelectAccountRequest } from "@gno/api/rpc_pb";
+import { CreateAccountRequest } from "@gno/api/rpc_pb";
+import { ListKeyInfoRequest } from "@gno/api/rpc_pb";
+import { CallRequest } from "@gno/api/gnomobiletypes_pb";
+import { CallResponse } from "@gno/api/gnomobiletypes_pb";
+import * as Grpc from "@gno/grpc/client";
+import { GnoAccount } from "@gno/native_modules/types";
+import { GoBridge } from "@gno/native_modules";
+import { PromiseClient } from "@connectrpc/connect";
+import { GnomobileService } from "@gno/api/rpc_connect";
+import { GenerateRecoveryPhraseRequest } from "@gno/api/gnomobiletypes_pb";
 
 interface GnoResponse {
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
@@ -26,14 +26,14 @@ let bridgeInstance: boolean = false;
 export const useGno = (): GnoResponse => {
   const getClient = async () => {
     if (!bridgeInstance) {
-      console.log('Initializing bridge...');
+      console.log("Initializing bridge...");
       await GoBridge.initBridge();
       bridgeInstance = true;
     }
 
     if (clientInstance) return clientInstance;
 
-    console.log('Creating GRPC client instance...');
+    console.log("Creating GRPC client instance...");
 
     const port = await GoBridge.getTcpPort();
     clientInstance = await Grpc.createClient(port);

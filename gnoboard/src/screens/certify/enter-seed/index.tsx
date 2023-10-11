@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import Layout from '@gno/components/pages';
-import Text from '@gno/components/texts';
-import Button from '@gno/components/buttons';
-import { useGno } from '@gno/hooks/use-gno';
-import { useNavigation } from '@react-navigation/native';
-import { RouterWelcomeStackProp } from '@gno/router/custom-router';
-import { RoutePath } from '@gno/router/path';
-import SeedBox from '@gno/components/seedbox';
-import TextInput from '@gno/components/textinput';
+import React, { useState } from "react";
+import Layout from "@gno/components/pages";
+import Text from "@gno/components/texts";
+import Button from "@gno/components/buttons";
+import { useGno } from "@gno/hooks/use-gno";
+import { useNavigation } from "@react-navigation/native";
+import { RouterWelcomeStackProp } from "@gno/router/custom-router";
+import { RoutePath } from "@gno/router/path";
+import SeedBox from "@gno/components/seedbox";
+import TextInput from "@gno/components/textinput";
 
 const walletContent = {
-  title: 'Import with Seed Phrase',
-  desc: 'Import an existing wallet with a 12 or 24-word seed phrase.',
-  terms: 'This phrase will only be stored on this device. Adena can’t recover it for you.',
+  title: "Import with Seed Phrase",
+  desc: "Import an existing wallet with a 12 or 24-word seed phrase.",
+  terms: "This phrase will only be stored on this device. Adena can’t recover it for you.",
 };
 
 const EnterSeedPharse = () => {
-  const [recoveryPhrase, setRecoveryPhrase] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [recoveryPhrase, setRecoveryPhrase] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const gno = useGno();
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -28,7 +28,7 @@ const EnterSeedPharse = () => {
     if (!recoveryPhrase || !name || !password || !confirmPassword) return;
 
     if (password !== confirmPassword) {
-      console.log('password and confirmPassword are not the same');
+      console.log("password and confirmPassword are not the same");
       return;
     }
 
@@ -36,10 +36,10 @@ const EnterSeedPharse = () => {
       const response = await gno.createAccount(name, recoveryPhrase, password);
       await gno.selectAccount(name);
       await gno.setPassword(password);
-      console.log('createAccount response: ' + response);
+      console.log("createAccount response: " + response);
       navigation.navigate(RoutePath.WalletCreate);
     } catch (error) {
-      console.log('createAccount error: ', error);
+      console.log("createAccount error: ", error);
     }
   };
 
