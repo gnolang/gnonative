@@ -20,7 +20,8 @@ service GnomobileService {
   // Generate a recovery phrase of BIP39 mnemonic words using entropy from the
   // crypto library random number generator. This can be used as the mnemonic in
   // CreateAccount.
-  rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest) returns (GenerateRecoveryPhraseResponse);
+  rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest)
+      returns (GenerateRecoveryPhraseResponse);
 
   // Get the keys informations in the keybase
   rpc ListKeyInfo(ListKeyInfoRequest) returns (ListKeyInfoResponse);
@@ -39,28 +40,32 @@ service GnomobileService {
   // If there is no active account, then return ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
-  rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
+  rpc GetActiveAccount(GetActiveAccountRequest)
+      returns (GetActiveAccountResponse);
 
-  // QueryAccount retrieves account information from the blockchain for a given address.
+  // QueryAccount retrieves account information from the blockchain for a given
+  // address.
   rpc QueryAccount(QueryAccountRequest) returns (QueryAccountResponse);
 
-  // DeleteAccount deletes the account with the given name, using the password to
-  // ensure access. However, if skip_password is true, then ignore the password.
-  // If the account doesn't exist, then return ErrCryptoKeyNotFound.
+  // DeleteAccount deletes the account with the given name, using the password
+  // to ensure access. However, if skip_password is true, then ignore the
+  // password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
   // If the password is wrong, then return ErrDecryptionFailed.
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 
   // Make an ABCI query to the remote node.
   rpc Query(QueryRequest) returns (QueryResponse);
 
-  // Render calls the Render function for package_path with optional args. The package path
-  // should include the prefix like "gno.land/". This is similar to using a browser URL
-  // <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+  // Render calls the Render function for package_path with optional args. The
+  // package path should include the prefix like "gno.land/". This is similar to
+  // using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+  // the prefix like "gno.land/".
   rpc Render(RenderRequest) returns (RenderResponse);
 
-  // QEval evaluates the given expression with the realm code at package_path. The package path
-  // should include the prefix like "gno.land/". The expression is usually a function call like
-  // "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+  // QEval evaluates the given expression with the realm code at package_path.
+  // The package path should include the prefix like "gno.land/". The expression
+  // is usually a function call like "GetBoardIDFromName(\"testboard\")". The
+  // return value is a typed expression like
   // "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
@@ -71,10 +76,13 @@ service GnomobileService {
   rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);
 
   // Convert a bech32 string address to a byte array address.
-  rpc AddressFromBech32(AddressFromBech32Request) returns (AddressFromBech32Response);
+  rpc AddressFromBech32(AddressFromBech32Request)
+      returns (AddressFromBech32Response);
 
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);
+  // HelloStream is for debug purposes
+  rpc HelloStream(HelloStreamRequest) returns (stream HelloStreamResponse);
 }
 
 // The ErrCode enum defines errors for gRPC API functions. These are converted
@@ -86,7 +94,7 @@ enum ErrCode {
 
   Undefined = 0; // default value, should never be set manually
 
-  TODO = 1; // indicates that you plan to create an error later
+  TODO = 1;              // indicates that you plan to create an error later
   ErrNotImplemented = 2; // indicates that a method is not implemented yet
   ErrInternal = 3; // indicates an unknown error (without Code), i.e. in gRPC
 
@@ -106,9 +114,8 @@ enum ErrCode {
   ErrNoActiveAccount = 107;
   ErrRunGRPCServer = 108;
   ErrDecryptionFailed = 109;
-  ErrUnknownAddress = 110; // indicates that the address is unknown on the blockchain
+  ErrUnknownAddress =
+      110; // indicates that the address is unknown on the blockchain
 }
 
-message ErrDetails {
-  repeated ErrCode codes = 1;
-}
+message ErrDetails { repeated ErrCode codes = 1; }

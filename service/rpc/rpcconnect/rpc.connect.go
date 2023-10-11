@@ -79,6 +79,9 @@ const (
 	GnomobileServiceAddressFromBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/AddressFromBech32"
 	// GnomobileServiceHelloProcedure is the fully-qualified name of the GnomobileService's Hello RPC.
 	GnomobileServiceHelloProcedure = "/land.gno.gnomobile.v1.GnomobileService/Hello"
+	// GnomobileServiceHelloStreamProcedure is the fully-qualified name of the GnomobileService's
+	// HelloStream RPC.
+	GnomobileServiceHelloStreamProcedure = "/land.gno.gnomobile.v1.GnomobileService/HelloStream"
 )
 
 // GnomobileServiceClient is a client for the land.gno.gnomobile.v1.GnomobileService service.
@@ -107,22 +110,25 @@ type GnomobileServiceClient interface {
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
-	// QueryAccount retrieves account information from the blockchain for a given address.
+	// QueryAccount retrieves account information from the blockchain for a given
+	// address.
 	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
-	// DeleteAccount deletes the account with the given name, using the password to
-	// ensure access. However, if skip_password is true, then ignore the password.
-	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// DeleteAccount deletes the account with the given name, using the password
+	// to ensure access. However, if skip_password is true, then ignore the
+	// password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
 	// If the password is wrong, then return ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
-	// Render calls the Render function for package_path with optional args. The package path
-	// should include the prefix like "gno.land/". This is similar to using a browser URL
-	// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+	// Render calls the Render function for package_path with optional args. The
+	// package path should include the prefix like "gno.land/". This is similar to
+	// using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+	// the prefix like "gno.land/".
 	Render(context.Context, *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error)
-	// QEval evaluates the given expression with the realm code at package_path. The package path
-	// should include the prefix like "gno.land/". The expression is usually a function call like
-	// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+	// QEval evaluates the given expression with the realm code at package_path.
+	// The package path should include the prefix like "gno.land/". The expression
+	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
+	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
 	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
@@ -133,6 +139,8 @@ type GnomobileServiceClient interface {
 	AddressFromBech32(context.Context, *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
+	// HelloStream is for debug purposes
+	HelloStream(context.Context, *connect.Request[rpc.HelloStreamRequest]) (*connect.ServerStreamForClient[rpc.HelloStreamResponse], error)
 }
 
 // NewGnomobileServiceClient constructs a client for the land.gno.gnomobile.v1.GnomobileService
@@ -230,6 +238,11 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceHelloProcedure,
 			opts...,
 		),
+		helloStream: connect.NewClient[rpc.HelloStreamRequest, rpc.HelloStreamResponse](
+			httpClient,
+			baseURL+GnomobileServiceHelloStreamProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -252,6 +265,7 @@ type gnomobileServiceClient struct {
 	addressToBech32        *connect.Client[rpc.AddressToBech32Request, rpc.AddressToBech32Response]
 	addressFromBech32      *connect.Client[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response]
 	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
+	helloStream            *connect.Client[rpc.HelloStreamRequest, rpc.HelloStreamResponse]
 }
 
 // SetRemote calls land.gno.gnomobile.v1.GnomobileService.SetRemote.
@@ -339,6 +353,11 @@ func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request
 	return c.hello.CallUnary(ctx, req)
 }
 
+// HelloStream calls land.gno.gnomobile.v1.GnomobileService.HelloStream.
+func (c *gnomobileServiceClient) HelloStream(ctx context.Context, req *connect.Request[rpc.HelloStreamRequest]) (*connect.ServerStreamForClient[rpc.HelloStreamResponse], error) {
+	return c.helloStream.CallServerStream(ctx, req)
+}
+
 // GnomobileServiceHandler is an implementation of the land.gno.gnomobile.v1.GnomobileService
 // service.
 type GnomobileServiceHandler interface {
@@ -366,22 +385,25 @@ type GnomobileServiceHandler interface {
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
-	// QueryAccount retrieves account information from the blockchain for a given address.
+	// QueryAccount retrieves account information from the blockchain for a given
+	// address.
 	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
-	// DeleteAccount deletes the account with the given name, using the password to
-	// ensure access. However, if skip_password is true, then ignore the password.
-	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// DeleteAccount deletes the account with the given name, using the password
+	// to ensure access. However, if skip_password is true, then ignore the
+	// password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
 	// If the password is wrong, then return ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
-	// Render calls the Render function for package_path with optional args. The package path
-	// should include the prefix like "gno.land/". This is similar to using a browser URL
-	// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+	// Render calls the Render function for package_path with optional args. The
+	// package path should include the prefix like "gno.land/". This is similar to
+	// using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+	// the prefix like "gno.land/".
 	Render(context.Context, *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error)
-	// QEval evaluates the given expression with the realm code at package_path. The package path
-	// should include the prefix like "gno.land/". The expression is usually a function call like
-	// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+	// QEval evaluates the given expression with the realm code at package_path.
+	// The package path should include the prefix like "gno.land/". The expression
+	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
+	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
 	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
@@ -392,6 +414,8 @@ type GnomobileServiceHandler interface {
 	AddressFromBech32(context.Context, *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
+	// HelloStream is for debug purposes
+	HelloStream(context.Context, *connect.Request[rpc.HelloStreamRequest], *connect.ServerStream[rpc.HelloStreamResponse]) error
 }
 
 // NewGnomobileServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -485,6 +509,11 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.Hello,
 		opts...,
 	)
+	gnomobileServiceHelloStreamHandler := connect.NewServerStreamHandler(
+		GnomobileServiceHelloStreamProcedure,
+		svc.HelloStream,
+		opts...,
+	)
 	return "/land.gno.gnomobile.v1.GnomobileService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case GnomobileServiceSetRemoteProcedure:
@@ -521,6 +550,8 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceAddressFromBech32Handler.ServeHTTP(w, r)
 		case GnomobileServiceHelloProcedure:
 			gnomobileServiceHelloHandler.ServeHTTP(w, r)
+		case GnomobileServiceHelloStreamProcedure:
+			gnomobileServiceHelloStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -596,4 +627,8 @@ func (UnimplementedGnomobileServiceHandler) AddressFromBech32(context.Context, *
 
 func (UnimplementedGnomobileServiceHandler) Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Hello is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) HelloStream(context.Context, *connect.Request[rpc.HelloStreamRequest], *connect.ServerStream[rpc.HelloStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HelloStream is not implemented"))
 }

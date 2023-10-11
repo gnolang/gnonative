@@ -54,7 +54,7 @@ export const useGno = (): GnoResponse => {
     console.log('Creating GRPC client instance...');
 
     const port = await GoBridge.getTcpPort();
-    clientInstance = await Grpc.createClient(port);
+    clientInstance = Grpc.createClient(port);
     return clientInstance;
   };
 

@@ -182,3 +182,11 @@ message HelloRequest {
 message HelloResponse {
 	string greeting = 1;
 }
+
+message HelloStreamRequest {
+	string name = 1;
+}
+
+message HelloStreamResponse {
+	string greeting = 1;
+}

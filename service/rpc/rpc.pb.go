@@ -186,7 +186,7 @@ var file_rpc_proto_rawDesc = []byte{
 	0x12, 0x17, 0x0a, 0x13, 0x45, 0x72, 0x72, 0x44, 0x65, 0x63, 0x72, 0x79, 0x70, 0x74, 0x69, 0x6f,
 	0x6e, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x10, 0x6d, 0x12, 0x15, 0x0a, 0x11, 0x45, 0x72, 0x72,
 	0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x10, 0x6e,
-	0x32, 0xd9, 0x0d, 0x0a, 0x10, 0x47, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x53, 0x65,
+	0x32, 0xc1, 0x0e, 0x0a, 0x10, 0x47, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x53, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x5e, 0x0a, 0x09, 0x53, 0x65, 0x74, 0x52, 0x65, 0x6d, 0x6f,
 	0x74, 0x65, 0x12, 0x27, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e,
 	0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x52, 0x65,
@@ -295,11 +295,17 @@ var file_rpc_proto_rawDesc = []byte{
 	0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e,
 	0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48,
-	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x30, 0x5a, 0x28,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61,
-	0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2f, 0x73, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x2f, 0x72, 0x70, 0x63, 0xa2, 0x02, 0x03, 0x52, 0x54, 0x47, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x66, 0x0a, 0x0b,
+	0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x29, 0x2e, 0x6c, 0x61,
+	0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65,
+	0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e,
+	0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48,
+	0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x30, 0x01, 0x42, 0x30, 0x5a, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6d, 0x6f,
+	0x62, 0x69, 0x6c, 0x65, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x72, 0x70, 0x63,
+	0xa2, 0x02, 0x03, 0x52, 0x54, 0x47, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -336,23 +342,25 @@ var file_rpc_proto_goTypes = []interface{}{
 	(*AddressToBech32Request)(nil),         // 16: land.gno.gnomobile.v1.AddressToBech32Request
 	(*AddressFromBech32Request)(nil),       // 17: land.gno.gnomobile.v1.AddressFromBech32Request
 	(*HelloRequest)(nil),                   // 18: land.gno.gnomobile.v1.HelloRequest
-	(*SetRemoteResponse)(nil),              // 19: land.gno.gnomobile.v1.SetRemoteResponse
-	(*SetChainIDResponse)(nil),             // 20: land.gno.gnomobile.v1.SetChainIDResponse
-	(*GenerateRecoveryPhraseResponse)(nil), // 21: land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
-	(*ListKeyInfoResponse)(nil),            // 22: land.gno.gnomobile.v1.ListKeyInfoResponse
-	(*CreateAccountResponse)(nil),          // 23: land.gno.gnomobile.v1.CreateAccountResponse
-	(*SelectAccountResponse)(nil),          // 24: land.gno.gnomobile.v1.SelectAccountResponse
-	(*SetPasswordResponse)(nil),            // 25: land.gno.gnomobile.v1.SetPasswordResponse
-	(*GetActiveAccountResponse)(nil),       // 26: land.gno.gnomobile.v1.GetActiveAccountResponse
-	(*QueryAccountResponse)(nil),           // 27: land.gno.gnomobile.v1.QueryAccountResponse
-	(*DeleteAccountResponse)(nil),          // 28: land.gno.gnomobile.v1.DeleteAccountResponse
-	(*QueryResponse)(nil),                  // 29: land.gno.gnomobile.v1.QueryResponse
-	(*RenderResponse)(nil),                 // 30: land.gno.gnomobile.v1.RenderResponse
-	(*QEvalResponse)(nil),                  // 31: land.gno.gnomobile.v1.QEvalResponse
-	(*CallResponse)(nil),                   // 32: land.gno.gnomobile.v1.CallResponse
-	(*AddressToBech32Response)(nil),        // 33: land.gno.gnomobile.v1.AddressToBech32Response
-	(*AddressFromBech32Response)(nil),      // 34: land.gno.gnomobile.v1.AddressFromBech32Response
-	(*HelloResponse)(nil),                  // 35: land.gno.gnomobile.v1.HelloResponse
+	(*HelloStreamRequest)(nil),             // 19: land.gno.gnomobile.v1.HelloStreamRequest
+	(*SetRemoteResponse)(nil),              // 20: land.gno.gnomobile.v1.SetRemoteResponse
+	(*SetChainIDResponse)(nil),             // 21: land.gno.gnomobile.v1.SetChainIDResponse
+	(*GenerateRecoveryPhraseResponse)(nil), // 22: land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
+	(*ListKeyInfoResponse)(nil),            // 23: land.gno.gnomobile.v1.ListKeyInfoResponse
+	(*CreateAccountResponse)(nil),          // 24: land.gno.gnomobile.v1.CreateAccountResponse
+	(*SelectAccountResponse)(nil),          // 25: land.gno.gnomobile.v1.SelectAccountResponse
+	(*SetPasswordResponse)(nil),            // 26: land.gno.gnomobile.v1.SetPasswordResponse
+	(*GetActiveAccountResponse)(nil),       // 27: land.gno.gnomobile.v1.GetActiveAccountResponse
+	(*QueryAccountResponse)(nil),           // 28: land.gno.gnomobile.v1.QueryAccountResponse
+	(*DeleteAccountResponse)(nil),          // 29: land.gno.gnomobile.v1.DeleteAccountResponse
+	(*QueryResponse)(nil),                  // 30: land.gno.gnomobile.v1.QueryResponse
+	(*RenderResponse)(nil),                 // 31: land.gno.gnomobile.v1.RenderResponse
+	(*QEvalResponse)(nil),                  // 32: land.gno.gnomobile.v1.QEvalResponse
+	(*CallResponse)(nil),                   // 33: land.gno.gnomobile.v1.CallResponse
+	(*AddressToBech32Response)(nil),        // 34: land.gno.gnomobile.v1.AddressToBech32Response
+	(*AddressFromBech32Response)(nil),      // 35: land.gno.gnomobile.v1.AddressFromBech32Response
+	(*HelloResponse)(nil),                  // 36: land.gno.gnomobile.v1.HelloResponse
+	(*HelloStreamResponse)(nil),            // 37: land.gno.gnomobile.v1.HelloStreamResponse
 }
 var file_rpc_proto_depIdxs = []int32{
 	0,  // 0: land.gno.gnomobile.v1.ErrDetails.codes:type_name -> land.gno.gnomobile.v1.ErrCode
@@ -373,25 +381,27 @@ var file_rpc_proto_depIdxs = []int32{
 	16, // 15: land.gno.gnomobile.v1.GnomobileService.AddressToBech32:input_type -> land.gno.gnomobile.v1.AddressToBech32Request
 	17, // 16: land.gno.gnomobile.v1.GnomobileService.AddressFromBech32:input_type -> land.gno.gnomobile.v1.AddressFromBech32Request
 	18, // 17: land.gno.gnomobile.v1.GnomobileService.Hello:input_type -> land.gno.gnomobile.v1.HelloRequest
-	19, // 18: land.gno.gnomobile.v1.GnomobileService.SetRemote:output_type -> land.gno.gnomobile.v1.SetRemoteResponse
-	20, // 19: land.gno.gnomobile.v1.GnomobileService.SetChainID:output_type -> land.gno.gnomobile.v1.SetChainIDResponse
-	21, // 20: land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase:output_type -> land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
-	22, // 21: land.gno.gnomobile.v1.GnomobileService.ListKeyInfo:output_type -> land.gno.gnomobile.v1.ListKeyInfoResponse
-	23, // 22: land.gno.gnomobile.v1.GnomobileService.CreateAccount:output_type -> land.gno.gnomobile.v1.CreateAccountResponse
-	24, // 23: land.gno.gnomobile.v1.GnomobileService.SelectAccount:output_type -> land.gno.gnomobile.v1.SelectAccountResponse
-	25, // 24: land.gno.gnomobile.v1.GnomobileService.SetPassword:output_type -> land.gno.gnomobile.v1.SetPasswordResponse
-	26, // 25: land.gno.gnomobile.v1.GnomobileService.GetActiveAccount:output_type -> land.gno.gnomobile.v1.GetActiveAccountResponse
-	27, // 26: land.gno.gnomobile.v1.GnomobileService.QueryAccount:output_type -> land.gno.gnomobile.v1.QueryAccountResponse
-	28, // 27: land.gno.gnomobile.v1.GnomobileService.DeleteAccount:output_type -> land.gno.gnomobile.v1.DeleteAccountResponse
-	29, // 28: land.gno.gnomobile.v1.GnomobileService.Query:output_type -> land.gno.gnomobile.v1.QueryResponse
-	30, // 29: land.gno.gnomobile.v1.GnomobileService.Render:output_type -> land.gno.gnomobile.v1.RenderResponse
-	31, // 30: land.gno.gnomobile.v1.GnomobileService.QEval:output_type -> land.gno.gnomobile.v1.QEvalResponse
-	32, // 31: land.gno.gnomobile.v1.GnomobileService.Call:output_type -> land.gno.gnomobile.v1.CallResponse
-	33, // 32: land.gno.gnomobile.v1.GnomobileService.AddressToBech32:output_type -> land.gno.gnomobile.v1.AddressToBech32Response
-	34, // 33: land.gno.gnomobile.v1.GnomobileService.AddressFromBech32:output_type -> land.gno.gnomobile.v1.AddressFromBech32Response
-	35, // 34: land.gno.gnomobile.v1.GnomobileService.Hello:output_type -> land.gno.gnomobile.v1.HelloResponse
-	18, // [18:35] is the sub-list for method output_type
-	1,  // [1:18] is the sub-list for method input_type
+	19, // 18: land.gno.gnomobile.v1.GnomobileService.HelloStream:input_type -> land.gno.gnomobile.v1.HelloStreamRequest
+	20, // 19: land.gno.gnomobile.v1.GnomobileService.SetRemote:output_type -> land.gno.gnomobile.v1.SetRemoteResponse
+	21, // 20: land.gno.gnomobile.v1.GnomobileService.SetChainID:output_type -> land.gno.gnomobile.v1.SetChainIDResponse
+	22, // 21: land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase:output_type -> land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse
+	23, // 22: land.gno.gnomobile.v1.GnomobileService.ListKeyInfo:output_type -> land.gno.gnomobile.v1.ListKeyInfoResponse
+	24, // 23: land.gno.gnomobile.v1.GnomobileService.CreateAccount:output_type -> land.gno.gnomobile.v1.CreateAccountResponse
+	25, // 24: land.gno.gnomobile.v1.GnomobileService.SelectAccount:output_type -> land.gno.gnomobile.v1.SelectAccountResponse
+	26, // 25: land.gno.gnomobile.v1.GnomobileService.SetPassword:output_type -> land.gno.gnomobile.v1.SetPasswordResponse
+	27, // 26: land.gno.gnomobile.v1.GnomobileService.GetActiveAccount:output_type -> land.gno.gnomobile.v1.GetActiveAccountResponse
+	28, // 27: land.gno.gnomobile.v1.GnomobileService.QueryAccount:output_type -> land.gno.gnomobile.v1.QueryAccountResponse
+	29, // 28: land.gno.gnomobile.v1.GnomobileService.DeleteAccount:output_type -> land.gno.gnomobile.v1.DeleteAccountResponse
+	30, // 29: land.gno.gnomobile.v1.GnomobileService.Query:output_type -> land.gno.gnomobile.v1.QueryResponse
+	31, // 30: land.gno.gnomobile.v1.GnomobileService.Render:output_type -> land.gno.gnomobile.v1.RenderResponse
+	32, // 31: land.gno.gnomobile.v1.GnomobileService.QEval:output_type -> land.gno.gnomobile.v1.QEvalResponse
+	33, // 32: land.gno.gnomobile.v1.GnomobileService.Call:output_type -> land.gno.gnomobile.v1.CallResponse
+	34, // 33: land.gno.gnomobile.v1.GnomobileService.AddressToBech32:output_type -> land.gno.gnomobile.v1.AddressToBech32Response
+	35, // 34: land.gno.gnomobile.v1.GnomobileService.AddressFromBech32:output_type -> land.gno.gnomobile.v1.AddressFromBech32Response
+	36, // 35: land.gno.gnomobile.v1.GnomobileService.Hello:output_type -> land.gno.gnomobile.v1.HelloResponse
+	37, // 36: land.gno.gnomobile.v1.GnomobileService.HelloStream:output_type -> land.gno.gnomobile.v1.HelloStreamResponse
+	19, // [19:37] is the sub-list for method output_type
+	1,  // [1:19] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name

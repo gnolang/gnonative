@@ -528,6 +528,36 @@ public final class GnomobileServiceGrpc {
     return getHelloMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> getHelloStreamMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "HelloStream",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> getHelloStreamMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest, land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> getHelloStreamMethod;
+    if ((getHelloStreamMethod = GnomobileServiceGrpc.getHelloStreamMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getHelloStreamMethod = GnomobileServiceGrpc.getHelloStreamMethod) == null) {
+          GnomobileServiceGrpc.getHelloStreamMethod = getHelloStreamMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest, land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "HelloStream"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getHelloStreamMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -669,7 +699,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QueryAccount retrieves account information from the blockchain for a given address.
+     * QueryAccount retrieves account information from the blockchain for a given
+     * address.
      * </pre>
      */
     default void queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request,
@@ -679,9 +710,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. However, if skip_password is true, then ignore the password.
-     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * DeleteAccount deletes the account with the given name, using the password
+     * to ensure access. However, if skip_password is true, then ignore the
+     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -702,9 +733,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Render calls the Render function for package_path with optional args. The package path
-     * should include the prefix like "gno.land/". This is similar to using a browser URL
-     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * Render calls the Render function for package_path with optional args. The
+     * package path should include the prefix like "gno.land/". This is similar to
+     * using a browser URL &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have
+     * the prefix like "gno.land/".
      * </pre>
      */
     default void render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request,
@@ -714,9 +746,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QEval evaluates the given expression with the realm code at package_path. The package path
-     * should include the prefix like "gno.land/". The expression is usually a function call like
-     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * QEval evaluates the given expression with the realm code at package_path.
+     * The package path should include the prefix like "gno.land/". The expression
+     * is usually a function call like "GetBoardIDFromName(&#92;"testboard&#92;")". The
+     * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
      * </pre>
      */
@@ -763,6 +796,16 @@ public final class GnomobileServiceGrpc {
     default void hello(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHelloMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * HelloStream is for debug purposes
+     * </pre>
+     */
+    default void helloStream(land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHelloStreamMethod(), responseObserver);
     }
   }
 
@@ -897,7 +940,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QueryAccount retrieves account information from the blockchain for a given address.
+     * QueryAccount retrieves account information from the blockchain for a given
+     * address.
      * </pre>
      */
     public void queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request,
@@ -908,9 +952,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. However, if skip_password is true, then ignore the password.
-     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * DeleteAccount deletes the account with the given name, using the password
+     * to ensure access. However, if skip_password is true, then ignore the
+     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -933,9 +977,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Render calls the Render function for package_path with optional args. The package path
-     * should include the prefix like "gno.land/". This is similar to using a browser URL
-     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * Render calls the Render function for package_path with optional args. The
+     * package path should include the prefix like "gno.land/". This is similar to
+     * using a browser URL &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have
+     * the prefix like "gno.land/".
      * </pre>
      */
     public void render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request,
@@ -946,9 +991,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QEval evaluates the given expression with the realm code at package_path. The package path
-     * should include the prefix like "gno.land/". The expression is usually a function call like
-     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * QEval evaluates the given expression with the realm code at package_path.
+     * The package path should include the prefix like "gno.land/". The expression
+     * is usually a function call like "GetBoardIDFromName(&#92;"testboard&#92;")". The
+     * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
      * </pre>
      */
@@ -1000,6 +1046,17 @@ public final class GnomobileServiceGrpc {
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getHelloMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * HelloStream is for debug purposes
+     * </pre>
+     */
+    public void helloStream(land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getHelloStreamMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -1112,7 +1169,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QueryAccount retrieves account information from the blockchain for a given address.
+     * QueryAccount retrieves account information from the blockchain for a given
+     * address.
      * </pre>
      */
     public land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request) {
@@ -1122,9 +1180,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. However, if skip_password is true, then ignore the password.
-     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * DeleteAccount deletes the account with the given name, using the password
+     * to ensure access. However, if skip_password is true, then ignore the
+     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -1145,9 +1203,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Render calls the Render function for package_path with optional args. The package path
-     * should include the prefix like "gno.land/". This is similar to using a browser URL
-     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * Render calls the Render function for package_path with optional args. The
+     * package path should include the prefix like "gno.land/". This is similar to
+     * using a browser URL &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have
+     * the prefix like "gno.land/".
      * </pre>
      */
     public land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request) {
@@ -1157,9 +1216,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QEval evaluates the given expression with the realm code at package_path. The package path
-     * should include the prefix like "gno.land/". The expression is usually a function call like
-     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * QEval evaluates the given expression with the realm code at package_path.
+     * The package path should include the prefix like "gno.land/". The expression
+     * is usually a function call like "GetBoardIDFromName(&#92;"testboard&#92;")". The
+     * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
      * </pre>
      */
@@ -1206,6 +1266,17 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse hello(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getHelloMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * HelloStream is for debug purposes
+     * </pre>
+     */
+    public java.util.Iterator<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse> helloStream(
+        land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getHelloStreamMethod(), getCallOptions(), request);
     }
   }
 
@@ -1326,7 +1397,8 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QueryAccount retrieves account information from the blockchain for a given address.
+     * QueryAccount retrieves account information from the blockchain for a given
+     * address.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> queryAccount(
@@ -1337,9 +1409,9 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. However, if skip_password is true, then ignore the password.
-     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * DeleteAccount deletes the account with the given name, using the password
+     * to ensure access. However, if skip_password is true, then ignore the
+     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -1362,9 +1434,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Render calls the Render function for package_path with optional args. The package path
-     * should include the prefix like "gno.land/". This is similar to using a browser URL
-     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * Render calls the Render function for package_path with optional args. The
+     * package path should include the prefix like "gno.land/". This is similar to
+     * using a browser URL &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have
+     * the prefix like "gno.land/".
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> render(
@@ -1375,9 +1448,10 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * QEval evaluates the given expression with the realm code at package_path. The package path
-     * should include the prefix like "gno.land/". The expression is usually a function call like
-     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * QEval evaluates the given expression with the realm code at package_path.
+     * The package path should include the prefix like "gno.land/". The expression
+     * is usually a function call like "GetBoardIDFromName(&#92;"testboard&#92;")". The
+     * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
      * </pre>
      */
@@ -1449,6 +1523,7 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_ADDRESS_TO_BECH32 = 14;
   private static final int METHODID_ADDRESS_FROM_BECH32 = 15;
   private static final int METHODID_HELLO = 16;
+  private static final int METHODID_HELLO_STREAM = 17;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1534,6 +1609,10 @@ public final class GnomobileServiceGrpc {
         case METHODID_HELLO:
           serviceImpl.hello((land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>) responseObserver);
+          break;
+        case METHODID_HELLO_STREAM:
+          serviceImpl.helloStream((land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1672,6 +1751,13 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest,
               land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>(
                 service, METHODID_HELLO)))
+        .addMethod(
+          getHelloStreamMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.HelloStreamResponse>(
+                service, METHODID_HELLO_STREAM)))
         .build();
   }
 
@@ -1701,6 +1787,7 @@ public final class GnomobileServiceGrpc {
               .addMethod(getAddressToBech32Method())
               .addMethod(getAddressFromBech32Method())
               .addMethod(getHelloMethod())
+              .addMethod(getHelloStreamMethod())
               .build();
         }
       }

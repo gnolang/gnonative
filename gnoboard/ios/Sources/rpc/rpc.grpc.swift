@@ -102,6 +102,12 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     _ request: Land_Gno_Gnomobile_V1_HelloRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloResponse>
+
+  func helloStream(
+    _ request: Land_Gno_Gnomobile_V1_HelloStreamRequest,
+    callOptions: CallOptions?,
+    handler: @escaping (Land_Gno_Gnomobile_V1_HelloStreamResponse) -> Void
+  ) -> ServerStreamingCall<Land_Gno_Gnomobile_V1_HelloStreamRequest, Land_Gno_Gnomobile_V1_HelloStreamResponse>
 }
 
 extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
@@ -261,7 +267,8 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// QueryAccount retrieves account information from the blockchain for a given address.
+  /// QueryAccount retrieves account information from the blockchain for a given
+  /// address.
   ///
   /// - Parameters:
   ///   - request: Request to send to QueryAccount.
@@ -279,9 +286,9 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// DeleteAccount deletes the account with the given name, using the password to
-  /// ensure access. However, if skip_password is true, then ignore the password.
-  /// If the account doesn't exist, then return ErrCryptoKeyNotFound.
+  /// DeleteAccount deletes the account with the given name, using the password
+  /// to ensure access. However, if skip_password is true, then ignore the
+  /// password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
   /// If the password is wrong, then return ErrDecryptionFailed.
   ///
   /// - Parameters:
@@ -318,9 +325,10 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// Render calls the Render function for package_path with optional args. The package path
-  /// should include the prefix like "gno.land/". This is similar to using a browser URL
-  /// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+  /// Render calls the Render function for package_path with optional args. The
+  /// package path should include the prefix like "gno.land/". This is similar to
+  /// using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+  /// the prefix like "gno.land/".
   ///
   /// - Parameters:
   ///   - request: Request to send to Render.
@@ -338,9 +346,10 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
-  /// QEval evaluates the given expression with the realm code at package_path. The package path
-  /// should include the prefix like "gno.land/". The expression is usually a function call like
-  /// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+  /// QEval evaluates the given expression with the realm code at package_path.
+  /// The package path should include the prefix like "gno.land/". The expression
+  /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
+  /// return value is a typed expression like
   /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
   ///
   /// - Parameters:
@@ -428,6 +437,27 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeHelloInterceptors() ?? []
+    )
+  }
+
+  /// HelloStream is for debug purposes
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to HelloStream.
+  ///   - callOptions: Call options.
+  ///   - handler: A closure called when each response is received from the server.
+  /// - Returns: A `ServerStreamingCall` with futures for the metadata and status.
+  internal func helloStream(
+    _ request: Land_Gno_Gnomobile_V1_HelloStreamRequest,
+    callOptions: CallOptions? = nil,
+    handler: @escaping (Land_Gno_Gnomobile_V1_HelloStreamResponse) -> Void
+  ) -> ServerStreamingCall<Land_Gno_Gnomobile_V1_HelloStreamRequest, Land_Gno_Gnomobile_V1_HelloStreamResponse> {
+    return self.makeServerStreamingCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.helloStream.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloStreamInterceptors() ?? [],
+      handler: handler
     )
   }
 }
@@ -579,6 +609,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     _ request: Land_Gno_Gnomobile_V1_HelloRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloResponse>
+
+  func makeHelloStreamCall(
+    _ request: Land_Gno_Gnomobile_V1_HelloStreamRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncServerStreamingCall<Land_Gno_Gnomobile_V1_HelloStreamRequest, Land_Gno_Gnomobile_V1_HelloStreamResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -794,6 +829,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       interceptors: self.interceptors?.makeHelloInterceptors() ?? []
     )
   }
+
+  internal func makeHelloStreamCall(
+    _ request: Land_Gno_Gnomobile_V1_HelloStreamRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncServerStreamingCall<Land_Gno_Gnomobile_V1_HelloStreamRequest, Land_Gno_Gnomobile_V1_HelloStreamResponse> {
+    return self.makeAsyncServerStreamingCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.helloStream.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloStreamInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1001,6 +1048,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       interceptors: self.interceptors?.makeHelloInterceptors() ?? []
     )
   }
+
+  internal func helloStream(
+    _ request: Land_Gno_Gnomobile_V1_HelloStreamRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncResponseStream<Land_Gno_Gnomobile_V1_HelloStreamResponse> {
+    return self.performAsyncServerStreamingCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.helloStream.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeHelloStreamInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1072,6 +1131,9 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
 
   /// - Returns: Interceptors to use when invoking 'hello'.
   func makeHelloInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'helloStream'.
+  func makeHelloStreamInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_HelloStreamRequest, Land_Gno_Gnomobile_V1_HelloStreamResponse>]
 }
 
 internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
@@ -1096,6 +1158,7 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.helloStream,
     ]
   )
 
@@ -1200,6 +1263,12 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       name: "Hello",
       path: "/land.gno.gnomobile.v1.GnomobileService/Hello",
       type: GRPCCallType.unary
+    )
+
+    internal static let helloStream = GRPCMethodDescriptor(
+      name: "HelloStream",
+      path: "/land.gno.gnomobile.v1.GnomobileService/HelloStream",
+      type: GRPCCallType.serverStreaming
     )
   }
 }

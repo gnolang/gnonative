@@ -178,3 +178,11 @@ type HelloRequest struct {
 type HelloResponse struct {
 	Greeting string
 }
+
+type HelloStreamRequest struct {
+	Name string
+}
+
+type HelloStreamResponse struct {
+	Greeting string
+}
