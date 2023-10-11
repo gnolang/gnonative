@@ -18,22 +18,16 @@ const styles = StyleSheet.create({
   },
 });
 
-type Props = {
+export interface Props {
   title: string;
   onPress: () => void;
   loading?: boolean;
-};
+}
 
 const Button: React.FC<Props> = ({ title, onPress, loading = false }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.button}>
-        {loading ? (
-          <ActivityIndicator size='small' />
-        ) : (
-          <Text style={styles.buttonText}>{title}</Text>
-        )}
-      </View>
+      <View style={styles.button}>{loading ? <ActivityIndicator size='small' /> : <Text style={styles.buttonText}>{title}</Text>}</View>
     </TouchableOpacity>
   );
 };

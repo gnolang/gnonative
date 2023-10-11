@@ -1,6 +1,12 @@
 import CustomRouter from '@gno/router/custom-router';
 import 'fast-text-encoding';
 
-export default function App() {
+function App() {
   return <CustomRouter />;
 }
+
+const  AppEntryPoint = App;
+// const  AppEntryPoint = require('./.storybook').default;
+
+
+export default AppEntryPoint;
