@@ -2,6 +2,8 @@ import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes
 import { SelectAccountRequest } from '@gno/api/rpc_pb';
 import { CreateAccountRequest } from '@gno/api/rpc_pb';
 import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
+import { CallRequest } from '@gno/api/gnomobiletypes_pb';
+import { CallResponse } from '@gno/api/gnomobiletypes_pb';
 import * as Grpc from '@gno/grpc/client';
 import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
@@ -15,6 +17,7 @@ interface GnoResponse {
   listKeyInfo: () => Promise<GnoAccount[]>;
   selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
+  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => Promise<CallResponse>;
 }
 
 let clientInstance: PromiseClient<typeof GnomobileService> | undefined = undefined;
@@ -77,11 +80,26 @@ export const useGno = (): GnoResponse => {
     return response;
   };
 
+  const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => {
+    const client = await getClient();
+    const reponse = await client.call(
+      new CallRequest({
+        PackagePath: packagePath,
+        Fnc: fnc,
+        Args: args,
+        GasFee: gasFee,
+        GasWanted: BigInt(gasWanted),
+      }),
+    );
+    return reponse;
+  };
+
   return {
     setPassword,
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,
     selectAccount,
+    call,
   };
 };

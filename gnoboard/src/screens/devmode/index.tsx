@@ -1,12 +1,12 @@
 import { ConsoleView } from '@gno/components/consoleview';
 import TextInput from '@gno/components/textinput';
-import { GoBridge } from '@gno/native_modules';
 import { screenStyleSheet as styles } from '@gno/styles';
 import { useState } from 'react';
 import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
+import { Buffer } from 'buffer'
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
@@ -20,15 +20,16 @@ function DevMode() {
     const gasFee = '1000000ugnot';
     const gasWanted = 2000000;
     const args: Array<string> = ['2', '1', '1', postContent];
-    GoBridge.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)
-      .then((data) => {
-        setAppConsole(data);
-        setPostContent('');
-      })
-      .catch((err) => {
-        setAppConsole(err);
-      })
-      .finally(() => setLoading(undefined));
+    try {
+      const response = await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted);
+      console.log('response: ', response);
+      setAppConsole(Buffer.from(response.Result).toString());
+    } catch (error) {
+      console.log(error);
+      setAppConsole('error' + JSON.stringify(error));
+    } finally {
+      setLoading(undefined);
+    }
   };
 
   const onLoadAccountPress = async () => {

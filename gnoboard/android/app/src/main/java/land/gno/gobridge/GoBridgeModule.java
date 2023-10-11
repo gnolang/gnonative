@@ -1,38 +1,20 @@
 package land.gno.gobridge;
 
-import android.util.Log;
-
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.WritableArray;
-import com.facebook.react.bridge.WritableMap;
-import com.google.protobuf.ByteString;
 
 import java.io.File;
-import java.util.ArrayList;
-import android.util.Base64 ;
-import java.util.List;
 
 import gnolang.gno.gnomobile.Gnomobile;
 import gnolang.gno.gnomobile.Bridge;
 import gnolang.gno.gnomobile.BridgeConfig;
 
-import io.grpc.CallOptions;
 import io.grpc.Channel;
 import android.net.LocalSocketAddress.Namespace;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.MethodDescriptor;
-import io.grpc.StatusRuntimeException;
 import land.gno.gnomobile.v1.GnomobileServiceGrpc;
-import land.gno.gnomobile.v1.Rpc;
-import land.gno.gnomobile.v1.Gnomobiletypes;
-import land.gno.gnomobile.v1.Rpc.KeyInfo;
 import land.gno.udschannel.UdsChannelBuilder;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
@@ -100,187 +82,12 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setPassword(String password, Promise promise) {
-        Gnomobiletypes.SetPasswordRequest request = Gnomobiletypes.SetPasswordRequest.newBuilder()
-            .setPassword(password)
-            .build();
-
-        Gnomobiletypes.SetPasswordResponse reply;
-        try {
-            reply = blockingStub.setPassword(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC setPassword failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(true);
-    }
-
-    @ReactMethod
-    public void generateRecoveryPhrase(Promise promise) {
-        Gnomobiletypes.GenerateRecoveryPhraseRequest request = Gnomobiletypes.GenerateRecoveryPhraseRequest.newBuilder()
-            .build();
-        Gnomobiletypes.GenerateRecoveryPhraseResponse reply;
-        try {
-            reply = blockingStub.generateRecoveryPhrase(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC generateRecoveryPhrase failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(reply.getPhrase().toString());
-    }
-
-    @ReactMethod
     public void getTcpPort(Promise promise) {
         if (bridgeGnomobile == null) {
             promise.reject(new Exception("bridge not init"));
             return ;
         }
         promise.resolve(socketPort);
-    }
-
-    @ReactMethod
-    public void listKeyInfo(Promise promise) {
-        Rpc.ListKeyInfoRequest request = Rpc.ListKeyInfoRequest.newBuilder()
-            .build();
-        Rpc.ListKeyInfoResponse reply;
-        try {
-            reply = blockingStub.listKeyInfo(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC listKeyInfo failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-
-        List<Rpc.KeyInfo> listKey = reply.getKeysList();
-        WritableArray promiseArray= Arguments.createArray();
-        for(int i=0;i<listKey.size();i++){
-            promiseArray.pushMap(convertKeyInfo(listKey.get(i)));
-        }
-
-        promise.resolve(promiseArray);
-    }
-
-    @ReactMethod
-    public void createAccount(String nameOrBech32, String mnemonic, String bip39Passwd, String password, int account, int index, Promise promise) {
-        Rpc.CreateAccountRequest request = Rpc.CreateAccountRequest.newBuilder()
-            .setNameOrBech32(nameOrBech32)
-            .setMnemonic(mnemonic)
-            .setBip39Passwd(bip39Passwd)
-            .setPassword(password)
-            .setAccount(account)
-            .setIndex(index)
-            .build();
-
-        Rpc.CreateAccountResponse reply;
-        try {
-            reply = blockingStub.createAccount(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC createAccount failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-
-        promise.resolve(convertKeyInfo(reply.getKey()));
-    }
-
-    @ReactMethod
-    public void selectAccount(String nameOrBech32, Promise promise) {
-        Rpc.SelectAccountRequest request = Rpc.SelectAccountRequest.newBuilder()
-            .setNameOrBech32(nameOrBech32)
-            .build();
-
-        Rpc.SelectAccountResponse reply;
-        try {
-            reply = blockingStub.selectAccount(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC selectAccount failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(convertKeyInfo(reply.getKey()));
-    }
-
-    @ReactMethod
-    public void getActiveAccount(Promise promise) {
-        Rpc.GetActiveAccountRequest request = Rpc.GetActiveAccountRequest.newBuilder()
-            .build();
-        Rpc.GetActiveAccountResponse reply;
-        try {
-            reply = blockingStub.getActiveAccount(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC getActiveAccount failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(convertKeyInfo(reply.getKey()));
-    }
-
-    @ReactMethod
-    public void query(String path, String data_b64, Promise promise) {
-        Gnomobiletypes.QueryRequest request = Gnomobiletypes.QueryRequest.newBuilder()
-            .setPath(path)
-            .setData(ByteString.copyFrom(Base64.decode(data_b64, Base64.DEFAULT)))
-            .build();
-
-        Gnomobiletypes.QueryResponse response;
-        try {
-            response = blockingStub.query(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(Base64.encodeToString(response.getResult().toByteArray(), Base64.NO_WRAP));
-    }
-
-    @ReactMethod
-    public void call(String packagePath, String fnc, ReadableArray args, String gasFee, int gasWanted, Promise promise) {
-        List<String> argList = new ArrayList<>();
-        for (int i = 0; i < args.size(); i++) {
-            argList.add(args.getString(i));
-        }
-
-        Gnomobiletypes.CallRequest request = Gnomobiletypes.CallRequest.newBuilder()
-            .setPackagePath(packagePath)
-            .setFnc(fnc)
-            .addAllArgs(argList)
-            .setGasFee(gasFee)
-            .setGasWanted(gasWanted)
-            .build();
-
-        Gnomobiletypes.CallResponse response;
-        try {
-            response = blockingStub.call(request);
-        } catch (StatusRuntimeException e) {
-            Log.d(TAG, String.format("RPC call failed: {%s}", e.getStatus()));
-            promise.reject(e);
-            return;
-        }
-        promise.resolve(Base64.encodeToString(response.getResult().toByteArray(), Base64.NO_WRAP));
-    }
-
-    @ReactMethod
-    public void exportJsonConfig(Promise promise) {
-        try {
-//            promise.resolve(Gnomobile.exportJsonConfig(rootDir.getAbsolutePath()));
-            promise.resolve("{}");
-        } catch (Exception err) {
-            promise.reject(err);
-        }
-    }
-
-    /**
-     * Convert the gRPC type KeyInfo into a WritableMap for passing to ReactNative.
-     */
-    public static WritableMap convertKeyInfo(KeyInfo keyInfo) {
-        WritableMap map = Arguments.createMap();
-        map.putInt("type", keyInfo.getType().getNumber());
-        map.putString("name", keyInfo.getName());
-        map.putString("address_b64", Base64.encodeToString(keyInfo.getAddress().toByteArray(), Base64.NO_WRAP));
-        map.putString("pubKey_b64", Base64.encodeToString(keyInfo.getPubKey().toByteArray(), Base64.NO_WRAP));
-        return map;
     }
 
     @Override
