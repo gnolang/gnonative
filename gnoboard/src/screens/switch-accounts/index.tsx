@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import SideMenuAccountList from '@gno/components/common/side-menu-account-list/side-menu-account-list';
-import { Buffer } from 'buffer';
 import { GnoAccount } from '@gno/native_modules/types';
 
 const SwitchAccounts = () => {
@@ -20,13 +19,6 @@ const SwitchAccounts = () => {
       try {
         setLoading('Loading accounts...');
         const response = await gno.listKeyInfo();
-        console.log(response);
-
-        response.forEach((item) => {
-          console.log('address_b64 -> ', item.name);
-          console.log('address_b64 -> ', Buffer.from(item.address_b64, 'base64').toString('hex'));
-          console.log('pubKey_b64 -> ', Buffer.from(item.pubKey_b64, 'base64').toString('hex'));
-        });
 
         setAccounts(response);
         setLoading(undefined);

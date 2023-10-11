@@ -1,48 +1,86 @@
+import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
+import { SelectAccountRequest } from '@gno/api/rpc_pb';
+import { CreateAccountRequest } from '@gno/api/rpc_pb';
+import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
+import * as Grpc from '@gno/grpc/client';
 import { GnoAccount } from '@gno/native_modules/types';
-import * as GoBridge from '@gno/utils/bridge';
+import { GoBridge } from '@gno/native_modules';
+import { PromiseClient } from '@connectrpc/connect';
+import { GnomobileService } from '@gno/api/rpc_connect';
+import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 
 interface GnoResponse {
-  createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount>;
+  createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
-  initBridge: () => Promise<boolean>;
   listKeyInfo: () => Promise<GnoAccount[]>;
-  selectAccount: (nameOrBech32: string) => Promise<GnoAccount>;
-  setPassword: (password: string) => Promise<void>;
+  selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
+  setPassword: (password: string) => Promise<SetPasswordResponse>;
 }
 
-export const useGno = (): GnoResponse => {
-  const createAccount = async (nameOrBech32: string, mnemonic: string, password: string) => {
-    console.log('nameOrBech32', nameOrBech32);
-    console.log('mnemonic', mnemonic);
+let clientInstance: PromiseClient<typeof GnomobileService> | undefined = undefined;
+let bridgeInstance: boolean = false;
 
-    return await GoBridge.createAccount(nameOrBech32, mnemonic, '', password, 0, 0);
+export const useGno = (): GnoResponse => {
+  const getClient = async () => {
+    if (!bridgeInstance) {
+      console.log('Initializing bridge...');
+      await GoBridge.initBridge();
+      bridgeInstance = true;
+    }
+
+    if (clientInstance) return clientInstance;
+
+    console.log('Creating GRPC client instance...');
+
+    const port = await GoBridge.getTcpPort();
+    clientInstance = await Grpc.createClient(port);
+    return clientInstance;
+  };
+
+  const createAccount = async (nameOrBech32: string, mnemonic: string, password: string) => {
+    const client = await getClient();
+    const reponse = await client.createAccount(
+      new CreateAccountRequest({
+        nameOrBech32,
+        mnemonic,
+        password,
+      }),
+    );
+    return reponse.key;
   };
 
   const generateRecoveryPhrase = async () => {
-    return await GoBridge.generateRecoveryPhrase();
-  };
-
-  const initBridge = async () => {
-    return await GoBridge.initBridge();
+    const client = await getClient();
+    const response = await client.generateRecoveryPhrase(new GenerateRecoveryPhraseRequest());
+    return response.Phrase;
   };
 
   const listKeyInfo = async () => {
-    return await GoBridge.listKeyInfo();
+    const client = await getClient();
+    const response = await client.listKeyInfo(new ListKeyInfoRequest());
+    return response.keys;
   };
 
   const selectAccount = async (nameOrBech32: string) => {
-    return await GoBridge.selectAccount(nameOrBech32);
+    const client = await getClient();
+    const response = await client.selectAccount(
+      new SelectAccountRequest({
+        nameOrBech32,
+      }),
+    );
+    return response.key;
   };
 
   const setPassword = async (password: string) => {
-    return await GoBridge.setPassword(password);
+    const client = await getClient();
+    const response = await client.setPassword(new SetPasswordRequest({ Password: password }));
+    return response;
   };
 
   return {
     setPassword,
     createAccount,
     generateRecoveryPhrase,
-    initBridge,
     listKeyInfo,
     selectAccount,
   };

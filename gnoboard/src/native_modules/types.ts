@@ -1,3 +1,5 @@
+import { KeyInfo } from "@gno/api/rpc_pb";
+
 export type GnoConfig = {
   Remote: string;
   ChainID: string;
@@ -8,9 +10,4 @@ export type GnoConfig = {
   Mnemonic: string;
 };
 
-export type GnoAccount = {
-  address_b64: string;
-  name: string;
-  pubKey_b64: string;
-  type: number;
-};
+export type GnoAccount = KeyInfo
