@@ -181,6 +181,54 @@ export declare class GenerateRecoveryPhraseResponse extends Message<GenerateReco
 }
 
 /**
+ * @generated from message land.gno.gnomobile.v1.DeleteAccountRequest
+ */
+export declare class DeleteAccountRequest extends Message<DeleteAccountRequest> {
+  /**
+   * @generated from field: string NameOrBech32 = 1;
+   */
+  NameOrBech32: string;
+
+  /**
+   * @generated from field: string Password = 2;
+   */
+  Password: string;
+
+  constructor(data?: PartialMessage<DeleteAccountRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.DeleteAccountRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAccountRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAccountRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAccountRequest;
+
+  static equals(a: DeleteAccountRequest | PlainMessage<DeleteAccountRequest> | undefined, b: DeleteAccountRequest | PlainMessage<DeleteAccountRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.DeleteAccountResponse
+ */
+export declare class DeleteAccountResponse extends Message<DeleteAccountResponse> {
+  constructor(data?: PartialMessage<DeleteAccountResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.DeleteAccountResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAccountResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAccountResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAccountResponse;
+
+  static equals(a: DeleteAccountResponse | PlainMessage<DeleteAccountResponse> | undefined, b: DeleteAccountResponse | PlainMessage<DeleteAccountResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnomobile.v1.QueryRequest
  */
 export declare class QueryRequest extends Message<QueryRequest> {

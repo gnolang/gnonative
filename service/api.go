@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"strings"
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
@@ -153,6 +154,22 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	}
 
 	return connect.NewResponse(&rpc.GetActiveAccountResponse{Key: info}), nil
+}
+
+// DeleteAccount deletes the account with the given name, using the password to
+// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+// If the password is wrong, then return ErrDecryptionFailed.
+func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
+	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, false); err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else if strings.Contains(err.Error(), "ciphertext decryption failed") {
+			return nil, rpc.ErrCode_ErrDecryptionFailed
+		} else {
+			return nil, err
+		}
+	}
+	return connect.NewResponse(&rpc.DeleteAccountResponse{}), nil
 }
 
 // Make an ABCI query to the remote node.

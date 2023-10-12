@@ -28,6 +28,14 @@ type GenerateRecoveryPhraseResponse struct {
 	Phrase string `json:"phrase" yaml:"phrase"`
 }
 
+type DeleteAccountRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+	Password     string `json:"password" yaml:"password"`
+}
+
+type DeleteAccountResponse struct {
+}
+
 type QueryRequest struct {
 	// Example: "vm/qrender"
 	Path string `json:"path" yaml:"path"`

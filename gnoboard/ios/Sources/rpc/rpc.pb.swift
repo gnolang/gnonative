@@ -94,6 +94,7 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
   case errCryptoKeyNotFound // = 106
   case errNoActiveAccount // = 107
   case errRunGrpcserver // = 108
+  case errDecryptionFailed // = 109
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -115,6 +116,7 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case 106: self = .errCryptoKeyNotFound
     case 107: self = .errNoActiveAccount
     case 108: self = .errRunGrpcserver
+    case 109: self = .errDecryptionFailed
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -134,6 +136,7 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case .errCryptoKeyNotFound: return 106
     case .errNoActiveAccount: return 107
     case .errRunGrpcserver: return 108
+    case .errDecryptionFailed: return 109
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -158,6 +161,7 @@ extension Land_Gno_Gnomobile_V1_ErrCode: CaseIterable {
     .errCryptoKeyNotFound,
     .errNoActiveAccount,
     .errRunGrpcserver,
+    .errDecryptionFailed,
   ]
 }
 
@@ -391,6 +395,7 @@ extension Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf._ProtoNameProviding {
     106: .same(proto: "ErrCryptoKeyNotFound"),
     107: .same(proto: "ErrNoActiveAccount"),
     108: .same(proto: "ErrRunGRPCServer"),
+    109: .same(proto: "ErrDecryptionFailed"),
   ]
 }
 

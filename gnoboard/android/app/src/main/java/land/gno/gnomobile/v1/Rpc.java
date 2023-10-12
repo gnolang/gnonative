@@ -194,6 +194,10 @@ public final class Rpc {
      * <code>ErrRunGRPCServer = 108;</code>
      */
     ErrRunGRPCServer(108),
+    /**
+     * <code>ErrDecryptionFailed = 109;</code>
+     */
+    ErrDecryptionFailed(109),
     UNRECOGNIZED(-1),
     ;
 
@@ -265,6 +269,10 @@ public final class Rpc {
      * <code>ErrRunGRPCServer = 108;</code>
      */
     public static final int ErrRunGRPCServer_VALUE = 108;
+    /**
+     * <code>ErrDecryptionFailed = 109;</code>
+     */
+    public static final int ErrDecryptionFailed_VALUE = 109;
 
 
     @java.lang.Override
@@ -301,6 +309,7 @@ public final class Rpc {
         case 106: return ErrCryptoKeyNotFound;
         case 107: return ErrNoActiveAccount;
         case 108: return ErrRunGRPCServer;
+        case 109: return ErrDecryptionFailed;
         default: return null;
       }
     }

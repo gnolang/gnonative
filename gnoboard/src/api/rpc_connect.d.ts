@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, QueryRequest, QueryResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { CallRequest, CallResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, QueryRequest, QueryResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { CreateAccountRequest, CreateAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, SelectAccountRequest, SelectAccountResponse } from "./rpc_pb.js";
 
@@ -109,6 +109,19 @@ export declare const GnomobileService: {
       readonly name: "GetActiveAccount",
       readonly I: typeof GetActiveAccountRequest,
       readonly O: typeof GetActiveAccountResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * DeleteAccount deletes the account with the given name, using the password to
+     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the password is wrong, then return ErrDecryptionFailed.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.DeleteAccount
+     */
+    readonly deleteAccount: {
+      readonly name: "DeleteAccount",
+      readonly I: typeof DeleteAccountRequest,
+      readonly O: typeof DeleteAccountResponse,
       readonly kind: MethodKind.Unary,
     },
     /**
