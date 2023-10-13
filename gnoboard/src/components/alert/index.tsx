@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { colors } from '@gno/styles';
 import Exclamation from '../icons/Exclamation';
 
-interface Props {
+export interface Props {
   message?: string;
   severity: 'error' | 'warning' | 'info' | 'success';
 }

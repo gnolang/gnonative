@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
-type Props = {
+export interface Props {
   error?: boolean | string;
-};
+}
 
 export const TextInput = styled.TextInput<Props>`
   height: 48px;
