@@ -80,6 +80,25 @@ export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnomobile.v1.DeleteAccountRequest
+ */
+export const DeleteAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.DeleteAccountRequest",
+  () => [
+    { no: 1, name: "NameOrBech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.DeleteAccountResponse
+ */
+export const DeleteAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.DeleteAccountResponse",
+  [],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.QueryRequest
  */
 export const QueryRequest = proto3.makeMessageType(

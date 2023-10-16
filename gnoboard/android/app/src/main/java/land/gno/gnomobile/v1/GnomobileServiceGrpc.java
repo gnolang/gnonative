@@ -258,6 +258,36 @@ public final class GnomobileServiceGrpc {
     return getGetActiveAccountMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> getDeleteAccountMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteAccount",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> getDeleteAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> getDeleteAccountMethod;
+    if ((getDeleteAccountMethod = GnomobileServiceGrpc.getDeleteAccountMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getDeleteAccountMethod = GnomobileServiceGrpc.getDeleteAccountMethod) == null) {
+          GnomobileServiceGrpc.getDeleteAccountMethod = getDeleteAccountMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteAccount"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getDeleteAccountMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QueryRequest,
       land.gno.gnomobile.v1.Gnomobiletypes.QueryResponse> getQueryMethod;
 
@@ -489,6 +519,18 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * DeleteAccount deletes the account with the given name, using the password to
+     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the password is wrong, then return ErrDecryptionFailed.
+     * </pre>
+     */
+    default void deleteAccount(land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteAccountMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Make an ABCI query to the remote node.
      * </pre>
      */
@@ -649,6 +691,19 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * DeleteAccount deletes the account with the given name, using the password to
+     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the password is wrong, then return ErrDecryptionFailed.
+     * </pre>
+     */
+    public void deleteAccount(land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteAccountMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Make an ABCI query to the remote node.
      * </pre>
      */
@@ -786,6 +841,18 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetActiveAccountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * DeleteAccount deletes the account with the given name, using the password to
+     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the password is wrong, then return ErrDecryptionFailed.
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse deleteAccount(land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteAccountMethod(), getCallOptions(), request);
     }
 
     /**
@@ -936,6 +1003,19 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * DeleteAccount deletes the account with the given name, using the password to
+     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the password is wrong, then return ErrDecryptionFailed.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> deleteAccount(
+        land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteAccountMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Make an ABCI query to the remote node.
      * </pre>
      */
@@ -976,9 +1056,10 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_CREATE_ACCOUNT = 5;
   private static final int METHODID_SELECT_ACCOUNT = 6;
   private static final int METHODID_GET_ACTIVE_ACCOUNT = 7;
-  private static final int METHODID_QUERY = 8;
-  private static final int METHODID_CALL = 9;
-  private static final int METHODID_HELLO = 10;
+  private static final int METHODID_DELETE_ACCOUNT = 8;
+  private static final int METHODID_QUERY = 9;
+  private static final int METHODID_CALL = 10;
+  private static final int METHODID_HELLO = 11;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1028,6 +1109,10 @@ public final class GnomobileServiceGrpc {
         case METHODID_GET_ACTIVE_ACCOUNT:
           serviceImpl.getActiveAccount((land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_ACCOUNT:
+          serviceImpl.deleteAccount((land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse>) responseObserver);
           break;
         case METHODID_QUERY:
           serviceImpl.query((land.gno.gnomobile.v1.Gnomobiletypes.QueryRequest) request,
@@ -1116,6 +1201,13 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse>(
                 service, METHODID_GET_ACTIVE_ACCOUNT)))
         .addMethod(
+          getDeleteAccountMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse>(
+                service, METHODID_DELETE_ACCOUNT)))
+        .addMethod(
           getQueryMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1156,6 +1248,7 @@ public final class GnomobileServiceGrpc {
               .addMethod(getCreateAccountMethod())
               .addMethod(getSelectAccountMethod())
               .addMethod(getGetActiveAccountMethod())
+              .addMethod(getDeleteAccountMethod())
               .addMethod(getQueryMethod())
               .addMethod(getCallMethod())
               .addMethod(getHelloMethod())

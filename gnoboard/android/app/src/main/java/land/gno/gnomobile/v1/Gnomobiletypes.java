@@ -1920,6 +1920,593 @@ public final class Gnomobiletypes {
     }
   }
 
+  public interface DeleteAccountRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.DeleteAccountRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    java.lang.String getNameOrBech32();
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    com.google.protobuf.ByteString
+        getNameOrBech32Bytes();
+
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @return The password.
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @return The bytes for password.
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.DeleteAccountRequest}
+   */
+  public  static final class DeleteAccountRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          DeleteAccountRequest, DeleteAccountRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.DeleteAccountRequest)
+      DeleteAccountRequestOrBuilder {
+    private DeleteAccountRequest() {
+      nameOrBech32_ = "";
+      password_ = "";
+    }
+    public static final int NAMEORBECH32_FIELD_NUMBER = 1;
+    private java.lang.String nameOrBech32_;
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    @java.lang.Override
+    public java.lang.String getNameOrBech32() {
+      return nameOrBech32_;
+    }
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameOrBech32Bytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(nameOrBech32_);
+    }
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @param value The nameOrBech32 to set.
+     */
+    private void setNameOrBech32(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      nameOrBech32_ = value;
+    }
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     */
+    private void clearNameOrBech32() {
+
+      nameOrBech32_ = getDefaultInstance().getNameOrBech32();
+    }
+    /**
+     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * @param value The bytes for nameOrBech32 to set.
+     */
+    private void setNameOrBech32Bytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      nameOrBech32_ = value.toStringUtf8();
+
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 2;
+    private java.lang.String password_;
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @return The password.
+     */
+    @java.lang.Override
+    public java.lang.String getPassword() {
+      return password_;
+    }
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @return The bytes for password.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(password_);
+    }
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @param value The password to set.
+     */
+    private void setPassword(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      password_ = value;
+    }
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     */
+    private void clearPassword() {
+
+      password_ = getDefaultInstance().getPassword();
+    }
+    /**
+     * <code>string Password = 2 [json_name = "Password"];</code>
+     * @param value The bytes for password to set.
+     */
+    private void setPasswordBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      password_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.DeleteAccountRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.DeleteAccountRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * @return The nameOrBech32.
+       */
+      @java.lang.Override
+      public java.lang.String getNameOrBech32() {
+        return instance.getNameOrBech32();
+      }
+      /**
+       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * @return The bytes for nameOrBech32.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getNameOrBech32Bytes() {
+        return instance.getNameOrBech32Bytes();
+      }
+      /**
+       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * @param value The nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setNameOrBech32(value);
+        return this;
+      }
+      /**
+       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearNameOrBech32() {
+        copyOnWrite();
+        instance.clearNameOrBech32();
+        return this;
+      }
+      /**
+       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * @param value The bytes for nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32Bytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setNameOrBech32Bytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string Password = 2 [json_name = "Password"];</code>
+       * @return The password.
+       */
+      @java.lang.Override
+      public java.lang.String getPassword() {
+        return instance.getPassword();
+      }
+      /**
+       * <code>string Password = 2 [json_name = "Password"];</code>
+       * @return The bytes for password.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        return instance.getPasswordBytes();
+      }
+      /**
+       * <code>string Password = 2 [json_name = "Password"];</code>
+       * @param value The password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPassword(value);
+        return this;
+      }
+      /**
+       * <code>string Password = 2 [json_name = "Password"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPassword() {
+        copyOnWrite();
+        instance.clearPassword();
+        return this;
+      }
+      /**
+       * <code>string Password = 2 [json_name = "Password"];</code>
+       * @param value The bytes for password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPasswordBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.DeleteAccountRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "nameOrBech32_",
+              "password_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.DeleteAccountRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest DEFAULT_INSTANCE;
+    static {
+      DeleteAccountRequest defaultInstance = new DeleteAccountRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        DeleteAccountRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<DeleteAccountRequest> PARSER;
+
+    public static com.google.protobuf.Parser<DeleteAccountRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface DeleteAccountResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.DeleteAccountResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.DeleteAccountResponse}
+   */
+  public  static final class DeleteAccountResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          DeleteAccountResponse, DeleteAccountResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.DeleteAccountResponse)
+      DeleteAccountResponseOrBuilder {
+    private DeleteAccountResponse() {
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.DeleteAccountResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.DeleteAccountResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.DeleteAccountResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.DeleteAccountResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse DEFAULT_INSTANCE;
+    static {
+      DeleteAccountResponse defaultInstance = new DeleteAccountResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        DeleteAccountResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<DeleteAccountResponse> PARSER;
+
+    public static com.google.protobuf.Parser<DeleteAccountResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface QueryRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.QueryRequest)
       com.google.protobuf.MessageLiteOrBuilder {

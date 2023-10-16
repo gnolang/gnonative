@@ -32,6 +32,14 @@ message GenerateRecoveryPhraseResponse {
 	string Phrase = 1;
 }
 
+message DeleteAccountRequest {
+	string NameOrBech32 = 1;
+	string Password = 2;
+}
+
+message DeleteAccountResponse {
+}
+
 message QueryRequest {
 	string Path = 1;
 	bytes Data = 2;

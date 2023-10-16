@@ -111,6 +111,11 @@ export declare enum ErrCode {
    * @generated from enum value: ErrRunGRPCServer = 108;
    */
   ErrRunGRPCServer = 108,
+
+  /**
+   * @generated from enum value: ErrDecryptionFailed = 109;
+   */
+  ErrDecryptionFailed = 109,
 }
 
 /**

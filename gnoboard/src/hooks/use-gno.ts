@@ -2,6 +2,7 @@ import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes
 import { SelectAccountRequest } from '@gno/api/rpc_pb';
 import { CreateAccountRequest } from '@gno/api/rpc_pb';
 import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
+import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { CallRequest } from '@gno/api/gnomobiletypes_pb';
 import { CallResponse } from '@gno/api/gnomobiletypes_pb';
 import * as Grpc from '@gno/grpc/client';
@@ -17,6 +18,7 @@ interface GnoResponse {
   listKeyInfo: () => Promise<GnoAccount[]>;
   selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
+  deleteAccount: (nameOrBech32: string, password: string) => Promise<DeleteAccountResponse>;
   call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => Promise<CallResponse>;
 }
 
@@ -80,6 +82,15 @@ export const useGno = (): GnoResponse => {
     return response;
   };
 
+  const deleteAccount = async (nameOrBech32: string, password: string) => {
+    const client = await getClient();
+    const response = await client.deleteAccount(
+      new DeleteAccountRequest({
+        NameOrBech32: nameOrBech32,
+        Password: password }));
+    return response;
+  };
+
   const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => {
     const client = await getClient();
     const reponse = await client.call(
@@ -95,11 +106,12 @@ export const useGno = (): GnoResponse => {
   };
 
   return {
-    setPassword,
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,
     selectAccount,
+    setPassword,
+    deleteAccount,
     call,
   };
 };

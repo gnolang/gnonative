@@ -58,6 +58,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>
 
+  func deleteAccount(
+    _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse>
+
   func query(
     _ request: Land_Gno_Gnomobile_V1_QueryRequest,
     callOptions: CallOptions?
@@ -231,6 +236,26 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
+  /// DeleteAccount deletes the account with the given name, using the password to
+  /// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+  /// If the password is wrong, then return ErrDecryptionFailed.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DeleteAccount.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func deleteAccount(
+    _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDeleteAccountInterceptors() ?? []
+    )
+  }
+
   /// Make an ABCI query to the remote node.
   ///
   /// - Parameters:
@@ -389,6 +414,11 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>
 
+  func makeDeleteAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse>
+
   func makeQueryCall(
     _ request: Land_Gno_Gnomobile_V1_QueryRequest,
     callOptions: CallOptions?
@@ -508,6 +538,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
+  internal func makeDeleteAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDeleteAccountInterceptors() ?? []
     )
   }
 
@@ -646,6 +688,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func deleteAccount(
+    _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_DeleteAccountResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDeleteAccountInterceptors() ?? []
+    )
+  }
+
   internal func query(
     _ request: Land_Gno_Gnomobile_V1_QueryRequest,
     callOptions: CallOptions? = nil
@@ -726,6 +780,9 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'getActiveAccount'.
   func makeGetActiveAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'deleteAccount'.
+  func makeDeleteAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse>]
+
   /// - Returns: Interceptors to use when invoking 'query'.
   func makeQueryInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_QueryRequest, Land_Gno_Gnomobile_V1_QueryResponse>]
 
@@ -749,6 +806,7 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.createAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.selectAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello,
@@ -801,6 +859,12 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let getActiveAccount = GRPCMethodDescriptor(
       name: "GetActiveAccount",
       path: "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount",
+      type: GRPCCallType.unary
+    )
+
+    internal static let deleteAccount = GRPCMethodDescriptor(
+      name: "DeleteAccount",
+      path: "/land.gno.gnomobile.v1.GnomobileService/DeleteAccount",
       type: GRPCCallType.unary
     )
 

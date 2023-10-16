@@ -41,6 +41,7 @@ export const ErrCode = proto3.makeEnum(
     {no: 106, name: "ErrCryptoKeyNotFound"},
     {no: 107, name: "ErrNoActiveAccount"},
     {no: 108, name: "ErrRunGRPCServer"},
+    {no: 109, name: "ErrDecryptionFailed"},
   ],
 );
 

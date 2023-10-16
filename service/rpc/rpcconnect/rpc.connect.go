@@ -57,6 +57,9 @@ const (
 	// GnomobileServiceGetActiveAccountProcedure is the fully-qualified name of the GnomobileService's
 	// GetActiveAccount RPC.
 	GnomobileServiceGetActiveAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount"
+	// GnomobileServiceDeleteAccountProcedure is the fully-qualified name of the GnomobileService's
+	// DeleteAccount RPC.
+	GnomobileServiceDeleteAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/DeleteAccount"
 	// GnomobileServiceQueryProcedure is the fully-qualified name of the GnomobileService's Query RPC.
 	GnomobileServiceQueryProcedure = "/land.gno.gnomobile.v1.GnomobileService/Query"
 	// GnomobileServiceCallProcedure is the fully-qualified name of the GnomobileService's Call RPC.
@@ -91,6 +94,10 @@ type GnomobileServiceClient interface {
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
+	// DeleteAccount deletes the account with the given name, using the password to
+	// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the password is wrong, then return ErrDecryptionFailed.
+	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
@@ -149,6 +156,11 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceGetActiveAccountProcedure,
 			opts...,
 		),
+		deleteAccount: connect.NewClient[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse](
+			httpClient,
+			baseURL+GnomobileServiceDeleteAccountProcedure,
+			opts...,
+		),
 		query: connect.NewClient[rpc.QueryRequest, rpc.QueryResponse](
 			httpClient,
 			baseURL+GnomobileServiceQueryProcedure,
@@ -177,6 +189,7 @@ type gnomobileServiceClient struct {
 	createAccount          *connect.Client[rpc.CreateAccountRequest, rpc.CreateAccountResponse]
 	selectAccount          *connect.Client[rpc.SelectAccountRequest, rpc.SelectAccountResponse]
 	getActiveAccount       *connect.Client[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse]
+	deleteAccount          *connect.Client[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse]
 	query                  *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
 	call                   *connect.Client[rpc.CallRequest, rpc.CallResponse]
 	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
@@ -222,6 +235,11 @@ func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, req *conn
 	return c.getActiveAccount.CallUnary(ctx, req)
 }
 
+// DeleteAccount calls land.gno.gnomobile.v1.GnomobileService.DeleteAccount.
+func (c *gnomobileServiceClient) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
+	return c.deleteAccount.CallUnary(ctx, req)
+}
+
 // Query calls land.gno.gnomobile.v1.GnomobileService.Query.
 func (c *gnomobileServiceClient) Query(ctx context.Context, req *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	return c.query.CallUnary(ctx, req)
@@ -264,6 +282,10 @@ type GnomobileServiceHandler interface {
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
+	// DeleteAccount deletes the account with the given name, using the password to
+	// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the password is wrong, then return ErrDecryptionFailed.
+	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
@@ -318,6 +340,11 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.GetActiveAccount,
 		opts...,
 	)
+	gnomobileServiceDeleteAccountHandler := connect.NewUnaryHandler(
+		GnomobileServiceDeleteAccountProcedure,
+		svc.DeleteAccount,
+		opts...,
+	)
 	gnomobileServiceQueryHandler := connect.NewUnaryHandler(
 		GnomobileServiceQueryProcedure,
 		svc.Query,
@@ -351,6 +378,8 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceSelectAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceGetActiveAccountProcedure:
 			gnomobileServiceGetActiveAccountHandler.ServeHTTP(w, r)
+		case GnomobileServiceDeleteAccountProcedure:
+			gnomobileServiceDeleteAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceQueryProcedure:
 			gnomobileServiceQueryHandler.ServeHTTP(w, r)
 		case GnomobileServiceCallProcedure:
@@ -396,6 +425,10 @@ func (UnimplementedGnomobileServiceHandler) SelectAccount(context.Context, *conn
 
 func (UnimplementedGnomobileServiceHandler) GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetActiveAccount is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.DeleteAccount is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {

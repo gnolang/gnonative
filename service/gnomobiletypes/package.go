@@ -20,6 +20,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	SetPasswordResponse{},
 	GenerateRecoveryPhraseRequest{},
 	GenerateRecoveryPhraseResponse{},
+	DeleteAccountRequest{},
+	DeleteAccountResponse{},
 	QueryRequest{},
 	QueryResponse{},
 	CallRequest{},
