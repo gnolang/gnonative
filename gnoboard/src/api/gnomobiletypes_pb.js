@@ -13,7 +13,7 @@ import { proto3 } from "@bufbuild/protobuf";
 export const SetRemoteRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.SetRemoteRequest",
   () => [
-    { no: 1, name: "Remote", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "remote", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -31,7 +31,7 @@ export const SetRemoteResponse = proto3.makeMessageType(
 export const SetChainIDRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.SetChainIDRequest",
   () => [
-    { no: 1, name: "ChainID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "chain_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -49,7 +49,7 @@ export const SetChainIDResponse = proto3.makeMessageType(
 export const SetPasswordRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.SetPasswordRequest",
   () => [
-    { no: 1, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -75,7 +75,7 @@ export const GenerateRecoveryPhraseRequest = proto3.makeMessageType(
 export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.GenerateRecoveryPhraseResponse",
   () => [
-    { no: 1, name: "Phrase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "phrase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -85,8 +85,8 @@ export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
 export const DeleteAccountRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.DeleteAccountRequest",
   () => [
-    { no: 1, name: "NameOrBech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "Password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -104,8 +104,8 @@ export const DeleteAccountResponse = proto3.makeMessageType(
 export const QueryRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.QueryRequest",
   () => [
-    { no: 1, name: "Path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "Data", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 1, name: "path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "data", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 
@@ -115,7 +115,7 @@ export const QueryRequest = proto3.makeMessageType(
 export const QueryResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.QueryResponse",
   () => [
-    { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 
@@ -125,13 +125,13 @@ export const QueryResponse = proto3.makeMessageType(
 export const CallRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.CallRequest",
   () => [
-    { no: 1, name: "PackagePath", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "Fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "Args", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 4, name: "GasFee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "GasWanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
-    { no: 6, name: "Send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 7, name: "Memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "package_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "args", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 4, name: "gas_fee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+    { no: 6, name: "send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -141,7 +141,7 @@ export const CallRequest = proto3.makeMessageType(
 export const CallResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.CallResponse",
   () => [
-    { no: 1, name: "Result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 

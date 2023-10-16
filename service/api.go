@@ -23,7 +23,7 @@ func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[r
 
 // Set the chain ID for the remote node. If you don't call this, the default is "dev"
 func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
-	s.getSigner().ChainID = req.Msg.ChainID
+	s.getSigner().ChainID = req.Msg.ChainId
 	return connect.NewResponse(&rpc.SetChainIDResponse{}), nil
 }
 

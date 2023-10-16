@@ -57,7 +57,7 @@ export const useGno = (): GnoResponse => {
   const generateRecoveryPhrase = async () => {
     const client = await getClient();
     const response = await client.generateRecoveryPhrase(new GenerateRecoveryPhraseRequest());
-    return response.Phrase;
+    return response.phrase;
   };
 
   const listKeyInfo = async () => {
@@ -78,7 +78,7 @@ export const useGno = (): GnoResponse => {
 
   const setPassword = async (password: string) => {
     const client = await getClient();
-    const response = await client.setPassword(new SetPasswordRequest({ Password: password }));
+    const response = await client.setPassword(new SetPasswordRequest({ password }));
     return response;
   };
 
@@ -86,8 +86,8 @@ export const useGno = (): GnoResponse => {
     const client = await getClient();
     const response = await client.deleteAccount(
       new DeleteAccountRequest({
-        NameOrBech32: nameOrBech32,
-        Password: password }));
+        nameOrBech32,
+        password }));
     return response;
   };
 
@@ -95,11 +95,11 @@ export const useGno = (): GnoResponse => {
     const client = await getClient();
     const reponse = await client.call(
       new CallRequest({
-        PackagePath: packagePath,
-        Fnc: fnc,
-        Args: args,
-        GasFee: gasFee,
-        GasWanted: BigInt(gasWanted),
+        packagePath,
+        fnc,
+        args,
+        gasFee,
+        gasWanted: BigInt(gasWanted),
       }),
     );
     return reponse;
