@@ -2,11 +2,11 @@ package service
 
 import (
 	"context"
-	"strings"
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
+	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
 	"go.uber.org/zap"
 
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
@@ -161,9 +161,9 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 // If the password is wrong, then return ErrDecryptionFailed.
 func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, false); err != nil {
-		if strings.Contains(err.Error(), "not found") {
+		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
-		} else if strings.Contains(err.Error(), "ciphertext decryption failed") {
+		} else if keyerror.IsErrWrongPassword(err) {
 			return nil, rpc.ErrCode_ErrDecryptionFailed
 		} else {
 			return nil, err
