@@ -32,9 +32,53 @@ message GenerateRecoveryPhraseResponse {
 	string phrase = 1;
 }
 
+message KeyInfo {
+	// 0: local, 1: ledger, 2: offline, 3: multi
+	uint32 type = 1;
+	string name = 2;
+	bytes pub_key = 3;
+	bytes address = 4;
+}
+
+message ListKeyInfoRequest {
+}
+
+message ListKeyInfoResponse {
+	repeated KeyInfo keys = 1;
+}
+
+message CreateAccountRequest {
+	string name_or_bech32 = 1;
+	string mnemonic = 2;
+	string bip39_passwd = 3;
+	string password = 4;
+	uint32 account = 5;
+	uint32 index = 6;
+}
+
+message CreateAccountResponse {
+	KeyInfo key = 1;
+}
+
+message SelectAccountRequest {
+	string name_or_bech32 = 1;
+}
+
+message SelectAccountResponse {
+	KeyInfo key = 1;
+}
+
+message GetActiveAccountRequest {
+}
+
+message GetActiveAccountResponse {
+	KeyInfo key = 1;
+}
+
 message DeleteAccountRequest {
 	string name_or_bech32 = 1;
 	string password = 2;
+	bool skip_password = 3;
 }
 
 message DeleteAccountResponse {
@@ -66,4 +110,12 @@ message CallRequest {
 
 message CallResponse {
 	bytes result = 1;
+}
+
+message HelloRequest {
+	string name = 1;
+}
+
+message HelloResponse {
+	string greeting = 1;
 }

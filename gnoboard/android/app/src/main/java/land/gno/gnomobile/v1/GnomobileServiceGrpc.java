@@ -138,29 +138,29 @@ public final class GnomobileServiceGrpc {
     return getGenerateRecoveryPhraseMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest,
-      land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> getListKeyInfoMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> getListKeyInfoMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "ListKeyInfo",
-      requestType = land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest.class,
-      responseType = land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest,
-      land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> getListKeyInfoMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest, land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> getListKeyInfoMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> getListKeyInfoMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest, land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> getListKeyInfoMethod;
     if ((getListKeyInfoMethod = GnomobileServiceGrpc.getListKeyInfoMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getListKeyInfoMethod = GnomobileServiceGrpc.getListKeyInfoMethod) == null) {
           GnomobileServiceGrpc.getListKeyInfoMethod = getListKeyInfoMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest, land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest, land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListKeyInfo"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse.getDefaultInstance()))
               .build();
         }
       }
@@ -168,29 +168,29 @@ public final class GnomobileServiceGrpc {
     return getListKeyInfoMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.CreateAccountRequest,
-      land.gno.gnomobile.v1.Rpc.CreateAccountResponse> getCreateAccountMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> getCreateAccountMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "CreateAccount",
-      requestType = land.gno.gnomobile.v1.Rpc.CreateAccountRequest.class,
-      responseType = land.gno.gnomobile.v1.Rpc.CreateAccountResponse.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.CreateAccountRequest,
-      land.gno.gnomobile.v1.Rpc.CreateAccountResponse> getCreateAccountMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.CreateAccountRequest, land.gno.gnomobile.v1.Rpc.CreateAccountResponse> getCreateAccountMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> getCreateAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> getCreateAccountMethod;
     if ((getCreateAccountMethod = GnomobileServiceGrpc.getCreateAccountMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getCreateAccountMethod = GnomobileServiceGrpc.getCreateAccountMethod) == null) {
           GnomobileServiceGrpc.getCreateAccountMethod = getCreateAccountMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.CreateAccountRequest, land.gno.gnomobile.v1.Rpc.CreateAccountResponse>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateAccount"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.CreateAccountRequest.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.CreateAccountResponse.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse.getDefaultInstance()))
               .build();
         }
       }
@@ -198,29 +198,29 @@ public final class GnomobileServiceGrpc {
     return getCreateAccountMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SelectAccountRequest,
-      land.gno.gnomobile.v1.Rpc.SelectAccountResponse> getSelectAccountMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> getSelectAccountMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SelectAccount",
-      requestType = land.gno.gnomobile.v1.Rpc.SelectAccountRequest.class,
-      responseType = land.gno.gnomobile.v1.Rpc.SelectAccountResponse.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SelectAccountRequest,
-      land.gno.gnomobile.v1.Rpc.SelectAccountResponse> getSelectAccountMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.SelectAccountRequest, land.gno.gnomobile.v1.Rpc.SelectAccountResponse> getSelectAccountMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> getSelectAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> getSelectAccountMethod;
     if ((getSelectAccountMethod = GnomobileServiceGrpc.getSelectAccountMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getSelectAccountMethod = GnomobileServiceGrpc.getSelectAccountMethod) == null) {
           GnomobileServiceGrpc.getSelectAccountMethod = getSelectAccountMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.SelectAccountRequest, land.gno.gnomobile.v1.Rpc.SelectAccountResponse>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SelectAccount"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SelectAccountRequest.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.SelectAccountResponse.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse.getDefaultInstance()))
               .build();
         }
       }
@@ -228,29 +228,29 @@ public final class GnomobileServiceGrpc {
     return getSelectAccountMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest,
-      land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> getGetActiveAccountMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> getGetActiveAccountMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetActiveAccount",
-      requestType = land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest.class,
-      responseType = land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest,
-      land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> getGetActiveAccountMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest, land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> getGetActiveAccountMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> getGetActiveAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> getGetActiveAccountMethod;
     if ((getGetActiveAccountMethod = GnomobileServiceGrpc.getGetActiveAccountMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getGetActiveAccountMethod = GnomobileServiceGrpc.getGetActiveAccountMethod) == null) {
           GnomobileServiceGrpc.getGetActiveAccountMethod = getGetActiveAccountMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest, land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetActiveAccount"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse.getDefaultInstance()))
               .build();
         }
       }
@@ -348,29 +348,29 @@ public final class GnomobileServiceGrpc {
     return getCallMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest,
-      land.gno.gnomobile.v1.Rpc.HelloResponse> getHelloMethod;
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> getHelloMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Hello",
-      requestType = land.gno.gnomobile.v1.Rpc.HelloRequest.class,
-      responseType = land.gno.gnomobile.v1.Rpc.HelloResponse.class,
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest,
-      land.gno.gnomobile.v1.Rpc.HelloResponse> getHelloMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Rpc.HelloRequest, land.gno.gnomobile.v1.Rpc.HelloResponse> getHelloMethod;
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> getHelloMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest, land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> getHelloMethod;
     if ((getHelloMethod = GnomobileServiceGrpc.getHelloMethod) == null) {
       synchronized (GnomobileServiceGrpc.class) {
         if ((getHelloMethod = GnomobileServiceGrpc.getHelloMethod) == null) {
           GnomobileServiceGrpc.getHelloMethod = getHelloMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Rpc.HelloRequest, land.gno.gnomobile.v1.Rpc.HelloResponse>newBuilder()
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest, land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Hello"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.HelloRequest.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Rpc.HelloResponse.getDefaultInstance()))
+                  land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse.getDefaultInstance()))
               .build();
         }
       }
@@ -478,8 +478,8 @@ public final class GnomobileServiceGrpc {
      * Get the keys informations in the keybase
      * </pre>
      */
-    default void listKeyInfo(land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> responseObserver) {
+    default void listKeyInfo(land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListKeyInfoMethod(), responseObserver);
     }
 
@@ -489,8 +489,8 @@ public final class GnomobileServiceGrpc {
      * SetAccount
      * </pre>
      */
-    default void createAccount(land.gno.gnomobile.v1.Rpc.CreateAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.CreateAccountResponse> responseObserver) {
+    default void createAccount(land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateAccountMethod(), responseObserver);
     }
 
@@ -499,8 +499,8 @@ public final class GnomobileServiceGrpc {
      * SelectAccount selects the active account to use for later operations
      * </pre>
      */
-    default void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccountResponse> responseObserver) {
+    default void selectAccount(land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSelectAccountMethod(), responseObserver);
     }
 
@@ -512,15 +512,16 @@ public final class GnomobileServiceGrpc {
      * length of the result.)
      * </pre>
      */
-    default void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> responseObserver) {
+    default void getActiveAccount(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetActiveAccountMethod(), responseObserver);
     }
 
     /**
      * <pre>
      * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * ensure access. However, if skip_password is true, then ignore the password.
+     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -554,8 +555,8 @@ public final class GnomobileServiceGrpc {
      * Hello is for debug purposes
      * </pre>
      */
-    default void hello(land.gno.gnomobile.v1.Rpc.HelloRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloResponse> responseObserver) {
+    default void hello(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHelloMethod(), responseObserver);
     }
   }
@@ -646,8 +647,8 @@ public final class GnomobileServiceGrpc {
      * Get the keys informations in the keybase
      * </pre>
      */
-    public void listKeyInfo(land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> responseObserver) {
+    public void listKeyInfo(land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListKeyInfoMethod(), getCallOptions()), request, responseObserver);
     }
@@ -658,8 +659,8 @@ public final class GnomobileServiceGrpc {
      * SetAccount
      * </pre>
      */
-    public void createAccount(land.gno.gnomobile.v1.Rpc.CreateAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.CreateAccountResponse> responseObserver) {
+    public void createAccount(land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCreateAccountMethod(), getCallOptions()), request, responseObserver);
     }
@@ -669,8 +670,8 @@ public final class GnomobileServiceGrpc {
      * SelectAccount selects the active account to use for later operations
      * </pre>
      */
-    public void selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccountResponse> responseObserver) {
+    public void selectAccount(land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSelectAccountMethod(), getCallOptions()), request, responseObserver);
     }
@@ -683,8 +684,8 @@ public final class GnomobileServiceGrpc {
      * length of the result.)
      * </pre>
      */
-    public void getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> responseObserver) {
+    public void getActiveAccount(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request, responseObserver);
     }
@@ -692,7 +693,8 @@ public final class GnomobileServiceGrpc {
     /**
      * <pre>
      * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * ensure access. However, if skip_password is true, then ignore the password.
+     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -729,8 +731,8 @@ public final class GnomobileServiceGrpc {
      * Hello is for debug purposes
      * </pre>
      */
-    public void hello(land.gno.gnomobile.v1.Rpc.HelloRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloResponse> responseObserver) {
+    public void hello(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getHelloMethod(), getCallOptions()), request, responseObserver);
     }
@@ -804,7 +806,7 @@ public final class GnomobileServiceGrpc {
      * Get the keys informations in the keybase
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse listKeyInfo(land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse listKeyInfo(land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListKeyInfoMethod(), getCallOptions(), request);
     }
@@ -815,7 +817,7 @@ public final class GnomobileServiceGrpc {
      * SetAccount
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.CreateAccountResponse createAccount(land.gno.gnomobile.v1.Rpc.CreateAccountRequest request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse createAccount(land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCreateAccountMethod(), getCallOptions(), request);
     }
@@ -825,7 +827,7 @@ public final class GnomobileServiceGrpc {
      * SelectAccount selects the active account to use for later operations
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.SelectAccountResponse selectAccount(land.gno.gnomobile.v1.Rpc.SelectAccountRequest request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse selectAccount(land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSelectAccountMethod(), getCallOptions(), request);
     }
@@ -838,7 +840,7 @@ public final class GnomobileServiceGrpc {
      * length of the result.)
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse getActiveAccount(land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse getActiveAccount(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetActiveAccountMethod(), getCallOptions(), request);
     }
@@ -846,7 +848,8 @@ public final class GnomobileServiceGrpc {
     /**
      * <pre>
      * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * ensure access. However, if skip_password is true, then ignore the password.
+     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -880,7 +883,7 @@ public final class GnomobileServiceGrpc {
      * Hello is for debug purposes
      * </pre>
      */
-    public land.gno.gnomobile.v1.Rpc.HelloResponse hello(land.gno.gnomobile.v1.Rpc.HelloRequest request) {
+    public land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse hello(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getHelloMethod(), getCallOptions(), request);
     }
@@ -958,8 +961,8 @@ public final class GnomobileServiceGrpc {
      * Get the keys informations in the keybase
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse> listKeyInfo(
-        land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> listKeyInfo(
+        land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListKeyInfoMethod(), getCallOptions()), request);
     }
@@ -970,8 +973,8 @@ public final class GnomobileServiceGrpc {
      * SetAccount
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.CreateAccountResponse> createAccount(
-        land.gno.gnomobile.v1.Rpc.CreateAccountRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> createAccount(
+        land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCreateAccountMethod(), getCallOptions()), request);
     }
@@ -981,8 +984,8 @@ public final class GnomobileServiceGrpc {
      * SelectAccount selects the active account to use for later operations
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.SelectAccountResponse> selectAccount(
-        land.gno.gnomobile.v1.Rpc.SelectAccountRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> selectAccount(
+        land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSelectAccountMethod(), getCallOptions()), request);
     }
@@ -995,8 +998,8 @@ public final class GnomobileServiceGrpc {
      * length of the result.)
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse> getActiveAccount(
-        land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> getActiveAccount(
+        land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request);
     }
@@ -1004,7 +1007,8 @@ public final class GnomobileServiceGrpc {
     /**
      * <pre>
      * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * ensure access. However, if skip_password is true, then ignore the password.
+     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      * </pre>
      */
@@ -1041,8 +1045,8 @@ public final class GnomobileServiceGrpc {
      * Hello is for debug purposes
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Rpc.HelloResponse> hello(
-        land.gno.gnomobile.v1.Rpc.HelloRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> hello(
+        land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getHelloMethod(), getCallOptions()), request);
     }
@@ -1095,20 +1099,20 @@ public final class GnomobileServiceGrpc {
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhraseResponse>) responseObserver);
           break;
         case METHODID_LIST_KEY_INFO:
-          serviceImpl.listKeyInfo((land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse>) responseObserver);
+          serviceImpl.listKeyInfo((land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse>) responseObserver);
           break;
         case METHODID_CREATE_ACCOUNT:
-          serviceImpl.createAccount((land.gno.gnomobile.v1.Rpc.CreateAccountRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.CreateAccountResponse>) responseObserver);
+          serviceImpl.createAccount((land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse>) responseObserver);
           break;
         case METHODID_SELECT_ACCOUNT:
-          serviceImpl.selectAccount((land.gno.gnomobile.v1.Rpc.SelectAccountRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.SelectAccountResponse>) responseObserver);
+          serviceImpl.selectAccount((land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>) responseObserver);
           break;
         case METHODID_GET_ACTIVE_ACCOUNT:
-          serviceImpl.getActiveAccount((land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse>) responseObserver);
+          serviceImpl.getActiveAccount((land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>) responseObserver);
           break;
         case METHODID_DELETE_ACCOUNT:
           serviceImpl.deleteAccount((land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest) request,
@@ -1123,8 +1127,8 @@ public final class GnomobileServiceGrpc {
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CallResponse>) responseObserver);
           break;
         case METHODID_HELLO:
-          serviceImpl.hello((land.gno.gnomobile.v1.Rpc.HelloRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Rpc.HelloResponse>) responseObserver);
+          serviceImpl.hello((land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1176,29 +1180,29 @@ public final class GnomobileServiceGrpc {
           getListKeyInfoMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.ListKeyInfoRequest,
-              land.gno.gnomobile.v1.Rpc.ListKeyInfoResponse>(
+              land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse>(
                 service, METHODID_LIST_KEY_INFO)))
         .addMethod(
           getCreateAccountMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.CreateAccountRequest,
-              land.gno.gnomobile.v1.Rpc.CreateAccountResponse>(
+              land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse>(
                 service, METHODID_CREATE_ACCOUNT)))
         .addMethod(
           getSelectAccountMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.SelectAccountRequest,
-              land.gno.gnomobile.v1.Rpc.SelectAccountResponse>(
+              land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>(
                 service, METHODID_SELECT_ACCOUNT)))
         .addMethod(
           getGetActiveAccountMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.GetActiveAccountRequest,
-              land.gno.gnomobile.v1.Rpc.GetActiveAccountResponse>(
+              land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>(
                 service, METHODID_GET_ACTIVE_ACCOUNT)))
         .addMethod(
           getDeleteAccountMethod(),
@@ -1225,8 +1229,8 @@ public final class GnomobileServiceGrpc {
           getHelloMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              land.gno.gnomobile.v1.Rpc.HelloRequest,
-              land.gno.gnomobile.v1.Rpc.HelloResponse>(
+              land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>(
                 service, METHODID_HELLO)))
         .build();
   }

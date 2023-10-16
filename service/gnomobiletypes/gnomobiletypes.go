@@ -28,9 +28,53 @@ type GenerateRecoveryPhraseResponse struct {
 	Phrase string `json:"phrase" yaml:"phrase"`
 }
 
+type KeyInfo struct {
+	// 0: local, 1: ledger, 2: offline, 3: multi
+	Type    uint32 `json:"type" yaml:"type"`
+	Name    string `json:"name" yaml:"name"`
+	PubKey  []byte `json:"pub_key" yaml:"pub_key"`
+	Address []byte `json:"address" yaml:"address"`
+}
+
+type ListKeyInfoRequest struct {
+}
+
+type ListKeyInfoResponse struct {
+	Keys []*KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type CreateAccountRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+	Mnemonic     string `json:"mnemonic" yaml:"mnemonic"`
+	Bip39Passwd  string `json:"bip39_passwd" yaml:"bip39_passwd"`
+	Password     string `json:"password" yaml:"password"`
+	Account      uint32 `json:"account" yaml:"account"`
+	Index        uint32 `json:"index" yaml:"index"`
+}
+
+type CreateAccountResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type SelectAccountRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+}
+
+type SelectAccountResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type GetActiveAccountRequest struct {
+}
+
+type GetActiveAccountResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
 type DeleteAccountRequest struct {
 	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
 	Password     string `json:"password" yaml:"password"`
+	SkipPassword bool   `json:"skip_password" yaml:"skip_password"`
 }
 
 type DeleteAccountResponse struct {
@@ -62,4 +106,12 @@ type CallRequest struct {
 
 type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
+}
+
+type HelloRequest struct {
+	Name string
+}
+
+type HelloResponse struct {
+	Greeting string
 }

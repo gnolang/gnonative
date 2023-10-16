@@ -95,7 +95,8 @@ type GnomobileServiceClient interface {
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password to
-	// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// ensure access. However, if skip_password is true, then ignore the password.
+	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
 	// If the password is wrong, then return ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
@@ -283,7 +284,8 @@ type GnomobileServiceHandler interface {
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password to
-	// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+	// ensure access. However, if skip_password is true, then ignore the password.
+	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
 	// If the password is wrong, then return ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
