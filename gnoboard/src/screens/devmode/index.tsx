@@ -23,7 +23,7 @@ function DevMode() {
     try {
       const response = await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted);
       console.log('response: ', response);
-      setAppConsole(Buffer.from(response.Result).toString());
+      setAppConsole(Buffer.from(response.result).toString());
     } catch (error) {
       console.log(error);
       setAppConsole('error' + JSON.stringify(error));

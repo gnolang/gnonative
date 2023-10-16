@@ -13,12 +13,12 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @return The remote.
      */
     java.lang.String getRemote();
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @return The bytes for remote.
      */
     com.google.protobuf.ByteString
@@ -42,7 +42,7 @@ public final class Gnomobiletypes {
     public static final int REMOTE_FIELD_NUMBER = 1;
     private java.lang.String remote_;
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @return The remote.
      */
     @java.lang.Override
@@ -50,7 +50,7 @@ public final class Gnomobiletypes {
       return remote_;
     }
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @return The bytes for remote.
      */
     @java.lang.Override
@@ -59,7 +59,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(remote_);
     }
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @param value The remote to set.
      */
     private void setRemote(
@@ -69,14 +69,14 @@ public final class Gnomobiletypes {
       remote_ = value;
     }
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      */
     private void clearRemote() {
 
       remote_ = getDefaultInstance().getRemote();
     }
     /**
-     * <code>string Remote = 1 [json_name = "Remote"];</code>
+     * <code>string remote = 1 [json_name = "remote"];</code>
      * @param value The bytes for remote to set.
      */
     private void setRemoteBytes(
@@ -188,7 +188,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string Remote = 1 [json_name = "Remote"];</code>
+       * <code>string remote = 1 [json_name = "remote"];</code>
        * @return The remote.
        */
       @java.lang.Override
@@ -196,7 +196,7 @@ public final class Gnomobiletypes {
         return instance.getRemote();
       }
       /**
-       * <code>string Remote = 1 [json_name = "Remote"];</code>
+       * <code>string remote = 1 [json_name = "remote"];</code>
        * @return The bytes for remote.
        */
       @java.lang.Override
@@ -205,7 +205,7 @@ public final class Gnomobiletypes {
         return instance.getRemoteBytes();
       }
       /**
-       * <code>string Remote = 1 [json_name = "Remote"];</code>
+       * <code>string remote = 1 [json_name = "remote"];</code>
        * @param value The remote to set.
        * @return This builder for chaining.
        */
@@ -216,7 +216,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Remote = 1 [json_name = "Remote"];</code>
+       * <code>string remote = 1 [json_name = "remote"];</code>
        * @return This builder for chaining.
        */
       public Builder clearRemote() {
@@ -225,7 +225,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Remote = 1 [json_name = "Remote"];</code>
+       * <code>string remote = 1 [json_name = "remote"];</code>
        * @param value The bytes for remote to set.
        * @return This builder for chaining.
        */
@@ -497,16 +497,16 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @return The chainID.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @return The chainId.
      */
-    java.lang.String getChainID();
+    java.lang.String getChainId();
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @return The bytes for chainID.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @return The bytes for chainId.
      */
     com.google.protobuf.ByteString
-        getChainIDBytes();
+        getChainIdBytes();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.SetChainIDRequest}
@@ -517,52 +517,52 @@ public final class Gnomobiletypes {
       // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.SetChainIDRequest)
       SetChainIDRequestOrBuilder {
     private SetChainIDRequest() {
-      chainID_ = "";
+      chainId_ = "";
     }
-    public static final int CHAINID_FIELD_NUMBER = 1;
-    private java.lang.String chainID_;
+    public static final int CHAIN_ID_FIELD_NUMBER = 1;
+    private java.lang.String chainId_;
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @return The chainID.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @return The chainId.
      */
     @java.lang.Override
-    public java.lang.String getChainID() {
-      return chainID_;
+    public java.lang.String getChainId() {
+      return chainId_;
     }
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @return The bytes for chainID.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @return The bytes for chainId.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getChainIDBytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(chainID_);
+        getChainIdBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(chainId_);
     }
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @param value The chainID to set.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @param value The chainId to set.
      */
-    private void setChainID(
+    private void setChainId(
         java.lang.String value) {
       java.lang.Class<?> valueClass = value.getClass();
   
-      chainID_ = value;
+      chainId_ = value;
     }
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
      */
-    private void clearChainID() {
+    private void clearChainId() {
 
-      chainID_ = getDefaultInstance().getChainID();
+      chainId_ = getDefaultInstance().getChainId();
     }
     /**
-     * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-     * @param value The bytes for chainID to set.
+     * <code>string chain_id = 1 [json_name = "chainId"];</code>
+     * @param value The bytes for chainId to set.
      */
-    private void setChainIDBytes(
+    private void setChainIdBytes(
         com.google.protobuf.ByteString value) {
       checkByteStringIsUtf8(value);
-      chainID_ = value.toStringUtf8();
+      chainId_ = value.toStringUtf8();
 
     }
 
@@ -664,51 +664,51 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-       * @return The chainID.
+       * <code>string chain_id = 1 [json_name = "chainId"];</code>
+       * @return The chainId.
        */
       @java.lang.Override
-      public java.lang.String getChainID() {
-        return instance.getChainID();
+      public java.lang.String getChainId() {
+        return instance.getChainId();
       }
       /**
-       * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-       * @return The bytes for chainID.
+       * <code>string chain_id = 1 [json_name = "chainId"];</code>
+       * @return The bytes for chainId.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getChainIDBytes() {
-        return instance.getChainIDBytes();
+          getChainIdBytes() {
+        return instance.getChainIdBytes();
       }
       /**
-       * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-       * @param value The chainID to set.
+       * <code>string chain_id = 1 [json_name = "chainId"];</code>
+       * @param value The chainId to set.
        * @return This builder for chaining.
        */
-      public Builder setChainID(
+      public Builder setChainId(
           java.lang.String value) {
         copyOnWrite();
-        instance.setChainID(value);
+        instance.setChainId(value);
         return this;
       }
       /**
-       * <code>string ChainID = 1 [json_name = "ChainID"];</code>
+       * <code>string chain_id = 1 [json_name = "chainId"];</code>
        * @return This builder for chaining.
        */
-      public Builder clearChainID() {
+      public Builder clearChainId() {
         copyOnWrite();
-        instance.clearChainID();
+        instance.clearChainId();
         return this;
       }
       /**
-       * <code>string ChainID = 1 [json_name = "ChainID"];</code>
-       * @param value The bytes for chainID to set.
+       * <code>string chain_id = 1 [json_name = "chainId"];</code>
+       * @param value The bytes for chainId to set.
        * @return This builder for chaining.
        */
-      public Builder setChainIDBytes(
+      public Builder setChainIdBytes(
           com.google.protobuf.ByteString value) {
         copyOnWrite();
-        instance.setChainIDBytes(value);
+        instance.setChainIdBytes(value);
         return this;
       }
 
@@ -728,7 +728,7 @@ public final class Gnomobiletypes {
         }
         case BUILD_MESSAGE_INFO: {
             java.lang.Object[] objects = new java.lang.Object[] {
-              "chainID_",
+              "chainId_",
             };
             java.lang.String info =
                 "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
@@ -973,12 +973,12 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @return The password.
      */
     java.lang.String getPassword();
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @return The bytes for password.
      */
     com.google.protobuf.ByteString
@@ -998,7 +998,7 @@ public final class Gnomobiletypes {
     public static final int PASSWORD_FIELD_NUMBER = 1;
     private java.lang.String password_;
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @return The password.
      */
     @java.lang.Override
@@ -1006,7 +1006,7 @@ public final class Gnomobiletypes {
       return password_;
     }
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @return The bytes for password.
      */
     @java.lang.Override
@@ -1015,7 +1015,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(password_);
     }
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @param value The password to set.
      */
     private void setPassword(
@@ -1025,14 +1025,14 @@ public final class Gnomobiletypes {
       password_ = value;
     }
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      */
     private void clearPassword() {
 
       password_ = getDefaultInstance().getPassword();
     }
     /**
-     * <code>string Password = 1 [json_name = "Password"];</code>
+     * <code>string password = 1 [json_name = "password"];</code>
      * @param value The bytes for password to set.
      */
     private void setPasswordBytes(
@@ -1140,7 +1140,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string Password = 1 [json_name = "Password"];</code>
+       * <code>string password = 1 [json_name = "password"];</code>
        * @return The password.
        */
       @java.lang.Override
@@ -1148,7 +1148,7 @@ public final class Gnomobiletypes {
         return instance.getPassword();
       }
       /**
-       * <code>string Password = 1 [json_name = "Password"];</code>
+       * <code>string password = 1 [json_name = "password"];</code>
        * @return The bytes for password.
        */
       @java.lang.Override
@@ -1157,7 +1157,7 @@ public final class Gnomobiletypes {
         return instance.getPasswordBytes();
       }
       /**
-       * <code>string Password = 1 [json_name = "Password"];</code>
+       * <code>string password = 1 [json_name = "password"];</code>
        * @param value The password to set.
        * @return This builder for chaining.
        */
@@ -1168,7 +1168,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Password = 1 [json_name = "Password"];</code>
+       * <code>string password = 1 [json_name = "password"];</code>
        * @return This builder for chaining.
        */
       public Builder clearPassword() {
@@ -1177,7 +1177,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Password = 1 [json_name = "Password"];</code>
+       * <code>string password = 1 [json_name = "password"];</code>
        * @param value The bytes for password to set.
        * @return This builder for chaining.
        */
@@ -1631,12 +1631,12 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @return The phrase.
      */
     java.lang.String getPhrase();
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @return The bytes for phrase.
      */
     com.google.protobuf.ByteString
@@ -1656,7 +1656,7 @@ public final class Gnomobiletypes {
     public static final int PHRASE_FIELD_NUMBER = 1;
     private java.lang.String phrase_;
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @return The phrase.
      */
     @java.lang.Override
@@ -1664,7 +1664,7 @@ public final class Gnomobiletypes {
       return phrase_;
     }
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @return The bytes for phrase.
      */
     @java.lang.Override
@@ -1673,7 +1673,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(phrase_);
     }
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @param value The phrase to set.
      */
     private void setPhrase(
@@ -1683,14 +1683,14 @@ public final class Gnomobiletypes {
       phrase_ = value;
     }
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      */
     private void clearPhrase() {
 
       phrase_ = getDefaultInstance().getPhrase();
     }
     /**
-     * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+     * <code>string phrase = 1 [json_name = "phrase"];</code>
      * @param value The bytes for phrase to set.
      */
     private void setPhraseBytes(
@@ -1798,7 +1798,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * <code>string phrase = 1 [json_name = "phrase"];</code>
        * @return The phrase.
        */
       @java.lang.Override
@@ -1806,7 +1806,7 @@ public final class Gnomobiletypes {
         return instance.getPhrase();
       }
       /**
-       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * <code>string phrase = 1 [json_name = "phrase"];</code>
        * @return The bytes for phrase.
        */
       @java.lang.Override
@@ -1815,7 +1815,7 @@ public final class Gnomobiletypes {
         return instance.getPhraseBytes();
       }
       /**
-       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * <code>string phrase = 1 [json_name = "phrase"];</code>
        * @param value The phrase to set.
        * @return This builder for chaining.
        */
@@ -1826,7 +1826,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * <code>string phrase = 1 [json_name = "phrase"];</code>
        * @return This builder for chaining.
        */
       public Builder clearPhrase() {
@@ -1835,7 +1835,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Phrase = 1 [json_name = "Phrase"];</code>
+       * <code>string phrase = 1 [json_name = "phrase"];</code>
        * @param value The bytes for phrase to set.
        * @return This builder for chaining.
        */
@@ -1925,24 +1925,24 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @return The nameOrBech32.
      */
     java.lang.String getNameOrBech32();
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @return The bytes for nameOrBech32.
      */
     com.google.protobuf.ByteString
         getNameOrBech32Bytes();
 
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @return The password.
      */
     java.lang.String getPassword();
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @return The bytes for password.
      */
     com.google.protobuf.ByteString
@@ -1960,10 +1960,10 @@ public final class Gnomobiletypes {
       nameOrBech32_ = "";
       password_ = "";
     }
-    public static final int NAMEORBECH32_FIELD_NUMBER = 1;
+    public static final int NAME_OR_BECH32_FIELD_NUMBER = 1;
     private java.lang.String nameOrBech32_;
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @return The nameOrBech32.
      */
     @java.lang.Override
@@ -1971,7 +1971,7 @@ public final class Gnomobiletypes {
       return nameOrBech32_;
     }
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @return The bytes for nameOrBech32.
      */
     @java.lang.Override
@@ -1980,7 +1980,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(nameOrBech32_);
     }
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @param value The nameOrBech32 to set.
      */
     private void setNameOrBech32(
@@ -1990,14 +1990,14 @@ public final class Gnomobiletypes {
       nameOrBech32_ = value;
     }
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      */
     private void clearNameOrBech32() {
 
       nameOrBech32_ = getDefaultInstance().getNameOrBech32();
     }
     /**
-     * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
      * @param value The bytes for nameOrBech32 to set.
      */
     private void setNameOrBech32Bytes(
@@ -2010,7 +2010,7 @@ public final class Gnomobiletypes {
     public static final int PASSWORD_FIELD_NUMBER = 2;
     private java.lang.String password_;
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @return The password.
      */
     @java.lang.Override
@@ -2018,7 +2018,7 @@ public final class Gnomobiletypes {
       return password_;
     }
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @return The bytes for password.
      */
     @java.lang.Override
@@ -2027,7 +2027,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(password_);
     }
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @param value The password to set.
      */
     private void setPassword(
@@ -2037,14 +2037,14 @@ public final class Gnomobiletypes {
       password_ = value;
     }
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      */
     private void clearPassword() {
 
       password_ = getDefaultInstance().getPassword();
     }
     /**
-     * <code>string Password = 2 [json_name = "Password"];</code>
+     * <code>string password = 2 [json_name = "password"];</code>
      * @param value The bytes for password to set.
      */
     private void setPasswordBytes(
@@ -2152,7 +2152,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
        * @return The nameOrBech32.
        */
       @java.lang.Override
@@ -2160,7 +2160,7 @@ public final class Gnomobiletypes {
         return instance.getNameOrBech32();
       }
       /**
-       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
        * @return The bytes for nameOrBech32.
        */
       @java.lang.Override
@@ -2169,7 +2169,7 @@ public final class Gnomobiletypes {
         return instance.getNameOrBech32Bytes();
       }
       /**
-       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
        * @param value The nameOrBech32 to set.
        * @return This builder for chaining.
        */
@@ -2180,7 +2180,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
        * @return This builder for chaining.
        */
       public Builder clearNameOrBech32() {
@@ -2189,7 +2189,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string NameOrBech32 = 1 [json_name = "NameOrBech32"];</code>
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
        * @param value The bytes for nameOrBech32 to set.
        * @return This builder for chaining.
        */
@@ -2201,7 +2201,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Password = 2 [json_name = "Password"];</code>
+       * <code>string password = 2 [json_name = "password"];</code>
        * @return The password.
        */
       @java.lang.Override
@@ -2209,7 +2209,7 @@ public final class Gnomobiletypes {
         return instance.getPassword();
       }
       /**
-       * <code>string Password = 2 [json_name = "Password"];</code>
+       * <code>string password = 2 [json_name = "password"];</code>
        * @return The bytes for password.
        */
       @java.lang.Override
@@ -2218,7 +2218,7 @@ public final class Gnomobiletypes {
         return instance.getPasswordBytes();
       }
       /**
-       * <code>string Password = 2 [json_name = "Password"];</code>
+       * <code>string password = 2 [json_name = "password"];</code>
        * @param value The password to set.
        * @return This builder for chaining.
        */
@@ -2229,7 +2229,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Password = 2 [json_name = "Password"];</code>
+       * <code>string password = 2 [json_name = "password"];</code>
        * @return This builder for chaining.
        */
       public Builder clearPassword() {
@@ -2238,7 +2238,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Password = 2 [json_name = "Password"];</code>
+       * <code>string password = 2 [json_name = "password"];</code>
        * @param value The bytes for password to set.
        * @return This builder for chaining.
        */
@@ -2512,19 +2512,31 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @return The path.
      */
     java.lang.String getPath();
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @return The bytes for path.
      */
     com.google.protobuf.ByteString
         getPathBytes();
 
     /**
-     * <code>bytes Data = 2 [json_name = "Data"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards&#92;ntestboard"
+     * </pre>
+     *
+     * <code>bytes data = 2 [json_name = "data"];</code>
      * @return The data.
      */
     com.google.protobuf.ByteString getData();
@@ -2544,7 +2556,11 @@ public final class Gnomobiletypes {
     public static final int PATH_FIELD_NUMBER = 1;
     private java.lang.String path_;
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @return The path.
      */
     @java.lang.Override
@@ -2552,7 +2568,11 @@ public final class Gnomobiletypes {
       return path_;
     }
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @return The bytes for path.
      */
     @java.lang.Override
@@ -2561,7 +2581,11 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(path_);
     }
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @param value The path to set.
      */
     private void setPath(
@@ -2571,14 +2595,22 @@ public final class Gnomobiletypes {
       path_ = value;
     }
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      */
     private void clearPath() {
 
       path_ = getDefaultInstance().getPath();
     }
     /**
-     * <code>string Path = 1 [json_name = "Path"];</code>
+     * <pre>
+     * Example: "vm/qrender"
+     * </pre>
+     *
+     * <code>string path = 1 [json_name = "path"];</code>
      * @param value The bytes for path to set.
      */
     private void setPathBytes(
@@ -2591,7 +2623,11 @@ public final class Gnomobiletypes {
     public static final int DATA_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString data_;
     /**
-     * <code>bytes Data = 2 [json_name = "Data"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards&#92;ntestboard"
+     * </pre>
+     *
+     * <code>bytes data = 2 [json_name = "data"];</code>
      * @return The data.
      */
     @java.lang.Override
@@ -2599,7 +2635,11 @@ public final class Gnomobiletypes {
       return data_;
     }
     /**
-     * <code>bytes Data = 2 [json_name = "Data"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards&#92;ntestboard"
+     * </pre>
+     *
+     * <code>bytes data = 2 [json_name = "data"];</code>
      * @param value The data to set.
      */
     private void setData(com.google.protobuf.ByteString value) {
@@ -2608,7 +2648,11 @@ public final class Gnomobiletypes {
       data_ = value;
     }
     /**
-     * <code>bytes Data = 2 [json_name = "Data"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards&#92;ntestboard"
+     * </pre>
+     *
+     * <code>bytes data = 2 [json_name = "data"];</code>
      */
     private void clearData() {
 
@@ -2713,7 +2757,11 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string Path = 1 [json_name = "Path"];</code>
+       * <pre>
+       * Example: "vm/qrender"
+       * </pre>
+       *
+       * <code>string path = 1 [json_name = "path"];</code>
        * @return The path.
        */
       @java.lang.Override
@@ -2721,7 +2769,11 @@ public final class Gnomobiletypes {
         return instance.getPath();
       }
       /**
-       * <code>string Path = 1 [json_name = "Path"];</code>
+       * <pre>
+       * Example: "vm/qrender"
+       * </pre>
+       *
+       * <code>string path = 1 [json_name = "path"];</code>
        * @return The bytes for path.
        */
       @java.lang.Override
@@ -2730,7 +2782,11 @@ public final class Gnomobiletypes {
         return instance.getPathBytes();
       }
       /**
-       * <code>string Path = 1 [json_name = "Path"];</code>
+       * <pre>
+       * Example: "vm/qrender"
+       * </pre>
+       *
+       * <code>string path = 1 [json_name = "path"];</code>
        * @param value The path to set.
        * @return This builder for chaining.
        */
@@ -2741,7 +2797,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Path = 1 [json_name = "Path"];</code>
+       * <pre>
+       * Example: "vm/qrender"
+       * </pre>
+       *
+       * <code>string path = 1 [json_name = "path"];</code>
        * @return This builder for chaining.
        */
       public Builder clearPath() {
@@ -2750,7 +2810,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Path = 1 [json_name = "Path"];</code>
+       * <pre>
+       * Example: "vm/qrender"
+       * </pre>
+       *
+       * <code>string path = 1 [json_name = "path"];</code>
        * @param value The bytes for path to set.
        * @return This builder for chaining.
        */
@@ -2762,7 +2826,11 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>bytes Data = 2 [json_name = "Data"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards&#92;ntestboard"
+       * </pre>
+       *
+       * <code>bytes data = 2 [json_name = "data"];</code>
        * @return The data.
        */
       @java.lang.Override
@@ -2770,7 +2838,11 @@ public final class Gnomobiletypes {
         return instance.getData();
       }
       /**
-       * <code>bytes Data = 2 [json_name = "Data"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards&#92;ntestboard"
+       * </pre>
+       *
+       * <code>bytes data = 2 [json_name = "data"];</code>
        * @param value The data to set.
        * @return This builder for chaining.
        */
@@ -2780,7 +2852,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>bytes Data = 2 [json_name = "Data"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards&#92;ntestboard"
+       * </pre>
+       *
+       * <code>bytes data = 2 [json_name = "data"];</code>
        * @return This builder for chaining.
        */
       public Builder clearData() {
@@ -2870,7 +2946,7 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @return The result.
      */
     com.google.protobuf.ByteString getResult();
@@ -2889,7 +2965,7 @@ public final class Gnomobiletypes {
     public static final int RESULT_FIELD_NUMBER = 1;
     private com.google.protobuf.ByteString result_;
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @return The result.
      */
     @java.lang.Override
@@ -2897,7 +2973,7 @@ public final class Gnomobiletypes {
       return result_;
     }
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @param value The result to set.
      */
     private void setResult(com.google.protobuf.ByteString value) {
@@ -2906,7 +2982,7 @@ public final class Gnomobiletypes {
       result_ = value;
     }
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      */
     private void clearResult() {
 
@@ -3011,7 +3087,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @return The result.
        */
       @java.lang.Override
@@ -3019,7 +3095,7 @@ public final class Gnomobiletypes {
         return instance.getResult();
       }
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @param value The result to set.
        * @return This builder for chaining.
        */
@@ -3029,7 +3105,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @return This builder for chaining.
        */
       public Builder clearResult() {
@@ -3117,48 +3193,80 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @return The packagePath.
      */
     java.lang.String getPackagePath();
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @return The bytes for packagePath.
      */
     com.google.protobuf.ByteString
         getPackagePathBytes();
 
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @return The fnc.
      */
     java.lang.String getFnc();
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @return The bytes for fnc.
      */
     com.google.protobuf.ByteString
         getFncBytes();
 
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @return A list containing the args.
      */
     java.util.List<java.lang.String>
         getArgsList();
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @return The count of args.
      */
     int getArgsCount();
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param index The index of the element to return.
      * @return The args at the given index.
      */
     java.lang.String getArgs(int index);
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param index The index of the element to return.
      * @return The args at the given index.
      */
@@ -3166,42 +3274,42 @@ public final class Gnomobiletypes {
         getArgsBytes(int index);
 
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @return The gasFee.
      */
     java.lang.String getGasFee();
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @return The bytes for gasFee.
      */
     com.google.protobuf.ByteString
         getGasFeeBytes();
 
     /**
-     * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+     * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
      * @return The gasWanted.
      */
     long getGasWanted();
 
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @return The send.
      */
     java.lang.String getSend();
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @return The bytes for send.
      */
     com.google.protobuf.ByteString
         getSendBytes();
 
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @return The memo.
      */
     java.lang.String getMemo();
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @return The bytes for memo.
      */
     com.google.protobuf.ByteString
@@ -3223,10 +3331,14 @@ public final class Gnomobiletypes {
       send_ = "";
       memo_ = "";
     }
-    public static final int PACKAGEPATH_FIELD_NUMBER = 1;
+    public static final int PACKAGE_PATH_FIELD_NUMBER = 1;
     private java.lang.String packagePath_;
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @return The packagePath.
      */
     @java.lang.Override
@@ -3234,7 +3346,11 @@ public final class Gnomobiletypes {
       return packagePath_;
     }
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @return The bytes for packagePath.
      */
     @java.lang.Override
@@ -3243,7 +3359,11 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(packagePath_);
     }
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @param value The packagePath to set.
      */
     private void setPackagePath(
@@ -3253,14 +3373,22 @@ public final class Gnomobiletypes {
       packagePath_ = value;
     }
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      */
     private void clearPackagePath() {
 
       packagePath_ = getDefaultInstance().getPackagePath();
     }
     /**
-     * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
      * @param value The bytes for packagePath to set.
      */
     private void setPackagePathBytes(
@@ -3273,7 +3401,11 @@ public final class Gnomobiletypes {
     public static final int FNC_FIELD_NUMBER = 2;
     private java.lang.String fnc_;
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @return The fnc.
      */
     @java.lang.Override
@@ -3281,7 +3413,11 @@ public final class Gnomobiletypes {
       return fnc_;
     }
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @return The bytes for fnc.
      */
     @java.lang.Override
@@ -3290,7 +3426,11 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(fnc_);
     }
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @param value The fnc to set.
      */
     private void setFnc(
@@ -3300,14 +3440,22 @@ public final class Gnomobiletypes {
       fnc_ = value;
     }
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      */
     private void clearFnc() {
 
       fnc_ = getDefaultInstance().getFnc();
     }
     /**
-     * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+     * <pre>
+     * Example: "CreateReply"
+     * </pre>
+     *
+     * <code>string fnc = 2 [json_name = "fnc"];</code>
      * @param value The bytes for fnc to set.
      */
     private void setFncBytes(
@@ -3320,7 +3468,11 @@ public final class Gnomobiletypes {
     public static final int ARGS_FIELD_NUMBER = 3;
     private com.google.protobuf.Internal.ProtobufList<java.lang.String> args_;
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @return A list containing the args.
      */
     @java.lang.Override
@@ -3328,7 +3480,11 @@ public final class Gnomobiletypes {
       return args_;
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @return The count of args.
      */
     @java.lang.Override
@@ -3336,7 +3492,11 @@ public final class Gnomobiletypes {
       return args_.size();
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param index The index of the element to return.
      * @return The args at the given index.
      */
@@ -3345,7 +3505,11 @@ public final class Gnomobiletypes {
       return args_.get(index);
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param index The index of the value to return.
      * @return The bytes of the args at the given index.
      */
@@ -3363,7 +3527,11 @@ public final class Gnomobiletypes {
        }
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param index The index to set the value at.
      * @param value The args to set.
      */
@@ -3374,7 +3542,11 @@ public final class Gnomobiletypes {
       args_.set(index, value);
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param value The args to add.
      */
     private void addArgs(
@@ -3384,7 +3556,11 @@ public final class Gnomobiletypes {
       args_.add(value);
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param values The args to add.
      */
     private void addAllArgs(
@@ -3394,13 +3570,21 @@ public final class Gnomobiletypes {
           values, args_);
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      */
     private void clearArgs() {
       args_ = com.google.protobuf.GeneratedMessageLite.emptyProtobufList();
     }
     /**
-     * <code>repeated string Args = 3 [json_name = "Args"];</code>
+     * <pre>
+     * list of arguments specific to the function
+     * </pre>
+     *
+     * <code>repeated string args = 3 [json_name = "args"];</code>
      * @param value The bytes of the args to add.
      */
     private void addArgsBytes(
@@ -3410,10 +3594,10 @@ public final class Gnomobiletypes {
       args_.add(value.toStringUtf8());
     }
 
-    public static final int GASFEE_FIELD_NUMBER = 4;
+    public static final int GAS_FEE_FIELD_NUMBER = 4;
     private java.lang.String gasFee_;
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @return The gasFee.
      */
     @java.lang.Override
@@ -3421,7 +3605,7 @@ public final class Gnomobiletypes {
       return gasFee_;
     }
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @return The bytes for gasFee.
      */
     @java.lang.Override
@@ -3430,7 +3614,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(gasFee_);
     }
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @param value The gasFee to set.
      */
     private void setGasFee(
@@ -3440,14 +3624,14 @@ public final class Gnomobiletypes {
       gasFee_ = value;
     }
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      */
     private void clearGasFee() {
 
       gasFee_ = getDefaultInstance().getGasFee();
     }
     /**
-     * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+     * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
      * @param value The bytes for gasFee to set.
      */
     private void setGasFeeBytes(
@@ -3457,10 +3641,10 @@ public final class Gnomobiletypes {
 
     }
 
-    public static final int GASWANTED_FIELD_NUMBER = 5;
+    public static final int GAS_WANTED_FIELD_NUMBER = 5;
     private long gasWanted_;
     /**
-     * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+     * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
      * @return The gasWanted.
      */
     @java.lang.Override
@@ -3468,7 +3652,7 @@ public final class Gnomobiletypes {
       return gasWanted_;
     }
     /**
-     * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+     * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
      * @param value The gasWanted to set.
      */
     private void setGasWanted(long value) {
@@ -3476,7 +3660,7 @@ public final class Gnomobiletypes {
       gasWanted_ = value;
     }
     /**
-     * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+     * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
      */
     private void clearGasWanted() {
 
@@ -3486,7 +3670,7 @@ public final class Gnomobiletypes {
     public static final int SEND_FIELD_NUMBER = 6;
     private java.lang.String send_;
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @return The send.
      */
     @java.lang.Override
@@ -3494,7 +3678,7 @@ public final class Gnomobiletypes {
       return send_;
     }
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @return The bytes for send.
      */
     @java.lang.Override
@@ -3503,7 +3687,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(send_);
     }
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @param value The send to set.
      */
     private void setSend(
@@ -3513,14 +3697,14 @@ public final class Gnomobiletypes {
       send_ = value;
     }
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      */
     private void clearSend() {
 
       send_ = getDefaultInstance().getSend();
     }
     /**
-     * <code>string Send = 6 [json_name = "Send"];</code>
+     * <code>string send = 6 [json_name = "send"];</code>
      * @param value The bytes for send to set.
      */
     private void setSendBytes(
@@ -3533,7 +3717,7 @@ public final class Gnomobiletypes {
     public static final int MEMO_FIELD_NUMBER = 7;
     private java.lang.String memo_;
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @return The memo.
      */
     @java.lang.Override
@@ -3541,7 +3725,7 @@ public final class Gnomobiletypes {
       return memo_;
     }
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @return The bytes for memo.
      */
     @java.lang.Override
@@ -3550,7 +3734,7 @@ public final class Gnomobiletypes {
       return com.google.protobuf.ByteString.copyFromUtf8(memo_);
     }
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @param value The memo to set.
      */
     private void setMemo(
@@ -3560,14 +3744,14 @@ public final class Gnomobiletypes {
       memo_ = value;
     }
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      */
     private void clearMemo() {
 
       memo_ = getDefaultInstance().getMemo();
     }
     /**
-     * <code>string Memo = 7 [json_name = "Memo"];</code>
+     * <code>string memo = 7 [json_name = "memo"];</code>
      * @param value The bytes for memo to set.
      */
     private void setMemoBytes(
@@ -3675,7 +3859,11 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
        * @return The packagePath.
        */
       @java.lang.Override
@@ -3683,7 +3871,11 @@ public final class Gnomobiletypes {
         return instance.getPackagePath();
       }
       /**
-       * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
        * @return The bytes for packagePath.
        */
       @java.lang.Override
@@ -3692,7 +3884,11 @@ public final class Gnomobiletypes {
         return instance.getPackagePathBytes();
       }
       /**
-       * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
        * @param value The packagePath to set.
        * @return This builder for chaining.
        */
@@ -3703,7 +3899,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
        * @return This builder for chaining.
        */
       public Builder clearPackagePath() {
@@ -3712,7 +3912,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string PackagePath = 1 [json_name = "PackagePath"];</code>
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
        * @param value The bytes for packagePath to set.
        * @return This builder for chaining.
        */
@@ -3724,7 +3928,11 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+       * <pre>
+       * Example: "CreateReply"
+       * </pre>
+       *
+       * <code>string fnc = 2 [json_name = "fnc"];</code>
        * @return The fnc.
        */
       @java.lang.Override
@@ -3732,7 +3940,11 @@ public final class Gnomobiletypes {
         return instance.getFnc();
       }
       /**
-       * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+       * <pre>
+       * Example: "CreateReply"
+       * </pre>
+       *
+       * <code>string fnc = 2 [json_name = "fnc"];</code>
        * @return The bytes for fnc.
        */
       @java.lang.Override
@@ -3741,7 +3953,11 @@ public final class Gnomobiletypes {
         return instance.getFncBytes();
       }
       /**
-       * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+       * <pre>
+       * Example: "CreateReply"
+       * </pre>
+       *
+       * <code>string fnc = 2 [json_name = "fnc"];</code>
        * @param value The fnc to set.
        * @return This builder for chaining.
        */
@@ -3752,7 +3968,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+       * <pre>
+       * Example: "CreateReply"
+       * </pre>
+       *
+       * <code>string fnc = 2 [json_name = "fnc"];</code>
        * @return This builder for chaining.
        */
       public Builder clearFnc() {
@@ -3761,7 +3981,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Fnc = 2 [json_name = "Fnc"];</code>
+       * <pre>
+       * Example: "CreateReply"
+       * </pre>
+       *
+       * <code>string fnc = 2 [json_name = "fnc"];</code>
        * @param value The bytes for fnc to set.
        * @return This builder for chaining.
        */
@@ -3773,7 +3997,11 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @return A list containing the args.
        */
       @java.lang.Override
@@ -3783,7 +4011,11 @@ public final class Gnomobiletypes {
             instance.getArgsList());
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @return The count of args.
        */
       @java.lang.Override
@@ -3791,7 +4023,11 @@ public final class Gnomobiletypes {
         return instance.getArgsCount();
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param index The index of the element to return.
        * @return The args at the given index.
        */
@@ -3800,7 +4036,11 @@ public final class Gnomobiletypes {
         return instance.getArgs(index);
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param index The index of the value to return.
        * @return The bytes of the args at the given index.
        */
@@ -3810,7 +4050,11 @@ public final class Gnomobiletypes {
         return instance.getArgsBytes(index);
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param index The index to set the value at.
        * @param value The args to set.
        * @return This builder for chaining.
@@ -3822,7 +4066,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param value The args to add.
        * @return This builder for chaining.
        */
@@ -3833,7 +4081,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param values The args to add.
        * @return This builder for chaining.
        */
@@ -3844,7 +4096,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @return This builder for chaining.
        */
       public Builder clearArgs() {
@@ -3853,7 +4109,11 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>repeated string Args = 3 [json_name = "Args"];</code>
+       * <pre>
+       * list of arguments specific to the function
+       * </pre>
+       *
+       * <code>repeated string args = 3 [json_name = "args"];</code>
        * @param value The bytes of the args to add.
        * @return This builder for chaining.
        */
@@ -3865,7 +4125,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+       * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
        * @return The gasFee.
        */
       @java.lang.Override
@@ -3873,7 +4133,7 @@ public final class Gnomobiletypes {
         return instance.getGasFee();
       }
       /**
-       * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+       * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
        * @return The bytes for gasFee.
        */
       @java.lang.Override
@@ -3882,7 +4142,7 @@ public final class Gnomobiletypes {
         return instance.getGasFeeBytes();
       }
       /**
-       * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+       * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
        * @param value The gasFee to set.
        * @return This builder for chaining.
        */
@@ -3893,7 +4153,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+       * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
        * @return This builder for chaining.
        */
       public Builder clearGasFee() {
@@ -3902,7 +4162,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string GasFee = 4 [json_name = "GasFee"];</code>
+       * <code>string gas_fee = 4 [json_name = "gasFee"];</code>
        * @param value The bytes for gasFee to set.
        * @return This builder for chaining.
        */
@@ -3914,7 +4174,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+       * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
        * @return The gasWanted.
        */
       @java.lang.Override
@@ -3922,7 +4182,7 @@ public final class Gnomobiletypes {
         return instance.getGasWanted();
       }
       /**
-       * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+       * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
        * @param value The gasWanted to set.
        * @return This builder for chaining.
        */
@@ -3932,7 +4192,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>sint64 GasWanted = 5 [json_name = "GasWanted"];</code>
+       * <code>sint64 gas_wanted = 5 [json_name = "gasWanted"];</code>
        * @return This builder for chaining.
        */
       public Builder clearGasWanted() {
@@ -3942,7 +4202,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Send = 6 [json_name = "Send"];</code>
+       * <code>string send = 6 [json_name = "send"];</code>
        * @return The send.
        */
       @java.lang.Override
@@ -3950,7 +4210,7 @@ public final class Gnomobiletypes {
         return instance.getSend();
       }
       /**
-       * <code>string Send = 6 [json_name = "Send"];</code>
+       * <code>string send = 6 [json_name = "send"];</code>
        * @return The bytes for send.
        */
       @java.lang.Override
@@ -3959,7 +4219,7 @@ public final class Gnomobiletypes {
         return instance.getSendBytes();
       }
       /**
-       * <code>string Send = 6 [json_name = "Send"];</code>
+       * <code>string send = 6 [json_name = "send"];</code>
        * @param value The send to set.
        * @return This builder for chaining.
        */
@@ -3970,7 +4230,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Send = 6 [json_name = "Send"];</code>
+       * <code>string send = 6 [json_name = "send"];</code>
        * @return This builder for chaining.
        */
       public Builder clearSend() {
@@ -3979,7 +4239,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Send = 6 [json_name = "Send"];</code>
+       * <code>string send = 6 [json_name = "send"];</code>
        * @param value The bytes for send to set.
        * @return This builder for chaining.
        */
@@ -3991,7 +4251,7 @@ public final class Gnomobiletypes {
       }
 
       /**
-       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * <code>string memo = 7 [json_name = "memo"];</code>
        * @return The memo.
        */
       @java.lang.Override
@@ -3999,7 +4259,7 @@ public final class Gnomobiletypes {
         return instance.getMemo();
       }
       /**
-       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * <code>string memo = 7 [json_name = "memo"];</code>
        * @return The bytes for memo.
        */
       @java.lang.Override
@@ -4008,7 +4268,7 @@ public final class Gnomobiletypes {
         return instance.getMemoBytes();
       }
       /**
-       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * <code>string memo = 7 [json_name = "memo"];</code>
        * @param value The memo to set.
        * @return This builder for chaining.
        */
@@ -4019,7 +4279,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * <code>string memo = 7 [json_name = "memo"];</code>
        * @return This builder for chaining.
        */
       public Builder clearMemo() {
@@ -4028,7 +4288,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>string Memo = 7 [json_name = "Memo"];</code>
+       * <code>string memo = 7 [json_name = "memo"];</code>
        * @param value The bytes for memo to set.
        * @return This builder for chaining.
        */
@@ -4125,7 +4385,7 @@ public final class Gnomobiletypes {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @return The result.
      */
     com.google.protobuf.ByteString getResult();
@@ -4144,7 +4404,7 @@ public final class Gnomobiletypes {
     public static final int RESULT_FIELD_NUMBER = 1;
     private com.google.protobuf.ByteString result_;
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @return The result.
      */
     @java.lang.Override
@@ -4152,7 +4412,7 @@ public final class Gnomobiletypes {
       return result_;
     }
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      * @param value The result to set.
      */
     private void setResult(com.google.protobuf.ByteString value) {
@@ -4161,7 +4421,7 @@ public final class Gnomobiletypes {
       result_ = value;
     }
     /**
-     * <code>bytes Result = 1 [json_name = "Result"];</code>
+     * <code>bytes result = 1 [json_name = "result"];</code>
      */
     private void clearResult() {
 
@@ -4266,7 +4526,7 @@ public final class Gnomobiletypes {
 
 
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @return The result.
        */
       @java.lang.Override
@@ -4274,7 +4534,7 @@ public final class Gnomobiletypes {
         return instance.getResult();
       }
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @param value The result to set.
        * @return This builder for chaining.
        */
@@ -4284,7 +4544,7 @@ public final class Gnomobiletypes {
         return this;
       }
       /**
-       * <code>bytes Result = 1 [json_name = "Result"];</code>
+       * <code>bytes result = 1 [json_name = "result"];</code>
        * @return This builder for chaining.
        */
       public Builder clearResult() {

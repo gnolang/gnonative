@@ -13,9 +13,9 @@ import { Message, proto3 } from "@bufbuild/protobuf";
  */
 export declare class SetRemoteRequest extends Message<SetRemoteRequest> {
   /**
-   * @generated from field: string Remote = 1;
+   * @generated from field: string remote = 1;
    */
-  Remote: string;
+  remote: string;
 
   constructor(data?: PartialMessage<SetRemoteRequest>);
 
@@ -56,9 +56,9 @@ export declare class SetRemoteResponse extends Message<SetRemoteResponse> {
  */
 export declare class SetChainIDRequest extends Message<SetChainIDRequest> {
   /**
-   * @generated from field: string ChainID = 1;
+   * @generated from field: string chain_id = 1;
    */
-  ChainID: string;
+  chainId: string;
 
   constructor(data?: PartialMessage<SetChainIDRequest>);
 
@@ -99,9 +99,9 @@ export declare class SetChainIDResponse extends Message<SetChainIDResponse> {
  */
 export declare class SetPasswordRequest extends Message<SetPasswordRequest> {
   /**
-   * @generated from field: string Password = 1;
+   * @generated from field: string password = 1;
    */
-  Password: string;
+  password: string;
 
   constructor(data?: PartialMessage<SetPasswordRequest>);
 
@@ -161,9 +161,9 @@ export declare class GenerateRecoveryPhraseRequest extends Message<GenerateRecov
  */
 export declare class GenerateRecoveryPhraseResponse extends Message<GenerateRecoveryPhraseResponse> {
   /**
-   * @generated from field: string Phrase = 1;
+   * @generated from field: string phrase = 1;
    */
-  Phrase: string;
+  phrase: string;
 
   constructor(data?: PartialMessage<GenerateRecoveryPhraseResponse>);
 
@@ -185,14 +185,14 @@ export declare class GenerateRecoveryPhraseResponse extends Message<GenerateReco
  */
 export declare class DeleteAccountRequest extends Message<DeleteAccountRequest> {
   /**
-   * @generated from field: string NameOrBech32 = 1;
+   * @generated from field: string name_or_bech32 = 1;
    */
-  NameOrBech32: string;
+  nameOrBech32: string;
 
   /**
-   * @generated from field: string Password = 2;
+   * @generated from field: string password = 2;
    */
-  Password: string;
+  password: string;
 
   constructor(data?: PartialMessage<DeleteAccountRequest>);
 
@@ -233,14 +233,18 @@ export declare class DeleteAccountResponse extends Message<DeleteAccountResponse
  */
 export declare class QueryRequest extends Message<QueryRequest> {
   /**
-   * @generated from field: string Path = 1;
+   * Example: "vm/qrender"
+   *
+   * @generated from field: string path = 1;
    */
-  Path: string;
+  path: string;
 
   /**
-   * @generated from field: bytes Data = 2;
+   * Example: "gno.land/r/demo/boards\ntestboard"
+   *
+   * @generated from field: bytes data = 2;
    */
-  Data: Uint8Array;
+  data: Uint8Array;
 
   constructor(data?: PartialMessage<QueryRequest>);
 
@@ -262,9 +266,9 @@ export declare class QueryRequest extends Message<QueryRequest> {
  */
 export declare class QueryResponse extends Message<QueryResponse> {
   /**
-   * @generated from field: bytes Result = 1;
+   * @generated from field: bytes result = 1;
    */
-  Result: Uint8Array;
+  result: Uint8Array;
 
   constructor(data?: PartialMessage<QueryResponse>);
 
@@ -286,39 +290,45 @@ export declare class QueryResponse extends Message<QueryResponse> {
  */
 export declare class CallRequest extends Message<CallRequest> {
   /**
-   * @generated from field: string PackagePath = 1;
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
    */
-  PackagePath: string;
+  packagePath: string;
 
   /**
-   * @generated from field: string Fnc = 2;
+   * Example: "CreateReply"
+   *
+   * @generated from field: string fnc = 2;
    */
-  Fnc: string;
+  fnc: string;
 
   /**
-   * @generated from field: repeated string Args = 3;
+   * list of arguments specific to the function
+   *
+   * @generated from field: repeated string args = 3;
    */
-  Args: string[];
+  args: string[];
 
   /**
-   * @generated from field: string GasFee = 4;
+   * @generated from field: string gas_fee = 4;
    */
-  GasFee: string;
+  gasFee: string;
 
   /**
-   * @generated from field: sint64 GasWanted = 5;
+   * @generated from field: sint64 gas_wanted = 5;
    */
-  GasWanted: bigint;
+  gasWanted: bigint;
 
   /**
-   * @generated from field: string Send = 6;
+   * @generated from field: string send = 6;
    */
-  Send: string;
+  send: string;
 
   /**
-   * @generated from field: string Memo = 7;
+   * @generated from field: string memo = 7;
    */
-  Memo: string;
+  memo: string;
 
   constructor(data?: PartialMessage<CallRequest>);
 
@@ -340,9 +350,9 @@ export declare class CallRequest extends Message<CallRequest> {
  */
 export declare class CallResponse extends Message<CallResponse> {
   /**
-   * @generated from field: bytes Result = 1;
+   * @generated from field: bytes result = 1;
    */
-  Result: Uint8Array;
+  result: Uint8Array;
 
   constructor(data?: PartialMessage<CallResponse>);
 

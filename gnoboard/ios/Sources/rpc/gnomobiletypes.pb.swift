@@ -138,8 +138,10 @@ public struct Land_Gno_Gnomobile_V1_QueryRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// Example: "vm/qrender"
   public var path: String = String()
 
+  /// Example: "gno.land/r/demo/boards\ntestboard"
   public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -164,10 +166,13 @@ public struct Land_Gno_Gnomobile_V1_CallRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// Example: "gno.land/r/demo/boards"
   public var packagePath: String = String()
 
+  /// Example: "CreateReply"
   public var fnc: String = String()
 
+  /// list of arguments specific to the function
   public var args: [String] = []
 
   public var gasFee: String = String()
@@ -219,7 +224,7 @@ fileprivate let _protobuf_package = "land.gno.gnomobile.v1"
 extension Land_Gno_Gnomobile_V1_SetRemoteRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetRemoteRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Remote"),
+    1: .same(proto: "remote"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -270,7 +275,7 @@ extension Land_Gno_Gnomobile_V1_SetRemoteResponse: SwiftProtobuf.Message, SwiftP
 extension Land_Gno_Gnomobile_V1_SetChainIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetChainIDRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "ChainID"),
+    1: .standard(proto: "chain_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -321,7 +326,7 @@ extension Land_Gno_Gnomobile_V1_SetChainIDResponse: SwiftProtobuf.Message, Swift
 extension Land_Gno_Gnomobile_V1_SetPasswordRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetPasswordRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Password"),
+    1: .same(proto: "password"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -391,7 +396,7 @@ extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest: SwiftProtobuf.Mes
 extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GenerateRecoveryPhraseResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Phrase"),
+    1: .same(proto: "phrase"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -423,8 +428,8 @@ extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: SwiftProtobuf.Me
 extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteAccountRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "NameOrBech32"),
-    2: .same(proto: "Password"),
+    1: .standard(proto: "name_or_bech32"),
+    2: .same(proto: "password"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -480,8 +485,8 @@ extension Land_Gno_Gnomobile_V1_DeleteAccountResponse: SwiftProtobuf.Message, Sw
 extension Land_Gno_Gnomobile_V1_QueryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Path"),
-    2: .same(proto: "Data"),
+    1: .same(proto: "path"),
+    2: .same(proto: "data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -518,7 +523,7 @@ extension Land_Gno_Gnomobile_V1_QueryRequest: SwiftProtobuf.Message, SwiftProtob
 extension Land_Gno_Gnomobile_V1_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Result"),
+    1: .same(proto: "result"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -550,13 +555,13 @@ extension Land_Gno_Gnomobile_V1_QueryResponse: SwiftProtobuf.Message, SwiftProto
 extension Land_Gno_Gnomobile_V1_CallRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CallRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "PackagePath"),
-    2: .same(proto: "Fnc"),
-    3: .same(proto: "Args"),
-    4: .same(proto: "GasFee"),
-    5: .same(proto: "GasWanted"),
-    6: .same(proto: "Send"),
-    7: .same(proto: "Memo"),
+    1: .standard(proto: "package_path"),
+    2: .same(proto: "fnc"),
+    3: .same(proto: "args"),
+    4: .standard(proto: "gas_fee"),
+    5: .standard(proto: "gas_wanted"),
+    6: .same(proto: "send"),
+    7: .same(proto: "memo"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -618,7 +623,7 @@ extension Land_Gno_Gnomobile_V1_CallRequest: SwiftProtobuf.Message, SwiftProtobu
 extension Land_Gno_Gnomobile_V1_CallResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CallResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "Result"),
+    1: .same(proto: "result"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {

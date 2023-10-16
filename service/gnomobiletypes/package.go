@@ -26,4 +26,4 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	QueryResponse{},
 	CallRequest{},
 	CallResponse{},
-))
+).WithComments(path.Join(amino.GetCallersDirname(), "gnomobiletypes.go")))

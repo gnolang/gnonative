@@ -5,21 +5,21 @@ option go_package = "github.com/gnolang/gnomobile/service/rpc";
 
 // messages
 message SetRemoteRequest {
-	string Remote = 1;
+	string remote = 1;
 }
 
 message SetRemoteResponse {
 }
 
 message SetChainIDRequest {
-	string ChainID = 1;
+	string chain_id = 1;
 }
 
 message SetChainIDResponse {
 }
 
 message SetPasswordRequest {
-	string Password = 1;
+	string password = 1;
 }
 
 message SetPasswordResponse {
@@ -29,36 +29,41 @@ message GenerateRecoveryPhraseRequest {
 }
 
 message GenerateRecoveryPhraseResponse {
-	string Phrase = 1;
+	string phrase = 1;
 }
 
 message DeleteAccountRequest {
-	string NameOrBech32 = 1;
-	string Password = 2;
+	string name_or_bech32 = 1;
+	string password = 2;
 }
 
 message DeleteAccountResponse {
 }
 
 message QueryRequest {
-	string Path = 1;
-	bytes Data = 2;
+	// Example: "vm/qrender"
+	string path = 1;
+	// Example: "gno.land/r/demo/boards\ntestboard"
+	bytes data = 2;
 }
 
 message QueryResponse {
-	bytes Result = 1;
+	bytes result = 1;
 }
 
 message CallRequest {
-	string PackagePath = 1;
-	string Fnc = 2;
-	repeated string Args = 3;
-	string GasFee = 4;
-	sint64 GasWanted = 5;
-	string Send = 6;
-	string Memo = 7;
+	// Example: "gno.land/r/demo/boards"
+	string package_path = 1;
+	// Example: "CreateReply"
+	string fnc = 2;
+	// list of arguments specific to the function
+	repeated string args = 3;
+	string gas_fee = 4;
+	sint64 gas_wanted = 5;
+	string send = 6;
+	string memo = 7;
 }
 
 message CallResponse {
-	bytes Result = 1;
+	bytes result = 1;
 }
