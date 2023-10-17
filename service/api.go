@@ -51,23 +51,8 @@ func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *conn
 }
 
 func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {
-	var keyType rpc.KeyType
-
-	switch key.GetType() {
-	case crypto_keys.TypeLocal:
-		keyType = rpc.KeyType_TypeLocal
-	case crypto_keys.TypeLedger:
-		keyType = rpc.KeyType_TypeLedger
-	case crypto_keys.TypeOffline:
-		keyType = rpc.KeyType_TypeOffline
-	case crypto_keys.TypeMulti:
-		keyType = rpc.KeyType_TypeMulti
-	default:
-		return nil, rpc.ErrCode_ErrCryptoKeyTypeUnknown
-	}
-
 	return &rpc.KeyInfo{
-		Type:    keyType,
+		Type:    uint32(key.GetType()),
 		Name:    key.GetName(),
 		Address: key.GetAddress().Bytes(),
 		PubKey:  key.GetPubKey().Bytes(),
@@ -157,10 +142,11 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 }
 
 // DeleteAccount deletes the account with the given name, using the password to
-// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+// ensure access. However, if skip_password is true, then ignore the password.
+// If the account doesn't exist, then return ErrCryptoKeyNotFound.
 // If the password is wrong, then return ErrDecryptionFailed.
 func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
-	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, false); err != nil {
+	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 		} else if keyerror.IsErrWrongPassword(err) {

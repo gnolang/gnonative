@@ -237,7 +237,8 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
   }
 
   /// DeleteAccount deletes the account with the given name, using the password to
-  /// ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+  /// ensure access. However, if skip_password is true, then ignore the password.
+  /// If the account doesn't exist, then return ErrCryptoKeyNotFound.
   /// If the password is wrong, then return ErrDecryptionFailed.
   ///
   /// - Parameters:

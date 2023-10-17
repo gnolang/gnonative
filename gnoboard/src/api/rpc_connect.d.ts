@@ -3,9 +3,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, QueryRequest, QueryResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
-import { CreateAccountRequest, CreateAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, SelectAccountRequest, SelectAccountResponse } from "./rpc_pb.js";
 
 /**
  * GnomobileService is the service to interact with the Gno blockchain
@@ -113,7 +112,8 @@ export declare const GnomobileService: {
     },
     /**
      * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * ensure access. However, if skip_password is true, then ignore the password.
+     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.DeleteAccount

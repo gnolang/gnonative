@@ -1920,6 +1920,3191 @@ public final class Gnomobiletypes {
     }
   }
 
+  public interface KeyInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.KeyInfo)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     * 0: local, 1: ledger, 2: offline, 3: multi
+     * </pre>
+     *
+     * <code>uint32 type = 1 [json_name = "type"];</code>
+     * @return The type.
+     */
+    int getType();
+
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+     * @return The pubKey.
+     */
+    com.google.protobuf.ByteString getPubKey();
+
+    /**
+     * <code>bytes address = 4 [json_name = "address"];</code>
+     * @return The address.
+     */
+    com.google.protobuf.ByteString getAddress();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.KeyInfo}
+   */
+  public  static final class KeyInfo extends
+      com.google.protobuf.GeneratedMessageLite<
+          KeyInfo, KeyInfo.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.KeyInfo)
+      KeyInfoOrBuilder {
+    private KeyInfo() {
+      name_ = "";
+      pubKey_ = com.google.protobuf.ByteString.EMPTY;
+      address_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <pre>
+     * 0: local, 1: ledger, 2: offline, 3: multi
+     * </pre>
+     *
+     * <code>uint32 type = 1 [json_name = "type"];</code>
+     * @return The type.
+     */
+    @java.lang.Override
+    public int getType() {
+      return type_;
+    }
+    /**
+     * <pre>
+     * 0: local, 1: ledger, 2: offline, 3: multi
+     * </pre>
+     *
+     * <code>uint32 type = 1 [json_name = "type"];</code>
+     * @param value The type to set.
+     */
+    private void setType(int value) {
+      
+      type_ = value;
+    }
+    /**
+     * <pre>
+     * 0: local, 1: ledger, 2: offline, 3: multi
+     * </pre>
+     *
+     * <code>uint32 type = 1 [json_name = "type"];</code>
+     */
+    private void clearType() {
+
+      type_ = 0;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.String name_;
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      return name_;
+    }
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(name_);
+    }
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @param value The name to set.
+     */
+    private void setName(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      name_ = value;
+    }
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     */
+    private void clearName() {
+
+      name_ = getDefaultInstance().getName();
+    }
+    /**
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @param value The bytes for name to set.
+     */
+    private void setNameBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      name_ = value.toStringUtf8();
+
+    }
+
+    public static final int PUB_KEY_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString pubKey_;
+    /**
+     * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+     * @return The pubKey.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getPubKey() {
+      return pubKey_;
+    }
+    /**
+     * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+     * @param value The pubKey to set.
+     */
+    private void setPubKey(com.google.protobuf.ByteString value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      pubKey_ = value;
+    }
+    /**
+     * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+     */
+    private void clearPubKey() {
+
+      pubKey_ = getDefaultInstance().getPubKey();
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString address_;
+    /**
+     * <code>bytes address = 4 [json_name = "address"];</code>
+     * @return The address.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getAddress() {
+      return address_;
+    }
+    /**
+     * <code>bytes address = 4 [json_name = "address"];</code>
+     * @param value The address to set.
+     */
+    private void setAddress(com.google.protobuf.ByteString value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      address_ = value;
+    }
+    /**
+     * <code>bytes address = 4 [json_name = "address"];</code>
+     */
+    private void clearAddress() {
+
+      address_ = getDefaultInstance().getAddress();
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.KeyInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.KeyInfo)
+        land.gno.gnomobile.v1.Gnomobiletypes.KeyInfoOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       * 0: local, 1: ledger, 2: offline, 3: multi
+       * </pre>
+       *
+       * <code>uint32 type = 1 [json_name = "type"];</code>
+       * @return The type.
+       */
+      @java.lang.Override
+      public int getType() {
+        return instance.getType();
+      }
+      /**
+       * <pre>
+       * 0: local, 1: ledger, 2: offline, 3: multi
+       * </pre>
+       *
+       * <code>uint32 type = 1 [json_name = "type"];</code>
+       * @param value The type to set.
+       * @return This builder for chaining.
+       */
+      public Builder setType(int value) {
+        copyOnWrite();
+        instance.setType(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * 0: local, 1: ledger, 2: offline, 3: multi
+       * </pre>
+       *
+       * <code>uint32 type = 1 [json_name = "type"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearType() {
+        copyOnWrite();
+        instance.clearType();
+        return this;
+      }
+
+      /**
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The name.
+       */
+      @java.lang.Override
+      public java.lang.String getName() {
+        return instance.getName();
+      }
+      /**
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The bytes for name.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        return instance.getNameBytes();
+      }
+      /**
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setName(value);
+        return this;
+      }
+      /**
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        copyOnWrite();
+        instance.clearName();
+        return this;
+      }
+      /**
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setNameBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+       * @return The pubKey.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString getPubKey() {
+        return instance.getPubKey();
+      }
+      /**
+       * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+       * @param value The pubKey to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPubKey(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPubKey(value);
+        return this;
+      }
+      /**
+       * <code>bytes pub_key = 3 [json_name = "pubKey"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPubKey() {
+        copyOnWrite();
+        instance.clearPubKey();
+        return this;
+      }
+
+      /**
+       * <code>bytes address = 4 [json_name = "address"];</code>
+       * @return The address.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString getAddress() {
+        return instance.getAddress();
+      }
+      /**
+       * <code>bytes address = 4 [json_name = "address"];</code>
+       * @param value The address to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAddress(com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setAddress(value);
+        return this;
+      }
+      /**
+       * <code>bytes address = 4 [json_name = "address"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAddress() {
+        copyOnWrite();
+        instance.clearAddress();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.KeyInfo)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "type_",
+              "name_",
+              "pubKey_",
+              "address_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0000\u0000\u0001\u000b\u0002\u0208" +
+                "\u0003\n\u0004\n";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.KeyInfo)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo DEFAULT_INSTANCE;
+    static {
+      KeyInfo defaultInstance = new KeyInfo();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        KeyInfo.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<KeyInfo> PARSER;
+
+    public static com.google.protobuf.Parser<KeyInfo> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface ListKeyInfoRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.ListKeyInfoRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.ListKeyInfoRequest}
+   */
+  public  static final class ListKeyInfoRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          ListKeyInfoRequest, ListKeyInfoRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.ListKeyInfoRequest)
+      ListKeyInfoRequestOrBuilder {
+    private ListKeyInfoRequest() {
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.ListKeyInfoRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.ListKeyInfoRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.ListKeyInfoRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.ListKeyInfoRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest DEFAULT_INSTANCE;
+    static {
+      ListKeyInfoRequest defaultInstance = new ListKeyInfoRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        ListKeyInfoRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<ListKeyInfoRequest> PARSER;
+
+    public static com.google.protobuf.Parser<ListKeyInfoRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface ListKeyInfoResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.ListKeyInfoResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    java.util.List<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> 
+        getKeysList();
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKeys(int index);
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    int getKeysCount();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.ListKeyInfoResponse}
+   */
+  public  static final class ListKeyInfoResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          ListKeyInfoResponse, ListKeyInfoResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.ListKeyInfoResponse)
+      ListKeyInfoResponseOrBuilder {
+    private ListKeyInfoResponse() {
+      keys_ = emptyProtobufList();
+    }
+    public static final int KEYS_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.ProtobufList<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> keys_;
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    @java.lang.Override
+    public java.util.List<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> getKeysList() {
+      return keys_;
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    public java.util.List<? extends land.gno.gnomobile.v1.Gnomobiletypes.KeyInfoOrBuilder> 
+        getKeysOrBuilderList() {
+      return keys_;
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    @java.lang.Override
+    public int getKeysCount() {
+      return keys_.size();
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    @java.lang.Override
+    public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKeys(int index) {
+      return keys_.get(index);
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfoOrBuilder getKeysOrBuilder(
+        int index) {
+      return keys_.get(index);
+    }
+    private void ensureKeysIsMutable() {
+      com.google.protobuf.Internal.ProtobufList<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> tmp = keys_;
+      if (!tmp.isModifiable()) {
+        keys_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(tmp);
+       }
+    }
+
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void setKeys(
+        int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  ensureKeysIsMutable();
+      keys_.set(index, value);
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void addKeys(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  ensureKeysIsMutable();
+      keys_.add(value);
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void addKeys(
+        int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  ensureKeysIsMutable();
+      keys_.add(index, value);
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void addAllKeys(
+        java.lang.Iterable<? extends land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> values) {
+      ensureKeysIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, keys_);
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void clearKeys() {
+      keys_ = emptyProtobufList();
+    }
+    /**
+     * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+     */
+    private void removeKeys(int index) {
+      ensureKeysIsMutable();
+      keys_.remove(index);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.ListKeyInfoResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.ListKeyInfoResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      @java.lang.Override
+      public java.util.List<land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> getKeysList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getKeysList());
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      @java.lang.Override
+      public int getKeysCount() {
+        return instance.getKeysCount();
+      }/**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      @java.lang.Override
+      public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKeys(int index) {
+        return instance.getKeys(index);
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder setKeys(
+          int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.setKeys(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder setKeys(
+          int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.setKeys(index,
+            builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder addKeys(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.addKeys(value);
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder addKeys(
+          int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.addKeys(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder addKeys(
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.addKeys(builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder addKeys(
+          int index, land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.addKeys(index,
+            builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder addAllKeys(
+          java.lang.Iterable<? extends land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo> values) {
+        copyOnWrite();
+        instance.addAllKeys(values);
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder clearKeys() {
+        copyOnWrite();
+        instance.clearKeys();
+        return this;
+      }
+      /**
+       * <code>repeated .land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "keys"];</code>
+       */
+      public Builder removeKeys(int index) {
+        copyOnWrite();
+        instance.removeKeys(index);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.ListKeyInfoResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "keys_",
+              land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.class,
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0001\u0000\u0001\u001b";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.ListKeyInfoResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse DEFAULT_INSTANCE;
+    static {
+      ListKeyInfoResponse defaultInstance = new ListKeyInfoResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        ListKeyInfoResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.ListKeyInfoResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<ListKeyInfoResponse> PARSER;
+
+    public static com.google.protobuf.Parser<ListKeyInfoResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface CreateAccountRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.CreateAccountRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    java.lang.String getNameOrBech32();
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    com.google.protobuf.ByteString
+        getNameOrBech32Bytes();
+
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @return The mnemonic.
+     */
+    java.lang.String getMnemonic();
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @return The bytes for mnemonic.
+     */
+    com.google.protobuf.ByteString
+        getMnemonicBytes();
+
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @return The bip39Passwd.
+     */
+    java.lang.String getBip39Passwd();
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @return The bytes for bip39Passwd.
+     */
+    com.google.protobuf.ByteString
+        getBip39PasswdBytes();
+
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @return The password.
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @return The bytes for password.
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+
+    /**
+     * <code>uint32 account = 5 [json_name = "account"];</code>
+     * @return The account.
+     */
+    int getAccount();
+
+    /**
+     * <code>uint32 index = 6 [json_name = "index"];</code>
+     * @return The index.
+     */
+    int getIndex();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.CreateAccountRequest}
+   */
+  public  static final class CreateAccountRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          CreateAccountRequest, CreateAccountRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.CreateAccountRequest)
+      CreateAccountRequestOrBuilder {
+    private CreateAccountRequest() {
+      nameOrBech32_ = "";
+      mnemonic_ = "";
+      bip39Passwd_ = "";
+      password_ = "";
+    }
+    public static final int NAME_OR_BECH32_FIELD_NUMBER = 1;
+    private java.lang.String nameOrBech32_;
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    @java.lang.Override
+    public java.lang.String getNameOrBech32() {
+      return nameOrBech32_;
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameOrBech32Bytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(nameOrBech32_);
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @param value The nameOrBech32 to set.
+     */
+    private void setNameOrBech32(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      nameOrBech32_ = value;
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     */
+    private void clearNameOrBech32() {
+
+      nameOrBech32_ = getDefaultInstance().getNameOrBech32();
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @param value The bytes for nameOrBech32 to set.
+     */
+    private void setNameOrBech32Bytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      nameOrBech32_ = value.toStringUtf8();
+
+    }
+
+    public static final int MNEMONIC_FIELD_NUMBER = 2;
+    private java.lang.String mnemonic_;
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @return The mnemonic.
+     */
+    @java.lang.Override
+    public java.lang.String getMnemonic() {
+      return mnemonic_;
+    }
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @return The bytes for mnemonic.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMnemonicBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(mnemonic_);
+    }
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @param value The mnemonic to set.
+     */
+    private void setMnemonic(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      mnemonic_ = value;
+    }
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     */
+    private void clearMnemonic() {
+
+      mnemonic_ = getDefaultInstance().getMnemonic();
+    }
+    /**
+     * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+     * @param value The bytes for mnemonic to set.
+     */
+    private void setMnemonicBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      mnemonic_ = value.toStringUtf8();
+
+    }
+
+    public static final int BIP39_PASSWD_FIELD_NUMBER = 3;
+    private java.lang.String bip39Passwd_;
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @return The bip39Passwd.
+     */
+    @java.lang.Override
+    public java.lang.String getBip39Passwd() {
+      return bip39Passwd_;
+    }
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @return The bytes for bip39Passwd.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getBip39PasswdBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(bip39Passwd_);
+    }
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @param value The bip39Passwd to set.
+     */
+    private void setBip39Passwd(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      bip39Passwd_ = value;
+    }
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     */
+    private void clearBip39Passwd() {
+
+      bip39Passwd_ = getDefaultInstance().getBip39Passwd();
+    }
+    /**
+     * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+     * @param value The bytes for bip39Passwd to set.
+     */
+    private void setBip39PasswdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      bip39Passwd_ = value.toStringUtf8();
+
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 4;
+    private java.lang.String password_;
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @return The password.
+     */
+    @java.lang.Override
+    public java.lang.String getPassword() {
+      return password_;
+    }
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @return The bytes for password.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(password_);
+    }
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @param value The password to set.
+     */
+    private void setPassword(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      password_ = value;
+    }
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     */
+    private void clearPassword() {
+
+      password_ = getDefaultInstance().getPassword();
+    }
+    /**
+     * <code>string password = 4 [json_name = "password"];</code>
+     * @param value The bytes for password to set.
+     */
+    private void setPasswordBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      password_ = value.toStringUtf8();
+
+    }
+
+    public static final int ACCOUNT_FIELD_NUMBER = 5;
+    private int account_;
+    /**
+     * <code>uint32 account = 5 [json_name = "account"];</code>
+     * @return The account.
+     */
+    @java.lang.Override
+    public int getAccount() {
+      return account_;
+    }
+    /**
+     * <code>uint32 account = 5 [json_name = "account"];</code>
+     * @param value The account to set.
+     */
+    private void setAccount(int value) {
+      
+      account_ = value;
+    }
+    /**
+     * <code>uint32 account = 5 [json_name = "account"];</code>
+     */
+    private void clearAccount() {
+
+      account_ = 0;
+    }
+
+    public static final int INDEX_FIELD_NUMBER = 6;
+    private int index_;
+    /**
+     * <code>uint32 index = 6 [json_name = "index"];</code>
+     * @return The index.
+     */
+    @java.lang.Override
+    public int getIndex() {
+      return index_;
+    }
+    /**
+     * <code>uint32 index = 6 [json_name = "index"];</code>
+     * @param value The index to set.
+     */
+    private void setIndex(int value) {
+      
+      index_ = value;
+    }
+    /**
+     * <code>uint32 index = 6 [json_name = "index"];</code>
+     */
+    private void clearIndex() {
+
+      index_ = 0;
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.CreateAccountRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.CreateAccountRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return The nameOrBech32.
+       */
+      @java.lang.Override
+      public java.lang.String getNameOrBech32() {
+        return instance.getNameOrBech32();
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return The bytes for nameOrBech32.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getNameOrBech32Bytes() {
+        return instance.getNameOrBech32Bytes();
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @param value The nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setNameOrBech32(value);
+        return this;
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearNameOrBech32() {
+        copyOnWrite();
+        instance.clearNameOrBech32();
+        return this;
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @param value The bytes for nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32Bytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setNameOrBech32Bytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+       * @return The mnemonic.
+       */
+      @java.lang.Override
+      public java.lang.String getMnemonic() {
+        return instance.getMnemonic();
+      }
+      /**
+       * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+       * @return The bytes for mnemonic.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getMnemonicBytes() {
+        return instance.getMnemonicBytes();
+      }
+      /**
+       * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+       * @param value The mnemonic to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMnemonic(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setMnemonic(value);
+        return this;
+      }
+      /**
+       * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMnemonic() {
+        copyOnWrite();
+        instance.clearMnemonic();
+        return this;
+      }
+      /**
+       * <code>string mnemonic = 2 [json_name = "mnemonic"];</code>
+       * @param value The bytes for mnemonic to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMnemonicBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setMnemonicBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+       * @return The bip39Passwd.
+       */
+      @java.lang.Override
+      public java.lang.String getBip39Passwd() {
+        return instance.getBip39Passwd();
+      }
+      /**
+       * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+       * @return The bytes for bip39Passwd.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getBip39PasswdBytes() {
+        return instance.getBip39PasswdBytes();
+      }
+      /**
+       * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+       * @param value The bip39Passwd to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBip39Passwd(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setBip39Passwd(value);
+        return this;
+      }
+      /**
+       * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBip39Passwd() {
+        copyOnWrite();
+        instance.clearBip39Passwd();
+        return this;
+      }
+      /**
+       * <code>string bip39_passwd = 3 [json_name = "bip39Passwd"];</code>
+       * @param value The bytes for bip39Passwd to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBip39PasswdBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setBip39PasswdBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>string password = 4 [json_name = "password"];</code>
+       * @return The password.
+       */
+      @java.lang.Override
+      public java.lang.String getPassword() {
+        return instance.getPassword();
+      }
+      /**
+       * <code>string password = 4 [json_name = "password"];</code>
+       * @return The bytes for password.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        return instance.getPasswordBytes();
+      }
+      /**
+       * <code>string password = 4 [json_name = "password"];</code>
+       * @param value The password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPassword(value);
+        return this;
+      }
+      /**
+       * <code>string password = 4 [json_name = "password"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPassword() {
+        copyOnWrite();
+        instance.clearPassword();
+        return this;
+      }
+      /**
+       * <code>string password = 4 [json_name = "password"];</code>
+       * @param value The bytes for password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPasswordBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>uint32 account = 5 [json_name = "account"];</code>
+       * @return The account.
+       */
+      @java.lang.Override
+      public int getAccount() {
+        return instance.getAccount();
+      }
+      /**
+       * <code>uint32 account = 5 [json_name = "account"];</code>
+       * @param value The account to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAccount(int value) {
+        copyOnWrite();
+        instance.setAccount(value);
+        return this;
+      }
+      /**
+       * <code>uint32 account = 5 [json_name = "account"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAccount() {
+        copyOnWrite();
+        instance.clearAccount();
+        return this;
+      }
+
+      /**
+       * <code>uint32 index = 6 [json_name = "index"];</code>
+       * @return The index.
+       */
+      @java.lang.Override
+      public int getIndex() {
+        return instance.getIndex();
+      }
+      /**
+       * <code>uint32 index = 6 [json_name = "index"];</code>
+       * @param value The index to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIndex(int value) {
+        copyOnWrite();
+        instance.setIndex(value);
+        return this;
+      }
+      /**
+       * <code>uint32 index = 6 [json_name = "index"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIndex() {
+        copyOnWrite();
+        instance.clearIndex();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.CreateAccountRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "nameOrBech32_",
+              "mnemonic_",
+              "bip39Passwd_",
+              "password_",
+              "account_",
+              "index_",
+            };
+            java.lang.String info =
+                "\u0000\u0006\u0000\u0000\u0001\u0006\u0006\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0208\u0004\u0208\u0005\u000b\u0006\u000b";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.CreateAccountRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest DEFAULT_INSTANCE;
+    static {
+      CreateAccountRequest defaultInstance = new CreateAccountRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        CreateAccountRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<CreateAccountRequest> PARSER;
+
+    public static com.google.protobuf.Parser<CreateAccountRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface CreateAccountResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.CreateAccountResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return Whether the key field is set.
+     */
+    boolean hasKey();
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return The key.
+     */
+    land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.CreateAccountResponse}
+   */
+  public  static final class CreateAccountResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          CreateAccountResponse, CreateAccountResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.CreateAccountResponse)
+      CreateAccountResponseOrBuilder {
+    private CreateAccountResponse() {
+    }
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo key_;
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+      return key_ == null ? land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance() : key_;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  key_ = value;
+      bitField0_ |= 0x00000001;
+      }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  if (key_ != null &&
+          key_ != land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance()) {
+        key_ =
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.newBuilder(key_).mergeFrom(value).buildPartial();
+      } else {
+        key_ = value;
+      }
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void clearKey() {  key_ = null;
+      bitField0_ = (bitField0_ & ~0x00000001);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.CreateAccountResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.CreateAccountResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public boolean hasKey() {
+        return instance.hasKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+        return instance.getKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.setKey(value);
+        return this;
+        }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.setKey(builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.mergeKey(value);
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder clearKey() {  copyOnWrite();
+        instance.clearKey();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.CreateAccountResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "key_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u1009\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.CreateAccountResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse DEFAULT_INSTANCE;
+    static {
+      CreateAccountResponse defaultInstance = new CreateAccountResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        CreateAccountResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.CreateAccountResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<CreateAccountResponse> PARSER;
+
+    public static com.google.protobuf.Parser<CreateAccountResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface SelectAccountRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.SelectAccountRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    java.lang.String getNameOrBech32();
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    com.google.protobuf.ByteString
+        getNameOrBech32Bytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.SelectAccountRequest}
+   */
+  public  static final class SelectAccountRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          SelectAccountRequest, SelectAccountRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.SelectAccountRequest)
+      SelectAccountRequestOrBuilder {
+    private SelectAccountRequest() {
+      nameOrBech32_ = "";
+    }
+    public static final int NAME_OR_BECH32_FIELD_NUMBER = 1;
+    private java.lang.String nameOrBech32_;
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The nameOrBech32.
+     */
+    @java.lang.Override
+    public java.lang.String getNameOrBech32() {
+      return nameOrBech32_;
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @return The bytes for nameOrBech32.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameOrBech32Bytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(nameOrBech32_);
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @param value The nameOrBech32 to set.
+     */
+    private void setNameOrBech32(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      nameOrBech32_ = value;
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     */
+    private void clearNameOrBech32() {
+
+      nameOrBech32_ = getDefaultInstance().getNameOrBech32();
+    }
+    /**
+     * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+     * @param value The bytes for nameOrBech32 to set.
+     */
+    private void setNameOrBech32Bytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      nameOrBech32_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.SelectAccountRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.SelectAccountRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return The nameOrBech32.
+       */
+      @java.lang.Override
+      public java.lang.String getNameOrBech32() {
+        return instance.getNameOrBech32();
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return The bytes for nameOrBech32.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getNameOrBech32Bytes() {
+        return instance.getNameOrBech32Bytes();
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @param value The nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setNameOrBech32(value);
+        return this;
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearNameOrBech32() {
+        copyOnWrite();
+        instance.clearNameOrBech32();
+        return this;
+      }
+      /**
+       * <code>string name_or_bech32 = 1 [json_name = "nameOrBech32"];</code>
+       * @param value The bytes for nameOrBech32 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameOrBech32Bytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setNameOrBech32Bytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.SelectAccountRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "nameOrBech32_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.SelectAccountRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest DEFAULT_INSTANCE;
+    static {
+      SelectAccountRequest defaultInstance = new SelectAccountRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        SelectAccountRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<SelectAccountRequest> PARSER;
+
+    public static com.google.protobuf.Parser<SelectAccountRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface SelectAccountResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.SelectAccountResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return Whether the key field is set.
+     */
+    boolean hasKey();
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return The key.
+     */
+    land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.SelectAccountResponse}
+   */
+  public  static final class SelectAccountResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          SelectAccountResponse, SelectAccountResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.SelectAccountResponse)
+      SelectAccountResponseOrBuilder {
+    private SelectAccountResponse() {
+    }
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo key_;
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+      return key_ == null ? land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance() : key_;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  key_ = value;
+      bitField0_ |= 0x00000001;
+      }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  if (key_ != null &&
+          key_ != land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance()) {
+        key_ =
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.newBuilder(key_).mergeFrom(value).buildPartial();
+      } else {
+        key_ = value;
+      }
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void clearKey() {  key_ = null;
+      bitField0_ = (bitField0_ & ~0x00000001);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.SelectAccountResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.SelectAccountResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public boolean hasKey() {
+        return instance.hasKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+        return instance.getKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.setKey(value);
+        return this;
+        }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.setKey(builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.mergeKey(value);
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder clearKey() {  copyOnWrite();
+        instance.clearKey();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.SelectAccountResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "key_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u1009\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.SelectAccountResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse DEFAULT_INSTANCE;
+    static {
+      SelectAccountResponse defaultInstance = new SelectAccountResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        SelectAccountResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<SelectAccountResponse> PARSER;
+
+    public static com.google.protobuf.Parser<SelectAccountResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface GetActiveAccountRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GetActiveAccountRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GetActiveAccountRequest}
+   */
+  public  static final class GetActiveAccountRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          GetActiveAccountRequest, GetActiveAccountRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GetActiveAccountRequest)
+      GetActiveAccountRequestOrBuilder {
+    private GetActiveAccountRequest() {
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GetActiveAccountRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GetActiveAccountRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GetActiveAccountRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GetActiveAccountRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest DEFAULT_INSTANCE;
+    static {
+      GetActiveAccountRequest defaultInstance = new GetActiveAccountRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GetActiveAccountRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GetActiveAccountRequest> PARSER;
+
+    public static com.google.protobuf.Parser<GetActiveAccountRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface GetActiveAccountResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.GetActiveAccountResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return Whether the key field is set.
+     */
+    boolean hasKey();
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     * @return The key.
+     */
+    land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.GetActiveAccountResponse}
+   */
+  public  static final class GetActiveAccountResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          GetActiveAccountResponse, GetActiveAccountResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.GetActiveAccountResponse)
+      GetActiveAccountResponseOrBuilder {
+    private GetActiveAccountResponse() {
+    }
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo key_;
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.Override
+    public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+      return key_ == null ? land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance() : key_;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  key_ = value;
+      bitField0_ |= 0x00000001;
+      }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+      value.getClass();
+  if (key_ != null &&
+          key_ != land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.getDefaultInstance()) {
+        key_ =
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.newBuilder(key_).mergeFrom(value).buildPartial();
+      } else {
+        key_ = value;
+      }
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+     */
+    private void clearKey() {  key_ = null;
+      bitField0_ = (bitField0_ & ~0x00000001);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.GetActiveAccountResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.GetActiveAccountResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public boolean hasKey() {
+        return instance.hasKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      @java.lang.Override
+      public land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo getKey() {
+        return instance.getKey();
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.setKey(value);
+        return this;
+        }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder setKey(
+          land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo.Builder builderForValue) {
+        copyOnWrite();
+        instance.setKey(builderForValue.build());
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder mergeKey(land.gno.gnomobile.v1.Gnomobiletypes.KeyInfo value) {
+        copyOnWrite();
+        instance.mergeKey(value);
+        return this;
+      }
+      /**
+       * <code>.land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key"];</code>
+       */
+      public Builder clearKey() {  copyOnWrite();
+        instance.clearKey();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.GetActiveAccountResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "key_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u1009\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.GetActiveAccountResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse DEFAULT_INSTANCE;
+    static {
+      GetActiveAccountResponse defaultInstance = new GetActiveAccountResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GetActiveAccountResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<GetActiveAccountResponse> PARSER;
+
+    public static com.google.protobuf.Parser<GetActiveAccountResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface DeleteAccountRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.DeleteAccountRequest)
       com.google.protobuf.MessageLiteOrBuilder {
@@ -1947,6 +5132,12 @@ public final class Gnomobiletypes {
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
+
+    /**
+     * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+     * @return The skipPassword.
+     */
+    boolean getSkipPassword();
   }
   /**
    * Protobuf type {@code land.gno.gnomobile.v1.DeleteAccountRequest}
@@ -2052,6 +5243,32 @@ public final class Gnomobiletypes {
       checkByteStringIsUtf8(value);
       password_ = value.toStringUtf8();
 
+    }
+
+    public static final int SKIP_PASSWORD_FIELD_NUMBER = 3;
+    private boolean skipPassword_;
+    /**
+     * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+     * @return The skipPassword.
+     */
+    @java.lang.Override
+    public boolean getSkipPassword() {
+      return skipPassword_;
+    }
+    /**
+     * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+     * @param value The skipPassword to set.
+     */
+    private void setSkipPassword(boolean value) {
+      
+      skipPassword_ = value;
+    }
+    /**
+     * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+     */
+    private void clearSkipPassword() {
+
+      skipPassword_ = false;
     }
 
     public static land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest parseFrom(
@@ -2249,6 +5466,34 @@ public final class Gnomobiletypes {
         return this;
       }
 
+      /**
+       * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+       * @return The skipPassword.
+       */
+      @java.lang.Override
+      public boolean getSkipPassword() {
+        return instance.getSkipPassword();
+      }
+      /**
+       * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+       * @param value The skipPassword to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSkipPassword(boolean value) {
+        copyOnWrite();
+        instance.setSkipPassword(value);
+        return this;
+      }
+      /**
+       * <code>bool skip_password = 3 [json_name = "skipPassword"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSkipPassword() {
+        copyOnWrite();
+        instance.clearSkipPassword();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.DeleteAccountRequest)
     }
     @java.lang.Override
@@ -2267,10 +5512,11 @@ public final class Gnomobiletypes {
             java.lang.Object[] objects = new java.lang.Object[] {
               "nameOrBech32_",
               "password_",
+              "skipPassword_",
             };
             java.lang.String info =
-                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
-                "";
+                "\u0000\u0003\u0000\u0000\u0001\u0003\u0003\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0007";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }
         // fall through
@@ -4623,6 +7869,594 @@ public final class Gnomobiletypes {
     private static volatile com.google.protobuf.Parser<CallResponse> PARSER;
 
     public static com.google.protobuf.Parser<CallResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface HelloRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.HelloRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.HelloRequest}
+   */
+  public  static final class HelloRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          HelloRequest, HelloRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.HelloRequest)
+      HelloRequestOrBuilder {
+    private HelloRequest() {
+      name_ = "";
+    }
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.String name_;
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      return name_;
+    }
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(name_);
+    }
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @param value The name to set.
+     */
+    private void setName(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      name_ = value;
+    }
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     */
+    private void clearName() {
+
+      name_ = getDefaultInstance().getName();
+    }
+    /**
+     * <code>string name = 1 [json_name = "name"];</code>
+     * @param value The bytes for name to set.
+     */
+    private void setNameBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      name_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.HelloRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.HelloRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.HelloRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string name = 1 [json_name = "name"];</code>
+       * @return The name.
+       */
+      @java.lang.Override
+      public java.lang.String getName() {
+        return instance.getName();
+      }
+      /**
+       * <code>string name = 1 [json_name = "name"];</code>
+       * @return The bytes for name.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        return instance.getNameBytes();
+      }
+      /**
+       * <code>string name = 1 [json_name = "name"];</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setName(value);
+        return this;
+      }
+      /**
+       * <code>string name = 1 [json_name = "name"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        copyOnWrite();
+        instance.clearName();
+        return this;
+      }
+      /**
+       * <code>string name = 1 [json_name = "name"];</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setNameBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.HelloRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "name_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.HelloRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest DEFAULT_INSTANCE;
+    static {
+      HelloRequest defaultInstance = new HelloRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        HelloRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<HelloRequest> PARSER;
+
+    public static com.google.protobuf.Parser<HelloRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface HelloResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.HelloResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @return The greeting.
+     */
+    java.lang.String getGreeting();
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @return The bytes for greeting.
+     */
+    com.google.protobuf.ByteString
+        getGreetingBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.HelloResponse}
+   */
+  public  static final class HelloResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          HelloResponse, HelloResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.HelloResponse)
+      HelloResponseOrBuilder {
+    private HelloResponse() {
+      greeting_ = "";
+    }
+    public static final int GREETING_FIELD_NUMBER = 1;
+    private java.lang.String greeting_;
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @return The greeting.
+     */
+    @java.lang.Override
+    public java.lang.String getGreeting() {
+      return greeting_;
+    }
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @return The bytes for greeting.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getGreetingBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(greeting_);
+    }
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @param value The greeting to set.
+     */
+    private void setGreeting(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      greeting_ = value;
+    }
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     */
+    private void clearGreeting() {
+
+      greeting_ = getDefaultInstance().getGreeting();
+    }
+    /**
+     * <code>string greeting = 1 [json_name = "greeting"];</code>
+     * @param value The bytes for greeting to set.
+     */
+    private void setGreetingBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      greeting_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.HelloResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.HelloResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.HelloResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>string greeting = 1 [json_name = "greeting"];</code>
+       * @return The greeting.
+       */
+      @java.lang.Override
+      public java.lang.String getGreeting() {
+        return instance.getGreeting();
+      }
+      /**
+       * <code>string greeting = 1 [json_name = "greeting"];</code>
+       * @return The bytes for greeting.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getGreetingBytes() {
+        return instance.getGreetingBytes();
+      }
+      /**
+       * <code>string greeting = 1 [json_name = "greeting"];</code>
+       * @param value The greeting to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGreeting(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setGreeting(value);
+        return this;
+      }
+      /**
+       * <code>string greeting = 1 [json_name = "greeting"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGreeting() {
+        copyOnWrite();
+        instance.clearGreeting();
+        return this;
+      }
+      /**
+       * <code>string greeting = 1 [json_name = "greeting"];</code>
+       * @param value The bytes for greeting to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGreetingBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setGreetingBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.HelloResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "greeting_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.HelloResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse DEFAULT_INSTANCE;
+    static {
+      HelloResponse defaultInstance = new HelloResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        HelloResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.HelloResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<HelloResponse> PARSER;
+
+    public static com.google.protobuf.Parser<HelloResponse> parser() {
       return DEFAULT_INSTANCE.getParserForType();
     }
   }

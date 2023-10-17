@@ -109,6 +109,154 @@ public struct Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse {
   public init() {}
 }
 
+public struct Land_Gno_Gnomobile_V1_KeyInfo {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// 0: local, 1: ledger, 2: offline, 3: multi
+  public var type: UInt32 = 0
+
+  public var name: String = String()
+
+  public var pubKey: Data = Data()
+
+  public var address: Data = Data()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_ListKeyInfoRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_ListKeyInfoResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var keys: [Land_Gno_Gnomobile_V1_KeyInfo] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_CreateAccountRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var nameOrBech32: String = String()
+
+  public var mnemonic: String = String()
+
+  public var bip39Passwd: String = String()
+
+  public var password: String = String()
+
+  public var account: UInt32 = 0
+
+  public var index: UInt32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_CreateAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
+  }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
+}
+
+public struct Land_Gno_Gnomobile_V1_SelectAccountRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var nameOrBech32: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_SelectAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
+  }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
+}
+
+public struct Land_Gno_Gnomobile_V1_GetActiveAccountRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_GetActiveAccountResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: Land_Gno_Gnomobile_V1_KeyInfo {
+    get {return _key ?? Land_Gno_Gnomobile_V1_KeyInfo()}
+    set {_key = newValue}
+  }
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {return self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
+  public mutating func clearKey() {self._key = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _key: Land_Gno_Gnomobile_V1_KeyInfo? = nil
+}
+
 public struct Land_Gno_Gnomobile_V1_DeleteAccountRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -117,6 +265,8 @@ public struct Land_Gno_Gnomobile_V1_DeleteAccountRequest {
   public var nameOrBech32: String = String()
 
   public var password: String = String()
+
+  public var skipPassword: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -200,6 +350,30 @@ public struct Land_Gno_Gnomobile_V1_CallResponse {
   public init() {}
 }
 
+public struct Land_Gno_Gnomobile_V1_HelloRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var name: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_HelloResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var greeting: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Land_Gno_Gnomobile_V1_SetRemoteRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetRemoteResponse: @unchecked Sendable {}
@@ -209,12 +383,23 @@ extension Land_Gno_Gnomobile_V1_SetPasswordRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_SetPasswordResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_KeyInfo: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_ListKeyInfoRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_ListKeyInfoResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CreateAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_CreateAccountResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SelectAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_SelectAccountResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GetActiveAccountRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_GetActiveAccountResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_DeleteAccountResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_QueryRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_QueryResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_CallRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_CallResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_HelloRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_HelloResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -425,11 +610,334 @@ extension Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse: SwiftProtobuf.Me
   }
 }
 
+extension Land_Gno_Gnomobile_V1_KeyInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KeyInfo"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "type"),
+    2: .same(proto: "name"),
+    3: .standard(proto: "pub_key"),
+    4: .same(proto: "address"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.type) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.pubKey) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.address) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.type != 0 {
+      try visitor.visitSingularUInt32Field(value: self.type, fieldNumber: 1)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+    }
+    if !self.pubKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.pubKey, fieldNumber: 3)
+    }
+    if !self.address.isEmpty {
+      try visitor.visitSingularBytesField(value: self.address, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_KeyInfo, rhs: Land_Gno_Gnomobile_V1_KeyInfo) -> Bool {
+    if lhs.type != rhs.type {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.pubKey != rhs.pubKey {return false}
+    if lhs.address != rhs.address {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_ListKeyInfoRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ListKeyInfoRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfoRequest, rhs: Land_Gno_Gnomobile_V1_ListKeyInfoRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_ListKeyInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ListKeyInfoResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "keys"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.keys) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.keys.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.keys, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_ListKeyInfoResponse, rhs: Land_Gno_Gnomobile_V1_ListKeyInfoResponse) -> Bool {
+    if lhs.keys != rhs.keys {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_CreateAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateAccountRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "name_or_bech32"),
+    2: .same(proto: "mnemonic"),
+    3: .standard(proto: "bip39_passwd"),
+    4: .same(proto: "password"),
+    5: .same(proto: "account"),
+    6: .same(proto: "index"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.nameOrBech32) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.mnemonic) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.bip39Passwd) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.account) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.index) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.nameOrBech32.isEmpty {
+      try visitor.visitSingularStringField(value: self.nameOrBech32, fieldNumber: 1)
+    }
+    if !self.mnemonic.isEmpty {
+      try visitor.visitSingularStringField(value: self.mnemonic, fieldNumber: 2)
+    }
+    if !self.bip39Passwd.isEmpty {
+      try visitor.visitSingularStringField(value: self.bip39Passwd, fieldNumber: 3)
+    }
+    if !self.password.isEmpty {
+      try visitor.visitSingularStringField(value: self.password, fieldNumber: 4)
+    }
+    if self.account != 0 {
+      try visitor.visitSingularUInt32Field(value: self.account, fieldNumber: 5)
+    }
+    if self.index != 0 {
+      try visitor.visitSingularUInt32Field(value: self.index, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccountRequest, rhs: Land_Gno_Gnomobile_V1_CreateAccountRequest) -> Bool {
+    if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
+    if lhs.mnemonic != rhs.mnemonic {return false}
+    if lhs.bip39Passwd != rhs.bip39Passwd {return false}
+    if lhs.password != rhs.password {return false}
+    if lhs.account != rhs.account {return false}
+    if lhs.index != rhs.index {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_CreateAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateAccountResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "key"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._key) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._key {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_CreateAccountResponse, rhs: Land_Gno_Gnomobile_V1_CreateAccountResponse) -> Bool {
+    if lhs._key != rhs._key {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_SelectAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SelectAccountRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "name_or_bech32"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.nameOrBech32) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.nameOrBech32.isEmpty {
+      try visitor.visitSingularStringField(value: self.nameOrBech32, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccountRequest, rhs: Land_Gno_Gnomobile_V1_SelectAccountRequest) -> Bool {
+    if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_SelectAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SelectAccountResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "key"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._key) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._key {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_SelectAccountResponse, rhs: Land_Gno_Gnomobile_V1_SelectAccountResponse) -> Bool {
+    if lhs._key != rhs._key {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_GetActiveAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetActiveAccountRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccountRequest, rhs: Land_Gno_Gnomobile_V1_GetActiveAccountRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_GetActiveAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetActiveAccountResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "key"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._key) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._key {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_GetActiveAccountResponse, rhs: Land_Gno_Gnomobile_V1_GetActiveAccountResponse) -> Bool {
+    if lhs._key != rhs._key {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteAccountRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "name_or_bech32"),
     2: .same(proto: "password"),
+    3: .standard(proto: "skip_password"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -440,6 +948,7 @@ extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: SwiftProtobuf.Message, Swi
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.nameOrBech32) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.skipPassword) }()
       default: break
       }
     }
@@ -452,12 +961,16 @@ extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: SwiftProtobuf.Message, Swi
     if !self.password.isEmpty {
       try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
     }
+    if self.skipPassword != false {
+      try visitor.visitSingularBoolField(value: self.skipPassword, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Land_Gno_Gnomobile_V1_DeleteAccountRequest, rhs: Land_Gno_Gnomobile_V1_DeleteAccountRequest) -> Bool {
     if lhs.nameOrBech32 != rhs.nameOrBech32 {return false}
     if lhs.password != rhs.password {return false}
+    if lhs.skipPassword != rhs.skipPassword {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -647,6 +1160,70 @@ extension Land_Gno_Gnomobile_V1_CallResponse: SwiftProtobuf.Message, SwiftProtob
 
   public static func ==(lhs: Land_Gno_Gnomobile_V1_CallResponse, rhs: Land_Gno_Gnomobile_V1_CallResponse) -> Bool {
     if lhs.result != rhs.result {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_HelloRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".HelloRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "name"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_HelloRequest, rhs: Land_Gno_Gnomobile_V1_HelloRequest) -> Bool {
+    if lhs.name != rhs.name {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_HelloResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".HelloResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "greeting"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.greeting) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.greeting.isEmpty {
+      try visitor.visitSingularStringField(value: self.greeting, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_HelloResponse, rhs: Land_Gno_Gnomobile_V1_HelloResponse) -> Bool {
+    if lhs.greeting != rhs.greeting {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -1,7 +1,7 @@
 import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
-import { SelectAccountRequest } from '@gno/api/rpc_pb';
-import { CreateAccountRequest } from '@gno/api/rpc_pb';
-import { ListKeyInfoRequest } from '@gno/api/rpc_pb';
+import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
 import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { CallRequest } from '@gno/api/gnomobiletypes_pb';
 import { CallResponse } from '@gno/api/gnomobiletypes_pb';
@@ -18,7 +18,7 @@ interface GnoResponse {
   listKeyInfo: () => Promise<GnoAccount[]>;
   selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
-  deleteAccount: (nameOrBech32: string, password: string) => Promise<DeleteAccountResponse>;
+  deleteAccount: (nameOrBech32: string, password: string, skipPassword: boolean) => Promise<DeleteAccountResponse>;
   call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => Promise<CallResponse>;
 }
 
@@ -82,12 +82,13 @@ export const useGno = (): GnoResponse => {
     return response;
   };
 
-  const deleteAccount = async (nameOrBech32: string, password: string) => {
+  const deleteAccount = async (nameOrBech32: string, password: string, skipPassword: boolean) => {
     const client = await getClient();
     const response = await client.deleteAccount(
       new DeleteAccountRequest({
         nameOrBech32,
-        password }));
+        password,
+        skipPassword, }));
     return response;
   };
 

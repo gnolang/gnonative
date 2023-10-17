@@ -80,6 +80,100 @@ export const GenerateRecoveryPhraseResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnomobile.v1.KeyInfo
+ */
+export const KeyInfo = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.KeyInfo",
+  () => [
+    { no: 1, name: "type", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "pub_key", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 4, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoRequest
+ */
+export const ListKeyInfoRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.ListKeyInfoRequest",
+  [],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.ListKeyInfoResponse
+ */
+export const ListKeyInfoResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.ListKeyInfoResponse",
+  () => [
+    { no: 1, name: "keys", kind: "message", T: KeyInfo, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.CreateAccountRequest
+ */
+export const CreateAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CreateAccountRequest",
+  () => [
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "mnemonic", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "bip39_passwd", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "account", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.CreateAccountResponse
+ */
+export const CreateAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.CreateAccountResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.SelectAccountRequest
+ */
+export const SelectAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SelectAccountRequest",
+  () => [
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.SelectAccountResponse
+ */
+export const SelectAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.SelectAccountResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountRequest
+ */
+export const GetActiveAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetActiveAccountRequest",
+  [],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetActiveAccountResponse
+ */
+export const GetActiveAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetActiveAccountResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.DeleteAccountRequest
  */
 export const DeleteAccountRequest = proto3.makeMessageType(
@@ -87,6 +181,7 @@ export const DeleteAccountRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "skip_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -142,6 +237,26 @@ export const CallResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.CallResponse",
   () => [
     { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloRequest
+ */
+export const HelloRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.HelloRequest",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloResponse
+ */
+export const HelloResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.HelloResponse",
+  () => [
+    { no: 1, name: "greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
