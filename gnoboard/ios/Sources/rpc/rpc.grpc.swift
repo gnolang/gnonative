@@ -28,11 +28,6 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetChainIDRequest, Land_Gno_Gnomobile_V1_SetChainIDResponse>
 
-  func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>
-
   func generateRecoveryPhrase(
     _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest,
     callOptions: CallOptions?
@@ -53,10 +48,20 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_SelectAccountRequest, Land_Gno_Gnomobile_V1_SelectAccountResponse>
 
+  func setPassword(
+    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>
+
   func getActiveAccount(
     _ request: Land_Gno_Gnomobile_V1_GetActiveAccountRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>
+
+  func queryAccount(
+    _ request: Land_Gno_Gnomobile_V1_QueryAccountRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_QueryAccountRequest, Land_Gno_Gnomobile_V1_QueryAccountResponse>
 
   func deleteAccount(
     _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
@@ -72,6 +77,16 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     _ request: Land_Gno_Gnomobile_V1_CallRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_CallRequest, Land_Gno_Gnomobile_V1_CallResponse>
+
+  func addressToBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressToBech32Request,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_AddressToBech32Request, Land_Gno_Gnomobile_V1_AddressToBech32Response>
+
+  func addressFromBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressFromBech32Request,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_AddressFromBech32Request, Land_Gno_Gnomobile_V1_AddressFromBech32Response>
 
   func hello(
     _ request: Land_Gno_Gnomobile_V1_HelloRequest,
@@ -119,24 +134,6 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSetChainIDInterceptors() ?? []
-    )
-  }
-
-  /// Set the password for the account in the keybase, used for later operations
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to SetPassword.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse> {
-    return self.makeUnaryCall(
-      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
     )
   }
 
@@ -215,6 +212,24 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
+  /// Set the password for the account in the keybase, used for later operations
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to SetPassword.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func setPassword(
+    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
+    )
+  }
+
   /// GetActiveAccount gets the active account which was set by SelectAccount.
   /// If there is no active account, then return ErrNoActiveAccount.
   /// (To check if there is an active account, use ListKeyInfo and check the
@@ -233,6 +248,24 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
+  /// QueryAccount retrieves account information from the blockchain for a given address.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to QueryAccount.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func queryAccount(
+    _ request: Land_Gno_Gnomobile_V1_QueryAccountRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_QueryAccountRequest, Land_Gno_Gnomobile_V1_QueryAccountResponse> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.queryAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQueryAccountInterceptors() ?? []
     )
   }
 
@@ -290,6 +323,42 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeCallInterceptors() ?? []
+    )
+  }
+
+  /// Convert a byte array address to a bech32 string address.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddressToBech32.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addressToBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressToBech32Request,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_AddressToBech32Request, Land_Gno_Gnomobile_V1_AddressToBech32Response> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressToBech32Interceptors() ?? []
+    )
+  }
+
+  /// Convert a bech32 string address to a byte array address.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddressFromBech32.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addressFromBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressFromBech32Request,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_AddressFromBech32Request, Land_Gno_Gnomobile_V1_AddressFromBech32Response> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressFromBech32Interceptors() ?? []
     )
   }
 
@@ -385,11 +454,6 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetChainIDRequest, Land_Gno_Gnomobile_V1_SetChainIDResponse>
 
-  func makeSetPasswordCall(
-    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>
-
   func makeGenerateRecoveryPhraseCall(
     _ request: Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest,
     callOptions: CallOptions?
@@ -410,10 +474,20 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SelectAccountRequest, Land_Gno_Gnomobile_V1_SelectAccountResponse>
 
+  func makeSetPasswordCall(
+    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>
+
   func makeGetActiveAccountCall(
     _ request: Land_Gno_Gnomobile_V1_GetActiveAccountRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>
+
+  func makeQueryAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_QueryAccountRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_QueryAccountRequest, Land_Gno_Gnomobile_V1_QueryAccountResponse>
 
   func makeDeleteAccountCall(
     _ request: Land_Gno_Gnomobile_V1_DeleteAccountRequest,
@@ -429,6 +503,16 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     _ request: Land_Gno_Gnomobile_V1_CallRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_CallRequest, Land_Gno_Gnomobile_V1_CallResponse>
+
+  func makeAddressToBech32Call(
+    _ request: Land_Gno_Gnomobile_V1_AddressToBech32Request,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_AddressToBech32Request, Land_Gno_Gnomobile_V1_AddressToBech32Response>
+
+  func makeAddressFromBech32Call(
+    _ request: Land_Gno_Gnomobile_V1_AddressFromBech32Request,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_AddressFromBech32Request, Land_Gno_Gnomobile_V1_AddressFromBech32Response>
 
   func makeHelloCall(
     _ request: Land_Gno_Gnomobile_V1_HelloRequest,
@@ -467,18 +551,6 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSetChainIDInterceptors() ?? []
-    )
-  }
-
-  internal func makeSetPasswordCall(
-    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
     )
   }
 
@@ -530,6 +602,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func makeSetPasswordCall(
+    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
+    )
+  }
+
   internal func makeGetActiveAccountCall(
     _ request: Land_Gno_Gnomobile_V1_GetActiveAccountRequest,
     callOptions: CallOptions? = nil
@@ -539,6 +623,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
+  internal func makeQueryAccountCall(
+    _ request: Land_Gno_Gnomobile_V1_QueryAccountRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_QueryAccountRequest, Land_Gno_Gnomobile_V1_QueryAccountResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.queryAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQueryAccountInterceptors() ?? []
     )
   }
 
@@ -578,6 +674,30 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func makeAddressToBech32Call(
+    _ request: Land_Gno_Gnomobile_V1_AddressToBech32Request,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_AddressToBech32Request, Land_Gno_Gnomobile_V1_AddressToBech32Response> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressToBech32Interceptors() ?? []
+    )
+  }
+
+  internal func makeAddressFromBech32Call(
+    _ request: Land_Gno_Gnomobile_V1_AddressFromBech32Request,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_AddressFromBech32Request, Land_Gno_Gnomobile_V1_AddressFromBech32Response> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressFromBech32Interceptors() ?? []
+    )
+  }
+
   internal func makeHelloCall(
     _ request: Land_Gno_Gnomobile_V1_HelloRequest,
     callOptions: CallOptions? = nil
@@ -614,18 +734,6 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSetChainIDInterceptors() ?? []
-    )
-  }
-
-  internal func setPassword(
-    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Land_Gno_Gnomobile_V1_SetPasswordResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
     )
   }
 
@@ -677,6 +785,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func setPassword(
+    _ request: Land_Gno_Gnomobile_V1_SetPasswordRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_SetPasswordResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSetPasswordInterceptors() ?? []
+    )
+  }
+
   internal func getActiveAccount(
     _ request: Land_Gno_Gnomobile_V1_GetActiveAccountRequest,
     callOptions: CallOptions? = nil
@@ -686,6 +806,18 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetActiveAccountInterceptors() ?? []
+    )
+  }
+
+  internal func queryAccount(
+    _ request: Land_Gno_Gnomobile_V1_QueryAccountRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_QueryAccountResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.queryAccount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQueryAccountInterceptors() ?? []
     )
   }
 
@@ -722,6 +854,30 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeCallInterceptors() ?? []
+    )
+  }
+
+  internal func addressToBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressToBech32Request,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_AddressToBech32Response {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressToBech32Interceptors() ?? []
+    )
+  }
+
+  internal func addressFromBech32(
+    _ request: Land_Gno_Gnomobile_V1_AddressFromBech32Request,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_AddressFromBech32Response {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressFromBech32Interceptors() ?? []
     )
   }
 
@@ -763,9 +919,6 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'setChainID'.
   func makeSetChainIDInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetChainIDRequest, Land_Gno_Gnomobile_V1_SetChainIDResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'setPassword'.
-  func makeSetPasswordInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>]
-
   /// - Returns: Interceptors to use when invoking 'generateRecoveryPhrase'.
   func makeGenerateRecoveryPhraseInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseRequest, Land_Gno_Gnomobile_V1_GenerateRecoveryPhraseResponse>]
 
@@ -778,8 +931,14 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'selectAccount'.
   func makeSelectAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SelectAccountRequest, Land_Gno_Gnomobile_V1_SelectAccountResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'setPassword'.
+  func makeSetPasswordInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_SetPasswordRequest, Land_Gno_Gnomobile_V1_SetPasswordResponse>]
+
   /// - Returns: Interceptors to use when invoking 'getActiveAccount'.
   func makeGetActiveAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_GetActiveAccountRequest, Land_Gno_Gnomobile_V1_GetActiveAccountResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'queryAccount'.
+  func makeQueryAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_QueryAccountRequest, Land_Gno_Gnomobile_V1_QueryAccountResponse>]
 
   /// - Returns: Interceptors to use when invoking 'deleteAccount'.
   func makeDeleteAccountInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_DeleteAccountRequest, Land_Gno_Gnomobile_V1_DeleteAccountResponse>]
@@ -789,6 +948,12 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
 
   /// - Returns: Interceptors to use when invoking 'call'.
   func makeCallInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_CallRequest, Land_Gno_Gnomobile_V1_CallResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'addressToBech32'.
+  func makeAddressToBech32Interceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_AddressToBech32Request, Land_Gno_Gnomobile_V1_AddressToBech32Response>]
+
+  /// - Returns: Interceptors to use when invoking 'addressFromBech32'.
+  func makeAddressFromBech32Interceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_AddressFromBech32Request, Land_Gno_Gnomobile_V1_AddressFromBech32Response>]
 
   /// - Returns: Interceptors to use when invoking 'hello'.
   func makeHelloInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_HelloRequest, Land_Gno_Gnomobile_V1_HelloResponse>]
@@ -801,15 +966,18 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     methods: [
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setRemote,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setChainID,
-      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.generateRecoveryPhrase,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.listKeyInfo,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.createAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.selectAccount,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.setPassword,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.getActiveAccount,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.queryAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.hello,
     ]
   )
@@ -824,12 +992,6 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let setChainID = GRPCMethodDescriptor(
       name: "SetChainID",
       path: "/land.gno.gnomobile.v1.GnomobileService/SetChainID",
-      type: GRPCCallType.unary
-    )
-
-    internal static let setPassword = GRPCMethodDescriptor(
-      name: "SetPassword",
-      path: "/land.gno.gnomobile.v1.GnomobileService/SetPassword",
       type: GRPCCallType.unary
     )
 
@@ -857,9 +1019,21 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let setPassword = GRPCMethodDescriptor(
+      name: "SetPassword",
+      path: "/land.gno.gnomobile.v1.GnomobileService/SetPassword",
+      type: GRPCCallType.unary
+    )
+
     internal static let getActiveAccount = GRPCMethodDescriptor(
       name: "GetActiveAccount",
       path: "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount",
+      type: GRPCCallType.unary
+    )
+
+    internal static let queryAccount = GRPCMethodDescriptor(
+      name: "QueryAccount",
+      path: "/land.gno.gnomobile.v1.GnomobileService/QueryAccount",
       type: GRPCCallType.unary
     )
 
@@ -878,6 +1052,18 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let call = GRPCMethodDescriptor(
       name: "Call",
       path: "/land.gno.gnomobile.v1.GnomobileService/Call",
+      type: GRPCCallType.unary
+    )
+
+    internal static let addressToBech32 = GRPCMethodDescriptor(
+      name: "AddressToBech32",
+      path: "/land.gno.gnomobile.v1.GnomobileService/AddressToBech32",
+      type: GRPCCallType.unary
+    )
+
+    internal static let addressFromBech32 = GRPCMethodDescriptor(
+      name: "AddressFromBech32",
+      path: "/land.gno.gnomobile.v1.GnomobileService/AddressFromBech32",
       type: GRPCCallType.unary
     )
 

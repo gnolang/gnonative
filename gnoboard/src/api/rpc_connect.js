@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -36,17 +36,6 @@ export const GnomobileService = {
       name: "SetChainID",
       I: SetChainIDRequest,
       O: SetChainIDResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * Set the password for the account in the keybase, used for later operations
-     *
-     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
-     */
-    setPassword: {
-      name: "SetPassword",
-      I: SetPasswordRequest,
-      O: SetPasswordResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -97,6 +86,17 @@ export const GnomobileService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Set the password for the account in the keybase, used for later operations
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
+     */
+    setPassword: {
+      name: "SetPassword",
+      I: SetPasswordRequest,
+      O: SetPasswordResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -108,6 +108,17 @@ export const GnomobileService = {
       name: "GetActiveAccount",
       I: GetActiveAccountRequest,
       O: GetActiveAccountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QueryAccount
+     */
+    queryAccount: {
+      name: "QueryAccount",
+      I: QueryAccountRequest,
+      O: QueryAccountResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -144,6 +155,28 @@ export const GnomobileService = {
       name: "Call",
       I: CallRequest,
       O: CallResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Convert a byte array address to a bech32 string address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.AddressToBech32
+     */
+    addressToBech32: {
+      name: "AddressToBech32",
+      I: AddressToBech32Request,
+      O: AddressToBech32Response,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Convert a bech32 string address to a byte array address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.AddressFromBech32
+     */
+    addressFromBech32: {
+      name: "AddressFromBech32",
+      I: AddressFromBech32Request,
+      O: AddressFromBech32Response,
       kind: MethodKind.Unary,
     },
     /**

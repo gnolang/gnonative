@@ -39,9 +39,6 @@ const (
 	// GnomobileServiceSetChainIDProcedure is the fully-qualified name of the GnomobileService's
 	// SetChainID RPC.
 	GnomobileServiceSetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
-	// GnomobileServiceSetPasswordProcedure is the fully-qualified name of the GnomobileService's
-	// SetPassword RPC.
-	GnomobileServiceSetPasswordProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
 	// GnomobileServiceGenerateRecoveryPhraseProcedure is the fully-qualified name of the
 	// GnomobileService's GenerateRecoveryPhrase RPC.
 	GnomobileServiceGenerateRecoveryPhraseProcedure = "/land.gno.gnomobile.v1.GnomobileService/GenerateRecoveryPhrase"
@@ -54,9 +51,15 @@ const (
 	// GnomobileServiceSelectAccountProcedure is the fully-qualified name of the GnomobileService's
 	// SelectAccount RPC.
 	GnomobileServiceSelectAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
+	// GnomobileServiceSetPasswordProcedure is the fully-qualified name of the GnomobileService's
+	// SetPassword RPC.
+	GnomobileServiceSetPasswordProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
 	// GnomobileServiceGetActiveAccountProcedure is the fully-qualified name of the GnomobileService's
 	// GetActiveAccount RPC.
 	GnomobileServiceGetActiveAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount"
+	// GnomobileServiceQueryAccountProcedure is the fully-qualified name of the GnomobileService's
+	// QueryAccount RPC.
+	GnomobileServiceQueryAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/QueryAccount"
 	// GnomobileServiceDeleteAccountProcedure is the fully-qualified name of the GnomobileService's
 	// DeleteAccount RPC.
 	GnomobileServiceDeleteAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/DeleteAccount"
@@ -64,6 +67,12 @@ const (
 	GnomobileServiceQueryProcedure = "/land.gno.gnomobile.v1.GnomobileService/Query"
 	// GnomobileServiceCallProcedure is the fully-qualified name of the GnomobileService's Call RPC.
 	GnomobileServiceCallProcedure = "/land.gno.gnomobile.v1.GnomobileService/Call"
+	// GnomobileServiceAddressToBech32Procedure is the fully-qualified name of the GnomobileService's
+	// AddressToBech32 RPC.
+	GnomobileServiceAddressToBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/AddressToBech32"
+	// GnomobileServiceAddressFromBech32Procedure is the fully-qualified name of the GnomobileService's
+	// AddressFromBech32 RPC.
+	GnomobileServiceAddressFromBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/AddressFromBech32"
 	// GnomobileServiceHelloProcedure is the fully-qualified name of the GnomobileService's Hello RPC.
 	GnomobileServiceHelloProcedure = "/land.gno.gnomobile.v1.GnomobileService/Hello"
 )
@@ -76,8 +85,6 @@ type GnomobileServiceClient interface {
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
-	// Set the password for the account in the keybase, used for later operations
-	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
@@ -89,11 +96,15 @@ type GnomobileServiceClient interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
+	// Set the password for the account in the keybase, used for later operations
+	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
+	// QueryAccount retrieves account information from the blockchain for a given address.
+	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password to
 	// ensure access. However, if skip_password is true, then ignore the password.
 	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
@@ -103,6 +114,10 @@ type GnomobileServiceClient interface {
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
+	// Convert a byte array address to a bech32 string address.
+	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
+	// Convert a bech32 string address to a byte array address.
+	AddressFromBech32(context.Context, *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
 }
@@ -127,11 +142,6 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceSetChainIDProcedure,
 			opts...,
 		),
-		setPassword: connect.NewClient[rpc.SetPasswordRequest, rpc.SetPasswordResponse](
-			httpClient,
-			baseURL+GnomobileServiceSetPasswordProcedure,
-			opts...,
-		),
 		generateRecoveryPhrase: connect.NewClient[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse](
 			httpClient,
 			baseURL+GnomobileServiceGenerateRecoveryPhraseProcedure,
@@ -152,9 +162,19 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceSelectAccountProcedure,
 			opts...,
 		),
+		setPassword: connect.NewClient[rpc.SetPasswordRequest, rpc.SetPasswordResponse](
+			httpClient,
+			baseURL+GnomobileServiceSetPasswordProcedure,
+			opts...,
+		),
 		getActiveAccount: connect.NewClient[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse](
 			httpClient,
 			baseURL+GnomobileServiceGetActiveAccountProcedure,
+			opts...,
+		),
+		queryAccount: connect.NewClient[rpc.QueryAccountRequest, rpc.QueryAccountResponse](
+			httpClient,
+			baseURL+GnomobileServiceQueryAccountProcedure,
 			opts...,
 		),
 		deleteAccount: connect.NewClient[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse](
@@ -172,6 +192,16 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceCallProcedure,
 			opts...,
 		),
+		addressToBech32: connect.NewClient[rpc.AddressToBech32Request, rpc.AddressToBech32Response](
+			httpClient,
+			baseURL+GnomobileServiceAddressToBech32Procedure,
+			opts...,
+		),
+		addressFromBech32: connect.NewClient[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response](
+			httpClient,
+			baseURL+GnomobileServiceAddressFromBech32Procedure,
+			opts...,
+		),
 		hello: connect.NewClient[rpc.HelloRequest, rpc.HelloResponse](
 			httpClient,
 			baseURL+GnomobileServiceHelloProcedure,
@@ -184,15 +214,18 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 type gnomobileServiceClient struct {
 	setRemote              *connect.Client[rpc.SetRemoteRequest, rpc.SetRemoteResponse]
 	setChainID             *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
-	setPassword            *connect.Client[rpc.SetPasswordRequest, rpc.SetPasswordResponse]
 	generateRecoveryPhrase *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
 	listKeyInfo            *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
 	createAccount          *connect.Client[rpc.CreateAccountRequest, rpc.CreateAccountResponse]
 	selectAccount          *connect.Client[rpc.SelectAccountRequest, rpc.SelectAccountResponse]
+	setPassword            *connect.Client[rpc.SetPasswordRequest, rpc.SetPasswordResponse]
 	getActiveAccount       *connect.Client[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse]
+	queryAccount           *connect.Client[rpc.QueryAccountRequest, rpc.QueryAccountResponse]
 	deleteAccount          *connect.Client[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse]
 	query                  *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
 	call                   *connect.Client[rpc.CallRequest, rpc.CallResponse]
+	addressToBech32        *connect.Client[rpc.AddressToBech32Request, rpc.AddressToBech32Response]
+	addressFromBech32      *connect.Client[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response]
 	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
 }
 
@@ -204,11 +237,6 @@ func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Req
 // SetChainID calls land.gno.gnomobile.v1.GnomobileService.SetChainID.
 func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	return c.setChainID.CallUnary(ctx, req)
-}
-
-// SetPassword calls land.gno.gnomobile.v1.GnomobileService.SetPassword.
-func (c *gnomobileServiceClient) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
-	return c.setPassword.CallUnary(ctx, req)
 }
 
 // GenerateRecoveryPhrase calls land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase.
@@ -231,9 +259,19 @@ func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, req *connect
 	return c.selectAccount.CallUnary(ctx, req)
 }
 
+// SetPassword calls land.gno.gnomobile.v1.GnomobileService.SetPassword.
+func (c *gnomobileServiceClient) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
+	return c.setPassword.CallUnary(ctx, req)
+}
+
 // GetActiveAccount calls land.gno.gnomobile.v1.GnomobileService.GetActiveAccount.
 func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	return c.getActiveAccount.CallUnary(ctx, req)
+}
+
+// QueryAccount calls land.gno.gnomobile.v1.GnomobileService.QueryAccount.
+func (c *gnomobileServiceClient) QueryAccount(ctx context.Context, req *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error) {
+	return c.queryAccount.CallUnary(ctx, req)
 }
 
 // DeleteAccount calls land.gno.gnomobile.v1.GnomobileService.DeleteAccount.
@@ -251,6 +289,16 @@ func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[
 	return c.call.CallUnary(ctx, req)
 }
 
+// AddressToBech32 calls land.gno.gnomobile.v1.GnomobileService.AddressToBech32.
+func (c *gnomobileServiceClient) AddressToBech32(ctx context.Context, req *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {
+	return c.addressToBech32.CallUnary(ctx, req)
+}
+
+// AddressFromBech32 calls land.gno.gnomobile.v1.GnomobileService.AddressFromBech32.
+func (c *gnomobileServiceClient) AddressFromBech32(ctx context.Context, req *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error) {
+	return c.addressFromBech32.CallUnary(ctx, req)
+}
+
 // Hello calls land.gno.gnomobile.v1.GnomobileService.Hello.
 func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
@@ -265,8 +313,6 @@ type GnomobileServiceHandler interface {
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
-	// Set the password for the account in the keybase, used for later operations
-	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
@@ -278,11 +324,15 @@ type GnomobileServiceHandler interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
+	// Set the password for the account in the keybase, used for later operations
+	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
+	// QueryAccount retrieves account information from the blockchain for a given address.
+	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password to
 	// ensure access. However, if skip_password is true, then ignore the password.
 	// If the account doesn't exist, then return ErrCryptoKeyNotFound.
@@ -292,6 +342,10 @@ type GnomobileServiceHandler interface {
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
 	// Call a specific realm function.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
+	// Convert a byte array address to a bech32 string address.
+	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
+	// Convert a bech32 string address to a byte array address.
+	AddressFromBech32(context.Context, *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error)
 }
@@ -310,11 +364,6 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 	gnomobileServiceSetChainIDHandler := connect.NewUnaryHandler(
 		GnomobileServiceSetChainIDProcedure,
 		svc.SetChainID,
-		opts...,
-	)
-	gnomobileServiceSetPasswordHandler := connect.NewUnaryHandler(
-		GnomobileServiceSetPasswordProcedure,
-		svc.SetPassword,
 		opts...,
 	)
 	gnomobileServiceGenerateRecoveryPhraseHandler := connect.NewUnaryHandler(
@@ -337,9 +386,19 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.SelectAccount,
 		opts...,
 	)
+	gnomobileServiceSetPasswordHandler := connect.NewUnaryHandler(
+		GnomobileServiceSetPasswordProcedure,
+		svc.SetPassword,
+		opts...,
+	)
 	gnomobileServiceGetActiveAccountHandler := connect.NewUnaryHandler(
 		GnomobileServiceGetActiveAccountProcedure,
 		svc.GetActiveAccount,
+		opts...,
+	)
+	gnomobileServiceQueryAccountHandler := connect.NewUnaryHandler(
+		GnomobileServiceQueryAccountProcedure,
+		svc.QueryAccount,
 		opts...,
 	)
 	gnomobileServiceDeleteAccountHandler := connect.NewUnaryHandler(
@@ -357,6 +416,16 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.Call,
 		opts...,
 	)
+	gnomobileServiceAddressToBech32Handler := connect.NewUnaryHandler(
+		GnomobileServiceAddressToBech32Procedure,
+		svc.AddressToBech32,
+		opts...,
+	)
+	gnomobileServiceAddressFromBech32Handler := connect.NewUnaryHandler(
+		GnomobileServiceAddressFromBech32Procedure,
+		svc.AddressFromBech32,
+		opts...,
+	)
 	gnomobileServiceHelloHandler := connect.NewUnaryHandler(
 		GnomobileServiceHelloProcedure,
 		svc.Hello,
@@ -368,8 +437,6 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceSetRemoteHandler.ServeHTTP(w, r)
 		case GnomobileServiceSetChainIDProcedure:
 			gnomobileServiceSetChainIDHandler.ServeHTTP(w, r)
-		case GnomobileServiceSetPasswordProcedure:
-			gnomobileServiceSetPasswordHandler.ServeHTTP(w, r)
 		case GnomobileServiceGenerateRecoveryPhraseProcedure:
 			gnomobileServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
 		case GnomobileServiceListKeyInfoProcedure:
@@ -378,14 +445,22 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceCreateAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceSelectAccountProcedure:
 			gnomobileServiceSelectAccountHandler.ServeHTTP(w, r)
+		case GnomobileServiceSetPasswordProcedure:
+			gnomobileServiceSetPasswordHandler.ServeHTTP(w, r)
 		case GnomobileServiceGetActiveAccountProcedure:
 			gnomobileServiceGetActiveAccountHandler.ServeHTTP(w, r)
+		case GnomobileServiceQueryAccountProcedure:
+			gnomobileServiceQueryAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceDeleteAccountProcedure:
 			gnomobileServiceDeleteAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceQueryProcedure:
 			gnomobileServiceQueryHandler.ServeHTTP(w, r)
 		case GnomobileServiceCallProcedure:
 			gnomobileServiceCallHandler.ServeHTTP(w, r)
+		case GnomobileServiceAddressToBech32Procedure:
+			gnomobileServiceAddressToBech32Handler.ServeHTTP(w, r)
+		case GnomobileServiceAddressFromBech32Procedure:
+			gnomobileServiceAddressFromBech32Handler.ServeHTTP(w, r)
 		case GnomobileServiceHelloProcedure:
 			gnomobileServiceHelloHandler.ServeHTTP(w, r)
 		default:
@@ -405,10 +480,6 @@ func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetChainID is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetPassword is not implemented"))
-}
-
 func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase is not implemented"))
 }
@@ -425,8 +496,16 @@ func (UnimplementedGnomobileServiceHandler) SelectAccount(context.Context, *conn
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SelectAccount is not implemented"))
 }
 
+func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetPassword is not implemented"))
+}
+
 func (UnimplementedGnomobileServiceHandler) GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetActiveAccount is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.QueryAccount is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
@@ -439,6 +518,14 @@ func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Requ
 
 func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Call is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.AddressToBech32 is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) AddressFromBech32(context.Context, *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.AddressFromBech32 is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) Hello(context.Context, *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {

@@ -36,6 +36,21 @@ type KeyInfo struct {
 	Address []byte `json:"address" yaml:"address"`
 }
 
+// Coin holds some amount of one currency.
+// A negative amount is invalid.
+type Coin struct {
+	Denom  string `json:"denom"`
+	Amount int64  `json:"amount"`
+}
+
+type BaseAccount struct {
+	Address       []byte `json:"address" yaml:"address"`
+	Coins         []Coin `json:"coins" yaml:"coins"`
+	PubKey        []byte `json:"pub_key" yaml:"pub_key"`
+	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
+	Sequence      uint64 `json:"sequence" yaml:"sequence"`
+}
+
 type ListKeyInfoRequest struct {
 }
 
@@ -69,6 +84,14 @@ type GetActiveAccountRequest struct {
 
 type GetActiveAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type QueryAccountRequest struct {
+	Address []byte `json:"address" yaml:"address"`
+}
+
+type QueryAccountResponse struct {
+	AccountInfo *BaseAccount `json:"account_info" yaml:"account_info"`
 }
 
 type DeleteAccountRequest struct {
@@ -106,6 +129,22 @@ type CallRequest struct {
 
 type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
+}
+
+type AddressToBech32Request struct {
+	Address []byte `json:"address" yaml:"address"`
+}
+
+type AddressToBech32Response struct {
+	Bech32Address string `json:"bech32_address" yaml:"bech32_address"`
+}
+
+type AddressFromBech32Request struct {
+	Bech32Address string `json:"bech32_address" yaml:"bech32_address"`
+}
+
+type AddressFromBech32Response struct {
+	Address []byte `json:"address" yaml:"address"`
 }
 
 type HelloRequest struct {
