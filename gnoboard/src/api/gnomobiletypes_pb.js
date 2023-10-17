@@ -93,6 +93,34 @@ export const KeyInfo = proto3.makeMessageType(
 );
 
 /**
+ * Coin holds some amount of one currency.
+ * A negative amount is invalid.
+ *
+ * @generated from message land.gno.gnomobile.v1.Coin
+ */
+export const Coin = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.Coin",
+  () => [
+    { no: 1, name: "denom", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "amount", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.BaseAccount
+ */
+export const BaseAccount = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.BaseAccount",
+  () => [
+    { no: 1, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "coins", kind: "message", T: Coin, repeated: true },
+    { no: 3, name: "pub_key", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 4, name: "account_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 5, name: "sequence", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.ListKeyInfoRequest
  */
 export const ListKeyInfoRequest = proto3.makeMessageType(
@@ -174,6 +202,26 @@ export const GetActiveAccountResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnomobile.v1.QueryAccountRequest
+ */
+export const QueryAccountRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QueryAccountRequest",
+  () => [
+    { no: 1, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QueryAccountResponse
+ */
+export const QueryAccountResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QueryAccountResponse",
+  () => [
+    { no: 1, name: "account_info", kind: "message", T: BaseAccount },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.DeleteAccountRequest
  */
 export const DeleteAccountRequest = proto3.makeMessageType(
@@ -237,6 +285,46 @@ export const CallResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.CallResponse",
   () => [
     { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressToBech32Request
+ */
+export const AddressToBech32Request = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.AddressToBech32Request",
+  () => [
+    { no: 1, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressToBech32Response
+ */
+export const AddressToBech32Response = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.AddressToBech32Response",
+  () => [
+    { no: 1, name: "bech32_address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressFromBech32Request
+ */
+export const AddressFromBech32Request = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.AddressFromBech32Request",
+  () => [
+    { no: 1, name: "bech32_address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressFromBech32Response
+ */
+export const AddressFromBech32Response = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.AddressFromBech32Response",
+  () => [
+    { no: 1, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 

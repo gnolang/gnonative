@@ -78,36 +78,6 @@ public final class GnomobileServiceGrpc {
     return getSetChainIDMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
-      land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "SetPassword",
-      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest.class,
-      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
-      land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod() {
-    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest, land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod;
-    if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
-      synchronized (GnomobileServiceGrpc.class) {
-        if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
-          GnomobileServiceGrpc.getSetPasswordMethod = getSetPasswordMethod =
-              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest, land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetPassword"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse.getDefaultInstance()))
-              .build();
-        }
-      }
-    }
-    return getSetPasswordMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhraseRequest,
       land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhraseResponse> getGenerateRecoveryPhraseMethod;
 
@@ -228,6 +198,36 @@ public final class GnomobileServiceGrpc {
     return getSelectAccountMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SetPassword",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest, land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> getSetPasswordMethod;
+    if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getSetPasswordMethod = GnomobileServiceGrpc.getSetPasswordMethod) == null) {
+          GnomobileServiceGrpc.getSetPasswordMethod = getSetPasswordMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest, land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetPassword"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getSetPasswordMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest,
       land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> getGetActiveAccountMethod;
 
@@ -256,6 +256,36 @@ public final class GnomobileServiceGrpc {
       }
     }
     return getGetActiveAccountMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> getQueryAccountMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "QueryAccount",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> getQueryAccountMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> getQueryAccountMethod;
+    if ((getQueryAccountMethod = GnomobileServiceGrpc.getQueryAccountMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getQueryAccountMethod = GnomobileServiceGrpc.getQueryAccountMethod) == null) {
+          GnomobileServiceGrpc.getQueryAccountMethod = getQueryAccountMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest, land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "QueryAccount"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getQueryAccountMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest,
@@ -346,6 +376,66 @@ public final class GnomobileServiceGrpc {
       }
     }
     return getCallMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> getAddressToBech32Method;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "AddressToBech32",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> getAddressToBech32Method() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request, land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> getAddressToBech32Method;
+    if ((getAddressToBech32Method = GnomobileServiceGrpc.getAddressToBech32Method) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getAddressToBech32Method = GnomobileServiceGrpc.getAddressToBech32Method) == null) {
+          GnomobileServiceGrpc.getAddressToBech32Method = getAddressToBech32Method =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request, land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddressToBech32"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getAddressToBech32Method;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> getAddressFromBech32Method;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "AddressFromBech32",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request,
+      land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> getAddressFromBech32Method() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request, land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> getAddressFromBech32Method;
+    if ((getAddressFromBech32Method = GnomobileServiceGrpc.getAddressFromBech32Method) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getAddressFromBech32Method = GnomobileServiceGrpc.getAddressFromBech32Method) == null) {
+          GnomobileServiceGrpc.getAddressFromBech32Method = getAddressFromBech32Method =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request, land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddressFromBech32"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getAddressFromBech32Method;
   }
 
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest,
@@ -453,16 +543,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the password for the account in the keybase, used for later operations
-     * </pre>
-     */
-    default void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetPasswordMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
      * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
      * crypto library random number generator. This can be used as the mnemonic in
      * CreateAccount.
@@ -506,6 +586,16 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Set the password for the account in the keybase, used for later operations
+     * </pre>
+     */
+    default void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetPasswordMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -515,6 +605,16 @@ public final class GnomobileServiceGrpc {
     default void getActiveAccount(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetActiveAccountMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     * </pre>
+     */
+    default void queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getQueryAccountMethod(), responseObserver);
     }
 
     /**
@@ -548,6 +648,26 @@ public final class GnomobileServiceGrpc {
     default void call(land.gno.gnomobile.v1.Gnomobiletypes.CallRequest request,
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CallResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCallMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Convert a byte array address to a bech32 string address.
+     * </pre>
+     */
+    default void addressToBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddressToBech32Method(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Convert a bech32 string address to a byte array address.
+     * </pre>
+     */
+    default void addressFromBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddressFromBech32Method(), responseObserver);
     }
 
     /**
@@ -620,17 +740,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the password for the account in the keybase, used for later operations
-     * </pre>
-     */
-    public void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request,
-        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
      * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
      * crypto library random number generator. This can be used as the mnemonic in
      * CreateAccount.
@@ -678,6 +787,17 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Set the password for the account in the keybase, used for later operations
+     * </pre>
+     */
+    public void setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -688,6 +808,17 @@ public final class GnomobileServiceGrpc {
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     * </pre>
+     */
+    public void queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getQueryAccountMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -724,6 +855,28 @@ public final class GnomobileServiceGrpc {
         io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CallResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCallMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Convert a byte array address to a bech32 string address.
+     * </pre>
+     */
+    public void addressToBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddressToBech32Method(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Convert a bech32 string address to a byte array address.
+     * </pre>
+     */
+    public void addressFromBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddressFromBech32Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -781,16 +934,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the password for the account in the keybase, used for later operations
-     * </pre>
-     */
-    public land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getSetPasswordMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
      * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
      * crypto library random number generator. This can be used as the mnemonic in
      * CreateAccount.
@@ -834,6 +977,16 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Set the password for the account in the keybase, used for later operations
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse setPassword(land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetPasswordMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -843,6 +996,16 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse getActiveAccount(land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetActiveAccountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse queryAccount(land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getQueryAccountMethod(), getCallOptions(), request);
     }
 
     /**
@@ -876,6 +1039,26 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.CallResponse call(land.gno.gnomobile.v1.Gnomobiletypes.CallRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCallMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Convert a byte array address to a bech32 string address.
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response addressToBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddressToBech32Method(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Convert a bech32 string address to a byte array address.
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response addressFromBech32(land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddressFromBech32Method(), getCallOptions(), request);
     }
 
     /**
@@ -934,17 +1117,6 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
-     * Set the password for the account in the keybase, used for later operations
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> setPassword(
-        land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
      * Generate a recovery phrase of BIP39 mnemonic words using entropy from the
      * crypto library random number generator. This can be used as the mnemonic in
      * CreateAccount.
@@ -992,6 +1164,17 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Set the password for the account in the keybase, used for later operations
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse> setPassword(
+        land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSetPasswordMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -1002,6 +1185,17 @@ public final class GnomobileServiceGrpc {
         land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetActiveAccountMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse> queryAccount(
+        land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getQueryAccountMethod(), getCallOptions()), request);
     }
 
     /**
@@ -1042,6 +1236,28 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Convert a byte array address to a bech32 string address.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response> addressToBech32(
+        land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddressToBech32Method(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Convert a bech32 string address to a byte array address.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response> addressFromBech32(
+        land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddressFromBech32Method(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Hello is for debug purposes
      * </pre>
      */
@@ -1054,16 +1270,19 @@ public final class GnomobileServiceGrpc {
 
   private static final int METHODID_SET_REMOTE = 0;
   private static final int METHODID_SET_CHAIN_ID = 1;
-  private static final int METHODID_SET_PASSWORD = 2;
-  private static final int METHODID_GENERATE_RECOVERY_PHRASE = 3;
-  private static final int METHODID_LIST_KEY_INFO = 4;
-  private static final int METHODID_CREATE_ACCOUNT = 5;
-  private static final int METHODID_SELECT_ACCOUNT = 6;
+  private static final int METHODID_GENERATE_RECOVERY_PHRASE = 2;
+  private static final int METHODID_LIST_KEY_INFO = 3;
+  private static final int METHODID_CREATE_ACCOUNT = 4;
+  private static final int METHODID_SELECT_ACCOUNT = 5;
+  private static final int METHODID_SET_PASSWORD = 6;
   private static final int METHODID_GET_ACTIVE_ACCOUNT = 7;
-  private static final int METHODID_DELETE_ACCOUNT = 8;
-  private static final int METHODID_QUERY = 9;
-  private static final int METHODID_CALL = 10;
-  private static final int METHODID_HELLO = 11;
+  private static final int METHODID_QUERY_ACCOUNT = 8;
+  private static final int METHODID_DELETE_ACCOUNT = 9;
+  private static final int METHODID_QUERY = 10;
+  private static final int METHODID_CALL = 11;
+  private static final int METHODID_ADDRESS_TO_BECH32 = 12;
+  private static final int METHODID_ADDRESS_FROM_BECH32 = 13;
+  private static final int METHODID_HELLO = 14;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1090,10 +1309,6 @@ public final class GnomobileServiceGrpc {
           serviceImpl.setChainID((land.gno.gnomobile.v1.Gnomobiletypes.SetChainIDRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetChainIDResponse>) responseObserver);
           break;
-        case METHODID_SET_PASSWORD:
-          serviceImpl.setPassword((land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest) request,
-              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>) responseObserver);
-          break;
         case METHODID_GENERATE_RECOVERY_PHRASE:
           serviceImpl.generateRecoveryPhrase((land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhraseRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GenerateRecoveryPhraseResponse>) responseObserver);
@@ -1110,9 +1325,17 @@ public final class GnomobileServiceGrpc {
           serviceImpl.selectAccount((land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>) responseObserver);
           break;
+        case METHODID_SET_PASSWORD:
+          serviceImpl.setPassword((land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>) responseObserver);
+          break;
         case METHODID_GET_ACTIVE_ACCOUNT:
           serviceImpl.getActiveAccount((land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>) responseObserver);
+          break;
+        case METHODID_QUERY_ACCOUNT:
+          serviceImpl.queryAccount((land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse>) responseObserver);
           break;
         case METHODID_DELETE_ACCOUNT:
           serviceImpl.deleteAccount((land.gno.gnomobile.v1.Gnomobiletypes.DeleteAccountRequest) request,
@@ -1125,6 +1348,14 @@ public final class GnomobileServiceGrpc {
         case METHODID_CALL:
           serviceImpl.call((land.gno.gnomobile.v1.Gnomobiletypes.CallRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.CallResponse>) responseObserver);
+          break;
+        case METHODID_ADDRESS_TO_BECH32:
+          serviceImpl.addressToBech32((land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response>) responseObserver);
+          break;
+        case METHODID_ADDRESS_FROM_BECH32:
+          serviceImpl.addressFromBech32((land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response>) responseObserver);
           break;
         case METHODID_HELLO:
           serviceImpl.hello((land.gno.gnomobile.v1.Gnomobiletypes.HelloRequest) request,
@@ -1163,13 +1394,6 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.SetChainIDResponse>(
                 service, METHODID_SET_CHAIN_ID)))
         .addMethod(
-          getSetPasswordMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
-              land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>(
-                service, METHODID_SET_PASSWORD)))
-        .addMethod(
           getGenerateRecoveryPhraseMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1198,12 +1422,26 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.SelectAccountResponse>(
                 service, METHODID_SELECT_ACCOUNT)))
         .addMethod(
+          getSetPasswordMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.SetPasswordResponse>(
+                service, METHODID_SET_PASSWORD)))
+        .addMethod(
           getGetActiveAccountMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountRequest,
               land.gno.gnomobile.v1.Gnomobiletypes.GetActiveAccountResponse>(
                 service, METHODID_GET_ACTIVE_ACCOUNT)))
+        .addMethod(
+          getQueryAccountMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.QueryAccountResponse>(
+                service, METHODID_QUERY_ACCOUNT)))
         .addMethod(
           getDeleteAccountMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1226,6 +1464,20 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.CallResponse>(
                 service, METHODID_CALL)))
         .addMethod(
+          getAddressToBech32Method(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.AddressToBech32Response>(
+                service, METHODID_ADDRESS_TO_BECH32)))
+        .addMethod(
+          getAddressFromBech32Method(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Request,
+              land.gno.gnomobile.v1.Gnomobiletypes.AddressFromBech32Response>(
+                service, METHODID_ADDRESS_FROM_BECH32)))
+        .addMethod(
           getHelloMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1246,15 +1498,18 @@ public final class GnomobileServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .addMethod(getSetRemoteMethod())
               .addMethod(getSetChainIDMethod())
-              .addMethod(getSetPasswordMethod())
               .addMethod(getGenerateRecoveryPhraseMethod())
               .addMethod(getListKeyInfoMethod())
               .addMethod(getCreateAccountMethod())
               .addMethod(getSelectAccountMethod())
+              .addMethod(getSetPasswordMethod())
               .addMethod(getGetActiveAccountMethod())
+              .addMethod(getQueryAccountMethod())
               .addMethod(getDeleteAccountMethod())
               .addMethod(getQueryMethod())
               .addMethod(getCallMethod())
+              .addMethod(getAddressToBech32Method())
+              .addMethod(getAddressFromBech32Method())
               .addMethod(getHelloMethod())
               .build();
         }

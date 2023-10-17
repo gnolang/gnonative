@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -36,17 +36,6 @@ export declare const GnomobileService: {
       readonly name: "SetChainID",
       readonly I: typeof SetChainIDRequest,
       readonly O: typeof SetChainIDResponse,
-      readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Set the password for the account in the keybase, used for later operations
-     *
-     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
-     */
-    readonly setPassword: {
-      readonly name: "SetPassword",
-      readonly I: typeof SetPasswordRequest,
-      readonly O: typeof SetPasswordResponse,
       readonly kind: MethodKind.Unary,
     },
     /**
@@ -97,6 +86,17 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
+     * Set the password for the account in the keybase, used for later operations
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
+     */
+    readonly setPassword: {
+      readonly name: "SetPassword",
+      readonly I: typeof SetPasswordRequest,
+      readonly O: typeof SetPasswordResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
      * GetActiveAccount gets the active account which was set by SelectAccount.
      * If there is no active account, then return ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
@@ -108,6 +108,17 @@ export declare const GnomobileService: {
       readonly name: "GetActiveAccount",
       readonly I: typeof GetActiveAccountRequest,
       readonly O: typeof GetActiveAccountResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * QueryAccount retrieves account information from the blockchain for a given address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QueryAccount
+     */
+    readonly queryAccount: {
+      readonly name: "QueryAccount",
+      readonly I: typeof QueryAccountRequest,
+      readonly O: typeof QueryAccountResponse,
       readonly kind: MethodKind.Unary,
     },
     /**
@@ -144,6 +155,28 @@ export declare const GnomobileService: {
       readonly name: "Call",
       readonly I: typeof CallRequest,
       readonly O: typeof CallResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Convert a byte array address to a bech32 string address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.AddressToBech32
+     */
+    readonly addressToBech32: {
+      readonly name: "AddressToBech32",
+      readonly I: typeof AddressToBech32Request,
+      readonly O: typeof AddressToBech32Response,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Convert a bech32 string address to a byte array address.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.AddressFromBech32
+     */
+    readonly addressFromBech32: {
+      readonly name: "AddressFromBech32",
+      readonly I: typeof AddressFromBech32Request,
+      readonly O: typeof AddressFromBech32Response,
       readonly kind: MethodKind.Unary,
     },
     /**

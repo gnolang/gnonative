@@ -17,9 +17,6 @@ service GnomobileService {
   // is "dev"
   rpc SetChainID(SetChainIDRequest) returns (SetChainIDResponse);
 
-  // Set the password for the account in the keybase, used for later operations
-  rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
-
   // Generate a recovery phrase of BIP39 mnemonic words using entropy from the
   // crypto library random number generator. This can be used as the mnemonic in
   // CreateAccount.
@@ -35,11 +32,17 @@ service GnomobileService {
   // SelectAccount selects the active account to use for later operations
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
+  // Set the password for the account in the keybase, used for later operations
+  rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
+
   // GetActiveAccount gets the active account which was set by SelectAccount.
   // If there is no active account, then return ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
   rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
+
+  // QueryAccount retrieves account information from the blockchain for a given address.
+  rpc QueryAccount(QueryAccountRequest) returns (QueryAccountResponse);
 
   // DeleteAccount deletes the account with the given name, using the password to
   // ensure access. However, if skip_password is true, then ignore the password.
@@ -52,6 +55,12 @@ service GnomobileService {
 
   // Call a specific realm function.
   rpc Call(CallRequest) returns (CallResponse);
+
+  // Convert a byte array address to a bech32 string address.
+  rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);
+
+  // Convert a bech32 string address to a byte array address.
+  rpc AddressFromBech32(AddressFromBech32Request) returns (AddressFromBech32Response);
 
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);

@@ -222,6 +222,82 @@ export declare class KeyInfo extends Message<KeyInfo> {
 }
 
 /**
+ * Coin holds some amount of one currency.
+ * A negative amount is invalid.
+ *
+ * @generated from message land.gno.gnomobile.v1.Coin
+ */
+export declare class Coin extends Message<Coin> {
+  /**
+   * @generated from field: string denom = 1;
+   */
+  denom: string;
+
+  /**
+   * @generated from field: sint64 amount = 2;
+   */
+  amount: bigint;
+
+  constructor(data?: PartialMessage<Coin>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.Coin";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Coin;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Coin;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Coin;
+
+  static equals(a: Coin | PlainMessage<Coin> | undefined, b: Coin | PlainMessage<Coin> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.BaseAccount
+ */
+export declare class BaseAccount extends Message<BaseAccount> {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+
+  /**
+   * @generated from field: repeated land.gno.gnomobile.v1.Coin coins = 2;
+   */
+  coins: Coin[];
+
+  /**
+   * @generated from field: bytes pub_key = 3;
+   */
+  pubKey: Uint8Array;
+
+  /**
+   * @generated from field: uint64 account_number = 4;
+   */
+  accountNumber: bigint;
+
+  /**
+   * @generated from field: uint64 sequence = 5;
+   */
+  sequence: bigint;
+
+  constructor(data?: PartialMessage<BaseAccount>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.BaseAccount";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BaseAccount;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BaseAccount;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BaseAccount;
+
+  static equals(a: BaseAccount | PlainMessage<BaseAccount> | undefined, b: BaseAccount | PlainMessage<BaseAccount> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnomobile.v1.ListKeyInfoRequest
  */
 export declare class ListKeyInfoRequest extends Message<ListKeyInfoRequest> {
@@ -429,6 +505,54 @@ export declare class GetActiveAccountResponse extends Message<GetActiveAccountRe
 }
 
 /**
+ * @generated from message land.gno.gnomobile.v1.QueryAccountRequest
+ */
+export declare class QueryAccountRequest extends Message<QueryAccountRequest> {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+
+  constructor(data?: PartialMessage<QueryAccountRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.QueryAccountRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryAccountRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryAccountRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryAccountRequest;
+
+  static equals(a: QueryAccountRequest | PlainMessage<QueryAccountRequest> | undefined, b: QueryAccountRequest | PlainMessage<QueryAccountRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QueryAccountResponse
+ */
+export declare class QueryAccountResponse extends Message<QueryAccountResponse> {
+  /**
+   * @generated from field: land.gno.gnomobile.v1.BaseAccount account_info = 1;
+   */
+  accountInfo?: BaseAccount;
+
+  constructor(data?: PartialMessage<QueryAccountResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.QueryAccountResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryAccountResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryAccountResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryAccountResponse;
+
+  static equals(a: QueryAccountResponse | PlainMessage<QueryAccountResponse> | undefined, b: QueryAccountResponse | PlainMessage<QueryAccountResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnomobile.v1.DeleteAccountRequest
  */
 export declare class DeleteAccountRequest extends Message<DeleteAccountRequest> {
@@ -620,6 +744,102 @@ export declare class CallResponse extends Message<CallResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CallResponse;
 
   static equals(a: CallResponse | PlainMessage<CallResponse> | undefined, b: CallResponse | PlainMessage<CallResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressToBech32Request
+ */
+export declare class AddressToBech32Request extends Message<AddressToBech32Request> {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+
+  constructor(data?: PartialMessage<AddressToBech32Request>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.AddressToBech32Request";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressToBech32Request;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressToBech32Request;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressToBech32Request;
+
+  static equals(a: AddressToBech32Request | PlainMessage<AddressToBech32Request> | undefined, b: AddressToBech32Request | PlainMessage<AddressToBech32Request> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressToBech32Response
+ */
+export declare class AddressToBech32Response extends Message<AddressToBech32Response> {
+  /**
+   * @generated from field: string bech32_address = 1;
+   */
+  bech32Address: string;
+
+  constructor(data?: PartialMessage<AddressToBech32Response>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.AddressToBech32Response";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressToBech32Response;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressToBech32Response;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressToBech32Response;
+
+  static equals(a: AddressToBech32Response | PlainMessage<AddressToBech32Response> | undefined, b: AddressToBech32Response | PlainMessage<AddressToBech32Response> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressFromBech32Request
+ */
+export declare class AddressFromBech32Request extends Message<AddressFromBech32Request> {
+  /**
+   * @generated from field: string bech32_address = 1;
+   */
+  bech32Address: string;
+
+  constructor(data?: PartialMessage<AddressFromBech32Request>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.AddressFromBech32Request";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressFromBech32Request;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressFromBech32Request;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressFromBech32Request;
+
+  static equals(a: AddressFromBech32Request | PlainMessage<AddressFromBech32Request> | undefined, b: AddressFromBech32Request | PlainMessage<AddressFromBech32Request> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.AddressFromBech32Response
+ */
+export declare class AddressFromBech32Response extends Message<AddressFromBech32Response> {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+
+  constructor(data?: PartialMessage<AddressFromBech32Response>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.AddressFromBech32Response";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressFromBech32Response;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressFromBech32Response;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressFromBech32Response;
+
+  static equals(a: AddressFromBech32Response | PlainMessage<AddressFromBech32Response> | undefined, b: AddressFromBech32Response | PlainMessage<AddressFromBech32Response> | undefined): boolean;
 }
 
 /**

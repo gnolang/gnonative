@@ -2,9 +2,16 @@ import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes
 import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
+import { GetActiveAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { QueryAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
+import { QueryRequest } from '@gno/api/gnomobiletypes_pb';
+import { QueryResponse } from '@gno/api/gnomobiletypes_pb';
 import { CallRequest } from '@gno/api/gnomobiletypes_pb';
 import { CallResponse } from '@gno/api/gnomobiletypes_pb';
+import { AddressToBech32Request } from '@gno/api/gnomobiletypes_pb';
+import { AddressFromBech32Request } from '@gno/api/gnomobiletypes_pb';
 import * as Grpc from '@gno/grpc/client';
 import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
@@ -18,8 +25,13 @@ interface GnoResponse {
   listKeyInfo: () => Promise<GnoAccount[]>;
   selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
+  getActiveAccount: () => Promise<GnoAccount | undefined>;
+  queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (nameOrBech32: string, password: string, skipPassword: boolean) => Promise<DeleteAccountResponse>;
+  query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => Promise<CallResponse>;
+  addressToBech32: (address: Uint8Array) => Promise<string>;
+  addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
 }
 
 let clientInstance: PromiseClient<typeof GnomobileService> | undefined = undefined;
@@ -82,6 +94,20 @@ export const useGno = (): GnoResponse => {
     return response;
   };
 
+  const getActiveAccount = async () => {
+    const client = await getClient();
+    const response = await client.getActiveAccount(new GetActiveAccountRequest());
+    return response.key;
+  };
+
+  const queryAccount = async (address: Uint8Array) => {
+    const client = await getClient();
+    const reponse = await client.queryAccount(
+      new QueryAccountRequest({ address })
+    );
+    return reponse;
+  };
+
   const deleteAccount = async (nameOrBech32: string, password: string, skipPassword: boolean) => {
     const client = await getClient();
     const response = await client.deleteAccount(
@@ -90,6 +116,17 @@ export const useGno = (): GnoResponse => {
         password,
         skipPassword, }));
     return response;
+  };
+
+  const query = async (path: string, data: Uint8Array) => {
+    const client = await getClient();
+    const reponse = await client.query(
+      new QueryRequest({
+        path,
+        data,
+      }),
+    );
+    return reponse;
   };
 
   const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => {
@@ -106,13 +143,34 @@ export const useGno = (): GnoResponse => {
     return reponse;
   };
 
+  const addressToBech32 = async (address: Uint8Array) => {
+    const client = await getClient();
+    const response = await client.addressToBech32(
+      new AddressToBech32Request({ address })
+    );
+    return response.bech32Address;
+  };
+
+  const addressFromBech32 = async (bech32Address: string) => {
+    const client = await getClient();
+    const response = await client.addressFromBech32(
+      new AddressFromBech32Request({ bech32Address })
+    );
+    return response.address;
+  };
+
   return {
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,
     selectAccount,
     setPassword,
+    getActiveAccount,
+    queryAccount,
     deleteAccount,
+    query,
     call,
+    addressToBech32,
+    addressFromBech32,
   };
 };

@@ -40,6 +40,21 @@ message KeyInfo {
 	bytes address = 4;
 }
 
+// Coin holds some amount of one currency.
+// A negative amount is invalid.
+message Coin {
+	string denom = 1;
+	sint64 amount = 2;
+}
+
+message BaseAccount {
+	bytes address = 1;
+	repeated Coin coins = 2;
+	bytes pub_key = 3;
+	uint64 account_number = 4;
+	uint64 sequence = 5;
+}
+
 message ListKeyInfoRequest {
 }
 
@@ -73,6 +88,14 @@ message GetActiveAccountRequest {
 
 message GetActiveAccountResponse {
 	KeyInfo key = 1;
+}
+
+message QueryAccountRequest {
+	bytes address = 1;
+}
+
+message QueryAccountResponse {
+	BaseAccount account_info = 1;
 }
 
 message DeleteAccountRequest {
@@ -110,6 +133,22 @@ message CallRequest {
 
 message CallResponse {
 	bytes result = 1;
+}
+
+message AddressToBech32Request {
+	bytes address = 1;
+}
+
+message AddressToBech32Response {
+	string bech32_address = 1;
+}
+
+message AddressFromBech32Request {
+	string bech32_address = 1;
+}
+
+message AddressFromBech32Response {
+	bytes address = 1;
 }
 
 message HelloRequest {

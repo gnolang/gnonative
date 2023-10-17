@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"connectrpc.com/connect"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
@@ -25,12 +26,6 @@ func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[r
 func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	s.getSigner().ChainID = req.Msg.ChainId
 	return connect.NewResponse(&rpc.SetChainIDResponse{}), nil
-}
-
-// Set the password for the account in the keybase, used for later operations
-func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
-	s.getSigner().Password = req.Msg.Password
-	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
 
 // Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
@@ -121,6 +116,12 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
 }
 
+// Set the password for the account in the keybase, used for later operations
+func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
+	s.getSigner().Password = req.Msg.Password
+	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
+}
+
 // GetActiveAccount gets the active account which was set by SelectAccount
 func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
@@ -139,6 +140,34 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	}
 
 	return connect.NewResponse(&rpc.GetActiveAccountResponse{Key: info}), nil
+}
+
+// QueryAccount retrieves account information from the blockchain for a given address.
+func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error) {
+	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
+
+	// gnoclient wants the bech32 address.
+	account, _, err := s.client.QueryAccount(crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address)))
+	if err != nil {
+		return nil, err
+	}
+
+	formattedCoins := make([]*rpc.Coin, 0)
+	for _, coin := range account.Coins {
+		formattedCoins = append(formattedCoins, &rpc.Coin{
+			Denom:  coin.Denom,
+			Amount: coin.Amount,
+		})
+	}
+
+	res := connect.NewResponse(&rpc.QueryAccountResponse{AccountInfo: &rpc.BaseAccount{
+		Address:       account.Address.Bytes(),
+		Coins:         formattedCoins,
+		PubKey:        account.PubKey.Bytes(),
+		AccountNumber: account.AccountNumber,
+		Sequence:      account.Sequence,
+	}})
+	return res, nil
 }
 
 // DeleteAccount deletes the account with the given name, using the password to
@@ -199,6 +228,23 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 	}
 
 	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil
+}
+
+// Convert a byte array address to a bech32 string address.
+func (s *gnomobileService) AddressToBech32(ctx context.Context, req *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {
+	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
+	bech32Address := crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))
+	return connect.NewResponse(&rpc.AddressToBech32Response{Bech32Address: bech32Address}), nil
+}
+
+// Convert a bech32 string address to a byte array address.
+func (s *gnomobileService) AddressFromBech32(ctx context.Context, req *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error) {
+	address, err := crypto.AddressFromBech32(req.Msg.Bech32Address)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.AddressFromBech32Response{Address: address.Bytes()}), nil
 }
 
 // Hello is for debug purposes
