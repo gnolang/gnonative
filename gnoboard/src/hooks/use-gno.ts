@@ -29,7 +29,7 @@ interface GnoResponse {
   setPassword: (password: string) => Promise<SetPasswordResponse>;
   getActiveAccount: () => Promise<GnoAccount | undefined>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
-  deleteAccount: (nameOrBech32: string, password: string, skipPassword: boolean) => Promise<DeleteAccountResponse>;
+  deleteAccount: (nameOrBech32: string, password: string | undefined, skipPassword: boolean) => Promise<DeleteAccountResponse>;
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
   qEval: (packagePath: string, expression: string) => Promise<string>;
@@ -106,19 +106,19 @@ export const useGno = (): GnoResponse => {
 
   const queryAccount = async (address: Uint8Array) => {
     const client = await getClient();
-    const reponse = await client.queryAccount(
-      new QueryAccountRequest({ address })
-    );
+    const reponse = await client.queryAccount(new QueryAccountRequest({ address }));
     return reponse;
   };
 
-  const deleteAccount = async (nameOrBech32: string, password: string, skipPassword: boolean) => {
+  const deleteAccount = async (nameOrBech32: string, password: string | undefined, skipPassword: boolean) => {
     const client = await getClient();
     const response = await client.deleteAccount(
       new DeleteAccountRequest({
         nameOrBech32,
         password,
-        skipPassword, }));
+        skipPassword,
+      }),
+    );
     return response;
   };
 
@@ -171,17 +171,13 @@ export const useGno = (): GnoResponse => {
 
   const addressToBech32 = async (address: Uint8Array) => {
     const client = await getClient();
-    const response = await client.addressToBech32(
-      new AddressToBech32Request({ address })
-    );
+    const response = await client.addressToBech32(new AddressToBech32Request({ address }));
     return response.bech32Address;
   };
 
   const addressFromBech32 = async (bech32Address: string) => {
     const client = await getClient();
-    const response = await client.addressFromBech32(
-      new AddressFromBech32Request({ bech32Address })
-    );
+    const response = await client.addressFromBech32(new AddressFromBech32Request({ bech32Address }));
     return response.address;
   };
 
