@@ -103,14 +103,14 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 		return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 	}
 
-	s.lock.Lock()
-	s.activeAccount = key
-	s.lock.Unlock()
-
 	info, err := convertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
+
+	s.lock.Lock()
+	s.activeAccount = key
+	s.lock.Unlock()
 
 	s.getSigner().Account = req.Msg.NameOrBech32
 	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
@@ -126,9 +126,9 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
 
-	s.lock.Lock()
+	s.lock.RLock()
 	key := s.activeAccount
-	s.lock.Unlock()
+	s.lock.RUnlock()
 
 	if key == nil {
 		return nil, rpc.ErrCode_ErrNoActiveAccount
@@ -184,13 +184,14 @@ func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Reque
 			return nil, err
 		}
 	}
+
+	s.lock.Lock()
 	if s.activeAccount != nil &&
 		(s.activeAccount.GetName() == req.Msg.NameOrBech32 || crypto.AddressToBech32(s.activeAccount.GetAddress()) == req.Msg.NameOrBech32) {
 		// The deleted account was the active account.
-		s.lock.Lock()
 		s.activeAccount = nil
-		s.lock.Unlock()
 	}
+	s.lock.Unlock()
 	return connect.NewResponse(&rpc.DeleteAccountResponse{}), nil
 }
 
@@ -215,9 +216,12 @@ func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.Q
 func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
+	s.lock.RLock()
 	if s.activeAccount == nil {
+		s.lock.RUnlock()
 		return nil, rpc.ErrCode_ErrNoActiveAccount
 	}
+	s.lock.RUnlock()
 
 	cfg := gnoclient.CallCfg{
 		PkgPath:   req.Msg.PackagePath,
