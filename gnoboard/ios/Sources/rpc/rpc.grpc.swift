@@ -73,6 +73,16 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> UnaryCall<Land_Gno_Gnomobile_V1_QueryRequest, Land_Gno_Gnomobile_V1_QueryResponse>
 
+  func render(
+    _ request: Land_Gno_Gnomobile_V1_RenderRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_RenderRequest, Land_Gno_Gnomobile_V1_RenderResponse>
+
+  func qEval(
+    _ request: Land_Gno_Gnomobile_V1_QEvalRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_QEvalRequest, Land_Gno_Gnomobile_V1_QEvalResponse>
+
   func call(
     _ request: Land_Gno_Gnomobile_V1_CallRequest,
     callOptions: CallOptions?
@@ -308,6 +318,47 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceClientProtocol {
     )
   }
 
+  /// Render calls the Render function for package_path with optional args. The package path
+  /// should include the prefix like "gno.land/". This is similar to using a browser URL
+  /// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Render.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func render(
+    _ request: Land_Gno_Gnomobile_V1_RenderRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_RenderRequest, Land_Gno_Gnomobile_V1_RenderResponse> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.render.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRenderInterceptors() ?? []
+    )
+  }
+
+  /// QEval evaluates the given expression with the realm code at package_path. The package path
+  /// should include the prefix like "gno.land/". The expression is usually a function call like
+  /// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+  /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to QEval.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func qEval(
+    _ request: Land_Gno_Gnomobile_V1_QEvalRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Land_Gno_Gnomobile_V1_QEvalRequest, Land_Gno_Gnomobile_V1_QEvalResponse> {
+    return self.makeUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.qEval.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQEvalInterceptors() ?? []
+    )
+  }
+
   /// Call a specific realm function.
   ///
   /// - Parameters:
@@ -499,6 +550,16 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol: GRP
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_QueryRequest, Land_Gno_Gnomobile_V1_QueryResponse>
 
+  func makeRenderCall(
+    _ request: Land_Gno_Gnomobile_V1_RenderRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_RenderRequest, Land_Gno_Gnomobile_V1_RenderResponse>
+
+  func makeQevalCall(
+    _ request: Land_Gno_Gnomobile_V1_QEvalRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_QEvalRequest, Land_Gno_Gnomobile_V1_QEvalResponse>
+
   func makeCallCall(
     _ request: Land_Gno_Gnomobile_V1_CallRequest,
     callOptions: CallOptions?
@@ -659,6 +720,30 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeQueryInterceptors() ?? []
+    )
+  }
+
+  internal func makeRenderCall(
+    _ request: Land_Gno_Gnomobile_V1_RenderRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_RenderRequest, Land_Gno_Gnomobile_V1_RenderResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.render.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRenderInterceptors() ?? []
+    )
+  }
+
+  internal func makeQevalCall(
+    _ request: Land_Gno_Gnomobile_V1_QEvalRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Land_Gno_Gnomobile_V1_QEvalRequest, Land_Gno_Gnomobile_V1_QEvalResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.qEval.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQEvalInterceptors() ?? []
     )
   }
 
@@ -845,6 +930,30 @@ extension Land_Gno_Gnomobile_V1_GnomobileServiceAsyncClientProtocol {
     )
   }
 
+  internal func render(
+    _ request: Land_Gno_Gnomobile_V1_RenderRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_RenderResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.render.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRenderInterceptors() ?? []
+    )
+  }
+
+  internal func qEval(
+    _ request: Land_Gno_Gnomobile_V1_QEvalRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Land_Gno_Gnomobile_V1_QEvalResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.qEval.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeQEvalInterceptors() ?? []
+    )
+  }
+
   internal func call(
     _ request: Land_Gno_Gnomobile_V1_CallRequest,
     callOptions: CallOptions? = nil
@@ -946,6 +1055,12 @@ internal protocol Land_Gno_Gnomobile_V1_GnomobileServiceClientInterceptorFactory
   /// - Returns: Interceptors to use when invoking 'query'.
   func makeQueryInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_QueryRequest, Land_Gno_Gnomobile_V1_QueryResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'render'.
+  func makeRenderInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_RenderRequest, Land_Gno_Gnomobile_V1_RenderResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'qEval'.
+  func makeQEvalInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_QEvalRequest, Land_Gno_Gnomobile_V1_QEvalResponse>]
+
   /// - Returns: Interceptors to use when invoking 'call'.
   func makeCallInterceptors() -> [ClientInterceptor<Land_Gno_Gnomobile_V1_CallRequest, Land_Gno_Gnomobile_V1_CallResponse>]
 
@@ -975,6 +1090,8 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.queryAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.deleteAccount,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.query,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.render,
+      Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.qEval,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.call,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressToBech32,
       Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata.Methods.addressFromBech32,
@@ -1046,6 +1163,18 @@ internal enum Land_Gno_Gnomobile_V1_GnomobileServiceClientMetadata {
     internal static let query = GRPCMethodDescriptor(
       name: "Query",
       path: "/land.gno.gnomobile.v1.GnomobileService/Query",
+      type: GRPCCallType.unary
+    )
+
+    internal static let render = GRPCMethodDescriptor(
+      name: "Render",
+      path: "/land.gno.gnomobile.v1.GnomobileService/Render",
+      type: GRPCCallType.unary
+    )
+
+    internal static let qEval = GRPCMethodDescriptor(
+      name: "QEval",
+      path: "/land.gno.gnomobile.v1.GnomobileService/QEval",
       type: GRPCCallType.unary
     )
 

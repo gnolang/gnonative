@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -144,6 +144,33 @@ export const GnomobileService = {
       name: "Query",
       I: QueryRequest,
       O: QueryResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Render calls the Render function for package_path with optional args. The package path
+     * should include the prefix like "gno.land/". This is similar to using a browser URL
+     * <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Render
+     */
+    render: {
+      name: "Render",
+      I: RenderRequest,
+      O: RenderResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * QEval evaluates the given expression with the realm code at package_path. The package path
+     * should include the prefix like "gno.land/". The expression is usually a function call like
+     * "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+     * "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QEval
+     */
+    qEval: {
+      name: "QEval",
+      I: QEvalRequest,
+      O: QEvalResponse,
       kind: MethodKind.Unary,
     },
     /**

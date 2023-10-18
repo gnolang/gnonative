@@ -380,6 +380,64 @@ public struct Land_Gno_Gnomobile_V1_QueryResponse {
   public init() {}
 }
 
+public struct Land_Gno_Gnomobile_V1_RenderRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Example: "gno.land/r/demo/boards"
+  public var packagePath: String = String()
+
+  /// Example: "testboard/1"
+  public var args: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_RenderResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The Render function result (typically markdown)
+  public var result: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_QEvalRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Example: "gno.land/r/demo/boards"
+  public var packagePath: String = String()
+
+  /// Example: "GetBoardIDFromName(\"testboard\")"
+  public var expression: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Land_Gno_Gnomobile_V1_QEvalResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// A typed expression like "(1 gno.land/r/demo/boards.BoardID)\n(true bool)"
+  public var result: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Land_Gno_Gnomobile_V1_CallRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -517,6 +575,10 @@ extension Land_Gno_Gnomobile_V1_DeleteAccountRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_DeleteAccountResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_QueryRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_QueryResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_RenderRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_RenderResponse: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_QEvalRequest: @unchecked Sendable {}
+extension Land_Gno_Gnomobile_V1_QEvalResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_CallRequest: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_CallResponse: @unchecked Sendable {}
 extension Land_Gno_Gnomobile_V1_AddressToBech32Request: @unchecked Sendable {}
@@ -1346,6 +1408,146 @@ extension Land_Gno_Gnomobile_V1_QueryResponse: SwiftProtobuf.Message, SwiftProto
   }
 
   public static func ==(lhs: Land_Gno_Gnomobile_V1_QueryResponse, rhs: Land_Gno_Gnomobile_V1_QueryResponse) -> Bool {
+    if lhs.result != rhs.result {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_RenderRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RenderRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "package_path"),
+    2: .same(proto: "args"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.packagePath) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.args) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.packagePath.isEmpty {
+      try visitor.visitSingularStringField(value: self.packagePath, fieldNumber: 1)
+    }
+    if !self.args.isEmpty {
+      try visitor.visitSingularStringField(value: self.args, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_RenderRequest, rhs: Land_Gno_Gnomobile_V1_RenderRequest) -> Bool {
+    if lhs.packagePath != rhs.packagePath {return false}
+    if lhs.args != rhs.args {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_RenderResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RenderResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "result"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.result) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.result.isEmpty {
+      try visitor.visitSingularStringField(value: self.result, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_RenderResponse, rhs: Land_Gno_Gnomobile_V1_RenderResponse) -> Bool {
+    if lhs.result != rhs.result {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_QEvalRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".QEvalRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "package_path"),
+    2: .same(proto: "expression"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.packagePath) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.expression) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.packagePath.isEmpty {
+      try visitor.visitSingularStringField(value: self.packagePath, fieldNumber: 1)
+    }
+    if !self.expression.isEmpty {
+      try visitor.visitSingularStringField(value: self.expression, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_QEvalRequest, rhs: Land_Gno_Gnomobile_V1_QEvalRequest) -> Bool {
+    if lhs.packagePath != rhs.packagePath {return false}
+    if lhs.expression != rhs.expression {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Land_Gno_Gnomobile_V1_QEvalResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".QEvalResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "result"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.result) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.result.isEmpty {
+      try visitor.visitSingularStringField(value: self.result, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Land_Gno_Gnomobile_V1_QEvalResponse, rhs: Land_Gno_Gnomobile_V1_QEvalResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

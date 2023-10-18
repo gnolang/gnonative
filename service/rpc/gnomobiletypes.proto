@@ -118,6 +118,30 @@ message QueryResponse {
 	bytes result = 1;
 }
 
+message RenderRequest {
+	// Example: "gno.land/r/demo/boards"
+	string package_path = 1;
+	// Example: "testboard/1"
+	string args = 2;
+}
+
+message RenderResponse {
+	// The Render function result (typically markdown)
+	string result = 1;
+}
+
+message QEvalRequest {
+	// Example: "gno.land/r/demo/boards"
+	string package_path = 1;
+	// Example: "GetBoardIDFromName(\"testboard\")"
+	string expression = 2;
+}
+
+message QEvalResponse {
+	// A typed expression like "(1 gno.land/r/demo/boards.BoardID)\n(true bool)"
+	string result = 1;
+}
+
 message CallRequest {
 	// Example: "gno.land/r/demo/boards"
 	string package_path = 1;

@@ -7984,6 +7984,1692 @@ public final class Gnomobiletypes {
     }
   }
 
+  public interface RenderRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.RenderRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The packagePath.
+     */
+    java.lang.String getPackagePath();
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The bytes for packagePath.
+     */
+    com.google.protobuf.ByteString
+        getPackagePathBytes();
+
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @return The args.
+     */
+    java.lang.String getArgs();
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @return The bytes for args.
+     */
+    com.google.protobuf.ByteString
+        getArgsBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.RenderRequest}
+   */
+  public  static final class RenderRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          RenderRequest, RenderRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.RenderRequest)
+      RenderRequestOrBuilder {
+    private RenderRequest() {
+      packagePath_ = "";
+      args_ = "";
+    }
+    public static final int PACKAGE_PATH_FIELD_NUMBER = 1;
+    private java.lang.String packagePath_;
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The packagePath.
+     */
+    @java.lang.Override
+    public java.lang.String getPackagePath() {
+      return packagePath_;
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The bytes for packagePath.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPackagePathBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(packagePath_);
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @param value The packagePath to set.
+     */
+    private void setPackagePath(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      packagePath_ = value;
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     */
+    private void clearPackagePath() {
+
+      packagePath_ = getDefaultInstance().getPackagePath();
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @param value The bytes for packagePath to set.
+     */
+    private void setPackagePathBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      packagePath_ = value.toStringUtf8();
+
+    }
+
+    public static final int ARGS_FIELD_NUMBER = 2;
+    private java.lang.String args_;
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @return The args.
+     */
+    @java.lang.Override
+    public java.lang.String getArgs() {
+      return args_;
+    }
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @return The bytes for args.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getArgsBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(args_);
+    }
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @param value The args to set.
+     */
+    private void setArgs(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      args_ = value;
+    }
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     */
+    private void clearArgs() {
+
+      args_ = getDefaultInstance().getArgs();
+    }
+    /**
+     * <pre>
+     * Example: "testboard/1"
+     * </pre>
+     *
+     * <code>string args = 2 [json_name = "args"];</code>
+     * @param value The bytes for args to set.
+     */
+    private void setArgsBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      args_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.RenderRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.RenderRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.RenderRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return The packagePath.
+       */
+      @java.lang.Override
+      public java.lang.String getPackagePath() {
+        return instance.getPackagePath();
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return The bytes for packagePath.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPackagePathBytes() {
+        return instance.getPackagePathBytes();
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @param value The packagePath to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackagePath(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPackagePath(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPackagePath() {
+        copyOnWrite();
+        instance.clearPackagePath();
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @param value The bytes for packagePath to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackagePathBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPackagePathBytes(value);
+        return this;
+      }
+
+      /**
+       * <pre>
+       * Example: "testboard/1"
+       * </pre>
+       *
+       * <code>string args = 2 [json_name = "args"];</code>
+       * @return The args.
+       */
+      @java.lang.Override
+      public java.lang.String getArgs() {
+        return instance.getArgs();
+      }
+      /**
+       * <pre>
+       * Example: "testboard/1"
+       * </pre>
+       *
+       * <code>string args = 2 [json_name = "args"];</code>
+       * @return The bytes for args.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getArgsBytes() {
+        return instance.getArgsBytes();
+      }
+      /**
+       * <pre>
+       * Example: "testboard/1"
+       * </pre>
+       *
+       * <code>string args = 2 [json_name = "args"];</code>
+       * @param value The args to set.
+       * @return This builder for chaining.
+       */
+      public Builder setArgs(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setArgs(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "testboard/1"
+       * </pre>
+       *
+       * <code>string args = 2 [json_name = "args"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearArgs() {
+        copyOnWrite();
+        instance.clearArgs();
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "testboard/1"
+       * </pre>
+       *
+       * <code>string args = 2 [json_name = "args"];</code>
+       * @param value The bytes for args to set.
+       * @return This builder for chaining.
+       */
+      public Builder setArgsBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setArgsBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.RenderRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "packagePath_",
+              "args_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.RenderRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest DEFAULT_INSTANCE;
+    static {
+      RenderRequest defaultInstance = new RenderRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        RenderRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<RenderRequest> PARSER;
+
+    public static com.google.protobuf.Parser<RenderRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface RenderResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.RenderResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The result.
+     */
+    java.lang.String getResult();
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The bytes for result.
+     */
+    com.google.protobuf.ByteString
+        getResultBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.RenderResponse}
+   */
+  public  static final class RenderResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          RenderResponse, RenderResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.RenderResponse)
+      RenderResponseOrBuilder {
+    private RenderResponse() {
+      result_ = "";
+    }
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private java.lang.String result_;
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The result.
+     */
+    @java.lang.Override
+    public java.lang.String getResult() {
+      return result_;
+    }
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The bytes for result.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getResultBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(result_);
+    }
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @param value The result to set.
+     */
+    private void setResult(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      result_ = value;
+    }
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     */
+    private void clearResult() {
+
+      result_ = getDefaultInstance().getResult();
+    }
+    /**
+     * <pre>
+     * The Render function result (typically markdown)
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @param value The bytes for result to set.
+     */
+    private void setResultBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      result_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.RenderResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.RenderResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.RenderResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       * The Render function result (typically markdown)
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return The result.
+       */
+      @java.lang.Override
+      public java.lang.String getResult() {
+        return instance.getResult();
+      }
+      /**
+       * <pre>
+       * The Render function result (typically markdown)
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return The bytes for result.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getResultBytes() {
+        return instance.getResultBytes();
+      }
+      /**
+       * <pre>
+       * The Render function result (typically markdown)
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @param value The result to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResult(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setResult(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * The Render function result (typically markdown)
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearResult() {
+        copyOnWrite();
+        instance.clearResult();
+        return this;
+      }
+      /**
+       * <pre>
+       * The Render function result (typically markdown)
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @param value The bytes for result to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResultBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setResultBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.RenderResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "result_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.RenderResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse DEFAULT_INSTANCE;
+    static {
+      RenderResponse defaultInstance = new RenderResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        RenderResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<RenderResponse> PARSER;
+
+    public static com.google.protobuf.Parser<RenderResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface QEvalRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.QEvalRequest)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The packagePath.
+     */
+    java.lang.String getPackagePath();
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The bytes for packagePath.
+     */
+    com.google.protobuf.ByteString
+        getPackagePathBytes();
+
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @return The expression.
+     */
+    java.lang.String getExpression();
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @return The bytes for expression.
+     */
+    com.google.protobuf.ByteString
+        getExpressionBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.QEvalRequest}
+   */
+  public  static final class QEvalRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          QEvalRequest, QEvalRequest.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.QEvalRequest)
+      QEvalRequestOrBuilder {
+    private QEvalRequest() {
+      packagePath_ = "";
+      expression_ = "";
+    }
+    public static final int PACKAGE_PATH_FIELD_NUMBER = 1;
+    private java.lang.String packagePath_;
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The packagePath.
+     */
+    @java.lang.Override
+    public java.lang.String getPackagePath() {
+      return packagePath_;
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @return The bytes for packagePath.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPackagePathBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(packagePath_);
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @param value The packagePath to set.
+     */
+    private void setPackagePath(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      packagePath_ = value;
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     */
+    private void clearPackagePath() {
+
+      packagePath_ = getDefaultInstance().getPackagePath();
+    }
+    /**
+     * <pre>
+     * Example: "gno.land/r/demo/boards"
+     * </pre>
+     *
+     * <code>string package_path = 1 [json_name = "packagePath"];</code>
+     * @param value The bytes for packagePath to set.
+     */
+    private void setPackagePathBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      packagePath_ = value.toStringUtf8();
+
+    }
+
+    public static final int EXPRESSION_FIELD_NUMBER = 2;
+    private java.lang.String expression_;
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @return The expression.
+     */
+    @java.lang.Override
+    public java.lang.String getExpression() {
+      return expression_;
+    }
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @return The bytes for expression.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExpressionBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(expression_);
+    }
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @param value The expression to set.
+     */
+    private void setExpression(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      expression_ = value;
+    }
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     */
+    private void clearExpression() {
+
+      expression_ = getDefaultInstance().getExpression();
+    }
+    /**
+     * <pre>
+     * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+     * </pre>
+     *
+     * <code>string expression = 2 [json_name = "expression"];</code>
+     * @param value The bytes for expression to set.
+     */
+    private void setExpressionBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      expression_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.QEvalRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.QEvalRequest)
+        land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequestOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return The packagePath.
+       */
+      @java.lang.Override
+      public java.lang.String getPackagePath() {
+        return instance.getPackagePath();
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return The bytes for packagePath.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPackagePathBytes() {
+        return instance.getPackagePathBytes();
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @param value The packagePath to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackagePath(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPackagePath(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPackagePath() {
+        copyOnWrite();
+        instance.clearPackagePath();
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "gno.land/r/demo/boards"
+       * </pre>
+       *
+       * <code>string package_path = 1 [json_name = "packagePath"];</code>
+       * @param value The bytes for packagePath to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackagePathBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPackagePathBytes(value);
+        return this;
+      }
+
+      /**
+       * <pre>
+       * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+       * </pre>
+       *
+       * <code>string expression = 2 [json_name = "expression"];</code>
+       * @return The expression.
+       */
+      @java.lang.Override
+      public java.lang.String getExpression() {
+        return instance.getExpression();
+      }
+      /**
+       * <pre>
+       * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+       * </pre>
+       *
+       * <code>string expression = 2 [json_name = "expression"];</code>
+       * @return The bytes for expression.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getExpressionBytes() {
+        return instance.getExpressionBytes();
+      }
+      /**
+       * <pre>
+       * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+       * </pre>
+       *
+       * <code>string expression = 2 [json_name = "expression"];</code>
+       * @param value The expression to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExpression(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setExpression(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+       * </pre>
+       *
+       * <code>string expression = 2 [json_name = "expression"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExpression() {
+        copyOnWrite();
+        instance.clearExpression();
+        return this;
+      }
+      /**
+       * <pre>
+       * Example: "GetBoardIDFromName(&#92;"testboard&#92;")"
+       * </pre>
+       *
+       * <code>string expression = 2 [json_name = "expression"];</code>
+       * @param value The bytes for expression to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExpressionBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setExpressionBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.QEvalRequest)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "packagePath_",
+              "expression_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.QEvalRequest)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest DEFAULT_INSTANCE;
+    static {
+      QEvalRequest defaultInstance = new QEvalRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        QEvalRequest.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<QEvalRequest> PARSER;
+
+    public static com.google.protobuf.Parser<QEvalRequest> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface QEvalResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.QEvalResponse)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The result.
+     */
+    java.lang.String getResult();
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The bytes for result.
+     */
+    com.google.protobuf.ByteString
+        getResultBytes();
+  }
+  /**
+   * Protobuf type {@code land.gno.gnomobile.v1.QEvalResponse}
+   */
+  public  static final class QEvalResponse extends
+      com.google.protobuf.GeneratedMessageLite<
+          QEvalResponse, QEvalResponse.Builder> implements
+      // @@protoc_insertion_point(message_implements:land.gno.gnomobile.v1.QEvalResponse)
+      QEvalResponseOrBuilder {
+    private QEvalResponse() {
+      result_ = "";
+    }
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private java.lang.String result_;
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The result.
+     */
+    @java.lang.Override
+    public java.lang.String getResult() {
+      return result_;
+    }
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @return The bytes for result.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getResultBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(result_);
+    }
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @param value The result to set.
+     */
+    private void setResult(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      result_ = value;
+    }
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     */
+    private void clearResult() {
+
+      result_ = getDefaultInstance().getResult();
+    }
+    /**
+     * <pre>
+     * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+     * </pre>
+     *
+     * <code>string result = 1 [json_name = "result"];</code>
+     * @param value The bytes for result to set.
+     */
+    private void setResultBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      result_ = value.toStringUtf8();
+
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
+    }
+    public static Builder newBuilder(land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse prototype) {
+      return DEFAULT_INSTANCE.createBuilder(prototype);
+    }
+
+    /**
+     * Protobuf type {@code land.gno.gnomobile.v1.QEvalResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse, Builder> implements
+        // @@protoc_insertion_point(builder_implements:land.gno.gnomobile.v1.QEvalResponse)
+        land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponseOrBuilder {
+      // Construct using land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return The result.
+       */
+      @java.lang.Override
+      public java.lang.String getResult() {
+        return instance.getResult();
+      }
+      /**
+       * <pre>
+       * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return The bytes for result.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getResultBytes() {
+        return instance.getResultBytes();
+      }
+      /**
+       * <pre>
+       * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @param value The result to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResult(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setResult(value);
+        return this;
+      }
+      /**
+       * <pre>
+       * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearResult() {
+        copyOnWrite();
+        instance.clearResult();
+        return this;
+      }
+      /**
+       * <pre>
+       * A typed expression like "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)"
+       * </pre>
+       *
+       * <code>string result = 1 [json_name = "result"];</code>
+       * @param value The bytes for result to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResultBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setResultBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:land.gno.gnomobile.v1.QEvalResponse)
+    }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "result_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> parser = PARSER;
+          if (parser == null) {
+            synchronized (land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:land.gno.gnomobile.v1.QEvalResponse)
+    private static final land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse DEFAULT_INSTANCE;
+    static {
+      QEvalResponse defaultInstance = new QEvalResponse();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        QEvalResponse.class, defaultInstance);
+    }
+
+    public static land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<QEvalResponse> PARSER;
+
+    public static com.google.protobuf.Parser<QEvalResponse> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface CallRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:land.gno.gnomobile.v1.CallRequest)
       com.google.protobuf.MessageLiteOrBuilder {

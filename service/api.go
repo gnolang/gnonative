@@ -199,6 +199,28 @@ func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.Q
 	return connect.NewResponse(&rpc.QueryResponse{Result: bres.Response.Data}), nil
 }
 
+func (s *gnomobileService) Render(ctx context.Context, req *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error) {
+	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
+
+	result, _, err := s.client.Render(req.Msg.PackagePath, req.Msg.Args)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.RenderResponse{Result: result}), nil
+}
+
+func (s *gnomobileService) QEval(ctx context.Context, req *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error) {
+	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
+
+	result, _, err := s.client.QEval(req.Msg.PackagePath, req.Msg.Expression)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.QEvalResponse{Result: result}), nil
+}
+
 func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
