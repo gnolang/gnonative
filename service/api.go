@@ -184,6 +184,13 @@ func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Reque
 			return nil, err
 		}
 	}
+	if s.activeAccount != nil &&
+		(s.activeAccount.GetName() == req.Msg.NameOrBech32 || crypto.AddressToBech32(s.activeAccount.GetAddress()) == req.Msg.NameOrBech32) {
+		// The deleted account was the active account.
+		s.lock.Lock()
+		s.activeAccount = nil
+		s.lock.Unlock()
+	}
 	return connect.NewResponse(&rpc.DeleteAccountResponse{}), nil
 }
 
