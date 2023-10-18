@@ -6,6 +6,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/gnolang/gno/tm2/pkg/std"
 )
@@ -35,12 +36,12 @@ func (c Client) Query(cfg QueryCfg) (*ctypes.ResultABCIQuery, error) {
 }
 
 // QueryAccount retrieves account information for a given address.
-func (c Client) QueryAccount(addr string) (*std.BaseAccount, *ctypes.ResultABCIQuery, error) {
+func (c Client) QueryAccount(addr crypto.Address) (*std.BaseAccount, *ctypes.ResultABCIQuery, error) {
 	if err := c.validateRPCClient(); err != nil {
 		return nil, nil, err
 	}
 
-	path := fmt.Sprintf("auth/accounts/%s", addr)
+	path := fmt.Sprintf("auth/accounts/%s", crypto.AddressToBech32(addr))
 	data := []byte{}
 
 	qres, err := c.RPCClient.ABCIQuery(path, data)

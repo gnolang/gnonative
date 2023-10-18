@@ -139,7 +139,7 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
 	// gnoclient wants the bech32 address.
-	account, _, err := s.client.QueryAccount(crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address)))
+	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, err
 	}
