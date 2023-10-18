@@ -40,7 +40,7 @@ const EnterSeedPharse = () => {
       await gno.selectAccount(name);
       await gno.setPassword(password);
       console.log('createAccount response: ' + response);
-      navigation.navigate(RoutePath.WalletCreate);
+      navigation.navigate(RoutePath.Home);
     } catch (error) {
       console.log('createAccount error: ', error);
     }

@@ -1,4 +1,9 @@
 export const colors = {
+  grayscale: {
+    200: '#A8A8A8',
+    700: '#333333',
+  },
+  secondary: '#ff0f63',
   main: '#37474f',
   danger: '#FFE5E6',
   success: '#00e676',

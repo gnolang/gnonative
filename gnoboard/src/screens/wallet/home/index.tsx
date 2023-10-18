@@ -55,7 +55,7 @@ export const Home: React.FC = () => {
           <Button title='Create New Account' onPress={() => navigation.navigate(RoutePath.GenerateSeedPhrase)} />
           <Button title='Import Account' onPress={() => navigation.navigate(RoutePath.ImportPrivateKey)} />
           <Button title='Switch Accounts' onPress={() => navigation.navigate(RoutePath.SwitchAccounts)} />
-          <Button title='Delete Account' onPress={() => navigation.navigate(RoutePath.RemoveAccount)} />
+          <Button title='Remove Account' onPress={() => navigation.navigate(RoutePath.RemoveAccount)} />
           <Button title='Developer Mode' onPress={() => navigation.navigate(RoutePath.DevMode)} />
         </ButtonGroup>
       </Layout.Body>

@@ -1,4 +1,4 @@
-import { KeyInfo } from "@gno/api/rpc_pb";
+import { KeyInfo } from '@gno/api/gnomobiletypes_pb';
 
 export type GnoConfig = {
   Remote: string;
@@ -10,4 +10,4 @@ export type GnoConfig = {
   Mnemonic: string;
 };
 
-export type GnoAccount = KeyInfo
+export type GnoAccount = KeyInfo;

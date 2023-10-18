@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import SideMenuAccountList from '@gno/components/common/side-menu-account-list/side-menu-account-list';
 import { GnoAccount } from '@gno/native_modules/types';
+import { RoutePath } from '@gno/router/path';
 
 const SwitchAccounts = () => {
   const gno = useGno();
@@ -35,7 +36,7 @@ const SwitchAccounts = () => {
       setLoading('Changing account...');
       await gno.selectAccount(value.name);
       setLoading(undefined);
-      navigation.navigate('WalletCreate');
+      navigation.navigate(RoutePath.Home);
     } catch (error: unknown | Error) {
       setLoading(error?.toString());
       console.log(error);
