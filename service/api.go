@@ -1,3 +1,6 @@
+// This file implements the gRPC API methods defined in service/rpc/rpc.proto . For documentation,
+// see that file and related request/response fields in the generated gnomobiletypes.proto .
+
 package service
 
 import (
@@ -15,21 +18,16 @@ import (
 	"github.com/gnolang/gnomobile/service/rpc"
 )
 
-// Set the connection addresse for the remote node. If you don't call this, the default is
-// "127.0.0.1:26657"
 func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error) {
 	s.client.RPCClient = rpcclient.NewHTTP(req.Msg.Remote, "/websocket")
 	return connect.NewResponse(&rpc.SetRemoteResponse{}), nil
 }
 
-// Set the chain ID for the remote node. If you don't call this, the default is "dev"
 func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	s.getSigner().ChainID = req.Msg.ChainId
 	return connect.NewResponse(&rpc.SetChainIDResponse{}), nil
 }
 
-// Generate a recovery phrase of BIP39 mnemonic words using entropy from the crypto library
-// random number generator. This can be used as the mnemonic in CreateAccount.
 func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
 	const mnemonicEntropySize = 256
 	entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
@@ -54,7 +52,6 @@ func convertKeyInfo(key crypto_keys.Info) (*rpc.KeyInfo, error) {
 	}, nil
 }
 
-// Get the keys informations in the keybase
 func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
 
@@ -77,7 +74,6 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&rpc.ListKeyInfoResponse{Keys: formatedKeys}), nil
 }
 
-// Create a new account in the keybase
 func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {
 	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
@@ -94,7 +90,6 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&rpc.CreateAccountResponse{Key: info}), nil
 }
 
-// SelectAccount selects the active account to use for later operations
 func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
@@ -116,13 +111,11 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
 }
 
-// Set the password for the account in the keybase, used for later operations
 func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
 	s.getSigner().Password = req.Msg.Password
 	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
 
-// GetActiveAccount gets the active account which was set by SelectAccount
 func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
 
@@ -142,12 +135,11 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	return connect.NewResponse(&rpc.GetActiveAccountResponse{Key: info}), nil
 }
 
-// QueryAccount retrieves account information from the blockchain for a given address.
 func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error) {
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
 	// gnoclient wants the bech32 address.
-	account, _, err := s.client.QueryAccount(crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address)))
+	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, err
 	}
@@ -170,10 +162,6 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	return res, nil
 }
 
-// DeleteAccount deletes the account with the given name, using the password to
-// ensure access. However, if skip_password is true, then ignore the password.
-// If the account doesn't exist, then return ErrCryptoKeyNotFound.
-// If the password is wrong, then return ErrDecryptionFailed.
 func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
@@ -195,7 +183,6 @@ func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&rpc.DeleteAccountResponse{}), nil
 }
 
-// Make an ABCI query to the remote node.
 func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	s.logger.Debug("Query", zap.String("path", req.Msg.Path), zap.ByteString("data", req.Msg.Data))
 
@@ -212,7 +199,28 @@ func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[rpc.Q
 	return connect.NewResponse(&rpc.QueryResponse{Result: bres.Response.Data}), nil
 }
 
-// Call a specific realm function.
+func (s *gnomobileService) Render(ctx context.Context, req *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error) {
+	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
+
+	result, _, err := s.client.Render(req.Msg.PackagePath, req.Msg.Args)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.RenderResponse{Result: result}), nil
+}
+
+func (s *gnomobileService) QEval(ctx context.Context, req *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error) {
+	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
+
+	result, _, err := s.client.QEval(req.Msg.PackagePath, req.Msg.Expression)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.QEvalResponse{Result: result}), nil
+}
+
 func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
@@ -241,14 +249,12 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil
 }
 
-// Convert a byte array address to a bech32 string address.
 func (s *gnomobileService) AddressToBech32(ctx context.Context, req *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {
 	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
 	bech32Address := crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))
 	return connect.NewResponse(&rpc.AddressToBech32Response{Bech32Address: bech32Address}), nil
 }
 
-// Convert a bech32 string address to a byte array address.
 func (s *gnomobileService) AddressFromBech32(ctx context.Context, req *connect.Request[rpc.AddressFromBech32Request]) (*connect.Response[rpc.AddressFromBech32Response], error) {
 	address, err := crypto.AddressFromBech32(req.Msg.Bech32Address)
 	if err != nil {
@@ -258,7 +264,6 @@ func (s *gnomobileService) AddressFromBech32(ctx context.Context, req *connect.R
 	return connect.NewResponse(&rpc.AddressFromBech32Response{Address: address.Bytes()}), nil
 }
 
-// Hello is for debug purposes
 func (s *gnomobileService) Hello(ctx context.Context, req *connect.Request[rpc.HelloRequest]) (*connect.Response[rpc.HelloResponse], error) {
 	return connect.NewResponse(&rpc.HelloResponse{
 		Greeting: "Hello " + req.Msg.Name,

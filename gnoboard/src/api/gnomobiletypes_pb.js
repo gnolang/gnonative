@@ -263,6 +263,48 @@ export const QueryResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnomobile.v1.RenderRequest
+ */
+export const RenderRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.RenderRequest",
+  () => [
+    { no: 1, name: "package_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "args", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.RenderResponse
+ */
+export const RenderResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.RenderResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QEvalRequest
+ */
+export const QEvalRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QEvalRequest",
+  () => [
+    { no: 1, name: "package_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "expression", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QEvalResponse
+ */
+export const QEvalResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.QEvalResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.CallRequest
  */
 export const CallRequest = proto3.makeMessageType(

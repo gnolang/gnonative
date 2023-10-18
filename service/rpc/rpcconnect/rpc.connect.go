@@ -65,6 +65,10 @@ const (
 	GnomobileServiceDeleteAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/DeleteAccount"
 	// GnomobileServiceQueryProcedure is the fully-qualified name of the GnomobileService's Query RPC.
 	GnomobileServiceQueryProcedure = "/land.gno.gnomobile.v1.GnomobileService/Query"
+	// GnomobileServiceRenderProcedure is the fully-qualified name of the GnomobileService's Render RPC.
+	GnomobileServiceRenderProcedure = "/land.gno.gnomobile.v1.GnomobileService/Render"
+	// GnomobileServiceQEvalProcedure is the fully-qualified name of the GnomobileService's QEval RPC.
+	GnomobileServiceQEvalProcedure = "/land.gno.gnomobile.v1.GnomobileService/QEval"
 	// GnomobileServiceCallProcedure is the fully-qualified name of the GnomobileService's Call RPC.
 	GnomobileServiceCallProcedure = "/land.gno.gnomobile.v1.GnomobileService/Call"
 	// GnomobileServiceAddressToBech32Procedure is the fully-qualified name of the GnomobileService's
@@ -112,6 +116,15 @@ type GnomobileServiceClient interface {
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
+	// Render calls the Render function for package_path with optional args. The package path
+	// should include the prefix like "gno.land/". This is similar to using a browser URL
+	// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+	Render(context.Context, *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error)
+	// QEval evaluates the given expression with the realm code at package_path. The package path
+	// should include the prefix like "gno.land/". The expression is usually a function call like
+	// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
@@ -187,6 +200,16 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceQueryProcedure,
 			opts...,
 		),
+		render: connect.NewClient[rpc.RenderRequest, rpc.RenderResponse](
+			httpClient,
+			baseURL+GnomobileServiceRenderProcedure,
+			opts...,
+		),
+		qEval: connect.NewClient[rpc.QEvalRequest, rpc.QEvalResponse](
+			httpClient,
+			baseURL+GnomobileServiceQEvalProcedure,
+			opts...,
+		),
 		call: connect.NewClient[rpc.CallRequest, rpc.CallResponse](
 			httpClient,
 			baseURL+GnomobileServiceCallProcedure,
@@ -223,6 +246,8 @@ type gnomobileServiceClient struct {
 	queryAccount           *connect.Client[rpc.QueryAccountRequest, rpc.QueryAccountResponse]
 	deleteAccount          *connect.Client[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse]
 	query                  *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
+	render                 *connect.Client[rpc.RenderRequest, rpc.RenderResponse]
+	qEval                  *connect.Client[rpc.QEvalRequest, rpc.QEvalResponse]
 	call                   *connect.Client[rpc.CallRequest, rpc.CallResponse]
 	addressToBech32        *connect.Client[rpc.AddressToBech32Request, rpc.AddressToBech32Response]
 	addressFromBech32      *connect.Client[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response]
@@ -284,6 +309,16 @@ func (c *gnomobileServiceClient) Query(ctx context.Context, req *connect.Request
 	return c.query.CallUnary(ctx, req)
 }
 
+// Render calls land.gno.gnomobile.v1.GnomobileService.Render.
+func (c *gnomobileServiceClient) Render(ctx context.Context, req *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error) {
+	return c.render.CallUnary(ctx, req)
+}
+
+// QEval calls land.gno.gnomobile.v1.GnomobileService.QEval.
+func (c *gnomobileServiceClient) QEval(ctx context.Context, req *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error) {
+	return c.qEval.CallUnary(ctx, req)
+}
+
 // Call calls land.gno.gnomobile.v1.GnomobileService.Call.
 func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
 	return c.call.CallUnary(ctx, req)
@@ -340,6 +375,15 @@ type GnomobileServiceHandler interface {
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
+	// Render calls the Render function for package_path with optional args. The package path
+	// should include the prefix like "gno.land/". This is similar to using a browser URL
+	// <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+	Render(context.Context, *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error)
+	// QEval evaluates the given expression with the realm code at package_path. The package path
+	// should include the prefix like "gno.land/". The expression is usually a function call like
+	// "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
@@ -411,6 +455,16 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.Query,
 		opts...,
 	)
+	gnomobileServiceRenderHandler := connect.NewUnaryHandler(
+		GnomobileServiceRenderProcedure,
+		svc.Render,
+		opts...,
+	)
+	gnomobileServiceQEvalHandler := connect.NewUnaryHandler(
+		GnomobileServiceQEvalProcedure,
+		svc.QEval,
+		opts...,
+	)
 	gnomobileServiceCallHandler := connect.NewUnaryHandler(
 		GnomobileServiceCallProcedure,
 		svc.Call,
@@ -455,6 +509,10 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceDeleteAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceQueryProcedure:
 			gnomobileServiceQueryHandler.ServeHTTP(w, r)
+		case GnomobileServiceRenderProcedure:
+			gnomobileServiceRenderHandler.ServeHTTP(w, r)
+		case GnomobileServiceQEvalProcedure:
+			gnomobileServiceQEvalHandler.ServeHTTP(w, r)
 		case GnomobileServiceCallProcedure:
 			gnomobileServiceCallHandler.ServeHTTP(w, r)
 		case GnomobileServiceAddressToBech32Procedure:
@@ -514,6 +572,14 @@ func (UnimplementedGnomobileServiceHandler) DeleteAccount(context.Context, *conn
 
 func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Query is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) Render(context.Context, *connect.Request[rpc.RenderRequest]) (*connect.Response[rpc.RenderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Render is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.QEval is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {

@@ -663,6 +663,124 @@ export declare class QueryResponse extends Message<QueryResponse> {
 }
 
 /**
+ * @generated from message land.gno.gnomobile.v1.RenderRequest
+ */
+export declare class RenderRequest extends Message<RenderRequest> {
+  /**
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath: string;
+
+  /**
+   * Example: "testboard/1"
+   *
+   * @generated from field: string args = 2;
+   */
+  args: string;
+
+  constructor(data?: PartialMessage<RenderRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.RenderRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RenderRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RenderRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RenderRequest;
+
+  static equals(a: RenderRequest | PlainMessage<RenderRequest> | undefined, b: RenderRequest | PlainMessage<RenderRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.RenderResponse
+ */
+export declare class RenderResponse extends Message<RenderResponse> {
+  /**
+   * The Render function result (typically markdown)
+   *
+   * @generated from field: string result = 1;
+   */
+  result: string;
+
+  constructor(data?: PartialMessage<RenderResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.RenderResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RenderResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RenderResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RenderResponse;
+
+  static equals(a: RenderResponse | PlainMessage<RenderResponse> | undefined, b: RenderResponse | PlainMessage<RenderResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QEvalRequest
+ */
+export declare class QEvalRequest extends Message<QEvalRequest> {
+  /**
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath: string;
+
+  /**
+   * Example: "GetBoardIDFromName(\"testboard\")"
+   *
+   * @generated from field: string expression = 2;
+   */
+  expression: string;
+
+  constructor(data?: PartialMessage<QEvalRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.QEvalRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QEvalRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QEvalRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QEvalRequest;
+
+  static equals(a: QEvalRequest | PlainMessage<QEvalRequest> | undefined, b: QEvalRequest | PlainMessage<QEvalRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.QEvalResponse
+ */
+export declare class QEvalResponse extends Message<QEvalResponse> {
+  /**
+   * A typed expression like "(1 gno.land/r/demo/boards.BoardID)\n(true bool)"
+   *
+   * @generated from field: string result = 1;
+   */
+  result: string;
+
+  constructor(data?: PartialMessage<QEvalResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.QEvalResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QEvalResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QEvalResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QEvalResponse;
+
+  static equals(a: QEvalResponse | PlainMessage<QEvalResponse> | undefined, b: QEvalResponse | PlainMessage<QEvalResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnomobile.v1.CallRequest
  */
 export declare class CallRequest extends Message<CallRequest> {

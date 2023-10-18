@@ -348,6 +348,66 @@ public final class GnomobileServiceGrpc {
     return getQueryMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> getRenderMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Render",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> getRenderMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest, land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> getRenderMethod;
+    if ((getRenderMethod = GnomobileServiceGrpc.getRenderMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getRenderMethod = GnomobileServiceGrpc.getRenderMethod) == null) {
+          GnomobileServiceGrpc.getRenderMethod = getRenderMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest, land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Render"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getRenderMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> getQEvalMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "QEval",
+      requestType = land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest.class,
+      responseType = land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest,
+      land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> getQEvalMethod() {
+    io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest, land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> getQEvalMethod;
+    if ((getQEvalMethod = GnomobileServiceGrpc.getQEvalMethod) == null) {
+      synchronized (GnomobileServiceGrpc.class) {
+        if ((getQEvalMethod = GnomobileServiceGrpc.getQEvalMethod) == null) {
+          GnomobileServiceGrpc.getQEvalMethod = getQEvalMethod =
+              io.grpc.MethodDescriptor.<land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest, land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "QEval"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getQEvalMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<land.gno.gnomobile.v1.Gnomobiletypes.CallRequest,
       land.gno.gnomobile.v1.Gnomobiletypes.CallResponse> getCallMethod;
 
@@ -642,6 +702,31 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Render calls the Render function for package_path with optional args. The package path
+     * should include the prefix like "gno.land/". This is similar to using a browser URL
+     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * </pre>
+     */
+    default void render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRenderMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * QEval evaluates the given expression with the realm code at package_path. The package path
+     * should include the prefix like "gno.land/". The expression is usually a function call like
+     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
+     * </pre>
+     */
+    default void qEval(land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getQEvalMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Call a specific realm function.
      * </pre>
      */
@@ -848,6 +933,33 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Render calls the Render function for package_path with optional args. The package path
+     * should include the prefix like "gno.land/". This is similar to using a browser URL
+     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * </pre>
+     */
+    public void render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRenderMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * QEval evaluates the given expression with the realm code at package_path. The package path
+     * should include the prefix like "gno.land/". The expression is usually a function call like
+     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
+     * </pre>
+     */
+    public void qEval(land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest request,
+        io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getQEvalMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Call a specific realm function.
      * </pre>
      */
@@ -1029,6 +1141,31 @@ public final class GnomobileServiceGrpc {
     public land.gno.gnomobile.v1.Gnomobiletypes.QueryResponse query(land.gno.gnomobile.v1.Gnomobiletypes.QueryRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getQueryMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Render calls the Render function for package_path with optional args. The package path
+     * should include the prefix like "gno.land/". This is similar to using a browser URL
+     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse render(land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRenderMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * QEval evaluates the given expression with the realm code at package_path. The package path
+     * should include the prefix like "gno.land/". The expression is usually a function call like
+     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
+     * </pre>
+     */
+    public land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse qEval(land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getQEvalMethod(), getCallOptions(), request);
     }
 
     /**
@@ -1225,6 +1362,33 @@ public final class GnomobileServiceGrpc {
 
     /**
      * <pre>
+     * Render calls the Render function for package_path with optional args. The package path
+     * should include the prefix like "gno.land/". This is similar to using a browser URL
+     * &lt;testnet&gt;/&lt;pkgPath&gt;:&lt;args&gt; where &lt;pkgPath&gt; doesn't have the prefix like "gno.land/".
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse> render(
+        land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRenderMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * QEval evaluates the given expression with the realm code at package_path. The package path
+     * should include the prefix like "gno.land/". The expression is usually a function call like
+     * "GetBoardIDFromName(&#92;"testboard&#92;")". The return value is a typed expression like
+     * "(1 gno.land/r/demo/boards.BoardID)&#92;n(true bool)".
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse> qEval(
+        land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getQEvalMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Call a specific realm function.
      * </pre>
      */
@@ -1279,10 +1443,12 @@ public final class GnomobileServiceGrpc {
   private static final int METHODID_QUERY_ACCOUNT = 8;
   private static final int METHODID_DELETE_ACCOUNT = 9;
   private static final int METHODID_QUERY = 10;
-  private static final int METHODID_CALL = 11;
-  private static final int METHODID_ADDRESS_TO_BECH32 = 12;
-  private static final int METHODID_ADDRESS_FROM_BECH32 = 13;
-  private static final int METHODID_HELLO = 14;
+  private static final int METHODID_RENDER = 11;
+  private static final int METHODID_QEVAL = 12;
+  private static final int METHODID_CALL = 13;
+  private static final int METHODID_ADDRESS_TO_BECH32 = 14;
+  private static final int METHODID_ADDRESS_FROM_BECH32 = 15;
+  private static final int METHODID_HELLO = 16;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1344,6 +1510,14 @@ public final class GnomobileServiceGrpc {
         case METHODID_QUERY:
           serviceImpl.query((land.gno.gnomobile.v1.Gnomobiletypes.QueryRequest) request,
               (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QueryResponse>) responseObserver);
+          break;
+        case METHODID_RENDER:
+          serviceImpl.render((land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse>) responseObserver);
+          break;
+        case METHODID_QEVAL:
+          serviceImpl.qEval((land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest) request,
+              (io.grpc.stub.StreamObserver<land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse>) responseObserver);
           break;
         case METHODID_CALL:
           serviceImpl.call((land.gno.gnomobile.v1.Gnomobiletypes.CallRequest) request,
@@ -1457,6 +1631,20 @@ public final class GnomobileServiceGrpc {
               land.gno.gnomobile.v1.Gnomobiletypes.QueryResponse>(
                 service, METHODID_QUERY)))
         .addMethod(
+          getRenderMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.RenderRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.RenderResponse>(
+                service, METHODID_RENDER)))
+        .addMethod(
+          getQEvalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              land.gno.gnomobile.v1.Gnomobiletypes.QEvalRequest,
+              land.gno.gnomobile.v1.Gnomobiletypes.QEvalResponse>(
+                service, METHODID_QEVAL)))
+        .addMethod(
           getCallMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1507,6 +1695,8 @@ public final class GnomobileServiceGrpc {
               .addMethod(getQueryAccountMethod())
               .addMethod(getDeleteAccountMethod())
               .addMethod(getQueryMethod())
+              .addMethod(getRenderMethod())
+              .addMethod(getQEvalMethod())
               .addMethod(getCallMethod())
               .addMethod(getAddressToBech32Method())
               .addMethod(getAddressFromBech32Method())

@@ -114,6 +114,30 @@ type QueryResponse struct {
 	Result []byte `json:"result" yaml:"result"`
 }
 
+type RenderRequest struct {
+	// Example: "gno.land/r/demo/boards"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "testboard/1"
+	Args string `json:"args" yaml:"args"`
+}
+
+type RenderResponse struct {
+	// The Render function result (typically markdown)
+	Result string `json:"result" yaml:"result"`
+}
+
+type QEvalRequest struct {
+	// Example: "gno.land/r/demo/boards"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "GetBoardIDFromName(\"testboard\")"
+	Expression string `json:"expression" yaml:"expression"`
+}
+
+type QEvalResponse struct {
+	// A typed expression like "(1 gno.land/r/demo/boards.BoardID)\n(true bool)"
+	Result string `json:"result" yaml:"result"`
+}
+
 type CallRequest struct {
 	// Example: "gno.land/r/demo/boards"
 	PackagePath string `json:"package_path" yaml:"package_path"`

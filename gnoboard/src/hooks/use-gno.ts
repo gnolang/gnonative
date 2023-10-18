@@ -1,6 +1,7 @@
 import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
 import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetActiveAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { QueryAccountRequest } from '@gno/api/gnomobiletypes_pb';
@@ -8,6 +9,8 @@ import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { QueryRequest } from '@gno/api/gnomobiletypes_pb';
 import { QueryResponse } from '@gno/api/gnomobiletypes_pb';
+import { RenderRequest } from '@gno/api/gnomobiletypes_pb';
+import { QEvalRequest } from '@gno/api/gnomobiletypes_pb';
 import { CallRequest } from '@gno/api/gnomobiletypes_pb';
 import { CallResponse } from '@gno/api/gnomobiletypes_pb';
 import { AddressToBech32Request } from '@gno/api/gnomobiletypes_pb';
@@ -17,7 +20,6 @@ import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
 import { GnomobileService } from '@gno/api/rpc_connect';
-import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 
 interface GnoResponse {
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
@@ -29,6 +31,8 @@ interface GnoResponse {
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (nameOrBech32: string, password: string, skipPassword: boolean) => Promise<DeleteAccountResponse>;
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
+  render: (packagePath: string, args: string) => Promise<string>;
+  qEval: (packagePath: string, expression: string) => Promise<string>;
   call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => Promise<CallResponse>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
@@ -129,6 +133,28 @@ export const useGno = (): GnoResponse => {
     return reponse;
   };
 
+  const render = async (packagePath: string, args: string) => {
+    const client = await getClient();
+    const reponse = await client.render(
+      new RenderRequest({
+        packagePath,
+        args,
+      }),
+    );
+    return reponse.result;
+  };
+
+  const qEval = async (packagePath: string, expression: string) => {
+    const client = await getClient();
+    const reponse = await client.qEval(
+      new QEvalRequest({
+        packagePath,
+        expression,
+      }),
+    );
+    return reponse.result;
+  };
+
   const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number) => {
     const client = await getClient();
     const reponse = await client.call(
@@ -169,6 +195,8 @@ export const useGno = (): GnoResponse => {
     queryAccount,
     deleteAccount,
     query,
+    render,
+    qEval,
     call,
     addressToBech32,
     addressFromBech32,
