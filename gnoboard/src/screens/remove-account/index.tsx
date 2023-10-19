@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import SideMenuAccountList from '@gno/components/common/side-menu-account-list/side-menu-account-list';
 import { GnoAccount } from '@gno/native_modules/types';
+import { RoutePath } from '@gno/router/path';
 
 const RemoveAccount = () => {
   const gno = useGno();
@@ -31,7 +32,7 @@ const RemoveAccount = () => {
   }, [navigation]);
 
   const onChangeAccountHandler = async (account: GnoAccount) => {
-    navigation.navigate('RemoveConfirm', { accountName: account.name });
+    navigation.navigate(RoutePath.RemoveConfirm, { accountName: account.name });
   };
 
   if (loading) return <Loading message={loading} />;

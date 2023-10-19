@@ -8,6 +8,7 @@ import Button from '@gno/components/buttons';
 import styled from 'styled-components/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Alert from '@gno/components/alert';
+import { RoutePath } from '@gno/router/path';
 
 export type Props = NativeStackScreenProps<RouterWelcomeStack, 'RemoveConfirm'>;
 
@@ -21,7 +22,7 @@ const RemoveConfirm = ({ route }: Props) => {
   const onConfirm = async () => {
     try {
       await gno.deleteAccount(accountName, undefined, true);
-      navigation.navigate('WalletCreate');
+      navigation.navigate(RoutePath.Home);
     } catch (error) {
       setError(error?.toString());
     }
