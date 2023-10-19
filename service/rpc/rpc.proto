@@ -106,6 +106,7 @@ enum ErrCode {
   ErrNoActiveAccount = 107;
   ErrRunGRPCServer = 108;
   ErrDecryptionFailed = 109;
+  ErrUnknownAddress = 110; // indicates that the address is unknown on the blockchain
 }
 
 message ErrDetails {

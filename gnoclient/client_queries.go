@@ -48,6 +48,9 @@ func (c Client) QueryAccount(addr crypto.Address) (*std.BaseAccount, *ctypes.Res
 	if err != nil {
 		return nil, nil, errors.Wrap(err, "query account")
 	}
+	if qres.Response.Data == nil || len(qres.Response.Data) == 0 || string(qres.Response.Data) == "null" {
+		return nil, nil, std.ErrUnknownAddress("unknown address: " + crypto.AddressToBech32(addr))
+	}
 
 	var qret struct{ BaseAccount std.BaseAccount }
 	err = amino.UnmarshalJSON(qres.Response.Data, &qret)

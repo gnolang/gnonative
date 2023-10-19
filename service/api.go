@@ -5,12 +5,14 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
+	"github.com/gnolang/gno/tm2/pkg/std"
 	"go.uber.org/zap"
 
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
@@ -141,6 +143,9 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	// gnoclient wants the bech32 address.
 	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
+		if errors.As(err, &std.UnknownAddressError{}) {
+			return nil, rpc.ErrCode_ErrUnknownAddress
+		}
 		return nil, err
 	}
 

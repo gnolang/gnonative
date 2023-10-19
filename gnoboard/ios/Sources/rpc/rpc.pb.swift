@@ -46,6 +46,9 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
   case errNoActiveAccount // = 107
   case errRunGrpcserver // = 108
   case errDecryptionFailed // = 109
+
+  /// indicates that the address is unknown on the blockchain
+  case errUnknownAddress // = 110
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -68,6 +71,7 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case 107: self = .errNoActiveAccount
     case 108: self = .errRunGrpcserver
     case 109: self = .errDecryptionFailed
+    case 110: self = .errUnknownAddress
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -88,6 +92,7 @@ public enum Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf.Enum {
     case .errNoActiveAccount: return 107
     case .errRunGrpcserver: return 108
     case .errDecryptionFailed: return 109
+    case .errUnknownAddress: return 110
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -113,6 +118,7 @@ extension Land_Gno_Gnomobile_V1_ErrCode: CaseIterable {
     .errNoActiveAccount,
     .errRunGrpcserver,
     .errDecryptionFailed,
+    .errUnknownAddress,
   ]
 }
 
@@ -155,6 +161,7 @@ extension Land_Gno_Gnomobile_V1_ErrCode: SwiftProtobuf._ProtoNameProviding {
     107: .same(proto: "ErrNoActiveAccount"),
     108: .same(proto: "ErrRunGRPCServer"),
     109: .same(proto: "ErrDecryptionFailed"),
+    110: .same(proto: "ErrUnknownAddress"),
   ]
 }
 
