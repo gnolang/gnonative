@@ -3,6 +3,8 @@ export enum RoutePath {
   ImportPrivateKey = 'ImportPrivateKey',
   GenerateSeedPhrase = 'GenerateSeedPhrase',
   CreatePassword = 'CreatePassword',
+  RemoveAccount = 'RemoveAccount',
+  RemoveConfirm = 'RemoveConfirm',
   DevMode = 'DevMode',
   SwitchAccounts = 'SwitchAccounts',
 }
