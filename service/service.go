@@ -37,7 +37,8 @@ type GnomobileService interface {
 }
 
 type userAccount struct {
-	keyInfo keys.Info
+	keyInfo  keys.Info
+	password string
 }
 
 type gnomobileService struct {

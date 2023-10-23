@@ -117,10 +117,18 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	s.lock.Unlock()
 
 	s.getSigner().Account = req.Msg.NameOrBech32
+	s.getSigner().Password = account.password
 	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
 }
 
 func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	if s.activeAccount == nil {
+		return nil, rpc.ErrCode_ErrNoActiveAccount
+	}
+	s.activeAccount.password = req.Msg.Password
+
 	s.getSigner().Password = req.Msg.Password
 	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
