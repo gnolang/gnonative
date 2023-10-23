@@ -90,6 +90,14 @@ public final class Rpc {
      * <code>ErrDecryptionFailed = 109;</code>
      */
     ErrDecryptionFailed(109),
+    /**
+     * <pre>
+     * indicates that the address is unknown on the blockchain
+     * </pre>
+     *
+     * <code>ErrUnknownAddress = 110;</code>
+     */
+    ErrUnknownAddress(110),
     UNRECOGNIZED(-1),
     ;
 
@@ -165,6 +173,14 @@ public final class Rpc {
      * <code>ErrDecryptionFailed = 109;</code>
      */
     public static final int ErrDecryptionFailed_VALUE = 109;
+    /**
+     * <pre>
+     * indicates that the address is unknown on the blockchain
+     * </pre>
+     *
+     * <code>ErrUnknownAddress = 110;</code>
+     */
+    public static final int ErrUnknownAddress_VALUE = 110;
 
 
     @java.lang.Override
@@ -202,6 +218,7 @@ public final class Rpc {
         case 107: return ErrNoActiveAccount;
         case 108: return ErrRunGRPCServer;
         case 109: return ErrDecryptionFailed;
+        case 110: return ErrUnknownAddress;
         default: return null;
       }
     }

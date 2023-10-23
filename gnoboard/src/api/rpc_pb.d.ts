@@ -94,6 +94,13 @@ export declare enum ErrCode {
    * @generated from enum value: ErrDecryptionFailed = 109;
    */
   ErrDecryptionFailed = 109,
+
+  /**
+   * indicates that the address is unknown on the blockchain
+   *
+   * @generated from enum value: ErrUnknownAddress = 110;
+   */
+  ErrUnknownAddress = 110,
 }
 
 /**

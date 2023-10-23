@@ -3,4 +3,4 @@ ceb2922aa6e25cc4b9256163c5a31443770af3a6  Makefile
 8e0d611d49279bc49aa043c5f518326b50dfd76c  service/gnomobiletypes/gnomobiletypes.go
 50596a8d996f91253ef714fe24b618f05a6f179a  service/gnomobiletypes/package.go
 cc43128277f99518087578f22e7e56a3de0c0f1f  service/rpc/gnomobiletypes.proto
-4c4328ef35536465faedd2770c061342f863db39  service/rpc/rpc.proto
+5cf0c76d7a484f82c7c56834983dba63286916f7  service/rpc/rpc.proto

@@ -42,7 +42,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
       console.log('createAccount response: ' + response);
       await gno.selectAccount(name);
       await gno.setPassword(password);
-      navigation.navigate(RoutePath.WalletCreate);
+      navigation.navigate(RoutePath.Home);
     } catch (error) {
       console.log(error);
     }

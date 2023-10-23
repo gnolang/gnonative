@@ -1,5 +1,5 @@
 export enum RoutePath {
-  WalletCreate = 'WalletCreate',
+  Home = 'Home',
   ImportPrivateKey = 'ImportPrivateKey',
   GenerateSeedPhrase = 'GenerateSeedPhrase',
   CreatePassword = 'CreatePassword',

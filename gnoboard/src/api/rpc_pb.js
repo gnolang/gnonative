@@ -32,6 +32,7 @@ export const ErrCode = proto3.makeEnum(
     {no: 107, name: "ErrNoActiveAccount"},
     {no: 108, name: "ErrRunGRPCServer"},
     {no: 109, name: "ErrDecryptionFailed"},
+    {no: 110, name: "ErrUnknownAddress"},
   ],
 );
 
