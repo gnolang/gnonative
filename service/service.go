@@ -36,6 +36,11 @@ type GnomobileService interface {
 	io.Closer
 }
 
+type userAccount struct {
+	keyInfo  keys.Info
+	password string
+}
+
 type gnomobileService struct {
 	logger     *zap.Logger
 	client     *gnoclient.Client
@@ -43,7 +48,10 @@ type gnomobileService struct {
 	socketPath string
 	lock       sync.RWMutex
 
-	activeAccount keys.Info
+	// Map of key name to userAccount.
+	userAccounts map[string]*userAccount
+	// The active account in userAccounts, or nil if none
+	activeAccount *userAccount
 
 	listener net.Listener
 	server   *http.Server
@@ -78,8 +86,9 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 
 func initService(cfg *Config) (*gnomobileService, error) {
 	svc := &gnomobileService{
-		logger:  cfg.Logger,
-		tcpPort: cfg.TcpPort,
+		logger:       cfg.Logger,
+		tcpPort:      cfg.TcpPort,
+		userAccounts: make(map[string]*userAccount),
 	}
 
 	if err := cfg.checkDirs(); err != nil {

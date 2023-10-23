@@ -95,6 +95,7 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Reque
 func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
+	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, rpc.ErrCode_ErrCryptoKeyNotFound
@@ -106,14 +107,28 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	}
 
 	s.lock.Lock()
-	s.activeAccount = key
+	account, ok := s.userAccounts[req.Msg.NameOrBech32]
+	if !ok {
+		account = &userAccount{}
+		s.userAccounts[req.Msg.NameOrBech32] = account
+	}
+	account.keyInfo = key
+	s.activeAccount = account
 	s.lock.Unlock()
 
 	s.getSigner().Account = req.Msg.NameOrBech32
+	s.getSigner().Password = account.password
 	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
 }
 
 func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	if s.activeAccount == nil {
+		return nil, rpc.ErrCode_ErrNoActiveAccount
+	}
+	s.activeAccount.password = req.Msg.Password
+
 	s.getSigner().Password = req.Msg.Password
 	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
@@ -122,14 +137,14 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	s.logger.Debug("GetActiveAccount called")
 
 	s.lock.RLock()
-	key := s.activeAccount
+	account := s.activeAccount
 	s.lock.RUnlock()
 
-	if key == nil {
+	if account == nil {
 		return nil, rpc.ErrCode_ErrNoActiveAccount
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := convertKeyInfo(account.keyInfo)
 	if err != nil {
 		return nil, err
 	}
@@ -179,8 +194,9 @@ func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Reque
 	}
 
 	s.lock.Lock()
+	delete(s.userAccounts, req.Msg.NameOrBech32)
 	if s.activeAccount != nil &&
-		(s.activeAccount.GetName() == req.Msg.NameOrBech32 || crypto.AddressToBech32(s.activeAccount.GetAddress()) == req.Msg.NameOrBech32) {
+		(s.activeAccount.keyInfo.GetName() == req.Msg.NameOrBech32 || crypto.AddressToBech32(s.activeAccount.keyInfo.GetAddress()) == req.Msg.NameOrBech32) {
 		// The deleted account was the active account.
 		s.activeAccount = nil
 	}
