@@ -6,6 +6,7 @@ package service
 import (
 	"context"
 	"errors"
+	"time"
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
@@ -289,4 +290,21 @@ func (s *gnomobileService) Hello(ctx context.Context, req *connect.Request[rpc.H
 	return connect.NewResponse(&rpc.HelloResponse{
 		Greeting: "Hello " + req.Msg.Name,
 	}), nil
+}
+
+// HelloStream is for debug purposes
+func (s *gnomobileService) HelloStream(ctx context.Context, req *connect.Request[rpc.HelloStreamRequest], stream *connect.ServerStream[rpc.HelloStreamResponse]) error {
+	s.logger.Debug("HelloStream called")
+	for i := 0; i < 4; i++ {
+		if err := stream.Send(&rpc.HelloStreamResponse{
+			Greeting: "Hello " + req.Msg.Name,
+		}); err != nil {
+			s.logger.Error("HelloStream returned error", zap.Error(err))
+			return err
+		}
+		time.Sleep(2 * time.Second)
+	}
+
+	s.logger.Debug("HelloStream returned ok")
+	return nil
 }

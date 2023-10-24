@@ -1008,3 +1008,51 @@ export declare class HelloResponse extends Message<HelloResponse> {
   static equals(a: HelloResponse | PlainMessage<HelloResponse> | undefined, b: HelloResponse | PlainMessage<HelloResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloStreamRequest
+ */
+export declare class HelloStreamRequest extends Message<HelloStreamRequest> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  constructor(data?: PartialMessage<HelloStreamRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.HelloStreamRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HelloStreamRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HelloStreamRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloStreamRequest;
+
+  static equals(a: HelloStreamRequest | PlainMessage<HelloStreamRequest> | undefined, b: HelloStreamRequest | PlainMessage<HelloStreamRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloStreamResponse
+ */
+export declare class HelloStreamResponse extends Message<HelloStreamResponse> {
+  /**
+   * @generated from field: string greeting = 1;
+   */
+  greeting: string;
+
+  constructor(data?: PartialMessage<HelloStreamResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.HelloStreamResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HelloStreamResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HelloStreamResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloStreamResponse;
+
+  static equals(a: HelloStreamResponse | PlainMessage<HelloStreamResponse> | undefined, b: HelloStreamResponse | PlainMessage<HelloStreamResponse> | undefined): boolean;
+}
+

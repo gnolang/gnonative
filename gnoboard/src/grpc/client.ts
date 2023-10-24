@@ -4,7 +4,6 @@ import { GnomobileService } from '@gno/api/rpc_connect';
 
 // Create a GnomobileService client
 export function createClient(port: number) {
-  console.log('createClient', port)
   return createPromiseClient(
     GnomobileService,
     createXHRGrpcWebTransport({

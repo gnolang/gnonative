@@ -49,4 +49,6 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	AddressFromBech32Response{},
 	HelloRequest{},
 	HelloResponse{},
+	HelloStreamRequest{},
+	HelloStreamResponse{},
 ).WithComments(path.Join(amino.GetCallersDirname(), "gnomobiletypes.go")))

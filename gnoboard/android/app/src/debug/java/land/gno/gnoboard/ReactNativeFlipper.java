@@ -38,15 +38,16 @@ public class ReactNativeFlipper {
       client.addPlugin(new SharedPreferencesFlipperPlugin(context));
       client.addPlugin(CrashReporterPlugin.getInstance());
 
-      NetworkFlipperPlugin networkFlipperPlugin = new NetworkFlipperPlugin();
-      NetworkingModule.setCustomClientBuilder(
-          new NetworkingModule.CustomClientBuilder() {
-            @Override
-            public void apply(OkHttpClient.Builder builder) {
-              builder.addNetworkInterceptor(new FlipperOkhttpInterceptor(networkFlipperPlugin));
-            }
-          });
-      client.addPlugin(networkFlipperPlugin);
+      // Need to comment this code to allow gRPC streams to work: https://github.com/react-native-community/fetch/issues/13#issuecomment-1703097655
+//      NetworkFlipperPlugin networkFlipperPlugin = new NetworkFlipperPlugin();
+//      NetworkingModule.setCustomClientBuilder(
+//          new NetworkingModule.CustomClientBuilder() {
+//            @Override
+//            public void apply(OkHttpClient.Builder builder) {
+//              builder.addNetworkInterceptor(new FlipperOkhttpInterceptor(networkFlipperPlugin));
+//            }
+//          });
+//      client.addPlugin(networkFlipperPlugin);
       client.start();
 
       // Fresco Plugin needs to ensure that ImagePipelineFactory is initialized

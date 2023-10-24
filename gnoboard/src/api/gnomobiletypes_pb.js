@@ -390,3 +390,23 @@ export const HelloResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloStreamRequest
+ */
+export const HelloStreamRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.HelloStreamRequest",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.HelloStreamResponse
+ */
+export const HelloStreamResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.HelloStreamResponse",
+  () => [
+    { no: 1, name: "greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -111,7 +111,8 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * QueryAccount retrieves account information from the blockchain for a given address.
+     * QueryAccount retrieves account information from the blockchain for a given
+     * address.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QueryAccount
      */
@@ -122,9 +123,9 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * DeleteAccount deletes the account with the given name, using the password to
-     * ensure access. However, if skip_password is true, then ignore the password.
-     * If the account doesn't exist, then return ErrCryptoKeyNotFound.
+     * DeleteAccount deletes the account with the given name, using the password
+     * to ensure access. However, if skip_password is true, then ignore the
+     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
      * If the password is wrong, then return ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.DeleteAccount
@@ -147,9 +148,10 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Render calls the Render function for package_path with optional args. The package path
-     * should include the prefix like "gno.land/". This is similar to using a browser URL
-     * <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have the prefix like "gno.land/".
+     * Render calls the Render function for package_path with optional args. The
+     * package path should include the prefix like "gno.land/". This is similar to
+     * using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+     * the prefix like "gno.land/".
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Render
      */
@@ -160,9 +162,10 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * QEval evaluates the given expression with the realm code at package_path. The package path
-     * should include the prefix like "gno.land/". The expression is usually a function call like
-     * "GetBoardIDFromName(\"testboard\")". The return value is a typed expression like
+     * QEval evaluates the given expression with the realm code at package_path.
+     * The package path should include the prefix like "gno.land/". The expression
+     * is usually a function call like "GetBoardIDFromName(\"testboard\")". The
+     * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QEval
@@ -216,6 +219,17 @@ export declare const GnomobileService: {
       readonly I: typeof HelloRequest,
       readonly O: typeof HelloResponse,
       readonly kind: MethodKind.Unary,
+    },
+    /**
+     * HelloStream is for debug purposes
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.HelloStream
+     */
+    readonly helloStream: {
+      readonly name: "HelloStream",
+      readonly I: typeof HelloStreamRequest,
+      readonly O: typeof HelloStreamResponse,
+      readonly kind: MethodKind.ServerStreaming,
     },
   }
 };
