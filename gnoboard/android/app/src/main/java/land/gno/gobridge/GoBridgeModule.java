@@ -11,19 +11,11 @@ import gnolang.gno.gnomobile.Gnomobile;
 import gnolang.gno.gnomobile.Bridge;
 import gnolang.gno.gnomobile.BridgeConfig;
 
-import io.grpc.Channel;
-import android.net.LocalSocketAddress.Namespace;
-
-import land.gno.gnomobile.v1.GnomobileServiceGrpc;
-import land.gno.udschannel.UdsChannelBuilder;
-
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
     private final ReactApplicationContext reactContext;
     private final File rootDir;
-    private String socketPath;
     private int socketPort;
-    private GnomobileServiceGrpc.GnomobileServiceBlockingStub blockingStub;
     private static Bridge bridgeGnomobile = null;
 
     public GoBridgeModule(ReactApplicationContext reactContext) {
@@ -55,12 +47,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             config.setUseUdsListener(true);
 
             bridgeGnomobile = Gnomobile.newBridge(config);
-
-            socketPath = bridgeGnomobile.getSocketPath();
             socketPort = (int)bridgeGnomobile.getTcpPort();
-
-            Channel channel = UdsChannelBuilder.forPath(socketPath, Namespace.FILESYSTEM).build();
-            blockingStub = GnomobileServiceGrpc.newBlockingStub(channel);
 
             promise.resolve(true);
         } catch (Exception err) {

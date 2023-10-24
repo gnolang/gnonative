@@ -76,8 +76,6 @@ _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
 	rm -f service/rpc/*.pb.go
 	rm -f service/rpc/rpcconnect/*.connect.go
-	rm -f gnoboard/android/app/src/main/java/land/gno/gnomobile/v1/*.java
-	rm -f gnoboard/ios/Sources/rpc/*.{grpc,pb}.swift
 	rm -f gnoboard/src/api/*.{ts,js}
 
 $(gen_sum): $(gen_src)
