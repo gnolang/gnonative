@@ -51,6 +51,9 @@ build.android: generate $(gnocore_aar) $(gnocore_jar)
 # Generate API from protofiles
 generate: api.generate
 
+# Clean and generate
+regenerate: api.clean api.generate
+
 # Clean all generated files
 clean: bind.clean api.clean
 
@@ -59,7 +62,7 @@ fclean: clean
 	rm -rf node_modules
 	rm -rf $(cache_dir)
 
-.PHONY: generate build.ios build.android clean fclean
+.PHONY: generate regenerate build.ios build.android clean fclean
 
 # - API : Handle API generation and cleaning
 
@@ -77,6 +80,7 @@ _api.clean.protocol:
 	rm -f service/rpc/*.pb.go
 	rm -f service/rpc/rpcconnect/*.connect.go
 	rm -f gnoboard/src/api/*.{ts,js}
+	rm -f $(gen_sum)
 
 $(gen_sum): $(gen_src)
 	$(call check-program, shasum buf)
