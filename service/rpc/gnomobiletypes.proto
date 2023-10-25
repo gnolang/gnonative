@@ -81,6 +81,8 @@ message SelectAccountRequest {
 
 message SelectAccountResponse {
 	KeyInfo key = 1;
+	// True if the password has been set. If false, then call SetPassword.
+	bool has_password = 2;
 }
 
 message GetActiveAccountRequest {
@@ -88,6 +90,8 @@ message GetActiveAccountRequest {
 
 message GetActiveAccountResponse {
 	KeyInfo key = 1;
+	// True if the password has been set. If false, then call SetPassword.
+	bool has_password = 2;
 }
 
 message QueryAccountRequest {
