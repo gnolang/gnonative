@@ -25,6 +25,7 @@ function DevMode() {
       console.log('response: ', response);
       setAppConsole(Buffer.from(response.result).toString());
     } catch (error) {
+      // TODO: If error?.rawMessage === 'ErrDecryptionFailed(#109)' then have the user enter the password.
       console.log(error);
       setAppConsole('error' + JSON.stringify(error));
     } finally {

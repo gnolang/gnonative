@@ -1,9 +1,11 @@
 import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
 import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { SelectAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetActiveAccountRequest } from '@gno/api/gnomobiletypes_pb';
+import { GetActiveAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { QueryAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
@@ -25,9 +27,9 @@ interface GnoResponse {
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
-  selectAccount: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
+  selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
-  getActiveAccount: () => Promise<GnoAccount | undefined>;
+  getActiveAccount: () => Promise<GetActiveAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (nameOrBech32: string, password: string | undefined, skipPassword: boolean) => Promise<DeleteAccountResponse>;
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
@@ -89,7 +91,7 @@ export const useGno = (): GnoResponse => {
         nameOrBech32,
       }),
     );
-    return response.key;
+    return response;
   };
 
   const setPassword = async (password: string) => {
@@ -101,7 +103,7 @@ export const useGno = (): GnoResponse => {
   const getActiveAccount = async () => {
     const client = await getClient();
     const response = await client.getActiveAccount(new GetActiveAccountRequest());
-    return response.key;
+    return response;
   };
 
   const queryAccount = async (address: Uint8Array) => {

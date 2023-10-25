@@ -34,7 +34,8 @@ const SwitchAccounts = () => {
   const onChangeAccountHandler = async (value: GnoAccount) => {
     try {
       setLoading('Changing account...');
-      await gno.selectAccount(value.name);
+      const response = await gno.selectAccount(value.name);
+      // TODO: If !response.hasPassword then have the user enter the password.
       setLoading(undefined);
       navigation.navigate(RoutePath.Home);
     } catch (error: unknown | Error) {

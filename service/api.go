@@ -119,7 +119,10 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 
 	s.getSigner().Account = req.Msg.NameOrBech32
 	s.getSigner().Password = account.password
-	return connect.NewResponse(&rpc.SelectAccountResponse{Key: info}), nil
+	return connect.NewResponse(&rpc.SelectAccountResponse{
+		Key:         info,
+		HasPassword: account.password != "",
+	}), nil
 }
 
 func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error) {
@@ -150,7 +153,10 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 		return nil, err
 	}
 
-	return connect.NewResponse(&rpc.GetActiveAccountResponse{Key: info}), nil
+	return connect.NewResponse(&rpc.GetActiveAccountResponse{
+		Key:         info,
+		HasPassword: account.password != "",
+	}), nil
 }
 
 func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error) {
@@ -265,7 +271,13 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 
 	bres, err := s.client.Call(cfg)
 	if err != nil {
-		return nil, err
+		if errors.As(err, &std.UnknownAddressError{}) {
+			return nil, rpc.ErrCode_ErrUnknownAddress
+		} else if keyerror.IsErrWrongPassword(err) {
+			return nil, rpc.ErrCode_ErrDecryptionFailed
+		} else {
+			return nil, err
+		}
 	}
 
 	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil

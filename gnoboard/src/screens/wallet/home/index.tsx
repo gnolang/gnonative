@@ -30,9 +30,9 @@ export const Home: React.FC = () => {
 
       try {
         const response = await gno.getActiveAccount();
-        setAccount(response);
-        if (response) {
-          const balance = await gno.queryAccount(response.address);
+        setAccount(response.key);
+        if (response.key) {
+          const balance = await gno.queryAccount(response.key.address);
           setBalance(balance);
         }
       } catch (error: unknown | Error) {
