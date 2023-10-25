@@ -77,6 +77,8 @@ type SelectAccountRequest struct {
 
 type SelectAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+	// True if the password has been set. If false, then call SetPassword.
+	HasPassword bool `json:"has_password" yaml:"has_password"`
 }
 
 type GetActiveAccountRequest struct {
@@ -84,6 +86,8 @@ type GetActiveAccountRequest struct {
 
 type GetActiveAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+	// True if the password has been set. If false, then call SetPassword.
+	HasPassword bool `json:"has_password" yaml:"has_password"`
 }
 
 type QueryAccountRequest struct {
