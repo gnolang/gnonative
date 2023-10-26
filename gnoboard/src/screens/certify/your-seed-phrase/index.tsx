@@ -45,8 +45,8 @@ const YourSeedPhrase: React.FC = () => {
         <Text.Title>{text.title}</Text.Title>
         <Text.Body>{text.desc}</Text.Body>
         <SeedBox placeholder='Your seed phrase' value={phrase} onChangeText={setPhrase} editable={false} />
-        {!phrase ? <Button title='Generate' onPress={onReviewPressHandler} /> : null}
-        {phrase ? <Button title='Create Account' onPress={onNextPressHandler} /> : null}
+        {!phrase ? <Button title='Generate' onPress={onReviewPressHandler} variant='primary' /> : null}
+        {phrase ? <Button title='Create Account' onPress={onNextPressHandler} variant='primary' /> : null}
       </Layout.Body>
     </Layout.Container>
   );

@@ -65,7 +65,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
           error={error}
         />
         <SeedBox placeholder='Your seed phrase' value={phrase} editable={false} />
-        <Button title='Save' onPress={onSaveHandler} />
+        <Button title='Save' onPress={onSaveHandler} variant='primary' />
       </Layout.Body>
     </Layout.Container>
   );

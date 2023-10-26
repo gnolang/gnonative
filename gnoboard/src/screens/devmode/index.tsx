@@ -6,7 +6,7 @@ import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
-import { Buffer } from 'buffer'
+import { Buffer } from 'buffer';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
@@ -33,22 +33,6 @@ function DevMode() {
     }
   };
 
-  const onLoadAccountPress = async () => {
-    setLoading('Loading account...');
-    setAppConsole('Loading account...');
-
-    try {
-      const response = await gno.listKeyInfo();
-      console.log('response: ', response);
-      setAppConsole(JSON.stringify(response));
-    } catch (error) {
-      console.log(error);
-      setAppConsole('error' + JSON.stringify(error));
-    } finally {
-      setAppConsole('done');
-    }
-  };
-
   const loadInBrowser = () => {
     Linking.openURL('http://testnet.gno.berty.io/r/demo/boards:gnomobile/1').catch((err) => console.error("Couldn't load page", err));
   };
@@ -58,14 +42,13 @@ function DevMode() {
       <Layout.Header />
       <Layout.Body>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <Button title='Load Accounts' onPress={onLoadAccountPress} />
           <Text>Content:</Text>
           <View style={customStyles.sendGroupLikeWhatsapp}>
             <TextInput style={customStyles.inputMsg} value={postContent} onChangeText={setPostContent} />
-            <Button title='Send' onPress={onPostPress} />
+            <Button title='Send' onPress={onPostPress} variant='primary' style={{ width: '30%' }} />
           </View>
           <ConsoleView text={appConsole} />
-          <Button title='Open http://testnet.gno.berty.io/r/demo/boards:gnomobile/1' onPress={loadInBrowser} />
+          <Button title='Open http://testnet.gno.berty.io/r/demo/boards:gnomobile/1' onPress={loadInBrowser} variant='primary' />
         </ScrollView>
       </Layout.Body>
     </Layout.Container>
@@ -78,7 +61,7 @@ const customStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  inputMsg: { width: '80%' },
+  inputMsg: { width: '70%' },
 });
 
 export default DevMode;
