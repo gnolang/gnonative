@@ -3,7 +3,7 @@ import { RoutePath } from './path';
 import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '@gno/screens/wallet/home';
 import YourSeedPhrase from '@gno/screens/certify/your-seed-phrase';
-import EnterSeedPharse from '@gno/screens/certify/enter-seed';
+import EnterSeedPhrase from '@gno/screens/certify/enter-seed';
 import CreatePassword from '@gno/screens/certify/create-password';
 import DevMode from '@gno/screens/devmode';
 import SwitchAccounts from '@gno/screens/switch-accounts';
@@ -30,7 +30,7 @@ const SignedOutStackScreen = () => (
     <Stack.Group screenOptions={{ headerShown: false }}>
       <Stack.Screen name={RoutePath.Home} component={Home}></Stack.Screen>
       <Stack.Screen name={RoutePath.GenerateSeedPhrase} component={YourSeedPhrase} />
-      <Stack.Screen name={RoutePath.ImportPrivateKey} component={EnterSeedPharse} />
+      <Stack.Screen name={RoutePath.ImportPrivateKey} component={EnterSeedPhrase} />
       <Stack.Screen name={RoutePath.CreatePassword} component={CreatePassword} />
       <Stack.Screen name={RoutePath.RemoveAccount} component={RemoveAccount}></Stack.Screen>
       <Stack.Screen name={RoutePath.RemoveConfirm} component={RemoveConfirm}></Stack.Screen>

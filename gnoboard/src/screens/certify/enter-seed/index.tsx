@@ -16,7 +16,7 @@ const walletContent = {
   terms: 'This phrase will only be stored on this device. Adena can’t recover it for you.',
 };
 
-const EnterSeedPharse = () => {
+const EnterSeedPhrase = () => {
   const [recoveryPhrase, setRecoveryPhrase] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -63,4 +63,4 @@ const EnterSeedPharse = () => {
   );
 };
 
-export default EnterSeedPharse;
+export default EnterSeedPhrase;
