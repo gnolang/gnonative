@@ -9,6 +9,7 @@ import styled from 'styled-components/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Alert from '@gno/components/alert';
 import { RoutePath } from '@gno/router/path';
+import { Spacer } from '@gno/components/row';
 
 export type Props = NativeStackScreenProps<RouterWelcomeStack, 'RemoveConfirm'>;
 
@@ -42,17 +43,17 @@ const RemoveConfirm = ({ route }: Props) => {
           key.
         </Text.Body>
         <Alert severity='error' message={error} />
-        <HorizontalView>
-          <Button title='Cancel' onPress={onCancel} />
-          <Button title='Remove' onPress={onConfirm} />
-        </HorizontalView>
+        <ButtonGroup>
+          <Button title='Remove' onPress={onConfirm} variant='primary-red' />
+          <Spacer />
+          <Button title='Cancel' onPress={onCancel} variant='primary' />
+        </ButtonGroup>
       </Layout.Body>
     </Layout.Container>
   );
 };
 
-const HorizontalView = styled.View`
-  flex-direction: row;
+const ButtonGroup = styled.View`
   margin-top: 24px;
   margin-left: 30px;
   margin-right: 30px;

@@ -53,6 +53,8 @@ const getStories = () => {
     '../src/components/textinput/Input.stories.tsx': require('../src/components/textinput/Input.stories.tsx'),
     '../src/components/account/AccountBalance.stories.tsx': require('../src/components/account/AccountBalance.stories.tsx'),
     '../src/components/account/CurrentAccount.stories.tsx': require('../src/components/account/CurrentAccount.stories.tsx'),
+    '../src/components/modal/Modal.stories.tsx': require('../src/components/modal/Modal.stories.tsx'),
+    '../src/components/modal/ModalConfirm.stories.tsx': require('../src/components/modal/ModalConfirm.stories.tsx'),
   };
 };
 

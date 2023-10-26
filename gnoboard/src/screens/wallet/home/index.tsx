@@ -12,6 +12,7 @@ import Loading from '@gno/screens/loading';
 import { GnoAccount } from '@gno/native_modules/types';
 import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { AccountBalance } from '@gno/components/account';
+import { Spacer } from '@gno/components/row';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -57,11 +58,15 @@ export const Home: React.FC = () => {
         <CurrentAccount account={account} />
         <AccountBalance accountInfo={balance?.accountInfo} unknownAddress={unknownAddress} />
         <ButtonGroup>
-          <Button title='Create New Account' onPress={() => navigation.navigate(RoutePath.GenerateSeedPhrase)} />
-          <Button title='Import Account' onPress={() => navigation.navigate(RoutePath.ImportPrivateKey)} />
-          <Button title='Switch Accounts' onPress={() => navigation.navigate(RoutePath.SwitchAccounts)} />
-          <Button title='Remove Account' onPress={() => navigation.navigate(RoutePath.RemoveAccount)} />
-          <Button title='Developer Mode' onPress={() => navigation.navigate(RoutePath.DevMode)} />
+          <Button title='Create New Account' onPress={() => navigation.navigate(RoutePath.GenerateSeedPhrase)} variant='primary' />
+          <Spacer />
+          <Button title='Import Account' onPress={() => navigation.navigate(RoutePath.ImportPrivateKey)} variant='primary' />
+          <Spacer />
+          <Button title='Switch Accounts' onPress={() => navigation.navigate(RoutePath.SwitchAccounts)} variant='primary' />
+          <Spacer />
+          <Button title='Remove Account' onPress={() => navigation.navigate(RoutePath.RemoveAccount)} variant='primary' />
+          <Spacer />
+          <Button title='Developer Mode' onPress={() => navigation.navigate(RoutePath.DevMode)} variant='primary' />
         </ButtonGroup>
       </Layout.Body>
     </Layout.Container>

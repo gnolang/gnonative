@@ -16,6 +16,15 @@ const Body = styled.Text`
   text-align: left;
 `;
 
+/** styleName: body/base/medium; */
+const BodyMedium = styled.Text`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0;
+  text-align: left;
+`;
+
 const HeaderTitle = styled.Text`
   color: black;
   font-size: 17px;
@@ -35,6 +44,34 @@ const HeaderSubtitle = styled.Text`
   text-align: center;
 `;
 
-const Text = { Title, Body, HeaderSubtitle, HeaderTitle };
+export const HeaderTitleText = styled.Text`
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0;
+  text-align: center;
+`;
+
+export const HeaderSubtitleText = styled.Text`
+  padding-top: 4px;
+  color: #667386;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.25px;
+  text-align: center;
+`;
+
+//styleName: body/subheadline/medium;
+const Subheadline = styled.Text`
+  color: #8b949e;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: left;
+`;
+
+const Text = { Title, Body, HeaderSubtitle, HeaderTitle, HeaderTitleText, HeaderSubtitleText, Subheadline, BodyMedium };
 
 export default Text;

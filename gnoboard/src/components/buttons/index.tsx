@@ -1,36 +1,62 @@
 import React from 'react';
-import { ActivityIndicator, TouchableOpacity, Text, View, TouchableOpacityProps } from 'react-native';
+import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { colors } from '@gno/styles/colors';
+import styled from 'styled-components/native';
+import Text from '../texts';
 
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.blue,
-    borderRadius: 28,
-    marginVertical: 8,
-    paddingHorizontal: 24,
-    padding: 8,
-  },
-  buttonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'white' | 'primary2' | 'primary-red' | 'secondary-red';
 
 export type Props = {
   title: string;
   onPress: () => void;
   loading?: boolean;
+  variant: ButtonVariant;
 } & TouchableOpacityProps;
 
-const Button: React.FC<Props> = ({ title, onPress, loading = false, ...rest }) => {
+const Button: React.FC<Props> = ({ title, onPress, loading = false, variant, ...rest }) => {
   return (
-    <TouchableOpacity onPress={onPress} {...rest}>
-      <View style={styles.button}>{loading ? <ActivityIndicator size='small' /> : <Text style={styles.buttonText}>{title}</Text>}</View>
-    </TouchableOpacity>
+    <TouchableOpacityButton variant={variant} onPress={onPress} {...rest}>
+      {loading ? <ActivityIndicator size='small' /> : <Text.Body style={styles.buttonText}>{title}</Text.Body>}
+    </TouchableOpacityButton>
   );
 };
+
+const TouchableOpacityButton = styled.TouchableOpacity<{ variant: ButtonVariant }>`
+  background-color: ${(props) => getStyle(props.variant)};
+  width: 100%;
+  height: 48px;
+  justify-content: center;
+  border-radius: 28px;
+`;
+
+const getStyle = (variant: ButtonVariant) => {
+  switch (variant) {
+    case 'primary':
+      return colors.primary;
+    case 'secondary':
+      return colors.button.secondary;
+    case 'tertiary':
+      return colors.tertiary;
+    case 'white':
+      return colors.white;
+    case 'primary2':
+      return 'transparent';
+    case 'primary-red':
+      return colors.red[500];
+    case 'secondary-red':
+      return colors.red[50];
+    default:
+      return colors.blue;
+  }
+};
+
+const styles = StyleSheet.create({
+  buttonText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
 
 export default Button;
