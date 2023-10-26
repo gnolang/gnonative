@@ -36,9 +36,9 @@ interface GnoResponse {
   hasKeyByName: (name: string) => Promise<boolean>;
   hasKeyByAddress: (address: Uint8Array) => Promise<boolean>;
   hasKeyByNameOrAddress: (nameOrBech32: string) => Promise<boolean>;
-  getKeyInfoByName: (name: string) => Promise<GnoAccount>;
-  getKeyInfoByAddress: (address: Uint8Array) => Promise<GnoAccount>;
-  getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<GnoAccount>;
+  getKeyInfoByName: (name: string) => Promise<GnoAccount | undefined>;
+  getKeyInfoByAddress: (address: Uint8Array) => Promise<GnoAccount | undefined>;
+  getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<GnoAccount | undefined>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
@@ -92,49 +92,37 @@ export const useGno = (): GnoResponse => {
 
   const hasKeyByName = async (name: string) => {
     const client = await getClient();
-    const response = await client.hasKeyByName(
-      new HasKeyByNameRequest({name}),
-    );
+    const response = await client.hasKeyByName(new HasKeyByNameRequest({ name }));
     return response.has;
   };
 
   const hasKeyByAddress = async (address: Uint8Array) => {
     const client = await getClient();
-    const response = await client.hasKeyByAddress(
-      new HasKeyByAddressRequest({address}),
-    );
+    const response = await client.hasKeyByAddress(new HasKeyByAddressRequest({ address }));
     return response.has;
   };
 
   const hasKeyByNameOrAddress = async (nameOrBech32: string) => {
     const client = await getClient();
-    const response = await client.hasKeyByNameOrAddress(
-      new HasKeyByNameOrAddressRequest({nameOrBech32}),
-    );
+    const response = await client.hasKeyByNameOrAddress(new HasKeyByNameOrAddressRequest({ nameOrBech32 }));
     return response.has;
   };
 
   const getKeyInfoByName = async (name: string) => {
     const client = await getClient();
-    const response = await client.getKeyInfoByName(
-      new GetKeyInfoByNameRequest({name}),
-    );
+    const response = await client.getKeyInfoByName(new GetKeyInfoByNameRequest({ name }));
     return response.key;
   };
 
   const getKeyInfoByAddress = async (address: Uint8Array) => {
     const client = await getClient();
-    const response = await client.getKeyInfoByAddress(
-      new GetKeyInfoByAddressRequest({address}),
-    );
+    const response = await client.getKeyInfoByAddress(new GetKeyInfoByAddressRequest({ address }));
     return response.key;
   };
 
   const getKeyInfoByNameOrAddress = async (nameOrBech32: string) => {
     const client = await getClient();
-    const response = await client.getKeyInfoByNameOrAddress(
-      new GetKeyInfoByNameOrAddressRequest({nameOrBech32}),
-    );
+    const response = await client.getKeyInfoByNameOrAddress(new GetKeyInfoByNameOrAddressRequest({ nameOrBech32 }));
     return response.key;
   };
 

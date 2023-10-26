@@ -1,5 +1,4 @@
 import * as ModalHeader from './ModalHeader';
+import ModalConfirm from './ModalConfirm';
 
-export default {
-  ModalHeader,
-};
+export { ModalHeader, ModalConfirm };
