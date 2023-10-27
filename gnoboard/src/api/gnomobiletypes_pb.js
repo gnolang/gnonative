@@ -139,6 +139,66 @@ export const ListKeyInfoResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameRequest
+ */
+export const GetKeyInfoByNameRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByNameRequest",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameResponse
+ */
+export const GetKeyInfoByNameResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByNameResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByAddressRequest
+ */
+export const GetKeyInfoByAddressRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByAddressRequest",
+  () => [
+    { no: 1, name: "bech32_address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByAddressResponse
+ */
+export const GetKeyInfoByAddressResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByAddressResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressRequest
+ */
+export const GetKeyInfoByNameOrAddressRequest = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressRequest",
+  () => [
+    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressResponse
+ */
+export const GetKeyInfoByNameOrAddressResponse = proto3.makeMessageType(
+  "land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressResponse",
+  () => [
+    { no: 1, name: "key", kind: "message", T: KeyInfo },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnomobile.v1.CreateAccountRequest
  */
 export const CreateAccountRequest = proto3.makeMessageType(

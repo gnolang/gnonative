@@ -4,6 +4,9 @@ import { SelectAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
+import { GetKeyInfoByNameRequest } from '@gno/api/gnomobiletypes_pb';
+import { GetKeyInfoByAddressRequest } from '@gno/api/gnomobiletypes_pb';
+import { GetKeyInfoByNameOrAddressRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetActiveAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetActiveAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { QueryAccountRequest } from '@gno/api/gnomobiletypes_pb';
@@ -27,6 +30,9 @@ interface GnoResponse {
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
+  getKeyInfoByName: (name: string) => Promise<GnoAccount>;
+  getKeyInfoByAddress: (bech32Address: string) => Promise<GnoAccount>;
+  getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<GnoAccount>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
@@ -76,6 +82,30 @@ export const useGno = (): GnoResponse => {
     const client = await getClient();
     const response = await client.generateRecoveryPhrase(new GenerateRecoveryPhraseRequest());
     return response.phrase;
+  };
+
+  const getKeyInfoByName = async (name: string) => {
+    const client = await getClient();
+    const response = await client.getKeyInfoByName(
+      new GetKeyInfoByNameRequest({name}),
+    );
+    return response.key;
+  };
+
+  const getKeyInfoByAddress = async (bech32Address: string) => {
+    const client = await getClient();
+    const response = await client.getKeyInfoByAddress(
+      new GetKeyInfoByAddressRequest({bech32Address}),
+    );
+    return response.key;
+  };
+
+  const getKeyInfoByNameOrAddress = async (nameOrBech32: string) => {
+    const client = await getClient();
+    const response = await client.getKeyInfoByNameOrAddress(
+      new GetKeyInfoByNameOrAddressRequest({nameOrBech32}),
+    );
+    return response.key;
   };
 
   const listKeyInfo = async () => {
@@ -187,6 +217,9 @@ export const useGno = (): GnoResponse => {
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,
+    getKeyInfoByName,
+    getKeyInfoByAddress,
+    getKeyInfoByNameOrAddress,
     selectAccount,
     setPassword,
     getActiveAccount,

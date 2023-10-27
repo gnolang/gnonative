@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -52,7 +52,7 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Get the keys informations in the keybase
+     * Get the information for all keys in the keybase
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.ListKeyInfo
      */
@@ -63,8 +63,46 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Create a new account the keybase using the name an password specified by
-     * SetAccount
+     * Get the information for the key in the keybase with the given name.
+     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName
+     */
+    readonly getKeyInfoByName: {
+      readonly name: "GetKeyInfoByName",
+      readonly I: typeof GetKeyInfoByNameRequest,
+      readonly O: typeof GetKeyInfoByNameResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Get the information for the key in the keybase with the given bech32 string address.
+     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress
+     */
+    readonly getKeyInfoByAddress: {
+      readonly name: "GetKeyInfoByAddress",
+      readonly I: typeof GetKeyInfoByAddressRequest,
+      readonly O: typeof GetKeyInfoByAddressResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Get the information for the key in the keybase with the given name or bech32 string address.
+     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress
+     */
+    readonly getKeyInfoByNameOrAddress: {
+      readonly name: "GetKeyInfoByNameOrAddress",
+      readonly I: typeof GetKeyInfoByNameOrAddressRequest,
+      readonly O: typeof GetKeyInfoByNameOrAddressResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Create a new account the keybase using the name an password specified by SetAccount.
+     * If an account with the same name already exists in the keybase,
+     * this replaces it. (If you don't want to replace it, then it's your responsibility
+     * to use GetKeyInfoByName to check if it exists before calling this.)
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.CreateAccount
      */

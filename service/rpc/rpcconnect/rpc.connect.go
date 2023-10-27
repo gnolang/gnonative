@@ -45,6 +45,15 @@ const (
 	// GnomobileServiceListKeyInfoProcedure is the fully-qualified name of the GnomobileService's
 	// ListKeyInfo RPC.
 	GnomobileServiceListKeyInfoProcedure = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
+	// GnomobileServiceGetKeyInfoByNameProcedure is the fully-qualified name of the GnomobileService's
+	// GetKeyInfoByName RPC.
+	GnomobileServiceGetKeyInfoByNameProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByName"
+	// GnomobileServiceGetKeyInfoByAddressProcedure is the fully-qualified name of the
+	// GnomobileService's GetKeyInfoByAddress RPC.
+	GnomobileServiceGetKeyInfoByAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByAddress"
+	// GnomobileServiceGetKeyInfoByNameOrAddressProcedure is the fully-qualified name of the
+	// GnomobileService's GetKeyInfoByNameOrAddress RPC.
+	GnomobileServiceGetKeyInfoByNameOrAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByNameOrAddress"
 	// GnomobileServiceCreateAccountProcedure is the fully-qualified name of the GnomobileService's
 	// CreateAccount RPC.
 	GnomobileServiceCreateAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
@@ -96,10 +105,21 @@ type GnomobileServiceClient interface {
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
 	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
-	// Get the keys informations in the keybase
+	// Get the information for all keys in the keybase
 	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
-	// Create a new account the keybase using the name an password specified by
-	// SetAccount
+	// Get the information for the key in the keybase with the given name.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
+	// Get the information for the key in the keybase with the given bech32 string address.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
+	// Get the information for the key in the keybase with the given name or bech32 string address.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error)
+	// Create a new account the keybase using the name an password specified by SetAccount.
+	// If an account with the same name already exists in the keybase,
+	// this replaces it. (If you don't want to replace it, then it's your responsibility
+	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
@@ -171,6 +191,21 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 		listKeyInfo: connect.NewClient[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse](
 			httpClient,
 			baseURL+GnomobileServiceListKeyInfoProcedure,
+			opts...,
+		),
+		getKeyInfoByName: connect.NewClient[rpc.GetKeyInfoByNameRequest, rpc.GetKeyInfoByNameResponse](
+			httpClient,
+			baseURL+GnomobileServiceGetKeyInfoByNameProcedure,
+			opts...,
+		),
+		getKeyInfoByAddress: connect.NewClient[rpc.GetKeyInfoByAddressRequest, rpc.GetKeyInfoByAddressResponse](
+			httpClient,
+			baseURL+GnomobileServiceGetKeyInfoByAddressProcedure,
+			opts...,
+		),
+		getKeyInfoByNameOrAddress: connect.NewClient[rpc.GetKeyInfoByNameOrAddressRequest, rpc.GetKeyInfoByNameOrAddressResponse](
+			httpClient,
+			baseURL+GnomobileServiceGetKeyInfoByNameOrAddressProcedure,
 			opts...,
 		),
 		createAccount: connect.NewClient[rpc.CreateAccountRequest, rpc.CreateAccountResponse](
@@ -248,24 +283,27 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // gnomobileServiceClient implements GnomobileServiceClient.
 type gnomobileServiceClient struct {
-	setRemote              *connect.Client[rpc.SetRemoteRequest, rpc.SetRemoteResponse]
-	setChainID             *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
-	generateRecoveryPhrase *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
-	listKeyInfo            *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
-	createAccount          *connect.Client[rpc.CreateAccountRequest, rpc.CreateAccountResponse]
-	selectAccount          *connect.Client[rpc.SelectAccountRequest, rpc.SelectAccountResponse]
-	setPassword            *connect.Client[rpc.SetPasswordRequest, rpc.SetPasswordResponse]
-	getActiveAccount       *connect.Client[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse]
-	queryAccount           *connect.Client[rpc.QueryAccountRequest, rpc.QueryAccountResponse]
-	deleteAccount          *connect.Client[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse]
-	query                  *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
-	render                 *connect.Client[rpc.RenderRequest, rpc.RenderResponse]
-	qEval                  *connect.Client[rpc.QEvalRequest, rpc.QEvalResponse]
-	call                   *connect.Client[rpc.CallRequest, rpc.CallResponse]
-	addressToBech32        *connect.Client[rpc.AddressToBech32Request, rpc.AddressToBech32Response]
-	addressFromBech32      *connect.Client[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response]
-	hello                  *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
-	helloStream            *connect.Client[rpc.HelloStreamRequest, rpc.HelloStreamResponse]
+	setRemote                 *connect.Client[rpc.SetRemoteRequest, rpc.SetRemoteResponse]
+	setChainID                *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
+	generateRecoveryPhrase    *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
+	listKeyInfo               *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
+	getKeyInfoByName          *connect.Client[rpc.GetKeyInfoByNameRequest, rpc.GetKeyInfoByNameResponse]
+	getKeyInfoByAddress       *connect.Client[rpc.GetKeyInfoByAddressRequest, rpc.GetKeyInfoByAddressResponse]
+	getKeyInfoByNameOrAddress *connect.Client[rpc.GetKeyInfoByNameOrAddressRequest, rpc.GetKeyInfoByNameOrAddressResponse]
+	createAccount             *connect.Client[rpc.CreateAccountRequest, rpc.CreateAccountResponse]
+	selectAccount             *connect.Client[rpc.SelectAccountRequest, rpc.SelectAccountResponse]
+	setPassword               *connect.Client[rpc.SetPasswordRequest, rpc.SetPasswordResponse]
+	getActiveAccount          *connect.Client[rpc.GetActiveAccountRequest, rpc.GetActiveAccountResponse]
+	queryAccount              *connect.Client[rpc.QueryAccountRequest, rpc.QueryAccountResponse]
+	deleteAccount             *connect.Client[rpc.DeleteAccountRequest, rpc.DeleteAccountResponse]
+	query                     *connect.Client[rpc.QueryRequest, rpc.QueryResponse]
+	render                    *connect.Client[rpc.RenderRequest, rpc.RenderResponse]
+	qEval                     *connect.Client[rpc.QEvalRequest, rpc.QEvalResponse]
+	call                      *connect.Client[rpc.CallRequest, rpc.CallResponse]
+	addressToBech32           *connect.Client[rpc.AddressToBech32Request, rpc.AddressToBech32Response]
+	addressFromBech32         *connect.Client[rpc.AddressFromBech32Request, rpc.AddressFromBech32Response]
+	hello                     *connect.Client[rpc.HelloRequest, rpc.HelloResponse]
+	helloStream               *connect.Client[rpc.HelloStreamRequest, rpc.HelloStreamResponse]
 }
 
 // SetRemote calls land.gno.gnomobile.v1.GnomobileService.SetRemote.
@@ -286,6 +324,21 @@ func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, req
 // ListKeyInfo calls land.gno.gnomobile.v1.GnomobileService.ListKeyInfo.
 func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return c.listKeyInfo.CallUnary(ctx, req)
+}
+
+// GetKeyInfoByName calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName.
+func (c *gnomobileServiceClient) GetKeyInfoByName(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error) {
+	return c.getKeyInfoByName.CallUnary(ctx, req)
+}
+
+// GetKeyInfoByAddress calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress.
+func (c *gnomobileServiceClient) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error) {
+	return c.getKeyInfoByAddress.CallUnary(ctx, req)
+}
+
+// GetKeyInfoByNameOrAddress calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress.
+func (c *gnomobileServiceClient) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error) {
+	return c.getKeyInfoByNameOrAddress.CallUnary(ctx, req)
 }
 
 // CreateAccount calls land.gno.gnomobile.v1.GnomobileService.CreateAccount.
@@ -371,10 +424,21 @@ type GnomobileServiceHandler interface {
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
 	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
-	// Get the keys informations in the keybase
+	// Get the information for all keys in the keybase
 	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
-	// Create a new account the keybase using the name an password specified by
-	// SetAccount
+	// Get the information for the key in the keybase with the given name.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
+	// Get the information for the key in the keybase with the given bech32 string address.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
+	// Get the information for the key in the keybase with the given name or bech32 string address.
+	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error)
+	// Create a new account the keybase using the name an password specified by SetAccount.
+	// If an account with the same name already exists in the keybase,
+	// this replaces it. (If you don't want to replace it, then it's your responsibility
+	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
@@ -442,6 +506,21 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 	gnomobileServiceListKeyInfoHandler := connect.NewUnaryHandler(
 		GnomobileServiceListKeyInfoProcedure,
 		svc.ListKeyInfo,
+		opts...,
+	)
+	gnomobileServiceGetKeyInfoByNameHandler := connect.NewUnaryHandler(
+		GnomobileServiceGetKeyInfoByNameProcedure,
+		svc.GetKeyInfoByName,
+		opts...,
+	)
+	gnomobileServiceGetKeyInfoByAddressHandler := connect.NewUnaryHandler(
+		GnomobileServiceGetKeyInfoByAddressProcedure,
+		svc.GetKeyInfoByAddress,
+		opts...,
+	)
+	gnomobileServiceGetKeyInfoByNameOrAddressHandler := connect.NewUnaryHandler(
+		GnomobileServiceGetKeyInfoByNameOrAddressProcedure,
+		svc.GetKeyInfoByNameOrAddress,
 		opts...,
 	)
 	gnomobileServiceCreateAccountHandler := connect.NewUnaryHandler(
@@ -524,6 +603,12 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
 		case GnomobileServiceListKeyInfoProcedure:
 			gnomobileServiceListKeyInfoHandler.ServeHTTP(w, r)
+		case GnomobileServiceGetKeyInfoByNameProcedure:
+			gnomobileServiceGetKeyInfoByNameHandler.ServeHTTP(w, r)
+		case GnomobileServiceGetKeyInfoByAddressProcedure:
+			gnomobileServiceGetKeyInfoByAddressHandler.ServeHTTP(w, r)
+		case GnomobileServiceGetKeyInfoByNameOrAddressProcedure:
+			gnomobileServiceGetKeyInfoByNameOrAddressHandler.ServeHTTP(w, r)
 		case GnomobileServiceCreateAccountProcedure:
 			gnomobileServiceCreateAccountHandler.ServeHTTP(w, r)
 		case GnomobileServiceSelectAccountProcedure:
@@ -575,6 +660,18 @@ func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Conte
 
 func (UnimplementedGnomobileServiceHandler) ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.ListKeyInfo is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) GetKeyInfoByNameOrAddress(context.Context, *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {

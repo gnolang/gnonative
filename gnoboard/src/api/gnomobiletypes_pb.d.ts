@@ -341,6 +341,150 @@ export declare class ListKeyInfoResponse extends Message<ListKeyInfoResponse> {
 }
 
 /**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameRequest
+ */
+export declare class GetKeyInfoByNameRequest extends Message<GetKeyInfoByNameRequest> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  constructor(data?: PartialMessage<GetKeyInfoByNameRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByNameRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByNameRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByNameRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByNameRequest;
+
+  static equals(a: GetKeyInfoByNameRequest | PlainMessage<GetKeyInfoByNameRequest> | undefined, b: GetKeyInfoByNameRequest | PlainMessage<GetKeyInfoByNameRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameResponse
+ */
+export declare class GetKeyInfoByNameResponse extends Message<GetKeyInfoByNameResponse> {
+  /**
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   */
+  key?: KeyInfo;
+
+  constructor(data?: PartialMessage<GetKeyInfoByNameResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByNameResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByNameResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByNameResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByNameResponse;
+
+  static equals(a: GetKeyInfoByNameResponse | PlainMessage<GetKeyInfoByNameResponse> | undefined, b: GetKeyInfoByNameResponse | PlainMessage<GetKeyInfoByNameResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByAddressRequest
+ */
+export declare class GetKeyInfoByAddressRequest extends Message<GetKeyInfoByAddressRequest> {
+  /**
+   * @generated from field: string bech32_address = 1;
+   */
+  bech32Address: string;
+
+  constructor(data?: PartialMessage<GetKeyInfoByAddressRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByAddressRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByAddressRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByAddressRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByAddressRequest;
+
+  static equals(a: GetKeyInfoByAddressRequest | PlainMessage<GetKeyInfoByAddressRequest> | undefined, b: GetKeyInfoByAddressRequest | PlainMessage<GetKeyInfoByAddressRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByAddressResponse
+ */
+export declare class GetKeyInfoByAddressResponse extends Message<GetKeyInfoByAddressResponse> {
+  /**
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   */
+  key?: KeyInfo;
+
+  constructor(data?: PartialMessage<GetKeyInfoByAddressResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByAddressResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByAddressResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByAddressResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByAddressResponse;
+
+  static equals(a: GetKeyInfoByAddressResponse | PlainMessage<GetKeyInfoByAddressResponse> | undefined, b: GetKeyInfoByAddressResponse | PlainMessage<GetKeyInfoByAddressResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressRequest
+ */
+export declare class GetKeyInfoByNameOrAddressRequest extends Message<GetKeyInfoByNameOrAddressRequest> {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32: string;
+
+  constructor(data?: PartialMessage<GetKeyInfoByNameOrAddressRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByNameOrAddressRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByNameOrAddressRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByNameOrAddressRequest;
+
+  static equals(a: GetKeyInfoByNameOrAddressRequest | PlainMessage<GetKeyInfoByNameOrAddressRequest> | undefined, b: GetKeyInfoByNameOrAddressRequest | PlainMessage<GetKeyInfoByNameOrAddressRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressResponse
+ */
+export declare class GetKeyInfoByNameOrAddressResponse extends Message<GetKeyInfoByNameOrAddressResponse> {
+  /**
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   */
+  key?: KeyInfo;
+
+  constructor(data?: PartialMessage<GetKeyInfoByNameOrAddressResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetKeyInfoByNameOrAddressResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetKeyInfoByNameOrAddressResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetKeyInfoByNameOrAddressResponse;
+
+  static equals(a: GetKeyInfoByNameOrAddressResponse | PlainMessage<GetKeyInfoByNameOrAddressResponse> | undefined, b: GetKeyInfoByNameOrAddressResponse | PlainMessage<GetKeyInfoByNameOrAddressResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnomobile.v1.CreateAccountRequest
  */
 export declare class CreateAccountRequest extends Message<CreateAccountRequest> {
