@@ -23,11 +23,25 @@ service GnomobileService {
   rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest)
       returns (GenerateRecoveryPhraseResponse);
 
-  // Get the keys informations in the keybase
+  // Get the information for all keys in the keybase
   rpc ListKeyInfo(ListKeyInfoRequest) returns (ListKeyInfoResponse);
 
-  // Create a new account the keybase using the name an password specified by
-  // SetAccount
+  // Get the information for the key in the keybase with the given name.
+  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  rpc GetKeyInfoByName(GetKeyInfoByNameRequest) returns (GetKeyInfoByNameResponse);
+
+  // Get the information for the key in the keybase with the given bech32 string address.
+  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  rpc GetKeyInfoByAddress(GetKeyInfoByAddressRequest) returns (GetKeyInfoByAddressResponse);
+
+  // Get the information for the key in the keybase with the given name or bech32 string address.
+  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  rpc GetKeyInfoByNameOrAddress(GetKeyInfoByNameOrAddressRequest) returns (GetKeyInfoByNameOrAddressResponse);
+
+  // Create a new account the keybase using the name an password specified by SetAccount.
+  // If an account with the same name already exists in the keybase,
+  // this replaces it. (If you don't want to replace it, then it's your responsibility
+  // to use GetKeyInfoByName to check if it exists before calling this.)
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 
   // SelectAccount selects the active account to use for later operations

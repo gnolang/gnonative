@@ -6,6 +6,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -75,6 +76,71 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request
 	}
 
 	return connect.NewResponse(&rpc.ListKeyInfoResponse{Keys: formatedKeys}), nil
+}
+
+func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error) {
+	s.logger.Debug("GetKeyInfoByName called")
+
+	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
+	if err != nil {
+		if keyerror.IsErrKeyNotFound(err) {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	info, err := convertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.GetKeyInfoByNameResponse{Key: info}), nil
+}
+
+func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error) {
+	s.logger.Debug("GetKeyInfoByAddress called")
+
+	address, err := crypto.AddressFromString(req.Msg.Bech32Address)
+	if err != nil {
+		return nil, err
+	}
+
+	key, err := s.getSigner().Keybase.GetByAddress(address)
+	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	info, err := convertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.GetKeyInfoByAddressResponse{Key: info}), nil
+}
+
+func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error) {
+	s.logger.Debug("GetKeyInfoByNameOrAddress called")
+
+	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	info, err := convertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&rpc.GetKeyInfoByNameOrAddressResponse{Key: info}), nil
 }
 
 func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error) {

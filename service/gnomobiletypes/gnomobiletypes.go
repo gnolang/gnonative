@@ -58,6 +58,30 @@ type ListKeyInfoResponse struct {
 	Keys []*KeyInfo `json:"key_info" yaml:"key_info"`
 }
 
+type GetKeyInfoByNameRequest struct {
+	Name string `json:"name" yaml:"name"`
+}
+
+type GetKeyInfoByNameResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type GetKeyInfoByAddressRequest struct {
+	Bech32Address string `json:"bech32_address" yaml:"bech32_address"`
+}
+
+type GetKeyInfoByAddressResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
+type GetKeyInfoByNameOrAddressRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+}
+
+type GetKeyInfoByNameOrAddressResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
 type CreateAccountRequest struct {
 	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
 	Mnemonic     string `json:"mnemonic" yaml:"mnemonic"`

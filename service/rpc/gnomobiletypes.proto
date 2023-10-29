@@ -62,6 +62,30 @@ message ListKeyInfoResponse {
 	repeated KeyInfo keys = 1;
 }
 
+message GetKeyInfoByNameRequest {
+	string name = 1;
+}
+
+message GetKeyInfoByNameResponse {
+	KeyInfo key = 1;
+}
+
+message GetKeyInfoByAddressRequest {
+	string bech32_address = 1;
+}
+
+message GetKeyInfoByAddressResponse {
+	KeyInfo key = 1;
+}
+
+message GetKeyInfoByNameOrAddressRequest {
+	string name_or_bech32 = 1;
+}
+
+message GetKeyInfoByNameOrAddressResponse {
+	KeyInfo key = 1;
+}
+
 message CreateAccountRequest {
 	string name_or_bech32 = 1;
 	string mnemonic = 2;
