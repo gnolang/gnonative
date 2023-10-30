@@ -7,11 +7,14 @@ import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
 import { Buffer } from 'buffer';
+import ReenterPassword from '../switch-accounts/ReenterPassword';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
   const [appConsole, setAppConsole] = useState<string>('');
   const [loading, setLoading] = useState<string | undefined>(undefined);
+  const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
+
   const gno = useGno();
 
   const onPostPress = async () => {
@@ -25,7 +28,11 @@ function DevMode() {
       console.log('response: ', response);
       setAppConsole(Buffer.from(response.result).toString());
     } catch (error) {
-      // TODO: If error?.rawMessage === 'ErrDecryptionFailed(#109)' then have the user enter the password.
+      if (error?.rawMessage === 'ErrDecryptionFailed(#109)') {
+        const account = await gno.getActiveAccount()
+        setReenterPassword(account.key?.name);
+        return;
+      }
       console.log(error);
       setAppConsole('error' + JSON.stringify(error));
     } finally {
@@ -37,21 +44,30 @@ function DevMode() {
     Linking.openURL('http://testnet.gno.berty.io/r/demo/boards:gnomobile/1').catch((err) => console.error("Couldn't load page", err));
   };
 
+  const onCloseReenterPassword = async () => {
+    setReenterPassword(undefined);
+  };
+
   return (
-    <Layout.Container>
-      <Layout.Header />
-      <Layout.Body>
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <Text>Content:</Text>
-          <View style={customStyles.sendGroupLikeWhatsapp}>
-            <TextInput style={customStyles.inputMsg} value={postContent} onChangeText={setPostContent} />
-            <Button title='Send' onPress={onPostPress} variant='primary' style={{ width: '30%' }} />
-          </View>
-          <ConsoleView text={appConsole} />
-          <Button title='Open http://testnet.gno.berty.io/r/demo/boards:gnomobile/1' onPress={loadInBrowser} variant='primary' />
-        </ScrollView>
-      </Layout.Body>
-    </Layout.Container>
+    <>
+      <Layout.Container>
+        <Layout.Header />
+        <Layout.Body>
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            <Text>Content:</Text>
+            <View style={customStyles.sendGroupLikeWhatsapp}>
+              <TextInput style={customStyles.inputMsg} value={postContent} onChangeText={setPostContent} />
+              <Button title='Send' onPress={onPostPress} variant='primary' style={{ width: '30%' }} />
+            </View>
+            <ConsoleView text={appConsole} />
+            <Button title='Open http://testnet.gno.berty.io/r/demo/boards:gnomobile/1' onPress={loadInBrowser} variant='primary' />
+          </ScrollView>
+        </Layout.Body>
+      </Layout.Container>
+      {reenterPassword ? (
+        <ReenterPassword visible={Boolean(reenterPassword)} accountName={reenterPassword} onClose={onCloseReenterPassword} />
+      ) : null}
+    </>
   );
 }
 

@@ -9,8 +9,8 @@ import { RoutePath } from '@gno/router/path';
 import SeedBox from '@gno/components/seedbox';
 import TextInput from '@gno/components/textinput';
 import Alert from '@gno/components/alert';
-import ModalConfirm from '../../../components/modal/ModalConfirm';
 import { Spacer } from '@gno/components/row';
+import { ModalConfirm } from '@gno/components/modal';
 
 const walletContent = {
   title: 'Import with Seed Phrase',
