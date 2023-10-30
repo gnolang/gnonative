@@ -31,7 +31,7 @@ interface GnoResponse {
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
   getKeyInfoByName: (name: string) => Promise<GnoAccount>;
-  getKeyInfoByAddress: (bech32Address: string) => Promise<GnoAccount>;
+  getKeyInfoByAddress: (address: Uint8Array) => Promise<GnoAccount>;
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<GnoAccount>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
@@ -92,10 +92,10 @@ export const useGno = (): GnoResponse => {
     return response.key;
   };
 
-  const getKeyInfoByAddress = async (bech32Address: string) => {
+  const getKeyInfoByAddress = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.getKeyInfoByAddress(
-      new GetKeyInfoByAddressRequest({bech32Address}),
+      new GetKeyInfoByAddressRequest({address}),
     );
     return response.key;
   };

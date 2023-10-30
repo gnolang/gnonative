@@ -100,12 +100,7 @@ func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	address, err := crypto.AddressFromString(req.Msg.Bech32Address)
-	if err != nil {
-		return nil, err
-	}
-
-	key, err := s.getSigner().Keybase.GetByAddress(address)
+	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound

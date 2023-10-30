@@ -110,7 +110,7 @@ type GnomobileServiceClient interface {
 	// Get the information for the key in the keybase with the given name.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
-	// Get the information for the key in the keybase with the given bech32 string address.
+	// Get the information for the key in the keybase with the given address.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
@@ -429,7 +429,7 @@ type GnomobileServiceHandler interface {
 	// Get the information for the key in the keybase with the given name.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
-	// Get the information for the key in the keybase with the given bech32 string address.
+	// Get the information for the key in the keybase with the given address.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.

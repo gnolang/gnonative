@@ -67,7 +67,7 @@ type GetKeyInfoByNameResponse struct {
 }
 
 type GetKeyInfoByAddressRequest struct {
-	Bech32Address string `json:"bech32_address" yaml:"bech32_address"`
+	Address []byte `json:"address" yaml:"address"`
 }
 
 type GetKeyInfoByAddressResponse struct {

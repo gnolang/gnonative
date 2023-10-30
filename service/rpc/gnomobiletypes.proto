@@ -71,7 +71,7 @@ message GetKeyInfoByNameResponse {
 }
 
 message GetKeyInfoByAddressRequest {
-	string bech32_address = 1;
+	bytes address = 1;
 }
 
 message GetKeyInfoByAddressResponse {
