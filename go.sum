@@ -11,8 +11,8 @@ github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAE
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
 github.com/benbjohnson/clock v1.3.0 h1:ip6w0uFQkncKQ979AypyG0ER7mqUSBdKLOgAle/AT8A=
-github.com/berty/gno v0.0.3 h1:9s9Q2xhWJl52tzH3ZQnOHFamu52dkL8MLqqsdmdhU9c=
-github.com/berty/gno v0.0.3/go.mod h1:yrhZ/AvgGfqk3L7ghycO6SU9LXA1sAbNX6EQ22sAduU=
+github.com/berty/gno v0.0.6-0.20231030130818-4aa291d9805e h1:YrhAn4UyStpuryo4JihC02HJBWcg15GR/8Yqm7re57s=
+github.com/berty/gno v0.0.6-0.20231030130818-4aa291d9805e/go.mod h1:Pq3O4ISa74bIu9YqTEvkdwtO7/fFxTo2d6f0zMqsUKw=
 github.com/berty/mobile v0.0.11 h1:EMN2VGSJYKqKMTmFLg7FEAOZ68HxruCmbAkh//YX4Eo=
 github.com/berty/mobile v0.0.11/go.mod h1:kQNMt2gXlYXNazoSeytBi7knmDN7YS/JzMKFYxgoNxc=
 github.com/btcsuite/btcd v0.20.1-beta/go.mod h1:wVuoA8VJLEcwgqHBwHmzLRazpKxTv13Px/pDuV7OomQ=

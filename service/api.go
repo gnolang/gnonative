@@ -6,7 +6,6 @@ package service
 import (
 	"context"
 	"errors"
-	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -108,7 +107,7 @@ func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect
 
 	key, err := s.getSigner().Keybase.GetByAddress(address)
 	if err != nil {
-		if strings.Contains(err.Error(), "not found") {
+		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 		} else {
 			return nil, err
@@ -128,7 +127,7 @@ func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		if strings.Contains(err.Error(), "not found") {
+		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 		} else {
 			return nil, err
