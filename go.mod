@@ -58,6 +58,6 @@ require (
 )
 
 replace (
-	github.com/gnolang/gno => github.com/berty/gno v0.0.3 // temporary until PRs merged into upstream, see https://github.com/berty/gno/pull/2
+	github.com/gnolang/gno => github.com/berty/gno v0.0.6-0.20231030130818-4aa291d9805e // temporary until PRs merged into upstream, see https://github.com/berty/gno/pull/2
 	golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
 )

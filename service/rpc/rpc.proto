@@ -26,11 +26,23 @@ service GnomobileService {
   // Get the information for all keys in the keybase
   rpc ListKeyInfo(ListKeyInfoRequest) returns (ListKeyInfoResponse);
 
+  // Check for the key in the keybase with the given name.
+  // In the response, set has true if the keybase has the key.
+  rpc HasKeyByName(HasKeyByNameRequest) returns (HasKeyByNameResponse);
+
+  // Check for the key in the keybase with the given address.
+  // In the response, set has true if the keybase has the key.
+  rpc HasKeyByAddress(HasKeyByAddressRequest) returns (HasKeyByAddressResponse);
+
+  // Check for the key in the keybase with the given name or bech32 string address.
+  // In the response, set has true if the keybase has the key.
+  rpc HasKeyByNameOrAddress(HasKeyByNameOrAddressRequest) returns (HasKeyByNameOrAddressResponse);
+
   // Get the information for the key in the keybase with the given name.
   // If the key doesn't exist, then return ErrCryptoKeyNotFound.
   rpc GetKeyInfoByName(GetKeyInfoByNameRequest) returns (GetKeyInfoByNameResponse);
 
-  // Get the information for the key in the keybase with the given bech32 string address.
+  // Get the information for the key in the keybase with the given address.
   // If the key doesn't exist, then return ErrCryptoKeyNotFound.
   rpc GetKeyInfoByAddress(GetKeyInfoByAddressRequest) returns (GetKeyInfoByAddressResponse);
 

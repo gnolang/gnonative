@@ -6,7 +6,6 @@ package service
 import (
 	"context"
 	"errors"
-	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -78,6 +77,51 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&rpc.ListKeyInfoResponse{Keys: formatedKeys}), nil
 }
 
+func (s *gnomobileService) HasKeyByName(ctx context.Context, req *connect.Request[rpc.HasKeyByNameRequest]) (*connect.Response[rpc.HasKeyByNameResponse], error) {
+	s.logger.Debug("HasKeyByName called")
+
+	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
+	if err != nil {
+		if keyerror.IsErrKeyNotFound(err) {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	return connect.NewResponse(&rpc.HasKeyByNameResponse{Has: has}), nil
+}
+
+func (s *gnomobileService) HasKeyByAddress(ctx context.Context, req *connect.Request[rpc.HasKeyByAddressRequest]) (*connect.Response[rpc.HasKeyByAddressResponse], error) {
+	s.logger.Debug("HasKeyByAddress called")
+
+	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	if err != nil {
+		if keyerror.IsErrKeyNotFound(err) {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	return connect.NewResponse(&rpc.HasKeyByAddressResponse{Has: has}), nil
+}
+
+func (s *gnomobileService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error) {
+	s.logger.Debug("HasKeyByNameOrAddress called")
+
+	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
+	if err != nil {
+		if keyerror.IsErrKeyNotFound(err) {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else {
+			return nil, err
+		}
+	}
+
+	return connect.NewResponse(&rpc.HasKeyByNameOrAddressResponse{Has: has}), nil
+}
+
 func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error) {
 	s.logger.Debug("GetKeyInfoByName called")
 
@@ -101,14 +145,9 @@ func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	address, err := crypto.AddressFromString(req.Msg.Bech32Address)
+	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
-		return nil, err
-	}
-
-	key, err := s.getSigner().Keybase.GetByAddress(address)
-	if err != nil {
-		if strings.Contains(err.Error(), "not found") {
+		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 		} else {
 			return nil, err
@@ -128,7 +167,7 @@ func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		if strings.Contains(err.Error(), "not found") {
+		if keyerror.IsErrKeyNotFound(err) {
 			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
 		} else {
 			return nil, err

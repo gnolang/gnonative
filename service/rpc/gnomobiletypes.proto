@@ -62,6 +62,30 @@ message ListKeyInfoResponse {
 	repeated KeyInfo keys = 1;
 }
 
+message HasKeyByNameRequest {
+	string name = 1;
+}
+
+message HasKeyByNameResponse {
+	bool has = 1;
+}
+
+message HasKeyByAddressRequest {
+	bytes address = 1;
+}
+
+message HasKeyByAddressResponse {
+	bool has = 1;
+}
+
+message HasKeyByNameOrAddressRequest {
+	string name_or_bech32 = 1;
+}
+
+message HasKeyByNameOrAddressResponse {
+	bool has = 1;
+}
+
 message GetKeyInfoByNameRequest {
 	string name = 1;
 }
@@ -71,7 +95,7 @@ message GetKeyInfoByNameResponse {
 }
 
 message GetKeyInfoByAddressRequest {
-	string bech32_address = 1;
+	bytes address = 1;
 }
 
 message GetKeyInfoByAddressResponse {

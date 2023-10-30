@@ -45,6 +45,15 @@ const (
 	// GnomobileServiceListKeyInfoProcedure is the fully-qualified name of the GnomobileService's
 	// ListKeyInfo RPC.
 	GnomobileServiceListKeyInfoProcedure = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
+	// GnomobileServiceHasKeyByNameProcedure is the fully-qualified name of the GnomobileService's
+	// HasKeyByName RPC.
+	GnomobileServiceHasKeyByNameProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByName"
+	// GnomobileServiceHasKeyByAddressProcedure is the fully-qualified name of the GnomobileService's
+	// HasKeyByAddress RPC.
+	GnomobileServiceHasKeyByAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByAddress"
+	// GnomobileServiceHasKeyByNameOrAddressProcedure is the fully-qualified name of the
+	// GnomobileService's HasKeyByNameOrAddress RPC.
+	GnomobileServiceHasKeyByNameOrAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByNameOrAddress"
 	// GnomobileServiceGetKeyInfoByNameProcedure is the fully-qualified name of the GnomobileService's
 	// GetKeyInfoByName RPC.
 	GnomobileServiceGetKeyInfoByNameProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByName"
@@ -107,10 +116,19 @@ type GnomobileServiceClient interface {
 	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
 	// Get the information for all keys in the keybase
 	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
+	// Check for the key in the keybase with the given name.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByName(context.Context, *connect.Request[rpc.HasKeyByNameRequest]) (*connect.Response[rpc.HasKeyByNameResponse], error)
+	// Check for the key in the keybase with the given address.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByAddress(context.Context, *connect.Request[rpc.HasKeyByAddressRequest]) (*connect.Response[rpc.HasKeyByAddressResponse], error)
+	// Check for the key in the keybase with the given name or bech32 string address.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByNameOrAddress(context.Context, *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
-	// Get the information for the key in the keybase with the given bech32 string address.
+	// Get the information for the key in the keybase with the given address.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
@@ -191,6 +209,21 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 		listKeyInfo: connect.NewClient[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse](
 			httpClient,
 			baseURL+GnomobileServiceListKeyInfoProcedure,
+			opts...,
+		),
+		hasKeyByName: connect.NewClient[rpc.HasKeyByNameRequest, rpc.HasKeyByNameResponse](
+			httpClient,
+			baseURL+GnomobileServiceHasKeyByNameProcedure,
+			opts...,
+		),
+		hasKeyByAddress: connect.NewClient[rpc.HasKeyByAddressRequest, rpc.HasKeyByAddressResponse](
+			httpClient,
+			baseURL+GnomobileServiceHasKeyByAddressProcedure,
+			opts...,
+		),
+		hasKeyByNameOrAddress: connect.NewClient[rpc.HasKeyByNameOrAddressRequest, rpc.HasKeyByNameOrAddressResponse](
+			httpClient,
+			baseURL+GnomobileServiceHasKeyByNameOrAddressProcedure,
 			opts...,
 		),
 		getKeyInfoByName: connect.NewClient[rpc.GetKeyInfoByNameRequest, rpc.GetKeyInfoByNameResponse](
@@ -287,6 +320,9 @@ type gnomobileServiceClient struct {
 	setChainID                *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
 	generateRecoveryPhrase    *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
 	listKeyInfo               *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
+	hasKeyByName              *connect.Client[rpc.HasKeyByNameRequest, rpc.HasKeyByNameResponse]
+	hasKeyByAddress           *connect.Client[rpc.HasKeyByAddressRequest, rpc.HasKeyByAddressResponse]
+	hasKeyByNameOrAddress     *connect.Client[rpc.HasKeyByNameOrAddressRequest, rpc.HasKeyByNameOrAddressResponse]
 	getKeyInfoByName          *connect.Client[rpc.GetKeyInfoByNameRequest, rpc.GetKeyInfoByNameResponse]
 	getKeyInfoByAddress       *connect.Client[rpc.GetKeyInfoByAddressRequest, rpc.GetKeyInfoByAddressResponse]
 	getKeyInfoByNameOrAddress *connect.Client[rpc.GetKeyInfoByNameOrAddressRequest, rpc.GetKeyInfoByNameOrAddressResponse]
@@ -324,6 +360,21 @@ func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, req
 // ListKeyInfo calls land.gno.gnomobile.v1.GnomobileService.ListKeyInfo.
 func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return c.listKeyInfo.CallUnary(ctx, req)
+}
+
+// HasKeyByName calls land.gno.gnomobile.v1.GnomobileService.HasKeyByName.
+func (c *gnomobileServiceClient) HasKeyByName(ctx context.Context, req *connect.Request[rpc.HasKeyByNameRequest]) (*connect.Response[rpc.HasKeyByNameResponse], error) {
+	return c.hasKeyByName.CallUnary(ctx, req)
+}
+
+// HasKeyByAddress calls land.gno.gnomobile.v1.GnomobileService.HasKeyByAddress.
+func (c *gnomobileServiceClient) HasKeyByAddress(ctx context.Context, req *connect.Request[rpc.HasKeyByAddressRequest]) (*connect.Response[rpc.HasKeyByAddressResponse], error) {
+	return c.hasKeyByAddress.CallUnary(ctx, req)
+}
+
+// HasKeyByNameOrAddress calls land.gno.gnomobile.v1.GnomobileService.HasKeyByNameOrAddress.
+func (c *gnomobileServiceClient) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error) {
+	return c.hasKeyByNameOrAddress.CallUnary(ctx, req)
 }
 
 // GetKeyInfoByName calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName.
@@ -426,10 +477,19 @@ type GnomobileServiceHandler interface {
 	GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error)
 	// Get the information for all keys in the keybase
 	ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error)
+	// Check for the key in the keybase with the given name.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByName(context.Context, *connect.Request[rpc.HasKeyByNameRequest]) (*connect.Response[rpc.HasKeyByNameResponse], error)
+	// Check for the key in the keybase with the given address.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByAddress(context.Context, *connect.Request[rpc.HasKeyByAddressRequest]) (*connect.Response[rpc.HasKeyByAddressResponse], error)
+	// Check for the key in the keybase with the given name or bech32 string address.
+	// In the response, set has true if the keybase has the key.
+	HasKeyByNameOrAddress(context.Context, *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
-	// Get the information for the key in the keybase with the given bech32 string address.
+	// Get the information for the key in the keybase with the given address.
 	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
@@ -506,6 +566,21 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 	gnomobileServiceListKeyInfoHandler := connect.NewUnaryHandler(
 		GnomobileServiceListKeyInfoProcedure,
 		svc.ListKeyInfo,
+		opts...,
+	)
+	gnomobileServiceHasKeyByNameHandler := connect.NewUnaryHandler(
+		GnomobileServiceHasKeyByNameProcedure,
+		svc.HasKeyByName,
+		opts...,
+	)
+	gnomobileServiceHasKeyByAddressHandler := connect.NewUnaryHandler(
+		GnomobileServiceHasKeyByAddressProcedure,
+		svc.HasKeyByAddress,
+		opts...,
+	)
+	gnomobileServiceHasKeyByNameOrAddressHandler := connect.NewUnaryHandler(
+		GnomobileServiceHasKeyByNameOrAddressProcedure,
+		svc.HasKeyByNameOrAddress,
 		opts...,
 	)
 	gnomobileServiceGetKeyInfoByNameHandler := connect.NewUnaryHandler(
@@ -603,6 +678,12 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 			gnomobileServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
 		case GnomobileServiceListKeyInfoProcedure:
 			gnomobileServiceListKeyInfoHandler.ServeHTTP(w, r)
+		case GnomobileServiceHasKeyByNameProcedure:
+			gnomobileServiceHasKeyByNameHandler.ServeHTTP(w, r)
+		case GnomobileServiceHasKeyByAddressProcedure:
+			gnomobileServiceHasKeyByAddressHandler.ServeHTTP(w, r)
+		case GnomobileServiceHasKeyByNameOrAddressProcedure:
+			gnomobileServiceHasKeyByNameOrAddressHandler.ServeHTTP(w, r)
 		case GnomobileServiceGetKeyInfoByNameProcedure:
 			gnomobileServiceGetKeyInfoByNameHandler.ServeHTTP(w, r)
 		case GnomobileServiceGetKeyInfoByAddressProcedure:
@@ -660,6 +741,18 @@ func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Conte
 
 func (UnimplementedGnomobileServiceHandler) ListKeyInfo(context.Context, *connect.Request[rpc.ListKeyInfoRequest]) (*connect.Response[rpc.ListKeyInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.ListKeyInfo is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) HasKeyByName(context.Context, *connect.Request[rpc.HasKeyByNameRequest]) (*connect.Response[rpc.HasKeyByNameResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByName is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) HasKeyByAddress(context.Context, *connect.Request[rpc.HasKeyByAddressRequest]) (*connect.Response[rpc.HasKeyByAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByAddress is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) HasKeyByNameOrAddress(context.Context, *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByNameOrAddress is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error) {

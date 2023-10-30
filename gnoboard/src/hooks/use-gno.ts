@@ -4,6 +4,9 @@ import { SelectAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
 import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
+import { HasKeyByNameRequest } from '@gno/api/gnomobiletypes_pb';
+import { HasKeyByAddressRequest } from '@gno/api/gnomobiletypes_pb';
+import { HasKeyByNameOrAddressRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetKeyInfoByNameRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetKeyInfoByAddressRequest } from '@gno/api/gnomobiletypes_pb';
 import { GetKeyInfoByNameOrAddressRequest } from '@gno/api/gnomobiletypes_pb';
@@ -30,8 +33,11 @@ interface GnoResponse {
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
+  hasKeyByName: (name: string) => Promise<boolean>;
+  hasKeyByAddress: (address: Uint8Array) => Promise<boolean>;
+  hasKeyByNameOrAddress: (nameOrBech32: string) => Promise<boolean>;
   getKeyInfoByName: (name: string) => Promise<GnoAccount>;
-  getKeyInfoByAddress: (bech32Address: string) => Promise<GnoAccount>;
+  getKeyInfoByAddress: (address: Uint8Array) => Promise<GnoAccount>;
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<GnoAccount>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
@@ -84,6 +90,30 @@ export const useGno = (): GnoResponse => {
     return response.phrase;
   };
 
+  const hasKeyByName = async (name: string) => {
+    const client = await getClient();
+    const response = await client.hasKeyByName(
+      new HasKeyByNameRequest({name}),
+    );
+    return response.has;
+  };
+
+  const hasKeyByAddress = async (address: Uint8Array) => {
+    const client = await getClient();
+    const response = await client.hasKeyByAddress(
+      new HasKeyByAddressRequest({address}),
+    );
+    return response.has;
+  };
+
+  const hasKeyByNameOrAddress = async (nameOrBech32: string) => {
+    const client = await getClient();
+    const response = await client.hasKeyByNameOrAddress(
+      new HasKeyByNameOrAddressRequest({nameOrBech32}),
+    );
+    return response.has;
+  };
+
   const getKeyInfoByName = async (name: string) => {
     const client = await getClient();
     const response = await client.getKeyInfoByName(
@@ -92,10 +122,10 @@ export const useGno = (): GnoResponse => {
     return response.key;
   };
 
-  const getKeyInfoByAddress = async (bech32Address: string) => {
+  const getKeyInfoByAddress = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.getKeyInfoByAddress(
-      new GetKeyInfoByAddressRequest({bech32Address}),
+      new GetKeyInfoByAddressRequest({address}),
     );
     return response.key;
   };
@@ -217,6 +247,9 @@ export const useGno = (): GnoResponse => {
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,
+    hasKeyByName,
+    hasKeyByAddress,
+    hasKeyByNameOrAddress,
     getKeyInfoByName,
     getKeyInfoByAddress,
     getKeyInfoByNameOrAddress,
