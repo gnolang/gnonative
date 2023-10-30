@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -60,6 +60,42 @@ export declare const GnomobileService: {
       readonly name: "ListKeyInfo",
       readonly I: typeof ListKeyInfoRequest,
       readonly O: typeof ListKeyInfoResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Check for the key in the keybase with the given name.
+     * In the response, set has true if the keybase has the key.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.HasKeyByName
+     */
+    readonly hasKeyByName: {
+      readonly name: "HasKeyByName",
+      readonly I: typeof HasKeyByNameRequest,
+      readonly O: typeof HasKeyByNameResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Check for the key in the keybase with the given address.
+     * In the response, set has true if the keybase has the key.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.HasKeyByAddress
+     */
+    readonly hasKeyByAddress: {
+      readonly name: "HasKeyByAddress",
+      readonly I: typeof HasKeyByAddressRequest,
+      readonly O: typeof HasKeyByAddressResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Check for the key in the keybase with the given name or bech32 string address.
+     * In the response, set has true if the keybase has the key.
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.HasKeyByNameOrAddress
+     */
+    readonly hasKeyByNameOrAddress: {
+      readonly name: "HasKeyByNameOrAddress",
+      readonly I: typeof HasKeyByNameOrAddressRequest,
+      readonly O: typeof HasKeyByNameOrAddressResponse,
       readonly kind: MethodKind.Unary,
     },
     /**

@@ -62,6 +62,30 @@ type GetKeyInfoByNameRequest struct {
 	Name string `json:"name" yaml:"name"`
 }
 
+type HasKeyByNameRequest struct {
+	Name string `json:"name" yaml:"name"`
+}
+
+type HasKeyByNameResponse struct {
+	Has bool `json:"has" yaml:"has"`
+}
+
+type HasKeyByAddressRequest struct {
+	Address []byte `json:"address" yaml:"address"`
+}
+
+type HasKeyByAddressResponse struct {
+	Has bool `json:"has" yaml:"has"`
+}
+
+type HasKeyByNameOrAddressRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+}
+
+type HasKeyByNameOrAddressResponse struct {
+	Has bool `json:"has" yaml:"has"`
+}
+
 type GetKeyInfoByNameResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
 }
