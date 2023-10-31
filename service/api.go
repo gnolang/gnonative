@@ -239,6 +239,18 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 	s.activeAccount.password = req.Msg.Password
 
 	s.getSigner().Password = req.Msg.Password
+
+	// Check the password.
+	if err := s.getSigner().Validate(); err != nil {
+		if keyerror.IsErrKeyNotFound(err) {
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		} else if keyerror.IsErrWrongPassword(err) {
+			return nil, rpc.ErrCode_ErrDecryptionFailed
+		} else {
+			return nil, err
+		}
+	}
+
 	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
 }
 

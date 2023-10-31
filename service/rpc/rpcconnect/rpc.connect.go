@@ -141,7 +141,8 @@ type GnomobileServiceClient interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
-	// Set the password for the account in the keybase, used for later operations
+	// Set the password for the account in the keybase, used for later operations.
+	// If the password is wrong, return ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.
@@ -502,7 +503,8 @@ type GnomobileServiceHandler interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
-	// Set the password for the account in the keybase, used for later operations
+	// Set the password for the account in the keybase, used for later operations.
+	// If the password is wrong, return ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If there is no active account, then return ErrNoActiveAccount.

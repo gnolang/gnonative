@@ -160,7 +160,8 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Set the password for the account in the keybase, used for later operations
+     * Set the password for the account in the keybase, used for later operations.
+     * If the password is wrong, return ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
      */
