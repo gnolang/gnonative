@@ -59,7 +59,8 @@ service GnomobileService {
   // SelectAccount selects the active account to use for later operations
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
-  // Set the password for the account in the keybase, used for later operations
+  // Set the password for the account in the keybase, used for later operations.
+  // If the password is wrong, return ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
