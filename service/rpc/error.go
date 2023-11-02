@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"io"
 
+	"connectrpc.com/connect"
 	"golang.org/x/xerrors"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 // WithCode defines an error that can be used by helpers of this package.
 type WithCode interface {
 	error
 	Code() ErrCode
+	Grpc() error
 }
 
 // Codes returns a list of wrapped codes
@@ -22,10 +22,6 @@ func Codes(err error) []ErrCode {
 	}
 
 	codes := []ErrCode{}
-
-	if st := getGRPCStatus(err); st != nil {
-		return codesFromGRPCStatus(st)
-	}
 
 	if code := Code(err); code != -1 {
 		codes = []ErrCode{code}
@@ -66,14 +62,6 @@ func Code(err error) ErrCode {
 		return typed.Code()
 	}
 
-	if st := getGRPCStatus(err); st != nil {
-		codes := codesFromGRPCStatus(st)
-		if len(codes) > 0 {
-			return codes[0]
-		}
-		return -1
-	}
-
 	return -1
 }
 
@@ -87,14 +75,6 @@ func LastCode(err error) ErrCode {
 		if ret := LastCode(cause); ret != -1 {
 			return ret
 		}
-	}
-
-	if st := getGRPCStatus(err); st != nil {
-		codes := codesFromGRPCStatus(st)
-		if len(codes) > 0 {
-			return codes[len(codes)-1]
-		}
-		return -1
 	}
 
 	return Code(err)
@@ -156,12 +136,18 @@ func (e ErrCode) Wrap(inner error) WithCode {
 	}
 }
 
-func (e ErrCode) GRPCStatus() *status.Status {
-	code := grpcCodeFromWithCode(e)
-	st, _ := status.New(code, e.Error()).WithDetails(
-		&ErrDetails{Codes: Codes(e)},
+// craft an connectRPC error with the rpc code error in the error details
+func (e ErrCode) Grpc() error {
+	err := connect.NewError(
+		connect.CodeUnknown,
+		e,
 	)
-	return st
+	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
+		Codes: Codes(e),
+	}); detailErr == nil {
+		err.AddDetail(detail)
+	}
+	return err
 }
 
 //
@@ -182,6 +168,21 @@ func (e wrappedError) Code() ErrCode {
 	return e.code
 }
 
+// craft an connectRPC error with the rpc code error in the error details
+func (e wrappedError) Grpc() error {
+	err := connect.NewError(
+		connect.CodeUnknown,
+		e,
+	)
+
+	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
+		Codes: Codes(e),
+	}); detailErr == nil {
+		err.AddDetail(detail)
+	}
+	return err
+}
+
 // Cause returns the inner error (github.com/pkg/errors)
 func (e wrappedError) Cause() error {
 	return e.inner
@@ -190,14 +191,6 @@ func (e wrappedError) Cause() error {
 // Unwrap returns the inner error (go1.13)
 func (e wrappedError) Unwrap() error {
 	return e.inner
-}
-
-func (e wrappedError) GRPCStatus() *status.Status {
-	code := grpcCodeFromWithCode(e)
-	st, _ := status.New(code, e.Error()).WithDetails(
-		&ErrDetails{Codes: Codes(e)},
-	)
-	return st
 }
 
 func (e wrappedError) Format(f fmt.State, c rune) {
@@ -254,36 +247,5 @@ func (e lightWrappedError) Format(f fmt.State, c rune) {
 func (e lightWrappedError) FormatError(p xerrors.Printer) error {
 	p.Printf("#%d", e.deepness+1)
 	e.frame.Format(p)
-	return nil
-}
-
-//
-// gRPC helpers
-//
-
-func codesFromGRPCStatus(st *status.Status) []ErrCode {
-	details := st.Details()
-	for _, detail := range details {
-		if typed, ok := detail.(*ErrDetails); ok {
-			return typed.Codes
-		}
-	}
-	return nil
-}
-
-func grpcCodeFromWithCode(err WithCode) codes.Code {
-	// here, we can do a big switch case if we plan to make accurate gRPC codes
-	// but we probably don't care
-	return codes.Unavailable
-}
-
-type gRPCStatus interface{ GRPCStatus() *status.Status }
-
-func getGRPCStatus(err error) *status.Status {
-	if _, ok := err.(WithCode); !ok {
-		if typed, ok := err.(gRPCStatus); ok {
-			return typed.GRPCStatus()
-		}
-	}
 	return nil
 }

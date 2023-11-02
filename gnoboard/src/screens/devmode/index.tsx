@@ -8,6 +8,9 @@ import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
 import { Buffer } from 'buffer';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
+import { ConnectError } from '@connectrpc/connect';
+import { ErrCode } from '@gno/api/rpc_pb';
+import { GRPCError } from '@gno/api/error';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
@@ -27,9 +30,10 @@ function DevMode() {
       const response = await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted);
       console.log('response: ', response);
       setAppConsole(Buffer.from(response.result).toString());
-    } catch (error) {
-      if (error?.rawMessage === 'ErrDecryptionFailed(#109)') {
-        const account = await gno.getActiveAccount()
+    } catch (error: ConnectError | unknown) {
+      const err = new GRPCError(error);
+      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+        const account = await gno.getActiveAccount();
         setReenterPassword(account.key?.name);
         return;
       }
