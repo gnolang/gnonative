@@ -45,7 +45,7 @@ const getStyle = (variant: ButtonVariant) => {
     case 'primary-red':
       return colors.red[500];
     case 'secondary-red':
-      return colors.red[50];
+      return colors.red[300];
     default:
       return colors.blue;
   }

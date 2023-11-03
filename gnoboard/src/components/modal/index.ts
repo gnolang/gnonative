@@ -1,4 +1,10 @@
-import * as ModalHeader from './ModalHeader';
+import ModalHeader from './ModalHeader';
 import ModalConfirm from './ModalConfirm';
+import ModalContent from './ModalContent';
 
-export { ModalHeader, ModalConfirm };
+export const Modal = {
+  Header: ModalHeader,
+  Content: ModalContent,
+};
+
+export { ModalConfirm };
