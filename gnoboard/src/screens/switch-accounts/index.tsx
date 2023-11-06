@@ -49,9 +49,11 @@ const SwitchAccounts = () => {
     }
   };
 
-  const onCloseReenterPassword = async () => {
+  const onCloseReenterPassword = async (sucess: boolean) => {
     setReenterPassword(undefined);
-    navigation.navigate(RoutePath.Home);
+    if (sucess) {
+      navigation.navigate(RoutePath.Home);
+    }
   };
 
   if (loading) return <Loading message={loading} />;
