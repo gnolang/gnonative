@@ -13,6 +13,9 @@ import { GnoAccount } from '@gno/native_modules/types';
 import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
+import { ConnectError } from '@connectrpc/connect';
+import { ErrCode } from '@gno/api/rpc_pb';
+import { GRPCError } from '@gno/api/error';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
@@ -36,8 +39,9 @@ export const Home: React.FC = () => {
           const balance = await gno.queryAccount(response.key.address);
           setBalance(balance);
         }
-      } catch (error: unknown | Error) {
-        if (error?.rawMessage === 'ErrUnknownAddress(#110)') {
+      } catch (error: ConnectError | unknown) {
+        const err = new GRPCError(error);
+        if (err.errCode() === ErrCode.ErrNoActiveAccount) {
           setUnknownAddress(true);
         }
       } finally {

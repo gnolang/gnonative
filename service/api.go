@@ -83,7 +83,7 @@ func (s *gnomobileService) HasKeyByName(ctx context.Context, req *connect.Reques
 	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -98,7 +98,7 @@ func (s *gnomobileService) HasKeyByAddress(ctx context.Context, req *connect.Req
 	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -113,7 +113,7 @@ func (s *gnomobileService) HasKeyByNameOrAddress(ctx context.Context, req *conne
 	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -128,7 +128,7 @@ func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -148,7 +148,7 @@ func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect
 	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -168,7 +168,7 @@ func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else {
 			return nil, err
 		}
@@ -204,7 +204,7 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+		return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 	}
 
 	info, err := convertKeyInfo(key)
@@ -234,7 +234,7 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	if s.activeAccount == nil {
-		return nil, rpc.ErrCode_ErrNoActiveAccount
+		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
 	}
 	s.activeAccount.password = req.Msg.Password
 
@@ -243,9 +243,9 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 	// Check the password.
 	if err := s.getSigner().Validate(); err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed
+			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
 		} else {
 			return nil, err
 		}
@@ -262,7 +262,7 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	s.lock.RUnlock()
 
 	if account == nil {
-		return nil, rpc.ErrCode_ErrNoActiveAccount
+		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
 	}
 
 	info, err := convertKeyInfo(account.keyInfo)
@@ -283,7 +283,7 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		if errors.As(err, &std.UnknownAddressError{}) {
-			return nil, rpc.ErrCode_ErrUnknownAddress
+			return nil, rpc.ErrCode_ErrUnknownAddress.Grpc()
 		}
 		return nil, err
 	}
@@ -309,9 +309,9 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound
+			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed
+			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
 		} else {
 			return nil, err
 		}
@@ -372,7 +372,7 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 	s.lock.RLock()
 	if s.activeAccount == nil {
 		s.lock.RUnlock()
-		return nil, rpc.ErrCode_ErrNoActiveAccount
+		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
 	}
 	s.lock.RUnlock()
 
@@ -389,9 +389,9 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 	bres, err := s.client.Call(cfg)
 	if err != nil {
 		if errors.As(err, &std.UnknownAddressError{}) {
-			return nil, rpc.ErrCode_ErrUnknownAddress
+			return nil, rpc.ErrCode_ErrUnknownAddress.Grpc()
 		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed
+			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
 		} else {
 			return nil, err
 		}
