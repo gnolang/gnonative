@@ -39,15 +39,15 @@ service GnomobileService {
   rpc HasKeyByNameOrAddress(HasKeyByNameOrAddressRequest) returns (HasKeyByNameOrAddressResponse);
 
   // Get the information for the key in the keybase with the given name.
-  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByName(GetKeyInfoByNameRequest) returns (GetKeyInfoByNameResponse);
 
   // Get the information for the key in the keybase with the given address.
-  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByAddress(GetKeyInfoByAddressRequest) returns (GetKeyInfoByAddressResponse);
 
   // Get the information for the key in the keybase with the given name or bech32 string address.
-  // If the key doesn't exist, then return ErrCryptoKeyNotFound.
+  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByNameOrAddress(GetKeyInfoByNameOrAddressRequest) returns (GetKeyInfoByNameOrAddressResponse);
 
   // Create a new account the keybase using the name an password specified by SetAccount.
@@ -60,11 +60,11 @@ service GnomobileService {
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
   // Set the password for the account in the keybase, used for later operations.
-  // If the password is wrong, return ErrDecryptionFailed.
+  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
-  // If there is no active account, then return ErrNoActiveAccount.
+  // If there is no active account, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
   rpc GetActiveAccount(GetActiveAccountRequest)
@@ -76,8 +76,9 @@ service GnomobileService {
 
   // DeleteAccount deletes the account with the given name, using the password
   // to ensure access. However, if skip_password is true, then ignore the
-  // password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
-  // If the password is wrong, then return ErrDecryptionFailed.
+  // password.
+  // If the account doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the password is wrong, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 
   // Make an ABCI query to the remote node.
@@ -119,11 +120,15 @@ enum ErrCode {
   // Special errors
   //----------------
 
-  Undefined = 0; // default value, should never be set manually
+  // Undefined is the default value. It should never be set manually
+  Undefined = 0;
 
-  TODO = 1;              // indicates that you plan to create an error later
-  ErrNotImplemented = 2; // indicates that a method is not implemented yet
-  ErrInternal = 3; // indicates an unknown error (without Code), i.e. in gRPC
+  // TODO indicates that you plan to create an error later
+  TODO = 1;
+  // ErrNotImplemented indicates that a method is not implemented yet
+  ErrNotImplemented = 2;
+  // ErrInternal indicates an unknown error (without Code), i.e. in gRPC
+  ErrInternal = 3;
 
   //----------------
   // Generic errors
@@ -141,8 +146,8 @@ enum ErrCode {
   ErrNoActiveAccount = 107;
   ErrRunGRPCServer = 108;
   ErrDecryptionFailed = 109;
-  ErrUnknownAddress =
-      110; // indicates that the address is unknown on the blockchain
+  // ErrUnknownAddress indicates that the address is unknown on the blockchain
+  ErrUnknownAddress = 110;
 }
 
 message ErrDetails { repeated ErrCode codes = 1; }
