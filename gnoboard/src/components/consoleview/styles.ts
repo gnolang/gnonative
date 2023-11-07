@@ -12,7 +12,7 @@ export const consoleStyleSheet = StyleSheet.create({
     maxHeight: 400,
   },
   contentContainer: {
-    minHeight: 150,
+    minHeight: 250,
   },
   text: {
     color: '#ffffff',

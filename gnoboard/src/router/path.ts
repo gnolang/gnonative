@@ -7,4 +7,5 @@ export enum RoutePath {
   RemoveConfirm = 'RemoveConfirm',
   DevMode = 'DevMode',
   SwitchAccounts = 'SwitchAccounts',
+  Board = 'Board',
 }

@@ -81,6 +81,7 @@ You can either connect an Android phone via USB cable, or launch an emulator dev
 Connect your device and bind the port to metro:
 
 ```console
+cd gnoboard
 make android.reverse_tcp
 ```
 

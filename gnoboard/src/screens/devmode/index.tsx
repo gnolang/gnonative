@@ -2,21 +2,27 @@ import { ConsoleView } from '@gno/components/consoleview';
 import TextInput from '@gno/components/textinput';
 import { screenStyleSheet as styles } from '@gno/styles';
 import { useState } from 'react';
-import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, ScrollView, StyleSheet, View } from 'react-native';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
 import { Buffer } from 'buffer';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
-import { ConnectError } from '@connectrpc/connect';
 import { ErrCode } from '@gno/api/rpc_pb';
 import { GRPCError } from '@gno/grpc/error';
+import { Spacer } from '@gno/components/row';
+import Text from '@gno/components/texts';
+import { ConnectError } from '@connectrpc/connect';
+import { useNavigation } from '@react-navigation/native';
+import { RouterWelcomeStackProp } from '@gno/router/custom-router';
+import { RoutePath } from '@gno/router/path';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
   const [appConsole, setAppConsole] = useState<string>('');
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
+  const navigate = useNavigation<RouterWelcomeStackProp>();
 
   const gno = useGno();
 
@@ -52,19 +58,26 @@ function DevMode() {
     setReenterPassword(undefined);
   };
 
+  const onRenderBoard = async () => {
+    navigate.navigate(RoutePath.Board, { board: 'gno.land/r/demo/boards', thread: 'gnomobile/1' });
+  };
+
   return (
     <>
       <Layout.Container>
         <Layout.Header />
         <Layout.Body>
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            <Text>Content:</Text>
+            <Text.Body>Content:</Text.Body>
             <View style={customStyles.sendGroupLikeWhatsapp}>
-              <TextInput style={customStyles.inputMsg} value={postContent} onChangeText={setPostContent} />
-              <Button title='Send' onPress={onPostPress} variant='primary' style={{ width: '30%' }} />
+              <TextInput style={customStyles.inputMsg} value={postContent} onChangeText={setPostContent} autoCapitalize='none' />
+              <Button title='Send' onPress={onPostPress} variant='primary' style={{ width: '30%' }} loading={Boolean(loading)} />
             </View>
             <ConsoleView text={appConsole} />
-            <Button title='Open http://testnet.gno.berty.io/r/demo/boards:gnomobile/1' onPress={loadInBrowser} variant='primary' />
+            <Spacer />
+            <Button title='Board Render on Browser' onPress={loadInBrowser} variant='primary' />
+            <Spacer />
+            <Button title='Board Render on Mobile' onPress={onRenderBoard} variant='primary' />
           </ScrollView>
         </Layout.Body>
       </Layout.Container>
