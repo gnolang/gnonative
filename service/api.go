@@ -82,11 +82,7 @@ func (s *gnomobileService) HasKeyByName(ctx context.Context, req *connect.Reques
 
 	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&rpc.HasKeyByNameResponse{Has: has}), nil
@@ -97,11 +93,7 @@ func (s *gnomobileService) HasKeyByAddress(ctx context.Context, req *connect.Req
 
 	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&rpc.HasKeyByAddressResponse{Has: has}), nil
@@ -112,11 +104,7 @@ func (s *gnomobileService) HasKeyByNameOrAddress(ctx context.Context, req *conne
 
 	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&rpc.HasKeyByNameOrAddressResponse{Has: has}), nil
@@ -127,11 +115,7 @@ func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 
 	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	info, err := convertKeyInfo(key)
@@ -147,11 +131,7 @@ func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect
 
 	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	info, err := convertKeyInfo(key)
@@ -167,11 +147,7 @@ func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	info, err := convertKeyInfo(key)
@@ -242,13 +218,7 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 
 	// Check the password.
 	if err := s.getSigner().Validate(); err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&rpc.SetPasswordResponse{}), nil
@@ -282,10 +252,7 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	// gnoclient wants the bech32 address.
 	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
-		if errors.As(err, &std.UnknownAddressError{}) {
-			return nil, rpc.ErrCode_ErrUnknownAddress.Grpc()
-		}
-		return nil, err
+		return nil, getGrpcError(err)
 	}
 
 	formattedCoins := make([]*rpc.Coin, 0)
@@ -308,13 +275,7 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 
 func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error) {
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
-		if keyerror.IsErrKeyNotFound(err) {
-			return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
-		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	s.lock.Lock()
@@ -388,13 +349,7 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 
 	bres, err := s.client.Call(cfg)
 	if err != nil {
-		if errors.As(err, &std.UnknownAddressError{}) {
-			return nil, rpc.ErrCode_ErrUnknownAddress.Grpc()
-		} else if keyerror.IsErrWrongPassword(err) {
-			return nil, rpc.ErrCode_ErrDecryptionFailed.Grpc()
-		} else {
-			return nil, err
-		}
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil
@@ -436,4 +391,18 @@ func (s *gnomobileService) HelloStream(ctx context.Context, req *connect.Request
 
 	s.logger.Debug("HelloStream returned ok")
 	return nil
+}
+
+// If err is a recognized Go error, return the equivalent Grpc error.
+// Otherwise, just return err.
+func getGrpcError(err error) error {
+	if keyerror.IsErrKeyNotFound(err) {
+		return rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
+	} else if keyerror.IsErrWrongPassword(err) {
+		return rpc.ErrCode_ErrDecryptionFailed.Grpc()
+	} else if errors.As(err, &std.UnknownAddressError{}) {
+		return rpc.ErrCode_ErrUnknownAddress.Grpc()
+	} else {
+		return err
+	}
 }
