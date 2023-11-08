@@ -1,3 +1,5 @@
+import { GRPCError } from '@gno/api/error';
+import { ErrCode } from '@gno/api/rpc_pb';
 import Alert from '@gno/components/alert';
 import Button from '@gno/components/buttons';
 import { Modal } from '@gno/components/modal';
@@ -11,7 +13,7 @@ import { Modal as NativeModal } from 'react-native';
 export type Props = {
   visible: boolean;
   accountName: string;
-  onClose: () => void;
+  onClose: (sucess: boolean) => void;
 };
 
 const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
@@ -25,21 +27,27 @@ const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
     try {
       setError(undefined);
       await gno.setPassword(password);
-      onClose();
+      onClose(true);
     } catch (error) {
-      setError(JSON.stringify(error));
+      const err = new GRPCError(error);
+      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+        setError('Wrong password, please try again.');
+      } else {
+        setError(JSON.stringify(error));
+      }
     }
   };
 
   return (
     <NativeModal visible={visible} transparent={true} animationType='slide'>
       <Modal.Content>
-        <Modal.Header title='Re-enter your password' onClose={onClose} />
+        <Modal.Header title='Re-enter your password' onClose={() => onClose(false)} />
         <Text.BodyMedium>Please, reenter the password for the selected account.</Text.BodyMedium>
         <Spacer />
-        <TextInput placeholder={`Password for ${accountName}'s Account`} secureTextEntry={true} onChangeText={setPassword} />
+        <TextInput placeholder={`Password for ${accountName}'s Account`} error={error} secureTextEntry={true} onChangeText={setPassword} />
         <Spacer />
         <Alert severity='error' message={error} />
+        <Spacer />
         <Button title='Confirm' onPress={onConfirm} variant='primary' />
       </Modal.Content>
     </NativeModal>
