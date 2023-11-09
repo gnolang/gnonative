@@ -3,4 +3,4 @@ de947d5bd943bc6295fed5ad70ecb81547245997  buf.gen.yaml
 f1885ad4899d13dd9862536d9561c09b8cf0304d  service/gnomobiletypes/gnomobiletypes.go
 d6482c2dabdab4720f3c7faa9b3a499b7b72626c  service/gnomobiletypes/package.go
 5498f446f6e0cfc4ca2b65cefc6e6cf7ae518857  service/rpc/gnomobiletypes.proto
-959d07c3a807ffd3f09606000aa42a5871b6a14d  service/rpc/rpc.proto
+e91cf70c34a00a9789d8e93aaa3131827a79b099  service/rpc/rpc.proto

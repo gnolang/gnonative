@@ -39,15 +39,15 @@ service GnomobileService {
   rpc HasKeyByNameOrAddress(HasKeyByNameOrAddressRequest) returns (HasKeyByNameOrAddressResponse);
 
   // Get the information for the key in the keybase with the given name.
-  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByName(GetKeyInfoByNameRequest) returns (GetKeyInfoByNameResponse);
 
   // Get the information for the key in the keybase with the given address.
-  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByAddress(GetKeyInfoByAddressRequest) returns (GetKeyInfoByAddressResponse);
 
   // Get the information for the key in the keybase with the given name or bech32 string address.
-  // If the key doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByNameOrAddress(GetKeyInfoByNameOrAddressRequest) returns (GetKeyInfoByNameOrAddressResponse);
 
   // Create a new account the keybase using the name an password specified by SetAccount.
@@ -59,12 +59,13 @@ service GnomobileService {
   // SelectAccount selects the active account to use for later operations
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
-  // Set the password for the account in the keybase, used for later operations.
+  // Set the password for the active account in the keybase, used for later operations.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
-  // If there is no active account, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
   rpc GetActiveAccount(GetActiveAccountRequest)
@@ -77,8 +78,8 @@ service GnomobileService {
   // DeleteAccount deletes the account with the given name, using the password
   // to ensure access. However, if skip_password is true, then ignore the
   // password.
-  // If the account doesn't exist, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
-  // If the password is wrong, then return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+  // If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 
   // Make an ABCI query to the remote node.
@@ -95,9 +96,13 @@ service GnomobileService {
   // is usually a function call like "GetBoardIDFromName(\"testboard\")". The
   // return value is a typed expression like
   // "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
   // Call a specific realm function.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (CallResponse);
 
   // Convert a byte array address to a bech32 string address.
@@ -142,12 +147,48 @@ enum ErrCode {
   ErrSerialization = 103;
   ErrDeserialization = 104;
   ErrCryptoKeyTypeUnknown = 105;
+  // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 106;
+  // ErrNoActiveAccount indicates that no active account has been set with SelectAccount
   ErrNoActiveAccount = 107;
   ErrRunGRPCServer = 108;
+  // ErrDecryptionFailed indicates a decryption failure including a wrong password
   ErrDecryptionFailed = 109;
+
+  // The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
+
+  ErrTxDecode = 110;
+  ErrInvalidSequence = 111;
+  ErrUnauthorized = 112;
+  // ErrInsufficientFunds indicates that there are insufficient funds to pay for fees
+  ErrInsufficientFunds = 113;
+  // ErrUnknownRequest indicates that the path of a realm function call is unrecognized
+  ErrUnknownRequest = 114;
+  // ErrInvalidAddress indicates that an account address is blank or the bech32 can't be decoded
+  ErrInvalidAddress = 115;
   // ErrUnknownAddress indicates that the address is unknown on the blockchain
-  ErrUnknownAddress = 110;
+  ErrUnknownAddress = 116;
+  // ErrInvalidPubKey indicates that the public key was not found or has an invalid algorithm or format
+  ErrInvalidPubKey = 117;
+  // ErrInsufficientCoins indicates that the transaction has insufficient account funds to send
+  ErrInsufficientCoins = 118;
+  // ErrInvalidCoins indicates that the transaction Coins are not sorted, or don't have a
+  // positive amount, or the coin Denom contains upper case characters
+  ErrInvalidCoins = 119;
+  // ErrInvalidGasWanted indicates that the transaction gas wanted is too large or otherwise invalid
+  ErrInvalidGasWanted = 120;
+  // ErrOutOfGas indicates that the transaction doesn't have enough gas
+  ErrOutOfGas = 121;
+  // ErrMemoTooLarge indicates that the transaction memo is too large
+  ErrMemoTooLarge = 122;
+  // ErrInsufficientFee indicates that the gas fee is insufficient
+  ErrInsufficientFee = 123;
+  // ErrTooManySignatures indicates that the transaction has too many signatures
+  ErrTooManySignatures = 124;
+  // ErrNoSignatures indicates that the transaction has no signatures
+  ErrNoSignatures = 125;
+  // ErrGasOverflow that an action results in a gas consumption unsigned integer overflow
+  ErrGasOverflow = 126;
 }
 
 message ErrDetails { repeated ErrCode codes = 1; }

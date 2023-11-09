@@ -100,7 +100,7 @@ export declare const GnomobileService: {
     },
     /**
      * Get the information for the key in the keybase with the given name.
-     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName
      */
@@ -112,7 +112,7 @@ export declare const GnomobileService: {
     },
     /**
      * Get the information for the key in the keybase with the given address.
-     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress
      */
@@ -124,7 +124,7 @@ export declare const GnomobileService: {
     },
     /**
      * Get the information for the key in the keybase with the given name or bech32 string address.
-     * If the key doesn't exist, then return ErrCryptoKeyNotFound.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress
      */
@@ -160,8 +160,9 @@ export declare const GnomobileService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Set the password for the account in the keybase, used for later operations.
-     * If the password is wrong, return ErrDecryptionFailed.
+     * Set the password for the active account in the keybase, used for later operations.
+     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+     * If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetPassword
      */
@@ -173,7 +174,7 @@ export declare const GnomobileService: {
     },
     /**
      * GetActiveAccount gets the active account which was set by SelectAccount.
-     * If there is no active account, then return ErrNoActiveAccount.
+     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
      * length of the result.)
      *
@@ -200,8 +201,9 @@ export declare const GnomobileService: {
     /**
      * DeleteAccount deletes the account with the given name, using the password
      * to ensure access. However, if skip_password is true, then ignore the
-     * password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
-     * If the password is wrong, then return ErrDecryptionFailed.
+     * password.
+     * If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+     * If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.DeleteAccount
      */
@@ -242,6 +244,7 @@ export declare const GnomobileService: {
      * is usually a function call like "GetBoardIDFromName(\"testboard\")". The
      * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+     * If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.QEval
      */
@@ -253,6 +256,9 @@ export declare const GnomobileService: {
     },
     /**
      * Call a specific realm function.
+     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+     * If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+     * If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.Call
      */

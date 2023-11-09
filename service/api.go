@@ -180,7 +180,7 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
-		return nil, rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
+		return nil, getGrpcError(err)
 	}
 
 	info, err := convertKeyInfo(key)
@@ -400,8 +400,43 @@ func getGrpcError(err error) error {
 		return rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
 	} else if keyerror.IsErrWrongPassword(err) {
 		return rpc.ErrCode_ErrDecryptionFailed.Grpc()
+	}
+
+	// The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
+	if errors.As(err, &std.TxDecodeError{}) {
+		return rpc.ErrCode_ErrTxDecode.Grpc()
+	} else if errors.As(err, &std.InvalidSequenceError{}) {
+		return rpc.ErrCode_ErrInvalidSequence.Grpc()
+	} else if errors.As(err, &std.UnauthorizedError{}) {
+		return rpc.ErrCode_ErrUnauthorized.Grpc()
+	} else if errors.As(err, &std.InsufficientFundsError{}) {
+		return rpc.ErrCode_ErrInsufficientFunds.Grpc()
+	} else if errors.As(err, &std.UnknownRequestError{}) {
+		return rpc.ErrCode_ErrUnknownRequest.Grpc()
+	} else if errors.As(err, &std.InvalidAddressError{}) {
+		return rpc.ErrCode_ErrInvalidAddress.Grpc()
 	} else if errors.As(err, &std.UnknownAddressError{}) {
 		return rpc.ErrCode_ErrUnknownAddress.Grpc()
+	} else if errors.As(err, &std.InvalidPubKeyError{}) {
+		return rpc.ErrCode_ErrInvalidPubKey.Grpc()
+	} else if errors.As(err, &std.InsufficientCoinsError{}) {
+		return rpc.ErrCode_ErrInsufficientCoins.Grpc()
+	} else if errors.As(err, &std.InvalidCoinsError{}) {
+		return rpc.ErrCode_ErrInvalidCoins.Grpc()
+	} else if errors.As(err, &std.InvalidGasWantedError{}) {
+		return rpc.ErrCode_ErrInvalidGasWanted.Grpc()
+	} else if errors.As(err, &std.OutOfGasError{}) {
+		return rpc.ErrCode_ErrOutOfGas.Grpc()
+	} else if errors.As(err, &std.MemoTooLargeError{}) {
+		return rpc.ErrCode_ErrMemoTooLarge.Grpc()
+	} else if errors.As(err, &std.InsufficientFeeError{}) {
+		return rpc.ErrCode_ErrInsufficientFee.Grpc()
+	} else if errors.As(err, &std.TooManySignaturesError{}) {
+		return rpc.ErrCode_ErrTooManySignatures.Grpc()
+	} else if errors.As(err, &std.NoSignaturesError{}) {
+		return rpc.ErrCode_ErrNoSignatures.Grpc()
+	} else if errors.As(err, &std.GasOverflowError{}) {
+		return rpc.ErrCode_ErrGasOverflow.Grpc()
 	} else {
 		return err
 	}
