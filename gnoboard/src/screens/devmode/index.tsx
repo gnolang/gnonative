@@ -10,7 +10,7 @@ import { Buffer } from 'buffer';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
 import { ConnectError } from '@connectrpc/connect';
 import { ErrCode } from '@gno/api/rpc_pb';
-import { GRPCError } from '@gno/api/error';
+import { GRPCError } from '@gno/grpc/error';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
