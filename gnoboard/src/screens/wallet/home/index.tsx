@@ -15,7 +15,7 @@ import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
 import { ConnectError } from '@connectrpc/connect';
 import { ErrCode } from '@gno/api/rpc_pb';
-import { GRPCError } from '@gno/api/error';
+import { GRPCError } from '@gno/grpc/error';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
