@@ -126,13 +126,13 @@ type GnomobileServiceClient interface {
 	// In the response, set has true if the keybase has the key.
 	HasKeyByNameOrAddress(context.Context, *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
 	// Get the information for the key in the keybase with the given address.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error)
 	// Create a new account the keybase using the name an password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
@@ -141,11 +141,12 @@ type GnomobileServiceClient interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
-	// Set the password for the account in the keybase, used for later operations.
-	// If the password is wrong, return ErrDecryptionFailed.
+	// Set the password for the active account in the keybase, used for later operations.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
-	// If there is no active account, then return ErrNoActiveAccount.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
@@ -154,8 +155,9 @@ type GnomobileServiceClient interface {
 	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
-	// password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
-	// If the password is wrong, then return ErrDecryptionFailed.
+	// password.
+	// If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
@@ -169,8 +171,12 @@ type GnomobileServiceClient interface {
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
 	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
@@ -488,13 +494,13 @@ type GnomobileServiceHandler interface {
 	// In the response, set has true if the keybase has the key.
 	HasKeyByNameOrAddress(context.Context, *connect.Request[rpc.HasKeyByNameOrAddressRequest]) (*connect.Response[rpc.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[rpc.GetKeyInfoByNameRequest]) (*connect.Response[rpc.GetKeyInfoByNameResponse], error)
 	// Get the information for the key in the keybase with the given address.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[rpc.GetKeyInfoByAddressRequest]) (*connect.Response[rpc.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
-	// If the key doesn't exist, then return ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[rpc.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[rpc.GetKeyInfoByNameOrAddressResponse], error)
 	// Create a new account the keybase using the name an password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
@@ -503,11 +509,12 @@ type GnomobileServiceHandler interface {
 	CreateAccount(context.Context, *connect.Request[rpc.CreateAccountRequest]) (*connect.Response[rpc.CreateAccountResponse], error)
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[rpc.SelectAccountRequest]) (*connect.Response[rpc.SelectAccountResponse], error)
-	// Set the password for the account in the keybase, used for later operations.
-	// If the password is wrong, return ErrDecryptionFailed.
+	// Set the password for the active account in the keybase, used for later operations.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[rpc.SetPasswordRequest]) (*connect.Response[rpc.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
-	// If there is no active account, then return ErrNoActiveAccount.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[rpc.GetActiveAccountRequest]) (*connect.Response[rpc.GetActiveAccountResponse], error)
@@ -516,8 +523,9 @@ type GnomobileServiceHandler interface {
 	QueryAccount(context.Context, *connect.Request[rpc.QueryAccountRequest]) (*connect.Response[rpc.QueryAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
-	// password. If the account doesn't exist, then return ErrCryptoKeyNotFound.
-	// If the password is wrong, then return ErrDecryptionFailed.
+	// password.
+	// If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[rpc.DeleteAccountRequest]) (*connect.Response[rpc.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[rpc.QueryRequest]) (*connect.Response[rpc.QueryResponse], error)
@@ -531,8 +539,12 @@ type GnomobileServiceHandler interface {
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
 	QEval(context.Context, *connect.Request[rpc.QEvalRequest]) (*connect.Response[rpc.QEvalResponse], error)
 	// Call a specific realm function.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
