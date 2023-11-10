@@ -9,6 +9,7 @@ import DevMode from '@gno/screens/devmode';
 import SwitchAccounts from '@gno/screens/switch-accounts';
 import RemoveAccount from '@gno/screens/remove-account';
 import RemoveConfirm from '@gno/screens/remove-account/confirm';
+import Board from '@gno/screens/board';
 
 export type RouterWelcomeStack = {
   Home: undefined;
@@ -19,6 +20,7 @@ export type RouterWelcomeStack = {
   SwitchAccounts: undefined;
   RemoveAccount: undefined;
   RemoveConfirm: { accountName: string };
+  Board: { board: string, thread: string };
 };
 
 export const Stack = createNativeStackNavigator<RouterWelcomeStack>();
@@ -36,6 +38,7 @@ const SignedOutStackScreen = () => (
       <Stack.Screen name={RoutePath.RemoveConfirm} component={RemoveConfirm}></Stack.Screen>
       <Stack.Screen name={RoutePath.SwitchAccounts} component={SwitchAccounts} />
       <Stack.Screen name={RoutePath.DevMode} component={DevMode}></Stack.Screen>
+      <Stack.Screen name={RoutePath.Board} component={Board}></Stack.Screen>
     </Stack.Group>
   </Stack.Navigator>
 );
