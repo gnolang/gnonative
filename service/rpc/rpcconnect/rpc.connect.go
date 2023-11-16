@@ -189,7 +189,7 @@ type GnomobileServiceClient interface {
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
-	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
+	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.ServerStreamForClient[rpc.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -479,8 +479,8 @@ func (c *gnomobileServiceClient) QEval(ctx context.Context, req *connect.Request
 }
 
 // Call calls land.gno.gnomobile.v1.GnomobileService.Call.
-func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
-	return c.call.CallUnary(ctx, req)
+func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.ServerStreamForClient[rpc.CallResponse], error) {
+	return c.call.CallServerStream(ctx, req)
 }
 
 // AddressToBech32 calls land.gno.gnomobile.v1.GnomobileService.AddressToBech32.
@@ -585,7 +585,7 @@ type GnomobileServiceHandler interface {
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
-	Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error)
+	Call(context.Context, *connect.Request[rpc.CallRequest], *connect.ServerStream[rpc.CallResponse]) error
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -707,7 +707,7 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.QEval,
 		opts...,
 	)
-	gnomobileServiceCallHandler := connect.NewUnaryHandler(
+	gnomobileServiceCallHandler := connect.NewServerStreamHandler(
 		GnomobileServiceCallProcedure,
 		svc.Call,
 		opts...,
@@ -879,8 +879,8 @@ func (UnimplementedGnomobileServiceHandler) QEval(context.Context, *connect.Requ
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.QEval is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Call is not implemented"))
+func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[rpc.CallRequest], *connect.ServerStream[rpc.CallResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Call is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) AddressToBech32(context.Context, *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {

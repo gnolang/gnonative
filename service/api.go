@@ -336,13 +336,13 @@ func (s *gnomobileService) QEval(ctx context.Context, req *connect.Request[rpc.Q
 	return connect.NewResponse(&rpc.QEvalResponse{Result: result}), nil
 }
 
-func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest]) (*connect.Response[rpc.CallResponse], error) {
+func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.CallRequest], stream *connect.ServerStream[rpc.CallResponse]) error {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
 	s.lock.RLock()
 	if s.activeAccount == nil {
 		s.lock.RUnlock()
-		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
+		return rpc.ErrCode_ErrNoActiveAccount.Grpc()
 	}
 	s.lock.RUnlock()
 
@@ -358,10 +358,17 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 
 	bres, err := s.client.Call(cfg)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return getGrpcError(err)
 	}
 
-	return connect.NewResponse(&rpc.CallResponse{Result: bres.DeliverTx.Data}), nil
+	if err := stream.Send(&rpc.CallResponse{
+		Result: bres.DeliverTx.Data,
+	}); err != nil {
+		s.logger.Error("Call stream.Send returned error", zap.Error(err))
+		return err
+	}
+
+	return nil
 }
 
 func (s *gnomobileService) AddressToBech32(ctx context.Context, req *connect.Request[rpc.AddressToBech32Request]) (*connect.Response[rpc.AddressToBech32Response], error) {

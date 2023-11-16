@@ -290,7 +290,7 @@ export const GnomobileService = {
       name: "Call",
       I: CallRequest,
       O: CallResponse,
-      kind: MethodKind.Unary,
+      kind: MethodKind.ServerStreaming,
     },
     /**
      * Convert a byte array address to a bech32 string address.
