@@ -25,6 +25,14 @@ const BodyMedium = styled.Text`
   text-align: left;
 `;
 
+const Caption1 = styled.Text`
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0.5px;
+  text-align: center;
+`;
+
 const HeaderTitle = styled.Text`
   color: black;
   font-size: 17px;
@@ -72,6 +80,6 @@ const Subheadline = styled.Text`
   text-align: left;
 `;
 
-const Text = { Title, Body, HeaderSubtitle, HeaderTitle, HeaderTitleText, HeaderSubtitleText, Subheadline, BodyMedium };
+const Text = { Title, Body, HeaderSubtitle, HeaderTitle, HeaderTitleText, HeaderSubtitleText, Subheadline, BodyMedium, Caption1 };
 
 export default Text;

@@ -1,0 +1,17 @@
+[
+  {
+    "chainId": "test3",
+    "chainName": "Testnet 3",
+    "gnoUrl": "test3.gno.land:36657"
+  },
+  {
+    "chainId": "dev",
+    "chainName": "Berty-Dev",
+    "gnoUrl": "testnet.gno.berty.io:26657"
+  },
+  {
+    "chainId": "teritori-1",
+    "chainName": "Teritori-1",
+    "gnoUrl": "testnet.gno.teritori.com:26657"
+  }
+]
