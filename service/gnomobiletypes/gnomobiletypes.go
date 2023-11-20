@@ -7,11 +7,25 @@ type SetRemoteRequest struct {
 type SetRemoteResponse struct {
 }
 
+type GetRemoteRequest struct {
+}
+
+type GetRemoteResponse struct {
+	Remote string `json:"remote" yaml:"remote"`
+}
+
 type SetChainIDRequest struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
 }
 
 type SetChainIDResponse struct {
+}
+
+type GetChainIDRequest struct {
+}
+
+type GetChainIDResponse struct {
+	ChainID string `json:"chain_id" yaml:"chain_id"`
 }
 
 type SetPasswordRequest struct {

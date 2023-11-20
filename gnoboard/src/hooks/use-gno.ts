@@ -1,3 +1,7 @@
+import { SetRemoteRequest, SetRemoteResponse } from '@gno/api/gnomobiletypes_pb';
+import { GetRemoteRequest } from '@gno/api/gnomobiletypes_pb';
+import { SetChainIDRequest, SetChainIDResponse } from '@gno/api/gnomobiletypes_pb';
+import { GetChainIDRequest } from '@gno/api/gnomobiletypes_pb';
 import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
 import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
 import { SelectAccountResponse } from '@gno/api/gnomobiletypes_pb';
@@ -30,6 +34,10 @@ import { PromiseClient } from '@connectrpc/connect';
 import { GnomobileService } from '@gno/api/rpc_connect';
 
 interface GnoResponse {
+  setRemote: (remote: string) => Promise<SetRemoteResponse>;
+  getRemote: () => Promise<string>;
+  setChainID: (chainId: string) => Promise<SetChainIDResponse>;
+  getChainID: () => Promise<string>;
   createAccount: (nameOrBech32: string, mnemonic: string, password: string) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
@@ -70,6 +78,30 @@ export const useGno = (): GnoResponse => {
     const port = await GoBridge.getTcpPort();
     clientInstance = Grpc.createClient(port);
     return clientInstance;
+  };
+
+  const setRemote = async (remote: string) => {
+    const client = await getClient();
+    const response = await client.setRemote(new SetRemoteRequest({ remote }));
+    return response;
+  };
+
+  const getRemote = async () => {
+    const client = await getClient();
+    const response = await client.getRemote(new GetRemoteRequest());
+    return response.remote;
+  };
+
+  const setChainID = async (chainId: string) => {
+    const client = await getClient();
+    const response = await client.setChainID(new SetChainIDRequest({ chainId }));
+    return response;
+  };
+
+  const getChainID = async () => {
+    const client = await getClient();
+    const response = await client.getChainID(new GetChainIDRequest());
+    return response.chainId;
   };
 
   const createAccount = async (nameOrBech32: string, mnemonic: string, password: string) => {
@@ -234,6 +266,10 @@ export const useGno = (): GnoResponse => {
   };
 
   return {
+    setRemote,
+    getRemote,
+    setChainID,
+    getChainID,
     createAccount,
     generateRecoveryPhrase,
     listKeyInfo,

@@ -47,6 +47,9 @@ type gnomobileService struct {
 	tcpPort    int
 	socketPath string
 	lock       sync.RWMutex
+	// The remote node address used to create client.RPCClient. We need to save this
+	// here because the remote is a private member of the HTTP struct.
+	remote string
 
 	// Map of key name to userAccount.
 	userAccounts map[string]*userAccount
@@ -102,6 +105,7 @@ func initService(cfg *Config) (*gnomobileService, error) {
 	}
 
 	rpcClient := rpcclient.NewHTTP(cfg.Remote, "/websocket")
+	svc.remote = cfg.Remote
 
 	svc.client = &gnoclient.Client{
 		Signer:    signer,

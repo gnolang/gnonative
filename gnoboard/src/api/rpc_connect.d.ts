@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnomobiletypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -15,7 +15,7 @@ export declare const GnomobileService: {
   readonly typeName: "land.gno.gnomobile.v1.GnomobileService",
   readonly methods: {
     /**
-     * Set the connection addresse for the remote node. If you don't call this,
+     * Set the connection address for the remote node. If you don't call this,
      * the default is "127.0.0.1:26657"
      *
      * @generated from rpc land.gno.gnomobile.v1.GnomobileService.SetRemote
@@ -24,6 +24,18 @@ export declare const GnomobileService: {
       readonly name: "SetRemote",
       readonly I: typeof SetRemoteRequest,
       readonly O: typeof SetRemoteResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Get the connection address for the remote node. The response is either
+     * the initial default, or the value which was set with SetRemote
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetRemote
+     */
+    readonly getRemote: {
+      readonly name: "GetRemote",
+      readonly I: typeof GetRemoteRequest,
+      readonly O: typeof GetRemoteResponse,
       readonly kind: MethodKind.Unary,
     },
     /**
@@ -36,6 +48,18 @@ export declare const GnomobileService: {
       readonly name: "SetChainID",
       readonly I: typeof SetChainIDRequest,
       readonly O: typeof SetChainIDResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Get the chain ID for the remote node. The response is either
+     * the initial default, or the value which was set with SetChainID
+     *
+     * @generated from rpc land.gno.gnomobile.v1.GnomobileService.GetChainID
+     */
+    readonly getChainID: {
+      readonly name: "GetChainID",
+      readonly I: typeof GetChainIDRequest,
+      readonly O: typeof GetChainIDResponse,
       readonly kind: MethodKind.Unary,
     },
     /**

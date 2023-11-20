@@ -9,13 +9,21 @@ option objc_class_prefix = "RTG";
 
 // GnomobileService is the service to interact with the Gno blockchain
 service GnomobileService {
-  // Set the connection addresse for the remote node. If you don't call this,
+  // Set the connection address for the remote node. If you don't call this,
   // the default is "127.0.0.1:26657"
   rpc SetRemote(SetRemoteRequest) returns (SetRemoteResponse);
+
+  // Get the connection address for the remote node. The response is either
+  // the initial default, or the value which was set with SetRemote
+  rpc GetRemote(GetRemoteRequest) returns (GetRemoteResponse);
 
   // Set the chain ID for the remote node. If you don't call this, the default
   // is "dev"
   rpc SetChainID(SetChainIDRequest) returns (SetChainIDResponse);
+
+  // Get the chain ID for the remote node. The response is either
+  // the initial default, or the value which was set with SetChainID
+  rpc GetChainID(GetChainIDRequest) returns (GetChainIDResponse);
 
   // Generate a recovery phrase of BIP39 mnemonic words using entropy from the
   // crypto library random number generator. This can be used as the mnemonic in
