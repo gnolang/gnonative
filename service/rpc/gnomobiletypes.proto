@@ -11,11 +11,25 @@ message SetRemoteRequest {
 message SetRemoteResponse {
 }
 
+message GetRemoteRequest {
+}
+
+message GetRemoteResponse {
+	string remote = 1;
+}
+
 message SetChainIDRequest {
 	string chain_id = 1;
 }
 
 message SetChainIDResponse {
+}
+
+message GetChainIDRequest {
+}
+
+message GetChainIDResponse {
+	string chain_id = 1;
 }
 
 message SetPasswordRequest {

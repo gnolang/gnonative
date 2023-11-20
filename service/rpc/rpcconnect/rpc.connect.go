@@ -36,9 +36,15 @@ const (
 	// GnomobileServiceSetRemoteProcedure is the fully-qualified name of the GnomobileService's
 	// SetRemote RPC.
 	GnomobileServiceSetRemoteProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetRemote"
+	// GnomobileServiceGetRemoteProcedure is the fully-qualified name of the GnomobileService's
+	// GetRemote RPC.
+	GnomobileServiceGetRemoteProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetRemote"
 	// GnomobileServiceSetChainIDProcedure is the fully-qualified name of the GnomobileService's
 	// SetChainID RPC.
 	GnomobileServiceSetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
+	// GnomobileServiceGetChainIDProcedure is the fully-qualified name of the GnomobileService's
+	// GetChainID RPC.
+	GnomobileServiceGetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetChainID"
 	// GnomobileServiceGenerateRecoveryPhraseProcedure is the fully-qualified name of the
 	// GnomobileService's GenerateRecoveryPhrase RPC.
 	GnomobileServiceGenerateRecoveryPhraseProcedure = "/land.gno.gnomobile.v1.GnomobileService/GenerateRecoveryPhrase"
@@ -104,12 +110,18 @@ const (
 
 // GnomobileServiceClient is a client for the land.gno.gnomobile.v1.GnomobileService service.
 type GnomobileServiceClient interface {
-	// Set the connection addresse for the remote node. If you don't call this,
+	// Set the connection address for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
 	SetRemote(context.Context, *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error)
+	// Get the connection address for the remote node. The response is either
+	// the initial default, or the value which was set with SetRemote
+	GetRemote(context.Context, *connect.Request[rpc.GetRemoteRequest]) (*connect.Response[rpc.GetRemoteResponse], error)
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
+	// Get the chain ID for the remote node. The response is either
+	// the initial default, or the value which was set with SetChainID
+	GetChainID(context.Context, *connect.Request[rpc.GetChainIDRequest]) (*connect.Response[rpc.GetChainIDResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
@@ -203,9 +215,19 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			baseURL+GnomobileServiceSetRemoteProcedure,
 			opts...,
 		),
+		getRemote: connect.NewClient[rpc.GetRemoteRequest, rpc.GetRemoteResponse](
+			httpClient,
+			baseURL+GnomobileServiceGetRemoteProcedure,
+			opts...,
+		),
 		setChainID: connect.NewClient[rpc.SetChainIDRequest, rpc.SetChainIDResponse](
 			httpClient,
 			baseURL+GnomobileServiceSetChainIDProcedure,
+			opts...,
+		),
+		getChainID: connect.NewClient[rpc.GetChainIDRequest, rpc.GetChainIDResponse](
+			httpClient,
+			baseURL+GnomobileServiceGetChainIDProcedure,
 			opts...,
 		),
 		generateRecoveryPhrase: connect.NewClient[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse](
@@ -324,7 +346,9 @@ func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, op
 // gnomobileServiceClient implements GnomobileServiceClient.
 type gnomobileServiceClient struct {
 	setRemote                 *connect.Client[rpc.SetRemoteRequest, rpc.SetRemoteResponse]
+	getRemote                 *connect.Client[rpc.GetRemoteRequest, rpc.GetRemoteResponse]
 	setChainID                *connect.Client[rpc.SetChainIDRequest, rpc.SetChainIDResponse]
+	getChainID                *connect.Client[rpc.GetChainIDRequest, rpc.GetChainIDResponse]
 	generateRecoveryPhrase    *connect.Client[rpc.GenerateRecoveryPhraseRequest, rpc.GenerateRecoveryPhraseResponse]
 	listKeyInfo               *connect.Client[rpc.ListKeyInfoRequest, rpc.ListKeyInfoResponse]
 	hasKeyByName              *connect.Client[rpc.HasKeyByNameRequest, rpc.HasKeyByNameResponse]
@@ -354,9 +378,19 @@ func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Req
 	return c.setRemote.CallUnary(ctx, req)
 }
 
+// GetRemote calls land.gno.gnomobile.v1.GnomobileService.GetRemote.
+func (c *gnomobileServiceClient) GetRemote(ctx context.Context, req *connect.Request[rpc.GetRemoteRequest]) (*connect.Response[rpc.GetRemoteResponse], error) {
+	return c.getRemote.CallUnary(ctx, req)
+}
+
 // SetChainID calls land.gno.gnomobile.v1.GnomobileService.SetChainID.
 func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	return c.setChainID.CallUnary(ctx, req)
+}
+
+// GetChainID calls land.gno.gnomobile.v1.GnomobileService.GetChainID.
+func (c *gnomobileServiceClient) GetChainID(ctx context.Context, req *connect.Request[rpc.GetChainIDRequest]) (*connect.Response[rpc.GetChainIDResponse], error) {
+	return c.getChainID.CallUnary(ctx, req)
 }
 
 // GenerateRecoveryPhrase calls land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase.
@@ -472,12 +506,18 @@ func (c *gnomobileServiceClient) HelloStream(ctx context.Context, req *connect.R
 // GnomobileServiceHandler is an implementation of the land.gno.gnomobile.v1.GnomobileService
 // service.
 type GnomobileServiceHandler interface {
-	// Set the connection addresse for the remote node. If you don't call this,
+	// Set the connection address for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
 	SetRemote(context.Context, *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error)
+	// Get the connection address for the remote node. The response is either
+	// the initial default, or the value which was set with SetRemote
+	GetRemote(context.Context, *connect.Request[rpc.GetRemoteRequest]) (*connect.Response[rpc.GetRemoteResponse], error)
 	// Set the chain ID for the remote node. If you don't call this, the default
 	// is "dev"
 	SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error)
+	// Get the chain ID for the remote node. The response is either
+	// the initial default, or the value which was set with SetChainID
+	GetChainID(context.Context, *connect.Request[rpc.GetChainIDRequest]) (*connect.Response[rpc.GetChainIDResponse], error)
 	// Generate a recovery phrase of BIP39 mnemonic words using entropy from the
 	// crypto library random number generator. This can be used as the mnemonic in
 	// CreateAccount.
@@ -567,9 +607,19 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		svc.SetRemote,
 		opts...,
 	)
+	gnomobileServiceGetRemoteHandler := connect.NewUnaryHandler(
+		GnomobileServiceGetRemoteProcedure,
+		svc.GetRemote,
+		opts...,
+	)
 	gnomobileServiceSetChainIDHandler := connect.NewUnaryHandler(
 		GnomobileServiceSetChainIDProcedure,
 		svc.SetChainID,
+		opts...,
+	)
+	gnomobileServiceGetChainIDHandler := connect.NewUnaryHandler(
+		GnomobileServiceGetChainIDProcedure,
+		svc.GetChainID,
 		opts...,
 	)
 	gnomobileServiceGenerateRecoveryPhraseHandler := connect.NewUnaryHandler(
@@ -686,8 +736,12 @@ func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.Han
 		switch r.URL.Path {
 		case GnomobileServiceSetRemoteProcedure:
 			gnomobileServiceSetRemoteHandler.ServeHTTP(w, r)
+		case GnomobileServiceGetRemoteProcedure:
+			gnomobileServiceGetRemoteHandler.ServeHTTP(w, r)
 		case GnomobileServiceSetChainIDProcedure:
 			gnomobileServiceSetChainIDHandler.ServeHTTP(w, r)
+		case GnomobileServiceGetChainIDProcedure:
+			gnomobileServiceGetChainIDHandler.ServeHTTP(w, r)
 		case GnomobileServiceGenerateRecoveryPhraseProcedure:
 			gnomobileServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
 		case GnomobileServiceListKeyInfoProcedure:
@@ -745,8 +799,16 @@ func (UnimplementedGnomobileServiceHandler) SetRemote(context.Context, *connect.
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetRemote is not implemented"))
 }
 
+func (UnimplementedGnomobileServiceHandler) GetRemote(context.Context, *connect.Request[rpc.GetRemoteRequest]) (*connect.Response[rpc.GetRemoteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetRemote is not implemented"))
+}
+
 func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetChainID is not implemented"))
+}
+
+func (UnimplementedGnomobileServiceHandler) GetChainID(context.Context, *connect.Request[rpc.GetChainIDRequest]) (*connect.Response[rpc.GetChainIDResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetChainID is not implemented"))
 }
 
 func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {

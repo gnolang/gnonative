@@ -14,8 +14,12 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	WithDependencies().WithTypes(
 	SetRemoteRequest{},
 	SetRemoteResponse{},
+	GetRemoteRequest{},
+	GetRemoteResponse{},
 	SetChainIDRequest{},
 	SetChainIDResponse{},
+	GetChainIDRequest{},
+	GetChainIDResponse{},
 	SetPasswordRequest{},
 	SetPasswordResponse{},
 	GenerateRecoveryPhraseRequest{},

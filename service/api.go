@@ -23,12 +23,21 @@ import (
 
 func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[rpc.SetRemoteRequest]) (*connect.Response[rpc.SetRemoteResponse], error) {
 	s.client.RPCClient = rpcclient.NewHTTP(req.Msg.Remote, "/websocket")
+	s.remote = req.Msg.Remote
 	return connect.NewResponse(&rpc.SetRemoteResponse{}), nil
+}
+
+func (s *gnomobileService) GetRemote(ctx context.Context, req *connect.Request[rpc.GetRemoteRequest]) (*connect.Response[rpc.GetRemoteResponse], error) {
+	return connect.NewResponse(&rpc.GetRemoteResponse{Remote: s.remote}), nil
 }
 
 func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[rpc.SetChainIDRequest]) (*connect.Response[rpc.SetChainIDResponse], error) {
 	s.getSigner().ChainID = req.Msg.ChainId
 	return connect.NewResponse(&rpc.SetChainIDResponse{}), nil
+}
+
+func (s *gnomobileService) GetChainID(ctx context.Context, req *connect.Request[rpc.GetChainIDRequest]) (*connect.Response[rpc.GetChainIDResponse], error) {
+	return connect.NewResponse(&rpc.GetChainIDResponse{ChainId: s.getSigner().ChainID}), nil
 }
 
 func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[rpc.GenerateRecoveryPhraseRequest]) (*connect.Response[rpc.GenerateRecoveryPhraseResponse], error) {
