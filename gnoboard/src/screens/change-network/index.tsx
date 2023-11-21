@@ -40,7 +40,7 @@ const ChangeNetwork = () => {
     try {
       setLoading('Changing network...');
       await gno.setChainID(networkMetainfo.chainId);
-      await gno.setRemote(networkMetainfo.gnoUrl);
+      await gno.setRemote(networkMetainfo.gnoAddress);
       setLoading(undefined);
       navigation.navigate(RoutePath.Home);
     } catch (error: unknown | Error) {

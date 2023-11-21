@@ -13,7 +13,7 @@ export type GnoConfig = {
 export type NetworkMetainfo = {
   chainId: string;
   chainName: string;
-  gnoUrl: string;
+  gnoAddress: string;
 };
 
 export type GnoAccount = KeyInfo;

@@ -16,9 +16,9 @@ const NetworkList: React.FC<Props> = ({ currentChainId, networkMetainfos = [], o
 
   return (
     <NetworkListWrapper>
-      {networkMetainfos.map((networkMetainfo) => (
+      {networkMetainfos.map((networkMetainfo, idx) => (
         <NetworkListItem
-          key={networkMetainfo.chainId}
+          key={idx}
           networkMetainfo={networkMetainfo}
           currentChainId={currentChainId}
           onPress={(item) => onNetworkChange(item)}

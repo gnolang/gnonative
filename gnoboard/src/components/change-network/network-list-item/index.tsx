@@ -14,7 +14,7 @@ const NetworkListItem: React.FC<Props> = ({ networkMetainfo, currentChainId, onP
   <Row style={{ margin: 4 }} onPress={() => onPress(networkMetainfo)}>
     <LeftItens>
       <Text.BodyMedium style={{ color: colors.white }}>{networkMetainfo.chainName}</Text.BodyMedium>
-      <Text.Caption1 style={{ color: colors.white }}>{networkMetainfo.gnoUrl}</Text.Caption1>
+      <Text.Caption1 style={{ color: colors.white }}>{networkMetainfo.gnoAddress}</Text.Caption1>
     </LeftItens>
 
     <RightItens>{currentChainId === networkMetainfo.chainId && <InUse />}</RightItens>

@@ -17,7 +17,7 @@ export default {
   args: {
     networkMetainfo: {
       networkName: 'test3',
-      gnoUrl: 'https://test3.gno.land',
+      gnoAddress: 'https://test3.gno.land',
     },
   },
 };
