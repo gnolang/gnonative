@@ -19,7 +19,7 @@ class GRPCError extends Error {
 
     this.error = e;
     this.GrpcCode = e.code;
-    this.Details = e.findDetails(ErrDetails).shift();
+    this.Details = e?.findDetails(ErrDetails).shift();
   }
 
   public details(): ErrDetails | unknown {

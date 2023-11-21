@@ -10,4 +10,10 @@ export type GnoConfig = {
   Mnemonic: string;
 };
 
+export type NetworkMetainfo = {
+  chainId: string;
+  chainName: string;
+  gnoAddress: string;
+};
+
 export type GnoAccount = KeyInfo;

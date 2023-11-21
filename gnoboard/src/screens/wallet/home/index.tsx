@@ -70,6 +70,8 @@ export const Home: React.FC = () => {
           <Spacer />
           <Button title='Developer Mode' onPress={() => navigation.navigate(RoutePath.DevMode)} variant='primary' />
           <Spacer />
+          <Button title='Change Network' onPress={() => navigation.navigate(RoutePath.ChangeNetwork)} variant='primary' />
+          <Spacer />
           <Button title='Remove Account' onPress={() => navigation.navigate(RoutePath.RemoveAccount)} variant='secondary-red' />
         </ButtonGroup>
       </Layout.Body>
