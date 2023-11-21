@@ -77,6 +77,10 @@ export const useGno = (): GnoResponse => {
 
     const port = await GoBridge.getTcpPort();
     clientInstance = Grpc.createClient(port);
+
+    // Set the initial configuration where it's different from the default.
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+
     return clientInstance;
   };
 

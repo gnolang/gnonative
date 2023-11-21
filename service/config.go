@@ -73,7 +73,7 @@ var WithRemote = func(remote string) GnomobileOption {
 
 // WithDefaultRemote inits a default remote node address.
 var WithDefaultRemote GnomobileOption = func(cfg *Config) error {
-	cfg.Remote = "testnet.gno.berty.io:26657"
+	cfg.Remote = "127.0.0.1:26657"
 	return nil
 }
 
