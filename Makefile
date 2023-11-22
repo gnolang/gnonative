@@ -168,24 +168,24 @@ new-app:
 ifndef APP_NAME
 	$(error APP_NAME is undefined. Please set APP_NAME to the name of your app)
 endif
+	@mkdir -p ./examples/
 	@echo "creating a new gno awesome project"
 	cd examples && npx create-expo-app $(APP_NAME) --template expo-template-blank-typescript
 	@echo "Creating ios and android folders"
 	cd examples/$(APP_NAME) && npx expo prebuild
 	@echo "Installing npm dependencies"
 	cd examples/$(APP_NAME) && npm install ${NPM_BASIC_DEPENDENCIES}
-	Override react_native_dir for this target
 
 # create folders (api, grpc, hooks)
 	@mkdir -p ./examples/$(APP_NAME)/src/api
 	@mkdir -p ./examples/$(APP_NAME)/src/grpc
 	@mkdir -p ./examples/$(APP_NAME)/src/hooks
 # copy the essential files
-	@ cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src
+	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src/api
 	@cp -r ./gnoboard/src/grpc examples/$(APP_NAME)/src/grpc
 	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src/hooks
 
-# generate the api
+# generate the api. Override react_native_dir for this target
 	$(MAKE) generate react_native_dir=$(make_dir)/examples/$(APP_NAME)
 	$(MAKE) build.ios react_native_dir=$(make_dir)/examples/$(APP_NAME)
 	$(MAKE) build.android react_native_dir=$(make_dir)/examples/$(APP_NAME)
