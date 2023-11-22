@@ -5,10 +5,12 @@ check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,
 # Get the temporary directory of the system
 TEMPDIR := $(shell dirname $(shell mktemp -u))
 
+TEMPLATE_PROJECT := gnoboard
+
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
-react_native_dir := $(make_dir)/gnoboard
+react_native_dir := $(make_dir)/$(TEMPLATE_PROJECT)
 
 # Argument Defaults
 IOS_OUTPUT_FRAMEWORK_DIR ?= $(react_native_dir)/ios/Frameworks
@@ -42,7 +44,7 @@ all build: generate build.ios build.android
 # Build iOS framework
 build.ios: generate $(gnocore_xcframework)
 	cd $(react_native_dir); $(MAKE) node_modules
-	cd $(react_native_dir); $(MAKE) ios/gnoboard.xcworkspace
+	cd $(react_native_dir); $(MAKE) ios/$(TEMPLATE_PROJECT).xcworkspace
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
@@ -79,7 +81,7 @@ _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
 	rm -f service/rpc/*.pb.go
 	rm -f service/rpc/rpcconnect/*.connect.go
-	rm -f gnoboard/src/api/*.{ts,js}
+	rm -f $(TEMPLATE_PROJECT)/src/api/*.{ts,js}
 	rm -f $(gen_sum)
 
 $(gen_sum): $(gen_src)
@@ -160,9 +162,9 @@ asdf.install_tools: asdf.add_plugins
 	@echo "Installing asdf tools..."
 	@asdf install
 
-# - Example Apps
+# Script to create a new app
 
-NPM_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web
+NPM_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
 
 new-app:
 ifndef APP_NAME
@@ -181,13 +183,39 @@ endif
 	@mkdir -p ./examples/$(APP_NAME)/src/grpc
 	@mkdir -p ./examples/$(APP_NAME)/src/hooks
 # copy the essential files
-	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src/api
-	@cp -r ./gnoboard/src/grpc examples/$(APP_NAME)/src/grpc
-	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src/hooks
+	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src
+	@cp -r ./$(TEMPLATE_PROJECT)/src/grpc ./examples/$(APP_NAME)/src
+	@cp -r ./$(TEMPLATE_PROJECT)/src/hooks ./examples/$(APP_NAME)/src
+	@cp -r ./$(TEMPLATE_PROJECT)/src/native_modules ./examples/$(APP_NAME)/src
+	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
+	@cp ./templates/App.tsx ./examples/$(APP_NAME)/App.tsx
+	$(MAKE) add-app-json-entry
+# copy ios Sources	
+	@mkdir -p ./examples/$(APP_NAME)/ios/$(APP_NAME)/Sources
+	@cp -r $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)/
+	@cp $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/$(TEMPLATE_PROJECT)-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
+	@cp -r $(react_native_dir)/ios/Sources ./examples/$(APP_NAME)/ios/
 
-# generate the api. Override react_native_dir for this target
-	$(MAKE) generate react_native_dir=$(make_dir)/examples/$(APP_NAME)
-	$(MAKE) build.ios react_native_dir=$(make_dir)/examples/$(APP_NAME)
-	$(MAKE) build.android react_native_dir=$(make_dir)/examples/$(APP_NAME)
-.PHONY: new-app
+# build GnoCore.xcframework for the new app
+	@echo "Building GnoCore.xcframework for the new app"
+	$(MAKE) build.ios TEMPLATE_PROJECT=$(APP_NAME) react_native_dir=./examples/$(APP_NAME)
+
+# copy ios project.pbxproj from gnoboard
+	$(MAKE) copy-ios-project-pbxproj
+
+
+JSON_FILE := $(make_dir)/examples/$(APP_NAME)/app.json
+# add tsconfigPaths entry to app.json
+add-app-json-entry:
+	@echo "Adding tsconfigPaths entry to app.json"
+	jq '.expo.experiments = {"tsconfigPaths": true}'  $(JSON_FILE) > $(JSON_FILE).tmp && mv $(JSON_FILE).tmp  $(JSON_FILE)
+
+# copy ios project.pbxproj from gnoboard to the new app and replace 'gnoboard' with the new app name
+copy-ios-project-pbxproj:
+	@echo "Copying ios project.pbxproj"
+	@cp $(react_native_dir)/ios/$(TEMPLATE_PROJECT).xcodeproj/project.pbxproj ./examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
+	@cd examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj
+	@sed -i.pbxproj 's/gnoboard/$(APP_NAME)/g' examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
+
+.PHONY: new-app copy-ios-project-pbxproj add-app-json-entry
 
