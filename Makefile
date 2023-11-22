@@ -186,6 +186,7 @@ endif
 	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src
 	@cp -r ./gnoboard/src/native_modules examples/$(APP_NAME)/src
 	@cp ./templates/tsconfig.json examples/$(APP_NAME)/tsconfig.json
+	$(MAKE) add-app-json-entry
 
 # generate the api. Override react_native_dir for this target
 	$(MAKE) generate react_native_dir=$(make_dir)/examples/$(APP_NAME)
@@ -193,3 +194,8 @@ endif
 	$(MAKE) build.android react_native_dir=$(make_dir)/examples/$(APP_NAME)
 .PHONY: new-app
 
+JSON_FILE := $(make_dir)/examples/$(APP_NAME)/app.json
+add-app-json-entry:
+	@echo "Adding tsconfigPaths entry to app.json"
+	jq '.expo.experiments = {"tsconfigPaths": true}'  $(JSON_FILE) > $(JSON_FILE).tmp && mv $(JSON_FILE).tmp  $(JSON_FILE)
+.PHONY: add-app-json-entry
