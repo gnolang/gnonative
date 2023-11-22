@@ -40,9 +40,10 @@ PATH := $(GO_BIND_BIN_DIR):$(PATH)
 all build: generate build.ios build.android
 
 # Build iOS framework
+APP_NAME := "gnoboard"
 build.ios: generate $(gnocore_xcframework)
 	cd $(react_native_dir); $(MAKE) node_modules
-	cd $(react_native_dir); $(MAKE) ios/gnoboard.xcworkspace
+	cd $(react_native_dir); $(MAKE) ios/$(APP_NAME).xcworkspace
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
@@ -182,11 +183,15 @@ endif
 	@mkdir -p ./examples/$(APP_NAME)/src/hooks
 # copy the essential files
 	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src
-	@cp -r ./gnoboard/src/grpc examples/$(APP_NAME)/src
-	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src
-	@cp -r ./gnoboard/src/native_modules examples/$(APP_NAME)/src
-	@cp ./templates/tsconfig.json examples/$(APP_NAME)/tsconfig.json
+	@cp -r ./gnoboard/src/grpc ./examples/$(APP_NAME)/src
+	@cp -r ./gnoboard/src/hooks ./examples/$(APP_NAME)/src
+	@cp -r ./gnoboard/src/native_modules ./examples/$(APP_NAME)/src
+	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
 	$(MAKE) add-app-json-entry
+# copy ios Sources	
+	@cp -r $(react_native_dir)/ios/gnoboard/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)
+	@cp $(react_native_dir)/ios/gnoboard/gnoboard-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)-Bridging-Header.h
+	@cp -r $(react_native_dir)/ios/Sources ./examples/$(APP_NAME)/ios/
 
 # generate the api. Override react_native_dir for this target
 	$(MAKE) generate react_native_dir=$(make_dir)/examples/$(APP_NAME)
