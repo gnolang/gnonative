@@ -1,8 +1,7 @@
-import { ErrCode, ErrDetails } from '@gno/api/rpc_pb';
+import { ErrCode } from '@gno/api/rpc_pb';
 import { Code, ConnectError } from '@connectrpc/connect';
 
 class GRPCError extends Error {
-  public Details: ErrDetails | undefined;
   public GrpcCode: Code;
 
   public error: ConnectError;
@@ -19,24 +18,50 @@ class GRPCError extends Error {
 
     this.error = e;
     this.GrpcCode = e.code;
-    this.Details = e?.findDetails(ErrDetails).shift();
   }
 
-  public details(): ErrDetails | unknown {
-    return this.Details;
+  private extractErrCode(match: RegExpMatchArray | null) {
+    if (match === null || match.length < 2) {
+      return ErrCode.Undefined;
+    }
+
+    const code = parseInt(match[1]);
+    if (typeof code !== 'number') {
+      return ErrCode.Undefined;
+    }
+
+    return code;
   }
 
+  // errCodes parses the error message formatted like `ErrType(#ErrNumber): WrappedErrType(#WrappedErrNumber)`
+  // and returns the corresponding ErrCodes or [ErrCode.Undefined] if some errors occur.
+  private errCodes(): ErrCode[] {
+    const errCodes: ErrCode[] = [];
+
+    if (this.message === '') {
+      return [ErrCode.Undefined];
+    }
+
+    const matches = this.message.matchAll(/\w+\(#(\d+)\)/g);
+
+    for (const match of matches) {
+      const code = this.extractErrCode(match);
+      errCodes.push(code);
+    }
+
+    return errCodes;
+  }
+
+  // errCode parses the error message formatted like `ErrType(#ErrNumber): WrappedErrType(#WrappedErrNumber)`
+  // and returns the corresponding parent ErrCode or ErrCode.Undefined if some errors occur.
   public errCode(): ErrCode {
-    if (this.Details === undefined) {
+    if (this.message === '') {
       return ErrCode.Undefined;
     }
 
-    const codes = this.Details.codes;
-    if (codes.length == 0) {
-      return ErrCode.Undefined;
-    }
+    const match = this.message.match(/\w+\(#(\d+)\)/);
 
-    return codes[0];
+    return this.extractErrCode(match);
   }
 
   public grpcErrorCode(): Code {
@@ -48,12 +73,16 @@ class GRPCError extends Error {
       message: this.message,
       grpcErrorCode: Code[this.GrpcCode],
       errorCode: ErrCode[this.errCode()],
-      details: this.Details,
     };
   }
 
   public hasErrCode(error: ErrCode): boolean {
-    return this.Details?.codes.reduce((ac, v) => ac && v == error, false) || false;
+    for (const err of this.errCodes()) {
+      if (err === error) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

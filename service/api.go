@@ -219,7 +219,7 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	if s.activeAccount == nil {
-		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
+		return nil, rpc.ErrCode_ErrNoActiveAccount
 	}
 	s.activeAccount.password = req.Msg.Password
 
@@ -241,7 +241,7 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	s.lock.RUnlock()
 
 	if account == nil {
-		return nil, rpc.ErrCode_ErrNoActiveAccount.Grpc()
+		return nil, rpc.ErrCode_ErrNoActiveAccount
 	}
 
 	info, err := convertKeyInfo(account.keyInfo)
@@ -342,7 +342,7 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[rpc.Ca
 	s.lock.RLock()
 	if s.activeAccount == nil {
 		s.lock.RUnlock()
-		return rpc.ErrCode_ErrNoActiveAccount.Grpc()
+		return rpc.ErrCode_ErrNoActiveAccount
 	}
 	s.lock.RUnlock()
 
@@ -413,46 +413,46 @@ func (s *gnomobileService) HelloStream(ctx context.Context, req *connect.Request
 // Otherwise, just return err.
 func getGrpcError(err error) error {
 	if keyerror.IsErrKeyNotFound(err) {
-		return rpc.ErrCode_ErrCryptoKeyNotFound.Grpc()
+		return rpc.ErrCode_ErrCryptoKeyNotFound
 	} else if keyerror.IsErrWrongPassword(err) {
-		return rpc.ErrCode_ErrDecryptionFailed.Grpc()
+		return rpc.ErrCode_ErrDecryptionFailed
 	}
 
 	// The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
 	if errors.As(err, &std.TxDecodeError{}) {
-		return rpc.ErrCode_ErrTxDecode.Grpc()
+		return rpc.ErrCode_ErrTxDecode
 	} else if errors.As(err, &std.InvalidSequenceError{}) {
-		return rpc.ErrCode_ErrInvalidSequence.Grpc()
+		return rpc.ErrCode_ErrInvalidSequence
 	} else if errors.As(err, &std.UnauthorizedError{}) {
-		return rpc.ErrCode_ErrUnauthorized.Grpc()
+		return rpc.ErrCode_ErrUnauthorized
 	} else if errors.As(err, &std.InsufficientFundsError{}) {
-		return rpc.ErrCode_ErrInsufficientFunds.Grpc()
+		return rpc.ErrCode_ErrInsufficientFunds
 	} else if errors.As(err, &std.UnknownRequestError{}) {
-		return rpc.ErrCode_ErrUnknownRequest.Grpc()
+		return rpc.ErrCode_ErrUnknownRequest
 	} else if errors.As(err, &std.InvalidAddressError{}) {
-		return rpc.ErrCode_ErrInvalidAddress.Grpc()
+		return rpc.ErrCode_ErrInvalidAddress
 	} else if errors.As(err, &std.UnknownAddressError{}) {
-		return rpc.ErrCode_ErrUnknownAddress.Grpc()
+		return rpc.ErrCode_ErrUnknownAddress
 	} else if errors.As(err, &std.InvalidPubKeyError{}) {
-		return rpc.ErrCode_ErrInvalidPubKey.Grpc()
+		return rpc.ErrCode_ErrInvalidPubKey
 	} else if errors.As(err, &std.InsufficientCoinsError{}) {
-		return rpc.ErrCode_ErrInsufficientCoins.Grpc()
+		return rpc.ErrCode_ErrInsufficientCoins
 	} else if errors.As(err, &std.InvalidCoinsError{}) {
-		return rpc.ErrCode_ErrInvalidCoins.Grpc()
+		return rpc.ErrCode_ErrInvalidCoins
 	} else if errors.As(err, &std.InvalidGasWantedError{}) {
-		return rpc.ErrCode_ErrInvalidGasWanted.Grpc()
+		return rpc.ErrCode_ErrInvalidGasWanted
 	} else if errors.As(err, &std.OutOfGasError{}) {
-		return rpc.ErrCode_ErrOutOfGas.Grpc()
+		return rpc.ErrCode_ErrOutOfGas
 	} else if errors.As(err, &std.MemoTooLargeError{}) {
-		return rpc.ErrCode_ErrMemoTooLarge.Grpc()
+		return rpc.ErrCode_ErrMemoTooLarge
 	} else if errors.As(err, &std.InsufficientFeeError{}) {
-		return rpc.ErrCode_ErrInsufficientFee.Grpc()
+		return rpc.ErrCode_ErrInsufficientFee
 	} else if errors.As(err, &std.TooManySignaturesError{}) {
-		return rpc.ErrCode_ErrTooManySignatures.Grpc()
+		return rpc.ErrCode_ErrTooManySignatures
 	} else if errors.As(err, &std.NoSignaturesError{}) {
-		return rpc.ErrCode_ErrNoSignatures.Grpc()
+		return rpc.ErrCode_ErrNoSignatures
 	} else if errors.As(err, &std.GasOverflowError{}) {
-		return rpc.ErrCode_ErrGasOverflow.Grpc()
+		return rpc.ErrCode_ErrGasOverflow
 	} else {
 		return err
 	}
