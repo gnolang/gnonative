@@ -181,9 +181,11 @@ endif
 	@mkdir -p ./examples/$(APP_NAME)/src/grpc
 	@mkdir -p ./examples/$(APP_NAME)/src/hooks
 # copy the essential files
-	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src/api
-	@cp -r ./gnoboard/src/grpc examples/$(APP_NAME)/src/grpc
-	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src/hooks
+	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src
+	@cp -r ./gnoboard/src/grpc examples/$(APP_NAME)/src
+	@cp -r ./gnoboard/src/hooks examples/$(APP_NAME)/src
+	@cp -r ./gnoboard/src/native_modules examples/$(APP_NAME)/src
+	@cp ./templates/tsconfig.json examples/$(APP_NAME)/tsconfig.json
 
 # generate the api. Override react_native_dir for this target
 	$(MAKE) generate react_native_dir=$(make_dir)/examples/$(APP_NAME)
