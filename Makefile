@@ -189,7 +189,7 @@ endif
 	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
 	$(MAKE) add-app-json-entry
 # copy ios Sources	
-	@cp -r $(react_native_dir)/ios/gnoboard/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)
+	@cp -r $(react_native_dir)/ios/gnoboard/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)/
 	@cp $(react_native_dir)/ios/gnoboard/gnoboard-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
 	@cp -r $(react_native_dir)/ios/Sources ./examples/$(APP_NAME)/ios/
 
