@@ -55,7 +55,7 @@ interface GnoResponse {
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
   qEval: (packagePath: string, expression: string) => Promise<string>;
-  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => Promise<CallResponse>;
+  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => Promise<AsyncIterable<CallResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
 }
@@ -243,7 +243,7 @@ export const useGno = (): GnoResponse => {
 
   const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => {
     const client = await getClient();
-    const reponse = await client.call(
+    const reponse = client.call(
       new CallRequest({
         packagePath,
         fnc,

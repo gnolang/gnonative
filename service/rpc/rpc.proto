@@ -111,7 +111,7 @@ service GnomobileService {
   // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
   // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
-  rpc Call(CallRequest) returns (CallResponse);
+  rpc Call(CallRequest) returns (stream CallResponse);
 
   // Convert a byte array address to a bech32 string address.
   rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);

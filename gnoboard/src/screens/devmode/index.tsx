@@ -33,9 +33,10 @@ function DevMode() {
     const gasWanted = 2000000;
     const args: Array<string> = ['2', '1', '1', postContent];
     try {
-      const response = await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted);
-      console.log('response: ', response);
-      setAppConsole(Buffer.from(response.result).toString());
+      for await (const response of await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
+        console.log('response: ', response);
+        setAppConsole(Buffer.from(response.result).toString());
+      }
     } catch (error: ConnectError | unknown) {
       const err = new GRPCError(error);
       if (err.errCode() === ErrCode.ErrDecryptionFailed) {
