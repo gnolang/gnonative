@@ -6,7 +6,7 @@ require (
 	connectrpc.com/connect v1.11.1
 	connectrpc.com/grpchealth v1.2.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/gnolang/gno v0.0.0-20230922195728-5a7d005fc14f
+	github.com/gnolang/gno v0.0.0-20231123184803-d421b963aed7
 	github.com/oklog/run v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/cors v1.10.1
@@ -19,12 +19,13 @@ require (
 )
 
 require (
-	github.com/btcsuite/btcd v0.22.1 // indirect
-	github.com/btcsuite/btcd/btcutil v1.0.0 // indirect
+	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
+	github.com/btcsuite/btcd/btcutil v1.1.3 // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cockroachdb/apd v1.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0 // indirect
 	github.com/dgraph-io/badger/v3 v3.2103.4 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
@@ -36,26 +37,23 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/flatbuffers v1.12.1 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/jmhodges/levigo v1.0.0 // indirect
 	github.com/klauspost/compress v1.16.4 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
-	github.com/linxGnu/grocksdb v1.8.4 // indirect
+	github.com/linxGnu/grocksdb v1.8.5 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/peterbourgon/ff/v3 v3.4.0 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
-	go.etcd.io/bbolt v1.3.7 // indirect
+	go.etcd.io/bbolt v1.3.8 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/crypto v0.14.0 // indirect
-	golang.org/x/mod v0.13.0 // indirect
+	golang.org/x/crypto v0.15.0 // indirect
+	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
-	golang.org/x/term v0.13.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
+	golang.org/x/term v0.14.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.13.0 // indirect
 )
 
-replace (
-	github.com/gnolang/gno => github.com/berty/gno v0.0.6-0.20231030130818-4aa291d9805e // temporary until PRs merged into upstream, see https://github.com/berty/gno/pull/2
-	golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
-)
+replace golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82

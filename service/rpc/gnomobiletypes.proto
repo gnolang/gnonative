@@ -73,7 +73,7 @@ message ListKeyInfoRequest {
 }
 
 message ListKeyInfoResponse {
-	repeated KeyInfo keys = 1;
+	repeated KeyInfo keys = 1 [json_name = "key_info"];
 }
 
 message HasKeyByNameRequest {
@@ -105,7 +105,7 @@ message GetKeyInfoByNameRequest {
 }
 
 message GetKeyInfoByNameResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 }
 
 message GetKeyInfoByAddressRequest {
@@ -113,7 +113,7 @@ message GetKeyInfoByAddressRequest {
 }
 
 message GetKeyInfoByAddressResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 }
 
 message GetKeyInfoByNameOrAddressRequest {
@@ -121,7 +121,7 @@ message GetKeyInfoByNameOrAddressRequest {
 }
 
 message GetKeyInfoByNameOrAddressResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 }
 
 message CreateAccountRequest {
@@ -134,7 +134,7 @@ message CreateAccountRequest {
 }
 
 message CreateAccountResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 }
 
 message SelectAccountRequest {
@@ -142,7 +142,7 @@ message SelectAccountRequest {
 }
 
 message SelectAccountResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 	// True if the password has been set. If false, then call SetPassword.
 	bool has_password = 2;
 }
@@ -151,7 +151,7 @@ message GetActiveAccountRequest {
 }
 
 message GetActiveAccountResponse {
-	KeyInfo key = 1;
+	KeyInfo key = 1 [json_name = "key_info"];
 	// True if the password has been set. If false, then call SetPassword.
 	bool has_password = 2;
 }
@@ -242,17 +242,17 @@ message AddressFromBech32Response {
 }
 
 message HelloRequest {
-	string name = 1;
+	string name = 1 [json_name = "Name"];
 }
 
 message HelloResponse {
-	string greeting = 1;
+	string greeting = 1 [json_name = "Greeting"];
 }
 
 message HelloStreamRequest {
-	string name = 1;
+	string name = 1 [json_name = "Name"];
 }
 
 message HelloStreamResponse {
-	string greeting = 1;
+	string greeting = 1 [json_name = "Greeting"];
 }

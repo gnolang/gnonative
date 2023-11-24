@@ -170,7 +170,7 @@ export const ListKeyInfoRequest = proto3.makeMessageType(
 export const ListKeyInfoResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.ListKeyInfoResponse",
   () => [
-    { no: 1, name: "keys", kind: "message", T: KeyInfo, repeated: true },
+    { no: 1, name: "keys", jsonName: "key_info", kind: "message", T: KeyInfo, repeated: true },
   ],
 );
 
@@ -250,7 +250,7 @@ export const GetKeyInfoByNameRequest = proto3.makeMessageType(
 export const GetKeyInfoByNameResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.GetKeyInfoByNameResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
   ],
 );
 
@@ -270,7 +270,7 @@ export const GetKeyInfoByAddressRequest = proto3.makeMessageType(
 export const GetKeyInfoByAddressResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.GetKeyInfoByAddressResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
   ],
 );
 
@@ -290,7 +290,7 @@ export const GetKeyInfoByNameOrAddressRequest = proto3.makeMessageType(
 export const GetKeyInfoByNameOrAddressResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.GetKeyInfoByNameOrAddressResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
   ],
 );
 
@@ -315,7 +315,7 @@ export const CreateAccountRequest = proto3.makeMessageType(
 export const CreateAccountResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.CreateAccountResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
   ],
 );
 
@@ -335,7 +335,7 @@ export const SelectAccountRequest = proto3.makeMessageType(
 export const SelectAccountResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.SelectAccountResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
     { no: 2, name: "has_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
@@ -354,7 +354,7 @@ export const GetActiveAccountRequest = proto3.makeMessageType(
 export const GetActiveAccountResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.GetActiveAccountResponse",
   () => [
-    { no: 1, name: "key", kind: "message", T: KeyInfo },
+    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
     { no: 2, name: "has_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
@@ -534,7 +534,7 @@ export const AddressFromBech32Response = proto3.makeMessageType(
 export const HelloRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.HelloRequest",
   () => [
-    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "name", jsonName: "Name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -544,7 +544,7 @@ export const HelloRequest = proto3.makeMessageType(
 export const HelloResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.HelloResponse",
   () => [
-    { no: 1, name: "greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "greeting", jsonName: "Greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -554,7 +554,7 @@ export const HelloResponse = proto3.makeMessageType(
 export const HelloStreamRequest = proto3.makeMessageType(
   "land.gno.gnomobile.v1.HelloStreamRequest",
   () => [
-    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "name", jsonName: "Name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -564,7 +564,7 @@ export const HelloStreamRequest = proto3.makeMessageType(
 export const HelloStreamResponse = proto3.makeMessageType(
   "land.gno.gnomobile.v1.HelloStreamResponse",
   () => [
-    { no: 1, name: "greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "greeting", jsonName: "Greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

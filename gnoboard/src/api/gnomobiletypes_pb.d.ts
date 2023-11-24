@@ -407,7 +407,7 @@ export declare class ListKeyInfoRequest extends Message<ListKeyInfoRequest> {
  */
 export declare class ListKeyInfoResponse extends Message<ListKeyInfoResponse> {
   /**
-   * @generated from field: repeated land.gno.gnomobile.v1.KeyInfo keys = 1;
+   * @generated from field: repeated land.gno.gnomobile.v1.KeyInfo keys = 1 [json_name = "key_info"];
    */
   keys: KeyInfo[];
 
@@ -599,7 +599,7 @@ export declare class GetKeyInfoByNameRequest extends Message<GetKeyInfoByNameReq
  */
 export declare class GetKeyInfoByNameResponse extends Message<GetKeyInfoByNameResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -647,7 +647,7 @@ export declare class GetKeyInfoByAddressRequest extends Message<GetKeyInfoByAddr
  */
 export declare class GetKeyInfoByAddressResponse extends Message<GetKeyInfoByAddressResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -695,7 +695,7 @@ export declare class GetKeyInfoByNameOrAddressRequest extends Message<GetKeyInfo
  */
 export declare class GetKeyInfoByNameOrAddressResponse extends Message<GetKeyInfoByNameOrAddressResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -768,7 +768,7 @@ export declare class CreateAccountRequest extends Message<CreateAccountRequest> 
  */
 export declare class CreateAccountResponse extends Message<CreateAccountResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -816,7 +816,7 @@ export declare class SelectAccountRequest extends Message<SelectAccountRequest> 
  */
 export declare class SelectAccountResponse extends Message<SelectAccountResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -866,7 +866,7 @@ export declare class GetActiveAccountRequest extends Message<GetActiveAccountReq
  */
 export declare class GetActiveAccountResponse extends Message<GetActiveAccountResponse> {
   /**
-   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1;
+   * @generated from field: land.gno.gnomobile.v1.KeyInfo key = 1 [json_name = "key_info"];
    */
   key?: KeyInfo;
 
@@ -1353,7 +1353,7 @@ export declare class AddressFromBech32Response extends Message<AddressFromBech32
  */
 export declare class HelloRequest extends Message<HelloRequest> {
   /**
-   * @generated from field: string name = 1;
+   * @generated from field: string name = 1 [json_name = "Name"];
    */
   name: string;
 
@@ -1377,7 +1377,7 @@ export declare class HelloRequest extends Message<HelloRequest> {
  */
 export declare class HelloResponse extends Message<HelloResponse> {
   /**
-   * @generated from field: string greeting = 1;
+   * @generated from field: string greeting = 1 [json_name = "Greeting"];
    */
   greeting: string;
 
@@ -1401,7 +1401,7 @@ export declare class HelloResponse extends Message<HelloResponse> {
  */
 export declare class HelloStreamRequest extends Message<HelloStreamRequest> {
   /**
-   * @generated from field: string name = 1;
+   * @generated from field: string name = 1 [json_name = "Name"];
    */
   name: string;
 
@@ -1425,7 +1425,7 @@ export declare class HelloStreamRequest extends Message<HelloStreamRequest> {
  */
 export declare class HelloStreamResponse extends Message<HelloStreamResponse> {
   /**
-   * @generated from field: string greeting = 1;
+   * @generated from field: string greeting = 1 [json_name = "Greeting"];
    */
   greeting: string;
 
