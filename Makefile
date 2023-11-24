@@ -163,7 +163,7 @@ asdf.install_tools: asdf.add_plugins
 
 # - Example Apps
 
-NPM_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web
+NPM_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
 
 new-app:
 ifndef APP_NAME
@@ -189,6 +189,7 @@ endif
 	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
 	$(MAKE) add-app-json-entry
 # copy ios Sources	
+	@mkdir -p ./examples/$(APP_NAME)/ios/$(APP_NAME)/Sources
 	@cp -r $(react_native_dir)/ios/gnoboard/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)/
 	@cp $(react_native_dir)/ios/gnoboard/gnoboard-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
 	@cp -r $(react_native_dir)/ios/Sources ./examples/$(APP_NAME)/ios/
