@@ -6,11 +6,11 @@ Therefore, we demonstrate that it is possible to run a Gno app on mobile. This p
 
 ## Build instructions
 
-### Install asdf for macOS 11, macOS 12 and macOS 13
+### Install prerequisites for macOS 11, macOS 12 and macOS 13
 
-(If you are on Ubuntu, see the next section to install asdf.)
+(If you are on Ubuntu, see the next section to install prerequisites.)
 
-To install the Command Line Developer Tools, in a terminal enter:
+Install Xcode. To install the Command Line Developer Tools, in a terminal enter:
 
     xcode-select --install
 
@@ -21,7 +21,7 @@ To install asdf using brew, follow instructions at https://asdf-vm.com . In shor
 first install brew following the instructions at https://brew.sh . Then, in
 a terminal enter:
 
-    brew install asdf
+    brew install asdf gnu-tar gpg
 
 If your terminal is zsh, enter:
 
@@ -33,7 +33,11 @@ If your terminal is bash, enter:
 
 Start a new terminal to get the changes to the environment .
 
-### Install asdf for Ubuntu 18.04, 20.04 and 22.04
+(optional) To install Android Studio, download and install the latest
+android-studio-{version}-mac.dmg from https://developer.android.com/studio .
+(Tested with Giraffe 2022.3.1 .)
+
+### Install prerequisites for Ubuntu 18.04, 20.04 and 22.04
 
 To install asdf, follow instructions at https://asdf-vm.com . In short, in
 a terminal enter:
@@ -44,6 +48,17 @@ a terminal enter:
 
 Start a new terminal to get the changes to the environment .
 
+(optional) To install Android Studio, download the latest
+android-studio-{version}-linux.tar.gz from
+https://developer.android.com/studio . (Tested with Giraffe 2022.3.1 .)
+In a terminal, enter the following with the correct {version}:
+
+    sudo tar -C /usr/local -xzf android-studio-{version}-linux.tar.gz
+
+To launch Android Studio, in a terminal enter:
+
+    /usr/local/android-studio/bin/studio.sh &
+
 ### Get a copy of the repo
 
 ```console
@@ -51,9 +66,20 @@ git clone https://github.com/gnolang/gnomobile
 cd gnomobile
 ```
 
-### Android
+### Build for Android
+
+#### Set up the Android NDK
+
+* Launch Android Studio and accept the default startup options. Create a new
+  default project (so that we get the main screen).
+* On the Tools menu, open the SDK Manager.
+* In the "SDK Tools" tab, click "Show Package Details". Expand
+  "NDK (Side by side)" and check "23.1.7779620".
+* Click OK to install and close the SDK Manager.
 
 #### Install the tools with asdf (only need to do once)
+
+(If not building for iOS, edit the file `.tool-versions` and remove the unneeded lines for `ruby` and `cocoapods`.)
 
 ```console
 make asdf.install_tools
@@ -105,7 +131,7 @@ Open Android Studio and open the current Android project if it's not already don
 Select the right device in the device list. Open the `Run` menu, and select `Run app`.
 See more: https://developer.android.com/studio/run#basic-build-run
 
-### iOS
+### Build for iOS
 
 #### Install the tools with asdf (only need to do once)
 
