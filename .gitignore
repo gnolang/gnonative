@@ -9,3 +9,6 @@
 # VSCode
 .vscode/
 jsconfig.json
+
+# Ignore any node_modules dir
+node_modules/

@@ -1,0 +1,8 @@
+framework module "GnoCore" {
+	header "ref.h"
+    header "GnoGnomobile.objc.h"
+    header "Universe.objc.h"
+    header "GnoCore.h"
+
+    export *
+}

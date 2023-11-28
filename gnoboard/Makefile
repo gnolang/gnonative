@@ -2,6 +2,8 @@ ANDROID_DEVICE ?=
 
 check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,$(error "Missing deps: no '$(exec)' in PATH")))
 
+TEMPLATE_PROJECT := gnoboard
+
 # - Node: Handle node_modules
 
 node_modules: package.json yarn.lock
@@ -9,11 +11,11 @@ node_modules: package.json yarn.lock
 	(yarn && touch $@) || true
 .PHONY: node_modules
 
-ios/gnoboard.xcworkspace: ios/gnoboard.xcodeproj ios/Podfile node_modules
+ios/${TEMPLATE_PROJECT}.xcworkspace: ios/${TEMPLATE_PROJECT}.xcodeproj ios/Podfile node_modules
 	$(call check-program, bundle)
 	cd ios && pod install
 	touch $@
-.PHONY: ios/gnoboard.xcworkspace
+.PHONY: ios/${TEMPLATE_PROJECT}.xcworkspace
 
 # - Helpers
 
