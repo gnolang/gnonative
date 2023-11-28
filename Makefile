@@ -44,7 +44,7 @@ all build: generate build.ios build.android
 # Build iOS framework
 build.ios: generate $(gnocore_xcframework)
 	cd $(react_native_dir); $(MAKE) node_modules
-	cd $(react_native_dir); $(MAKE) ios/$(TEMPLATE_PROJECT).xcworkspace
+	cd $(react_native_dir); $(MAKE) ios/$(TEMPLATE_PROJECT).xcworkspace TEMPLATE_PROJECT=$(TEMPLATE_PROJECT)
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
@@ -164,7 +164,7 @@ asdf.install_tools: asdf.add_plugins
 
 # Script to create a new app
 
-NPM_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+YARN_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
 
 new-app:
 ifndef APP_NAME
@@ -172,11 +172,11 @@ ifndef APP_NAME
 endif
 	@mkdir -p ./examples/
 	@echo "creating a new gno awesome project"
-	cd examples && npx create-expo-app $(APP_NAME) --template expo-template-blank-typescript
+	cd examples && yarn create expo $(APP_NAME) --template expo-template-blank-typescript
 	@echo "Creating ios and android folders"
-	cd examples/$(APP_NAME) && npx expo prebuild
-	@echo "Installing npm dependencies"
-	cd examples/$(APP_NAME) && npm install ${NPM_BASIC_DEPENDENCIES}
+	cd examples/$(APP_NAME) && yarn expo prebuild
+	@echo "Installing yarn dependencies"
+	cd examples/$(APP_NAME) && yarn add ${YARN_BASIC_DEPENDENCIES}
 
 # create folders (api, grpc, hooks)
 	@mkdir -p ./examples/$(APP_NAME)/src/api
@@ -187,10 +187,11 @@ endif
 	@cp -r ./$(TEMPLATE_PROJECT)/src/grpc ./examples/$(APP_NAME)/src
 	@cp -r ./$(TEMPLATE_PROJECT)/src/hooks ./examples/$(APP_NAME)/src
 	@cp -r ./$(TEMPLATE_PROJECT)/src/native_modules ./examples/$(APP_NAME)/src
+	@cp -r ./$(TEMPLATE_PROJECT)/Makefile ./examples/$(APP_NAME)
 	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
 	@cp ./templates/App.tsx ./examples/$(APP_NAME)/App.tsx
 	$(MAKE) add-app-json-entry
-# copy ios Sources	
+# copy ios Sources
 	@mkdir -p ./examples/$(APP_NAME)/ios/$(APP_NAME)/Sources
 	@cp -r $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)/
 	@cp $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/$(TEMPLATE_PROJECT)-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
