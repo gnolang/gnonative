@@ -5,16 +5,15 @@ to the Gno blockchain. It calls the render function of the Boards realm.
 
 ## Run the server service
 
-`go run ./../../goserver`
+Go to the gnomobile root directory.
+`cd ../..`
 
-The server print the port it listen to. For instance, you should have something
-like this :
-`2023-11-29T13:59:22.566+0100    INFO    service/service.go:231  createTcpGrpcServer: gRPC server listens to    {"port": 58748}`
-Note the port is 58748.
+Run the server.
+`go run ./goserver`
 
 ## Run the client
 
-In another terminal, execute this (note that we are using the port `58748`):
-`go run ./client http://localhost:58748`
+In another terminal, execute this is the goclient directory (the default port is `26658`):
+`go run . http://localhost:26658`
 
 The client prints the raw Boards' messages.

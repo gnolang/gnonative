@@ -63,7 +63,7 @@ type gnomobileService struct {
 var _ GnomobileService = (*gnomobileService)(nil)
 
 func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
-	cfg := &Config{}
+	cfg := &Config{TcpPort: DEFAULT_TCP_PORT}
 	if err := cfg.applyOptions(append(opts, WithFallbackDefaults)...); err != nil {
 		return nil, err
 	}

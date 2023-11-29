@@ -6,6 +6,8 @@ import (
 	"go.uber.org/zap"
 )
 
+const DEFAULT_TCP_PORT = 26658
+
 // Config describes a set of settings for a GnomobileService
 type Config struct {
 	Logger         *zap.Logger
@@ -193,6 +195,8 @@ var WithFallbackTmpDir GnomobileOption = func(cfg *Config) error {
 // --- tcpPort options ---
 
 // WithTcpPort sets the given tcp port to serve the gRPC server.
+// If no TCP port is defined, a default port will be used.
+// If TCP port is set to 0, a random port number will be chosen.
 var WithTcpPort = func(port int) GnomobileOption {
 	return func(cfg *Config) error {
 		cfg.TcpPort = port
