@@ -188,6 +188,8 @@ endif
 	@cp -r ./$(TEMPLATE_PROJECT)/src/hooks ./examples/$(APP_NAME)/src
 	@cp -r ./$(TEMPLATE_PROJECT)/src/native_modules ./examples/$(APP_NAME)/src
 	@cp -r ./$(TEMPLATE_PROJECT)/Makefile ./examples/$(APP_NAME)
+	@cp -r ./$(TEMPLATE_PROJECT)/android/.gitignore ./examples/$(APP_NAME)/android
+	@cp -r ./$(TEMPLATE_PROJECT)/ios/.gitignore ./examples/$(APP_NAME)/ios
 	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
 	@cp ./templates/App.tsx ./examples/$(APP_NAME)/App.tsx
 	$(MAKE) add-app-json-entry
