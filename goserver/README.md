@@ -2,11 +2,11 @@
 
 This Go executable run a Gnomobile service.## Run the service
 
-`go run ./goserver udp`
+`go run ./goserver uds`
 
 or
 
-`go run ./goserver udp`
+`go run ./goserver tcp`
 
 The gRPC server prints the TCP address/socket path it listens to:
 
