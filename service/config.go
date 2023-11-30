@@ -2,23 +2,63 @@ package service
 
 import (
 	"os"
+	"path/filepath"
 
+	"github.com/gnolang/gnomobile/service/rpc"
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
+const DEFAULT_TCP_ADDR = ":26658"
+const DEFAULT_SOCKET_SUBDIR = "s"
+const DEFAULT_SOCKET_FILE = "gno"
+
 // Config describes a set of settings for a GnomobileService
 type Config struct {
-	Logger         *zap.Logger
-	Remote         string
-	ChainID        string
-	RootDir        string
-	TmpDir         string
-	TcpPort        int
-	UseUdsListener bool
-	UseTcpListener bool
+	Logger             *zap.Logger
+	Remote             string
+	ChainID            string
+	RootDir            string
+	TmpDir             string
+	TcpAddr            string
+	UdsPath            string
+	UseTcpListener     bool
+	DisableUdsListener bool
 }
 
 type GnomobileOption func(cfg *Config) error
+
+func (cfg *Config) applyOptions(opts ...GnomobileOption) error {
+	withDefaultOpts := make([]GnomobileOption, len(opts))
+	copy(withDefaultOpts, opts)
+	withDefaultOpts = append(withDefaultOpts, WithFallbackDefaults)
+	for _, opt := range withDefaultOpts {
+		if err := opt(cfg); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (cfg *Config) checkDirs() error {
+	// check if rootDir exists
+	{
+		_, err := os.Stat(cfg.RootDir)
+		if os.IsNotExist(err) {
+			return errors.Wrap(err, "rootDir folder doesn't exist")
+		}
+	}
+
+	// check if tmpDir exists
+	{
+		_, err := os.Stat(cfg.TmpDir)
+		if os.IsNotExist(err) {
+			return errors.Wrap(err, "tmpDir folder doesn't exist")
+		}
+	}
+
+	return nil
+}
 
 // FallBackOption is a structure that permits to fallback to a default option if the option is not set.
 type FallBackOption struct {
@@ -190,27 +230,81 @@ var WithFallbackTmpDir GnomobileOption = func(cfg *Config) error {
 	return nil
 }
 
-// --- tcpPort options ---
+// --- tcpAddr options ---
 
-// WithTcpPort sets the given tcp port to serve the gRPC server.
-var WithTcpPort = func(port int) GnomobileOption {
+// WithTcpAddr sets the given TCP address to serve the gRPC server.
+// If no TCP address is defined, a default will be used.
+// If the TCP port is set to 0, a random port number will be chosen.
+var WithTcpAddr = func(addr string) GnomobileOption {
 	return func(cfg *Config) error {
-		cfg.TcpPort = port
+		cfg.TcpAddr = addr
 		return nil
 	}
 }
 
-// --- useUdsListener options ---
+// WithDefaultTcpAddr sets a default TCP addr to listen to.
+var WithDefaultTcpAddr GnomobileOption = func(cfg *Config) error {
+	cfg.TcpAddr = DEFAULT_TCP_ADDR
 
-// WithUseUDSListener sets the gRPC server to serve on a Unix Domain Socket listener.
-var WithUseUdsListener = func() GnomobileOption {
+	return nil
+}
+
+var fallbackTcpAddr = FallBackOption{
+	fallback: func(cfg *Config) bool { return cfg.TcpAddr == "" },
+	opt:      WithDefaultTcpAddr,
+}
+
+// WithDefaultTcpAddr sets a default TCP addr to listen to if no address is set.
+var WithFallbackTcpAddr GnomobileOption = func(cfg *Config) error {
+	if fallbackTcpAddr.fallback(cfg) {
+		return fallbackTcpAddr.opt(cfg)
+	}
+	return nil
+}
+
+// --- udsPath options ---
+
+// WithUdsPath sets the given Unix Domain Socket path to serve the gRPC server.
+// If no UDS socket is defined, a default will be used.
+var WithUdsPath = func(addr string) GnomobileOption {
 	return func(cfg *Config) error {
-		cfg.UseUdsListener = true
+		cfg.UdsPath = addr
 		return nil
 	}
 }
 
-// --- useTcpListener options ---
+// WithDefaultUdsPath sets a default UDS path to listen to.
+var WithDefaultUdsPath GnomobileOption = func(cfg *Config) error {
+	// dependency
+	if err := WithFallbackTmpDir(cfg); err != nil {
+		return err
+	}
+
+	// create a socket subdirectory
+	sockDir := filepath.Join(cfg.TmpDir, DEFAULT_SOCKET_SUBDIR)
+	if err := os.MkdirAll(sockDir, 0700); err != nil {
+		return rpc.ErrCode_ErrInitService.Wrap(err)
+	}
+
+	cfg.UdsPath = filepath.Join(sockDir, DEFAULT_SOCKET_FILE)
+
+	return nil
+}
+
+var fallbackUdsPath = FallBackOption{
+	fallback: func(cfg *Config) bool { return cfg.UdsPath == "" },
+	opt:      WithDefaultUdsPath,
+}
+
+// WithDefaultUdsPath sets a default UDS path to listen to if no path is set.
+var WithFallbackUdsPath GnomobileOption = func(cfg *Config) error {
+	if fallbackUdsPath.fallback(cfg) {
+		return fallbackUdsPath.opt(cfg)
+	}
+	return nil
+}
+
+// --- listener options ---
 
 // WithUseTcpListener sets the gRPC server to serve on a TCP listener.
 var WithUseTcpListener = func() GnomobileOption {
@@ -220,17 +314,12 @@ var WithUseTcpListener = func() GnomobileOption {
 	}
 }
 
-// --- listener fallback option ---
-
-// WithUseDefaultListener sets a TCP listener for the gRPC server.
-var WithUseDefaultListener GnomobileOption = func(cfg *Config) error {
-	cfg.UseTcpListener = true
-	return nil
-}
-
-var fallbackListener = FallBackOption{
-	fallback: func(cfg *Config) bool { return !cfg.UseTcpListener && !cfg.UseUdsListener },
-	opt:      WithUseDefaultListener,
+// WithDisableUdsListener sets the gRPC server to serve on a TCP listener.
+var WithDisableUdsListener = func() GnomobileOption {
+	return func(cfg *Config) error {
+		cfg.DisableUdsListener = true
+		return nil
+	}
 }
 
 // --- Fallback options ---
@@ -241,6 +330,8 @@ var defaults = []FallBackOption{
 	fallbackChainID,
 	fallbackRootDir,
 	fallbackTmpDir,
+	fallbackTcpAddr,
+	fallbackUdsPath,
 }
 
 // WithFallbackDefaults sets the default options if no option is set.
