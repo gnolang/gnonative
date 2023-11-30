@@ -2,22 +2,128 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/gnolang/gnomobile/service"
+	"github.com/peterbourgon/ff/v3/ffcli"
 )
 
+// path of the remote Gno node
+var remote string
+
 func main() {
-	service, err := service.NewGnomobileService(
-		service.WithUseTcpListener(),
-		service.WithRemote("http://testnet.gno.berty.io:26657"),
-	)
-	if err != nil {
-		log.Fatalf("failed to run GnomobileService: %v", err)
+	err := runMain(os.Args[1:])
+
+	switch {
+	case err == nil:
+		// noop
+	case err == flag.ErrHelp || strings.Contains(err.Error(), flag.ErrHelp.Error()):
+		os.Exit(2)
+	default:
+		fmt.Fprintf(os.Stderr, "error: %+v\n", err)
 		os.Exit(1)
 	}
-	defer service.Close()
+}
 
-	<-context.Background().Done()
+func runMain(args []string) error {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// setup flags
+	var fs *flag.FlagSet
+	{
+		fs = flag.NewFlagSet("goclient", flag.ContinueOnError)
+	}
+
+	fs.StringVar(&remote, "remote", "http://testnet.gno.berty.io:26657", "address of the Gno node")
+
+	var root *ffcli.Command
+	{
+		root = &ffcli.Command{
+			ShortUsage:  "goclient [flag] <subcommand>",
+			ShortHelp:   "start a Go server of Gnomobile",
+			FlagSet:     fs,
+			Subcommands: []*ffcli.Command{uds(), tcp()},
+			Exec: func(ctx context.Context, args []string) error {
+				return flag.ErrHelp
+			},
+		}
+	}
+
+	if err := root.ParseAndRun(ctx, args); err != nil {
+		log.Fatal(err)
+	}
+
+	return nil
+}
+
+func uds() *ffcli.Command {
+	fs := flag.NewFlagSet("goserver uds", flag.ExitOnError)
+	path := fs.String("path", "", "path of the socket to listen to")
+
+	return &ffcli.Command{
+		Name:       "uds",
+		ShortUsage: "goserver uds [flags]",
+		ShortHelp:  "Listen on Unix Domain Socket",
+		FlagSet:    fs,
+		Exec: func(ctx context.Context, args []string) error {
+			options := []service.GnomobileOption{
+				service.WithRemote(remote),
+			}
+
+			if *path != "" {
+				options = append(options, service.WithUdsPath(*path))
+			}
+
+			service, err := service.NewGnomobileService(options...)
+			if err != nil {
+				log.Fatalf("failed to run GnomobileService: %v", err)
+				os.Exit(1)
+			}
+			defer service.Close()
+
+			fmt.Printf("server UDS path: %s\n", service.GetUDSPath())
+
+			<-context.Background().Done()
+			return nil
+		},
+	}
+}
+
+func tcp() *ffcli.Command {
+	fs := flag.NewFlagSet("goserver tcp", flag.ExitOnError)
+	addr := fs.String("addr", "", "TCP address to listen to")
+
+	return &ffcli.Command{
+		Name:       "tcp",
+		ShortUsage: "goserver tcp [flags]",
+		ShortHelp:  "Listen on TCP",
+		FlagSet:    fs,
+		Exec: func(ctx context.Context, args []string) error {
+			options := []service.GnomobileOption{
+				service.WithRemote(remote),
+				service.WithUseTcpListener(),
+			}
+
+			if *addr != "" {
+				options = append(options, service.WithTcpAddr(*addr))
+			}
+
+			service, err := service.NewGnomobileService(options...)
+			if err != nil {
+				log.Fatalf("failed to run GnomobileService: %v", err)
+				os.Exit(1)
+			}
+			defer service.Close()
+
+			fmt.Printf("server TCP address: %s\n", service.GetTcpAddr())
+
+			<-context.Background().Done()
+			return nil
+		},
+	}
 }

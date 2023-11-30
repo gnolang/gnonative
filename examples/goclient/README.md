@@ -6,14 +6,19 @@ to the Gno blockchain. It calls the render function of the Boards realm.
 ## Run the server service
 
 Go to the gnomobile root directory.
+
 `cd ../..`
 
 Run the server.
-`go run ./goserver`
+
+`go run ./goserver tcp`
 
 ## Run the client
 
-In another terminal, execute this is the goclient directory (the default port is `26658`):
-`go run . http://localhost:26658`
+In another terminal, execute this is the goclient directory (the default port is
+`26658`):
+
+`go run . tcp` or specify the remote address:
+`go run . tcp http://localhost:26658`
 
 The client prints the raw Boards' messages.

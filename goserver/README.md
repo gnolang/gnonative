@@ -1,11 +1,19 @@
 # Go server
 
-This Go executable run a Gnomobile service. The gRPC server prints the port it
-listens to:
-`2023-11-29T13:59:22.566+0100    INFO    service/service.go:231  createTcpGrpcServer: gRPC server listens to    {"port": 58748}`
+This Go executable run a Gnomobile service.## Run the service
 
-## Run the service
+`go run ./goserver udp`
 
-`go run ./goserver`
+or
+
+`go run ./goserver udp`
+
+The gRPC server prints the TCP address/socket path it listens to:
+
+`server UDS path: xxx` or `server TCP address: xxx`
 
 To close it, press Ctrl+C in the terminal.
+
+## Usage
+
+`go run ./goserver`
