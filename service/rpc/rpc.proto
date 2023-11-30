@@ -154,49 +154,50 @@ enum ErrCode {
   ErrMissingInput = 102;
   ErrSerialization = 103;
   ErrDeserialization = 104;
-  ErrCryptoKeyTypeUnknown = 105;
+  ErrInitService = 105;
+  ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
-  ErrCryptoKeyNotFound = 106;
+  ErrCryptoKeyNotFound = 151;
   // ErrNoActiveAccount indicates that no active account has been set with SelectAccount
-  ErrNoActiveAccount = 107;
-  ErrRunGRPCServer = 108;
+  ErrNoActiveAccount = 152;
+  ErrRunGRPCServer = 153;
   // ErrDecryptionFailed indicates a decryption failure including a wrong password
-  ErrDecryptionFailed = 109;
+  ErrDecryptionFailed = 154;
 
   // The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
 
-  ErrTxDecode = 110;
-  ErrInvalidSequence = 111;
-  ErrUnauthorized = 112;
+  ErrTxDecode = 200;
+  ErrInvalidSequence = 201;
+  ErrUnauthorized = 202;
   // ErrInsufficientFunds indicates that there are insufficient funds to pay for fees
-  ErrInsufficientFunds = 113;
+  ErrInsufficientFunds = 203;
   // ErrUnknownRequest indicates that the path of a realm function call is unrecognized
-  ErrUnknownRequest = 114;
+  ErrUnknownRequest = 204;
   // ErrInvalidAddress indicates that an account address is blank or the bech32 can't be decoded
-  ErrInvalidAddress = 115;
+  ErrInvalidAddress = 205;
   // ErrUnknownAddress indicates that the address is unknown on the blockchain
-  ErrUnknownAddress = 116;
+  ErrUnknownAddress = 206;
   // ErrInvalidPubKey indicates that the public key was not found or has an invalid algorithm or format
-  ErrInvalidPubKey = 117;
+  ErrInvalidPubKey = 207;
   // ErrInsufficientCoins indicates that the transaction has insufficient account funds to send
-  ErrInsufficientCoins = 118;
+  ErrInsufficientCoins = 208;
   // ErrInvalidCoins indicates that the transaction Coins are not sorted, or don't have a
   // positive amount, or the coin Denom contains upper case characters
-  ErrInvalidCoins = 119;
+  ErrInvalidCoins = 209;
   // ErrInvalidGasWanted indicates that the transaction gas wanted is too large or otherwise invalid
-  ErrInvalidGasWanted = 120;
+  ErrInvalidGasWanted = 210;
   // ErrOutOfGas indicates that the transaction doesn't have enough gas
-  ErrOutOfGas = 121;
+  ErrOutOfGas = 211;
   // ErrMemoTooLarge indicates that the transaction memo is too large
-  ErrMemoTooLarge = 122;
+  ErrMemoTooLarge = 212;
   // ErrInsufficientFee indicates that the gas fee is insufficient
-  ErrInsufficientFee = 123;
+  ErrInsufficientFee = 213;
   // ErrTooManySignatures indicates that the transaction has too many signatures
-  ErrTooManySignatures = 124;
+  ErrTooManySignatures = 214;
   // ErrNoSignatures indicates that the transaction has no signatures
-  ErrNoSignatures = 125;
+  ErrNoSignatures = 215;
   // ErrGasOverflow that an action results in a gas consumption unsigned integer overflow
-  ErrGasOverflow = 126;
+  ErrGasOverflow = 216;
 }
 
 message ErrDetails { repeated ErrCode codes = 1; }
