@@ -2,12 +2,10 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net"
 	"net/http"
 	"os"
-	"path/filepath"
 	"sync"
 	"time"
 
@@ -26,11 +24,9 @@ import (
 	"golang.org/x/net/http2/h2c"
 )
 
-const SOCKET_SUBDIR = "s"
-const SOCKET_FILE = "gno"
-
 type GnomobileService interface {
-	GetSocketPath() string
+	GetUDSPath() string
+	GetTcpAddr() string
 	GetTcpPort() int
 
 	io.Closer
@@ -42,11 +38,12 @@ type userAccount struct {
 }
 
 type gnomobileService struct {
-	logger     *zap.Logger
-	client     *gnoclient.Client
-	tcpPort    int
-	socketPath string
-	lock       sync.RWMutex
+	logger  *zap.Logger
+	client  *gnoclient.Client
+	tcpAddr string
+	tcpPort int
+	udsPath string
+	lock    sync.RWMutex
 	// The remote node address used to create client.RPCClient. We need to save this
 	// here because the remote is a private member of the HTTP struct.
 	remote string
@@ -62,8 +59,9 @@ type gnomobileService struct {
 
 var _ GnomobileService = (*gnomobileService)(nil)
 
+// NewGnomobileService create a new Gnomobile service along with a gRPC server listening on UDS by default.
 func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
-	cfg := &Config{TcpPort: DEFAULT_TCP_PORT}
+	cfg := &Config{}
 	if err := cfg.applyOptions(append(opts, WithFallbackDefaults)...); err != nil {
 		return nil, err
 	}
@@ -73,13 +71,15 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 		return nil, err
 	}
 
-	if cfg.UseTcpListener {
-		if err := svc.createTcpGrpcServer(); err != nil {
+	// Use UDS by default
+	if !cfg.DisableUdsListener {
+		if err := svc.createUdsGrpcServer(cfg); err != nil {
 			return nil, err
 		}
 	}
-	if cfg.UseUdsListener {
-		if err := svc.createUdsGrpcServer(cfg); err != nil {
+
+	if cfg.UseTcpListener {
+		if err := svc.createTcpGrpcServer(); err != nil {
 			return nil, err
 		}
 	}
@@ -90,7 +90,8 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 func initService(cfg *Config) (*gnomobileService, error) {
 	svc := &gnomobileService{
 		logger:       cfg.Logger,
-		tcpPort:      cfg.TcpPort,
+		tcpAddr:      cfg.TcpAddr,
+		udsPath:      cfg.UdsPath,
 		userAccounts: make(map[string]*userAccount),
 	}
 
@@ -115,18 +116,6 @@ func initService(cfg *Config) (*gnomobileService, error) {
 	return svc, nil
 }
 
-func (cfg *Config) applyOptions(opts ...GnomobileOption) error {
-	withDefaultOpts := make([]GnomobileOption, len(opts))
-	copy(withDefaultOpts, opts)
-	withDefaultOpts = append(withDefaultOpts, WithFallbackDefaults)
-	for _, opt := range withDefaultOpts {
-		if err := opt(cfg); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 // Get s.client.Signer as a SignerFromKeybase.
 func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
 	signer, ok := s.client.Signer.(*gnoclient.SignerFromKeybase)
@@ -137,47 +126,18 @@ func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
 	return signer
 }
 
-func (cfg *Config) checkDirs() error {
-	// check if rootDir exists
-	{
-		_, err := os.Stat(cfg.RootDir)
-		if os.IsNotExist(err) {
-			return errors.Wrap(err, "rootDir folder doesn't exist")
-		}
-	}
-
-	// check if tmpDir exists
-	{
-		_, err := os.Stat(cfg.TmpDir)
-		if os.IsNotExist(err) {
-			return errors.Wrap(err, "tmpDir folder doesn't exist")
-		}
-	}
-
-	return nil
-}
-
 func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 	s.logger.Debug("createUdsGrpcServer called")
 
-	// create a socket subdirectory
-	sockDir := filepath.Join(cfg.TmpDir, SOCKET_SUBDIR)
-	if err := os.MkdirAll(sockDir, 0700); err != nil {
-		s.logger.Debug("createUDSListener error", zap.Error(err))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
-	}
-
-	s.socketPath = filepath.Join(sockDir, SOCKET_FILE)
-
 	// delete socket if it already exists
-	if _, err := os.Stat(s.socketPath); !os.IsNotExist(err) {
-		if err := os.RemoveAll(s.socketPath); err != nil {
+	if _, err := os.Stat(s.udsPath); !os.IsNotExist(err) {
+		if err := os.RemoveAll(s.udsPath); err != nil {
 			s.logger.Debug("createUDSListener error", zap.Error(err))
 			return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 		}
 	}
 
-	listener, err := net.Listen("unix", s.socketPath)
+	listener, err := net.Listen("unix", s.udsPath)
 	if err != nil {
 		s.logger.Debug("createUDSListener error", zap.Error(err))
 		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
@@ -189,7 +149,7 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 		return err
 	}
 
-	s.logger.Info("createUDSListener: gRPC server listens to", zap.String("path", s.socketPath))
+	s.logger.Info("createUDSListener: gRPC server listens to", zap.String("path", s.udsPath))
 
 	return nil
 }
@@ -197,8 +157,7 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 func (s *gnomobileService) createTcpGrpcServer() error {
 	s.logger.Debug("createTcpGrpcServer called")
 
-	tcpAddr := fmt.Sprintf(":%d", s.tcpPort)
-	listener, err := net.Listen("tcp", tcpAddr)
+	listener, err := net.Listen("tcp", s.tcpAddr)
 	if err != nil {
 		s.logger.Debug("createTcpGrpcServer error", zap.Error(err))
 		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
@@ -323,12 +282,16 @@ func (s *gnomobileService) runGRPCServer() error {
 	return nil
 }
 
-func (s *gnomobileService) GetSocketPath() string {
-	return s.socketPath
+func (s *gnomobileService) GetTcpAddr() string {
+	return s.tcpAddr
 }
 
 func (s *gnomobileService) GetTcpPort() int {
 	return s.tcpPort
+}
+
+func (s *gnomobileService) GetUDSPath() string {
+	return s.udsPath
 }
 
 func (s *gnomobileService) Close() error {
