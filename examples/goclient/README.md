@@ -19,6 +19,9 @@ In another terminal, execute this is the goclient directory (the default port is
 `26658`):
 
 `go run . tcp` or specify the remote address:
-`go run . tcp http://localhost:26658`
+`go run . tcp -addr http://localhost:26658`
+
+`go run . uds` or specify the absolute socket path:
+`go run . uds -path /tmp/socket`
 
 The client prints the raw Boards' messages.
