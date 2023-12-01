@@ -6,17 +6,17 @@ This Go executable run a Gnomobile service.
 
 The default path is `/tmp/socket`.
 
-`go run ./goserver uds`
+`go run . uds`
 
-`go run ./goserver uds -path /tmp/gnomobile.sock`
+`go run . uds -path /tmp/gnomobile.sock`
 
 ## TCP connection
 
 The default port is `26658`.
 
-`go run ./goserver tcp`
+`go run . tcp`
 
-`go run ./goserver tcp -addr http://localhost:26658`
+`go run . tcp -addr http://localhost:26658`
 
 The gRPC server prints the TCP address/socket path it listens to:
 
@@ -26,4 +26,4 @@ To close it, press Ctrl+C in the terminal.
 
 ## Usage
 
-`go run ./goserver`
+`go run .`
