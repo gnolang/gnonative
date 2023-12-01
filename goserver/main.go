@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"strings"
 
 	"github.com/gnolang/gnomobile/service"
@@ -63,7 +64,7 @@ func runMain(args []string) error {
 
 func uds() *ffcli.Command {
 	fs := flag.NewFlagSet("goserver uds", flag.ExitOnError)
-	path := fs.String("path", "", "path of the socket to listen to")
+	path := fs.String("path", "/tmp/gnomobile.sock", "path of the socket to listen to")
 
 	return &ffcli.Command{
 		Name:       "uds",
@@ -88,7 +89,10 @@ func uds() *ffcli.Command {
 
 			fmt.Printf("server UDS path: %s\n", service.GetUDSPath())
 
-			<-context.Background().Done()
+			// <-context.Background().Done()
+			c := make(chan os.Signal, 1)
+			signal.Notify(c, os.Interrupt)
+			<-c
 			return nil
 		},
 	}

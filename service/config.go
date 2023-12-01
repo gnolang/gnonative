@@ -266,9 +266,14 @@ var WithFallbackTcpAddr GnomobileOption = func(cfg *Config) error {
 
 // WithUdsPath sets the given Unix Domain Socket path to serve the gRPC server.
 // If no UDS socket is defined, a default will be used.
-var WithUdsPath = func(addr string) GnomobileOption {
+var WithUdsPath = func(path string) GnomobileOption {
 	return func(cfg *Config) error {
-		cfg.UdsPath = addr
+		absPath, err := filepath.Abs(path)
+		if err != nil {
+			return err
+		}
+
+		cfg.UdsPath = absPath
 		return nil
 	}
 }

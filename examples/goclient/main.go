@@ -2,18 +2,20 @@ package main
 
 import (
 	"context"
-	"errors"
 	"flag"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gnomobile/service/rpc"
 	"github.com/gnolang/gnomobile/service/rpc/rpcconnect"
 	"github.com/peterbourgon/ff/v3/ffcli"
+	"github.com/peterbourgon/unixtransport"
 )
 
 func main() {
@@ -62,7 +64,7 @@ func runMain(args []string) error {
 
 func uds() *ffcli.Command {
 	fs := flag.NewFlagSet("goclient uds", flag.ExitOnError)
-	path := fs.String("path", "gnomobile.sock", "path of the socket")
+	path := fs.String("path", "/tmp/gnomobile.sock", "absolute path of the socket")
 
 	return &ffcli.Command{
 		Name:       "uds",
@@ -70,8 +72,36 @@ func uds() *ffcli.Command {
 		ShortHelp:  "Connect via Unix Domain Socket",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, args []string) error {
-			_ = path
-			return errors.New("to be implemented")
+			// custom transport with deadline of 2 seconds
+			t := &http.Transport{
+				Dial: func(network, addr string) (net.Conn, error) {
+					conn, err := net.DialTimeout(network, addr, time.Second*2)
+					if err != nil {
+						return nil, err
+					}
+					conn.SetDeadline(time.Now().Add(time.Second * 2))
+					return conn, nil
+				},
+			}
+
+			// Register the "http+unix" and "https+unix" protocols in the transport.
+			unixtransport.Register(t)
+
+			httpClient := &http.Client{Transport: t}
+
+			// add a trailing colon
+			fullPath := fmt.Sprintf("http+unix://%s:", *path)
+
+			client := rpcconnect.NewGnomobileServiceClient(
+				httpClient,
+				fullPath,
+			)
+			if err := exampleAction(client); err != nil {
+				log.Fatal(err)
+				return err
+			}
+
+			return nil
 		},
 	}
 }
