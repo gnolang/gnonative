@@ -64,7 +64,7 @@ func runMain(args []string) error {
 
 func uds() *ffcli.Command {
 	fs := flag.NewFlagSet("goclient uds", flag.ExitOnError)
-	path := fs.String("path", "/gnomobile.sock", "absolute path of the socket")
+	path := fs.String("path", "/tmp/gnomobile.sock", "absolute path of the socket")
 
 	return &ffcli.Command{
 		Name:       "uds",
