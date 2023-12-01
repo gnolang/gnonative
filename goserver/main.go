@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"strings"
 
 	"github.com/gnolang/gnomobile/service"
@@ -88,7 +89,10 @@ func uds() *ffcli.Command {
 
 			fmt.Printf("server UDS path: %s\n", service.GetUDSPath())
 
-			<-context.Background().Done()
+			// <-context.Background().Done()
+			c := make(chan os.Signal, 1)
+			signal.Notify(c, os.Interrupt)
+			<-c
 			return nil
 		},
 	}

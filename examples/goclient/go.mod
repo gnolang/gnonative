@@ -6,6 +6,7 @@ require (
 	connectrpc.com/connect v1.11.1
 	github.com/gnolang/gnomobile v0.0.0-20231128150601-7a6487aaf485
 	github.com/peterbourgon/ff/v3 v3.4.0
+	github.com/peterbourgon/unixtransport v0.0.3
 )
 
 require (

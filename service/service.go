@@ -22,6 +22,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
+	"moul.io/u"
 )
 
 type GnomobileService interface {
@@ -53,8 +54,9 @@ type gnomobileService struct {
 	// The active account in userAccounts, or nil if none
 	activeAccount *userAccount
 
-	listener net.Listener
-	server   *http.Server
+	listeners []net.Listener
+	server    *http.Server
+	closeFunc func()
 }
 
 var _ GnomobileService = (*gnomobileService)(nil)
@@ -74,12 +76,14 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	// Use UDS by default
 	if !cfg.DisableUdsListener {
 		if err := svc.createUdsGrpcServer(cfg); err != nil {
+			svc.closeFunc()
 			return nil, err
 		}
 	}
 
 	if cfg.UseTcpListener {
 		if err := svc.createTcpGrpcServer(); err != nil {
+			svc.closeFunc()
 			return nil, err
 		}
 	}
@@ -93,6 +97,7 @@ func initService(cfg *Config) (*gnomobileService, error) {
 		tcpAddr:      cfg.TcpAddr,
 		udsPath:      cfg.UdsPath,
 		userAccounts: make(map[string]*userAccount),
+		closeFunc:    func() {},
 	}
 
 	if err := cfg.checkDirs(); err != nil {
@@ -131,10 +136,8 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 
 	// delete socket if it already exists
 	if _, err := os.Stat(s.udsPath); !os.IsNotExist(err) {
-		if err := os.RemoveAll(s.udsPath); err != nil {
-			s.logger.Debug("createUDSListener error", zap.Error(err))
-			return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
-		}
+		s.logger.Debug("createUDSListener error: socket file already exists", zap.String("socket", s.udsPath))
+		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	listener, err := net.Listen("unix", s.udsPath)
@@ -143,9 +146,11 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
-	s.listener = listener
+	s.lock.Lock()
+	s.listeners = append(s.listeners, listener)
+	s.lock.Unlock()
 
-	if err := s.runGRPCServer(); err != nil {
+	if err := s.runGRPCServer(listener); err != nil {
 		return err
 	}
 
@@ -163,7 +168,9 @@ func (s *gnomobileService) createTcpGrpcServer() error {
 		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
-	s.listener = listener
+	s.lock.Lock()
+	s.listeners = append(s.listeners, listener)
+	s.lock.Unlock()
 
 	// update the tcpPort field
 
@@ -183,7 +190,7 @@ func (s *gnomobileService) createTcpGrpcServer() error {
 
 	s.tcpPort = portInt
 
-	if err := s.runGRPCServer(); err != nil {
+	if err := s.runGRPCServer(listener); err != nil {
 		return err
 	}
 
@@ -231,11 +238,7 @@ func newCORS() *cors.Cors {
 	})
 }
 
-func (s *gnomobileService) runGRPCServer() error {
-	if s.listener == nil {
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(errors.New("listener is not initialized"))
-	}
-
+func (s *gnomobileService) runGRPCServer(listener net.Listener) error {
 	mux := http.NewServeMux()
 
 	compress1KB := connect.WithCompressMinBytes(1024)
@@ -269,7 +272,7 @@ func (s *gnomobileService) runGRPCServer() error {
 
 	go func() {
 		// we dont need to log the error
-		err := s.server.Serve(s.listener)
+		err := s.server.Serve(listener)
 		if err != nil && !errors.Is(err, http.ErrServerClosed) {
 			s.logger.Error("failed to serve the gRPC listener")
 		}
@@ -277,6 +280,11 @@ func (s *gnomobileService) runGRPCServer() error {
 
 	s.lock.Lock()
 	s.server = server
+	s.closeFunc = u.CombineFuncs(s.closeFunc, func() {
+		if err := server.Shutdown(context.Background()); err != nil {
+			s.logger.Error("cannot close the gRPC server", zap.Error(err)) //nolint:gocritic
+		}
+	})
 	s.lock.Unlock()
 
 	return nil
@@ -295,15 +303,8 @@ func (s *gnomobileService) GetUDSPath() string {
 }
 
 func (s *gnomobileService) Close() error {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-
-	if s.server != nil {
-		if err := s.server.Shutdown(context.Background()); err != nil {
-			s.logger.Error("HTTP shutdown: %v", zap.Error(err)) //nolint:gocritic
-		}
-		s.server = nil
+	if s.closeFunc != nil {
+		s.closeFunc()
 	}
-
 	return nil
 }
