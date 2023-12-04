@@ -44,7 +44,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
             config.setRootDir(rootDir.getAbsolutePath());
             config.setUseTcpListener(true);
-            config.setUseUdsListener(true);
+            config.setDisableUdsListener(true);
 
             bridgeGnomobile = Gnomobile.newBridge(config);
             socketPort = (int)bridgeGnomobile.getTcpPort();

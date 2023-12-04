@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
+def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -136,7 +137,7 @@ android {
 
 // Auto-build gomobile.aar by running Makefile rule
 task makeDeps(description: 'Build gnocore.aar (Gno go core)') {
-    outputs.files fileTree(dir: "${rootDir.getPath()}/libs", include: ["*.jar", "*.aar"])
+    outputs.files fileTree(dir: "${frameworkDir}/android", include: ["*.jar", "*.aar"])
 
     doLast {
         if (System.properties['os.name'].toLowerCase().contains('windows')) {
@@ -164,7 +165,7 @@ task makeDeps(description: 'Build gnocore.aar (Gno go core)') {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "${frameworkDir}/android", include: ["*.jar"])
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
