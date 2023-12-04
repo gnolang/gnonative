@@ -13,8 +13,8 @@ cache_dir := $(make_dir)/.cache
 react_native_dir := $(make_dir)/$(TEMPLATE_PROJECT)
 
 # Argument Defaults
-IOS_OUTPUT_FRAMEWORK_DIR ?= $(react_native_dir)/ios/Frameworks
-ANDROID_OUTPUT_LIBS_DIR ?= $(react_native_dir)/android/libs
+IOS_OUTPUT_FRAMEWORK_DIR ?= framework/ios
+ANDROID_OUTPUT_LIBS_DIR ?= framework/android
 GO_BIND_BIN_DIR ?= $(cache_dir)/bind
 
 # IOS definitions
@@ -126,7 +126,7 @@ $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/ios-gmomobile \
 		-tags 'nowatchdog' -prefix=Gno \
-		-o $@ -target ios ./framework
+		-o $@ -target ios ./framework/service
 _bind.clean.ios:
 	rm -rf $(gnocore_xcframework)
 
@@ -137,7 +137,7 @@ $(gnocore_aar): $(bind_init_files) $(go_deps)
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gmomobile \
 		-javapkg=gnolang.gno \
-		-o $@ -target android -androidapi 21 ./framework
+		-o $@ -target android -androidapi 21 ./framework/service
 _bind.clean.android:
 	rm -rf $(gnocore_jar) $(gnocore_aar)
 
