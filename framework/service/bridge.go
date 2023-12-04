@@ -19,10 +19,10 @@ type PromiseBlock interface {
 }
 
 type BridgeConfig struct {
-	RootDir        string
-	TmpDir         string
-	UseTcpListener bool
-	UseUdsListener bool
+	RootDir            string
+	TmpDir             string
+	UseTcpListener     bool
+	DisableUdsListener bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -70,8 +70,8 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			svcOpts = append(svcOpts, service.WithUseTcpListener())
 		}
 
-		if config.UseUdsListener {
-			svcOpts = append(svcOpts, service.WithUseUdsListener())
+		if config.DisableUdsListener {
+			svcOpts = append(svcOpts, service.WithDisableUdsListener())
 		}
 
 		serviceServer, err := service.NewGnomobileService(svcOpts...)
@@ -89,12 +89,12 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 	return b, nil
 }
 
-func (b *Bridge) GetSocketPath() string {
+func (b *Bridge) GetUDSPath() string {
 	if b.serviceServer == nil {
 		return ""
 	}
 
-	return b.serviceServer.GetSocketPath()
+	return b.serviceServer.GetUDSPath()
 }
 
 func (b *Bridge) GetTcpPort() int {
@@ -103,6 +103,14 @@ func (b *Bridge) GetTcpPort() int {
 	}
 
 	return b.serviceServer.GetTcpPort()
+}
+
+func (b *Bridge) GetTcpAddr() string {
+	if b.serviceServer == nil {
+		return ""
+	}
+
+	return b.serviceServer.GetTcpAddr()
 }
 
 func (b *Bridge) Close() error {
