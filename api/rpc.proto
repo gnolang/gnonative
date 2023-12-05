@@ -4,7 +4,7 @@ package land.gno.gnomobile.v1;
 
 import "gnomobiletypes.proto";
 
-option go_package = "github.com/gnolang/gnomobile/service/rpc";
+option go_package = "github.com/gnolang/gnomobile/api/gen/go";
 option objc_class_prefix = "RTG";
 
 // GnomobileService is the service to interact with the Gno blockchain
@@ -28,8 +28,7 @@ service GnomobileService {
   // Generate a recovery phrase of BIP39 mnemonic words using entropy from the
   // crypto library random number generator. This can be used as the mnemonic in
   // CreateAccount.
-  rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest)
-      returns (GenerateRecoveryPhraseResponse);
+  rpc GenerateRecoveryPhrase(GenerateRecoveryPhraseRequest) returns (GenerateRecoveryPhraseResponse);
 
   // Get the information for all keys in the keybase
   rpc ListKeyInfo(ListKeyInfoRequest) returns (ListKeyInfoResponse);
@@ -76,8 +75,7 @@ service GnomobileService {
   // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
-  rpc GetActiveAccount(GetActiveAccountRequest)
-      returns (GetActiveAccountResponse);
+  rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
 
   // QueryAccount retrieves account information from the blockchain for a given
   // address.
@@ -117,8 +115,7 @@ service GnomobileService {
   rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);
 
   // Convert a bech32 string address to a byte array address.
-  rpc AddressFromBech32(AddressFromBech32Request)
-      returns (AddressFromBech32Response);
+  rpc AddressFromBech32(AddressFromBech32Request) returns (AddressFromBech32Response);
 
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);
@@ -200,4 +197,6 @@ enum ErrCode {
   ErrGasOverflow = 216;
 }
 
-message ErrDetails { repeated ErrCode codes = 1; }
+message ErrDetails {
+  repeated ErrCode codes = 1;
+}

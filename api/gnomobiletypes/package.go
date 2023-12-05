@@ -7,10 +7,10 @@ import (
 )
 
 var Package = amino.RegisterPackage(amino.NewPackage(
-	"github.com/gnolang/gnomobile/service/gnomobiletypes",
+	"github.com/gnolang/gnomobile/api/gnomobiletypes",
 	"land.gno.gnomobile.v1",
-	path.Join(amino.GetCallersDirname(), "../rpc"),
-).WithP3GoPkgPath("github.com/gnolang/gnomobile/service/rpc").
+	path.Join(amino.GetCallersDirname(), ".."),
+).WithP3GoPkgPath("github.com/gnolang/gnomobile/api/gen/go").
 	WithDependencies().WithTypes(
 	SetRemoteRequest{},
 	SetRemoteResponse{},

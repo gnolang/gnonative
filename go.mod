@@ -9,6 +9,7 @@ require (
 	github.com/gnolang/gno v0.0.0-20231123184803-d421b963aed7
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff/v3 v3.4.0
+	github.com/peterbourgon/unixtransport v0.0.3
 	github.com/pkg/errors v0.9.1
 	github.com/rs/cors v1.10.1
 	go.uber.org/multierr v1.11.0

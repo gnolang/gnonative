@@ -79,9 +79,9 @@ gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
 _api.clean.protocol:
-	rm -f service/rpc/*.pb.go
-	rm -f service/rpc/rpcconnect/*.connect.go
-	rm -f $(TEMPLATE_PROJECT)/src/api/*.{ts,js}
+	rm -f api/gen/go/*.pb.go
+	rm -f api/gen/go/_goconnect/*.connect.go
+	rm -f api/gen/es/*.{ts,js}
 	rm -f $(gen_sum)
 
 $(gen_sum): $(gen_src)
@@ -89,7 +89,7 @@ $(gen_sum): $(gen_src)
 	@shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp
 	@diff -q $(gen_sum).tmp $(gen_sum) || ( \
 		cd misc/genproto && go run . && cd ../.. ; \
-		buf generate service/rpc; \
+		buf generate api; \
 		shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp; \
 		mv $(gen_sum).tmp $(gen_sum); \
 		go mod tidy \

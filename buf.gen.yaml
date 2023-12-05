@@ -1,12 +1,12 @@
 version: v1
 plugins:
   - plugin: buf.build/protocolbuffers/go
-    out: ./
-    opt: module=github.com/gnolang/gnomobile
+    out: ./api/gen/go
+    opt: module=github.com/gnolang/gnomobile/api/gen/go
   - plugin: buf.build/connectrpc/go
-    out: ./
-    opt: module=github.com/gnolang/gnomobile
+    out: ./api/gen/go
+    opt: module=github.com/gnolang/gnomobile/api/gen/go
   - plugin: buf.build/bufbuild/es
-    out: gnoboard/src/api
+    out: ./api/gen/es
   - plugin: buf.build/connectrpc/es
-    out: gnoboard/src/api
+    out: ./api/gen/es

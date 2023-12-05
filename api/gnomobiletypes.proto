@@ -1,7 +1,7 @@
 syntax = "proto3";
 package land.gno.gnomobile.v1;
 
-option go_package = "github.com/gnolang/gnomobile/service/rpc";
+option go_package = "github.com/gnolang/gnomobile/api/gen/go";
 
 // messages
 message SetRemoteRequest {

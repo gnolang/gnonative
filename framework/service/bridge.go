@@ -9,8 +9,8 @@ import (
 	"github.com/oklog/run"
 	"go.uber.org/multierr"
 
+	api_gen "github.com/gnolang/gnomobile/api/gen/go"
 	"github.com/gnolang/gnomobile/service"
-	"github.com/gnolang/gnomobile/service/rpc"
 )
 
 type PromiseBlock interface {
@@ -53,7 +53,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		b.workers.Add(func() error {
 			// wait for closing signal
 			<-b.closec
-			return rpc.ErrCode_ErrBridgeInterrupted
+			return api_gen.ErrCode_ErrBridgeInterrupted
 		}, func(error) {
 			b.onceCloser.Do(func() { close(b.closec) })
 		})
@@ -134,7 +134,7 @@ func (b *Bridge) Close() error {
 
 		b.serviceServer.Close()
 
-		if !rpc.Is(err, rpc.ErrCode_ErrBridgeInterrupted) {
+		if !api_gen.Is(err, api_gen.ErrCode_ErrBridgeInterrupted) {
 			errs = multierr.Append(errs, err)
 		}
 
