@@ -5,14 +5,15 @@ check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,
 # Get the temporary directory of the system
 TEMPDIR := $(shell dirname $(shell mktemp -u))
 
-TEMPLATE_PROJECT := gnoboard
+APP_NAME := gnoboard
 
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
-react_native_dir := $(make_dir)/$(TEMPLATE_PROJECT)
+gnoboard_dir := $(make_dir)/examples/react-native/gnoboard
 
 # Argument Defaults
+APP_OUTPUT_DIR ?= $(make_dir)/examples/react-native/$(APP_NAME)
 IOS_OUTPUT_FRAMEWORK_DIR ?= framework/ios
 ANDROID_OUTPUT_LIBS_DIR ?= framework/android
 GO_BIND_BIN_DIR ?= $(cache_dir)/bind
@@ -43,12 +44,13 @@ all build: generate build.ios build.android
 
 # Build iOS framework
 build.ios: generate $(gnocore_xcframework)
-	cd $(react_native_dir); $(MAKE) node_modules
-	cd $(react_native_dir); $(MAKE) ios/$(TEMPLATE_PROJECT).xcworkspace TEMPLATE_PROJECT=$(TEMPLATE_PROJECT)
+	@echo "generate iOS framework"
+	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
+	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace APP_NAME=$(APP_NAME)
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
-	cd $(react_native_dir); $(MAKE) node_modules
+	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
 
 # Generate API from protofiles
 generate: api.generate
@@ -60,8 +62,8 @@ regenerate: api.clean api.generate
 clean: bind.clean api.clean
 
 # Force clean (clean and remove node_modules)
-fclean: clean
-	rm -rf node_modules
+fclean:
+	cd $(APP_OUTPUT_DIR); ls; rm -rf node_modules
 	rm -rf $(cache_dir)
 
 .PHONY: generate regenerate build.ios build.android clean fclean
@@ -164,50 +166,58 @@ asdf.install_tools: asdf.add_plugins
 
 # Script to create a new app
 
-YARN_BASIC_DEPENDENCIES := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+OUTPUT_DIR := $(make_dir)/examples/react-native
 
 new-app:
 ifndef APP_NAME
 	$(error APP_NAME is undefined. Please set APP_NAME to the name of your app)
 endif
-	@mkdir -p ./examples/
-	@echo "creating a new gno awesome project"
-	cd examples && yarn create expo $(APP_NAME) --template expo-template-blank-typescript
-	@echo "Creating ios and android folders"
-	cd examples/$(APP_NAME) && yarn expo prebuild
-	@echo "Installing yarn dependencies"
-	cd examples/$(APP_NAME) && yarn add ${YARN_BASIC_DEPENDENCIES}
-
-# create folders (api, grpc, hooks)
-	@mkdir -p ./examples/$(APP_NAME)/src/api
-	@mkdir -p ./examples/$(APP_NAME)/src/grpc
-	@mkdir -p ./examples/$(APP_NAME)/src/hooks
-# copy the essential files
-	@cp -r $(react_native_dir)/src/api ./examples/$(APP_NAME)/src
-	@cp -r ./$(TEMPLATE_PROJECT)/src/grpc ./examples/$(APP_NAME)/src
-	@cp -r ./$(TEMPLATE_PROJECT)/src/hooks ./examples/$(APP_NAME)/src
-	@cp -r ./$(TEMPLATE_PROJECT)/src/native_modules ./examples/$(APP_NAME)/src
-	@cp -r ./$(TEMPLATE_PROJECT)/Makefile ./examples/$(APP_NAME)
-	@cp -r ./$(TEMPLATE_PROJECT)/android/.gitignore ./examples/$(APP_NAME)/android
-	@cp -r ./$(TEMPLATE_PROJECT)/ios/.gitignore ./examples/$(APP_NAME)/ios
-	@cp ./templates/tsconfig.json ./examples/$(APP_NAME)/tsconfig.json
-	@cp ./templates/App.tsx ./examples/$(APP_NAME)/App.tsx
-	$(MAKE) add-app-json-entry
-# copy ios Sources
-	@mkdir -p ./examples/$(APP_NAME)/ios/$(APP_NAME)/Sources
-	@cp -r $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/Sources ./examples/$(APP_NAME)/ios/$(APP_NAME)/
-	@cp $(react_native_dir)/ios/$(TEMPLATE_PROJECT)/$(TEMPLATE_PROJECT)-Bridging-Header.h ./examples/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
-	@cp -r $(react_native_dir)/ios/Sources ./examples/$(APP_NAME)/ios/
-
-# build GnoCore.xcframework for the new app
-	@echo "Building GnoCore.xcframework for the new app"
-	$(MAKE) build.ios TEMPLATE_PROJECT=$(APP_NAME) react_native_dir=./examples/$(APP_NAME)
-
-# copy ios project.pbxproj from gnoboard
+	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) add-app-json-entry APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) new-app-build-ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
 	$(MAKE) copy-ios-project-pbxproj
 
+# creates a new react native app using Expo script. Also creates ios and android folders
+new-react-native-app:
+	$(call check-program, yarn)
+	@mkdir -p $(OUTPUT_DIR)
+	@echo "creating a new gno awesome project at: $(OUTPUT_DIR)"
+	cd $(OUTPUT_DIR) && yarn create expo $(APP_NAME) --template expo-template-blank-typescript
+	@echo "Creating ios and android folders"
+	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
+	@echo "Installing yarn dependencies"
+	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies}
+	@echo "Building GnoCore.xcframework for the new app"
+	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
-JSON_FILE := $(make_dir)/examples/$(APP_NAME)/app.json
+# copy js files from gnoboard to the new app
+copy-js-files:
+	$(call check-program, jq)
+	@echo "Copying js files"
+	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/api
+	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/grpc
+	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/hooks
+	@cp -r $(gnoboard_dir)/src/api $(OUTPUT_DIR)/$(APP_NAME)/src
+	@cp -r $(gnoboard_dir)/src/grpc $(OUTPUT_DIR)/$(APP_NAME)/src
+	@cp -r $(gnoboard_dir)/src/hooks $(OUTPUT_DIR)/$(APP_NAME)/src
+	@cp -r $(gnoboard_dir)/src/native_modules $(OUTPUT_DIR)/$(APP_NAME)/src
+	@cp -r $(gnoboard_dir)/Makefile $(OUTPUT_DIR)/$(APP_NAME)
+	@cp -r $(gnoboard_dir)/android/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/android
+	@cp -r $(gnoboard_dir)/ios/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/ios
+	@cp $(make_dir)/templates/tsconfig.json $(OUTPUT_DIR)/$(APP_NAME)/tsconfig.json
+	@cp $(make_dir)/templates/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
+
+# build GnoCore.xcframework for the new app
+new-app-build-ios:
+	@echo "Copying ios files"
+	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/Sources
+	@cp -r $(gnoboard_dir)/ios/gnoboard/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/
+	@cp $(gnoboard_dir)/ios/gnoboard/gnoboard-Bridging-Header.h $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
+	@cp -r $(gnoboard_dir)/ios/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/
+
+JSON_FILE := $(OUTPUT_DIR)/$(APP_NAME)/app.json
 # add tsconfigPaths entry to app.json
 add-app-json-entry:
 	@echo "Adding tsconfigPaths entry to app.json"
@@ -216,9 +226,8 @@ add-app-json-entry:
 # copy ios project.pbxproj from gnoboard to the new app and replace 'gnoboard' with the new app name
 copy-ios-project-pbxproj:
 	@echo "Copying ios project.pbxproj"
-	@cp $(react_native_dir)/ios/$(TEMPLATE_PROJECT).xcodeproj/project.pbxproj ./examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
-	@cd examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj
-	@sed -i.pbxproj 's/gnoboard/$(APP_NAME)/g' examples/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
+	@cp $(gnoboard_dir)/ios/gnoboard.xcodeproj/project.pbxproj $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
+	@cd $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj
+	@sed -i.pbxproj 's/gnoboard/$(APP_NAME)/g' $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
 
-.PHONY: new-app copy-ios-project-pbxproj add-app-json-entry
-
+.PHONY: new-app new-react-native-app copy-js-files new-app-build-ios add-app-json-entry copy-ios-project-pbxproj
