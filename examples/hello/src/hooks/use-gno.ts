@@ -33,7 +33,7 @@ import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
 import { GnomobileService } from '@gno/api/rpc_connect';
 
-interface GnoResponse {
+export type GnoResponse = {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
   getRemote: () => Promise<string>;
   setChainID: (chainId: string) => Promise<SetChainIDResponse>;

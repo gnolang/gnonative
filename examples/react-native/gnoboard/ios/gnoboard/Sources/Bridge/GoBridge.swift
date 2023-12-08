@@ -66,6 +66,7 @@ class GoBridge: NSObject {
       config.rootDir = self.appRootDir
       config.tmpDir = self.tmpDir
 
+      config.disableUdsListener = true
       config.useTcpListener = true
 
       let bridge = GnoGnomobileNewBridge(config, &err);

@@ -164,6 +164,7 @@ asdf.install_tools: asdf.add_plugins
 	@echo "Installing asdf tools..."
 	@asdf install
 
+########################################
 # Script to create a new app
 
 yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
