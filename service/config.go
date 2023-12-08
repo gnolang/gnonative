@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gnolang/gnomobile/service/rpc"
+	api_gen "github.com/gnolang/gnomobile/api/gen/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -288,7 +288,7 @@ var WithDefaultUdsPath GnomobileOption = func(cfg *Config) error {
 	// create a socket subdirectory
 	sockDir := filepath.Join(cfg.TmpDir, DEFAULT_SOCKET_SUBDIR)
 	if err := os.MkdirAll(sockDir, 0700); err != nil {
-		return rpc.ErrCode_ErrInitService.Wrap(err)
+		return api_gen.ErrCode_ErrInitService.Wrap(err)
 	}
 
 	cfg.UdsPath = filepath.Join(sockDir, DEFAULT_SOCKET_FILE)

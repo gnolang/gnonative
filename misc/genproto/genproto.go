@@ -10,7 +10,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/commands"
 
 	// TODO: move these out.
-	"github.com/gnolang/gnomobile/service/gnomobiletypes"
+	"github.com/gnolang/gnomobile/api/gnomobiletypes"
 )
 
 func main() {

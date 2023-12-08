@@ -33,7 +33,7 @@ import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
 import { GnomobileService } from '@gno/api/rpc_connect';
 
-export type GnoResponse = {
+export interface GnoResponse {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
   getRemote: () => Promise<string>;
   setChainID: (chainId: string) => Promise<SetChainIDResponse>;
@@ -55,9 +55,11 @@ export type GnoResponse = {
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
   qEval: (packagePath: string, expression: string) => Promise<string>;
-  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => Promise<CallResponse>;
+  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => Promise<AsyncIterable<CallResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
+  closeBridge: () => Promise<void>;
+  initBridge: () => Promise<void>;
 }
 
 let clientInstance: PromiseClient<typeof GnomobileService> | undefined = undefined;
@@ -66,9 +68,7 @@ let bridgeInstance: boolean = false;
 export const useGno = (): GnoResponse => {
   const getClient = async () => {
     if (!bridgeInstance) {
-      console.log('Initializing bridge...');
-      await GoBridge.initBridge();
-      bridgeInstance = true;
+      await initBridge();
     }
 
     if (clientInstance) return clientInstance;
@@ -77,8 +77,32 @@ export const useGno = (): GnoResponse => {
 
     const port = await GoBridge.getTcpPort();
     clientInstance = Grpc.createClient(port);
+
+    console.log('Creating GRPC client instance... done.');
+    
+    // Set the initial configuration where it's different from the default.
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+
     return clientInstance;
   };
+
+  const closeBridge = async () => { 
+    if (bridgeInstance) {
+      console.log('Closing bridge...');
+      await GoBridge.closeBridge();
+      console.log('Bridge closed.');
+      bridgeInstance = false;
+    }
+  }
+
+  const initBridge = async () => {
+    if (!bridgeInstance) {
+      console.log('Initializing bridge...');
+      await GoBridge.initBridge();
+      console.log('Bridge initialized.');
+      bridgeInstance = true;
+    }
+  }
 
   const setRemote = async (remote: string) => {
     const client = await getClient();
@@ -239,7 +263,7 @@ export const useGno = (): GnoResponse => {
 
   const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => {
     const client = await getClient();
-    const reponse = await client.call(
+    const reponse = client.call(
       new CallRequest({
         packagePath,
         fnc,
@@ -266,6 +290,8 @@ export const useGno = (): GnoResponse => {
   };
 
   return {
+    initBridge,
+    closeBridge,
     setRemote,
     getRemote,
     setChainID,

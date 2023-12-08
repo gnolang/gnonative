@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	"github.com/gnolang/gnomobile/service/rpc"
-	"github.com/gnolang/gnomobile/service/rpc/rpcconnect"
+	api_gen "github.com/gnolang/gnomobile/api/gen/go"
+	"github.com/gnolang/gnomobile/api/gen/go/_goconnect"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"github.com/peterbourgon/unixtransport"
 )
@@ -92,7 +92,7 @@ func uds() *ffcli.Command {
 			// add a trailing colon
 			fullPath := fmt.Sprintf("http+unix://%s:", *path)
 
-			client := rpcconnect.NewGnomobileServiceClient(
+			client := _goconnect.NewGnomobileServiceClient(
 				httpClient,
 				fullPath,
 			)
@@ -116,7 +116,7 @@ func tcp() *ffcli.Command {
 		ShortHelp:  "Connect via TCP",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, args []string) error {
-			client := rpcconnect.NewGnomobileServiceClient(
+			client := _goconnect.NewGnomobileServiceClient(
 				http.DefaultClient,
 				*addr,
 			)
@@ -130,10 +130,10 @@ func tcp() *ffcli.Command {
 	}
 }
 
-func exampleAction(client rpcconnect.GnomobileServiceClient) error {
+func exampleAction(client _goconnect.GnomobileServiceClient) error {
 	res, err := client.Render(
 		context.Background(),
-		connect.NewRequest(&rpc.RenderRequest{
+		connect.NewRequest(&api_gen.RenderRequest{
 			PackagePath: "gno.land/r/demo/boards",
 			Args:        "gnomobile/1",
 		}),

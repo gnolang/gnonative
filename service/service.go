@@ -14,9 +14,9 @@ import (
 	"connectrpc.com/grpcreflect"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
+	api_gen "github.com/gnolang/gnomobile/api/gen/go"
+	"github.com/gnolang/gnomobile/api/gen/go/_goconnect"
 	"github.com/gnolang/gnomobile/gnoclient"
-	"github.com/gnolang/gnomobile/service/rpc"
-	"github.com/gnolang/gnomobile/service/rpc/rpcconnect"
 	"github.com/pkg/errors"
 	"github.com/rs/cors"
 	"go.uber.org/zap"
@@ -137,13 +137,13 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 	// delete socket if it already exists
 	if _, err := os.Stat(s.udsPath); !os.IsNotExist(err) {
 		s.logger.Debug("createUDSListener error: socket file already exists", zap.String("socket", s.udsPath))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	listener, err := net.Listen("unix", s.udsPath)
 	if err != nil {
 		s.logger.Debug("createUDSListener error", zap.Error(err))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.lock.Lock()
@@ -165,7 +165,7 @@ func (s *gnomobileService) createTcpGrpcServer() error {
 	listener, err := net.Listen("tcp", s.tcpAddr)
 	if err != nil {
 		s.logger.Debug("createTcpGrpcServer error", zap.Error(err))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.lock.Lock()
@@ -179,13 +179,13 @@ func (s *gnomobileService) createTcpGrpcServer() error {
 	_, portStr, err := net.SplitHostPort(addr)
 	if err != nil {
 		s.logger.Debug("createTcpGrpcServer error", zap.Error(err))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	portInt, err := net.LookupPort("tcp", portStr)
 	if err != nil {
 		s.logger.Debug("createTcpGrpcServer error", zap.Error(err))
-		return rpc.ErrCode_ErrRunGRPCServer.Wrap(err)
+		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
 	}
 
 	s.tcpPort = portInt
@@ -242,20 +242,20 @@ func (s *gnomobileService) runGRPCServer(listener net.Listener) error {
 	mux := http.NewServeMux()
 
 	compress1KB := connect.WithCompressMinBytes(1024)
-	mux.Handle(rpcconnect.NewGnomobileServiceHandler(
+	mux.Handle(_goconnect.NewGnomobileServiceHandler(
 		s,
 		compress1KB,
 	))
 	mux.Handle(grpchealth.NewHandler(
-		grpchealth.NewStaticChecker(rpcconnect.GnomobileServiceName),
+		grpchealth.NewStaticChecker(_goconnect.GnomobileServiceName),
 		compress1KB,
 	))
 	mux.Handle(grpcreflect.NewHandlerV1(
-		grpcreflect.NewStaticReflector(rpcconnect.GnomobileServiceName),
+		grpcreflect.NewStaticReflector(_goconnect.GnomobileServiceName),
 		compress1KB,
 	))
 	mux.Handle(grpcreflect.NewHandlerV1Alpha(
-		grpcreflect.NewStaticReflector(rpcconnect.GnomobileServiceName),
+		grpcreflect.NewStaticReflector(_goconnect.GnomobileServiceName),
 		compress1KB,
 	))
 
