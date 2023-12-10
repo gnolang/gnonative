@@ -26,5 +26,12 @@
     "eslint": "^7.32.0",
     "typescript": "^4.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@bufbuild/buf": "^1.28.1",
+    "@bufbuild/protobuf": "^1.5.1",
+    "@bufbuild/protoc-gen-es": "^1.5.1",
+    "@connectrpc/connect": "^1.1.4",
+    "@connectrpc/connect-node": "^1.1.4",
+    "@connectrpc/protoc-gen-connect-es": "^1.1.4"
+  }
 }

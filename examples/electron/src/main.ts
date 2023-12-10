@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import { useGno } from "./gno/use-gno";
 
 function createWindow() {
   // Create the browser window.
@@ -16,6 +17,10 @@ function createWindow() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  const gno = useGno();
+  gno.getChainID().then((res) => console.log(res));
+  gno.listKeyInfo().then((res) => console.log(res));
 }
 
 // This method will be called when Electron has finished
