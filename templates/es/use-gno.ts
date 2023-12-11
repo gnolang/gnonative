@@ -2,46 +2,46 @@ import {
   KeyInfo,
   SetRemoteRequest,
   SetRemoteResponse,
-} from "./api/gnomobiletypes_pb";
-import { GetRemoteRequest } from "./api/gnomobiletypes_pb";
-import { SetChainIDRequest, SetChainIDResponse } from "./api/gnomobiletypes_pb";
-import { GetChainIDRequest } from "./api/gnomobiletypes_pb";
+} from "./gnomobiletypes_pb";
+import { GetRemoteRequest } from "./gnomobiletypes_pb";
+import { SetChainIDRequest, SetChainIDResponse } from "./gnomobiletypes_pb";
+import { GetChainIDRequest } from "./gnomobiletypes_pb";
 import {
   SetPasswordRequest,
   SetPasswordResponse,
-} from "./api/gnomobiletypes_pb";
-import { SelectAccountRequest } from "./api/gnomobiletypes_pb";
-import { SelectAccountResponse } from "./api/gnomobiletypes_pb";
-import { CreateAccountRequest } from "./api/gnomobiletypes_pb";
-import { GenerateRecoveryPhraseRequest } from "./api/gnomobiletypes_pb";
-import { ListKeyInfoRequest } from "./api/gnomobiletypes_pb";
-import { HasKeyByNameRequest } from "./api/gnomobiletypes_pb";
-import { HasKeyByAddressRequest } from "./api/gnomobiletypes_pb";
-import { HasKeyByNameOrAddressRequest } from "./api/gnomobiletypes_pb";
-import { GetKeyInfoByNameRequest } from "./api/gnomobiletypes_pb";
-import { GetKeyInfoByAddressRequest } from "./api/gnomobiletypes_pb";
-import { GetKeyInfoByNameOrAddressRequest } from "./api/gnomobiletypes_pb";
-import { GetActiveAccountRequest } from "./api/gnomobiletypes_pb";
-import { GetActiveAccountResponse } from "./api/gnomobiletypes_pb";
-import { QueryAccountRequest } from "./api/gnomobiletypes_pb";
-import { QueryAccountResponse } from "./api/gnomobiletypes_pb";
+} from "./gnomobiletypes_pb";
+import { SelectAccountRequest } from "./gnomobiletypes_pb";
+import { SelectAccountResponse } from "./gnomobiletypes_pb";
+import { CreateAccountRequest } from "./gnomobiletypes_pb";
+import { GenerateRecoveryPhraseRequest } from "./gnomobiletypes_pb";
+import { ListKeyInfoRequest } from "./gnomobiletypes_pb";
+import { HasKeyByNameRequest } from "./gnomobiletypes_pb";
+import { HasKeyByAddressRequest } from "./gnomobiletypes_pb";
+import { HasKeyByNameOrAddressRequest } from "./gnomobiletypes_pb";
+import { GetKeyInfoByNameRequest } from "./gnomobiletypes_pb";
+import { GetKeyInfoByAddressRequest } from "./gnomobiletypes_pb";
+import { GetKeyInfoByNameOrAddressRequest } from "./gnomobiletypes_pb";
+import { GetActiveAccountRequest } from "./gnomobiletypes_pb";
+import { GetActiveAccountResponse } from "./gnomobiletypes_pb";
+import { QueryAccountRequest } from "./gnomobiletypes_pb";
+import { QueryAccountResponse } from "./gnomobiletypes_pb";
 import {
   DeleteAccountRequest,
   DeleteAccountResponse,
-} from "./api/gnomobiletypes_pb";
-import { QueryRequest } from "./api/gnomobiletypes_pb";
-import { QueryResponse } from "./api/gnomobiletypes_pb";
-import { RenderRequest } from "./api/gnomobiletypes_pb";
-import { QEvalRequest } from "./api/gnomobiletypes_pb";
-import { CallRequest } from "./api/gnomobiletypes_pb";
-import { CallResponse } from "./api/gnomobiletypes_pb";
-import { AddressToBech32Request } from "./api/gnomobiletypes_pb";
-import { AddressFromBech32Request } from "./api/gnomobiletypes_pb";
+} from "./gnomobiletypes_pb";
+import { QueryRequest } from "./gnomobiletypes_pb";
+import { QueryResponse } from "./gnomobiletypes_pb";
+import { RenderRequest } from "./gnomobiletypes_pb";
+import { QEvalRequest } from "./gnomobiletypes_pb";
+import { CallRequest } from "./gnomobiletypes_pb";
+import { CallResponse } from "./gnomobiletypes_pb";
+import { AddressToBech32Request } from "./gnomobiletypes_pb";
+import { AddressFromBech32Request } from "./gnomobiletypes_pb";
 // import * as Grpc from '@gno/grpc/client';
 // import { GnoAccount } from '@gno/native_modules/types';
 // import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from "@connectrpc/connect";
-import { GnomobileService } from "./api/rpc_connect";
+import { GnomobileService } from "./rpc_connect";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 
@@ -108,7 +108,7 @@ export const useGno = (): GnoResponse => {
 
     console.log("Creating GRPC client instance...");
 
-    const port = 26659;
+    const port = 26658;
     const transport = createConnectTransport({
       baseUrl: "http://127.0.0.1:" + port,
       httpVersion: "1.1",
