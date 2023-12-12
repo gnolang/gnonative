@@ -197,10 +197,8 @@ new-react-native-app:
 copy-js-files:
 	$(call check-program, jq)
 	@echo "Copying js files"
-	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/api
 	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/grpc
 	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/hooks
-	@cp -r $(gnoboard_dir)/src/api $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/grpc $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/hooks $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/native_modules $(OUTPUT_DIR)/$(APP_NAME)/src
@@ -208,6 +206,8 @@ copy-js-files:
 	@cp -r $(gnoboard_dir)/android/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/android
 	@cp -r $(gnoboard_dir)/ios/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/ios
 	@cp $(make_dir)/templates/tsconfig.json $(OUTPUT_DIR)/$(APP_NAME)/tsconfig.json
+	@cp $(make_dir)/templates/babel.config.js $(OUTPUT_DIR)/$(APP_NAME)/babel.config.js
+	@cp $(make_dir)/templates/metro.config.js $(OUTPUT_DIR)/$(APP_NAME)/metro.config.js
 	@cp $(make_dir)/templates/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
 
 # build GnoCore.xcframework for the new app
