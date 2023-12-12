@@ -1,5 +1,5 @@
 import { GRPCError } from '@gno/grpc/error';
-import { ErrCode } from '@gno/api/rpc_pb';
+import { ErrCode } from '@api/rpc_pb';
 import Alert from '@gno/components/alert';
 import Button from '@gno/components/buttons';
 import { Modal } from '@gno/components/modal';
