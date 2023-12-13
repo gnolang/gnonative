@@ -26,7 +26,8 @@ npm install @connectrpc/connect @connectrpc/connect-node @connectrpc/protoc-gen-
 
 ### Enable the Electron-Nodejs integration:
 
-Open the `main.ts` file and add the following line as shown [in docs](https://www.electronjs.org/docs/latest/tutorial/sandbox#disabling-the-sandbox-for-a-single-process):
+Open the `src/main.ts` file and add the line `nodeIntegration: true` to `webPreferences`.
+More details about Electron-Nodejs integration can be found [here](https://www.electronjs.org/docs/latest/tutorial/sandbox#disabling-the-sandbox-for-a-single-process).
 
 ```bash
 webPreferences: {
@@ -54,9 +55,17 @@ cp -r ../../api/gen/es ./src/api
 cp ../../templates/es/use-gno.ts ./src/api/use-gno.ts
 ```
 
-### Use the GNO API in the boilerplate:
+### Communicating with the Blockchain:
 
-Now we can use the GNO API in the boilerplate. Let's open the `preload.ts` file and add the following lines:
+Let's open the `src/preload.ts` file and add change it a little bit.
+
+We'll use the GnoNative Javascript GRPC Client wrapper (aka: `useGno`) to communicate with the GnoNative GRPC Server.
+
+At the top of the `src/preload.ts` file add `import { useGno } from "./api/use-gno"`.
+
+And use the `useGno` function to create a "gno service instance" and become able to call the RPC methods already available.
+
+Check out this sample code bellow. 
 
 ```bash
 import { useGno } from "./api/use-gno";
@@ -72,28 +81,28 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   const gno = useGno();
-  gno.getChainID().then((res) => {
-    replaceText("chainID", res);
+  gno.getRemote().then((res) => {
+    replaceText("gnoRemoteAddress", res);
   });
 });
 ```
 
-In the `index.html` file, we need to add the following line to display the chainID:
+In the `index.html` file, add the following line to the ```<body>``` element to display the **Gno Remote Address**:
 
 ```html
- chainID: <span id="chainID"></span>.
+ GNO Remote Address: <span id="gnoRemoteAddress"></span>.
 ```
 
 ### Run:
 
-Now we can start the GnoNative GRPC API:
+In a separate terminal, from the root of the repo, enter the bellow command to start the GnoNative GRPC Server:
 
 ```bash
 cd gnonative/gnoserver
 go run . tcp
 ```
 
-and the boilerplate:
+and in the Electron boilerplate folder, enter:
 
 ```bash
 npm start
