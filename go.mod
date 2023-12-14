@@ -1,9 +1,9 @@
-module github.com/gnolang/gnomobile
+module github.com/gnolang/gnonative
 
 go 1.20
 
 require (
-	connectrpc.com/connect v1.11.1
+	connectrpc.com/connect v1.13.0
 	connectrpc.com/grpchealth v1.2.0
 	connectrpc.com/grpcreflect v1.2.0
 	github.com/gnolang/gno v0.0.0-20231123184803-d421b963aed7

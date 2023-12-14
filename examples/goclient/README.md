@@ -6,7 +6,7 @@ to the Gno blockchain. It calls the render function of the Boards realm.
 ## Run the server service
 
 Please read the corresponding
-[README](https://github.com/gnolang/gnomobile/blob/main/goserver/README.md).
+[README](https://github.com/gnolang/gnonative/blob/main/goserver/README.md).
 
 ## Run the client
 

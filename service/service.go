@@ -14,9 +14,9 @@ import (
 	"connectrpc.com/grpcreflect"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
-	api_gen "github.com/gnolang/gnomobile/api/gen/go"
-	"github.com/gnolang/gnomobile/api/gen/go/_goconnect"
-	"github.com/gnolang/gnomobile/gnoclient"
+	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
+	"github.com/gnolang/gnonative/gnoclient"
 	"github.com/pkg/errors"
 	"github.com/rs/cors"
 	"go.uber.org/zap"
@@ -25,7 +25,7 @@ import (
 	"moul.io/u"
 )
 
-type GnomobileService interface {
+type GnoNativeService interface {
 	GetUDSPath() string
 	GetTcpAddr() string
 	GetTcpPort() int
@@ -38,7 +38,7 @@ type userAccount struct {
 	password string
 }
 
-type gnomobileService struct {
+type gnoNativeService struct {
 	logger  *zap.Logger
 	client  *gnoclient.Client
 	tcpAddr string
@@ -59,10 +59,10 @@ type gnomobileService struct {
 	closeFunc func()
 }
 
-var _ GnomobileService = (*gnomobileService)(nil)
+var _ GnoNativeService = (*gnoNativeService)(nil)
 
-// NewGnomobileService create a new Gnomobile service along with a gRPC server listening on UDS by default.
-func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
+// NewGnoNativeService create a new GnoNative service along with a gRPC server listening on UDS by default.
+func NewGnoNativeService(opts ...GnoNativeOption) (GnoNativeService, error) {
 	cfg := &Config{}
 	if err := cfg.applyOptions(append(opts, WithFallbackDefaults)...); err != nil {
 		return nil, err
@@ -91,8 +91,8 @@ func NewGnomobileService(opts ...GnomobileOption) (GnomobileService, error) {
 	return svc, nil
 }
 
-func initService(cfg *Config) (*gnomobileService, error) {
-	svc := &gnomobileService{
+func initService(cfg *Config) (*gnoNativeService, error) {
+	svc := &gnoNativeService{
 		logger:       cfg.Logger,
 		tcpAddr:      cfg.TcpAddr,
 		udsPath:      cfg.UdsPath,
@@ -122,7 +122,7 @@ func initService(cfg *Config) (*gnomobileService, error) {
 }
 
 // Get s.client.Signer as a SignerFromKeybase.
-func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
+func (s *gnoNativeService) getSigner() *gnoclient.SignerFromKeybase {
 	signer, ok := s.client.Signer.(*gnoclient.SignerFromKeybase)
 	if !ok {
 		// We only set s.client.Signer in initService, so this shouldn't happen.
@@ -131,7 +131,7 @@ func (s *gnomobileService) getSigner() *gnoclient.SignerFromKeybase {
 	return signer
 }
 
-func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
+func (s *gnoNativeService) createUdsGrpcServer(cfg *Config) error {
 	s.logger.Debug("createUdsGrpcServer called")
 
 	// delete socket if it already exists
@@ -159,7 +159,7 @@ func (s *gnomobileService) createUdsGrpcServer(cfg *Config) error {
 	return nil
 }
 
-func (s *gnomobileService) createTcpGrpcServer() error {
+func (s *gnoNativeService) createTcpGrpcServer() error {
 	s.logger.Debug("createTcpGrpcServer called")
 
 	listener, err := net.Listen("tcp", s.tcpAddr)
@@ -238,24 +238,24 @@ func newCORS() *cors.Cors {
 	})
 }
 
-func (s *gnomobileService) runGRPCServer(listener net.Listener) error {
+func (s *gnoNativeService) runGRPCServer(listener net.Listener) error {
 	mux := http.NewServeMux()
 
 	compress1KB := connect.WithCompressMinBytes(1024)
-	mux.Handle(_goconnect.NewGnomobileServiceHandler(
+	mux.Handle(_goconnect.NewGnoNativeServiceHandler(
 		s,
 		compress1KB,
 	))
 	mux.Handle(grpchealth.NewHandler(
-		grpchealth.NewStaticChecker(_goconnect.GnomobileServiceName),
+		grpchealth.NewStaticChecker(_goconnect.GnoNativeServiceName),
 		compress1KB,
 	))
 	mux.Handle(grpcreflect.NewHandlerV1(
-		grpcreflect.NewStaticReflector(_goconnect.GnomobileServiceName),
+		grpcreflect.NewStaticReflector(_goconnect.GnoNativeServiceName),
 		compress1KB,
 	))
 	mux.Handle(grpcreflect.NewHandlerV1Alpha(
-		grpcreflect.NewStaticReflector(_goconnect.GnomobileServiceName),
+		grpcreflect.NewStaticReflector(_goconnect.GnoNativeServiceName),
 		compress1KB,
 	))
 
@@ -290,19 +290,19 @@ func (s *gnomobileService) runGRPCServer(listener net.Listener) error {
 	return nil
 }
 
-func (s *gnomobileService) GetTcpAddr() string {
+func (s *gnoNativeService) GetTcpAddr() string {
 	return s.tcpAddr
 }
 
-func (s *gnomobileService) GetTcpPort() int {
+func (s *gnoNativeService) GetTcpPort() int {
 	return s.tcpPort
 }
 
-func (s *gnomobileService) GetUDSPath() string {
+func (s *gnoNativeService) GetUDSPath() string {
 	return s.udsPath
 }
 
-func (s *gnomobileService) Close() error {
+func (s *gnoNativeService) Close() error {
 	if s.closeFunc != nil {
 		s.closeFunc()
 	}

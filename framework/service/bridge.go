@@ -1,4 +1,4 @@
-package gnomobile
+package gnonative
 
 import (
 	"context"
@@ -9,8 +9,8 @@ import (
 	"github.com/oklog/run"
 	"go.uber.org/multierr"
 
-	api_gen "github.com/gnolang/gnomobile/api/gen/go"
-	"github.com/gnolang/gnomobile/service"
+	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	"github.com/gnolang/gnonative/service"
 )
 
 type PromiseBlock interface {
@@ -36,11 +36,11 @@ type Bridge struct {
 	onceCloser sync.Once
 	workers    run.Group
 
-	serviceServer service.GnomobileService
+	serviceServer service.GnoNativeService
 }
 
 func NewBridge(config *BridgeConfig) (*Bridge, error) {
-	svcOpts := []service.GnomobileOption{}
+	svcOpts := []service.GnoNativeOption{}
 
 	// create bridge instance
 	b := &Bridge{
@@ -74,7 +74,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			svcOpts = append(svcOpts, service.WithDisableUdsListener())
 		}
 
-		serviceServer, err := service.NewGnomobileService(svcOpts...)
+		serviceServer, err := service.NewGnoNativeService(svcOpts...)
 		if err != nil {
 			return nil, errors.Wrap(err, "unable to create bridge service")
 		}

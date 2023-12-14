@@ -18,7 +18,7 @@ export default function App() {
 
   React.useEffect(() => {
     gno
-      .render("gno.land/r/demo/boards", "gnomobile/1")
+      .render("gno.land/r/demo/boards", "gnonative/1")
       .then((res) => setBoard(res))
       .catch((err) => setBoard(err));
   }, []);

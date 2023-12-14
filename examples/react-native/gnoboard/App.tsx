@@ -1,7 +1,7 @@
 // order of imports is important
 import 'react-native-polyfill-globals/auto';
 
-import { GnomobileProvider } from '@gno/provider/gnomobile/gnomobile-provider';
+import { GnoNativeProvider } from '@gno/provider/gnonative/gnonative-provider';
 import CustomRouter from '@gno/router/custom-router';
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
@@ -10,9 +10,9 @@ import CustomRouter from '@gno/router/custom-router';
 
 function App() {
   return (
-    <GnomobileProvider>
+    <GnoNativeProvider>
       <CustomRouter />
-    </GnomobileProvider>
+    </GnoNativeProvider>
   );
 }
 

@@ -1,8 +1,11 @@
-import { useGno } from "@gno/hooks/use-gno";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
+
+// order matters here
 import "react-native-polyfill-globals/auto";
+
+import { StatusBar } from "expo-status-bar";
+import { useGno } from "@gno/hooks/use-gno";
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
 // Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
@@ -15,7 +18,7 @@ export default function App() {
 
   React.useEffect(() => {
     gno
-      .render("gno.land/r/demo/boards", "gnomobile/1")
+      .render("gno.land/r/demo/boards", "gnonative/1")
       .then((res) => setBoard(res))
       .catch((err) => setBoard(err));
   }, []);

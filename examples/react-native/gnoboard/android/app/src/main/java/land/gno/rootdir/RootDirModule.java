@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 import java.io.File;
 
 public class RootDirModule extends ReactContextBaseJavaModule {
-    private final static String nameFolder = "gnomobile";
+    private final static String nameFolder = "gnonative";
 
     public RootDirModule(ReactApplicationContext reactContext) {
         super(reactContext);

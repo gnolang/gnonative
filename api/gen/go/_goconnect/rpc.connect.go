@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	_go "github.com/gnolang/gnomobile/api/gen/go"
+	_go "github.com/gnolang/gnonative/api/gen/go"
 	http "net/http"
 	strings "strings"
 )
@@ -18,11 +18,11 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
-	// GnomobileServiceName is the fully-qualified name of the GnomobileService service.
-	GnomobileServiceName = "land.gno.gnomobile.v1.GnomobileService"
+	// GnoNativeServiceName is the fully-qualified name of the GnoNativeService service.
+	GnoNativeServiceName = "land.gno.gnonative.v1.GnoNativeService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -33,83 +33,114 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// GnomobileServiceSetRemoteProcedure is the fully-qualified name of the GnomobileService's
+	// GnoNativeServiceSetRemoteProcedure is the fully-qualified name of the GnoNativeService's
 	// SetRemote RPC.
-	GnomobileServiceSetRemoteProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetRemote"
-	// GnomobileServiceGetRemoteProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceSetRemoteProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetRemote"
+	// GnoNativeServiceGetRemoteProcedure is the fully-qualified name of the GnoNativeService's
 	// GetRemote RPC.
-	GnomobileServiceGetRemoteProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetRemote"
-	// GnomobileServiceSetChainIDProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceGetRemoteProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetRemote"
+	// GnoNativeServiceSetChainIDProcedure is the fully-qualified name of the GnoNativeService's
 	// SetChainID RPC.
-	GnomobileServiceSetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetChainID"
-	// GnomobileServiceGetChainIDProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceSetChainIDProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetChainID"
+	// GnoNativeServiceGetChainIDProcedure is the fully-qualified name of the GnoNativeService's
 	// GetChainID RPC.
-	GnomobileServiceGetChainIDProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetChainID"
-	// GnomobileServiceGenerateRecoveryPhraseProcedure is the fully-qualified name of the
-	// GnomobileService's GenerateRecoveryPhrase RPC.
-	GnomobileServiceGenerateRecoveryPhraseProcedure = "/land.gno.gnomobile.v1.GnomobileService/GenerateRecoveryPhrase"
-	// GnomobileServiceListKeyInfoProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceGetChainIDProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetChainID"
+	// GnoNativeServiceGenerateRecoveryPhraseProcedure is the fully-qualified name of the
+	// GnoNativeService's GenerateRecoveryPhrase RPC.
+	GnoNativeServiceGenerateRecoveryPhraseProcedure = "/land.gno.gnonative.v1.GnoNativeService/GenerateRecoveryPhrase"
+	// GnoNativeServiceListKeyInfoProcedure is the fully-qualified name of the GnoNativeService's
 	// ListKeyInfo RPC.
-	GnomobileServiceListKeyInfoProcedure = "/land.gno.gnomobile.v1.GnomobileService/ListKeyInfo"
-	// GnomobileServiceHasKeyByNameProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceListKeyInfoProcedure = "/land.gno.gnonative.v1.GnoNativeService/ListKeyInfo"
+	// GnoNativeServiceHasKeyByNameProcedure is the fully-qualified name of the GnoNativeService's
 	// HasKeyByName RPC.
-	GnomobileServiceHasKeyByNameProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByName"
-	// GnomobileServiceHasKeyByAddressProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceHasKeyByNameProcedure = "/land.gno.gnonative.v1.GnoNativeService/HasKeyByName"
+	// GnoNativeServiceHasKeyByAddressProcedure is the fully-qualified name of the GnoNativeService's
 	// HasKeyByAddress RPC.
-	GnomobileServiceHasKeyByAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByAddress"
-	// GnomobileServiceHasKeyByNameOrAddressProcedure is the fully-qualified name of the
-	// GnomobileService's HasKeyByNameOrAddress RPC.
-	GnomobileServiceHasKeyByNameOrAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/HasKeyByNameOrAddress"
-	// GnomobileServiceGetKeyInfoByNameProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceHasKeyByAddressProcedure = "/land.gno.gnonative.v1.GnoNativeService/HasKeyByAddress"
+	// GnoNativeServiceHasKeyByNameOrAddressProcedure is the fully-qualified name of the
+	// GnoNativeService's HasKeyByNameOrAddress RPC.
+	GnoNativeServiceHasKeyByNameOrAddressProcedure = "/land.gno.gnonative.v1.GnoNativeService/HasKeyByNameOrAddress"
+	// GnoNativeServiceGetKeyInfoByNameProcedure is the fully-qualified name of the GnoNativeService's
 	// GetKeyInfoByName RPC.
-	GnomobileServiceGetKeyInfoByNameProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByName"
-	// GnomobileServiceGetKeyInfoByAddressProcedure is the fully-qualified name of the
-	// GnomobileService's GetKeyInfoByAddress RPC.
-	GnomobileServiceGetKeyInfoByAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByAddress"
-	// GnomobileServiceGetKeyInfoByNameOrAddressProcedure is the fully-qualified name of the
-	// GnomobileService's GetKeyInfoByNameOrAddress RPC.
-	GnomobileServiceGetKeyInfoByNameOrAddressProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetKeyInfoByNameOrAddress"
-	// GnomobileServiceCreateAccountProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceGetKeyInfoByNameProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetKeyInfoByName"
+	// GnoNativeServiceGetKeyInfoByAddressProcedure is the fully-qualified name of the
+	// GnoNativeService's GetKeyInfoByAddress RPC.
+	GnoNativeServiceGetKeyInfoByAddressProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetKeyInfoByAddress"
+	// GnoNativeServiceGetKeyInfoByNameOrAddressProcedure is the fully-qualified name of the
+	// GnoNativeService's GetKeyInfoByNameOrAddress RPC.
+	GnoNativeServiceGetKeyInfoByNameOrAddressProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetKeyInfoByNameOrAddress"
+	// GnoNativeServiceCreateAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// CreateAccount RPC.
-	GnomobileServiceCreateAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/CreateAccount"
-	// GnomobileServiceSelectAccountProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceCreateAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/CreateAccount"
+	// GnoNativeServiceSelectAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// SelectAccount RPC.
-	GnomobileServiceSelectAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/SelectAccount"
-	// GnomobileServiceSetPasswordProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceSelectAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/SelectAccount"
+	// GnoNativeServiceSetPasswordProcedure is the fully-qualified name of the GnoNativeService's
 	// SetPassword RPC.
-	GnomobileServiceSetPasswordProcedure = "/land.gno.gnomobile.v1.GnomobileService/SetPassword"
-	// GnomobileServiceGetActiveAccountProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceSetPasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetPassword"
+	// GnoNativeServiceGetActiveAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// GetActiveAccount RPC.
-	GnomobileServiceGetActiveAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/GetActiveAccount"
-	// GnomobileServiceQueryAccountProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceGetActiveAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetActiveAccount"
+	// GnoNativeServiceQueryAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// QueryAccount RPC.
-	GnomobileServiceQueryAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/QueryAccount"
-	// GnomobileServiceDeleteAccountProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceQueryAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/QueryAccount"
+	// GnoNativeServiceDeleteAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// DeleteAccount RPC.
-	GnomobileServiceDeleteAccountProcedure = "/land.gno.gnomobile.v1.GnomobileService/DeleteAccount"
-	// GnomobileServiceQueryProcedure is the fully-qualified name of the GnomobileService's Query RPC.
-	GnomobileServiceQueryProcedure = "/land.gno.gnomobile.v1.GnomobileService/Query"
-	// GnomobileServiceRenderProcedure is the fully-qualified name of the GnomobileService's Render RPC.
-	GnomobileServiceRenderProcedure = "/land.gno.gnomobile.v1.GnomobileService/Render"
-	// GnomobileServiceQEvalProcedure is the fully-qualified name of the GnomobileService's QEval RPC.
-	GnomobileServiceQEvalProcedure = "/land.gno.gnomobile.v1.GnomobileService/QEval"
-	// GnomobileServiceCallProcedure is the fully-qualified name of the GnomobileService's Call RPC.
-	GnomobileServiceCallProcedure = "/land.gno.gnomobile.v1.GnomobileService/Call"
-	// GnomobileServiceAddressToBech32Procedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceDeleteAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/DeleteAccount"
+	// GnoNativeServiceQueryProcedure is the fully-qualified name of the GnoNativeService's Query RPC.
+	GnoNativeServiceQueryProcedure = "/land.gno.gnonative.v1.GnoNativeService/Query"
+	// GnoNativeServiceRenderProcedure is the fully-qualified name of the GnoNativeService's Render RPC.
+	GnoNativeServiceRenderProcedure = "/land.gno.gnonative.v1.GnoNativeService/Render"
+	// GnoNativeServiceQEvalProcedure is the fully-qualified name of the GnoNativeService's QEval RPC.
+	GnoNativeServiceQEvalProcedure = "/land.gno.gnonative.v1.GnoNativeService/QEval"
+	// GnoNativeServiceCallProcedure is the fully-qualified name of the GnoNativeService's Call RPC.
+	GnoNativeServiceCallProcedure = "/land.gno.gnonative.v1.GnoNativeService/Call"
+	// GnoNativeServiceAddressToBech32Procedure is the fully-qualified name of the GnoNativeService's
 	// AddressToBech32 RPC.
-	GnomobileServiceAddressToBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/AddressToBech32"
-	// GnomobileServiceAddressFromBech32Procedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceAddressToBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/AddressToBech32"
+	// GnoNativeServiceAddressFromBech32Procedure is the fully-qualified name of the GnoNativeService's
 	// AddressFromBech32 RPC.
-	GnomobileServiceAddressFromBech32Procedure = "/land.gno.gnomobile.v1.GnomobileService/AddressFromBech32"
-	// GnomobileServiceHelloProcedure is the fully-qualified name of the GnomobileService's Hello RPC.
-	GnomobileServiceHelloProcedure = "/land.gno.gnomobile.v1.GnomobileService/Hello"
-	// GnomobileServiceHelloStreamProcedure is the fully-qualified name of the GnomobileService's
+	GnoNativeServiceAddressFromBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/AddressFromBech32"
+	// GnoNativeServiceHelloProcedure is the fully-qualified name of the GnoNativeService's Hello RPC.
+	GnoNativeServiceHelloProcedure = "/land.gno.gnonative.v1.GnoNativeService/Hello"
+	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
 	// HelloStream RPC.
-	GnomobileServiceHelloStreamProcedure = "/land.gno.gnomobile.v1.GnomobileService/HelloStream"
+	GnoNativeServiceHelloStreamProcedure = "/land.gno.gnonative.v1.GnoNativeService/HelloStream"
 )
 
-// GnomobileServiceClient is a client for the land.gno.gnomobile.v1.GnomobileService service.
-type GnomobileServiceClient interface {
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	gnoNativeServiceServiceDescriptor                         = _go.File_rpc_proto.Services().ByName("GnoNativeService")
+	gnoNativeServiceSetRemoteMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("SetRemote")
+	gnoNativeServiceGetRemoteMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("GetRemote")
+	gnoNativeServiceSetChainIDMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("SetChainID")
+	gnoNativeServiceGetChainIDMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("GetChainID")
+	gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor    = gnoNativeServiceServiceDescriptor.Methods().ByName("GenerateRecoveryPhrase")
+	gnoNativeServiceListKeyInfoMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("ListKeyInfo")
+	gnoNativeServiceHasKeyByNameMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByName")
+	gnoNativeServiceHasKeyByAddressMethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByAddress")
+	gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor     = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByNameOrAddress")
+	gnoNativeServiceGetKeyInfoByNameMethodDescriptor          = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByName")
+	gnoNativeServiceGetKeyInfoByAddressMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByAddress")
+	gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByNameOrAddress")
+	gnoNativeServiceCreateAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("CreateAccount")
+	gnoNativeServiceSelectAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("SelectAccount")
+	gnoNativeServiceSetPasswordMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("SetPassword")
+	gnoNativeServiceGetActiveAccountMethodDescriptor          = gnoNativeServiceServiceDescriptor.Methods().ByName("GetActiveAccount")
+	gnoNativeServiceQueryAccountMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("QueryAccount")
+	gnoNativeServiceDeleteAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("DeleteAccount")
+	gnoNativeServiceQueryMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Query")
+	gnoNativeServiceRenderMethodDescriptor                    = gnoNativeServiceServiceDescriptor.Methods().ByName("Render")
+	gnoNativeServiceQEvalMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("QEval")
+	gnoNativeServiceCallMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Call")
+	gnoNativeServiceAddressToBech32MethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressToBech32")
+	gnoNativeServiceAddressFromBech32MethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromBech32")
+	gnoNativeServiceHelloMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Hello")
+	gnoNativeServiceHelloStreamMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("HelloStream")
+)
+
+// GnoNativeServiceClient is a client for the land.gno.gnonative.v1.GnoNativeService service.
+type GnoNativeServiceClient interface {
 	// Set the connection address for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
 	SetRemote(context.Context, *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error)
@@ -138,13 +169,13 @@ type GnomobileServiceClient interface {
 	// In the response, set has true if the keybase has the key.
 	HasKeyByNameOrAddress(context.Context, *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error)
 	// Get the information for the key in the keybase with the given address.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
 	// Create a new account the keybase using the name an password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
@@ -154,11 +185,11 @@ type GnomobileServiceClient interface {
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error)
 	// Set the password for the active account in the keybase, used for later operations.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error)
@@ -168,8 +199,8 @@ type GnomobileServiceClient interface {
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
 	// password.
-	// If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If the account doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error)
@@ -183,12 +214,12 @@ type GnomobileServiceClient interface {
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
 	// Call a specific realm function.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
@@ -200,151 +231,177 @@ type GnomobileServiceClient interface {
 	HelloStream(context.Context, *connect.Request[_go.HelloStreamRequest]) (*connect.ServerStreamForClient[_go.HelloStreamResponse], error)
 }
 
-// NewGnomobileServiceClient constructs a client for the land.gno.gnomobile.v1.GnomobileService
+// NewGnoNativeServiceClient constructs a client for the land.gno.gnonative.v1.GnoNativeService
 // service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
 // gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
 // the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewGnomobileServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GnomobileServiceClient {
+func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GnoNativeServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	return &gnomobileServiceClient{
+	return &gnoNativeServiceClient{
 		setRemote: connect.NewClient[_go.SetRemoteRequest, _go.SetRemoteResponse](
 			httpClient,
-			baseURL+GnomobileServiceSetRemoteProcedure,
-			opts...,
+			baseURL+GnoNativeServiceSetRemoteProcedure,
+			connect.WithSchema(gnoNativeServiceSetRemoteMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getRemote: connect.NewClient[_go.GetRemoteRequest, _go.GetRemoteResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetRemoteProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetRemoteProcedure,
+			connect.WithSchema(gnoNativeServiceGetRemoteMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		setChainID: connect.NewClient[_go.SetChainIDRequest, _go.SetChainIDResponse](
 			httpClient,
-			baseURL+GnomobileServiceSetChainIDProcedure,
-			opts...,
+			baseURL+GnoNativeServiceSetChainIDProcedure,
+			connect.WithSchema(gnoNativeServiceSetChainIDMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getChainID: connect.NewClient[_go.GetChainIDRequest, _go.GetChainIDResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetChainIDProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetChainIDProcedure,
+			connect.WithSchema(gnoNativeServiceGetChainIDMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		generateRecoveryPhrase: connect.NewClient[_go.GenerateRecoveryPhraseRequest, _go.GenerateRecoveryPhraseResponse](
 			httpClient,
-			baseURL+GnomobileServiceGenerateRecoveryPhraseProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGenerateRecoveryPhraseProcedure,
+			connect.WithSchema(gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listKeyInfo: connect.NewClient[_go.ListKeyInfoRequest, _go.ListKeyInfoResponse](
 			httpClient,
-			baseURL+GnomobileServiceListKeyInfoProcedure,
-			opts...,
+			baseURL+GnoNativeServiceListKeyInfoProcedure,
+			connect.WithSchema(gnoNativeServiceListKeyInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		hasKeyByName: connect.NewClient[_go.HasKeyByNameRequest, _go.HasKeyByNameResponse](
 			httpClient,
-			baseURL+GnomobileServiceHasKeyByNameProcedure,
-			opts...,
+			baseURL+GnoNativeServiceHasKeyByNameProcedure,
+			connect.WithSchema(gnoNativeServiceHasKeyByNameMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		hasKeyByAddress: connect.NewClient[_go.HasKeyByAddressRequest, _go.HasKeyByAddressResponse](
 			httpClient,
-			baseURL+GnomobileServiceHasKeyByAddressProcedure,
-			opts...,
+			baseURL+GnoNativeServiceHasKeyByAddressProcedure,
+			connect.WithSchema(gnoNativeServiceHasKeyByAddressMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		hasKeyByNameOrAddress: connect.NewClient[_go.HasKeyByNameOrAddressRequest, _go.HasKeyByNameOrAddressResponse](
 			httpClient,
-			baseURL+GnomobileServiceHasKeyByNameOrAddressProcedure,
-			opts...,
+			baseURL+GnoNativeServiceHasKeyByNameOrAddressProcedure,
+			connect.WithSchema(gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByName: connect.NewClient[_go.GetKeyInfoByNameRequest, _go.GetKeyInfoByNameResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetKeyInfoByNameProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetKeyInfoByNameProcedure,
+			connect.WithSchema(gnoNativeServiceGetKeyInfoByNameMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByAddress: connect.NewClient[_go.GetKeyInfoByAddressRequest, _go.GetKeyInfoByAddressResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetKeyInfoByAddressProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetKeyInfoByAddressProcedure,
+			connect.WithSchema(gnoNativeServiceGetKeyInfoByAddressMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByNameOrAddress: connect.NewClient[_go.GetKeyInfoByNameOrAddressRequest, _go.GetKeyInfoByNameOrAddressResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetKeyInfoByNameOrAddressProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetKeyInfoByNameOrAddressProcedure,
+			connect.WithSchema(gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createAccount: connect.NewClient[_go.CreateAccountRequest, _go.CreateAccountResponse](
 			httpClient,
-			baseURL+GnomobileServiceCreateAccountProcedure,
-			opts...,
+			baseURL+GnoNativeServiceCreateAccountProcedure,
+			connect.WithSchema(gnoNativeServiceCreateAccountMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		selectAccount: connect.NewClient[_go.SelectAccountRequest, _go.SelectAccountResponse](
 			httpClient,
-			baseURL+GnomobileServiceSelectAccountProcedure,
-			opts...,
+			baseURL+GnoNativeServiceSelectAccountProcedure,
+			connect.WithSchema(gnoNativeServiceSelectAccountMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		setPassword: connect.NewClient[_go.SetPasswordRequest, _go.SetPasswordResponse](
 			httpClient,
-			baseURL+GnomobileServiceSetPasswordProcedure,
-			opts...,
+			baseURL+GnoNativeServiceSetPasswordProcedure,
+			connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getActiveAccount: connect.NewClient[_go.GetActiveAccountRequest, _go.GetActiveAccountResponse](
 			httpClient,
-			baseURL+GnomobileServiceGetActiveAccountProcedure,
-			opts...,
+			baseURL+GnoNativeServiceGetActiveAccountProcedure,
+			connect.WithSchema(gnoNativeServiceGetActiveAccountMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		queryAccount: connect.NewClient[_go.QueryAccountRequest, _go.QueryAccountResponse](
 			httpClient,
-			baseURL+GnomobileServiceQueryAccountProcedure,
-			opts...,
+			baseURL+GnoNativeServiceQueryAccountProcedure,
+			connect.WithSchema(gnoNativeServiceQueryAccountMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteAccount: connect.NewClient[_go.DeleteAccountRequest, _go.DeleteAccountResponse](
 			httpClient,
-			baseURL+GnomobileServiceDeleteAccountProcedure,
-			opts...,
+			baseURL+GnoNativeServiceDeleteAccountProcedure,
+			connect.WithSchema(gnoNativeServiceDeleteAccountMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		query: connect.NewClient[_go.QueryRequest, _go.QueryResponse](
 			httpClient,
-			baseURL+GnomobileServiceQueryProcedure,
-			opts...,
+			baseURL+GnoNativeServiceQueryProcedure,
+			connect.WithSchema(gnoNativeServiceQueryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		render: connect.NewClient[_go.RenderRequest, _go.RenderResponse](
 			httpClient,
-			baseURL+GnomobileServiceRenderProcedure,
-			opts...,
+			baseURL+GnoNativeServiceRenderProcedure,
+			connect.WithSchema(gnoNativeServiceRenderMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		qEval: connect.NewClient[_go.QEvalRequest, _go.QEvalResponse](
 			httpClient,
-			baseURL+GnomobileServiceQEvalProcedure,
-			opts...,
+			baseURL+GnoNativeServiceQEvalProcedure,
+			connect.WithSchema(gnoNativeServiceQEvalMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		call: connect.NewClient[_go.CallRequest, _go.CallResponse](
 			httpClient,
-			baseURL+GnomobileServiceCallProcedure,
-			opts...,
+			baseURL+GnoNativeServiceCallProcedure,
+			connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		addressToBech32: connect.NewClient[_go.AddressToBech32Request, _go.AddressToBech32Response](
 			httpClient,
-			baseURL+GnomobileServiceAddressToBech32Procedure,
-			opts...,
+			baseURL+GnoNativeServiceAddressToBech32Procedure,
+			connect.WithSchema(gnoNativeServiceAddressToBech32MethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		addressFromBech32: connect.NewClient[_go.AddressFromBech32Request, _go.AddressFromBech32Response](
 			httpClient,
-			baseURL+GnomobileServiceAddressFromBech32Procedure,
-			opts...,
+			baseURL+GnoNativeServiceAddressFromBech32Procedure,
+			connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
-			baseURL+GnomobileServiceHelloProcedure,
-			opts...,
+			baseURL+GnoNativeServiceHelloProcedure,
+			connect.WithSchema(gnoNativeServiceHelloMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		helloStream: connect.NewClient[_go.HelloStreamRequest, _go.HelloStreamResponse](
 			httpClient,
-			baseURL+GnomobileServiceHelloStreamProcedure,
-			opts...,
+			baseURL+GnoNativeServiceHelloStreamProcedure,
+			connect.WithSchema(gnoNativeServiceHelloStreamMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
-// gnomobileServiceClient implements GnomobileServiceClient.
-type gnomobileServiceClient struct {
+// gnoNativeServiceClient implements GnoNativeServiceClient.
+type gnoNativeServiceClient struct {
 	setRemote                 *connect.Client[_go.SetRemoteRequest, _go.SetRemoteResponse]
 	getRemote                 *connect.Client[_go.GetRemoteRequest, _go.GetRemoteResponse]
 	setChainID                *connect.Client[_go.SetChainIDRequest, _go.SetChainIDResponse]
@@ -373,139 +430,139 @@ type gnomobileServiceClient struct {
 	helloStream               *connect.Client[_go.HelloStreamRequest, _go.HelloStreamResponse]
 }
 
-// SetRemote calls land.gno.gnomobile.v1.GnomobileService.SetRemote.
-func (c *gnomobileServiceClient) SetRemote(ctx context.Context, req *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error) {
+// SetRemote calls land.gno.gnonative.v1.GnoNativeService.SetRemote.
+func (c *gnoNativeServiceClient) SetRemote(ctx context.Context, req *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error) {
 	return c.setRemote.CallUnary(ctx, req)
 }
 
-// GetRemote calls land.gno.gnomobile.v1.GnomobileService.GetRemote.
-func (c *gnomobileServiceClient) GetRemote(ctx context.Context, req *connect.Request[_go.GetRemoteRequest]) (*connect.Response[_go.GetRemoteResponse], error) {
+// GetRemote calls land.gno.gnonative.v1.GnoNativeService.GetRemote.
+func (c *gnoNativeServiceClient) GetRemote(ctx context.Context, req *connect.Request[_go.GetRemoteRequest]) (*connect.Response[_go.GetRemoteResponse], error) {
 	return c.getRemote.CallUnary(ctx, req)
 }
 
-// SetChainID calls land.gno.gnomobile.v1.GnomobileService.SetChainID.
-func (c *gnomobileServiceClient) SetChainID(ctx context.Context, req *connect.Request[_go.SetChainIDRequest]) (*connect.Response[_go.SetChainIDResponse], error) {
+// SetChainID calls land.gno.gnonative.v1.GnoNativeService.SetChainID.
+func (c *gnoNativeServiceClient) SetChainID(ctx context.Context, req *connect.Request[_go.SetChainIDRequest]) (*connect.Response[_go.SetChainIDResponse], error) {
 	return c.setChainID.CallUnary(ctx, req)
 }
 
-// GetChainID calls land.gno.gnomobile.v1.GnomobileService.GetChainID.
-func (c *gnomobileServiceClient) GetChainID(ctx context.Context, req *connect.Request[_go.GetChainIDRequest]) (*connect.Response[_go.GetChainIDResponse], error) {
+// GetChainID calls land.gno.gnonative.v1.GnoNativeService.GetChainID.
+func (c *gnoNativeServiceClient) GetChainID(ctx context.Context, req *connect.Request[_go.GetChainIDRequest]) (*connect.Response[_go.GetChainIDResponse], error) {
 	return c.getChainID.CallUnary(ctx, req)
 }
 
-// GenerateRecoveryPhrase calls land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase.
-func (c *gnomobileServiceClient) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[_go.GenerateRecoveryPhraseRequest]) (*connect.Response[_go.GenerateRecoveryPhraseResponse], error) {
+// GenerateRecoveryPhrase calls land.gno.gnonative.v1.GnoNativeService.GenerateRecoveryPhrase.
+func (c *gnoNativeServiceClient) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[_go.GenerateRecoveryPhraseRequest]) (*connect.Response[_go.GenerateRecoveryPhraseResponse], error) {
 	return c.generateRecoveryPhrase.CallUnary(ctx, req)
 }
 
-// ListKeyInfo calls land.gno.gnomobile.v1.GnomobileService.ListKeyInfo.
-func (c *gnomobileServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[_go.ListKeyInfoRequest]) (*connect.Response[_go.ListKeyInfoResponse], error) {
+// ListKeyInfo calls land.gno.gnonative.v1.GnoNativeService.ListKeyInfo.
+func (c *gnoNativeServiceClient) ListKeyInfo(ctx context.Context, req *connect.Request[_go.ListKeyInfoRequest]) (*connect.Response[_go.ListKeyInfoResponse], error) {
 	return c.listKeyInfo.CallUnary(ctx, req)
 }
 
-// HasKeyByName calls land.gno.gnomobile.v1.GnomobileService.HasKeyByName.
-func (c *gnomobileServiceClient) HasKeyByName(ctx context.Context, req *connect.Request[_go.HasKeyByNameRequest]) (*connect.Response[_go.HasKeyByNameResponse], error) {
+// HasKeyByName calls land.gno.gnonative.v1.GnoNativeService.HasKeyByName.
+func (c *gnoNativeServiceClient) HasKeyByName(ctx context.Context, req *connect.Request[_go.HasKeyByNameRequest]) (*connect.Response[_go.HasKeyByNameResponse], error) {
 	return c.hasKeyByName.CallUnary(ctx, req)
 }
 
-// HasKeyByAddress calls land.gno.gnomobile.v1.GnomobileService.HasKeyByAddress.
-func (c *gnomobileServiceClient) HasKeyByAddress(ctx context.Context, req *connect.Request[_go.HasKeyByAddressRequest]) (*connect.Response[_go.HasKeyByAddressResponse], error) {
+// HasKeyByAddress calls land.gno.gnonative.v1.GnoNativeService.HasKeyByAddress.
+func (c *gnoNativeServiceClient) HasKeyByAddress(ctx context.Context, req *connect.Request[_go.HasKeyByAddressRequest]) (*connect.Response[_go.HasKeyByAddressResponse], error) {
 	return c.hasKeyByAddress.CallUnary(ctx, req)
 }
 
-// HasKeyByNameOrAddress calls land.gno.gnomobile.v1.GnomobileService.HasKeyByNameOrAddress.
-func (c *gnomobileServiceClient) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error) {
+// HasKeyByNameOrAddress calls land.gno.gnonative.v1.GnoNativeService.HasKeyByNameOrAddress.
+func (c *gnoNativeServiceClient) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error) {
 	return c.hasKeyByNameOrAddress.CallUnary(ctx, req)
 }
 
-// GetKeyInfoByName calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName.
-func (c *gnomobileServiceClient) GetKeyInfoByName(ctx context.Context, req *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error) {
+// GetKeyInfoByName calls land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByName.
+func (c *gnoNativeServiceClient) GetKeyInfoByName(ctx context.Context, req *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error) {
 	return c.getKeyInfoByName.CallUnary(ctx, req)
 }
 
-// GetKeyInfoByAddress calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress.
-func (c *gnomobileServiceClient) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error) {
+// GetKeyInfoByAddress calls land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByAddress.
+func (c *gnoNativeServiceClient) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error) {
 	return c.getKeyInfoByAddress.CallUnary(ctx, req)
 }
 
-// GetKeyInfoByNameOrAddress calls land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress.
-func (c *gnomobileServiceClient) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error) {
+// GetKeyInfoByNameOrAddress calls land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByNameOrAddress.
+func (c *gnoNativeServiceClient) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error) {
 	return c.getKeyInfoByNameOrAddress.CallUnary(ctx, req)
 }
 
-// CreateAccount calls land.gno.gnomobile.v1.GnomobileService.CreateAccount.
-func (c *gnomobileServiceClient) CreateAccount(ctx context.Context, req *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
+// CreateAccount calls land.gno.gnonative.v1.GnoNativeService.CreateAccount.
+func (c *gnoNativeServiceClient) CreateAccount(ctx context.Context, req *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
 	return c.createAccount.CallUnary(ctx, req)
 }
 
-// SelectAccount calls land.gno.gnomobile.v1.GnomobileService.SelectAccount.
-func (c *gnomobileServiceClient) SelectAccount(ctx context.Context, req *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error) {
+// SelectAccount calls land.gno.gnonative.v1.GnoNativeService.SelectAccount.
+func (c *gnoNativeServiceClient) SelectAccount(ctx context.Context, req *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error) {
 	return c.selectAccount.CallUnary(ctx, req)
 }
 
-// SetPassword calls land.gno.gnomobile.v1.GnomobileService.SetPassword.
-func (c *gnomobileServiceClient) SetPassword(ctx context.Context, req *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
+// SetPassword calls land.gno.gnonative.v1.GnoNativeService.SetPassword.
+func (c *gnoNativeServiceClient) SetPassword(ctx context.Context, req *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
 	return c.setPassword.CallUnary(ctx, req)
 }
 
-// GetActiveAccount calls land.gno.gnomobile.v1.GnomobileService.GetActiveAccount.
-func (c *gnomobileServiceClient) GetActiveAccount(ctx context.Context, req *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error) {
+// GetActiveAccount calls land.gno.gnonative.v1.GnoNativeService.GetActiveAccount.
+func (c *gnoNativeServiceClient) GetActiveAccount(ctx context.Context, req *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error) {
 	return c.getActiveAccount.CallUnary(ctx, req)
 }
 
-// QueryAccount calls land.gno.gnomobile.v1.GnomobileService.QueryAccount.
-func (c *gnomobileServiceClient) QueryAccount(ctx context.Context, req *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error) {
+// QueryAccount calls land.gno.gnonative.v1.GnoNativeService.QueryAccount.
+func (c *gnoNativeServiceClient) QueryAccount(ctx context.Context, req *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error) {
 	return c.queryAccount.CallUnary(ctx, req)
 }
 
-// DeleteAccount calls land.gno.gnomobile.v1.GnomobileService.DeleteAccount.
-func (c *gnomobileServiceClient) DeleteAccount(ctx context.Context, req *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
+// DeleteAccount calls land.gno.gnonative.v1.GnoNativeService.DeleteAccount.
+func (c *gnoNativeServiceClient) DeleteAccount(ctx context.Context, req *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
 	return c.deleteAccount.CallUnary(ctx, req)
 }
 
-// Query calls land.gno.gnomobile.v1.GnomobileService.Query.
-func (c *gnomobileServiceClient) Query(ctx context.Context, req *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error) {
+// Query calls land.gno.gnonative.v1.GnoNativeService.Query.
+func (c *gnoNativeServiceClient) Query(ctx context.Context, req *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error) {
 	return c.query.CallUnary(ctx, req)
 }
 
-// Render calls land.gno.gnomobile.v1.GnomobileService.Render.
-func (c *gnomobileServiceClient) Render(ctx context.Context, req *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error) {
+// Render calls land.gno.gnonative.v1.GnoNativeService.Render.
+func (c *gnoNativeServiceClient) Render(ctx context.Context, req *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error) {
 	return c.render.CallUnary(ctx, req)
 }
 
-// QEval calls land.gno.gnomobile.v1.GnomobileService.QEval.
-func (c *gnomobileServiceClient) QEval(ctx context.Context, req *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error) {
+// QEval calls land.gno.gnonative.v1.GnoNativeService.QEval.
+func (c *gnoNativeServiceClient) QEval(ctx context.Context, req *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error) {
 	return c.qEval.CallUnary(ctx, req)
 }
 
-// Call calls land.gno.gnomobile.v1.GnomobileService.Call.
-func (c *gnomobileServiceClient) Call(ctx context.Context, req *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error) {
+// Call calls land.gno.gnonative.v1.GnoNativeService.Call.
+func (c *gnoNativeServiceClient) Call(ctx context.Context, req *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error) {
 	return c.call.CallServerStream(ctx, req)
 }
 
-// AddressToBech32 calls land.gno.gnomobile.v1.GnomobileService.AddressToBech32.
-func (c *gnomobileServiceClient) AddressToBech32(ctx context.Context, req *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
+// AddressToBech32 calls land.gno.gnonative.v1.GnoNativeService.AddressToBech32.
+func (c *gnoNativeServiceClient) AddressToBech32(ctx context.Context, req *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
 	return c.addressToBech32.CallUnary(ctx, req)
 }
 
-// AddressFromBech32 calls land.gno.gnomobile.v1.GnomobileService.AddressFromBech32.
-func (c *gnomobileServiceClient) AddressFromBech32(ctx context.Context, req *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error) {
+// AddressFromBech32 calls land.gno.gnonative.v1.GnoNativeService.AddressFromBech32.
+func (c *gnoNativeServiceClient) AddressFromBech32(ctx context.Context, req *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error) {
 	return c.addressFromBech32.CallUnary(ctx, req)
 }
 
-// Hello calls land.gno.gnomobile.v1.GnomobileService.Hello.
-func (c *gnomobileServiceClient) Hello(ctx context.Context, req *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
+// Hello calls land.gno.gnonative.v1.GnoNativeService.Hello.
+func (c *gnoNativeServiceClient) Hello(ctx context.Context, req *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
 }
 
-// HelloStream calls land.gno.gnomobile.v1.GnomobileService.HelloStream.
-func (c *gnomobileServiceClient) HelloStream(ctx context.Context, req *connect.Request[_go.HelloStreamRequest]) (*connect.ServerStreamForClient[_go.HelloStreamResponse], error) {
+// HelloStream calls land.gno.gnonative.v1.GnoNativeService.HelloStream.
+func (c *gnoNativeServiceClient) HelloStream(ctx context.Context, req *connect.Request[_go.HelloStreamRequest]) (*connect.ServerStreamForClient[_go.HelloStreamResponse], error) {
 	return c.helloStream.CallServerStream(ctx, req)
 }
 
-// GnomobileServiceHandler is an implementation of the land.gno.gnomobile.v1.GnomobileService
+// GnoNativeServiceHandler is an implementation of the land.gno.gnonative.v1.GnoNativeService
 // service.
-type GnomobileServiceHandler interface {
+type GnoNativeServiceHandler interface {
 	// Set the connection address for the remote node. If you don't call this,
 	// the default is "127.0.0.1:26657"
 	SetRemote(context.Context, *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error)
@@ -534,13 +591,13 @@ type GnomobileServiceHandler interface {
 	// In the response, set has true if the keybase has the key.
 	HasKeyByNameOrAddress(context.Context, *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error)
 	// Get the information for the key in the keybase with the given name.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByName(context.Context, *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error)
 	// Get the information for the key in the keybase with the given address.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByAddress(context.Context, *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error)
 	// Get the information for the key in the keybase with the given name or bech32 string address.
-	// If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
 	// Create a new account the keybase using the name an password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
@@ -550,11 +607,11 @@ type GnomobileServiceHandler interface {
 	// SelectAccount selects the active account to use for later operations
 	SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error)
 	// Set the password for the active account in the keybase, used for later operations.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
 	// length of the result.)
 	GetActiveAccount(context.Context, *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error)
@@ -564,8 +621,8 @@ type GnomobileServiceHandler interface {
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
 	// password.
-	// If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+	// If the account doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
 	Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error)
@@ -579,12 +636,12 @@ type GnomobileServiceHandler interface {
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
 	// Call a specific realm function.
-	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-	// If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
@@ -596,305 +653,331 @@ type GnomobileServiceHandler interface {
 	HelloStream(context.Context, *connect.Request[_go.HelloStreamRequest], *connect.ServerStream[_go.HelloStreamResponse]) error
 }
 
-// NewGnomobileServiceHandler builds an HTTP handler from the service implementation. It returns the
+// NewGnoNativeServiceHandler builds an HTTP handler from the service implementation. It returns the
 // path on which to mount the handler and the handler itself.
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewGnomobileServiceHandler(svc GnomobileServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	gnomobileServiceSetRemoteHandler := connect.NewUnaryHandler(
-		GnomobileServiceSetRemoteProcedure,
+func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	gnoNativeServiceSetRemoteHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSetRemoteProcedure,
 		svc.SetRemote,
-		opts...,
+		connect.WithSchema(gnoNativeServiceSetRemoteMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetRemoteHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetRemoteProcedure,
+	gnoNativeServiceGetRemoteHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetRemoteProcedure,
 		svc.GetRemote,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetRemoteMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceSetChainIDHandler := connect.NewUnaryHandler(
-		GnomobileServiceSetChainIDProcedure,
+	gnoNativeServiceSetChainIDHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSetChainIDProcedure,
 		svc.SetChainID,
-		opts...,
+		connect.WithSchema(gnoNativeServiceSetChainIDMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetChainIDHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetChainIDProcedure,
+	gnoNativeServiceGetChainIDHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetChainIDProcedure,
 		svc.GetChainID,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetChainIDMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGenerateRecoveryPhraseHandler := connect.NewUnaryHandler(
-		GnomobileServiceGenerateRecoveryPhraseProcedure,
+	gnoNativeServiceGenerateRecoveryPhraseHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGenerateRecoveryPhraseProcedure,
 		svc.GenerateRecoveryPhrase,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceListKeyInfoHandler := connect.NewUnaryHandler(
-		GnomobileServiceListKeyInfoProcedure,
+	gnoNativeServiceListKeyInfoHandler := connect.NewUnaryHandler(
+		GnoNativeServiceListKeyInfoProcedure,
 		svc.ListKeyInfo,
-		opts...,
+		connect.WithSchema(gnoNativeServiceListKeyInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceHasKeyByNameHandler := connect.NewUnaryHandler(
-		GnomobileServiceHasKeyByNameProcedure,
+	gnoNativeServiceHasKeyByNameHandler := connect.NewUnaryHandler(
+		GnoNativeServiceHasKeyByNameProcedure,
 		svc.HasKeyByName,
-		opts...,
+		connect.WithSchema(gnoNativeServiceHasKeyByNameMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceHasKeyByAddressHandler := connect.NewUnaryHandler(
-		GnomobileServiceHasKeyByAddressProcedure,
+	gnoNativeServiceHasKeyByAddressHandler := connect.NewUnaryHandler(
+		GnoNativeServiceHasKeyByAddressProcedure,
 		svc.HasKeyByAddress,
-		opts...,
+		connect.WithSchema(gnoNativeServiceHasKeyByAddressMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceHasKeyByNameOrAddressHandler := connect.NewUnaryHandler(
-		GnomobileServiceHasKeyByNameOrAddressProcedure,
+	gnoNativeServiceHasKeyByNameOrAddressHandler := connect.NewUnaryHandler(
+		GnoNativeServiceHasKeyByNameOrAddressProcedure,
 		svc.HasKeyByNameOrAddress,
-		opts...,
+		connect.WithSchema(gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetKeyInfoByNameHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetKeyInfoByNameProcedure,
+	gnoNativeServiceGetKeyInfoByNameHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetKeyInfoByNameProcedure,
 		svc.GetKeyInfoByName,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetKeyInfoByNameMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetKeyInfoByAddressHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetKeyInfoByAddressProcedure,
+	gnoNativeServiceGetKeyInfoByAddressHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetKeyInfoByAddressProcedure,
 		svc.GetKeyInfoByAddress,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetKeyInfoByAddressMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetKeyInfoByNameOrAddressHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetKeyInfoByNameOrAddressProcedure,
+	gnoNativeServiceGetKeyInfoByNameOrAddressHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetKeyInfoByNameOrAddressProcedure,
 		svc.GetKeyInfoByNameOrAddress,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceCreateAccountHandler := connect.NewUnaryHandler(
-		GnomobileServiceCreateAccountProcedure,
+	gnoNativeServiceCreateAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceCreateAccountProcedure,
 		svc.CreateAccount,
-		opts...,
+		connect.WithSchema(gnoNativeServiceCreateAccountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceSelectAccountHandler := connect.NewUnaryHandler(
-		GnomobileServiceSelectAccountProcedure,
+	gnoNativeServiceSelectAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSelectAccountProcedure,
 		svc.SelectAccount,
-		opts...,
+		connect.WithSchema(gnoNativeServiceSelectAccountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceSetPasswordHandler := connect.NewUnaryHandler(
-		GnomobileServiceSetPasswordProcedure,
+	gnoNativeServiceSetPasswordHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSetPasswordProcedure,
 		svc.SetPassword,
-		opts...,
+		connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceGetActiveAccountHandler := connect.NewUnaryHandler(
-		GnomobileServiceGetActiveAccountProcedure,
+	gnoNativeServiceGetActiveAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceGetActiveAccountProcedure,
 		svc.GetActiveAccount,
-		opts...,
+		connect.WithSchema(gnoNativeServiceGetActiveAccountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceQueryAccountHandler := connect.NewUnaryHandler(
-		GnomobileServiceQueryAccountProcedure,
+	gnoNativeServiceQueryAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQueryAccountProcedure,
 		svc.QueryAccount,
-		opts...,
+		connect.WithSchema(gnoNativeServiceQueryAccountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceDeleteAccountHandler := connect.NewUnaryHandler(
-		GnomobileServiceDeleteAccountProcedure,
+	gnoNativeServiceDeleteAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceDeleteAccountProcedure,
 		svc.DeleteAccount,
-		opts...,
+		connect.WithSchema(gnoNativeServiceDeleteAccountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceQueryHandler := connect.NewUnaryHandler(
-		GnomobileServiceQueryProcedure,
+	gnoNativeServiceQueryHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQueryProcedure,
 		svc.Query,
-		opts...,
+		connect.WithSchema(gnoNativeServiceQueryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceRenderHandler := connect.NewUnaryHandler(
-		GnomobileServiceRenderProcedure,
+	gnoNativeServiceRenderHandler := connect.NewUnaryHandler(
+		GnoNativeServiceRenderProcedure,
 		svc.Render,
-		opts...,
+		connect.WithSchema(gnoNativeServiceRenderMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceQEvalHandler := connect.NewUnaryHandler(
-		GnomobileServiceQEvalProcedure,
+	gnoNativeServiceQEvalHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQEvalProcedure,
 		svc.QEval,
-		opts...,
+		connect.WithSchema(gnoNativeServiceQEvalMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceCallHandler := connect.NewServerStreamHandler(
-		GnomobileServiceCallProcedure,
+	gnoNativeServiceCallHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceCallProcedure,
 		svc.Call,
-		opts...,
+		connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceAddressToBech32Handler := connect.NewUnaryHandler(
-		GnomobileServiceAddressToBech32Procedure,
+	gnoNativeServiceAddressToBech32Handler := connect.NewUnaryHandler(
+		GnoNativeServiceAddressToBech32Procedure,
 		svc.AddressToBech32,
-		opts...,
+		connect.WithSchema(gnoNativeServiceAddressToBech32MethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceAddressFromBech32Handler := connect.NewUnaryHandler(
-		GnomobileServiceAddressFromBech32Procedure,
+	gnoNativeServiceAddressFromBech32Handler := connect.NewUnaryHandler(
+		GnoNativeServiceAddressFromBech32Procedure,
 		svc.AddressFromBech32,
-		opts...,
+		connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceHelloHandler := connect.NewUnaryHandler(
-		GnomobileServiceHelloProcedure,
+	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
+		GnoNativeServiceHelloProcedure,
 		svc.Hello,
-		opts...,
+		connect.WithSchema(gnoNativeServiceHelloMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	gnomobileServiceHelloStreamHandler := connect.NewServerStreamHandler(
-		GnomobileServiceHelloStreamProcedure,
+	gnoNativeServiceHelloStreamHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceHelloStreamProcedure,
 		svc.HelloStream,
-		opts...,
+		connect.WithSchema(gnoNativeServiceHelloStreamMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	return "/land.gno.gnomobile.v1.GnomobileService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/land.gno.gnonative.v1.GnoNativeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case GnomobileServiceSetRemoteProcedure:
-			gnomobileServiceSetRemoteHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetRemoteProcedure:
-			gnomobileServiceGetRemoteHandler.ServeHTTP(w, r)
-		case GnomobileServiceSetChainIDProcedure:
-			gnomobileServiceSetChainIDHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetChainIDProcedure:
-			gnomobileServiceGetChainIDHandler.ServeHTTP(w, r)
-		case GnomobileServiceGenerateRecoveryPhraseProcedure:
-			gnomobileServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
-		case GnomobileServiceListKeyInfoProcedure:
-			gnomobileServiceListKeyInfoHandler.ServeHTTP(w, r)
-		case GnomobileServiceHasKeyByNameProcedure:
-			gnomobileServiceHasKeyByNameHandler.ServeHTTP(w, r)
-		case GnomobileServiceHasKeyByAddressProcedure:
-			gnomobileServiceHasKeyByAddressHandler.ServeHTTP(w, r)
-		case GnomobileServiceHasKeyByNameOrAddressProcedure:
-			gnomobileServiceHasKeyByNameOrAddressHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetKeyInfoByNameProcedure:
-			gnomobileServiceGetKeyInfoByNameHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetKeyInfoByAddressProcedure:
-			gnomobileServiceGetKeyInfoByAddressHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetKeyInfoByNameOrAddressProcedure:
-			gnomobileServiceGetKeyInfoByNameOrAddressHandler.ServeHTTP(w, r)
-		case GnomobileServiceCreateAccountProcedure:
-			gnomobileServiceCreateAccountHandler.ServeHTTP(w, r)
-		case GnomobileServiceSelectAccountProcedure:
-			gnomobileServiceSelectAccountHandler.ServeHTTP(w, r)
-		case GnomobileServiceSetPasswordProcedure:
-			gnomobileServiceSetPasswordHandler.ServeHTTP(w, r)
-		case GnomobileServiceGetActiveAccountProcedure:
-			gnomobileServiceGetActiveAccountHandler.ServeHTTP(w, r)
-		case GnomobileServiceQueryAccountProcedure:
-			gnomobileServiceQueryAccountHandler.ServeHTTP(w, r)
-		case GnomobileServiceDeleteAccountProcedure:
-			gnomobileServiceDeleteAccountHandler.ServeHTTP(w, r)
-		case GnomobileServiceQueryProcedure:
-			gnomobileServiceQueryHandler.ServeHTTP(w, r)
-		case GnomobileServiceRenderProcedure:
-			gnomobileServiceRenderHandler.ServeHTTP(w, r)
-		case GnomobileServiceQEvalProcedure:
-			gnomobileServiceQEvalHandler.ServeHTTP(w, r)
-		case GnomobileServiceCallProcedure:
-			gnomobileServiceCallHandler.ServeHTTP(w, r)
-		case GnomobileServiceAddressToBech32Procedure:
-			gnomobileServiceAddressToBech32Handler.ServeHTTP(w, r)
-		case GnomobileServiceAddressFromBech32Procedure:
-			gnomobileServiceAddressFromBech32Handler.ServeHTTP(w, r)
-		case GnomobileServiceHelloProcedure:
-			gnomobileServiceHelloHandler.ServeHTTP(w, r)
-		case GnomobileServiceHelloStreamProcedure:
-			gnomobileServiceHelloStreamHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSetRemoteProcedure:
+			gnoNativeServiceSetRemoteHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetRemoteProcedure:
+			gnoNativeServiceGetRemoteHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSetChainIDProcedure:
+			gnoNativeServiceSetChainIDHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetChainIDProcedure:
+			gnoNativeServiceGetChainIDHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGenerateRecoveryPhraseProcedure:
+			gnoNativeServiceGenerateRecoveryPhraseHandler.ServeHTTP(w, r)
+		case GnoNativeServiceListKeyInfoProcedure:
+			gnoNativeServiceListKeyInfoHandler.ServeHTTP(w, r)
+		case GnoNativeServiceHasKeyByNameProcedure:
+			gnoNativeServiceHasKeyByNameHandler.ServeHTTP(w, r)
+		case GnoNativeServiceHasKeyByAddressProcedure:
+			gnoNativeServiceHasKeyByAddressHandler.ServeHTTP(w, r)
+		case GnoNativeServiceHasKeyByNameOrAddressProcedure:
+			gnoNativeServiceHasKeyByNameOrAddressHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetKeyInfoByNameProcedure:
+			gnoNativeServiceGetKeyInfoByNameHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetKeyInfoByAddressProcedure:
+			gnoNativeServiceGetKeyInfoByAddressHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetKeyInfoByNameOrAddressProcedure:
+			gnoNativeServiceGetKeyInfoByNameOrAddressHandler.ServeHTTP(w, r)
+		case GnoNativeServiceCreateAccountProcedure:
+			gnoNativeServiceCreateAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSelectAccountProcedure:
+			gnoNativeServiceSelectAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSetPasswordProcedure:
+			gnoNativeServiceSetPasswordHandler.ServeHTTP(w, r)
+		case GnoNativeServiceGetActiveAccountProcedure:
+			gnoNativeServiceGetActiveAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQueryAccountProcedure:
+			gnoNativeServiceQueryAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceDeleteAccountProcedure:
+			gnoNativeServiceDeleteAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQueryProcedure:
+			gnoNativeServiceQueryHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRenderProcedure:
+			gnoNativeServiceRenderHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQEvalProcedure:
+			gnoNativeServiceQEvalHandler.ServeHTTP(w, r)
+		case GnoNativeServiceCallProcedure:
+			gnoNativeServiceCallHandler.ServeHTTP(w, r)
+		case GnoNativeServiceAddressToBech32Procedure:
+			gnoNativeServiceAddressToBech32Handler.ServeHTTP(w, r)
+		case GnoNativeServiceAddressFromBech32Procedure:
+			gnoNativeServiceAddressFromBech32Handler.ServeHTTP(w, r)
+		case GnoNativeServiceHelloProcedure:
+			gnoNativeServiceHelloHandler.ServeHTTP(w, r)
+		case GnoNativeServiceHelloStreamProcedure:
+			gnoNativeServiceHelloStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
 	})
 }
 
-// UnimplementedGnomobileServiceHandler returns CodeUnimplemented from all methods.
-type UnimplementedGnomobileServiceHandler struct{}
+// UnimplementedGnoNativeServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedGnoNativeServiceHandler struct{}
 
-func (UnimplementedGnomobileServiceHandler) SetRemote(context.Context, *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetRemote is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) SetRemote(context.Context, *connect.Request[_go.SetRemoteRequest]) (*connect.Response[_go.SetRemoteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetRemote is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetRemote(context.Context, *connect.Request[_go.GetRemoteRequest]) (*connect.Response[_go.GetRemoteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetRemote is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetRemote(context.Context, *connect.Request[_go.GetRemoteRequest]) (*connect.Response[_go.GetRemoteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetRemote is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SetChainID(context.Context, *connect.Request[_go.SetChainIDRequest]) (*connect.Response[_go.SetChainIDResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetChainID is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) SetChainID(context.Context, *connect.Request[_go.SetChainIDRequest]) (*connect.Response[_go.SetChainIDResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetChainID is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetChainID(context.Context, *connect.Request[_go.GetChainIDRequest]) (*connect.Response[_go.GetChainIDResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetChainID is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetChainID(context.Context, *connect.Request[_go.GetChainIDRequest]) (*connect.Response[_go.GetChainIDResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetChainID is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[_go.GenerateRecoveryPhraseRequest]) (*connect.Response[_go.GenerateRecoveryPhraseResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GenerateRecoveryPhrase is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GenerateRecoveryPhrase(context.Context, *connect.Request[_go.GenerateRecoveryPhraseRequest]) (*connect.Response[_go.GenerateRecoveryPhraseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GenerateRecoveryPhrase is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) ListKeyInfo(context.Context, *connect.Request[_go.ListKeyInfoRequest]) (*connect.Response[_go.ListKeyInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.ListKeyInfo is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) ListKeyInfo(context.Context, *connect.Request[_go.ListKeyInfoRequest]) (*connect.Response[_go.ListKeyInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.ListKeyInfo is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) HasKeyByName(context.Context, *connect.Request[_go.HasKeyByNameRequest]) (*connect.Response[_go.HasKeyByNameResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByName is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) HasKeyByName(context.Context, *connect.Request[_go.HasKeyByNameRequest]) (*connect.Response[_go.HasKeyByNameResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.HasKeyByName is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) HasKeyByAddress(context.Context, *connect.Request[_go.HasKeyByAddressRequest]) (*connect.Response[_go.HasKeyByAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByAddress is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) HasKeyByAddress(context.Context, *connect.Request[_go.HasKeyByAddressRequest]) (*connect.Response[_go.HasKeyByAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.HasKeyByAddress is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) HasKeyByNameOrAddress(context.Context, *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HasKeyByNameOrAddress is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) HasKeyByNameOrAddress(context.Context, *connect.Request[_go.HasKeyByNameOrAddressRequest]) (*connect.Response[_go.HasKeyByNameOrAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.HasKeyByNameOrAddress is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetKeyInfoByName(context.Context, *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByName is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetKeyInfoByName(context.Context, *connect.Request[_go.GetKeyInfoByNameRequest]) (*connect.Response[_go.GetKeyInfoByNameResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByName is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetKeyInfoByAddress(context.Context, *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByAddress is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetKeyInfoByAddress(context.Context, *connect.Request[_go.GetKeyInfoByAddressRequest]) (*connect.Response[_go.GetKeyInfoByAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByAddress is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetKeyInfoByNameOrAddress is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByNameOrAddress is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.CreateAccount is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.CreateAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SelectAccount is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SelectAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.SetPassword is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetPassword is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) GetActiveAccount(context.Context, *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.GetActiveAccount is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) GetActiveAccount(context.Context, *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.GetActiveAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) QueryAccount(context.Context, *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.QueryAccount is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) QueryAccount(context.Context, *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QueryAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.DeleteAccount is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.DeleteAccount is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Query is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Query is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Render(context.Context, *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Render is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) Render(context.Context, *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Render is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.QEval is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QEval is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Call is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Call is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.AddressToBech32 is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressToBech32 is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.AddressFromBech32 is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressFromBech32 is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.Hello is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Hello is not implemented"))
 }
 
-func (UnimplementedGnomobileServiceHandler) HelloStream(context.Context, *connect.Request[_go.HelloStreamRequest], *connect.ServerStream[_go.HelloStreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnomobile.v1.GnomobileService.HelloStream is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) HelloStream(context.Context, *connect.Request[_go.HelloStreamRequest], *connect.ServerStream[_go.HelloStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.HelloStream is not implemented"))
 }

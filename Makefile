@@ -76,7 +76,7 @@ api.clean: _api.clean.protocol
 # - API - rpc
 
 protos_src := $(wildcard service/rpc/*.proto)
-gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard service/gnomobiletypes/*.go)
+gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard service/gnonativetypes/*.go)
 gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
@@ -126,7 +126,7 @@ $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@)
 	# need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
 	$(gomobile) bind -v \
-		-cache $(cache_dir)/ios-gmomobile \
+		-cache $(cache_dir)/ios-gnonative \
 		-tags 'nowatchdog' -prefix=Gno \
 		-o $@ -target ios ./framework/service
 _bind.clean.ios:
@@ -137,7 +137,7 @@ _bind.clean.ios:
 $(gnocore_aar): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@) .cache/bind/android
 	$(gomobile) bind -v \
-		-cache $(cache_dir)/android-gmomobile \
+		-cache $(cache_dir)/android-gnonative \
 		-javapkg=gnolang.gno \
 		-o $@ -target android -androidapi 21 ./framework/service
 _bind.clean.android:

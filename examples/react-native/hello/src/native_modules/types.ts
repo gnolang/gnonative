@@ -1,4 +1,4 @@
-import { KeyInfo } from '@gno/api/gnomobiletypes_pb';
+import { KeyInfo } from '@gno/api/gnonativetypes_pb';
 
 export type GnoConfig = {
   Remote: string;
