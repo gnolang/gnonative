@@ -16,7 +16,7 @@ The default port is `26658`.
 
 `go run . tcp`
 
-`go run . tcp -addr http://localhost:26658`
+`go run . tcp -addr localhost:26658`
 
 The gRPC server prints the TCP address/socket path it listens to:
 
