@@ -12,7 +12,12 @@ This is a tutorial on how to use GnoNativeKit with Wails. It is based on the off
 
 ### Generate a new Wails React TS project
 
-To generate a new project, run `wails init -n myproject -t react-ts`. This will generate a new project in the current directory.
+To generate a new project, run `wails init -n myproject -t react-ts`. This will generate a new project in the current directory. Please, navigate to the project directory:
+
+```bash
+cd myproject
+```
+
 Don't worry, you can check out this [link](https://wails.io/docs/gettingstarted/firstproject#project-layout) and become more familiar with this bunch of generated files.
 
 
@@ -56,24 +61,20 @@ func (a *App) startup(ctx context.Context) {
 
 ### Install the Frontend Dependencies
 
-Now we have the GRPC server running, we need to install the GnoNativeKit dependencies in the frontend:
+Now we have the GRPC server ready to run, we need to install the GnoNative Kit dependencies in the frontend.
+Let's also copy the protobufs files we already generated for Typescript.
 
 ```bash
 cd frontend
 npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc/connect @connectrpc/connect-web @connectrpc/protoc-gen-connect-es
-```
 
-Let's copy the protobufs files we already generated for Typescript.
-
-```bash
-cd frontend
 mkdir -p src/api
-cp -r ../../../api/gen/es/* ./src/api/
-cp ../../../templates/es/use-gno-web.ts ./src/api/use-gno.ts
-cp ../../../templates/images/logo-universal.png ./src/assets/images 
+cp -r ../../../../api/gen/es/* ./src/api/
+cp ../../../../templates/es/use-gno-web.ts ./src/api/use-gno.ts
+cp ../../../../templates/images/logo-universal.png ./src/assets/images 
 ```
 
-Open `src/App.tsx` and add the following code:
+Open `src/App.tsx` and replace the contents with the following code:
 
 ```typescript
 import { useEffect, useState } from "react";
