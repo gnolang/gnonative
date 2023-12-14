@@ -32,7 +32,7 @@ import (
 	"context"
 	"fmt"
 
-	framework "github.com/gnolang/gnomobile/framework/service"
+	framework "github.com/gnolang/gnonative/framework/service"
 )
 
 type App struct {

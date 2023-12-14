@@ -1,39 +1,39 @@
-import { SetRemoteRequest, SetRemoteResponse } from '@gno/api/gnomobiletypes_pb';
-import { GetRemoteRequest } from '@gno/api/gnomobiletypes_pb';
-import { SetChainIDRequest, SetChainIDResponse } from '@gno/api/gnomobiletypes_pb';
-import { GetChainIDRequest } from '@gno/api/gnomobiletypes_pb';
-import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnomobiletypes_pb';
-import { SelectAccountRequest } from '@gno/api/gnomobiletypes_pb';
-import { SelectAccountResponse } from '@gno/api/gnomobiletypes_pb';
-import { CreateAccountRequest } from '@gno/api/gnomobiletypes_pb';
-import { GenerateRecoveryPhraseRequest } from '@gno/api/gnomobiletypes_pb';
-import { ListKeyInfoRequest } from '@gno/api/gnomobiletypes_pb';
-import { HasKeyByNameRequest } from '@gno/api/gnomobiletypes_pb';
-import { HasKeyByAddressRequest } from '@gno/api/gnomobiletypes_pb';
-import { HasKeyByNameOrAddressRequest } from '@gno/api/gnomobiletypes_pb';
-import { GetKeyInfoByNameRequest } from '@gno/api/gnomobiletypes_pb';
-import { GetKeyInfoByAddressRequest } from '@gno/api/gnomobiletypes_pb';
-import { GetKeyInfoByNameOrAddressRequest } from '@gno/api/gnomobiletypes_pb';
-import { GetActiveAccountRequest } from '@gno/api/gnomobiletypes_pb';
-import { GetActiveAccountResponse } from '@gno/api/gnomobiletypes_pb';
-import { QueryAccountRequest } from '@gno/api/gnomobiletypes_pb';
-import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
-import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnomobiletypes_pb';
-import { QueryRequest } from '@gno/api/gnomobiletypes_pb';
-import { QueryResponse } from '@gno/api/gnomobiletypes_pb';
-import { RenderRequest } from '@gno/api/gnomobiletypes_pb';
-import { QEvalRequest } from '@gno/api/gnomobiletypes_pb';
-import { CallRequest } from '@gno/api/gnomobiletypes_pb';
-import { CallResponse } from '@gno/api/gnomobiletypes_pb';
-import { AddressToBech32Request } from '@gno/api/gnomobiletypes_pb';
-import { AddressFromBech32Request } from '@gno/api/gnomobiletypes_pb';
+import { SetRemoteRequest, SetRemoteResponse } from '@gno/api/gnonativetypes_pb';
+import { GetRemoteRequest } from '@gno/api/gnonativetypes_pb';
+import { SetChainIDRequest, SetChainIDResponse } from '@gno/api/gnonativetypes_pb';
+import { GetChainIDRequest } from '@gno/api/gnonativetypes_pb';
+import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnonativetypes_pb';
+import { SelectAccountRequest } from '@gno/api/gnonativetypes_pb';
+import { SelectAccountResponse } from '@gno/api/gnonativetypes_pb';
+import { CreateAccountRequest } from '@gno/api/gnonativetypes_pb';
+import { GenerateRecoveryPhraseRequest } from '@gno/api/gnonativetypes_pb';
+import { ListKeyInfoRequest } from '@gno/api/gnonativetypes_pb';
+import { HasKeyByNameRequest } from '@gno/api/gnonativetypes_pb';
+import { HasKeyByAddressRequest } from '@gno/api/gnonativetypes_pb';
+import { HasKeyByNameOrAddressRequest } from '@gno/api/gnonativetypes_pb';
+import { GetKeyInfoByNameRequest } from '@gno/api/gnonativetypes_pb';
+import { GetKeyInfoByAddressRequest } from '@gno/api/gnonativetypes_pb';
+import { GetKeyInfoByNameOrAddressRequest } from '@gno/api/gnonativetypes_pb';
+import { GetActiveAccountRequest } from '@gno/api/gnonativetypes_pb';
+import { GetActiveAccountResponse } from '@gno/api/gnonativetypes_pb';
+import { QueryAccountRequest } from '@gno/api/gnonativetypes_pb';
+import { QueryAccountResponse } from '@gno/api/gnonativetypes_pb';
+import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnonativetypes_pb';
+import { QueryRequest } from '@gno/api/gnonativetypes_pb';
+import { QueryResponse } from '@gno/api/gnonativetypes_pb';
+import { RenderRequest } from '@gno/api/gnonativetypes_pb';
+import { QEvalRequest } from '@gno/api/gnonativetypes_pb';
+import { CallRequest } from '@gno/api/gnonativetypes_pb';
+import { CallResponse } from '@gno/api/gnonativetypes_pb';
+import { AddressToBech32Request } from '@gno/api/gnonativetypes_pb';
+import { AddressFromBech32Request } from '@gno/api/gnonativetypes_pb';
 import * as Grpc from '@gno/grpc/client';
 import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
-import { GnomobileService } from '@gno/api/rpc_connect';
+import { GnoNativeService } from '@gno/api/rpc_connect';
 
-export type GnoResponse = {
+export interface GnoResponse {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
   getRemote: () => Promise<string>;
   setChainID: (chainId: string) => Promise<SetChainIDResponse>;
@@ -55,20 +55,28 @@ export type GnoResponse = {
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
   qEval: (packagePath: string, expression: string) => Promise<string>;
-  call: (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => Promise<CallResponse>;
+  call: (
+    packagePath: string,
+    fnc: string,
+    args: Array<string>,
+    gasFee: string,
+    gasWanted: number,
+    send?: string,
+    memo?: string,
+  ) => Promise<AsyncIterable<CallResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
+  closeBridge: () => Promise<void>;
+  initBridge: () => Promise<void>;
 }
 
-let clientInstance: PromiseClient<typeof GnomobileService> | undefined = undefined;
+let clientInstance: PromiseClient<typeof GnoNativeService> | undefined = undefined;
 let bridgeInstance: boolean = false;
 
 export const useGno = (): GnoResponse => {
   const getClient = async () => {
     if (!bridgeInstance) {
-      console.log('Initializing bridge...');
-      await GoBridge.initBridge();
-      bridgeInstance = true;
+      await initBridge();
     }
 
     if (clientInstance) return clientInstance;
@@ -77,7 +85,31 @@ export const useGno = (): GnoResponse => {
 
     const port = await GoBridge.getTcpPort();
     clientInstance = Grpc.createClient(port);
+
+    console.log('Creating GRPC client instance... done.');
+
+    // Set the initial configuration where it's different from the default.
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+
     return clientInstance;
+  };
+
+  const closeBridge = async () => {
+    if (bridgeInstance) {
+      console.log('Closing bridge...');
+      await GoBridge.closeBridge();
+      console.log('Bridge closed.');
+      bridgeInstance = false;
+    }
+  };
+
+  const initBridge = async () => {
+    if (!bridgeInstance) {
+      console.log('Initializing bridge...');
+      await GoBridge.initBridge();
+      console.log('Bridge initialized.');
+      bridgeInstance = true;
+    }
   };
 
   const setRemote = async (remote: string) => {
@@ -237,9 +269,17 @@ export const useGno = (): GnoResponse => {
     return reponse.result;
   };
 
-  const call = async (packagePath: string, fnc: string, args: Array<string>, gasFee: string, gasWanted: number, send?: string, memo?: string) => {
+  const call = async (
+    packagePath: string,
+    fnc: string,
+    args: Array<string>,
+    gasFee: string,
+    gasWanted: number,
+    send?: string,
+    memo?: string,
+  ) => {
     const client = await getClient();
-    const reponse = await client.call(
+    const reponse = client.call(
       new CallRequest({
         packagePath,
         fnc,
@@ -266,6 +306,8 @@ export const useGno = (): GnoResponse => {
   };
 
   return {
+    initBridge,
+    closeBridge,
     setRemote,
     getRemote,
     setChainID,

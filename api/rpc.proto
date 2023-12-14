@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package land.gno.gnomobile.v1;
+package land.gno.gnonative.v1;
 
-import "gnomobiletypes.proto";
+import "gnonativetypes.proto";
 
-option go_package = "github.com/gnolang/gnomobile/api/gen/go";
+option go_package = "github.com/gnolang/gnonative/api/gen/go";
 option objc_class_prefix = "RTG";
 
-// GnomobileService is the service to interact with the Gno blockchain
-service GnomobileService {
+// GnoNativeService is the service to interact with the Gno blockchain
+service GnoNativeService {
   // Set the connection address for the remote node. If you don't call this,
   // the default is "127.0.0.1:26657"
   rpc SetRemote(SetRemoteRequest) returns (SetRemoteResponse);
@@ -46,15 +46,15 @@ service GnomobileService {
   rpc HasKeyByNameOrAddress(HasKeyByNameOrAddressRequest) returns (HasKeyByNameOrAddressResponse);
 
   // Get the information for the key in the keybase with the given name.
-  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByName(GetKeyInfoByNameRequest) returns (GetKeyInfoByNameResponse);
 
   // Get the information for the key in the keybase with the given address.
-  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByAddress(GetKeyInfoByAddressRequest) returns (GetKeyInfoByAddressResponse);
 
   // Get the information for the key in the keybase with the given name or bech32 string address.
-  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByNameOrAddress(GetKeyInfoByNameOrAddressRequest) returns (GetKeyInfoByNameOrAddressResponse);
 
   // Create a new account the keybase using the name an password specified by SetAccount.
@@ -67,12 +67,12 @@ service GnomobileService {
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
   // Set the password for the active account in the keybase, used for later operations.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
   rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
@@ -84,8 +84,8 @@ service GnomobileService {
   // DeleteAccount deletes the account with the given name, using the password
   // to ensure access. However, if skip_password is true, then ignore the
   // password.
-  // If the account doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
-  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
+  // If the account doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 
   // Make an ABCI query to the remote node.
@@ -102,13 +102,13 @@ service GnomobileService {
   // is usually a function call like "GetBoardIDFromName(\"testboard\")". The
   // return value is a typed expression like
   // "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
   // Call a specific realm function.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrNoActiveAccount.
-  // If the password is wrong, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrDecryptionFailed.
-  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (stream CallResponse);
 
   // Convert a byte array address to a bech32 string address.

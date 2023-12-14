@@ -1,5 +1,5 @@
 // This file implements the gRPC API methods defined in service/rpc/api_gen.proto . For documentation,
-// see that file and related request/response fields in the generated gnomobiletypes.proto .
+// see that file and related request/response fields in the generated gnonativetypes.proto .
 
 package service
 
@@ -17,30 +17,30 @@ import (
 	"go.uber.org/zap"
 
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
-	api_gen "github.com/gnolang/gnomobile/api/gen/go"
-	"github.com/gnolang/gnomobile/gnoclient"
+	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	"github.com/gnolang/gnonative/gnoclient"
 )
 
-func (s *gnomobileService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
+func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
 	s.client.RPCClient = rpcclient.NewHTTP(req.Msg.Remote, "/websocket")
 	s.remote = req.Msg.Remote
 	return connect.NewResponse(&api_gen.SetRemoteResponse{}), nil
 }
 
-func (s *gnomobileService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
+func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
 	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.remote}), nil
 }
 
-func (s *gnomobileService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
+func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
 	s.getSigner().ChainID = req.Msg.ChainId
 	return connect.NewResponse(&api_gen.SetChainIDResponse{}), nil
 }
 
-func (s *gnomobileService) GetChainID(ctx context.Context, req *connect.Request[api_gen.GetChainIDRequest]) (*connect.Response[api_gen.GetChainIDResponse], error) {
+func (s *gnoNativeService) GetChainID(ctx context.Context, req *connect.Request[api_gen.GetChainIDRequest]) (*connect.Response[api_gen.GetChainIDResponse], error) {
 	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.getSigner().ChainID}), nil
 }
 
-func (s *gnomobileService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[api_gen.GenerateRecoveryPhraseRequest]) (*connect.Response[api_gen.GenerateRecoveryPhraseResponse], error) {
+func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[api_gen.GenerateRecoveryPhraseRequest]) (*connect.Response[api_gen.GenerateRecoveryPhraseResponse], error) {
 	const mnemonicEntropySize = 256
 	entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
 	if err != nil {
@@ -64,7 +64,7 @@ func convertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 	}, nil
 }
 
-func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
+func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
 
 	keys, err := s.getSigner().Keybase.List()
@@ -86,7 +86,7 @@ func (s *gnomobileService) ListKeyInfo(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&api_gen.ListKeyInfoResponse{Keys: formatedKeys}), nil
 }
 
-func (s *gnomobileService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
+func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
 	s.logger.Debug("HasKeyByName called")
 
 	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
@@ -97,7 +97,7 @@ func (s *gnomobileService) HasKeyByName(ctx context.Context, req *connect.Reques
 	return connect.NewResponse(&api_gen.HasKeyByNameResponse{Has: has}), nil
 }
 
-func (s *gnomobileService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
+func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
 	s.logger.Debug("HasKeyByAddress called")
 
 	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
@@ -108,7 +108,7 @@ func (s *gnomobileService) HasKeyByAddress(ctx context.Context, req *connect.Req
 	return connect.NewResponse(&api_gen.HasKeyByAddressResponse{Has: has}), nil
 }
 
-func (s *gnomobileService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameOrAddressRequest]) (*connect.Response[api_gen.HasKeyByNameOrAddressResponse], error) {
+func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameOrAddressRequest]) (*connect.Response[api_gen.HasKeyByNameOrAddressResponse], error) {
 	s.logger.Debug("HasKeyByNameOrAddress called")
 
 	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
@@ -119,7 +119,7 @@ func (s *gnomobileService) HasKeyByNameOrAddress(ctx context.Context, req *conne
 	return connect.NewResponse(&api_gen.HasKeyByNameOrAddressResponse{Has: has}), nil
 }
 
-func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameRequest]) (*connect.Response[api_gen.GetKeyInfoByNameResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameRequest]) (*connect.Response[api_gen.GetKeyInfoByNameResponse], error) {
 	s.logger.Debug("GetKeyInfoByName called")
 
 	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
@@ -135,7 +135,7 @@ func (s *gnomobileService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 	return connect.NewResponse(&api_gen.GetKeyInfoByNameResponse{Key: info}), nil
 }
 
-func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
 	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
@@ -151,7 +151,7 @@ func (s *gnomobileService) GetKeyInfoByAddress(ctx context.Context, req *connect
 	return connect.NewResponse(&api_gen.GetKeyInfoByAddressResponse{Key: info}), nil
 }
 
-func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByNameOrAddressResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByNameOrAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByNameOrAddress called")
 
 	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
@@ -167,7 +167,7 @@ func (s *gnomobileService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 	return connect.NewResponse(&api_gen.GetKeyInfoByNameOrAddressResponse{Key: info}), nil
 }
 
-func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Request[api_gen.CreateAccountRequest]) (*connect.Response[api_gen.CreateAccountResponse], error) {
+func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Request[api_gen.CreateAccountRequest]) (*connect.Response[api_gen.CreateAccountResponse], error) {
 	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	key, err := s.getSigner().Keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
@@ -183,7 +183,7 @@ func (s *gnomobileService) CreateAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&api_gen.CreateAccountResponse{Key: info}), nil
 }
 
-func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Request[api_gen.SelectAccountRequest]) (*connect.Response[api_gen.SelectAccountResponse], error) {
+func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Request[api_gen.SelectAccountRequest]) (*connect.Response[api_gen.SelectAccountResponse], error) {
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
@@ -215,7 +215,7 @@ func (s *gnomobileService) SelectAccount(ctx context.Context, req *connect.Reque
 	}), nil
 }
 
-func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request[api_gen.SetPasswordRequest]) (*connect.Response[api_gen.SetPasswordResponse], error) {
+func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request[api_gen.SetPasswordRequest]) (*connect.Response[api_gen.SetPasswordResponse], error) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	if s.activeAccount == nil {
@@ -233,7 +233,7 @@ func (s *gnomobileService) SetPassword(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&api_gen.SetPasswordResponse{}), nil
 }
 
-func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Request[api_gen.GetActiveAccountRequest]) (*connect.Response[api_gen.GetActiveAccountResponse], error) {
+func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Request[api_gen.GetActiveAccountRequest]) (*connect.Response[api_gen.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
 
 	s.lock.RLock()
@@ -255,7 +255,7 @@ func (s *gnomobileService) GetActiveAccount(ctx context.Context, req *connect.Re
 	}), nil
 }
 
-func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
+func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
 	// gnoclient wants the bech32 address.
@@ -282,7 +282,7 @@ func (s *gnomobileService) QueryAccount(ctx context.Context, req *connect.Reques
 	return res, nil
 }
 
-func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
+func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -298,7 +298,7 @@ func (s *gnomobileService) DeleteAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&api_gen.DeleteAccountResponse{}), nil
 }
 
-func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[api_gen.QueryRequest]) (*connect.Response[api_gen.QueryResponse], error) {
+func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_gen.QueryRequest]) (*connect.Response[api_gen.QueryResponse], error) {
 	s.logger.Debug("Query", zap.String("path", req.Msg.Path), zap.ByteString("data", req.Msg.Data))
 
 	cfg := gnoclient.QueryCfg{
@@ -314,7 +314,7 @@ func (s *gnomobileService) Query(ctx context.Context, req *connect.Request[api_g
 	return connect.NewResponse(&api_gen.QueryResponse{Result: bres.Response.Data}), nil
 }
 
-func (s *gnomobileService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
+func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
 	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
 
 	result, _, err := s.client.Render(req.Msg.PackagePath, req.Msg.Args)
@@ -325,7 +325,7 @@ func (s *gnomobileService) Render(ctx context.Context, req *connect.Request[api_
 	return connect.NewResponse(&api_gen.RenderResponse{Result: result}), nil
 }
 
-func (s *gnomobileService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
+func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
 	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
 	result, _, err := s.client.QEval(req.Msg.PackagePath, req.Msg.Expression)
@@ -336,7 +336,7 @@ func (s *gnomobileService) QEval(ctx context.Context, req *connect.Request[api_g
 	return connect.NewResponse(&api_gen.QEvalResponse{Result: result}), nil
 }
 
-func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
+func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
 	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
 
 	s.lock.RLock()
@@ -371,13 +371,13 @@ func (s *gnomobileService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
-func (s *gnomobileService) AddressToBech32(ctx context.Context, req *connect.Request[api_gen.AddressToBech32Request]) (*connect.Response[api_gen.AddressToBech32Response], error) {
+func (s *gnoNativeService) AddressToBech32(ctx context.Context, req *connect.Request[api_gen.AddressToBech32Request]) (*connect.Response[api_gen.AddressToBech32Response], error) {
 	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
 	bech32Address := crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))
 	return connect.NewResponse(&api_gen.AddressToBech32Response{Bech32Address: bech32Address}), nil
 }
 
-func (s *gnomobileService) AddressFromBech32(ctx context.Context, req *connect.Request[api_gen.AddressFromBech32Request]) (*connect.Response[api_gen.AddressFromBech32Response], error) {
+func (s *gnoNativeService) AddressFromBech32(ctx context.Context, req *connect.Request[api_gen.AddressFromBech32Request]) (*connect.Response[api_gen.AddressFromBech32Response], error) {
 	address, err := crypto.AddressFromBech32(req.Msg.Bech32Address)
 	if err != nil {
 		return nil, err
@@ -386,14 +386,14 @@ func (s *gnomobileService) AddressFromBech32(ctx context.Context, req *connect.R
 	return connect.NewResponse(&api_gen.AddressFromBech32Response{Address: address.Bytes()}), nil
 }
 
-func (s *gnomobileService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
+func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
 	return connect.NewResponse(&api_gen.HelloResponse{
 		Greeting: "Hello " + req.Msg.Name,
 	}), nil
 }
 
 // HelloStream is for debug purposes
-func (s *gnomobileService) HelloStream(ctx context.Context, req *connect.Request[api_gen.HelloStreamRequest], stream *connect.ServerStream[api_gen.HelloStreamResponse]) error {
+func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request[api_gen.HelloStreamRequest], stream *connect.ServerStream[api_gen.HelloStreamResponse]) error {
 	s.logger.Debug("HelloStream called")
 	for i := 0; i < 4; i++ {
 		if err := stream.Send(&api_gen.HelloStreamResponse{

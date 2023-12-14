@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"strings"
 
-	"github.com/gnolang/gnomobile/service"
+	"github.com/gnolang/gnonative/service"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
 
@@ -46,7 +46,7 @@ func runMain(args []string) error {
 	{
 		root = &ffcli.Command{
 			ShortUsage:  "goclient [flag] <subcommand>",
-			ShortHelp:   "start a Go server of Gnomobile",
+			ShortHelp:   "start a Go server of GnoNative",
 			FlagSet:     fs,
 			Subcommands: []*ffcli.Command{uds(), tcp()},
 			Exec: func(ctx context.Context, args []string) error {
@@ -64,7 +64,7 @@ func runMain(args []string) error {
 
 func uds() *ffcli.Command {
 	fs := flag.NewFlagSet("goserver uds", flag.ExitOnError)
-	path := fs.String("path", "/tmp/gnomobile.sock", "path of the socket to listen to")
+	path := fs.String("path", "/tmp/gnonative.sock", "path of the socket to listen to")
 
 	return &ffcli.Command{
 		Name:       "uds",
@@ -72,7 +72,7 @@ func uds() *ffcli.Command {
 		ShortHelp:  "Listen on Unix Domain Socket",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, args []string) error {
-			options := []service.GnomobileOption{
+			options := []service.GnoNativeOption{
 				service.WithRemote(remote),
 			}
 
@@ -80,9 +80,9 @@ func uds() *ffcli.Command {
 				options = append(options, service.WithUdsPath(*path))
 			}
 
-			service, err := service.NewGnomobileService(options...)
+			service, err := service.NewGnoNativeService(options...)
 			if err != nil {
-				log.Fatalf("failed to run GnomobileService: %v", err)
+				log.Fatalf("failed to run GnoNativeService: %v", err)
 				os.Exit(1)
 			}
 			defer service.Close()
@@ -108,7 +108,7 @@ func tcp() *ffcli.Command {
 		ShortHelp:  "Listen on TCP",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, args []string) error {
-			options := []service.GnomobileOption{
+			options := []service.GnoNativeOption{
 				service.WithRemote(remote),
 				service.WithUseTcpListener(),
 			}
@@ -117,9 +117,9 @@ func tcp() *ffcli.Command {
 				options = append(options, service.WithTcpAddr(*addr))
 			}
 
-			service, err := service.NewGnomobileService(options...)
+			service, err := service.NewGnoNativeService(options...)
 			if err != nil {
-				log.Fatalf("failed to run GnomobileService: %v", err)
+				log.Fatalf("failed to run GnoNativeService: %v", err)
 				os.Exit(1)
 			}
 			defer service.Close()

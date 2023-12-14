@@ -1,4 +1,4 @@
-package gnomobiletypes
+package gnonativetypes
 
 type SetRemoteRequest struct {
 	Remote string `json:"remote" yaml:"remote"`

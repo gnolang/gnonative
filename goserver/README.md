@@ -1,6 +1,6 @@
 # Go server
 
-This Go executable run a Gnomobile service.
+This Go executable run a GnoNative service.
 
 ## Unix Domain Socket connection
 
@@ -8,7 +8,7 @@ The default path is `/tmp/socket`.
 
 `go run . uds`
 
-`go run . uds -path /tmp/gnomobile.sock`
+`go run . uds -path /tmp/gnonative.sock`
 
 ## TCP connection
 

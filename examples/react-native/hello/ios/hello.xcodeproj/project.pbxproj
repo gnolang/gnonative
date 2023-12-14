@@ -12,13 +12,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3310DF473105470FBA4883B6 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26928F07A2B14F638F3E7CF3 /* noop-file.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8AB390522A85415D00CB681E /* GnoCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB390512A85415D00CB681E /* GnoCore.xcframework */; };
 		8AB3905D2A85BA7D00CB681E /* GoBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905B2A85BA7C00CB681E /* GoBridge.m */; };
 		8AB3905E2A85BA7D00CB681E /* GoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905C2A85BA7C00CB681E /* GoBridge.swift */; };
 		8AB390602A85BD6000CB681E /* PromiseBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */; };
 		8AF1F6892A98ABBA0073D4D1 /* RootDir.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF1F6872A98ABBA0073D4D1 /* RootDir.m */; };
 		8AF1F68A2A98ABBA0073D4D1 /* RootDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF1F6882A98ABBA0073D4D1 /* RootDir.swift */; };
 		8AF1F68C2AA241430073D4D1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF1F68B2AA241430073D4D1 /* libresolv.tbd */; };
+		A5A602EC2B1E2B3900287011 /* GnoCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A602EB2B1E2B3900287011 /* GnoCore.xcframework */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		C18C66DA498A838570632F82 /* libPods-hello.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98579A04EAACC61B87C8F064 /* libPods-hello.a */; };
@@ -34,7 +34,6 @@
 		26928F07A2B14F638F3E7CF3 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "hello/noop-file.swift"; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-hello.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hello.debug.xcconfig"; path = "Target Support Files/Pods-hello/Pods-hello.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-hello.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hello.release.xcconfig"; path = "Target Support Files/Pods-hello/Pods-hello.release.xcconfig"; sourceTree = "<group>"; };
-		8AB390512A85415D00CB681E /* GnoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GnoCore.xcframework; path = Frameworks/GnoCore.xcframework; sourceTree = "<group>"; };
 		8AB3905B2A85BA7C00CB681E /* GoBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoBridge.m; sourceTree = "<group>"; };
 		8AB3905C2A85BA7C00CB681E /* GoBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoBridge.swift; sourceTree = "<group>"; };
 		8AB3905F2A85BD6000CB681E /* PromiseBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseBlock.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		8AF1F6882A98ABBA0073D4D1 /* RootDir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootDir.swift; sourceTree = "<group>"; };
 		8AF1F68B2AA241430073D4D1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		98579A04EAACC61B87C8F064 /* libPods-hello.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hello.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A602EB2B1E2B3900287011 /* GnoCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GnoCore.xcframework; path = ../../../../framework/ios/GnoCore.xcframework; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = hello/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B11419FF73544E34A5C7A3A2 /* hello-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "hello-Bridging-Header.h"; path = "hello/hello-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
@@ -54,8 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5A602EC2B1E2B3900287011 /* GnoCore.xcframework in Frameworks */,
 				8AF1F68C2AA241430073D4D1 /* libresolv.tbd in Frameworks */,
-				8AB390522A85415D00CB681E /* GnoCore.xcframework in Frameworks */,
 				C18C66DA498A838570632F82 /* libPods-hello.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,8 +83,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5A602EB2B1E2B3900287011 /* GnoCore.xcframework */,
 				8AF1F68B2AA241430073D4D1 /* libresolv.tbd */,
-				8AB390512A85415D00CB681E /* GnoCore.xcframework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				98579A04EAACC61B87C8F064 /* libPods-hello.a */,
 			);
@@ -524,10 +524,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
@@ -595,10 +592,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

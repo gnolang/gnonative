@@ -1,14 +1,14 @@
 import React, { createContext, useEffect, useRef } from 'react';
-import { useGno, GnoResponse } from '@gno/hooks/use-gno';
+import { GnoResponse, useGno } from '@gno/hooks/use-gno';
 import { AppState } from 'react-native';
 
-interface GnomobileContextProps {
+interface GnoNativeContextProps {
   gno: GnoResponse;
 }
 
-export const GnomobileContext = createContext<GnomobileContextProps | null>(null);
+export const GnoNativeContext = createContext<GnoNativeContextProps | null>(null);
 
-export const GnomobileProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+export const GnoNativeProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const gno = useGno();
 
   const appState = useRef(AppState.currentState);
@@ -34,5 +34,5 @@ export const GnomobileProvider: React.FC<React.PropsWithChildren<unknown>> = ({ 
     };
   }, []);
 
-  return <GnomobileContext.Provider value={{ gno }}>{children}</GnomobileContext.Provider>;
+  return <GnoNativeContext.Provider value={{ gno }}>{children}</GnoNativeContext.Provider>;
 };

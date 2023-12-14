@@ -10,7 +10,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/commands"
 
 	// TODO: move these out.
-	"github.com/gnolang/gnomobile/api/gnomobiletypes"
+	"github.com/gnolang/gnonative/api/gnonativetypes"
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 
 func execGen(_ context.Context, _ []string) error {
 	pkgs := []*amino.Package{
-		gnomobiletypes.Package,
+		gnonativetypes.Package,
 	}
 
 	for _, pkg := range pkgs {

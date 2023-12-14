@@ -2,43 +2,40 @@ import {
   KeyInfo,
   SetRemoteRequest,
   SetRemoteResponse,
-} from "./gnomobiletypes_pb";
-import { GetRemoteRequest } from "./gnomobiletypes_pb";
-import { SetChainIDRequest, SetChainIDResponse } from "./gnomobiletypes_pb";
-import { GetChainIDRequest } from "./gnomobiletypes_pb";
-import {
-  SetPasswordRequest,
-  SetPasswordResponse,
-} from "./gnomobiletypes_pb";
-import { SelectAccountRequest } from "./gnomobiletypes_pb";
-import { SelectAccountResponse } from "./gnomobiletypes_pb";
-import { CreateAccountRequest } from "./gnomobiletypes_pb";
-import { GenerateRecoveryPhraseRequest } from "./gnomobiletypes_pb";
-import { ListKeyInfoRequest } from "./gnomobiletypes_pb";
-import { HasKeyByNameRequest } from "./gnomobiletypes_pb";
-import { HasKeyByAddressRequest } from "./gnomobiletypes_pb";
-import { HasKeyByNameOrAddressRequest } from "./gnomobiletypes_pb";
-import { GetKeyInfoByNameRequest } from "./gnomobiletypes_pb";
-import { GetKeyInfoByAddressRequest } from "./gnomobiletypes_pb";
-import { GetKeyInfoByNameOrAddressRequest } from "./gnomobiletypes_pb";
-import { GetActiveAccountRequest } from "./gnomobiletypes_pb";
-import { GetActiveAccountResponse } from "./gnomobiletypes_pb";
-import { QueryAccountRequest } from "./gnomobiletypes_pb";
-import { QueryAccountResponse } from "./gnomobiletypes_pb";
+} from "./gnonativetypes_pb";
+import { GetRemoteRequest } from "./gnonativetypes_pb";
+import { SetChainIDRequest, SetChainIDResponse } from "./gnonativetypes_pb";
+import { GetChainIDRequest } from "./gnonativetypes_pb";
+import { SetPasswordRequest, SetPasswordResponse } from "./gnonativetypes_pb";
+import { SelectAccountRequest } from "./gnonativetypes_pb";
+import { SelectAccountResponse } from "./gnonativetypes_pb";
+import { CreateAccountRequest } from "./gnonativetypes_pb";
+import { GenerateRecoveryPhraseRequest } from "./gnonativetypes_pb";
+import { ListKeyInfoRequest } from "./gnonativetypes_pb";
+import { HasKeyByNameRequest } from "./gnonativetypes_pb";
+import { HasKeyByAddressRequest } from "./gnonativetypes_pb";
+import { HasKeyByNameOrAddressRequest } from "./gnonativetypes_pb";
+import { GetKeyInfoByNameRequest } from "./gnonativetypes_pb";
+import { GetKeyInfoByAddressRequest } from "./gnonativetypes_pb";
+import { GetKeyInfoByNameOrAddressRequest } from "./gnonativetypes_pb";
+import { GetActiveAccountRequest } from "./gnonativetypes_pb";
+import { GetActiveAccountResponse } from "./gnonativetypes_pb";
+import { QueryAccountRequest } from "./gnonativetypes_pb";
+import { QueryAccountResponse } from "./gnonativetypes_pb";
 import {
   DeleteAccountRequest,
   DeleteAccountResponse,
-} from "./gnomobiletypes_pb";
-import { QueryRequest } from "./gnomobiletypes_pb";
-import { QueryResponse } from "./gnomobiletypes_pb";
-import { RenderRequest } from "./gnomobiletypes_pb";
-import { QEvalRequest } from "./gnomobiletypes_pb";
-import { CallRequest } from "./gnomobiletypes_pb";
-import { CallResponse } from "./gnomobiletypes_pb";
-import { AddressToBech32Request } from "./gnomobiletypes_pb";
-import { AddressFromBech32Request } from "./gnomobiletypes_pb";
+} from "./gnonativetypes_pb";
+import { QueryRequest } from "./gnonativetypes_pb";
+import { QueryResponse } from "./gnonativetypes_pb";
+import { RenderRequest } from "./gnonativetypes_pb";
+import { QEvalRequest } from "./gnonativetypes_pb";
+import { CallRequest } from "./gnonativetypes_pb";
+import { CallResponse } from "./gnonativetypes_pb";
+import { AddressToBech32Request } from "./gnonativetypes_pb";
+import { AddressFromBech32Request } from "./gnonativetypes_pb";
 import { PromiseClient } from "@connectrpc/connect";
-import { GnomobileService } from "./rpc_connect";
+import { GnonativeService } from "./rpc_connect";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 
@@ -52,7 +49,7 @@ export interface GnoResponse {
   createAccount: (
     nameOrBech32: string,
     mnemonic: string,
-    password: string
+    password: string,
   ) => Promise<GnoAccount | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<GnoAccount[]>;
@@ -62,7 +59,7 @@ export interface GnoResponse {
   getKeyInfoByName: (name: string) => Promise<GnoAccount | undefined>;
   getKeyInfoByAddress: (address: Uint8Array) => Promise<GnoAccount | undefined>;
   getKeyInfoByNameOrAddress: (
-    nameOrBech32: string
+    nameOrBech32: string,
   ) => Promise<GnoAccount | undefined>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
@@ -71,7 +68,7 @@ export interface GnoResponse {
   deleteAccount: (
     nameOrBech32: string,
     password: string | undefined,
-    skipPassword: boolean
+    skipPassword: boolean,
   ) => Promise<DeleteAccountResponse>;
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
@@ -83,7 +80,7 @@ export interface GnoResponse {
     gasFee: string,
     gasWanted: number,
     send?: string,
-    memo?: string
+    memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
@@ -91,7 +88,7 @@ export interface GnoResponse {
   initBridge: () => Promise<void>;
 }
 
-let clientInstance: PromiseClient<typeof GnomobileService> | undefined =
+let clientInstance: PromiseClient<typeof GnonativeService> | undefined =
   undefined;
 let bridgeInstance = false;
 
@@ -111,13 +108,13 @@ export const useGno = (): GnoResponse => {
       httpVersion: "1.1",
     });
 
-    clientInstance = createPromiseClient(GnomobileService, transport);
+    clientInstance = createPromiseClient(GnonativeService, transport);
 
     console.log("Creating GRPC client instance... done.");
 
     // Set the initial configuration where it's different from the default.
     await clientInstance.setRemote(
-      new SetRemoteRequest({ remote: "testnet.gno.berty.io:26657" })
+      new SetRemoteRequest({ remote: "testnet.gno.berty.io:26657" }),
     );
 
     return clientInstance;
@@ -156,7 +153,7 @@ export const useGno = (): GnoResponse => {
   const setChainID = async (chainId: string) => {
     const client = await getClient();
     const response = await client.setChainID(
-      new SetChainIDRequest({ chainId })
+      new SetChainIDRequest({ chainId }),
     );
     return response;
   };
@@ -170,7 +167,7 @@ export const useGno = (): GnoResponse => {
   const createAccount = async (
     nameOrBech32: string,
     mnemonic: string,
-    password: string
+    password: string,
   ) => {
     const client = await getClient();
     const reponse = await client.createAccount(
@@ -178,7 +175,7 @@ export const useGno = (): GnoResponse => {
         nameOrBech32,
         mnemonic,
         password,
-      })
+      }),
     );
     return reponse.key;
   };
@@ -186,7 +183,7 @@ export const useGno = (): GnoResponse => {
   const generateRecoveryPhrase = async () => {
     const client = await getClient();
     const response = await client.generateRecoveryPhrase(
-      new GenerateRecoveryPhraseRequest()
+      new GenerateRecoveryPhraseRequest(),
     );
     return response.phrase;
   };
@@ -194,7 +191,7 @@ export const useGno = (): GnoResponse => {
   const hasKeyByName = async (name: string) => {
     const client = await getClient();
     const response = await client.hasKeyByName(
-      new HasKeyByNameRequest({ name })
+      new HasKeyByNameRequest({ name }),
     );
     return response.has;
   };
@@ -202,7 +199,7 @@ export const useGno = (): GnoResponse => {
   const hasKeyByAddress = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.hasKeyByAddress(
-      new HasKeyByAddressRequest({ address })
+      new HasKeyByAddressRequest({ address }),
     );
     return response.has;
   };
@@ -210,7 +207,7 @@ export const useGno = (): GnoResponse => {
   const hasKeyByNameOrAddress = async (nameOrBech32: string) => {
     const client = await getClient();
     const response = await client.hasKeyByNameOrAddress(
-      new HasKeyByNameOrAddressRequest({ nameOrBech32 })
+      new HasKeyByNameOrAddressRequest({ nameOrBech32 }),
     );
     return response.has;
   };
@@ -218,7 +215,7 @@ export const useGno = (): GnoResponse => {
   const getKeyInfoByName = async (name: string) => {
     const client = await getClient();
     const response = await client.getKeyInfoByName(
-      new GetKeyInfoByNameRequest({ name })
+      new GetKeyInfoByNameRequest({ name }),
     );
     return response.key;
   };
@@ -226,7 +223,7 @@ export const useGno = (): GnoResponse => {
   const getKeyInfoByAddress = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.getKeyInfoByAddress(
-      new GetKeyInfoByAddressRequest({ address })
+      new GetKeyInfoByAddressRequest({ address }),
     );
     return response.key;
   };
@@ -234,7 +231,7 @@ export const useGno = (): GnoResponse => {
   const getKeyInfoByNameOrAddress = async (nameOrBech32: string) => {
     const client = await getClient();
     const response = await client.getKeyInfoByNameOrAddress(
-      new GetKeyInfoByNameOrAddressRequest({ nameOrBech32 })
+      new GetKeyInfoByNameOrAddressRequest({ nameOrBech32 }),
     );
     return response.key;
   };
@@ -250,7 +247,7 @@ export const useGno = (): GnoResponse => {
     const response = await client.selectAccount(
       new SelectAccountRequest({
         nameOrBech32,
-      })
+      }),
     );
     return response;
   };
@@ -258,7 +255,7 @@ export const useGno = (): GnoResponse => {
   const setPassword = async (password: string) => {
     const client = await getClient();
     const response = await client.setPassword(
-      new SetPasswordRequest({ password })
+      new SetPasswordRequest({ password }),
     );
     return response;
   };
@@ -266,7 +263,7 @@ export const useGno = (): GnoResponse => {
   const getActiveAccount = async () => {
     const client = await getClient();
     const response = await client.getActiveAccount(
-      new GetActiveAccountRequest()
+      new GetActiveAccountRequest(),
     );
     return response;
   };
@@ -274,7 +271,7 @@ export const useGno = (): GnoResponse => {
   const queryAccount = async (address: Uint8Array) => {
     const client = await getClient();
     const reponse = await client.queryAccount(
-      new QueryAccountRequest({ address })
+      new QueryAccountRequest({ address }),
     );
     return reponse;
   };
@@ -282,7 +279,7 @@ export const useGno = (): GnoResponse => {
   const deleteAccount = async (
     nameOrBech32: string,
     password: string | undefined,
-    skipPassword: boolean
+    skipPassword: boolean,
   ) => {
     const client = await getClient();
     const response = await client.deleteAccount(
@@ -290,7 +287,7 @@ export const useGno = (): GnoResponse => {
         nameOrBech32,
         password,
         skipPassword,
-      })
+      }),
     );
     return response;
   };
@@ -301,7 +298,7 @@ export const useGno = (): GnoResponse => {
       new QueryRequest({
         path,
         data,
-      })
+      }),
     );
     return reponse;
   };
@@ -312,7 +309,7 @@ export const useGno = (): GnoResponse => {
       new RenderRequest({
         packagePath,
         args,
-      })
+      }),
     );
     return reponse.result;
   };
@@ -323,7 +320,7 @@ export const useGno = (): GnoResponse => {
       new QEvalRequest({
         packagePath,
         expression,
-      })
+      }),
     );
     return reponse.result;
   };
@@ -335,7 +332,7 @@ export const useGno = (): GnoResponse => {
     gasFee: string,
     gasWanted: number,
     send?: string,
-    memo?: string
+    memo?: string,
   ) => {
     const client = await getClient();
     const reponse = client.call(
@@ -347,7 +344,7 @@ export const useGno = (): GnoResponse => {
         gasWanted: BigInt(gasWanted),
         send,
         memo,
-      })
+      }),
     );
     return reponse;
   };
@@ -355,7 +352,7 @@ export const useGno = (): GnoResponse => {
   const addressToBech32 = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.addressToBech32(
-      new AddressToBech32Request({ address })
+      new AddressToBech32Request({ address }),
     );
     return response.bech32Address;
   };
@@ -363,7 +360,7 @@ export const useGno = (): GnoResponse => {
   const addressFromBech32 = async (bech32Address: string) => {
     const client = await getClient();
     const response = await client.addressFromBech32(
-      new AddressFromBech32Request({ bech32Address })
+      new AddressFromBech32Request({ bech32Address }),
     );
     return response.address;
   };

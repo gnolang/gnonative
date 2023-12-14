@@ -7,16 +7,16 @@ import com.facebook.react.bridge.ReactMethod;
 
 import java.io.File;
 
-import gnolang.gno.gnomobile.Gnomobile;
-import gnolang.gno.gnomobile.Bridge;
-import gnolang.gno.gnomobile.BridgeConfig;
+import gnolang.gno.gnonative.Gnonative;
+import gnolang.gno.gnonative.Bridge;
+import gnolang.gno.gnonative.BridgeConfig;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
     private final ReactApplicationContext reactContext;
     private final File rootDir;
     private int socketPort;
-    private static Bridge bridgeGnomobile = null;
+    private static Bridge bridgeGnoNative = null;
 
     public GoBridgeModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -37,7 +37,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void initBridge(Promise promise) {
         try {
-            final BridgeConfig config = Gnomobile.newBridgeConfig();
+            final BridgeConfig config = Gnonative.newBridgeConfig();
             if (config == null) {
                 throw new Exception("");
             }
@@ -46,8 +46,8 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             config.setUseTcpListener(true);
             config.setDisableUdsListener(true);
 
-            bridgeGnomobile = Gnomobile.newBridge(config);
-            socketPort = (int)bridgeGnomobile.getTcpPort();
+            bridgeGnoNative = Gnonative.newBridge(config);
+            socketPort = (int)bridgeGnoNative.getTcpPort();
 
             promise.resolve(true);
         } catch (Exception err) {
@@ -58,9 +58,9 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void closeBridge(Promise promise) {
         try {
-            if (bridgeGnomobile != null) {
-                bridgeGnomobile.close();
-                bridgeGnomobile = null;
+            if (bridgeGnoNative != null) {
+                bridgeGnoNative.close();
+                bridgeGnoNative = null;
             }
             promise.resolve(true);
         } catch (Exception err) {
@@ -70,7 +70,7 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getTcpPort(Promise promise) {
-        if (bridgeGnomobile == null) {
+        if (bridgeGnoNative == null) {
             promise.reject(new Exception("bridge not init"));
             return ;
         }

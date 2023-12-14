@@ -52,7 +52,7 @@ function DevMode() {
   };
 
   const loadInBrowser = () => {
-    Linking.openURL('http://testnet.gno.berty.io/r/demo/boards:gnomobile/1').catch((err) => console.error("Couldn't load page", err));
+    Linking.openURL('http://testnet.gno.berty.io/r/demo/boards:gnonative/1').catch((err) => console.error("Couldn't load page", err));
   };
 
   const onCloseReenterPassword = async () => {
@@ -60,7 +60,10 @@ function DevMode() {
   };
 
   const onRenderBoard = async () => {
-    navigate.navigate(RoutePath.Board, { board: 'gno.land/r/demo/boards', thread: 'gnomobile/1' });
+    navigate.navigate(RoutePath.Board, {
+      board: 'gno.land/r/demo/boards',
+      thread: 'gnonative/1',
+    });
   };
 
   return (

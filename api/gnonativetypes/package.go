@@ -1,4 +1,4 @@
-package gnomobiletypes
+package gnonativetypes
 
 import (
 	"path"
@@ -7,10 +7,10 @@ import (
 )
 
 var Package = amino.RegisterPackage(amino.NewPackage(
-	"github.com/gnolang/gnomobile/api/gnomobiletypes",
-	"land.gno.gnomobile.v1",
+	"github.com/gnolang/gnonative/api/gnonativetypes",
+	"land.gno.gnonative.v1",
 	path.Join(amino.GetCallersDirname(), ".."),
-).WithP3GoPkgPath("github.com/gnolang/gnomobile/api/gen/go").
+).WithP3GoPkgPath("github.com/gnolang/gnonative/api/gen/go").
 	WithDependencies().WithTypes(
 	SetRemoteRequest{},
 	SetRemoteResponse{},
@@ -67,4 +67,4 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	HelloResponse{},
 	HelloStreamRequest{},
 	HelloStreamResponse{},
-).WithComments(path.Join(amino.GetCallersDirname(), "gnomobiletypes.go")))
+).WithComments(path.Join(amino.GetCallersDirname(), "gnonativetypes.go")))

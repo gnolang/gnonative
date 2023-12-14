@@ -14,7 +14,7 @@ let promisesQueue = DispatchQueue(label: "land.gno.gnoboard.promises.queue")
 
 // PromiseBlock aim to keep reference over promise object so go can play with
 // until the promise is resolved
-class PromiseBlock: NSObject, GnoGnomobilePromiseBlockProtocol {
+class PromiseBlock: NSObject, GnoGnonativePromiseBlockProtocol {
   
   var resolve: RCTPromiseResolveBlock
   var reject: RCTPromiseRejectBlock

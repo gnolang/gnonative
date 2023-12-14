@@ -10,7 +10,7 @@ import CurrentAccount from '@gno/components/account/CurrentAccoutn';
 import { useGno } from '@gno/hooks/use-gno';
 import Loading from '@gno/screens/loading';
 import { GnoAccount } from '@gno/native_modules/types';
-import { QueryAccountResponse } from '@gno/api/gnomobiletypes_pb';
+import { QueryAccountResponse } from '@gno/api/gnonativetypes_pb';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
 import { ConnectError } from '@connectrpc/connect';
@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
   return (
     <Layout.Container>
       <Layout.Body>
-        <Text.Title>Gnomobile</Text.Title>
+        <Text.Title>Gno Native Kit</Text.Title>
         <CurrentAccount account={account} />
         <AccountBalance accountInfo={balance?.accountInfo} unknownAddress={unknownAddress} />
         <ButtonGroup>

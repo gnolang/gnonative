@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	api_gen "github.com/gnolang/gnomobile/api/gen/go"
+	api_gen "github.com/gnolang/gnonative/api/gen/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -13,7 +13,7 @@ const DEFAULT_TCP_ADDR = ":26658"
 const DEFAULT_SOCKET_SUBDIR = "s"
 const DEFAULT_SOCKET_FILE = "gno"
 
-// Config describes a set of settings for a GnomobileService
+// Config describes a set of settings for a GnoNativeService
 type Config struct {
 	Logger             *zap.Logger
 	Remote             string
@@ -26,10 +26,10 @@ type Config struct {
 	DisableUdsListener bool
 }
 
-type GnomobileOption func(cfg *Config) error
+type GnoNativeOption func(cfg *Config) error
 
-func (cfg *Config) applyOptions(opts ...GnomobileOption) error {
-	withDefaultOpts := make([]GnomobileOption, len(opts))
+func (cfg *Config) applyOptions(opts ...GnoNativeOption) error {
+	withDefaultOpts := make([]GnoNativeOption, len(opts))
 	copy(withDefaultOpts, opts)
 	withDefaultOpts = append(withDefaultOpts, WithFallbackDefaults)
 	for _, opt := range withDefaultOpts {
@@ -63,13 +63,13 @@ func (cfg *Config) checkDirs() error {
 // FallBackOption is a structure that permits to fallback to a default option if the option is not set.
 type FallBackOption struct {
 	fallback func(cfg *Config) bool
-	opt      GnomobileOption
+	opt      GnoNativeOption
 }
 
 // --- Logger options ---
 
 // WithLogger set the given logger.
-var WithLogger = func(l *zap.Logger) GnomobileOption {
+var WithLogger = func(l *zap.Logger) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.Logger = l
 		return nil
@@ -77,7 +77,7 @@ var WithLogger = func(l *zap.Logger) GnomobileOption {
 }
 
 // WithDefaultLogger init a noop logger.
-var WithDefaultLogger GnomobileOption = func(cfg *Config) error {
+var WithDefaultLogger GnoNativeOption = func(cfg *Config) error {
 	logger, err := zap.NewDevelopment()
 	if err != nil {
 		return err
@@ -94,7 +94,7 @@ var fallbackLogger = FallBackOption{
 }
 
 // WithFallbackLogger sets the logger if no logger is set.
-var WithFallbackLogger GnomobileOption = func(cfg *Config) error {
+var WithFallbackLogger GnoNativeOption = func(cfg *Config) error {
 	if fallbackLogger.fallback(cfg) {
 		return fallbackLogger.opt(cfg)
 	}
@@ -104,7 +104,7 @@ var WithFallbackLogger GnomobileOption = func(cfg *Config) error {
 // --- Remote options ---
 
 // WithRemote sets the given remote node address.
-var WithRemote = func(remote string) GnomobileOption {
+var WithRemote = func(remote string) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.Remote = remote
 		return nil
@@ -112,7 +112,7 @@ var WithRemote = func(remote string) GnomobileOption {
 }
 
 // WithDefaultRemote inits a default remote node address.
-var WithDefaultRemote GnomobileOption = func(cfg *Config) error {
+var WithDefaultRemote GnoNativeOption = func(cfg *Config) error {
 	cfg.Remote = "127.0.0.1:26657"
 	return nil
 }
@@ -123,7 +123,7 @@ var fallbackRemote = FallBackOption{
 }
 
 // WithFallbackRemote sets the remote node address if no address is set.
-var WithFallbacRemote GnomobileOption = func(cfg *Config) error {
+var WithFallbacRemote GnoNativeOption = func(cfg *Config) error {
 	if fallbackRemote.fallback(cfg) {
 		return fallbackRemote.opt(cfg)
 	}
@@ -133,7 +133,7 @@ var WithFallbacRemote GnomobileOption = func(cfg *Config) error {
 // --- ChainID options ---
 
 // WithChainID sets the given chain ID.
-var WithChainID = func(chainID string) GnomobileOption {
+var WithChainID = func(chainID string) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.ChainID = chainID
 		return nil
@@ -141,7 +141,7 @@ var WithChainID = func(chainID string) GnomobileOption {
 }
 
 // WithDefaultChainID sets a default chain ID.
-var WithDefaultChainID GnomobileOption = func(cfg *Config) error {
+var WithDefaultChainID GnoNativeOption = func(cfg *Config) error {
 	cfg.ChainID = "dev"
 
 	return nil
@@ -153,7 +153,7 @@ var fallbackChainID = FallBackOption{
 }
 
 // WithFallbackChainID sets the chain ID if no chain ID is set.
-var WithFallbacChainID GnomobileOption = func(cfg *Config) error {
+var WithFallbacChainID GnoNativeOption = func(cfg *Config) error {
 	if fallbackChainID.fallback(cfg) {
 		return fallbackChainID.opt(cfg)
 	}
@@ -163,7 +163,7 @@ var WithFallbacChainID GnomobileOption = func(cfg *Config) error {
 // --- RootDir options ---
 
 // WithRootDir sets the given root directory path.
-var WithRootDir = func(rootDir string) GnomobileOption {
+var WithRootDir = func(rootDir string) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.RootDir = rootDir
 		return nil
@@ -171,8 +171,8 @@ var WithRootDir = func(rootDir string) GnomobileOption {
 }
 
 // WithDefaultRootDir sets a default root directory in a temporary folder.
-var WithDefaultRootDir GnomobileOption = func(cfg *Config) error {
-	rootDir, err := os.MkdirTemp("", "gnomobile")
+var WithDefaultRootDir GnoNativeOption = func(cfg *Config) error {
+	rootDir, err := os.MkdirTemp("", "gnonative")
 	if err != nil {
 		return err
 	}
@@ -188,7 +188,7 @@ var fallbackRootDir = FallBackOption{
 }
 
 // WithFallbackRootDir sets the default root directory if no directory is set.
-var WithFallbackRootDir GnomobileOption = func(cfg *Config) error {
+var WithFallbackRootDir GnoNativeOption = func(cfg *Config) error {
 	if fallbackRootDir.fallback(cfg) {
 		return fallbackRootDir.opt(cfg)
 	}
@@ -198,7 +198,7 @@ var WithFallbackRootDir GnomobileOption = func(cfg *Config) error {
 // --- tmpDir options ---
 
 // WithTmpDir sets the given temporary path.
-var WithTmpDir = func(path string) GnomobileOption {
+var WithTmpDir = func(path string) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.TmpDir = path
 		return nil
@@ -206,7 +206,7 @@ var WithTmpDir = func(path string) GnomobileOption {
 }
 
 // WithDefaultTmpDir sets a default temporary path.
-var WithDefaultTmpDir GnomobileOption = func(cfg *Config) error {
+var WithDefaultTmpDir GnoNativeOption = func(cfg *Config) error {
 	// dependency
 	if err := WithFallbackRootDir(cfg); err != nil {
 		return err
@@ -223,7 +223,7 @@ var fallbackTmpDir = FallBackOption{
 }
 
 // WithFallbackTmpDir sets the default temporary path if no path is set.
-var WithFallbackTmpDir GnomobileOption = func(cfg *Config) error {
+var WithFallbackTmpDir GnoNativeOption = func(cfg *Config) error {
 	if fallbackTmpDir.fallback(cfg) {
 		return fallbackTmpDir.opt(cfg)
 	}
@@ -235,7 +235,7 @@ var WithFallbackTmpDir GnomobileOption = func(cfg *Config) error {
 // WithTcpAddr sets the given TCP address to serve the gRPC server.
 // If no TCP address is defined, a default will be used.
 // If the TCP port is set to 0, a random port number will be chosen.
-var WithTcpAddr = func(addr string) GnomobileOption {
+var WithTcpAddr = func(addr string) GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.TcpAddr = addr
 		return nil
@@ -243,7 +243,7 @@ var WithTcpAddr = func(addr string) GnomobileOption {
 }
 
 // WithDefaultTcpAddr sets a default TCP addr to listen to.
-var WithDefaultTcpAddr GnomobileOption = func(cfg *Config) error {
+var WithDefaultTcpAddr GnoNativeOption = func(cfg *Config) error {
 	cfg.TcpAddr = DEFAULT_TCP_ADDR
 
 	return nil
@@ -255,7 +255,7 @@ var fallbackTcpAddr = FallBackOption{
 }
 
 // WithDefaultTcpAddr sets a default TCP addr to listen to if no address is set.
-var WithFallbackTcpAddr GnomobileOption = func(cfg *Config) error {
+var WithFallbackTcpAddr GnoNativeOption = func(cfg *Config) error {
 	if fallbackTcpAddr.fallback(cfg) {
 		return fallbackTcpAddr.opt(cfg)
 	}
@@ -266,7 +266,7 @@ var WithFallbackTcpAddr GnomobileOption = func(cfg *Config) error {
 
 // WithUdsPath sets the given Unix Domain Socket path to serve the gRPC server.
 // If no UDS socket is defined, a default will be used.
-var WithUdsPath = func(path string) GnomobileOption {
+var WithUdsPath = func(path string) GnoNativeOption {
 	return func(cfg *Config) error {
 		absPath, err := filepath.Abs(path)
 		if err != nil {
@@ -279,7 +279,7 @@ var WithUdsPath = func(path string) GnomobileOption {
 }
 
 // WithDefaultUdsPath sets a default UDS path to listen to.
-var WithDefaultUdsPath GnomobileOption = func(cfg *Config) error {
+var WithDefaultUdsPath GnoNativeOption = func(cfg *Config) error {
 	// dependency
 	if err := WithFallbackTmpDir(cfg); err != nil {
 		return err
@@ -302,7 +302,7 @@ var fallbackUdsPath = FallBackOption{
 }
 
 // WithDefaultUdsPath sets a default UDS path to listen to if no path is set.
-var WithFallbackUdsPath GnomobileOption = func(cfg *Config) error {
+var WithFallbackUdsPath GnoNativeOption = func(cfg *Config) error {
 	if fallbackUdsPath.fallback(cfg) {
 		return fallbackUdsPath.opt(cfg)
 	}
@@ -312,7 +312,7 @@ var WithFallbackUdsPath GnomobileOption = func(cfg *Config) error {
 // --- listener options ---
 
 // WithUseTcpListener sets the gRPC server to serve on a TCP listener.
-var WithUseTcpListener = func() GnomobileOption {
+var WithUseTcpListener = func() GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.UseTcpListener = true
 		return nil
@@ -320,7 +320,7 @@ var WithUseTcpListener = func() GnomobileOption {
 }
 
 // WithDisableUdsListener sets the gRPC server to serve on a TCP listener.
-var WithDisableUdsListener = func() GnomobileOption {
+var WithDisableUdsListener = func() GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.DisableUdsListener = true
 		return nil
@@ -340,7 +340,7 @@ var defaults = []FallBackOption{
 }
 
 // WithFallbackDefaults sets the default options if no option is set.
-var WithFallbackDefaults GnomobileOption = func(cfg *Config) error {
+var WithFallbackDefaults GnoNativeOption = func(cfg *Config) error {
 	for _, def := range defaults {
 		if !def.fallback(cfg) {
 			continue

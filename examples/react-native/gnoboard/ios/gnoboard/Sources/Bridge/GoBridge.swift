@@ -8,7 +8,7 @@ class GoBridge: NSObject {
   let logger: Logger
   let appRootDir: String
   let tmpDir: String
-  var bridge: GnoGnomobileBridge?
+  var bridge: GnoGnonativeBridge?
   var socketPort: Int = 0
   
   static func requiresMainQueueSetup() -> Bool {
@@ -55,13 +55,13 @@ class GoBridge: NSObject {
     
     do {
       if self.bridge != nil {
-        throw NSError(domain: "land.gno.gnomobile", code: 1, userInfo: [NSLocalizedDescriptionKey : "already started"])
+        throw NSError(domain: "land.gno.gnonative", code: 1, userInfo: [NSLocalizedDescriptionKey : "already started"])
       }
       
       // init the bridge service
       
-      guard let config = GnoGnomobileBridgeConfig() else {
-        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "unable to create config"])
+      guard let config = GnoGnonativeBridgeConfig() else {
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "unable to create config"])
       }
       config.rootDir = self.appRootDir
       config.tmpDir = self.tmpDir
@@ -69,7 +69,7 @@ class GoBridge: NSObject {
       config.disableUdsListener = true
       config.useTcpListener = true
 
-      let bridge = GnoGnomobileNewBridge(config, &err);
+      let bridge = GnoGnonativeNewBridge(config, &err);
       if err != nil {
         throw err!
       }
@@ -88,7 +88,7 @@ class GoBridge: NSObject {
   @objc func getTcpPort(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
       if self.bridge == nil {
-        throw NSError(domain: "land.gno.gnomobile", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
       }
       resolve(self.socketPort)
     } catch let error as NSError {

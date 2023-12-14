@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	api_gen "github.com/gnolang/gnomobile/api/gen/go"
-	"github.com/gnolang/gnomobile/api/gen/go/_goconnect"
+	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"github.com/peterbourgon/unixtransport"
 )
@@ -46,7 +46,7 @@ func runMain(args []string) error {
 	{
 		root = &ffcli.Command{
 			ShortUsage:  "goclient <subcommand>",
-			ShortHelp:   "start a Go client of Gnomobile",
+			ShortHelp:   "start a Go client of GnoNative",
 			FlagSet:     fs,
 			Subcommands: []*ffcli.Command{uds(), tcp()},
 			Exec: func(ctx context.Context, args []string) error {
@@ -64,7 +64,7 @@ func runMain(args []string) error {
 
 func uds() *ffcli.Command {
 	fs := flag.NewFlagSet("goclient uds", flag.ExitOnError)
-	path := fs.String("path", "/tmp/gnomobile.sock", "absolute path of the socket")
+	path := fs.String("path", "/tmp/gnonative.sock", "absolute path of the socket")
 
 	return &ffcli.Command{
 		Name:       "uds",
@@ -92,7 +92,7 @@ func uds() *ffcli.Command {
 			// add a trailing colon
 			fullPath := fmt.Sprintf("http+unix://%s:", *path)
 
-			client := _goconnect.NewGnomobileServiceClient(
+			client := _goconnect.NewGnoNativeServiceClient(
 				httpClient,
 				fullPath,
 			)
@@ -116,7 +116,7 @@ func tcp() *ffcli.Command {
 		ShortHelp:  "Connect via TCP",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, args []string) error {
-			client := _goconnect.NewGnomobileServiceClient(
+			client := _goconnect.NewGnoNativeServiceClient(
 				http.DefaultClient,
 				*addr,
 			)
@@ -130,12 +130,12 @@ func tcp() *ffcli.Command {
 	}
 }
 
-func exampleAction(client _goconnect.GnomobileServiceClient) error {
+func exampleAction(client _goconnect.GnoNativeServiceClient) error {
 	res, err := client.Render(
 		context.Background(),
 		connect.NewRequest(&api_gen.RenderRequest{
 			PackagePath: "gno.land/r/demo/boards",
-			Args:        "gnomobile/1",
+			Args:        "gnonative/1",
 		}),
 	)
 	if err != nil {
