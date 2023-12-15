@@ -44,7 +44,8 @@ a terminal enter:
 
     sudo apt install curl git
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-    echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+    echo '. "$HOME/.asdf/asdf.sh"' >> ~/.profile
+    source ~/.profile
 
 Start a new terminal to get the changes to the environment .
 
