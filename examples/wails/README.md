@@ -48,7 +48,8 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 	config := framework.NewBridgeConfig()
 	config.UseTcpListener = true
-	config.RootDir = ""
+	config.RootDir = "."
+ 	config.DisableUdsListener = true
 	bridge, err := framework.NewBridge(config)
 	if err != nil {
 		fmt.Println(err)
@@ -66,7 +67,7 @@ Let's also copy the protobufs files we already generated for Typescript.
 
 ```bash
 cd frontend
-npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc/connect @connectrpc/connect-web @connectrpc/protoc-gen-connect-es
+npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc/connect @connectrpc/connect-web @connectrpc/protoc-gen-connect-es buffer
 
 mkdir -p src/api
 cp -r ../../../../api/gen/es/* ./src/api/
