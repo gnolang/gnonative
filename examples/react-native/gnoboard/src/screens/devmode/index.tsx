@@ -8,7 +8,7 @@ import Layout from '@gno/components/pages';
 import { useGno } from '@gno/hooks/use-gno';
 import { Buffer } from 'buffer';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
-import { ErrCode } from '@gno/api/rpc_pb';
+import { ErrCode } from '@api/rpc_pb';
 import { GRPCError } from '@gno/grpc/error';
 import { Spacer } from '@gno/components/row';
 import Text from '@gno/components/texts';

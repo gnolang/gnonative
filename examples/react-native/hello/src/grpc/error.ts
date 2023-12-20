@@ -1,4 +1,4 @@
-import { ErrCode } from '@gno/api/rpc_pb';
+import { ErrCode } from '@api/rpc_pb';
 import { Code, ConnectError } from '@connectrpc/connect';
 
 class GRPCError extends Error {
