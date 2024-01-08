@@ -69,11 +69,62 @@ Let's also copy the protobufs files we already generated for Typescript.
 cd frontend
 npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc/connect @connectrpc/connect-web @connectrpc/protoc-gen-connect-es buffer
 
-mkdir -p src/api
-cp -r ../../../../api/gen/es/* ./src/api/
-cp ../../../../templates/es/use-gno-web.ts ./src/api/use-gno.ts
+mkdir -p src/hooks
+cp ../../../../templates/es/use-gno-web.ts ./src/hooks/use-gno.ts
 cp ../../../../templates/images/logo-universal.png ./src/assets/images 
 ```
+### Set up `@api` alias
+
+The Typescript compiler must be able to resolve import paths starting by `@api` to find the API files.
+
+Copy and paste the following content into a patch file (e.g. `tsconfig.patch`):
+
+```diff
+@@ -18,7 +18,11 @@
+     "resolveJsonModule": true,
+     "isolatedModules": true,
+     "noEmit": true,
+-    "jsx": "react-jsx"
++    "jsx": "react-jsx",
++    "baseUrl": ".",
++    "paths": {
++      "@api/*": ["../../../../api/gen/es/*"]
++    }
+   },
+   "include": [
+     "src"
+```
+Copy and paste the following content into an other patch file (e.g. `vite.patch`):
+
+```diff
+@@ -1,7 +1,16 @@
+ import {defineConfig} from 'vite'
+ import react from '@vitejs/plugin-react'
++import path from 'path'
+ 
+ // https://vitejs.dev/config/
+ export default defineConfig({
+-  plugins: [react()]
++  plugins: [react()],
++  resolve: {
++    alias: [
++      {
++        find: '@api',
++        replacement: path.resolve(__dirname, '../../../../api/gen/es'),
++      },
++    ],
++  },
+ })
+```
+
+Apply the patches:
+
+```batch
+patch tsconfig.json < tsconfig.patch
+patch vite.config.ts < vite.patch
+```
+
+### Customize the render function
 
 Open `src/App.tsx` and replace the contents with the following code:
 
@@ -81,7 +132,7 @@ Open `src/App.tsx` and replace the contents with the following code:
 import { useEffect, useState } from "react";
 import logo from "./assets/images/logo-universal.png";
 import "./App.css";
-import { useGno } from "./api/use-gno";
+import { useGno } from "./hooks/use-gno";
 
 function App() {
   const [resultText, setResultText] = useState(
