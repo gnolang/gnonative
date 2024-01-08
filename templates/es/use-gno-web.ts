@@ -2,40 +2,43 @@ import {
   KeyInfo,
   SetRemoteRequest,
   SetRemoteResponse,
-} from "./gnonativetypes_pb";
-import { GetRemoteRequest } from "./gnonativetypes_pb";
-import { SetChainIDRequest, SetChainIDResponse } from "./gnonativetypes_pb";
-import { GetChainIDRequest } from "./gnonativetypes_pb";
-import { SetPasswordRequest, SetPasswordResponse } from "./gnonativetypes_pb";
-import { SelectAccountRequest } from "./gnonativetypes_pb";
-import { SelectAccountResponse } from "./gnonativetypes_pb";
-import { CreateAccountRequest } from "./gnonativetypes_pb";
-import { GenerateRecoveryPhraseRequest } from "./gnonativetypes_pb";
-import { ListKeyInfoRequest } from "./gnonativetypes_pb";
-import { HasKeyByNameRequest } from "./gnonativetypes_pb";
-import { HasKeyByAddressRequest } from "./gnonativetypes_pb";
-import { HasKeyByNameOrAddressRequest } from "./gnonativetypes_pb";
-import { GetKeyInfoByNameRequest } from "./gnonativetypes_pb";
-import { GetKeyInfoByAddressRequest } from "./gnonativetypes_pb";
-import { GetKeyInfoByNameOrAddressRequest } from "./gnonativetypes_pb";
-import { GetActiveAccountRequest } from "./gnonativetypes_pb";
-import { GetActiveAccountResponse } from "./gnonativetypes_pb";
-import { QueryAccountRequest } from "./gnonativetypes_pb";
-import { QueryAccountResponse } from "./gnonativetypes_pb";
+} from "@api/gnonativetypes_pb";
+import { GetRemoteRequest } from "@api/gnonativetypes_pb";
+import { SetChainIDRequest, SetChainIDResponse } from "@api/gnonativetypes_pb";
+import { GetChainIDRequest } from "@api/gnonativetypes_pb";
+import {
+  SetPasswordRequest,
+  SetPasswordResponse,
+} from "@api/gnonativetypes_pb";
+import { SelectAccountRequest } from "@api/gnonativetypes_pb";
+import { SelectAccountResponse } from "@api/gnonativetypes_pb";
+import { CreateAccountRequest } from "@api/gnonativetypes_pb";
+import { GenerateRecoveryPhraseRequest } from "@api/gnonativetypes_pb";
+import { ListKeyInfoRequest } from "@api/gnonativetypes_pb";
+import { HasKeyByNameRequest } from "@api/gnonativetypes_pb";
+import { HasKeyByAddressRequest } from "@api/gnonativetypes_pb";
+import { HasKeyByNameOrAddressRequest } from "@api/gnonativetypes_pb";
+import { GetKeyInfoByNameRequest } from "@api/gnonativetypes_pb";
+import { GetKeyInfoByAddressRequest } from "@api/gnonativetypes_pb";
+import { GetKeyInfoByNameOrAddressRequest } from "@api/gnonativetypes_pb";
+import { GetActiveAccountRequest } from "@api/gnonativetypes_pb";
+import { GetActiveAccountResponse } from "@api/gnonativetypes_pb";
+import { QueryAccountRequest } from "@api/gnonativetypes_pb";
+import { QueryAccountResponse } from "@api/gnonativetypes_pb";
 import {
   DeleteAccountRequest,
   DeleteAccountResponse,
-} from "./gnonativetypes_pb";
-import { QueryRequest } from "./gnonativetypes_pb";
-import { QueryResponse } from "./gnonativetypes_pb";
-import { RenderRequest } from "./gnonativetypes_pb";
-import { QEvalRequest } from "./gnonativetypes_pb";
-import { CallRequest } from "./gnonativetypes_pb";
-import { CallResponse } from "./gnonativetypes_pb";
-import { AddressToBech32Request } from "./gnonativetypes_pb";
-import { AddressFromBech32Request } from "./gnonativetypes_pb";
+} from "@api/gnonativetypes_pb";
+import { QueryRequest } from "@api/gnonativetypes_pb";
+import { QueryResponse } from "@api/gnonativetypes_pb";
+import { RenderRequest } from "@api/gnonativetypes_pb";
+import { QEvalRequest } from "@api/gnonativetypes_pb";
+import { CallRequest } from "@api/gnonativetypes_pb";
+import { CallResponse } from "@api/gnonativetypes_pb";
+import { AddressToBech32Request } from "@api/gnonativetypes_pb";
+import { AddressFromBech32Request } from "@api/gnonativetypes_pb";
 import { PromiseClient } from "@connectrpc/connect";
-import { gnonativeService } from "./rpc_connect";
+import { GnoNativeService } from "@api/rpc_connect";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-web";
 
@@ -88,7 +91,7 @@ export interface GnoResponse {
   initBridge: () => Promise<void>;
 }
 
-let clientInstance: PromiseClient<typeof GnonativeService> | undefined =
+let clientInstance: PromiseClient<typeof GnoNativeService> | undefined =
   undefined;
 let bridgeInstance = false;
 
@@ -107,7 +110,7 @@ export const useGno = (): GnoResponse => {
       baseUrl: "http://127.0.0.1:" + port,
     });
 
-    clientInstance = createPromiseClient(GnonativeService, transport);
+    clientInstance = createPromiseClient(GnoNativeService, transport);
 
     console.log("Creating GRPC client instance... done.");
 

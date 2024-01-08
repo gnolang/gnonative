@@ -35,7 +35,7 @@ import { CallResponse } from "./gnonativetypes_pb";
 import { AddressToBech32Request } from "./gnonativetypes_pb";
 import { AddressFromBech32Request } from "./gnonativetypes_pb";
 import { PromiseClient } from "@connectrpc/connect";
-import { GnonativeService } from "./rpc_connect";
+import { GnoNativeService } from "./rpc_connect";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 
@@ -88,7 +88,7 @@ export interface GnoResponse {
   initBridge: () => Promise<void>;
 }
 
-let clientInstance: PromiseClient<typeof GnonativeService> | undefined =
+let clientInstance: PromiseClient<typeof GnoNativeService> | undefined =
   undefined;
 let bridgeInstance = false;
 
@@ -108,7 +108,7 @@ export const useGno = (): GnoResponse => {
       httpVersion: "1.1",
     });
 
-    clientInstance = createPromiseClient(GnonativeService, transport);
+    clientInstance = createPromiseClient(GnoNativeService, transport);
 
     console.log("Creating GRPC client instance... done.");
 
