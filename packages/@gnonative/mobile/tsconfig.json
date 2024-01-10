@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "target": "es2015",
+        "declaration": true,
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        // "lib": [
+        //   "esnext.asynciterable"
+        // ],
+      },
+      "include": [
+        "./**/*",
+        // "../**/*"
+      ]
+}
