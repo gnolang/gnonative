@@ -10,3 +10,7 @@ plugins:
     out: ./api/gen/es
   - plugin: buf.build/connectrpc/es
     out: ./api/gen/es
+  - plugin: buf.build/protocolbuffers/csharp
+    out: ./api/gen/csharp
+  - plugin: buf.build/grpc/csharp
+    out: ./api/gen/csharp
