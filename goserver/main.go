@@ -37,7 +37,7 @@ func runMain(args []string) error {
 	// setup flags
 	var fs *flag.FlagSet
 	{
-		fs = flag.NewFlagSet("goclient", flag.ContinueOnError)
+		fs = flag.NewFlagSet("goserver", flag.ContinueOnError)
 	}
 
 	fs.StringVar(&remote, "remote", "http://testnet.gno.berty.io:26657", "address of the Gno node")
@@ -45,7 +45,7 @@ func runMain(args []string) error {
 	var root *ffcli.Command
 	{
 		root = &ffcli.Command{
-			ShortUsage:  "goclient [flag] <subcommand>",
+			ShortUsage:  "goserver [flag] <subcommand>",
 			ShortHelp:   "start a Go server of GnoNative",
 			FlagSet:     fs,
 			Subcommands: []*ffcli.Command{uds(), tcp()},
