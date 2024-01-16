@@ -19,9 +19,9 @@ Upon the installation complete, restart Unity to have the new NuGet menu. Select
 
 ## Copy API dependencies
 
-We will copy the generated GnoNative API files and gRPC C# stubs in `Assets/Gno`.
+We will copy the generated GnoNative API files and gRPC C# stubs into `Assets/Gno`.
 
-In a terminal, write this command (remplace ${gnonative} by the location where is gnonative in your filesystem):
+In a terminal, cd to your Unity project folder and write this command (replace ${gnonative} by the location where is gnonative in your filesystem):
 ```bash
 cp -r ${gnonative}/api/gen/csharp Assets/GnoNative
 ```
@@ -74,7 +74,7 @@ public class Hello : MonoBehaviour
 
 ```
 In the `Start()` function, we initialize the gRPC client with the gRPC Web protocol and use the default GnoNative port.
-In the `OnHello()` function, we do the `Hello` gRPC call and set the result into the `Text` object. This function can be trigger by a button for example.
+In the `OnHello()` function, we do the `Hello` gRPC call and set the result into the `Text` object. This function can be triggered by a button for example.
 
 Save the modifications and go back to Unity.
 
@@ -88,7 +88,7 @@ In the Hierarchy panel, click on the `+` sign and select `UI` and `Text - TextMe
 
 Now we have to attach these two objects to the script we wrote.
 
-In the `Hierarchy` panel, select the button. Scroll down on the `Inspector` (right panel) to find the `On Click` section and click on `+` to add a new action. Drag and drop the `UI Script` object to the `None (Object)` in this action, and replace `No Function` by `Hello` -> `OnHello ()`.
+In the `Hierarchy` panel, select the button. Scroll down on the `Inspector` (right panel) to find the `On Click` section and click on `+` to add a new action. Drag and drop the `UI Script` object to the `None (Object)` in this action, and replace `No Function` by `Hello.OnHello()`.
 
 In the `Hierarchy` panel, click on `UI Script`. In the `Inspector` panel, you can see the `Hello (Script)` section with the empty `Text` field. Drag and drop the `Text` object (in the `Hierarchy`) to this `Text` field (in the `Inspector`).
 
