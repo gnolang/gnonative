@@ -221,6 +221,21 @@ type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
 }
 
+type RunRequest struct {
+	// The code for the script package. Must have main().
+	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
+	Package   string `json:"package" yaml:"package"`
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	// Memo is optional
+	Memo string `json:"memo" yaml:"memo"`
+}
+
+type RunResponse struct {
+	// The "console" output from the run
+	Result string `json:"result" yaml:"result"`
+}
+
 type AddressToBech32Request struct {
 	Address []byte `json:"address" yaml:"address"`
 }

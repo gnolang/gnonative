@@ -95,6 +95,8 @@ const (
 	GnoNativeServiceQEvalProcedure = "/land.gno.gnonative.v1.GnoNativeService/QEval"
 	// GnoNativeServiceCallProcedure is the fully-qualified name of the GnoNativeService's Call RPC.
 	GnoNativeServiceCallProcedure = "/land.gno.gnonative.v1.GnoNativeService/Call"
+	// GnoNativeServiceRunProcedure is the fully-qualified name of the GnoNativeService's Run RPC.
+	GnoNativeServiceRunProcedure = "/land.gno.gnonative.v1.GnoNativeService/Run"
 	// GnoNativeServiceAddressToBech32Procedure is the fully-qualified name of the GnoNativeService's
 	// AddressToBech32 RPC.
 	GnoNativeServiceAddressToBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/AddressToBech32"
@@ -133,6 +135,7 @@ var (
 	gnoNativeServiceRenderMethodDescriptor                    = gnoNativeServiceServiceDescriptor.Methods().ByName("Render")
 	gnoNativeServiceQEvalMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("QEval")
 	gnoNativeServiceCallMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Call")
+	gnoNativeServiceRunMethodDescriptor                       = gnoNativeServiceServiceDescriptor.Methods().ByName("Run")
 	gnoNativeServiceAddressToBech32MethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressToBech32")
 	gnoNativeServiceAddressFromBech32MethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromBech32")
 	gnoNativeServiceHelloMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Hello")
@@ -221,6 +224,10 @@ type GnoNativeServiceClient interface {
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error)
+	// Temporarily load the code in package on the blockchain and run main() which can
+	// call realm functions and use println() to output to the "console".
+	// This returns the "console" output.
+	Run(context.Context, *connect.Request[_go.RunRequest]) (*connect.ServerStreamForClient[_go.RunResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -373,6 +380,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		run: connect.NewClient[_go.RunRequest, _go.RunResponse](
+			httpClient,
+			baseURL+GnoNativeServiceRunProcedure,
+			connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		addressToBech32: connect.NewClient[_go.AddressToBech32Request, _go.AddressToBech32Response](
 			httpClient,
 			baseURL+GnoNativeServiceAddressToBech32Procedure,
@@ -424,6 +437,7 @@ type gnoNativeServiceClient struct {
 	render                    *connect.Client[_go.RenderRequest, _go.RenderResponse]
 	qEval                     *connect.Client[_go.QEvalRequest, _go.QEvalResponse]
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
+	run                       *connect.Client[_go.RunRequest, _go.RunResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
 	hello                     *connect.Client[_go.HelloRequest, _go.HelloResponse]
@@ -540,6 +554,11 @@ func (c *gnoNativeServiceClient) Call(ctx context.Context, req *connect.Request[
 	return c.call.CallServerStream(ctx, req)
 }
 
+// Run calls land.gno.gnonative.v1.GnoNativeService.Run.
+func (c *gnoNativeServiceClient) Run(ctx context.Context, req *connect.Request[_go.RunRequest]) (*connect.ServerStreamForClient[_go.RunResponse], error) {
+	return c.run.CallServerStream(ctx, req)
+}
+
 // AddressToBech32 calls land.gno.gnonative.v1.GnoNativeService.AddressToBech32.
 func (c *gnoNativeServiceClient) AddressToBech32(ctx context.Context, req *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
 	return c.addressToBech32.CallUnary(ctx, req)
@@ -643,6 +662,10 @@ type GnoNativeServiceHandler interface {
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error
+	// Temporarily load the code in package on the blockchain and run main() which can
+	// call realm functions and use println() to output to the "console".
+	// This returns the "console" output.
+	Run(context.Context, *connect.Request[_go.RunRequest], *connect.ServerStream[_go.RunResponse]) error
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -791,6 +814,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceRunHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceRunProcedure,
+		svc.Run,
+		connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceAddressToBech32Handler := connect.NewUnaryHandler(
 		GnoNativeServiceAddressToBech32Procedure,
 		svc.AddressToBech32,
@@ -861,6 +890,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceQEvalHandler.ServeHTTP(w, r)
 		case GnoNativeServiceCallProcedure:
 			gnoNativeServiceCallHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRunProcedure:
+			gnoNativeServiceRunHandler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressToBech32Procedure:
 			gnoNativeServiceAddressToBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressFromBech32Procedure:
@@ -964,6 +995,10 @@ func (UnimplementedGnoNativeServiceHandler) QEval(context.Context, *connect.Requ
 
 func (UnimplementedGnoNativeServiceHandler) Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Call is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) Run(context.Context, *connect.Request[_go.RunRequest], *connect.ServerStream[_go.RunResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Run is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
