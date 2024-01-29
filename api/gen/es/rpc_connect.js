@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnonativetypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -290,6 +290,19 @@ export const GnoNativeService = {
       name: "Call",
       I: CallRequest,
       O: CallResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * Temporarily load the code in package on the blockchain and run main() which can
+     * call realm functions and use println() to output to the "console".
+     * This returns the "console" output.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Run
+     */
+    run: {
+      name: "Run",
+      I: RunRequest,
+      O: RunResponse,
       kind: MethodKind.ServerStreaming,
     },
     /**

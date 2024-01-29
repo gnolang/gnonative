@@ -111,6 +111,11 @@ service GnoNativeService {
   // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (stream CallResponse);
 
+  // Temporarily load the code in package on the blockchain and run main() which can
+  // call realm functions and use println() to output to the "console".
+  // This returns the "console" output.
+  rpc Run(RunRequest) returns (stream RunResponse);
+
   // Convert a byte array address to a bech32 string address.
   rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);
 

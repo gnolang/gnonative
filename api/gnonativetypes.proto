@@ -225,6 +225,21 @@ message CallResponse {
 	bytes result = 1;
 }
 
+message RunRequest {
+	// The code for the script package. Must have main().
+	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
+	string package = 1;
+	string gas_fee = 2;
+	sint64 gas_wanted = 3;
+	// Memo is optional
+	string memo = 4;
+}
+
+message RunResponse {
+	// The "console" output from the run
+	string result = 1;
+}
+
 message AddressToBech32Request {
 	bytes address = 1;
 }

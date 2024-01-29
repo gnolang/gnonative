@@ -59,6 +59,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	QEvalResponse{},
 	CallRequest{},
 	CallResponse{},
+	RunRequest{},
+	RunResponse{},
 	AddressToBech32Request{},
 	AddressToBech32Response{},
 	AddressFromBech32Request{},

@@ -371,6 +371,44 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
+func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
+	s.lock.RLock()
+	if s.activeAccount == nil {
+		s.lock.RUnlock()
+		return api_gen.ErrCode_ErrNoActiveAccount
+	}
+	s.lock.RUnlock()
+
+	memPkg := &std.MemPackage{
+		Files: []*std.MemFile{
+			{
+				Name: "main.gno",
+				Body: req.Msg.Package,
+			},
+		},
+	}
+	cfg := gnoclient.RunCfg{
+		Package:   memPkg,
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+
+	bres, err := s.client.Run(cfg)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.RunResponse{
+		Result: string(bres.DeliverTx.Data),
+	}); err != nil {
+		s.logger.Error("Run stream.Send returned error", zap.Error(err))
+		return err
+	}
+
+	return nil
+}
+
 func (s *gnoNativeService) AddressToBech32(ctx context.Context, req *connect.Request[api_gen.AddressToBech32Request]) (*connect.Response[api_gen.AddressToBech32Response], error) {
 	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
 	bech32Address := crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))
