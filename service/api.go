@@ -346,17 +346,18 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	}
 	s.lock.RUnlock()
 
-	cfg := gnoclient.CallCfg{
-		PkgPath:   req.Msg.PackagePath,
-		FuncName:  req.Msg.Fnc,
-		Args:      req.Msg.Args,
+	cfg := gnoclient.BaseTxCfg{
 		GasFee:    req.Msg.GasFee,
 		GasWanted: req.Msg.GasWanted,
-		Send:      req.Msg.Send,
 		Memo:      req.Msg.Memo,
 	}
 
-	bres, err := s.client.Call(cfg)
+	bres, err := s.client.Call(cfg, gnoclient.MsgCall{
+		PkgPath:  req.Msg.PackagePath,
+		FuncName: req.Msg.Fnc,
+		Args:     req.Msg.Args,
+		Send:     req.Msg.Send,
+	})
 	if err != nil {
 		return getGrpcError(err)
 	}
