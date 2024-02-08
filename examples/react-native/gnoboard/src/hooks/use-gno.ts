@@ -36,6 +36,7 @@ import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
 import { GnoNativeService } from '@gno/api/rpc_connect';
+import { HelloRequest, HelloStreamRequest } from '@gno/api/gnonativetypes_pb';
 
 export interface GnoResponse {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
@@ -100,7 +101,15 @@ export const useGno = (): GnoResponse => {
     console.log('Creating GRPC client instance... done.');
 
     // Set the initial configuration where it's different from the default.
-    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+    // await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+    console.log('remi: calling Hello');
+    const resp = await clientInstance.hello(new HelloRequest({ name: 'd4ryl00' }));
+    console.log('remi: hello response', resp);
+
+    console.log('remi: calling HelloStream');
+    for await (const resp of clientInstance.helloStream(new HelloStreamRequest({ name: 'd4ryl00' }))) {
+      console.log('remi: helloStream response', resp);
+    }
 
     return clientInstance;
   };

@@ -1,4 +1,4 @@
-import { GoBridgeInterface } from "./GoBridgeInterface";
+import { GoBridgeInterface } from './GoBridgeInterface';
 
 class NoopGoBridge implements GoBridgeInterface {
   initBridge() {
@@ -10,6 +10,22 @@ class NoopGoBridge implements GoBridgeInterface {
   }
 
   getTcpPort() {
+    return Promise.reject();
+  }
+
+  invokeGrpcMethod() {
+    return Promise.reject();
+  }
+
+  createStreamClient() {
+    return Promise.reject();
+  }
+
+  streamClientReceive() {
+    return Promise.reject();
+  }
+
+  closeStreamClient() {
     return Promise.reject();
   }
 }

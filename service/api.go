@@ -474,6 +474,8 @@ func (s *gnoNativeService) AddressFromBech32(ctx context.Context, req *connect.R
 }
 
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
+	s.logger.Debug("Hello called")
+	defer s.logger.Debug("Hello returned ok")
 	return connect.NewResponse(&api_gen.HelloResponse{
 		Greeting: "Hello " + req.Msg.Name,
 	}), nil

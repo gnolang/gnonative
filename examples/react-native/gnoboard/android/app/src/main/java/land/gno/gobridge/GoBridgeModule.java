@@ -1,5 +1,7 @@
 package land.gno.gobridge;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -10,6 +12,7 @@ import java.io.File;
 import gnolang.gno.gnonative.Gnonative;
 import gnolang.gno.gnonative.Bridge;
 import gnolang.gno.gnonative.BridgeConfig;
+import gnolang.gno.gnonative.PromiseBlock;
 
 public class GoBridgeModule extends ReactContextBaseJavaModule {
     private final static String TAG = "GoBridge";
@@ -44,7 +47,6 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
 
             config.setRootDir(rootDir.getAbsolutePath());
             config.setUseTcpListener(true);
-            config.setDisableUdsListener(true);
 
             bridgeGnoNative = Gnonative.newBridge(config);
             socketPort = (int)bridgeGnoNative.getTcpPort();
@@ -75,6 +77,62 @@ public class GoBridgeModule extends ReactContextBaseJavaModule {
             return ;
         }
         promise.resolve(socketPort);
+    }
+
+    @ReactMethod
+    public void invokeGrpcMethod(String method, String jsonMessage, Promise promise) {
+        try {
+            if (bridgeGnoNative == null) {
+                throw new Exception("bridge not init");
+            }
+
+            PromiseBlock promiseBlock = new JavaPromiseBlock(promise);
+            bridgeGnoNative.invokeGrpcMethodWithPromiseBlock(promiseBlock, method, jsonMessage);
+        } catch (Exception err) {
+            promise.reject(err);
+        }
+    }
+
+    @ReactMethod
+    public void createStreamClient(String method, String jsonMessage, Promise promise) {
+        try {
+            if (bridgeGnoNative == null) {
+                throw new Exception("bridge not init");
+            }
+
+            PromiseBlock promiseBlock = new JavaPromiseBlock(promise);
+            bridgeGnoNative.createStreamClientWithPromiseBlock(promiseBlock, method, jsonMessage);
+        } catch (Exception err) {
+            promise.reject(err);
+        }
+    }
+
+    @ReactMethod
+    public void streamClientReceive(String id, Promise promise) {
+        try {
+            if (bridgeGnoNative == null) {
+                throw new Exception("bridge not init");
+            }
+
+            PromiseBlock promiseBlock = new JavaPromiseBlock(promise);
+            bridgeGnoNative.streamClientReceiveWithPromiseBlock(promiseBlock, id);
+        } catch (Exception err) {
+            promise.reject(err);
+        }
+    }
+
+    @ReactMethod
+    public void closeStreamClient(String id, Promise promise) {
+        try {
+            if (bridgeGnoNative == null) {
+                throw new Exception("bridge not init");
+            }
+
+            PromiseBlock promiseBlock = new JavaPromiseBlock(promise);
+            bridgeGnoNative.closeStreamClientWithPromiseBlock(promiseBlock, id);
+        } catch (Exception err) {
+            promise.reject(err);
+        }
     }
 
     @Override
