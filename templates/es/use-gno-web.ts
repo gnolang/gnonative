@@ -30,6 +30,7 @@ import { QueryRequest } from "./gnonativetypes_pb";
 import { QueryResponse } from "./gnonativetypes_pb";
 import { RenderRequest } from "./gnonativetypes_pb";
 import { QEvalRequest } from "./gnonativetypes_pb";
+import { MsgCall } from '@gno/api/gnonativetypes_pb';
 import { CallRequest } from "./gnonativetypes_pb";
 import { CallResponse } from "./gnonativetypes_pb";
 import { AddressToBech32Request } from "./gnonativetypes_pb";

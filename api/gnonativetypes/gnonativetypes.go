@@ -204,17 +204,23 @@ type QEvalResponse struct {
 	Result string `json:"result" yaml:"result"`
 }
 
-type CallRequest struct {
+type MsgCall struct {
 	// Example: "gno.land/r/demo/boards"
 	PackagePath string `json:"package_path" yaml:"package_path"`
 	// Example: "CreateReply"
 	Fnc string `json:"fnc" yaml:"fnc"`
 	// list of arguments specific to the function
-	Args      []string `json:"args" yaml:"args"`
-	GasFee    string   `json:"gas_fee" yaml:"gas_fee"`
-	GasWanted int64    `json:"gas_wanted" yaml:"gas_wanted"`
-	Send      string   `json:"send" yaml:"send"`
-	Memo      string   `json:"memo" yaml:"memo"`
+	// Example: ["1", "1", "2", "my reply"]
+	Args []string `json:"args" yaml:"args"`
+	Send string   `json:"send" yaml:"send"`
+}
+
+type CallRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	Memo      string `json:"memo" yaml:"memo"`
+	// list of calls to make in one transaction
+	Msgs []MsgCall
 }
 
 type CallResponse struct {

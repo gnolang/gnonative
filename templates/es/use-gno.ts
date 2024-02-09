@@ -30,6 +30,7 @@ import { QueryRequest } from "./gnonativetypes_pb";
 import { QueryResponse } from "./gnonativetypes_pb";
 import { RenderRequest } from "./gnonativetypes_pb";
 import { QEvalRequest } from "./gnonativetypes_pb";
+import { MsgCall } from '@gno/api/gnonativetypes_pb';
 import { CallRequest } from "./gnonativetypes_pb";
 import { CallResponse } from "./gnonativetypes_pb";
 import { AddressToBech32Request } from "./gnonativetypes_pb";
@@ -337,13 +338,15 @@ export const useGno = (): GnoResponse => {
     const client = await getClient();
     const reponse = client.call(
       new CallRequest({
-        packagePath,
-        fnc,
-        args,
         gasFee,
         gasWanted: BigInt(gasWanted),
-        send,
         memo,
+        msgs: [new MsgCall({
+          packagePath,
+          fnc,
+          args,
+          send,
+        })],
       }),
     );
     return reponse;
