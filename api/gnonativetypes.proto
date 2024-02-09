@@ -208,17 +208,23 @@ message QEvalResponse {
 	string result = 1;
 }
 
-message CallRequest {
+message MsgCall {
 	// Example: "gno.land/r/demo/boards"
 	string package_path = 1;
 	// Example: "CreateReply"
 	string fnc = 2;
 	// list of arguments specific to the function
+	// Example: ["1", "1", "2", "my reply"]
 	repeated string args = 3;
-	string gas_fee = 4;
-	sint64 gas_wanted = 5;
-	string send = 6;
-	string memo = 7;
+	string send = 4;
+}
+
+message CallRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	string memo = 3;
+	// list of calls to make in one transaction
+	repeated MsgCall msgs = 4 [json_name = "Msgs"];
 }
 
 message CallResponse {

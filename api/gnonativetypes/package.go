@@ -57,6 +57,7 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	RenderResponse{},
 	QEvalRequest{},
 	QEvalResponse{},
+	MsgCall{},
 	CallRequest{},
 	CallResponse{},
 	RunRequest{},

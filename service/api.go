@@ -337,7 +337,9 @@ func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_g
 }
 
 func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
-	s.logger.Debug("Call", zap.String("package", req.Msg.PackagePath), zap.String("function", req.Msg.Fnc), zap.Any("args", req.Msg.Args))
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
+	}
 
 	s.lock.RLock()
 	if s.activeAccount == nil {
@@ -352,12 +354,18 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		Memo:      req.Msg.Memo,
 	}
 
-	bres, err := s.client.Call(cfg, gnoclient.MsgCall{
-		PkgPath:  req.Msg.PackagePath,
-		FuncName: req.Msg.Fnc,
-		Args:     req.Msg.Args,
-		Send:     req.Msg.Send,
-	})
+	msgs := make([]gnoclient.MsgCall, 0)
+
+	for _, msg := range req.Msg.Msgs {
+		msgs = append(msgs, gnoclient.MsgCall{
+			PkgPath:  msg.PackagePath,
+			FuncName: msg.Fnc,
+			Args:     msg.Args,
+			Send:     msg.Send,
+		})
+	}
+
+	bres, err := s.client.Call(cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
