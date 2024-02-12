@@ -347,13 +347,15 @@ export const useGno = (): GnoResponse => {
     const client = await getClient();
     const reponse = client.call(
       new CallRequest({
-        packagePath,
-        fnc,
-        args,
         gasFee,
         gasWanted: BigInt(gasWanted),
-        send,
         memo,
+        msgs: [new MsgCall({
+          packagePath,
+          fnc,
+          args,
+          send,
+        })],
       }),
     );
     return reponse;
