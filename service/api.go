@@ -380,6 +380,46 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
+func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("send", msg.Send))
+	}
+
+	s.lock.RLock()
+	if s.activeAccount == nil {
+		s.lock.RUnlock()
+		return api_gen.ErrCode_ErrNoActiveAccount
+	}
+	s.lock.RUnlock()
+
+	cfg := gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+
+	msgs := make([]gnoclient.MsgSend, 0)
+
+	for _, msg := range req.Msg.Msgs {
+		msgs = append(msgs, gnoclient.MsgSend{
+			ToAddress: crypto.AddressFromBytes(msg.ToAddress),
+			Send:      msg.Send,
+		})
+	}
+
+	_, err := s.client.Send(cfg, msgs...)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.SendResponse{}); err != nil {
+		s.logger.Error("Send stream.Send returned error", zap.Error(err))
+		return err
+	}
+
+	return nil
+}
+
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
 	s.lock.RLock()
 	if s.activeAccount == nil {

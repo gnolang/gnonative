@@ -499,6 +499,38 @@ export const CallResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnonative.v1.MsgSend
+ */
+export const MsgSend = proto3.makeMessageType(
+  "land.gno.gnonative.v1.MsgSend",
+  () => [
+    { no: 1, name: "to_address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendRequest
+ */
+export const SendRequest = proto3.makeMessageType(
+  "land.gno.gnonative.v1.SendRequest",
+  () => [
+    { no: 1, name: "gas_fee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+    { no: 3, name: "memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "msgs", jsonName: "Msgs", kind: "message", T: MsgSend, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendResponse
+ */
+export const SendResponse = proto3.makeMessageType(
+  "land.gno.gnonative.v1.SendResponse",
+  [],
+);
+
+/**
  * @generated from message land.gno.gnonative.v1.RunRequest
  */
 export const RunRequest = proto3.makeMessageType(

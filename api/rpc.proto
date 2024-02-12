@@ -111,6 +111,11 @@ service GnoNativeService {
   // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (stream CallResponse);
 
+  // Send currency from the active account to an account on the blockchain.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  rpc Send(SendRequest) returns (stream SendResponse);
+
   // Temporarily load the code in package on the blockchain and run main() which can
   // call realm functions and use println() to output to the "console".
   // This returns the "console" output.
