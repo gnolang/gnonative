@@ -33,6 +33,9 @@ import { QEvalRequest } from "./gnonativetypes_pb";
 import { MsgCall } from '@gno/api/gnonativetypes_pb';
 import { CallRequest } from "./gnonativetypes_pb";
 import { CallResponse } from "./gnonativetypes_pb";
+import { MsgSend } from '@gno/api/gnonativetypes_pb';
+import { SendRequest } from '@gno/api/gnonativetypes_pb';
+import { SendResponse } from '@gno/api/gnonativetypes_pb';
 import { AddressToBech32Request } from "./gnonativetypes_pb";
 import { AddressFromBech32Request } from "./gnonativetypes_pb";
 import { PromiseClient } from "@connectrpc/connect";
@@ -83,6 +86,13 @@ export interface GnoResponse {
     send?: string,
     memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
+  send: (
+    toAddress: Uint8Array,
+    send: string,
+    gasFee: string,
+    gasWanted: number,
+    memo?: string,
+  ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
   closeBridge: () => Promise<void>;
@@ -352,6 +362,28 @@ export const useGno = (): GnoResponse => {
     return reponse;
   };
 
+  const send = async (
+    toAddress: Uint8Array,
+    send: string,
+    gasFee: string,
+    gasWanted: number,
+    memo?: string,
+  ) => {
+    const client = await getClient();
+    const reponse = client.send(
+      new SendRequest({
+        gasFee,
+        gasWanted: BigInt(gasWanted),
+        memo,
+        msgs: [new MsgSend({
+          toAddress,
+          send,
+        })],
+      }),
+    );
+    return reponse;
+  };
+
   const addressToBech32 = async (address: Uint8Array) => {
     const client = await getClient();
     const response = await client.addressToBech32(
@@ -393,6 +425,7 @@ export const useGno = (): GnoResponse => {
     render,
     qEval,
     call,
+    send,
     addressToBech32,
     addressFromBech32,
   };

@@ -2422,6 +2422,175 @@ func (x *CallResponse) GetResult() []byte {
 	return nil
 }
 
+type MsgSend struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Example: The response of calling AddressFromBech32 with
+	// "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
+	ToAddress []byte `protobuf:"bytes,1,opt,name=to_address,json=toAddress,proto3" json:"to_address,omitempty"`
+	// Example: "1000ugnot"
+	Send string `protobuf:"bytes,2,opt,name=send,proto3" json:"send,omitempty"`
+}
+
+func (x *MsgSend) Reset() {
+	*x = MsgSend{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnonativetypes_proto_msgTypes[48]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgSend) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgSend) ProtoMessage() {}
+
+func (x *MsgSend) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[48]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgSend.ProtoReflect.Descriptor instead.
+func (*MsgSend) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *MsgSend) GetToAddress() []byte {
+	if x != nil {
+		return x.ToAddress
+	}
+	return nil
+}
+
+func (x *MsgSend) GetSend() string {
+	if x != nil {
+		return x.Send
+	}
+	return ""
+}
+
+type SendRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	GasFee    string `protobuf:"bytes,1,opt,name=gas_fee,json=gasFee,proto3" json:"gas_fee,omitempty"`
+	GasWanted int64  `protobuf:"zigzag64,2,opt,name=gas_wanted,json=gasWanted,proto3" json:"gas_wanted,omitempty"`
+	// Memo is optional
+	Memo string `protobuf:"bytes,3,opt,name=memo,proto3" json:"memo,omitempty"`
+	// list of send operations to make in one transaction
+	Msgs []*MsgSend `protobuf:"bytes,4,rep,name=msgs,json=Msgs,proto3" json:"msgs,omitempty"`
+}
+
+func (x *SendRequest) Reset() {
+	*x = SendRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnonativetypes_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendRequest) ProtoMessage() {}
+
+func (x *SendRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendRequest.ProtoReflect.Descriptor instead.
+func (*SendRequest) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *SendRequest) GetGasFee() string {
+	if x != nil {
+		return x.GasFee
+	}
+	return ""
+}
+
+func (x *SendRequest) GetGasWanted() int64 {
+	if x != nil {
+		return x.GasWanted
+	}
+	return 0
+}
+
+func (x *SendRequest) GetMemo() string {
+	if x != nil {
+		return x.Memo
+	}
+	return ""
+}
+
+func (x *SendRequest) GetMsgs() []*MsgSend {
+	if x != nil {
+		return x.Msgs
+	}
+	return nil
+}
+
+type SendResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SendResponse) Reset() {
+	*x = SendResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnonativetypes_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendResponse) ProtoMessage() {}
+
+func (x *SendResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendResponse.ProtoReflect.Descriptor instead.
+func (*SendResponse) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{50}
+}
+
 type RunRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2439,7 +2608,7 @@ type RunRequest struct {
 func (x *RunRequest) Reset() {
 	*x = RunRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[48]
+		mi := &file_gnonativetypes_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2452,7 +2621,7 @@ func (x *RunRequest) String() string {
 func (*RunRequest) ProtoMessage() {}
 
 func (x *RunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[48]
+	mi := &file_gnonativetypes_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2465,7 +2634,7 @@ func (x *RunRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunRequest.ProtoReflect.Descriptor instead.
 func (*RunRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{48}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *RunRequest) GetPackage() string {
@@ -2508,7 +2677,7 @@ type RunResponse struct {
 func (x *RunResponse) Reset() {
 	*x = RunResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[49]
+		mi := &file_gnonativetypes_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2521,7 +2690,7 @@ func (x *RunResponse) String() string {
 func (*RunResponse) ProtoMessage() {}
 
 func (x *RunResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[49]
+	mi := &file_gnonativetypes_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2534,7 +2703,7 @@ func (x *RunResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunResponse.ProtoReflect.Descriptor instead.
 func (*RunResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{49}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *RunResponse) GetResult() string {
@@ -2555,7 +2724,7 @@ type AddressToBech32Request struct {
 func (x *AddressToBech32Request) Reset() {
 	*x = AddressToBech32Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[50]
+		mi := &file_gnonativetypes_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2568,7 +2737,7 @@ func (x *AddressToBech32Request) String() string {
 func (*AddressToBech32Request) ProtoMessage() {}
 
 func (x *AddressToBech32Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[50]
+	mi := &file_gnonativetypes_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2581,7 +2750,7 @@ func (x *AddressToBech32Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressToBech32Request.ProtoReflect.Descriptor instead.
 func (*AddressToBech32Request) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{50}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *AddressToBech32Request) GetAddress() []byte {
@@ -2602,7 +2771,7 @@ type AddressToBech32Response struct {
 func (x *AddressToBech32Response) Reset() {
 	*x = AddressToBech32Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[51]
+		mi := &file_gnonativetypes_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2615,7 +2784,7 @@ func (x *AddressToBech32Response) String() string {
 func (*AddressToBech32Response) ProtoMessage() {}
 
 func (x *AddressToBech32Response) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[51]
+	mi := &file_gnonativetypes_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2628,7 +2797,7 @@ func (x *AddressToBech32Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressToBech32Response.ProtoReflect.Descriptor instead.
 func (*AddressToBech32Response) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{51}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *AddressToBech32Response) GetBech32Address() string {
@@ -2649,7 +2818,7 @@ type AddressFromBech32Request struct {
 func (x *AddressFromBech32Request) Reset() {
 	*x = AddressFromBech32Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[52]
+		mi := &file_gnonativetypes_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2662,7 +2831,7 @@ func (x *AddressFromBech32Request) String() string {
 func (*AddressFromBech32Request) ProtoMessage() {}
 
 func (x *AddressFromBech32Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[52]
+	mi := &file_gnonativetypes_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +2844,7 @@ func (x *AddressFromBech32Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromBech32Request.ProtoReflect.Descriptor instead.
 func (*AddressFromBech32Request) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{52}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *AddressFromBech32Request) GetBech32Address() string {
@@ -2696,7 +2865,7 @@ type AddressFromBech32Response struct {
 func (x *AddressFromBech32Response) Reset() {
 	*x = AddressFromBech32Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[53]
+		mi := &file_gnonativetypes_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2709,7 +2878,7 @@ func (x *AddressFromBech32Response) String() string {
 func (*AddressFromBech32Response) ProtoMessage() {}
 
 func (x *AddressFromBech32Response) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[53]
+	mi := &file_gnonativetypes_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2722,7 +2891,7 @@ func (x *AddressFromBech32Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromBech32Response.ProtoReflect.Descriptor instead.
 func (*AddressFromBech32Response) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{53}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *AddressFromBech32Response) GetAddress() []byte {
@@ -2743,7 +2912,7 @@ type HelloRequest struct {
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[54]
+		mi := &file_gnonativetypes_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2756,7 +2925,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[54]
+	mi := &file_gnonativetypes_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2769,7 +2938,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{54}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -2790,7 +2959,7 @@ type HelloResponse struct {
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[55]
+		mi := &file_gnonativetypes_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2803,7 +2972,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[55]
+	mi := &file_gnonativetypes_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2816,7 +2985,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{55}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *HelloResponse) GetGreeting() string {
@@ -2837,7 +3006,7 @@ type HelloStreamRequest struct {
 func (x *HelloStreamRequest) Reset() {
 	*x = HelloStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[56]
+		mi := &file_gnonativetypes_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2850,7 +3019,7 @@ func (x *HelloStreamRequest) String() string {
 func (*HelloStreamRequest) ProtoMessage() {}
 
 func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[56]
+	mi := &file_gnonativetypes_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2863,7 +3032,7 @@ func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamRequest.ProtoReflect.Descriptor instead.
 func (*HelloStreamRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{56}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *HelloStreamRequest) GetName() string {
@@ -2884,7 +3053,7 @@ type HelloStreamResponse struct {
 func (x *HelloStreamResponse) Reset() {
 	*x = HelloStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[57]
+		mi := &file_gnonativetypes_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2897,7 +3066,7 @@ func (x *HelloStreamResponse) String() string {
 func (*HelloStreamResponse) ProtoMessage() {}
 
 func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[57]
+	mi := &file_gnonativetypes_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2910,7 +3079,7 @@ func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamResponse.ProtoReflect.Descriptor instead.
 func (*HelloStreamResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{57}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *HelloStreamResponse) GetGreeting() string {
@@ -3122,45 +3291,59 @@ var file_gnonativetypes_proto_rawDesc = []byte{
 	0x61, 0x6c, 0x6c, 0x52, 0x04, 0x4d, 0x73, 0x67, 0x73, 0x22, 0x26, 0x0a, 0x0c, 0x43, 0x61, 0x6c,
 	0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73,
 	0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x22, 0x72, 0x0a, 0x0a, 0x52, 0x75, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x18, 0x0a, 0x07, 0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x67, 0x61, 0x73,
-	0x5f, 0x66, 0x65, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61, 0x73, 0x46,
-	0x65, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x61, 0x73, 0x5f, 0x77, 0x61, 0x6e, 0x74, 0x65, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x12, 0x52, 0x09, 0x67, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65,
-	0x64, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x22, 0x25, 0x0a, 0x0b, 0x52, 0x75, 0x6e, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x32, 0x0a, 0x16,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x22, 0x40, 0x0a, 0x17, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x42, 0x65, 0x63,
-	0x68, 0x33, 0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x62,
-	0x65, 0x63, 0x68, 0x33, 0x32, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0d, 0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x41, 0x64, 0x64, 0x72, 0x65,
-	0x73, 0x73, 0x22, 0x41, 0x0a, 0x18, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46, 0x72, 0x6f,
-	0x6d, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x25,
-	0x0a, 0x0e, 0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x35, 0x0a, 0x19, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x46, 0x72, 0x6f, 0x6d, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x22, 0x0a, 0x0c,
-	0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65,
-	0x22, 0x2b, 0x0a, 0x0d, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x28, 0x0a,
-	0x12, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x31, 0x0a, 0x13, 0x48, 0x65, 0x6c, 0x6c, 0x6f,
-	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a,
-	0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67,
-	0x2f, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67,
-	0x65, 0x6e, 0x2f, 0x67, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x22, 0x3c, 0x0a, 0x07, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
+	0x74, 0x6f, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x09, 0x74, 0x6f, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x73,
+	0x65, 0x6e, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x65, 0x6e, 0x64, 0x22,
+	0x8d, 0x01, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x17, 0x0a, 0x07, 0x67, 0x61, 0x73, 0x5f, 0x66, 0x65, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x67, 0x61, 0x73, 0x46, 0x65, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x61, 0x73, 0x5f,
+	0x77, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x12, 0x52, 0x09, 0x67, 0x61,
+	0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x12, 0x32, 0x0a, 0x04, 0x6d,
+	0x73, 0x67, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6c, 0x61, 0x6e, 0x64,
+	0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76,
+	0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x04, 0x4d, 0x73, 0x67, 0x73, 0x22,
+	0x0e, 0x0a, 0x0c, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x72, 0x0a, 0x0a, 0x52, 0x75, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a,
+	0x07, 0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x67, 0x61, 0x73, 0x5f, 0x66,
+	0x65, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61, 0x73, 0x46, 0x65, 0x65,
+	0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x61, 0x73, 0x5f, 0x77, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x12, 0x52, 0x09, 0x67, 0x61, 0x73, 0x57, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x12,
+	0x12, 0x0a, 0x04, 0x6d, 0x65, 0x6d, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6d,
+	0x65, 0x6d, 0x6f, 0x22, 0x25, 0x0a, 0x0b, 0x52, 0x75, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x32, 0x0a, 0x16, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x40,
+	0x0a, 0x17, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x42, 0x65, 0x63, 0x68, 0x33,
+	0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x62, 0x65, 0x63,
+	0x68, 0x33, 0x32, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0d, 0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x22, 0x41, 0x0a, 0x18, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46, 0x72, 0x6f, 0x6d, 0x42,
+	0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x25, 0x0a, 0x0e,
+	0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x62, 0x65, 0x63, 0x68, 0x33, 0x32, 0x41, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x22, 0x35, 0x0a, 0x19, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46, 0x72,
+	0x6f, 0x6d, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x22, 0x0a, 0x0c, 0x48, 0x65,
+	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x2b,
+	0x0a, 0x0d, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x1a, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x28, 0x0a, 0x12, 0x48,
+	0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x31, 0x0a, 0x13, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08,
+	0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67,
+	0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e,
+	0x2f, 0x67, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3175,7 +3358,7 @@ func file_gnonativetypes_proto_rawDescGZIP() []byte {
 	return file_gnonativetypes_proto_rawDescData
 }
 
-var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
+var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 61)
 var file_gnonativetypes_proto_goTypes = []interface{}{
 	(*SetRemoteRequest)(nil),                  // 0: land.gno.gnonative.v1.SetRemoteRequest
 	(*SetRemoteResponse)(nil),                 // 1: land.gno.gnonative.v1.SetRemoteResponse
@@ -3225,16 +3408,19 @@ var file_gnonativetypes_proto_goTypes = []interface{}{
 	(*MsgCall)(nil),                           // 45: land.gno.gnonative.v1.MsgCall
 	(*CallRequest)(nil),                       // 46: land.gno.gnonative.v1.CallRequest
 	(*CallResponse)(nil),                      // 47: land.gno.gnonative.v1.CallResponse
-	(*RunRequest)(nil),                        // 48: land.gno.gnonative.v1.RunRequest
-	(*RunResponse)(nil),                       // 49: land.gno.gnonative.v1.RunResponse
-	(*AddressToBech32Request)(nil),            // 50: land.gno.gnonative.v1.AddressToBech32Request
-	(*AddressToBech32Response)(nil),           // 51: land.gno.gnonative.v1.AddressToBech32Response
-	(*AddressFromBech32Request)(nil),          // 52: land.gno.gnonative.v1.AddressFromBech32Request
-	(*AddressFromBech32Response)(nil),         // 53: land.gno.gnonative.v1.AddressFromBech32Response
-	(*HelloRequest)(nil),                      // 54: land.gno.gnonative.v1.HelloRequest
-	(*HelloResponse)(nil),                     // 55: land.gno.gnonative.v1.HelloResponse
-	(*HelloStreamRequest)(nil),                // 56: land.gno.gnonative.v1.HelloStreamRequest
-	(*HelloStreamResponse)(nil),               // 57: land.gno.gnonative.v1.HelloStreamResponse
+	(*MsgSend)(nil),                           // 48: land.gno.gnonative.v1.MsgSend
+	(*SendRequest)(nil),                       // 49: land.gno.gnonative.v1.SendRequest
+	(*SendResponse)(nil),                      // 50: land.gno.gnonative.v1.SendResponse
+	(*RunRequest)(nil),                        // 51: land.gno.gnonative.v1.RunRequest
+	(*RunResponse)(nil),                       // 52: land.gno.gnonative.v1.RunResponse
+	(*AddressToBech32Request)(nil),            // 53: land.gno.gnonative.v1.AddressToBech32Request
+	(*AddressToBech32Response)(nil),           // 54: land.gno.gnonative.v1.AddressToBech32Response
+	(*AddressFromBech32Request)(nil),          // 55: land.gno.gnonative.v1.AddressFromBech32Request
+	(*AddressFromBech32Response)(nil),         // 56: land.gno.gnonative.v1.AddressFromBech32Response
+	(*HelloRequest)(nil),                      // 57: land.gno.gnonative.v1.HelloRequest
+	(*HelloResponse)(nil),                     // 58: land.gno.gnonative.v1.HelloResponse
+	(*HelloStreamRequest)(nil),                // 59: land.gno.gnonative.v1.HelloStreamRequest
+	(*HelloStreamResponse)(nil),               // 60: land.gno.gnonative.v1.HelloStreamResponse
 }
 var file_gnonativetypes_proto_depIdxs = []int32{
 	13, // 0: land.gno.gnonative.v1.BaseAccount.coins:type_name -> land.gno.gnonative.v1.Coin
@@ -3247,11 +3433,12 @@ var file_gnonativetypes_proto_depIdxs = []int32{
 	12, // 7: land.gno.gnonative.v1.GetActiveAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
 	14, // 8: land.gno.gnonative.v1.QueryAccountResponse.account_info:type_name -> land.gno.gnonative.v1.BaseAccount
 	45, // 9: land.gno.gnonative.v1.CallRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	48, // 10: land.gno.gnonative.v1.SendRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_gnonativetypes_proto_init() }
@@ -3837,7 +4024,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RunRequest); i {
+			switch v := v.(*MsgSend); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3849,7 +4036,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RunResponse); i {
+			switch v := v.(*SendRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3861,7 +4048,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddressToBech32Request); i {
+			switch v := v.(*SendResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3873,7 +4060,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddressToBech32Response); i {
+			switch v := v.(*RunRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3885,7 +4072,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddressFromBech32Request); i {
+			switch v := v.(*RunResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3897,7 +4084,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddressFromBech32Response); i {
+			switch v := v.(*AddressToBech32Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3909,7 +4096,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloRequest); i {
+			switch v := v.(*AddressToBech32Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3921,7 +4108,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloResponse); i {
+			switch v := v.(*AddressFromBech32Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3933,7 +4120,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloStreamRequest); i {
+			switch v := v.(*AddressFromBech32Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3945,6 +4132,42 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HelloRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnonativetypes_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HelloResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnonativetypes_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HelloStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnonativetypes_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HelloStreamResponse); i {
 			case 0:
 				return &v.state
@@ -3963,7 +4186,7 @@ func file_gnonativetypes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_gnonativetypes_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   58,
+			NumMessages:   61,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -1280,6 +1280,102 @@ export declare class CallResponse extends Message<CallResponse> {
 }
 
 /**
+ * @generated from message land.gno.gnonative.v1.MsgSend
+ */
+export declare class MsgSend extends Message<MsgSend> {
+  /**
+   * Example: The response of calling AddressFromBech32 with
+   * "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
+   *
+   * @generated from field: bytes to_address = 1;
+   */
+  toAddress: Uint8Array;
+
+  /**
+   * Example: "1000ugnot"
+   *
+   * @generated from field: string send = 2;
+   */
+  send: string;
+
+  constructor(data?: PartialMessage<MsgSend>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.MsgSend";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MsgSend;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MsgSend;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MsgSend;
+
+  static equals(a: MsgSend | PlainMessage<MsgSend> | undefined, b: MsgSend | PlainMessage<MsgSend> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendRequest
+ */
+export declare class SendRequest extends Message<SendRequest> {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted: bigint;
+
+  /**
+   * Memo is optional
+   *
+   * @generated from field: string memo = 3;
+   */
+  memo: string;
+
+  /**
+   * list of send operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgSend msgs = 4 [json_name = "Msgs"];
+   */
+  msgs: MsgSend[];
+
+  constructor(data?: PartialMessage<SendRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.SendRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendRequest;
+
+  static equals(a: SendRequest | PlainMessage<SendRequest> | undefined, b: SendRequest | PlainMessage<SendRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendResponse
+ */
+export declare class SendResponse extends Message<SendResponse> {
+  constructor(data?: PartialMessage<SendResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.SendResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendResponse;
+
+  static equals(a: SendResponse | PlainMessage<SendResponse> | undefined, b: SendResponse | PlainMessage<SendResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnonative.v1.RunRequest
  */
 export declare class RunRequest extends Message<RunRequest> {

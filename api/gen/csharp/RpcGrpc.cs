@@ -137,6 +137,10 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CallResponse> __Marshaller_land_gno_gnonative_v1_CallResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CallResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SendRequest> __Marshaller_land_gno_gnonative_v1_SendRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SendRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SendResponse> __Marshaller_land_gno_gnonative_v1_SendResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SendResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RunRequest> __Marshaller_land_gno_gnonative_v1_RunRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RunRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RunResponse> __Marshaller_land_gno_gnonative_v1_RunResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RunResponse.Parser));
@@ -332,6 +336,14 @@ namespace Land.Gno.Gnonative.V1 {
         "Call",
         __Marshaller_land_gno_gnonative_v1_CallRequest,
         __Marshaller_land_gno_gnonative_v1_CallResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.SendResponse> __Method_Send = new grpc::Method<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.SendResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "Send",
+        __Marshaller_land_gno_gnonative_v1_SendRequest,
+        __Marshaller_land_gno_gnonative_v1_SendResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.RunResponse> __Method_Run = new grpc::Method<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.RunResponse>(
@@ -680,6 +692,21 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>A task indicating completion of the handler.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task Call(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::IServerStreamWriter<global::Land.Gno.Gnonative.V1.CallResponse> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Send currency from the active account to an account on the blockchain.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task Send(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::IServerStreamWriter<global::Land.Gno.Gnonative.V1.SendResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1948,6 +1975,34 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncServerStreamingCall(__Method_Call, null, options, request);
       }
       /// <summary>
+      /// Send currency from the active account to an account on the blockchain.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Land.Gno.Gnonative.V1.SendResponse> Send(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Send(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Send currency from the active account to an account on the blockchain.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Land.Gno.Gnonative.V1.SendResponse> Send(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_Send, null, options, request);
+      }
+      /// <summary>
       /// Temporarily load the code in package on the blockchain and run main() which can
       /// call realm functions and use println() to output to the "console".
       /// This returns the "console" output.
@@ -2179,6 +2234,7 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_Render, serviceImpl.Render)
           .AddMethod(__Method_QEval, serviceImpl.QEval)
           .AddMethod(__Method_Call, serviceImpl.Call)
+          .AddMethod(__Method_Send, serviceImpl.Send)
           .AddMethod(__Method_Run, serviceImpl.Run)
           .AddMethod(__Method_AddressToBech32, serviceImpl.AddressToBech32)
           .AddMethod(__Method_AddressFromBech32, serviceImpl.AddressFromBech32)
@@ -2215,6 +2271,7 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_Render, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RenderRequest, global::Land.Gno.Gnonative.V1.RenderResponse>(serviceImpl.Render));
       serviceBinder.AddMethod(__Method_QEval, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QEvalRequest, global::Land.Gno.Gnonative.V1.QEvalResponse>(serviceImpl.QEval));
       serviceBinder.AddMethod(__Method_Call, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.CallResponse>(serviceImpl.Call));
+      serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.SendResponse>(serviceImpl.Send));
       serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.RunResponse>(serviceImpl.Run));
       serviceBinder.AddMethod(__Method_AddressToBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(serviceImpl.AddressToBech32));
       serviceBinder.AddMethod(__Method_AddressFromBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromBech32Request, global::Land.Gno.Gnonative.V1.AddressFromBech32Response>(serviceImpl.AddressFromBech32));

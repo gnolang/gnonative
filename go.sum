@@ -85,8 +85,8 @@ github.com/fortytw2/leaktest v1.3.0 h1:u8491cBMTQ8ft8aeV+adlcytMZylmA5nnwwkRZjI8
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
-github.com/gnolang/gno v0.0.0-20240202111440-37c1c31b0531 h1:4jFxLmDtGl3RrNtyFKOLeLVmFaFAdfFDXtKC4GdxzwI=
-github.com/gnolang/gno v0.0.0-20240202111440-37c1c31b0531/go.mod h1:pzlpRF80RfVsWpstEumplkhDnAhzkbgSpoVOio3jkJs=
+github.com/gnolang/gno v0.0.0-20240209120457-59d87875c944 h1:N2kKCbGSHLWrKNiJJNZE1Lct/5GH5dS62Ypaw3JQyUQ=
+github.com/gnolang/gno v0.0.0-20240209120457-59d87875c944/go.mod h1:pzlpRF80RfVsWpstEumplkhDnAhzkbgSpoVOio3jkJs=
 github.com/gnolang/goleveldb v0.0.9 h1:Q7rGko9oXMKtQA+Apeeed5a3sjba/mcDhzJGoTVLCKE=
 github.com/gnolang/goleveldb v0.0.9/go.mod h1:Dz6p9bmpy/FBESTgduiThZt5mToVDipcHGzj/zUOo8E=
 github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 h1:GKvsK3oLWG9B1GL7WP/VqwM6C92j5tIvB844oggL9Lk=

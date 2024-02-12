@@ -231,6 +231,26 @@ message CallResponse {
 	bytes result = 1;
 }
 
+message MsgSend {
+	// Example: The response of calling AddressFromBech32 with
+	// "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
+	bytes to_address = 1;
+	// Example: "1000ugnot"
+	string send = 2;
+}
+
+message SendRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	// Memo is optional
+	string memo = 3;
+	// list of send operations to make in one transaction
+	repeated MsgSend msgs = 4 [json_name = "Msgs"];
+}
+
+message SendResponse {
+}
+
 message RunRequest {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"

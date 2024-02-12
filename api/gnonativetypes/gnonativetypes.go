@@ -227,6 +227,26 @@ type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
 }
 
+type MsgSend struct {
+	// Example: The response of calling AddressFromBech32 with
+	// "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
+	ToAddress []byte `json:"to_address" yaml:"to_address"`
+	// Example: "1000ugnot"
+	Send string `json:"send" yaml:"send"`
+}
+
+type SendRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	// Memo is optional
+	Memo string `json:"memo" yaml:"memo"`
+	// list of send operations to make in one transaction
+	Msgs []MsgSend
+}
+
+type SendResponse struct {
+}
+
 type RunRequest struct {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
