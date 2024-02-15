@@ -12,6 +12,24 @@ RCT_EXTERN_METHOD(closeBridge:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(getTcpPort:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject);
 
+RCT_EXTERN_METHOD(invokeGrpcMethod:(NSString *)method
+                  jsonMessage:(NSString *)jsonMessage
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
+RCT_EXTERN_METHOD(createStreamClient:(NSString)method
+                  jsonMessage:(NSString)jsonMessage
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
+RCT_EXTERN_METHOD(streamClientReceive:(NSString)id
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
+RCT_EXTERN_METHOD(closeStreamClient:(NSString)id
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject);
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;  // only do this if your module initialization relies on calling UIKit!

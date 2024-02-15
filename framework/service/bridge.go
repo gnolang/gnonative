@@ -85,25 +85,36 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 	// create native bridge client
 	{
-		path := b.serviceServer.GetUDSPath()
-		fullPath := fmt.Sprintf("http+unix://%s:", path)
+		var httpClient *http.Client
+		var address string
 
-		t := &http.Transport{
-			Dial: func(network, addr string) (net.Conn, error) {
-				conn, err := net.DialTimeout(network, addr, time.Second*2)
-				if err != nil {
-					return nil, err
-				}
-				conn.SetDeadline(time.Now().Add(time.Second * 2))
-				return conn, nil
-			},
+		// prefer a TCP connection if available
+		// because iOS simulator devices cannot use UDS connections
+		if config.UseTcpListener {
+			httpClient = http.DefaultClient
+			port := b.serviceServer.GetTcpPort()
+			address = fmt.Sprintf("http://localhost:%d", port)
+		} else {
+			path := b.serviceServer.GetUDSPath()
+			address = fmt.Sprintf("http+unix://%s:", path)
+
+			t := &http.Transport{
+				Dial: func(network, addr string) (net.Conn, error) {
+					conn, err := net.DialTimeout(network, addr, time.Second*2)
+					if err != nil {
+						return nil, err
+					}
+					conn.SetDeadline(time.Now().Add(time.Second * 2))
+					return conn, nil
+				},
+			}
+			unixtransport.Register(t)
+			httpClient = &http.Client{Transport: t}
 		}
-		unixtransport.Register(t)
-		httpClient := &http.Client{Transport: t}
 
 		client := _goconnect.NewGnoNativeServiceClient(
 			httpClient,
-			fullPath,
+			address,
 		)
 		b.ServiceClient = NewServiceClient(client)
 	}

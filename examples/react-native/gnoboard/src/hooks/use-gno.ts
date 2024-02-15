@@ -101,7 +101,7 @@ export const useGno = (): GnoResponse => {
     console.log('Creating GRPC client instance... done.');
 
     // Set the initial configuration where it's different from the default.
-    // await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:36657' }));
     console.log('remi: calling Hello');
     const resp = await clientInstance.hello(new HelloRequest({ name: 'd4ryl00' }));
     console.log('remi: hello response', resp);

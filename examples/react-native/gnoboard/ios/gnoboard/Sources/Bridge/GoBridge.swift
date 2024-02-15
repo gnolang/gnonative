@@ -66,9 +66,12 @@ class GoBridge: NSObject {
       config.rootDir = self.appRootDir
       config.tmpDir = self.tmpDir
 
-      config.disableUdsListener = true
+      // On simulator we can't create an UDS, see comment below
+#if targetEnvironment(simulator)
       config.useTcpListener = true
-
+      config.disableUdsListener = true
+#endif
+      
       let bridge = GnoGnonativeNewBridge(config, &err);
       if err != nil {
         throw err!
@@ -104,6 +107,54 @@ class GoBridge: NSObject {
       }
     } catch let error as NSError {
       self.logger.error("\(String(describing: error.code))")
+    }
+  }
+  
+  @objc func invokeGrpcMethod(_ method: NSString, jsonMessage: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      if self.bridge == nil {
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+      }
+      let promise = PromiseBlock(resolve, reject)
+      self.bridge?.invokeGrpcMethod(with: promise, method: method as String, jsonMessage: jsonMessage as String)
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
+    }
+  }
+  
+  @objc func createStreamClient(_ method: NSString, jsonMessage: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      if self.bridge == nil {
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+      }
+      let promise = PromiseBlock(resolve, reject)
+      self.bridge?.createStreamClient(with: promise, method: method as String, jsonMessage: jsonMessage as String)
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
+    }
+  }
+  
+  @objc func streamClientReceive(_ id: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      if self.bridge == nil {
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+      }
+      let promise = PromiseBlock(resolve, reject)
+      self.bridge?.streamClientReceive(with: promise, id_: id as String)
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
+    }
+  }
+  
+  @objc func closeStreamClient(_ id: NSString, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    do {
+      if self.bridge == nil {
+        throw NSError(domain: "land.gno.gnonative", code: 2, userInfo: [NSLocalizedDescriptionKey : "bridge not init"])
+      }
+      let promise = PromiseBlock(resolve, reject)
+      self.bridge?.closeStreamClient(with: promise, id_: id as String)
+    } catch let error as NSError {
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
     }
   }
 }
