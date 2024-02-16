@@ -85,8 +85,7 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
           throw 'missing request message';
         }
 
-        const jsonRequest = r.value.toJsonString();
-        return jsonRequest;
+        return r.value.toJsonString();
       }
 
       return await runStreamingCall<I, O>({

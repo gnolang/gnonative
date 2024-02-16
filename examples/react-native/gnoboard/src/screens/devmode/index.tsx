@@ -31,7 +31,7 @@ function DevMode() {
     setAppConsole('replying to a post...');
     const gasFee = '1000000ugnot';
     const gasWanted = 2000000;
-    const args: Array<string> = ['2', '1', '1', postContent];
+    const args: Array<string> = ['1', '1', '1', postContent];
     try {
       for await (const response of await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
         console.log('response: ', response);

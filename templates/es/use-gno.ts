@@ -30,16 +30,16 @@ import { QueryRequest } from "./gnonativetypes_pb";
 import { QueryResponse } from "./gnonativetypes_pb";
 import { RenderRequest } from "./gnonativetypes_pb";
 import { QEvalRequest } from "./gnonativetypes_pb";
-import { MsgCall } from '@gno/api/gnonativetypes_pb';
+import { MsgCall } from "@gno/api/gnonativetypes_pb";
 import { CallRequest } from "./gnonativetypes_pb";
 import { CallResponse } from "./gnonativetypes_pb";
-import { MsgSend } from '@gno/api/gnonativetypes_pb';
-import { SendRequest } from '@gno/api/gnonativetypes_pb';
-import { SendResponse } from '@gno/api/gnonativetypes_pb';
+import { MsgSend } from "@gno/api/gnonativetypes_pb";
+import { SendRequest } from "@gno/api/gnonativetypes_pb";
+import { SendResponse } from "@gno/api/gnonativetypes_pb";
 import { AddressToBech32Request } from "./gnonativetypes_pb";
 import { AddressFromBech32Request } from "./gnonativetypes_pb";
 import { PromiseClient } from "@connectrpc/connect";
-import { GnonativeService } from "./rpc_connect";
+import { GnoNativeService } from "./rpc_connect";
 import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 
@@ -99,7 +99,7 @@ export interface GnoResponse {
   initBridge: () => Promise<void>;
 }
 
-let clientInstance: PromiseClient<typeof GnonativeService> | undefined =
+let clientInstance: PromiseClient<typeof GnoNativeService> | undefined =
   undefined;
 let bridgeInstance = false;
 
@@ -119,7 +119,7 @@ export const useGno = (): GnoResponse => {
       httpVersion: "1.1",
     });
 
-    clientInstance = createPromiseClient(GnonativeService, transport);
+    clientInstance = createPromiseClient(GnoNativeService, transport);
 
     console.log("Creating GRPC client instance... done.");
 
@@ -351,12 +351,14 @@ export const useGno = (): GnoResponse => {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgCall({
-          packagePath,
-          fnc,
-          args,
-          send,
-        })],
+        msgs: [
+          new MsgCall({
+            packagePath,
+            fnc,
+            args,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;
@@ -375,10 +377,12 @@ export const useGno = (): GnoResponse => {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgSend({
-          toAddress,
-          send,
-        })],
+        msgs: [
+          new MsgSend({
+            toAddress,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;

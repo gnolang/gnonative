@@ -36,7 +36,6 @@ import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
 import { GnoNativeService } from '@gno/api/rpc_connect';
-import { HelloRequest, HelloStreamRequest } from '@gno/api/gnonativetypes_pb';
 
 export interface GnoResponse {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
@@ -69,13 +68,7 @@ export interface GnoResponse {
     send?: string,
     memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
-  send: (
-    toAddress: Uint8Array,
-    send: string,
-    gasFee: string,
-    gasWanted: number,
-    memo?: string,
-  ) => Promise<AsyncIterable<SendResponse>>;
+  send: (toAddress: Uint8Array, send: string, gasFee: string, gasWanted: number, memo?: string) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
   closeBridge: () => Promise<void>;
@@ -102,14 +95,6 @@ export const useGno = (): GnoResponse => {
 
     // Set the initial configuration where it's different from the default.
     await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:36657' }));
-    console.log('remi: calling Hello');
-    const resp = await clientInstance.hello(new HelloRequest({ name: 'd4ryl00' }));
-    console.log('remi: hello response', resp);
-
-    console.log('remi: calling HelloStream');
-    for await (const resp of clientInstance.helloStream(new HelloStreamRequest({ name: 'd4ryl00' }))) {
-      console.log('remi: helloStream response', resp);
-    }
 
     return clientInstance;
   };
@@ -304,34 +289,32 @@ export const useGno = (): GnoResponse => {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgCall({
-          packagePath,
-          fnc,
-          args,
-          send,
-        })],
+        msgs: [
+          new MsgCall({
+            packagePath,
+            fnc,
+            args,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;
   };
 
-  const send = async (
-    toAddress: Uint8Array,
-    send: string,
-    gasFee: string,
-    gasWanted: number,
-    memo?: string,
-  ) => {
+  const send = async (toAddress: Uint8Array, send: string, gasFee: string, gasWanted: number, memo?: string) => {
     const client = await getClient();
     const reponse = client.send(
       new SendRequest({
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgSend({
-          toAddress,
-          send,
-        })],
+        msgs: [
+          new MsgSend({
+            toAddress,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;

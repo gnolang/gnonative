@@ -12,6 +12,8 @@ import (
 	"sync/atomic"
 
 	"github.com/pkg/errors"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 
 	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
 )
@@ -65,13 +67,22 @@ func (s *serviceClient) InvokeGrpcMethod(method string, jsonMessage string) (str
 		return "", errors.Errorf("method not found: %s", method)
 	}
 
+	// create arguments for the method
 	in := make([]reflect.Value, refMethod.Type().NumIn())
 	in[0] = reflect.ValueOf(context.Background())
-	typ := refMethod.Type().In(1) //*Request[Req] type
-	methodReq := reflect.New(typ)
-	jsonReq := fmt.Sprintf("{\"Msg\":%s}", jsonMessage)
-	json.Unmarshal([]byte(jsonReq), methodReq.Interface())
-	in[1] = methodReq.Elem()
+
+	refReqType := refMethod.Type().In(1)                     // **Request[Req] type
+	refReqValue := reflect.New(refReqType.Elem())            // *Request[Req] type
+	refMsgReqValue := refReqValue.Elem().FieldByName("Msg")  // *Request[Req].Msg
+	refMsgValue := reflect.New(refMsgReqValue.Type().Elem()) // Req type
+
+	err := protojson.Unmarshal([]byte(jsonMessage), refMsgValue.Interface().(proto.Message))
+	if err != nil {
+		return "", errors.Wrap(err, "unable to unmarshal request")
+	}
+
+	refMsgReqValue.Set(refMsgValue)
+	in[1] = refReqValue
 
 	outRaw := refMethod.Call(in)
 	if len(outRaw) != 2 {
@@ -114,22 +125,31 @@ func (s *serviceClient) CreateStreamClient(method string, jsonMessage string) (s
 		return "", errors.Errorf("method not found: %s", method)
 	}
 
+	// create arguments for the method
 	in := make([]reflect.Value, refMethod.Type().NumIn())
 	in[0] = reflect.ValueOf(context.Background())
-	typ := refMethod.Type().In(1) //*Request[Req] type
-	methodReq := reflect.New(typ)
-	jsonReq := fmt.Sprintf("{\"Msg\":%s}", jsonMessage)
-	json.Unmarshal([]byte(jsonReq), methodReq.Interface())
-	in[1] = methodReq.Elem()
 
-	outRaw := refMethod.Call(in)
-	if outRaw[1].Interface() != nil {
-		errValue := outRaw[1].Interface().(error)
-		return "", errors.Wrap(errValue.(error), "stream bridge method error")
+	refReqType := refMethod.Type().In(1)                     // **Request[Req] type
+	refReqValue := reflect.New(refReqType.Elem())            // *Request[Req] type
+	refMsgReqValue := refReqValue.Elem().FieldByName("Msg")  // *Request[Req].Msg
+	refMsgValue := reflect.New(refMsgReqValue.Type().Elem()) // Req type
+
+	err := protojson.Unmarshal([]byte(jsonMessage), refMsgValue.Interface().(proto.Message))
+	if err != nil {
+		return "", errors.Wrap(err, "unable to unmarshal request")
 	}
 
+	refMsgReqValue.Set(refMsgValue)
+	in[1] = refReqValue
+
+	outRaw := refMethod.Call(in)
 	if len(outRaw) != 2 {
 		return "", errors.Errorf("unexpected number of return values: %d", len(outRaw))
+	}
+
+	errValue := outRaw[1].Interface()
+	if errValue != nil {
+		return "", errors.Wrap(errValue.(error), "stream bridge method error")
 	}
 
 	streamId := strconv.FormatUint(atomic.AddUint64(&s.streamIds, 1), 16)
