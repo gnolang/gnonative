@@ -236,12 +236,12 @@ func (s *serviceClient) registerStream(id string, cstream reflect.Value) {
 
 func (s *serviceClient) unregisterStream(id string) error {
 	s.muStreams.Lock()
+	defer s.muStreams.Unlock()
 	if _, ok := s.streams[id]; !ok {
 		return fmt.Errorf("invalid stream id")
 	}
 
 	delete(s.streams, id)
-	s.muStreams.Unlock()
 
 	return nil
 }
