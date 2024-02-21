@@ -1,13 +1,13 @@
 import { createPromiseClient } from '@connectrpc/connect';
-import { createXHRGrpcWebTransport } from './transport';
+import { createNativeGrpcTransport } from './transport_native';
 import { GnoNativeService } from '@gno/api/rpc_connect';
 
 // Create a GnoNativeService client
-export function createClient(port: number) {
+export function createClient(_port: number) {
   return createPromiseClient(
     GnoNativeService,
-    createXHRGrpcWebTransport({
-      baseUrl: 'http://127.0.0.1:' + port,
+    createNativeGrpcTransport({
+      baseUrl: '',
     }),
   );
 }

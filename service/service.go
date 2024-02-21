@@ -136,8 +136,10 @@ func (s *gnoNativeService) createUdsGrpcServer(cfg *Config) error {
 
 	// delete socket if it already exists
 	if _, err := os.Stat(s.udsPath); !os.IsNotExist(err) {
-		s.logger.Debug("createUDSListener error: socket file already exists", zap.String("socket", s.udsPath))
-		return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
+		if err := os.RemoveAll(s.udsPath); err != nil {
+			s.logger.Debug("createUDSListener error", zap.Error(err))
+			return api_gen.ErrCode_ErrRunGRPCServer.Wrap(err)
+		}
 	}
 
 	listener, err := net.Listen("unix", s.udsPath)

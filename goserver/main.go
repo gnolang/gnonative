@@ -40,7 +40,7 @@ func runMain(args []string) error {
 		fs = flag.NewFlagSet("goserver", flag.ContinueOnError)
 	}
 
-	fs.StringVar(&remote, "remote", "http://testnet.gno.berty.io:26657", "address of the Gno node")
+	fs.StringVar(&remote, "remote", "http://testnet.gno.berty.io:36657", "address of the Gno node")
 
 	var root *ffcli.Command
 	{

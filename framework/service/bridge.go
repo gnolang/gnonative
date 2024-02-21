@@ -2,21 +2,21 @@ package gnonative
 
 import (
 	"context"
+	"fmt"
+	"net"
+	"net/http"
 	"sync"
 	"time"
 
 	"github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/oklog/run"
+	"github.com/peterbourgon/unixtransport"
 	"go.uber.org/multierr"
 
 	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
 	"github.com/gnolang/gnonative/service"
 )
-
-type PromiseBlock interface {
-	CallResolve(reply string)
-	CallReject(error error)
-}
 
 type BridgeConfig struct {
 	RootDir            string
@@ -37,6 +37,8 @@ type Bridge struct {
 	workers    run.Group
 
 	serviceServer service.GnoNativeService
+
+	ServiceClient
 }
 
 func NewBridge(config *BridgeConfig) (*Bridge, error) {
@@ -79,6 +81,42 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			return nil, errors.Wrap(err, "unable to create bridge service")
 		}
 		b.serviceServer = serviceServer
+	}
+
+	// create native bridge client
+	{
+		var httpClient *http.Client
+		var address string
+
+		// prefer a TCP connection if available
+		// because iOS simulator devices cannot use UDS connections
+		if config.UseTcpListener {
+			httpClient = http.DefaultClient
+			port := b.serviceServer.GetTcpPort()
+			address = fmt.Sprintf("http://localhost:%d", port)
+		} else {
+			path := b.serviceServer.GetUDSPath()
+			address = fmt.Sprintf("http+unix://%s:", path)
+
+			t := &http.Transport{
+				Dial: func(network, addr string) (net.Conn, error) {
+					conn, err := net.DialTimeout(network, addr, time.Second*2)
+					if err != nil {
+						return nil, err
+					}
+					conn.SetDeadline(time.Now().Add(time.Second * 2))
+					return conn, nil
+				},
+			}
+			unixtransport.Register(t)
+			httpClient = &http.Client{Transport: t}
+		}
+
+		client := _goconnect.NewGnoNativeServiceClient(
+			httpClient,
+			address,
+		)
+		b.ServiceClient = NewServiceClient(client)
 	}
 
 	// start Bridge
