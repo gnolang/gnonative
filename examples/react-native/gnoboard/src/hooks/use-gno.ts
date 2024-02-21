@@ -95,6 +95,7 @@ export const useGno = (): GnoResponse => {
 
     // Set the initial configuration where it's different from the default.
     await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:36657' }));
+    await clientInstance.setChainID(new SetChainIDRequest({ chainId: 'tendermint_test' }));
 
     return clientInstance;
   };
