@@ -5,7 +5,7 @@ check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,
 # Get the temporary directory of the system
 TEMPDIR := $(shell dirname $(shell mktemp -u))
 
-APP_NAME := gnoboard
+APP_NAME ?= gnoboard
 
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
@@ -175,6 +175,7 @@ asdf.install_tools: asdf.add_plugins
 # Script to create a new app
 
 yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+yarn_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
 OUTPUT_DIR := $(make_dir)/examples/react-native
 
 new-app:
@@ -196,7 +197,7 @@ new-react-native-app:
 	@echo "Creating ios and android folders"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
 	@echo "Installing yarn dependencies"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies}
+	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies} && yarn add -D ${yarn_basic_dev_dependencies}
 	@echo "Building GnoCore.xcframework for the new app"
 	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
