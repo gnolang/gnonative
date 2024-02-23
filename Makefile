@@ -70,8 +70,8 @@ fclean:
 
 # - API : Handle API generation and cleaning
 
-api.generate: _api.generate.protocol
-api.clean: _api.clean.protocol
+api.generate: _api.generate.protocol _api.generate.modules
+api.clean: _api.clean.protocol _api.clean.modules
 
 # - API - rpc
 
@@ -97,7 +97,14 @@ $(gen_sum): $(gen_src)
 		go mod tidy \
 	)
 
-.PHONY: api.generate _api.generate.protocol _api.clean.protocol
+_api.generate.modules:
+	$(call check-program, yarn)
+	cd api; yarn
+
+_api.clean.modules:
+	cd api; rm -fr node_modules
+
+.PHONY: api.generate _api.generate.protocol _api.generate.modules _api.clean.protocol _api.clean.modules
 
 # - Bind : Handle gomobile bind
 
