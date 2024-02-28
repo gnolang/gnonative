@@ -46,7 +46,7 @@ all build: generate build.ios build.android
 build.ios: generate $(gnocore_xcframework)
 	@echo "generate iOS framework"
 	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
-	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace APP_NAME=$(APP_NAME)
+	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
