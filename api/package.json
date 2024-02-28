@@ -1,0 +1,10 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.23.6",
+    "@bufbuild/protobuf": "^1.6.0"
+  }
+}

@@ -5,13 +5,12 @@
 package _goconnect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
+	_go "github.com/gnolang/gnonative/api/gen/go"
 	http "net/http"
 	strings "strings"
-
-	connect "connectrpc.com/connect"
-	_go "github.com/gnolang/gnonative/api/gen/go"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are

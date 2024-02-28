@@ -10,11 +10,11 @@ import CurrentAccount from '@gno/components/account/CurrentAccoutn';
 import { useGno } from '@gno/hooks/use-gno';
 import Loading from '@gno/screens/loading';
 import { GnoAccount } from '@gno/native_modules/types';
-import { QueryAccountResponse } from '@gno/api/gnonativetypes_pb';
+import { QueryAccountResponse } from '@api/gnonativetypes_pb';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
 import { ConnectError } from '@connectrpc/connect';
-import { ErrCode } from '@gno/api/rpc_pb';
+import { ErrCode } from '@api/rpc_pb';
 import { GRPCError } from '@gno/grpc/error';
 
 export const Home: React.FC = () => {

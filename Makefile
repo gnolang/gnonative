@@ -5,7 +5,7 @@ check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,
 # Get the temporary directory of the system
 TEMPDIR := $(shell dirname $(shell mktemp -u))
 
-APP_NAME := gnoboard
+APP_NAME ?= gnoboard
 
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
@@ -70,8 +70,8 @@ fclean:
 
 # - API : Handle API generation and cleaning
 
-api.generate: _api.generate.protocol
-api.clean: _api.clean.protocol
+api.generate: _api.generate.protocol _api.generate.modules
+api.clean: _api.clean.protocol _api.clean.modules
 
 # - API - rpc
 
@@ -97,7 +97,14 @@ $(gen_sum): $(gen_src)
 		go mod tidy \
 	)
 
-.PHONY: api.generate _api.generate.protocol _api.clean.protocol
+_api.generate.modules:
+	$(call check-program, yarn)
+	cd api; yarn
+
+_api.clean.modules:
+	cd api; rm -fr node_modules
+
+.PHONY: api.generate _api.generate.protocol _api.generate.modules _api.clean.protocol _api.clean.modules
 
 # - Bind : Handle gomobile bind
 
@@ -168,6 +175,7 @@ asdf.install_tools: asdf.add_plugins
 # Script to create a new app
 
 yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+yarn_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
 OUTPUT_DIR := $(make_dir)/examples/react-native
 
 new-app:
@@ -189,7 +197,7 @@ new-react-native-app:
 	@echo "Creating ios and android folders"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
 	@echo "Installing yarn dependencies"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies}
+	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies} && yarn add -D ${yarn_basic_dev_dependencies}
 	@echo "Building GnoCore.xcframework for the new app"
 	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
@@ -197,10 +205,8 @@ new-react-native-app:
 copy-js-files:
 	$(call check-program, jq)
 	@echo "Copying js files"
-	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/api
 	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/grpc
 	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/hooks
-	@cp -r $(gnoboard_dir)/src/api $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/grpc $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/hooks $(OUTPUT_DIR)/$(APP_NAME)/src
 	@cp -r $(gnoboard_dir)/src/native_modules $(OUTPUT_DIR)/$(APP_NAME)/src
@@ -208,6 +214,8 @@ copy-js-files:
 	@cp -r $(gnoboard_dir)/android/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/android
 	@cp -r $(gnoboard_dir)/ios/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/ios
 	@cp $(make_dir)/templates/tsconfig.json $(OUTPUT_DIR)/$(APP_NAME)/tsconfig.json
+	@cp $(make_dir)/templates/babel.config.js $(OUTPUT_DIR)/$(APP_NAME)/babel.config.js
+	@cp $(make_dir)/templates/metro.config.js $(OUTPUT_DIR)/$(APP_NAME)/metro.config.js
 	@cp $(make_dir)/templates/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
 
 # build GnoCore.xcframework for the new app
@@ -217,6 +225,7 @@ new-app-build-ios:
 	@cp -r $(gnoboard_dir)/ios/gnoboard/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/
 	@cp $(gnoboard_dir)/ios/gnoboard/gnoboard-Bridging-Header.h $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
 	@cp -r $(gnoboard_dir)/ios/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/
+	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
 
 JSON_FILE := $(OUTPUT_DIR)/$(APP_NAME)/app.json
 # add tsconfigPaths entry to app.json

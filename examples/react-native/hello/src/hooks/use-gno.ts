@@ -1,41 +1,41 @@
-import { SetRemoteRequest, SetRemoteResponse } from '@gno/api/gnonativetypes_pb';
-import { GetRemoteRequest } from '@gno/api/gnonativetypes_pb';
-import { SetChainIDRequest, SetChainIDResponse } from '@gno/api/gnonativetypes_pb';
-import { GetChainIDRequest } from '@gno/api/gnonativetypes_pb';
-import { SetPasswordRequest, SetPasswordResponse } from '@gno/api/gnonativetypes_pb';
-import { SelectAccountRequest } from '@gno/api/gnonativetypes_pb';
-import { SelectAccountResponse } from '@gno/api/gnonativetypes_pb';
-import { CreateAccountRequest } from '@gno/api/gnonativetypes_pb';
-import { GenerateRecoveryPhraseRequest } from '@gno/api/gnonativetypes_pb';
-import { ListKeyInfoRequest } from '@gno/api/gnonativetypes_pb';
-import { HasKeyByNameRequest } from '@gno/api/gnonativetypes_pb';
-import { HasKeyByAddressRequest } from '@gno/api/gnonativetypes_pb';
-import { HasKeyByNameOrAddressRequest } from '@gno/api/gnonativetypes_pb';
-import { GetKeyInfoByNameRequest } from '@gno/api/gnonativetypes_pb';
-import { GetKeyInfoByAddressRequest } from '@gno/api/gnonativetypes_pb';
-import { GetKeyInfoByNameOrAddressRequest } from '@gno/api/gnonativetypes_pb';
-import { GetActiveAccountRequest } from '@gno/api/gnonativetypes_pb';
-import { GetActiveAccountResponse } from '@gno/api/gnonativetypes_pb';
-import { QueryAccountRequest } from '@gno/api/gnonativetypes_pb';
-import { QueryAccountResponse } from '@gno/api/gnonativetypes_pb';
-import { DeleteAccountRequest, DeleteAccountResponse } from '@gno/api/gnonativetypes_pb';
-import { QueryRequest } from '@gno/api/gnonativetypes_pb';
-import { QueryResponse } from '@gno/api/gnonativetypes_pb';
-import { RenderRequest } from '@gno/api/gnonativetypes_pb';
-import { QEvalRequest } from '@gno/api/gnonativetypes_pb';
-import { MsgCall } from '@gno/api/gnonativetypes_pb';
-import { CallRequest } from '@gno/api/gnonativetypes_pb';
-import { CallResponse } from '@gno/api/gnonativetypes_pb';
-import { MsgSend } from '@gno/api/gnonativetypes_pb';
-import { SendRequest } from '@gno/api/gnonativetypes_pb';
-import { SendResponse } from '@gno/api/gnonativetypes_pb';
-import { AddressToBech32Request } from '@gno/api/gnonativetypes_pb';
-import { AddressFromBech32Request } from '@gno/api/gnonativetypes_pb';
+import { SetRemoteRequest, SetRemoteResponse } from '@api/gnonativetypes_pb';
+import { GetRemoteRequest } from '@api/gnonativetypes_pb';
+import { SetChainIDRequest, SetChainIDResponse } from '@api/gnonativetypes_pb';
+import { GetChainIDRequest } from '@api/gnonativetypes_pb';
+import { SetPasswordRequest, SetPasswordResponse } from '@api/gnonativetypes_pb';
+import { SelectAccountRequest } from '@api/gnonativetypes_pb';
+import { SelectAccountResponse } from '@api/gnonativetypes_pb';
+import { CreateAccountRequest } from '@api/gnonativetypes_pb';
+import { GenerateRecoveryPhraseRequest } from '@api/gnonativetypes_pb';
+import { ListKeyInfoRequest } from '@api/gnonativetypes_pb';
+import { HasKeyByNameRequest } from '@api/gnonativetypes_pb';
+import { HasKeyByAddressRequest } from '@api/gnonativetypes_pb';
+import { HasKeyByNameOrAddressRequest } from '@api/gnonativetypes_pb';
+import { GetKeyInfoByNameRequest } from '@api/gnonativetypes_pb';
+import { GetKeyInfoByAddressRequest } from '@api/gnonativetypes_pb';
+import { GetKeyInfoByNameOrAddressRequest } from '@api/gnonativetypes_pb';
+import { GetActiveAccountRequest } from '@api/gnonativetypes_pb';
+import { GetActiveAccountResponse } from '@api/gnonativetypes_pb';
+import { QueryAccountRequest } from '@api/gnonativetypes_pb';
+import { QueryAccountResponse } from '@api/gnonativetypes_pb';
+import { DeleteAccountRequest, DeleteAccountResponse } from '@api/gnonativetypes_pb';
+import { QueryRequest } from '@api/gnonativetypes_pb';
+import { QueryResponse } from '@api/gnonativetypes_pb';
+import { RenderRequest } from '@api/gnonativetypes_pb';
+import { QEvalRequest } from '@api/gnonativetypes_pb';
+import { MsgCall } from '@api/gnonativetypes_pb';
+import { CallRequest } from '@api/gnonativetypes_pb';
+import { CallResponse } from '@api/gnonativetypes_pb';
+import { MsgSend } from '@api/gnonativetypes_pb';
+import { SendRequest } from '@api/gnonativetypes_pb';
+import { SendResponse } from '@api/gnonativetypes_pb';
+import { AddressToBech32Request } from '@api/gnonativetypes_pb';
+import { AddressFromBech32Request } from '@api/gnonativetypes_pb';
 import * as Grpc from '@gno/grpc/client';
 import { GnoAccount } from '@gno/native_modules/types';
 import { GoBridge } from '@gno/native_modules';
 import { PromiseClient } from '@connectrpc/connect';
-import { GnoNativeService } from '@gno/api/rpc_connect';
+import { GnoNativeService } from '@api/rpc_connect';
 
 export interface GnoResponse {
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
@@ -68,13 +68,7 @@ export interface GnoResponse {
     send?: string,
     memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
-  send: (
-    toAddress: Uint8Array,
-    send: string,
-    gasFee: string,
-    gasWanted: number,
-    memo?: string,
-  ) => Promise<AsyncIterable<SendResponse>>;
+  send: (toAddress: Uint8Array, send: string, gasFee: string, gasWanted: number, memo?: string) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
   closeBridge: () => Promise<void>;
@@ -100,7 +94,8 @@ export const useGno = (): GnoResponse => {
     console.log('Creating GRPC client instance... done.');
 
     // Set the initial configuration where it's different from the default.
-    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:26657' }));
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'testnet.gno.berty.io:36657' }));
+    await clientInstance.setChainID(new SetChainIDRequest({ chainId: 'tendermint_test' }));
 
     return clientInstance;
   };
@@ -295,34 +290,32 @@ export const useGno = (): GnoResponse => {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgCall({
-          packagePath,
-          fnc,
-          args,
-          send,
-        })],
+        msgs: [
+          new MsgCall({
+            packagePath,
+            fnc,
+            args,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;
   };
 
-  const send = async (
-    toAddress: Uint8Array,
-    send: string,
-    gasFee: string,
-    gasWanted: number,
-    memo?: string,
-  ) => {
+  const send = async (toAddress: Uint8Array, send: string, gasFee: string, gasWanted: number, memo?: string) => {
     const client = await getClient();
     const reponse = client.send(
       new SendRequest({
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
-        msgs: [new MsgSend({
-          toAddress,
-          send,
-        })],
+        msgs: [
+          new MsgSend({
+            toAddress,
+            send,
+          }),
+        ],
       }),
     );
     return reponse;
