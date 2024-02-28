@@ -225,6 +225,7 @@ new-app-build-ios:
 	@cp -r $(gnoboard_dir)/ios/gnoboard/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/
 	@cp $(gnoboard_dir)/ios/gnoboard/gnoboard-Bridging-Header.h $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
 	@cp -r $(gnoboard_dir)/ios/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/
+	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
 
 JSON_FILE := $(OUTPUT_DIR)/$(APP_NAME)/app.json
 # add tsconfigPaths entry to app.json
