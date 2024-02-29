@@ -272,10 +272,14 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 		})
 	}
 
+	var pubKeyBytes []byte
+	if account.PubKey != nil {
+		pubKeyBytes = account.PubKey.Bytes()
+	}
 	res := connect.NewResponse(&api_gen.QueryAccountResponse{AccountInfo: &api_gen.BaseAccount{
 		Address:       account.Address.Bytes(),
 		Coins:         formattedCoins,
-		PubKey:        account.PubKey.Bytes(),
+		PubKey:        pubKeyBytes,
 		AccountNumber: account.AccountNumber,
 		Sequence:      account.Sequence,
 	}})
