@@ -125,7 +125,8 @@ export const useGno = (): GnoResponse => {
 
     // Set the initial configuration where it's different from the default.
     await clientInstance.setRemote(
-      new SetRemoteRequest({ remote: "testnet.gno.berty.io:26657" }),
+    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'gno.land:26657' }));
+    await clientInstance.setChainID(new SetChainIDRequest({ chainId: 'portal-loop' }));
     );
 
     return clientInstance;
