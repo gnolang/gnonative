@@ -175,3 +175,20 @@ In the `Signing` section, select your `team` certificate.
 
 Select the right device in the device list. Open the `Product` menu, and select `Run`.
 See more: https://developer.apple.com/documentation/xcode/building-and-running-an-app
+
+## Create a new React-Native app from our template
+
+You can create a new React-Native application easily with our script:
+
+```console
+APP_NAME=myapp make new-app
+```
+This creates the new project in the `examples/react-native/hello` directory.
+
+### Regenerate dependencies
+
+If you changed some Go code, or updated the React-Native dependencies, you have to build them again:
+```console
+APP_NAME=myapp make build.ios # for iOS
+APP_NAME=myapp make build.android # for Android
+```
