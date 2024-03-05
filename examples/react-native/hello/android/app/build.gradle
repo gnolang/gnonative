@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
+def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -135,6 +136,7 @@ android {
 }
 
 dependencies {
+	implementation fileTree(dir: "${frameworkDir}/android", include: ["*.jar", "*.aar"])
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
