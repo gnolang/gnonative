@@ -2,6 +2,8 @@ SHELL := /bin/bash
 
 check-program = $(foreach exec,$(1),$(if $(shell PATH="$(PATH)" which $(exec)),,$(error "Missing deps: no '$(exec)' in PATH")))
 
+OS := $(shell uname)
+
 # Get the temporary directory of the system
 TEMPDIR := $(shell dirname $(shell mktemp -u))
 
@@ -44,9 +46,11 @@ all build: generate build.ios build.android
 
 # Build iOS framework
 build.ios: generate $(gnocore_xcframework)
+ifeq ($(OS),Darwin)
 	@echo "generate iOS framework"
 	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
-	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace APP_NAME=$(APP_NAME)
+	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
+endif
 
 # Build Android aar & jar
 build.android: generate $(gnocore_aar) $(gnocore_jar)
@@ -130,12 +134,14 @@ $(TEMPDIR)/.tool-versions: .tool-versions
 # - Bind - ios framework
 
 $(gnocore_xcframework): $(bind_init_files) $(go_deps)
+ifeq ($(OS),Darwin)
 	@mkdir -p $(dir $@)
 	# need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/ios-gnonative \
 		-tags 'nowatchdog' -prefix=Gno \
 		-o $@ -target ios ./framework/service
+endif
 _bind.clean.ios:
 	rm -rf $(gnocore_xcframework)
 
@@ -174,7 +180,7 @@ asdf.install_tools: asdf.add_plugins
 ########################################
 # Script to create a new app
 
-yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill react-native-get-random-values text-encoding base-64 react-native-fetch-api
+yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill@3.2.1 react-native-get-random-values text-encoding base-64 react-native-fetch-api
 yarn_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
 OUTPUT_DIR := $(make_dir)/examples/react-native
 
@@ -185,8 +191,11 @@ endif
 	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/react-native
 	$(MAKE) add-app-json-entry APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
 	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) new-app-build-android APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+ifeq ($(OS),Darwin)
 	$(MAKE) new-app-build-ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
 	$(MAKE) copy-ios-project-pbxproj
+endif
 
 # creates a new react native app using Expo script. Also creates ios and android folders
 new-react-native-app:
@@ -226,6 +235,24 @@ new-app-build-ios:
 	@cp $(gnoboard_dir)/ios/gnoboard/gnoboard-Bridging-Header.h $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
 	@cp -r $(gnoboard_dir)/ios/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/
 	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
+
+# build the Android project files for the new app
+new-app-build-android:
+	@echo "Copying Android project files"
+	@$(eval MAIN_APP_PATH := $(shell find $(OUTPUT_DIR)/$(APP_NAME)/android/app/src/main/java -name 'MainApplication.kt')) # ./android/app/src/main/java/com/anonymous/<APP_NAME>/MainApplication.kt
+	@$(eval MAIN_APP_FILE := $(shell basename $(MAIN_APP_PATH))) # MainApplication.kt
+	@$(eval MAIN_APP_DIR := $(shell dirname $(MAIN_APP_PATH))) # ./android/app/src/main/java/com/anonymous/<APP_NAME>
+	@$(eval PACKAGE_PREFIX := $(shell sed -n 's/package \(.*\)\.$(APP_NAME)/\1/'p $(MAIN_APP_DIR)/$(MAIN_APP_FILE))) # e.g. com.anonymous
+	@cp -r $(gnoboard_dir)/android/app/src/main/java/land/gno/gobridge $(MAIN_APP_DIR)/.. # copy gobridge directory
+	@cp -r $(gnoboard_dir)/android/app/src/main/java/land/gno/rootdir $(MAIN_APP_DIR)/.. # copy rootdir directory
+	@perl -pi -e "s/land\.gno/$(PACKAGE_PREFIX)/" $(MAIN_APP_DIR)/../gobridge/* # in gobridge, replace land.gno by PACKAGE_PREFIX (e.g. com.anonymous)
+	@perl -pi -e "s/land\.gno/$(PACKAGE_PREFIX)/" $(MAIN_APP_DIR)/../rootdir/* # in rootdir, replace land.gno by PACKAGE_PREFIX (e.g. com.anonymous)
+	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.gobridge.GoBridgePackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for gobridge (e.g. import com.anonymous.gobridge.GoBridgePackage)
+	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.rootdir.RootDirPackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for rootdir (e.g. import com.anonymous.rootdir.RootDirPackage)
+	@perl -pi -e 's/return PackageList\(this\)\.packages/return PackageList\(this\)\.packages.apply \{\n\t\t\t\tadd(RootDirPackage())\n\t\t\t\tadd(GoBridgePackage())\n\t\t\t\}/' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # replace the default package list by one adding gobridge and rootdir
+	@perl -pi -e '/^def projectRoot/ and $$_.="def frameworkDir = \"\$$\{rootDir\.getAbsoluteFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getAbsolutePath\(\)\}/framework\"\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the projectRoot variable in build.gradle
+	@perl -pi -e '/^dependencies/ and $$_.="\timplementation fileTree(dir: \"\$$\{frameworkDir\}/android\", include: \[\"\*\.jar\", \"\*\.aar\"\]\)\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the framework dependency in build.gradle
+	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) node_modules TEMPLATE_PROJECT=$(APP_NAME)
 
 JSON_FILE := $(OUTPUT_DIR)/$(APP_NAME)/app.json
 # add tsconfigPaths entry to app.json

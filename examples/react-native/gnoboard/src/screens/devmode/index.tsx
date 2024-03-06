@@ -31,7 +31,7 @@ function DevMode() {
     setAppConsole('replying to a post...');
     const gasFee = '1000000ugnot';
     const gasWanted = 2000000;
-    const args: Array<string> = ['2', '1', '1', postContent];
+    const args: Array<string> = ['1', '1', '1', postContent];
     try {
       for await (const response of await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
         console.log('response: ', response);
@@ -52,7 +52,7 @@ function DevMode() {
   };
 
   const loadInBrowser = () => {
-    Linking.openURL('http://testnet.gno.berty.io/r/demo/boards:gnonative/1').catch((err) => console.error("Couldn't load page", err));
+    Linking.openURL('https://gno.land/r/demo/boards:testboard/1').catch((err) => console.error("Couldn't load page", err));
   };
 
   const onCloseReenterPassword = async () => {
@@ -62,7 +62,7 @@ function DevMode() {
   const onRenderBoard = async () => {
     navigate.navigate(RoutePath.Board, {
       board: 'gno.land/r/demo/boards',
-      thread: 'gnonative/1',
+      thread: 'testboard/1',
     });
   };
 

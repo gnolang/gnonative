@@ -23,7 +23,7 @@ const Board: React.FC<Props> = ({ route }) => {
       try {
         setLoading('Calling Gno Render Function...');
 
-        const response = await gno.render('gno.land/r/demo/boards', 'gnonative/1');
+        const response = await gno.render('gno.land/r/demo/boards', 'testboard/1');
         setRenderedBoard(response);
 
         setLoading(undefined);

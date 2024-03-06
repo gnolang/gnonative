@@ -1,5 +1,10 @@
 [
   {
+    "chainId": "portal-loop",
+    "chainName": "Portal loop",
+    "gnoAddress": "gno.land:26657"
+  },
+  {
     "chainId": "test3",
     "chainName": "Testnet 3",
     "gnoAddress": "test3.gno.land:36657"
