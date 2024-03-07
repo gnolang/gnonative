@@ -247,14 +247,21 @@ type SendRequest struct {
 type SendResponse struct {
 }
 
-type RunRequest struct {
+type MsgRun struct {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
-	Package   string `json:"package" yaml:"package"`
+	Package string `json:"package" yaml:"package"`
+	// Optional. Example: "1000ugnot"
+	Send string `json:"send" yaml:"send"`
+}
+
+type RunRequest struct {
 	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
+	// list of run operations to make in one transaction
+	Msgs []MsgRun
 }
 
 type RunResponse struct {

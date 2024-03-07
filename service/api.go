@@ -432,22 +432,30 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	}
 	s.lock.RUnlock()
 
-	memPkg := &std.MemPackage{
-		Files: []*std.MemFile{
-			{
-				Name: "main.gno",
-				Body: req.Msg.Package,
-			},
-		},
-	}
-	cfg := gnoclient.RunCfg{
-		Package:   memPkg,
+	cfg := gnoclient.BaseTxCfg{
 		GasFee:    req.Msg.GasFee,
 		GasWanted: req.Msg.GasWanted,
 		Memo:      req.Msg.Memo,
 	}
 
-	bres, err := s.client.Run(cfg)
+	msgs := make([]gnoclient.MsgRun, 0)
+
+	for _, msg := range req.Msg.Msgs {
+		memPkg := &std.MemPackage{
+			Files: []*std.MemFile{
+				{
+					Name: "main.gno",
+					Body: msg.Package,
+				},
+			},
+		}
+		msgs = append(msgs, gnoclient.MsgRun{
+			Package: memPkg,
+			Send:    msg.Send,
+		})
+	}
+
+	bres, err := s.client.Run(cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}

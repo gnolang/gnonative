@@ -531,15 +531,26 @@ export const SendResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnonative.v1.MsgRun
+ */
+export const MsgRun = proto3.makeMessageType(
+  "land.gno.gnonative.v1.MsgRun",
+  () => [
+    { no: 1, name: "package", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnonative.v1.RunRequest
  */
 export const RunRequest = proto3.makeMessageType(
   "land.gno.gnonative.v1.RunRequest",
   () => [
-    { no: 1, name: "package", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "gas_fee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
-    { no: 4, name: "memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "gas_fee", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+    { no: 3, name: "memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "msgs", jsonName: "Msgs", kind: "message", T: MsgRun, repeated: true },
   ],
 );
 

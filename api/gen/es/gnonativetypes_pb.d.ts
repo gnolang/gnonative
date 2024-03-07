@@ -1376,9 +1376,9 @@ export declare class SendResponse extends Message<SendResponse> {
 }
 
 /**
- * @generated from message land.gno.gnonative.v1.RunRequest
+ * @generated from message land.gno.gnonative.v1.MsgRun
  */
-export declare class RunRequest extends Message<RunRequest> {
+export declare class MsgRun extends Message<MsgRun> {
   /**
    * The code for the script package. Must have main().
    * Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
@@ -1388,21 +1388,54 @@ export declare class RunRequest extends Message<RunRequest> {
   package: string;
 
   /**
-   * @generated from field: string gas_fee = 2;
+   * Optional. Example: "1000ugnot"
+   *
+   * @generated from field: string send = 2;
+   */
+  send: string;
+
+  constructor(data?: PartialMessage<MsgRun>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.MsgRun";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MsgRun;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MsgRun;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MsgRun;
+
+  static equals(a: MsgRun | PlainMessage<MsgRun> | undefined, b: MsgRun | PlainMessage<MsgRun> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.RunRequest
+ */
+export declare class RunRequest extends Message<RunRequest> {
+  /**
+   * @generated from field: string gas_fee = 1;
    */
   gasFee: string;
 
   /**
-   * @generated from field: sint64 gas_wanted = 3;
+   * @generated from field: sint64 gas_wanted = 2;
    */
   gasWanted: bigint;
 
   /**
    * Memo is optional
    *
-   * @generated from field: string memo = 4;
+   * @generated from field: string memo = 3;
    */
   memo: string;
+
+  /**
+   * list of run operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgRun msgs = 4 [json_name = "Msgs"];
+   */
+  msgs: MsgRun[];
 
   constructor(data?: PartialMessage<RunRequest>);
 

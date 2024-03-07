@@ -251,14 +251,21 @@ message SendRequest {
 message SendResponse {
 }
 
-message RunRequest {
+message MsgRun {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
 	string package = 1;
-	string gas_fee = 2;
-	sint64 gas_wanted = 3;
+	// Optional. Example: "1000ugnot"
+	string send = 2;
+}
+
+message RunRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
 	// Memo is optional
-	string memo = 4;
+	string memo = 3;
+	// list of run operations to make in one transaction
+	repeated MsgRun msgs = 4 [json_name = "Msgs"];
 }
 
 message RunResponse {

@@ -63,6 +63,7 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	MsgSend{},
 	SendRequest{},
 	SendResponse{},
+	MsgRun{},
 	RunRequest{},
 	RunResponse{},
 	AddressToBech32Request{},

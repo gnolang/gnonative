@@ -3,6 +3,6 @@ ruby 3.2.2
 cocoapods 1.12.1
 java openjdk-18.0.1.1
 yarn 1.22.19
-golang 1.20.7
+golang 1.21.7
 buf 1.15.1
 jq 1.6
