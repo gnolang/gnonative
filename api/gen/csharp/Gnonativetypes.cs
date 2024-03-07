@@ -99,21 +99,23 @@ namespace Land.Gno.Gnonative.V1 {
             "CVIEc2VuZCKNAQoLU2VuZFJlcXVlc3QSFwoHZ2FzX2ZlZRgBIAEoCVIGZ2Fz",
             "RmVlEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBISCgRtZW1vGAMg",
             "ASgJUgRtZW1vEjIKBG1zZ3MYBCADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUu",
-            "djEuTXNnU2VuZFIETXNncyIOCgxTZW5kUmVzcG9uc2UicgoKUnVuUmVxdWVz",
-            "dBIYCgdwYWNrYWdlGAEgASgJUgdwYWNrYWdlEhcKB2dhc19mZWUYAiABKAlS",
-            "Bmdhc0ZlZRIdCgpnYXNfd2FudGVkGAMgASgSUglnYXNXYW50ZWQSEgoEbWVt",
-            "bxgEIAEoCVIEbWVtbyIlCgtSdW5SZXNwb25zZRIWCgZyZXN1bHQYASABKAlS",
-            "BnJlc3VsdCIyChZBZGRyZXNzVG9CZWNoMzJSZXF1ZXN0EhgKB2FkZHJlc3MY",
-            "ASABKAxSB2FkZHJlc3MiQAoXQWRkcmVzc1RvQmVjaDMyUmVzcG9uc2USJQoO",
-            "YmVjaDMyX2FkZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3MiQQoYQWRkcmVz",
-            "c0Zyb21CZWNoMzJSZXF1ZXN0EiUKDmJlY2gzMl9hZGRyZXNzGAEgASgJUg1i",
-            "ZWNoMzJBZGRyZXNzIjUKGUFkZHJlc3NGcm9tQmVjaDMyUmVzcG9uc2USGAoH",
-            "YWRkcmVzcxgBIAEoDFIHYWRkcmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFt",
-            "ZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEg",
-            "ASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgB",
-            "IAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5n",
-            "GAEgASgJUghHcmVldGluZ0IpWidnaXRodWIuY29tL2dub2xhbmcvZ25vbmF0",
-            "aXZlL2FwaS9nZW4vZ29iBnByb3RvMw=="));
+            "djEuTXNnU2VuZFIETXNncyIOCgxTZW5kUmVzcG9uc2UiNgoGTXNnUnVuEhgK",
+            "B3BhY2thZ2UYASABKAlSB3BhY2thZ2USEgoEc2VuZBgCIAEoCVIEc2VuZCKL",
+            "AQoKUnVuUmVxdWVzdBIXCgdnYXNfZmVlGAEgASgJUgZnYXNGZWUSHQoKZ2Fz",
+            "X3dhbnRlZBgCIAEoElIJZ2FzV2FudGVkEhIKBG1lbW8YAyABKAlSBG1lbW8S",
+            "MQoEbXNncxgEIAMoCzIdLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dSdW5S",
+            "BE1zZ3MiJQoLUnVuUmVzcG9uc2USFgoGcmVzdWx0GAEgASgJUgZyZXN1bHQi",
+            "MgoWQWRkcmVzc1RvQmVjaDMyUmVxdWVzdBIYCgdhZGRyZXNzGAEgASgMUgdh",
+            "ZGRyZXNzIkAKF0FkZHJlc3NUb0JlY2gzMlJlc3BvbnNlEiUKDmJlY2gzMl9h",
+            "ZGRyZXNzGAEgASgJUg1iZWNoMzJBZGRyZXNzIkEKGEFkZHJlc3NGcm9tQmVj",
+            "aDMyUmVxdWVzdBIlCg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRk",
+            "cmVzcyI1ChlBZGRyZXNzRnJvbUJlY2gzMlJlc3BvbnNlEhgKB2FkZHJlc3MY",
+            "ASABKAxSB2FkZHJlc3MiIgoMSGVsbG9SZXF1ZXN0EhIKBG5hbWUYASABKAlS",
+            "BE5hbWUiKwoNSGVsbG9SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVIIR3Jl",
+            "ZXRpbmciKAoSSGVsbG9TdHJlYW1SZXF1ZXN0EhIKBG5hbWUYASABKAlSBE5h",
+            "bWUiMQoTSGVsbG9TdHJlYW1SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVII",
+            "R3JlZXRpbmdCKVonZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS9hcGkv",
+            "Z2VuL2dvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -168,7 +170,8 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgSend), global::Land.Gno.Gnonative.V1.MsgSend.Parser, new[]{ "ToAddress", "Send" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendRequest), global::Land.Gno.Gnonative.V1.SendRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "Msgs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendResponse), global::Land.Gno.Gnonative.V1.SendResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunRequest), global::Land.Gno.Gnonative.V1.RunRequest.Parser, new[]{ "Package", "GasFee", "GasWanted", "Memo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgRun), global::Land.Gno.Gnonative.V1.MsgRun.Parser, new[]{ "Package", "Send" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunRequest), global::Land.Gno.Gnonative.V1.RunRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "Msgs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunResponse), global::Land.Gno.Gnonative.V1.RunResponse.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Request), global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser, new[]{ "Address" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Response), global::Land.Gno.Gnonative.V1.AddressToBech32Response.Parser, new[]{ "Bech32Address" }, null, null, null, null),
@@ -10689,16 +10692,16 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class RunRequest : pb::IMessage<RunRequest>
+  public sealed partial class MsgRun : pb::IMessage<MsgRun>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RunRequest> _parser = new pb::MessageParser<RunRequest>(() => new RunRequest());
+    private static readonly pb::MessageParser<MsgRun> _parser = new pb::MessageParser<MsgRun>(() => new MsgRun());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RunRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<MsgRun> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -10714,7 +10717,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RunRequest() {
+    public MsgRun() {
       OnConstruction();
     }
 
@@ -10722,18 +10725,16 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RunRequest(RunRequest other) : this() {
+    public MsgRun(MsgRun other) : this() {
       package_ = other.package_;
-      gasFee_ = other.gasFee_;
-      gasWanted_ = other.gasWanted_;
-      memo_ = other.memo_;
+      send_ = other.send_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RunRequest Clone() {
-      return new RunRequest(this);
+    public MsgRun Clone() {
+      return new MsgRun(this);
     }
 
     /// <summary>Field number for the "package" field.</summary>
@@ -10752,54 +10753,30 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
-    /// <summary>Field number for the "gas_fee" field.</summary>
-    public const int GasFeeFieldNumber = 2;
-    private string gasFee_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string GasFee {
-      get { return gasFee_; }
-      set {
-        gasFee_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "gas_wanted" field.</summary>
-    public const int GasWantedFieldNumber = 3;
-    private long gasWanted_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long GasWanted {
-      get { return gasWanted_; }
-      set {
-        gasWanted_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "memo" field.</summary>
-    public const int MemoFieldNumber = 4;
-    private string memo_ = "";
+    /// <summary>Field number for the "send" field.</summary>
+    public const int SendFieldNumber = 2;
+    private string send_ = "";
     /// <summary>
-    /// Memo is optional
+    /// Optional. Example: "1000ugnot"
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Memo {
-      get { return memo_; }
+    public string Send {
+      get { return send_; }
       set {
-        memo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        send_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RunRequest);
+      return Equals(other as MsgRun);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RunRequest other) {
+    public bool Equals(MsgRun other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -10807,9 +10784,7 @@ namespace Land.Gno.Gnonative.V1 {
         return true;
       }
       if (Package != other.Package) return false;
-      if (GasFee != other.GasFee) return false;
-      if (GasWanted != other.GasWanted) return false;
-      if (Memo != other.Memo) return false;
+      if (Send != other.Send) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10818,9 +10793,7 @@ namespace Land.Gno.Gnonative.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Package.Length != 0) hash ^= Package.GetHashCode();
-      if (GasFee.Length != 0) hash ^= GasFee.GetHashCode();
-      if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
-      if (Memo.Length != 0) hash ^= Memo.GetHashCode();
+      if (Send.Length != 0) hash ^= Send.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10843,17 +10816,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteString(Package);
       }
-      if (GasFee.Length != 0) {
+      if (Send.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(GasFee);
-      }
-      if (GasWanted != 0L) {
-        output.WriteRawTag(24);
-        output.WriteSInt64(GasWanted);
-      }
-      if (Memo.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Memo);
+        output.WriteString(Send);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -10869,17 +10834,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteString(Package);
       }
-      if (GasFee.Length != 0) {
+      if (Send.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(GasFee);
-      }
-      if (GasWanted != 0L) {
-        output.WriteRawTag(24);
-        output.WriteSInt64(GasWanted);
-      }
-      if (Memo.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Memo);
+        output.WriteString(Send);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -10894,14 +10851,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (Package.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Package);
       }
-      if (GasFee.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(GasFee);
-      }
-      if (GasWanted != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(GasWanted);
-      }
-      if (Memo.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Memo);
+      if (Send.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Send);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -10911,21 +10862,15 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RunRequest other) {
+    public void MergeFrom(MsgRun other) {
       if (other == null) {
         return;
       }
       if (other.Package.Length != 0) {
         Package = other.Package;
       }
-      if (other.GasFee.Length != 0) {
-        GasFee = other.GasFee;
-      }
-      if (other.GasWanted != 0L) {
-        GasWanted = other.GasWanted;
-      }
-      if (other.Memo.Length != 0) {
-        Memo = other.Memo;
+      if (other.Send.Length != 0) {
+        Send = other.Send;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -10947,15 +10892,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 18: {
-            GasFee = input.ReadString();
-            break;
-          }
-          case 24: {
-            GasWanted = input.ReadSInt64();
-            break;
-          }
-          case 34: {
-            Memo = input.ReadString();
+            Send = input.ReadString();
             break;
           }
         }
@@ -10978,15 +10915,303 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 18: {
+            Send = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class RunRequest : pb::IMessage<RunRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<RunRequest> _parser = new pb::MessageParser<RunRequest>(() => new RunRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<RunRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[52]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RunRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RunRequest(RunRequest other) : this() {
+      gasFee_ = other.gasFee_;
+      gasWanted_ = other.gasWanted_;
+      memo_ = other.memo_;
+      msgs_ = other.msgs_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RunRequest Clone() {
+      return new RunRequest(this);
+    }
+
+    /// <summary>Field number for the "gas_fee" field.</summary>
+    public const int GasFeeFieldNumber = 1;
+    private string gasFee_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string GasFee {
+      get { return gasFee_; }
+      set {
+        gasFee_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "gas_wanted" field.</summary>
+    public const int GasWantedFieldNumber = 2;
+    private long gasWanted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long GasWanted {
+      get { return gasWanted_; }
+      set {
+        gasWanted_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "memo" field.</summary>
+    public const int MemoFieldNumber = 3;
+    private string memo_ = "";
+    /// <summary>
+    /// Memo is optional
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Memo {
+      get { return memo_; }
+      set {
+        memo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "msgs" field.</summary>
+    public const int MsgsFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.MsgRun> _repeated_msgs_codec
+        = pb::FieldCodec.ForMessage(34, global::Land.Gno.Gnonative.V1.MsgRun.Parser);
+    private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.MsgRun> msgs_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.MsgRun>();
+    /// <summary>
+    /// list of run operations to make in one transaction
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.MsgRun> Msgs {
+      get { return msgs_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as RunRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(RunRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GasFee != other.GasFee) return false;
+      if (GasWanted != other.GasWanted) return false;
+      if (Memo != other.Memo) return false;
+      if(!msgs_.Equals(other.msgs_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GasFee.Length != 0) hash ^= GasFee.GetHashCode();
+      if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
+      if (Memo.Length != 0) hash ^= Memo.GetHashCode();
+      hash ^= msgs_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (GasFee.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GasFee);
+      }
+      if (GasWanted != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(GasWanted);
+      }
+      if (Memo.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Memo);
+      }
+      msgs_.WriteTo(output, _repeated_msgs_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GasFee.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GasFee);
+      }
+      if (GasWanted != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(GasWanted);
+      }
+      if (Memo.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Memo);
+      }
+      msgs_.WriteTo(ref output, _repeated_msgs_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (GasFee.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GasFee);
+      }
+      if (GasWanted != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(GasWanted);
+      }
+      if (Memo.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Memo);
+      }
+      size += msgs_.CalculateSize(_repeated_msgs_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(RunRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GasFee.Length != 0) {
+        GasFee = other.GasFee;
+      }
+      if (other.GasWanted != 0L) {
+        GasWanted = other.GasWanted;
+      }
+      if (other.Memo.Length != 0) {
+        Memo = other.Memo;
+      }
+      msgs_.Add(other.msgs_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
             GasFee = input.ReadString();
             break;
           }
-          case 24: {
+          case 16: {
             GasWanted = input.ReadSInt64();
             break;
           }
-          case 34: {
+          case 26: {
             Memo = input.ReadString();
+            break;
+          }
+          case 34: {
+            msgs_.AddEntriesFrom(input, _repeated_msgs_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            GasFee = input.ReadString();
+            break;
+          }
+          case 16: {
+            GasWanted = input.ReadSInt64();
+            break;
+          }
+          case 26: {
+            Memo = input.ReadString();
+            break;
+          }
+          case 34: {
+            msgs_.AddEntriesFrom(ref input, _repeated_msgs_codec);
             break;
           }
         }
@@ -11011,7 +11236,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[52]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[53]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11204,7 +11429,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[53]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[54]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11394,7 +11619,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[54]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[55]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11584,7 +11809,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[55]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[56]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11774,7 +11999,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[56]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[57]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11964,7 +12189,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[57]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[58]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12154,7 +12379,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[58]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[59]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12344,7 +12569,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[59]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[60]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12534,7 +12759,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[60]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[61]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
