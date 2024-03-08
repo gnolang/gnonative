@@ -95,7 +95,7 @@ make build.android
 #### Start metro
 
 ```console
-cd gnoboard
+cd examples/react-native/gnoboard
 yarn start
 ```
 
@@ -108,13 +108,13 @@ You can either connect an Android phone via USB cable, or launch an emulator dev
 Connect your device and bind the port to metro:
 
 ```console
-cd gnoboard
+cd examples/react-native/gnoboard
 make android.reverse_tcp
 ```
 
 ##### Emulator device
 
-You can either run Android Studio and open the Android project in `gnoboard/android`.
+You can either run Android Studio and open the Android project in `examples/react-native/gnoboard/android`.
 If you prefer the CLI option:
 
 ```console
@@ -156,13 +156,13 @@ make build.ios
 #### Start metro
 
 ```console
-cd gnoboard
+cd examples/react-native/gnoboard
 yarn start
 ```
 
 #### Open Xcode and connect your iOS device
 
-Open Xcode and open the GnoBoard Xcode workspace: `gnoboard/ios/gnoboard.xcworkspace`
+Open Xcode and open the GnoBoard Xcode workspace: `examples/react-native/gnoboard/ios/gnoboard.xcworkspace`
 You can either connect an iOS phone via USB cable, or launch an emulator device from Xcode.
 See more: https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device
 
