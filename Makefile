@@ -12,10 +12,10 @@ APP_NAME ?= gnoboard
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
-gnoboard_dir := $(make_dir)/examples/react-native/gnoboard
+gnoboard_dir := $(make_dir)/examples/js/react-native/gnoboard
 
 # Argument Defaults
-APP_OUTPUT_DIR ?= $(make_dir)/examples/react-native/$(APP_NAME)
+APP_OUTPUT_DIR ?= $(make_dir)/examples/js/react-native/$(APP_NAME)
 IOS_OUTPUT_FRAMEWORK_DIR ?= framework/ios
 ANDROID_OUTPUT_LIBS_DIR ?= framework/android
 GO_BIND_BIN_DIR ?= $(cache_dir)/bind
@@ -182,18 +182,18 @@ asdf.install_tools: asdf.add_plugins
 
 yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill@3.2.1 react-native-get-random-values text-encoding base-64 react-native-fetch-api
 yarn_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
-OUTPUT_DIR := $(make_dir)/examples/react-native
+OUTPUT_DIR := $(make_dir)/examples/js/react-native
 
 new-app:
 ifndef APP_NAME
 	$(error APP_NAME is undefined. Please set APP_NAME to the name of your app)
 endif
-	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/react-native
-	$(MAKE) add-app-json-entry APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
-	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
-	$(MAKE) new-app-build-android APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/js/react-native
+	$(MAKE) add-app-json-entry APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
+	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
+	$(MAKE) new-app-build-android APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
 ifeq ($(OS),Darwin)
-	$(MAKE) new-app-build-ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/react-native
+	$(MAKE) new-app-build-ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
 	$(MAKE) copy-ios-project-pbxproj
 endif
 
@@ -250,7 +250,7 @@ new-app-build-android:
 	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.gobridge.GoBridgePackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for gobridge (e.g. import com.anonymous.gobridge.GoBridgePackage)
 	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.rootdir.RootDirPackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for rootdir (e.g. import com.anonymous.rootdir.RootDirPackage)
 	@perl -pi -e 's/return PackageList\(this\)\.packages/return PackageList\(this\)\.packages.apply \{\n\t\t\t\tadd(RootDirPackage())\n\t\t\t\tadd(GoBridgePackage())\n\t\t\t\}/' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # replace the default package list by one adding gobridge and rootdir
-	@perl -pi -e '/^def projectRoot/ and $$_.="def frameworkDir = \"\$$\{rootDir\.getAbsoluteFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getAbsolutePath\(\)\}/framework\"\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the projectRoot variable in build.gradle
+	@perl -pi -e '/^def projectRoot/ and $$_.="def frameworkDir = \"\$$\{rootDir\.getAbsoluteFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getAbsolutePath\(\)\}/framework\"\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the projectRoot variable in build.gradle
 	@perl -pi -e '/^dependencies/ and $$_.="\timplementation fileTree(dir: \"\$$\{frameworkDir\}/android\", include: \[\"\*\.jar\", \"\*\.aar\"\]\)\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the framework dependency in build.gradle
 	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) node_modules TEMPLATE_PROJECT=$(APP_NAME)
 

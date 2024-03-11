@@ -9,12 +9,18 @@ This is a tutorial on how to use GnoNativeKit with Wails. It is based on the off
 
 ## Project Generation
 
+Create a temporary environment variable to store the root directory:
+
+```bash
+export GNONATIVE=$(go list -m -f '{{.Dir}}')
+```
+
 ### Generate the API dependencies
 
 Assuming your are in this directory in a shell, go to the `api` folder of gnonative:
 
 ```bash
-cd ../../api
+cd $GNONATIVE/api
 yarn
 ```
 
@@ -22,7 +28,7 @@ yarn
 
 Go back to the README's folder:
 ```bash
-cd ../examples/wails
+cd $GNONATIVE/examples/js/wails
 ```
 
 To generate a new project, run `wails init -n myproject -t react-ts`. This will generate a new project in the current directory. Please, navigate to the project directory:
@@ -84,15 +90,15 @@ npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc
 npm install -D @types/node
 
 mkdir -p src/hooks
-cp ../../../../templates/es/use-gno-web.ts ./src/hooks/use-gno.ts
-cp ../../../../templates/images/logo-universal.png ./src/assets/images 
+cp $GNONATIVE/templates/es/use-gno-web.ts ./src/hooks/use-gno.ts
+cp $GNONATIVE/templates/images/logo-universal.png ./src/assets/images 
 ```
 ### Set up `@api` alias
 
 The Typescript compiler (tsc) must be able to resolve import paths starting by `@api` to find the API files. But `tsc` cannot resolve folders outside the project root directory. The simplest way is to link the `api/gen/es` folder into this project:
 
 ```bash
-ln -s ../../../../../api/gen/es src/api
+ln -s $GNONATIVE/api/gen/es src/api
 ```
 
 Copy and paste the following content into a patch file (e.g. `tsconfig.patch`):

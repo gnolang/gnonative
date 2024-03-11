@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
-def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
+def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -153,7 +153,7 @@ task makeDeps(description: 'Build gnocore.aar (Gno go core)') {
 
         if (checkMakeInPath.getExitValue() == 0) {
             exec {
-                def makefileDir = "${rootDir.getPath()}/../../../.."
+                def makefileDir = "${rootDir.getPath()}/../../../../.."
                 workingDir makefileDir
                 environment 'PWD', makefileDir
                 commandLine 'make', 'build.android'

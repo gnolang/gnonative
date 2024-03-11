@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
-def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
+def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
 
 /**
  * This is the configuration block to customize your React Native Android app.
