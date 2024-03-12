@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "gnonative": ["../src/index"],
+      "gnonative/*": ["../src/*"]
+    }
+  }
+}
