@@ -15,32 +15,27 @@ prerequisites.
 To create a new app, run the following command:
 
 ```console
-cd gnonative (root of the repo)
+cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
 make create-app APP_NAME=MyApp
 ```
 
-This will create a new app in the `examples/MyApp` directory containing a basic
+This will create a new app in the `examples/js/react-native/MyApp` directory containing a basic
 integration with Gno.
-
-Once you have created the app, you need to copy some files that are not included
-in the current script version:
-
--   GnoCore Framework - TODO
--   XCode workspace - TODO
 
 ## Run the App
 
 To run the app, run the following command:
 
 ```console
-cd examples/MyApp
+cd examples/js/react-native/MyApp
+make android.reverse_tcp # for Android, after you have connected an Android device (simulator or real device)
 yarn start
 ```
 
 and then run the following command in another terminal:
 
 ```console
-cd examples/MyApp
+cd examples/js/react-native/MyApp
 npx react-native [run-android|run-ios]
 ```
 
@@ -62,4 +57,13 @@ export default function App() {
   }, []);
 
 ...
+```
+
+## Regenerate dependencies
+
+If you changed some Go code, or updated the React-Native dependencies, you have to build them again:
+```console
+cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
+APP_NAME=MyApp make build.ios # for iOS
+APP_NAME=MyApp make build.android # for Android
 ```

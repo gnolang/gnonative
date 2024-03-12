@@ -8,7 +8,7 @@ const path = require('path');
 //
 // module.exports = config;
 const config = {
-  watchFolders: [path.resolve(__dirname + '/../../../api')],
+  watchFolders: [path.resolve(__dirname + '/../../../../api')],
 };
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
