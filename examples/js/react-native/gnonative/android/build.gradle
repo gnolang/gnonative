@@ -5,6 +5,8 @@ apply plugin: 'maven-publish'
 group = 'land.gno.gnonative'
 version = '0.1.0'
 
+def frameworkDir = "${rootDir.getAbsoluteFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath()}/framework"
+
 buildscript {
   def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
   if (expoModulesCorePlugin.exists()) {
@@ -87,6 +89,7 @@ repositories {
 }
 
 dependencies {
+  implementation fileTree(dir: "${frameworkDir}/android", include: ['*.aar', '*.jar'])
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
 }

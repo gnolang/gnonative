@@ -1,9 +1,21 @@
 package land.gno.gnonative
 
+import android.content.Context
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import gnolang.gno.gnonative.Bridge
+import gnolang.gno.gnonative.BridgeConfig
+import gnolang.gno.gnonative.Gnonative
+import java.io.File
+import expo.modules.kotlin.Promise
+import expo.modules.kotlin.exception.CodedException
 
 class GnonativeModule : Module() {
+  private var context: Context? = null
+  private var rootDir: File? = null
+  private var socketPort = 0
+  private var bridgeGnoNative: Bridge? = null
+
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
   // See https://docs.expo.dev/modules/module-api for more details about available components.
@@ -18,8 +30,26 @@ class GnonativeModule : Module() {
       "PI" to Math.PI
     )
 
+    OnCreate {
+      context = appContext.reactContext
+      rootDir = context!!.filesDir
+    }
+
     // Defines event names that the module can send to JavaScript.
     Events("onChange")
+
+    AsyncFunction("initBridge") { promise: Promise ->
+      try {
+        val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
+        config.setRootDir(rootDir!!.absolutePath)
+        config.setUseTcpListener(true)
+        bridgeGnoNative = Gnonative.newBridge(config)
+        socketPort = bridgeGnoNative!!.getTcpPort() as Int
+        promise.resolve(true)
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
 
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
     Function("hello") {
