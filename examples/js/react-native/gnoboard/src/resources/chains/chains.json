@@ -10,7 +10,7 @@
     "gnoAddress": "test3.gno.land:36657"
   },
   {
-    "chainId": "tendermint_test",
+    "chainId": "dev",
     "chainName": "Berty-Dev",
     "gnoAddress": "testnet.gno.berty.io:36657"
   },
