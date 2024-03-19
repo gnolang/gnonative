@@ -28,7 +28,11 @@
   "author": "D4ryl00 <d4ryl00@gmail.com> (https://github.com/D4ryl00)",
   "license": "MIT",
   "homepage": "https://github.com/gnolang/gnonative#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.8.0",
+    "@connectrpc/connect": "^1.4.0",
+    "@connectrpc/connect-web": "^1.4.0"
+  },
   "devDependencies": {
     "@types/react": "^18.0.25",
     "expo-module-scripts": "^3.4.1",

@@ -3,9 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Gnonative from 'gnonative';
 
 export default function App() {
+  const gno = Gnonative.useGno();
+
   return (
     <View style={styles.container}>
-      <Text>{Gnonative.hello()}</Text>
+      <Text>Hey {gno.hello('Gno')}</Text>
     </View>
   );
 }
