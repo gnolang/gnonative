@@ -6,7 +6,7 @@ Therefore, we demonstrate that it is possible to run a Gno app on mobile. This p
 
 ## Build instructions
 
-### Install prerequisites for macOS 11, macOS 12 and macOS 13
+### Install prerequisites for macOS 13
 
 (If you are on Ubuntu, see the next section to install prerequisites.)
 

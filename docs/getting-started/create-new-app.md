@@ -1,22 +1,22 @@
-# Create a new App (WIP - not working yet)
+# Create a New App
 
 ## Overview
 
-This guide will walk you through creating a new Gno Mobile App using the
-`create-app` command.
+This guide will walk you through creating a new Gno Native Kit App using the
+`new-app` command.
 
 ## Prerequisites
 
-Check the [Build instruction](../../README.md#build-instructions) guide for
+Check the [Build instructions](../../README.md#build-instructions) guide for
 prerequisites.
 
 ## Create a new App
 
-To create a new app, run the following command:
+To create a new app, run the following command in the repo folder:
 
 ```console
 cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
-make create-app APP_NAME=MyApp
+APP_NAME=MyApp make new-app
 ```
 
 This will create a new app in the `examples/js/react-native/MyApp` directory containing a basic
@@ -32,9 +32,10 @@ make android.reverse_tcp # for Android, after you have connected an Android devi
 yarn start
 ```
 
-and then run the following command in another terminal:
+and then run the following command in another terminal in the repo folder:
 
 ```console
+cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
 cd examples/js/react-native/MyApp
 npx react-native [run-android|run-ios]
 ```
