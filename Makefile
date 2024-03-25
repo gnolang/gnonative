@@ -203,6 +203,8 @@ new-react-native-app:
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "creating a new gno awesome project at: $(OUTPUT_DIR)"
 	cd $(OUTPUT_DIR) && yarn create expo $(APP_NAME) --template expo-template-blank-typescript
+	@echo "patching glog.spec file"
+	cd $(OUTPUT_DIR)/$(APP_NAME) && patch -p1 < $(make_dir)/templates/glog.patch
 	@echo "Creating ios and android folders"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
 	@echo "Installing yarn dependencies"
