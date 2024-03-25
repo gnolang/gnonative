@@ -1,0 +1,13 @@
+--- app/ios/Podfile	2024-03-25 14:05:51
++++ app/ios/Podfile	2024-03-25 14:05:37
+@@ -41,6 +41,10 @@
+   use_expo_modules!
+   config = use_native_modules!
+
++  use_modular_headers!
++
++  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec', :modular_headers => false
++
+   use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
+   use_frameworks! :linkage => ENV['USE_FRAMEWORKS'].to_sym if ENV['USE_FRAMEWORKS']
+

@@ -207,6 +207,8 @@ new-react-native-app:
 	cd $(OUTPUT_DIR)/$(APP_NAME) && patch -p1 < $(make_dir)/templates/glog.patch
 	@echo "Creating ios and android folders"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
+	@echo "patching Podfile file"
+	cd $(OUTPUT_DIR)/$(APP_NAME) && patch -p1 < $(make_dir)/templates/Podfile.patch
 	@echo "Installing yarn dependencies"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies} && yarn add -D ${yarn_basic_dev_dependencies}
 	@echo "Building GnoCore.xcframework for the new app"
