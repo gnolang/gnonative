@@ -1,8 +1,12 @@
 # Gno Native Kit
 
-Current Gno apps run on desktop/laptop computers which have Go installed. To run on mobile, the app would need to bundle the Go runtime which is complicated for most developers. However our devs have years of experience with using Go on mobile and overcoming other difficulties of the Android and iOS operating systems. 
+Gno Native Kit is a framework that allows developers to build and port gno.land (d)apps written in the (d)app's native language.
 
-Therefore, we demonstrate that it is possible to run a Gno app on mobile. This project's objective is to create a proof-of-concept mobile application which stores a Gno wallet on the mobile and calls a realm function on a remote Gno.land node and to create this software framework called Gno Native Kit. The ultimate objective of Gno Native Kit is to allow other Gno developers to easily offer their apps to run on mobile devices.
+Current Gno (d)apps run on desktop/laptop computers which have Go installed. To run on mobile, the (d)app would need to bundle the Go runtime, which is complicated for most developers. 
+
+However, Gno Native Kit helps bypass this complexity by using gRPC to make calls to the Gno core API and access the blockchain's realm functions on a remote Gno.land node.
+
+Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0) to esily get started on building and bringing your (d)apps to mobile and desktop.
 
 ## Build instructions
 
