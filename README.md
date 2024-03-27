@@ -21,7 +21,7 @@ To install asdf using brew, follow instructions at https://asdf-vm.com . In shor
 first install brew following the instructions at https://brew.sh . Then, in
 a terminal enter:
 
-    brew install asdf gnu-tar gpg
+    brew install asdf gnu-tar gpg jq
 
 If your terminal is zsh, enter:
 
