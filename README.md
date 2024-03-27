@@ -4,7 +4,8 @@ Gno Native Kit is a framework that allows developers to build and port gno.land 
 
 Current Gno (d)apps run on desktop/laptop computers which have Go installed. To run on mobile, the (d)app would need to bundle the Go runtime, which is complicated for most developers. 
 
-However, Gno Native Kit helps bypass this complexity by using gRPC to make calls to the Gno core API and access the blockchain's realm functions on a remote Gno.land node.
+However, Gno Native Kit helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
+These API calls are a programming language-independent wrapper on top of the core supported APIs like [gnoclient](https://github.com/gnolang/gno/tree/master/gno.land/pkg/gnoclient) and [crypto/keys](https://github.com/gnolang/gno/tree/master/tm2/pkg/crypto/keys).
 
 Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0) to esily get started on building and bringing your (d)apps to mobile and desktop.
 
