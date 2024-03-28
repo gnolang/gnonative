@@ -3,6 +3,7 @@ package land.gno.gnonative
 //  Created by Guilhem Fanton on 10/07/2023.
 
 import expo.modules.kotlin.Promise
+import expo.modules.kotlin.exception.CodedException
 import gnolang.gno.gnonative.PromiseBlock as IPromiseBlock
 
 class PromiseBlock(val promise: Promise): IPromiseBlock {
@@ -22,7 +23,12 @@ class PromiseBlock(val promise: Promise): IPromiseBlock {
   }
 
   override fun callReject(err: Exception?) {
-    this.promise.reject(GoBridgeCoreError(err))
+    if (err?.message == "EOF") {
+      this.promise.reject(GoBridgeCoreEOF())
+    } else {
+      this.promise.reject(GoBridgeCoreError(err))
+    }
+
     this.remove() // cleanup the promise
   }
 

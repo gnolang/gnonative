@@ -5,6 +5,9 @@ import { EventEmitter, NativeModulesProxy, Subscription } from 'expo-modules-cor
 import { ChangeEventPayload, GnonativeViewProps } from './Gnonative.types';
 import GnonativeModule from './GnonativeModule';
 import GnonativeView from './GnonativeView';
+import 'fast-text-encoding';
+
+(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
 
 const emitter = new EventEmitter(GnonativeModule ?? NativeModulesProxy.Gnonative);
 

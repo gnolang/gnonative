@@ -31,12 +31,12 @@ class GoBridge implements GoBridgeInterface {
     return GnonativeModule.createStreamClient(method, jsonMessage);
   }
 
-  streamClientReceive(): Promise<string> {
-    return GnonativeModule.streamClientReceive();
+  streamClientReceive(id: string): Promise<string> {
+    return GnonativeModule.streamClientReceive(id);
   }
 
   closeStreamClient(id: string): Promise<void> {
-    return GnonativeModule.streamClientReceive(id);
+    return GnonativeModule.closeStreamClient(id);
   }
 }
 

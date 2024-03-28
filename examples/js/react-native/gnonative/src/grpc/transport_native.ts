@@ -1,21 +1,35 @@
 import type { AnyMessage, MethodInfo, PartialMessage, ServiceType } from '@bufbuild/protobuf';
-
-import type { StreamResponse, Transport, UnaryRequest, UnaryResponse } from '@connectrpc/connect';
+import { Message, MethodKind } from '@bufbuild/protobuf';
+import type {
+  ContextValues,
+  StreamResponse,
+  Transport,
+  UnaryRequest,
+  UnaryResponse,
+} from '@connectrpc/connect';
+import { createContextValues } from '@connectrpc/connect';
 import {
   createClientMethodSerializers,
   createMethodUrl,
   runStreamingCall,
   runUnaryCall,
 } from '@connectrpc/connect/protocol';
-import { requestHeader } from '@connectrpc/connect/protocol-connect';
-import { requestHeader as webRequestHeader } from '@connectrpc/connect/protocol-grpc-web';
+import { requestHeader } from '@connectrpc/connect/protocol-grpc-web';
 import { GrpcWebTransportOptions } from '@connectrpc/connect-web';
-import { Message, MethodKind } from '@bufbuild/protobuf';
+import { CodedError } from 'expo-modules-core';
+import { decode } from 'js-base64';
+
 import { GoBridge } from '../GoBridge';
 
 function base64ToBytes(base64: string): Uint8Array {
-  const binString = atob(base64);
-  return Uint8Array.from(binString, m => m.codePointAt(0));
+  const binString = decode(base64);
+  const bytes = new Uint8Array(binString.length);
+
+  for (let i = 0; i < binString.length; i++) {
+    bytes[i] = binString.charCodeAt(i);
+  }
+
+  return bytes;
 }
 
 export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Transport {
@@ -26,12 +40,13 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
       method: MethodInfo<I, O>,
       signal: AbortSignal | undefined,
       timeoutMs: number | undefined,
-      header: Headers,
+      header: HeadersInit | undefined,
       message: PartialMessage<I>,
+      contextValues?: ContextValues,
     ): Promise<UnaryResponse<I, O>> {
       const { parse } = createClientMethodSerializers(
         method,
-        false,
+        useBinaryFormat,
         options.jsonOptions,
         options.binaryOptions,
       );
@@ -48,7 +63,8 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
             method: 'POST',
             mode: 'cors',
           },
-          header: webRequestHeader(useBinaryFormat, timeoutMs, header),
+          header: new Headers(),
+          contextValues: contextValues ?? createContextValues(),
           message,
         },
         next: async (req: UnaryRequest<I, O>): Promise<UnaryResponse<I, O>> => {
@@ -66,6 +82,8 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
 
             return <UnaryResponse<I, O>>{
               stream: false,
+              service,
+              method,
               header,
               message,
               trailer,
@@ -85,21 +103,22 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
       timeoutMs: number | undefined,
       header: HeadersInit | undefined,
       input: AsyncIterable<PartialMessage<I>>,
+      contextValues?: ContextValues,
     ): Promise<StreamResponse<I, O>> {
       const { parse } = createClientMethodSerializers(
         method,
-        false,
+        useBinaryFormat,
         options.jsonOptions,
         options.binaryOptions,
       );
 
       async function createRequestBody(input: AsyncIterable<I>): Promise<string> {
-        if (method.kind != MethodKind.ServerStreaming) {
+        if (method.kind !== MethodKind.ServerStreaming) {
           throw 'The fetch API does not support streaming request bodies';
         }
 
         const r = await input[Symbol.asyncIterator]().next();
-        if (r.done == true) {
+        if (r.done === true) {
           throw 'missing request message';
         }
 
@@ -120,8 +139,9 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
             credentials: options.credentials ?? 'same-origin',
             mode: 'cors',
           },
-          header: requestHeader(method.kind, useBinaryFormat, timeoutMs, header),
+          header: requestHeader(useBinaryFormat, timeoutMs, header, false),
           message: input,
+          contextValues: contextValues ?? createContextValues(),
         },
         next: async req => {
           const header: Headers | undefined = new Headers();
@@ -153,7 +173,7 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
                     console.log('closeStreamClient error:', e);
                   }
 
-                  if (!(e instanceof Error && e.message === 'EOF')) {
+                  if (!(e instanceof CodedError && e.message === 'EOF')) {
                     console.log('streamClientReceive error:', e);
                     throw e;
                   }
@@ -165,7 +185,7 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
 
           const res: StreamResponse<I, O> = {
             ...req,
-            header: header,
+            header,
             trailer,
             message: generator,
           };

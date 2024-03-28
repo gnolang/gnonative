@@ -1,6 +1,7 @@
 import { PromiseClient } from '@connectrpc/connect';
 
 import { GnoAccount } from './types';
+import { GoBridge } from '../GoBridge';
 import {
   AddressFromBech32Request,
   AddressToBech32Request,
@@ -21,6 +22,7 @@ import {
   HasKeyByNameOrAddressRequest,
   HasKeyByNameRequest,
   HelloRequest,
+  HelloStreamResponse,
   ListKeyInfoRequest,
   MsgCall,
   MsgSend,
@@ -42,7 +44,6 @@ import {
   SetRemoteResponse,
 } from '../api/gnonativetypes_pb';
 import { GnoNativeService } from '../api/rpc_connect';
-import { GoBridge } from '../GoBridge';
 import * as Grpc from '../grpc/client';
 
 export interface GnoResponse {
@@ -93,9 +94,11 @@ export interface GnoResponse {
   ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
-  hello: (name: string) => Promise<string>;
   closeBridge: () => Promise<void>;
   initBridge: () => Promise<void>;
+  // debug
+  hello: (name: string) => Promise<string>;
+  helloStream: (name: string) => Promise<AsyncIterable<HelloStreamResponse>>;
 }
 
 let clientInstance: PromiseClient<typeof GnoNativeService> | undefined = undefined;
@@ -372,10 +375,17 @@ export const useGno = (): GnoResponse => {
     return response.address;
   };
 
+  // debug
   const hello = async (name: string) => {
     const client = await getClient();
     const response = await client.hello(new HelloRequest({ name }));
     return response.greeting;
+  };
+
+  // debug
+  const helloStream = async (name: string) => {
+    const client = await getClient();
+    return client.helloStream(new HelloRequest({ name }));
   };
 
   return {
@@ -406,6 +416,8 @@ export const useGno = (): GnoResponse => {
     send,
     addressToBech32,
     addressFromBech32,
+    // debug
     hello,
+    helloStream,
   };
 };

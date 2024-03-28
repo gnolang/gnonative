@@ -1,6 +1,7 @@
 package land.gno.gnonative
 
 import android.content.Context
+import android.util.Log
 import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.CodedException
 import expo.modules.kotlin.modules.Module
@@ -41,9 +42,8 @@ class GnonativeModule : Module() {
       try {
         val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
         config.rootDir = rootDir!!.absolutePath
-        config.useTcpListener = true
         bridgeGnoNative = Gnonative.newBridge(config)
-        socketPort = bridgeGnoNative!!.tcpPort as Int
+
         promise.resolve(true)
       } catch (err: CodedException) {
         promise.reject(err)
@@ -67,6 +67,7 @@ class GnonativeModule : Module() {
     AsyncFunction("getTcpPort") { promise: Promise ->
     try {
       bridgeGnoNative?.let {
+        socketPort = bridgeGnoNative!!.tcpPort.toInt()
         promise.resolve(socketPort)
       } ?: run {
         throw GoBridgeNotStartedError()
