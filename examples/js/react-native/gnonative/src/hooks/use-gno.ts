@@ -1,7 +1,3 @@
-import { PromiseClient } from '@connectrpc/connect';
-
-import { GnoAccount } from './types';
-import { GoBridge } from '../GoBridge';
 import {
   AddressFromBech32Request,
   AddressToBech32Request,
@@ -42,8 +38,12 @@ import {
   SetPasswordResponse,
   SetRemoteRequest,
   SetRemoteResponse,
-} from '../api/gnonativetypes_pb';
-import { GnoNativeService } from '../api/rpc_connect';
+} from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+import { GnoNativeService } from '@buf/gnolang_gnonative.connectrpc_es/rpc_connect';
+import { PromiseClient } from '@connectrpc/connect';
+
+import { GnoAccount } from './types';
+import { GoBridge } from '../GoBridge';
 import * as Grpc from '../grpc/client';
 
 export interface GnoResponse {
