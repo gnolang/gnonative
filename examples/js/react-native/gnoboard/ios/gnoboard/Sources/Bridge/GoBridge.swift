@@ -105,8 +105,10 @@ class GoBridge: NSObject {
         try self.bridge?.close()
         self.bridge = nil
       }
+      resolve(true)
     } catch let error as NSError {
       self.logger.error("\(String(describing: error.code))")
+      reject("\(String(describing: error.code))", error.localizedDescription, error)
     }
   }
   
