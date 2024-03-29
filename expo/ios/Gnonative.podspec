@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
   }
 
   s.source_files = "**/*.{h,m,swift}"
-  s.prepare_command = 'make -C .. build.ios'
-  s.vendored_frameworks = "frameworks/ios/GnoCore.xcframework"
-  s.preserve_paths = 'frameworks/ios/GnoCore.xcframework'
+  s.vendored_frameworks = "framework/ios/GnoCore.xcframework"
+  s.preserve_paths = 'framework/ios/GnoCore.xcframework'
 end

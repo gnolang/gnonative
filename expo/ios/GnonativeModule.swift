@@ -5,11 +5,14 @@ public class GnonativeModule: Module {
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
   // See https://docs.expo.dev/modules/module-api for more details about available components.
-  var logger: Logger
-  var appRootDir: String
-  var tmpDir: String
+  var logger: Logger = Logger(
+    category: String(describing: "GnoNative")
+  )
+  var appRootDir: String?
+  var tmpDir: String?
   var bridge: GnoGnonativeBridge?
   var socketPort: Int = 0
+  
   public func definition() -> ModuleDefinition {
     // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
     // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
@@ -22,9 +25,6 @@ public class GnonativeModule: Module {
     ])
     
     OnCreate {
-      self.logger = Logger(
-        category: String(describing: "GnoNative")
-      )
       self.appRootDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).path
       self.tmpDir = try! FileManager.default.compatTemporaryDirectory.path
     }
@@ -56,8 +56,8 @@ public class GnonativeModule: Module {
         guard let config = GnoGnonativeBridgeConfig() else {
           throw GnoError(.createConfig)
         }
-        config.rootDir = self.appRootDir
-        config.tmpDir = self.tmpDir
+        config.rootDir = self.appRootDir!
+        config.tmpDir = self.tmpDir!
         
         // On simulator we can't create an UDS, see comment below
 #if targetEnvironment(simulator)
@@ -71,9 +71,9 @@ public class GnonativeModule: Module {
         }
         self.bridge = bridge
         
-        resolve(true)
+        promise.resolve(true)
       } catch let error {
-        promise.reject(err)
+        promise.reject(error)
       }
     }
     
@@ -84,9 +84,9 @@ public class GnonativeModule: Module {
         }
         self.socketPort = service.getTcpPort()
         self.logger.info("gRPC server port: \(self.socketPort)")
-        resolve(self.socketPort)
+        promise.resolve(self.socketPort)
       } catch let error {
-        promise.reject(err)
+        promise.reject(error)
       }
     }
     
@@ -96,14 +96,14 @@ public class GnonativeModule: Module {
           throw GnoError(.notStarted)
         }
         
-        service.close()
+        try service.close()
         self.bridge = nil
       } catch let error {
-        promise.reject(err)
+        promise.reject(error)
       }
     }
     
-    AsyncFunction("invokeGrpcMethod") { (method: String, b64message: String, promise: Promise) in
+    AsyncFunction("invokeGrpcMethod") { (method: String, jsonMessage: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
@@ -116,7 +116,7 @@ public class GnonativeModule: Module {
       }
     }
     
-    AsyncFunction("createStreamClient") { (method: String, b64message: String, promise: Promise) in
+    AsyncFunction("createStreamClient") { (method: String, jsonMessage: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
@@ -129,7 +129,7 @@ public class GnonativeModule: Module {
       }
     }
     
-    AsyncFunction("streamClientReceive") { (method: String, b64message: String, promise: Promise) in
+    AsyncFunction("streamClientReceive") { (id: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)

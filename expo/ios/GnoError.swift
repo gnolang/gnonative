@@ -1,3 +1,5 @@
+import ExpoModulesCore
+
 // Redefine GnoError with more context.
 open class GnoError: Exception {
     public enum ErrorCase {

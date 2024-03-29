@@ -12,7 +12,7 @@ var promises = Set<PromiseBlock>()
 
 // PromiseBlock aim to keep reference over promise object so go can play with
 // until the promise is resolved
-class PromiseBlock: NSObject, GnoCorePromiseBlockProtocol {
+class PromiseBlock: NSObject, GnoGnonativePromiseBlockProtocol {
     static func == (lhs: PromiseBlock, rhs: PromiseBlock) -> Bool {
         return lhs === rhs
     }
