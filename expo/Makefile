@@ -1,24 +1,49 @@
 PROJECT_DIR := ..
 
-build: android ios
+ANDROID_FRAMEWORK_SRC_DIR := $(PROJECT_DIR)/framework/android
+ANDROID_FRAMEWORK_OUTPUT_DIR := android/libs
+ANDROID_FRAMEWORK_FILES := gnocore.aar gnocore-sources.jar
+ANDROID_FRAMEWORK_SRC := $(addprefix $(ANDROID_FRAMEWORK_SRC_DIR)/, $(ANDROID_FRAMEWORK_FILES))
+ANDROID_FRAMEWORK_DST := $(addprefix $(ANDROID_FRAMEWORK_OUTPUT_DIR)/, $(ANDROID_FRAMEWORK_FILES))
 
-android:
-	cd $(PROJECT_DIR); $(MAKE) build.android
-	cp $(PROJECT_DIR)/framework/android/*.{aar,jar} android/libs
-.PHONY: android
+IOS_FRAMEWORK_SRC_DIR := $(PROJECT_DIR)/framework/ios
+IOS_FRAMEWORK_OUTPUT_DIR := ios/Frameworks
+IOS_FRAMEWORK_FILES := GnoCore.xcframework
+IOS_FRAMEWORK_SRC := $(addprefix $(IOS_FRAMEWORK_SRC_DIR)/, $(IOS_FRAMEWORK_FILES))
+IOS_FRAMEWORK_DST := $(addprefix $(IOS_FRAMEWORK_OUTPUT_DIR)/, $(IOS_FRAMEWORK_FILES))
 
-ios:
-	cd $(PROJECT_DIR); $(MAKE) build.ios
-	cp -r $(PROJECT_DIR)/framework/ios/*.xcframework ios/Frameworks
-.PHONY: ios
+build: build.android build.ios
 
 clean: clean.android clean.ios
+	cd $(PROJECT_DIR); $(MAKE) clean
 .PHONY: clean
 
+######### ANDROID #########
+
+build.android: $(ANDROID_FRAMEWORK_DST)
+.PHONY: build.android
+
+$(ANDROID_FRAMEWORK_SRC):
+	cd $(PROJECT_DIR); $(MAKE) build.android
+
+$(ANDROID_FRAMEWORK_DST): $(ANDROID_FRAMEWORK_SRC)
+	cp $^ $(ANDROID_FRAMEWORK_OUTPUT_DIR)
+
 clean.android:
-	rm -f android/lib/*.{aar,jar}
+	rm -f $(ANDROID_FRAMEWORK_DST)
 .PHONY: clean.android
 
+######### IOS #########
+
+build.ios: $(IOS_FRAMEWORK_DST)
+.PHONY: build.ios
+
+$(IOS_FRAMEWORK_SRC):
+	cd $(PROJECT_DIR); $(MAKE) build.ios
+
+$(IOS_FRAMEWORK_DST): $(IOS_FRAMEWORK_SRC)
+	cp -r $^ $(IOS_FRAMEWORK_OUTPUT_DIR)
+
 clean.ios:
-	rm -fr ios/Frameworks/*.xcframework
+	rm -fr $(IOS_FRAMEWORK_DST)
 .PHONY: clean.ios
