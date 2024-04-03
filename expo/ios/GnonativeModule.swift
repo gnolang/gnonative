@@ -25,8 +25,12 @@ public class GnonativeModule: Module {
     ])
     
     OnCreate {
-      self.appRootDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).path
-      self.tmpDir = try! FileManager.default.compatTemporaryDirectory.path
+      do {
+        self.appRootDir = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).path
+      } catch let error as NSError {
+        self.logger.error("\(String(describing: error.code))")
+      }
+      self.tmpDir = FileManager.default.compatTemporaryDirectory.path
     }
     
     OnDestroy {

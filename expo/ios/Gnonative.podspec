@@ -16,14 +16,13 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-
+  s.libraries = 'resolv'
+  s.vendored_frameworks = "Frameworks/GnoCore.xcframework"
+  s.source_files = "**/*.{h,m,mm,swift}"
+  s.private_header_files = "Frameworks/GnoCore.xcframework/**/*.h"
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
     'SWIFT_COMPILATION_MODE' => 'wholemodule'
   }
-
-  s.source_files = "**/*.{h,m,swift}"
-  s.vendored_frameworks = "framework/ios/GnoCore.xcframework"
-  s.preserve_paths = 'framework/ios/GnoCore.xcframework'
 end
