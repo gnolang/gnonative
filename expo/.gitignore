@@ -57,4 +57,5 @@ yarn-error.log
 .expo/*
 
 # go framework
-framework/*
+android/libs/*
+ios/Frameworks/*

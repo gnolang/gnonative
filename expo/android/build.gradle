@@ -87,7 +87,7 @@ repositories {
 }
 
 dependencies {
-  implementation fileTree(dir: "../framework/android", include: ['*.aar', '*.jar'])
+  implementation fileTree(dir: "libs", include: ['*.aar', '*.jar'])
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
 }
