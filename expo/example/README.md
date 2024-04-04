@@ -1,6 +1,6 @@
 # Example app using Expo module
 
-This example app imports the GnoNattive Expo module directly from the parent
+This example app imports the GnoNative Expo module directly from the parent
 folder. Every time you want to import the module in the example app (because of
 the first time or because you modified the module itself), you have to build it
 again.

@@ -27,10 +27,11 @@ $(ANDROID_FRAMEWORK_SRC):
 	cd $(PROJECT_DIR); $(MAKE) build.android
 
 $(ANDROID_FRAMEWORK_DST): $(ANDROID_FRAMEWORK_SRC)
+	mkdir -p $(ANDROID_FRAMEWORK_OUTPUT_DIR)
 	cp $^ $(ANDROID_FRAMEWORK_OUTPUT_DIR)
 
 clean.android:
-	rm -f $(ANDROID_FRAMEWORK_DST)
+	rm -fr $(ANDROID_FRAMEWORK_OUTPUT_DIR)
 .PHONY: clean.android
 
 ######### IOS #########
@@ -42,8 +43,9 @@ $(IOS_FRAMEWORK_SRC):
 	cd $(PROJECT_DIR); $(MAKE) build.ios
 
 $(IOS_FRAMEWORK_DST): $(IOS_FRAMEWORK_SRC)
+	mkdir -p $(IOS_FRAMEWORK_OUTPUT_DIR)
 	cp -r $^ $(IOS_FRAMEWORK_OUTPUT_DIR)
 
 clean.ios:
-	rm -fr $(IOS_FRAMEWORK_DST)
+	rm -fr $(IOS_FRAMEWORK_OUTPUT_DIR)
 .PHONY: clean.ios
