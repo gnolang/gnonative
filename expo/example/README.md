@@ -14,6 +14,7 @@ Open a terminal and run:
 ```
 cd .. # cd to the expo folder
 make build # or make build.android or make build.ios
+npm install
 npm run build
 ```
 

@@ -6,10 +6,10 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['gnonative'],
+        dangerouslyAddModulePathsToTranspile: ['@bertygnonative'],
       },
     },
-    argv
+    argv,
   );
   config.resolve.modules = [
     path.resolve(__dirname, './node_modules'),

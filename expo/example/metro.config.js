@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'gnonative': '..',
+  '@berty/gnonative': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];
