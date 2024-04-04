@@ -17,20 +17,23 @@ make build # or make build.android or make build.ios
 npm run build
 ```
 
-Open a second terminal and run: `npx expo prebuild --clean`
+Open a second terminal and run:
+
+```
+cd example
+npx expo prebuild --clean
+```
 
 Now the module is compiled, we can build the example app.
 
 ### Android
 
 ```
-cd example
 npx expo run:android
 ```
 
 ### iOS
 
 ```
-cd example
 npx expo run:ios
 ```
