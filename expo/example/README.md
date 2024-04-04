@@ -22,6 +22,7 @@ Open a second terminal and run:
 
 ```
 cd example
+npm install
 npx expo prebuild --clean
 ```
 
