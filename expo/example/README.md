@@ -7,6 +7,15 @@ again.
 
 Follow the following instructions.
 
+## Prerequisites
+
+Please follow the general `Build instructions` in the main
+[README](https://github.com/gnolang/gnonative/blob/main/README.md) and then:
+
+```console
+make asdf.install_tools
+```
+
 ## Building the Expo module
 
 Open a terminal and run:
