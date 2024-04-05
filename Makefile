@@ -63,7 +63,7 @@ generate: api.generate
 regenerate: api.clean api.generate
 
 # Clean all generated files
-clean: bind.clean api.clean
+clean: bind.clean
 
 # Force clean (clean and remove node_modules)
 fclean:

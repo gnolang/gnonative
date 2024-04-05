@@ -1,0 +1,14 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@berty/gnonative": [
+        "../src/index"
+      ],
+      "@berty/gnonative/*": [
+        "../src/*"
+      ]
+    }
+  }
+}
