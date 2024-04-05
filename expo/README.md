@@ -13,6 +13,15 @@ The RPC API documentation is avalaible in the Buf registry:
 
 # Installation in Expo projects
 
+## Prerequisites
+
+Please follow the general `Build instructions` in the main
+[README](https://github.com/gnolang/gnonative/blob/main/README.md) and then:
+
+```console
+make asdf.install_tools
+```
+
 ## Create new Expo app
 
 ```
