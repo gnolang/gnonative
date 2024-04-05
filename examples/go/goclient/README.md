@@ -1,6 +1,6 @@
 # A Go client
 
-This example show how to implement a go client in few lines and make a request
+This example shows how to implement a go client in few lines and make a request
 to the Gno blockchain. It calls the render function of the Boards realm.
 
 ## Run the server service
