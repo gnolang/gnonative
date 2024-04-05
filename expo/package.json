@@ -1,6 +1,6 @@
 {
   "name": "@berty/gnonative",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Develop for Gno using your app's native language ",
   "main": "build/index.js",
   "types": "build/index.d.ts",

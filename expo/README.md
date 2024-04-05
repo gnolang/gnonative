@@ -20,6 +20,7 @@ Please follow the general `Build instructions` in the main
 
 ```console
 make asdf.install_tools
+npm config set @buf:registry  https://buf.build/gen/npm/v1/
 ```
 
 ## Create new Expo app
