@@ -11,7 +11,7 @@ on `Create Project`.
 
 ## Install dependencies
 
-The gRPC .NET client is avalaible through the Nuget ecosystem. Unity doesn't
+The gRPC .NET client is available through the Nuget ecosystem. Unity doesn't
 support it natively, so we had to add a module
 ([NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity)) to be able to
 install it easily. Please install NuGetForUnity by following the README on their
@@ -126,5 +126,5 @@ In a terminal, go to `gnonative/goserver` and run the gRPC server:
 go run . tcp
 ```
 
-In Unity, click on the play button and click to the button on the scene. The
+In Unity, click on the play button and click on the button on the scene. The
 text object should change.

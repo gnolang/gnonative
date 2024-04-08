@@ -40,7 +40,7 @@ npm install @berty/gnonative
 
 We prepared for you an example Hello World code.
 
-Open App.js and replace the content by this:
+Open App.js and replace the content with this:
 
 ```tsx
 import React, { useEffect, useState } from 'react';

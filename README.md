@@ -7,7 +7,7 @@ Current Gno (d)apps run on desktop/laptop computers which have Go installed. To 
 However, Gno Native Kit helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
 These API calls are a programming language-independent wrapper on top of the core supported APIs like [gnoclient](https://github.com/gnolang/gno/tree/master/gno.land/pkg/gnoclient) and [crypto/keys](https://github.com/gnolang/gno/tree/master/tm2/pkg/crypto/keys).
 
-Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0) to esily get started on building and bringing your (d)apps to mobile and desktop.
+Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0) to easily get started on building and bringing your (d)apps to mobile and desktop.
 
 ## Build instructions
 
@@ -36,7 +36,7 @@ If your terminal is bash, enter:
 
     echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
 
-Start a new terminal to get the changes to the environment .
+Start a new terminal to get the changes to the environment.
 
 (optional) To install Android Studio, download and install the latest
 android-studio-{version}-mac.dmg from https://developer.android.com/studio .
@@ -52,7 +52,7 @@ a terminal enter:
     echo '. "$HOME/.asdf/asdf.sh"' >> ~/.profile
     source ~/.profile
 
-Start a new terminal to get the changes to the environment .
+Start a new terminal to get the changes to the environment.
 
 (optional) To install Android Studio, download the latest
 android-studio-{version}-linux.tar.gz from

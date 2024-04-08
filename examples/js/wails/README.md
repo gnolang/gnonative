@@ -2,7 +2,7 @@
 
 This is a tutorial on how to use GnoNativeKit with Wails. It is based on the official Wails React-TS template.
 
-[Wails](https://wails.app/) it is a framework for building desktop apps by embedding Go and Web runtimes.
+[Wails](https://wails.app/) is a framework for building desktop apps by embedding Go and Web runtimes.
 
 ## Prerequisites
 - [Wails](https://wails.io/docs/gettingstarted/installation)
@@ -17,7 +17,7 @@ export GNONATIVE=$(go list -m -f '{{.Dir}}')
 
 ### Generate the API dependencies
 
-Assuming your are in this directory in a shell, go to the `api` folder of gnonative:
+Assuming you are in this directory in a shell, go to the `api` folder of gnonative:
 
 ```bash
 cd $GNONATIVE/api
@@ -118,7 +118,7 @@ Copy and paste the following content into a patch file (e.g. `tsconfig.patch`):
    "include": [
      "src"
 ```
-Copy and paste the following content into an other patch file (e.g. `vite.patch`):
+Copy and paste the following content into another patch file (e.g. `vite.patch`):
 
 ```diff
 @@ -1,7 +1,16 @@
