@@ -108,11 +108,11 @@ before continuing.
 You can run one of the following command:
 
 ```shell
-npm pack
+make pack
 ```
 
 or
 
 ```shell
-npm publish
+make publish
 ```
