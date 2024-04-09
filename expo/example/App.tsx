@@ -1,4 +1,4 @@
-import * as Gnonative from '@berty/gnonative';
+import * as Gnonative from '@gnolang/gnonative';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 

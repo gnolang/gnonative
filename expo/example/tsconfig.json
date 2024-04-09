@@ -3,10 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@berty/gnonative": [
+      "@gnolang/gnonative": [
         "../src/index"
       ],
-      "@berty/gnonative/*": [
+      "@gnolang/gnonative/*": [
         "../src/*"
       ]
     }

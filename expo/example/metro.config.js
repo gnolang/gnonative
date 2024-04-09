@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  '@berty/gnonative': '..',
+  '@gnolang/gnonative': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];
