@@ -49,3 +49,14 @@ $(IOS_FRAMEWORK_DST): $(IOS_FRAMEWORK_SRC)
 clean.ios:
 	rm -fr $(IOS_FRAMEWORK_OUTPUT_DIR)
 .PHONY: clean.ios
+
+######### NPM #########
+npm.pack: build
+	npm install
+	npm pack
+.PHONY: npm.pack
+
+npm.publish: build
+	npm install
+	npm publish
+.PHONY: npm.publish

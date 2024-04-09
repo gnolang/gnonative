@@ -102,3 +102,17 @@ npx expo run:ios
 For bare React Native projects, you must ensure that you have
 [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/)
 before continuing.
+
+# Generate new NPM package
+
+You can run one of the following command:
+
+```shell
+npm pack
+```
+
+or
+
+```shell
+npm publish
+```
