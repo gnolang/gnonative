@@ -2,16 +2,58 @@ name: Semantic Release
 on:
   push:
     branches:
-      - master
+      - main
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: "Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)"
+        required: false
+        default: false
 jobs:
   semantic-release:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          detached: true
+          limit-access-to-actor: true
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
       - name: Setup asdf
-        uses: asdf-vm/actions/install@v3
+        uses: asdf-vm/actions/setup@v3
+
+      - name: Setup Go version
+        run: |
+          asdf plugin add golang
+          asdf install golang
+          echo "go_version=$(asdf current golang | xargs | cut -d ' ' -f 2)" >> $GITHUB_ENV
+
+      - name: Setup Node version
+        run: |
+          asdf plugin add nodejs
+          asdf install nodejs
+          asdf global nodejs 18.16.0
+          echo "node_version=$(asdf current nodejs | xargs | cut -d ' ' -f 2)" >> $GITHUB_ENV
+
+      - name: Cache go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ env.go_version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-go-${{ env.go_version }}-
+
+      - name: Cache node_modules
+        id: node_modules-cache
+        uses: actions/cache@v4
+        with:
+          path: ./expo/node_modules
+          key: ${{ runner.OS }}-node-${{ env.node_version }}-${{ hashFiles('expo/package-lock.json') }}
+          restore-keys: ${{ runner.OS }}-node-${{ env.node_version }}-
 
       - name: Compile frameworks
         working-directory: expo
