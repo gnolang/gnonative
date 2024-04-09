@@ -6,7 +6,7 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['@bertygnonative'],
+        dangerouslyAddModulePathsToTranspile: ['@gnolang/gnonative'],
       },
     },
     argv,

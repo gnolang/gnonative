@@ -24,7 +24,7 @@ build.android: $(ANDROID_FRAMEWORK_DST)
 .PHONY: build.android
 
 $(ANDROID_FRAMEWORK_SRC):
-	cd $(PROJECT_DIR); $(MAKE) build.android
+	cd $(PROJECT_DIR); $(MAKE) framework.android
 
 $(ANDROID_FRAMEWORK_DST): $(ANDROID_FRAMEWORK_SRC)
 	mkdir -p $(ANDROID_FRAMEWORK_OUTPUT_DIR)
@@ -40,7 +40,7 @@ build.ios: $(IOS_FRAMEWORK_DST)
 .PHONY: build.ios
 
 $(IOS_FRAMEWORK_SRC):
-	cd $(PROJECT_DIR); $(MAKE) build.ios
+	cd $(PROJECT_DIR); $(MAKE) framework.ios
 
 $(IOS_FRAMEWORK_DST): $(IOS_FRAMEWORK_SRC)
 	mkdir -p $(IOS_FRAMEWORK_OUTPUT_DIR)
@@ -49,3 +49,14 @@ $(IOS_FRAMEWORK_DST): $(IOS_FRAMEWORK_SRC)
 clean.ios:
 	rm -fr $(IOS_FRAMEWORK_OUTPUT_DIR)
 .PHONY: clean.ios
+
+######### NPM #########
+npm.pack: build
+	npm install
+	npm pack
+.PHONY: npm.pack
+
+npm.publish: build
+	npm install
+	npm publish
+.PHONY: npm.publish

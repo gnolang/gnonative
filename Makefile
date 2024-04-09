@@ -45,7 +45,7 @@ PATH := $(GO_BIND_BIN_DIR):$(PATH)
 all build: generate build.ios build.android
 
 # Build iOS framework
-build.ios: generate $(gnocore_xcframework)
+build.ios: generate framework.ios
 ifeq ($(OS),Darwin)
 	@echo "generate iOS framework"
 	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
@@ -53,7 +53,7 @@ ifeq ($(OS),Darwin)
 endif
 
 # Build Android aar & jar
-build.android: generate $(gnocore_aar) $(gnocore_jar)
+build.android: generate framework.android
 	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
 
 # Generate API from protofiles
@@ -133,6 +133,9 @@ $(TEMPDIR)/.tool-versions: .tool-versions
 
 # - Bind - ios framework
 
+framework.ios: $(gnocore_xcframework)
+.PHONY: framework.ios
+
 $(gnocore_xcframework): $(bind_init_files) $(go_deps)
 ifeq ($(OS),Darwin)
 	@mkdir -p $(dir $@)
@@ -146,6 +149,9 @@ _bind.clean.ios:
 	rm -rf $(gnocore_xcframework)
 
 # - Bind - android aar and jar
+
+framework.android: $(gnocore_aar) $(gnocore_jar)
+.PHONY: framework.android
 
 $(gnocore_aar): $(bind_init_files) $(go_deps)
 	@mkdir -p $(dir $@) .cache/bind/android

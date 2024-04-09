@@ -33,7 +33,7 @@ cd my-app
 ## Add the package to your npm dependencies
 
 ```
-npm install @berty/gnonative
+npm install @gnolang/gnonative
 ```
 
 ## Customize the app
@@ -46,7 +46,7 @@ Open App.js and replace the content with this:
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import * as Gnonative from '@berty/gnonative';
+import * as Gnonative from '@gnolang/gnonative';
 
 export default function App() {
   const gno = Gnonative.useGno();
@@ -102,3 +102,17 @@ npx expo run:ios
 For bare React Native projects, you must ensure that you have
 [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/)
 before continuing.
+
+# Generate new NPM package
+
+You can run one of the following command:
+
+```shell
+make pack
+```
+
+or
+
+```shell
+make publish
+```

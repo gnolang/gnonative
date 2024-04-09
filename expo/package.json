@@ -1,5 +1,5 @@
 {
-  "name": "@berty/gnonative",
+  "name": "@gnolang/gnonative",
   "version": "0.1.2",
   "description": "Develop for Gno using your app's native language ",
   "main": "build/index.js",
