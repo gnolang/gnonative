@@ -25,7 +25,7 @@ func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[a
 	var err error
 	s.client.RPCClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
 	if err != nil {
-		return nil, connect.NewError(connect.Code(api_gen.ErrCode_ErrSetRemote), err)
+		return nil, api_gen.ErrCode_ErrSetRemote.Wrap(err)
 	}
 	s.remote = req.Msg.Remote
 	return connect.NewResponse(&api_gen.SetRemoteResponse{}), nil
