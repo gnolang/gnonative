@@ -59,6 +59,10 @@ jobs:
         working-directory: expo
         run: make build
 
+      - name: Install NPM dependencies
+        working-directory: expo
+        run: npm install
+
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         with:
