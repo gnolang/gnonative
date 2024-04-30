@@ -22,7 +22,11 @@ import (
 )
 
 func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
-	s.client.RPCClient = rpcclient.NewHTTP(req.Msg.Remote, "/websocket")
+	var err error
+	s.client.RPCClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
+	if err != nil {
+		return nil, connect.NewError(connect.Code(api_gen.ErrCode_ErrSetRemote), err)
+	}
 	s.remote = req.Msg.Remote
 	return connect.NewResponse(&api_gen.SetRemoteResponse{}), nil
 }

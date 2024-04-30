@@ -110,7 +110,10 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		ChainID: cfg.ChainID,
 	}
 
-	rpcClient := rpcclient.NewHTTP(cfg.Remote, "/websocket")
+	rpcClient, err := rpcclient.NewHTTPClient(cfg.Remote)
+	if err != nil {
+		return nil, err
+	}
 	svc.remote = cfg.Remote
 
 	svc.client = &gnoclient.Client{
