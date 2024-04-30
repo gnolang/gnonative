@@ -162,6 +162,7 @@ enum ErrCode {
   ErrSerialization = 103;
   ErrDeserialization = 104;
   ErrInitService = 105;
+  ErrSetRemote = 106;
   ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 151;

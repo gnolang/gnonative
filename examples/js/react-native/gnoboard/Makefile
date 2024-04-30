@@ -26,4 +26,5 @@ android.reverse_tcp:
 	  >&2 echo "ERROR: no Android device found"; exit 1; \
 	fi
 	adb -s $(ANDROID_DEVICE) reverse tcp:8081 tcp:8081 # metro
+	adb -s $(ANDROID_DEVICE) reverse tcp:36657 tcp:36657 # gnodev
 .PHONY: android.reverse_tcp

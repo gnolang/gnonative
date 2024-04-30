@@ -12,11 +12,16 @@
   {
     "chainId": "dev",
     "chainName": "Berty-Dev",
-    "gnoAddress": "testnet.gno.berty.io:36657"
+    "gnoAddress": "https://api.gno.berty.io:443"
   },
   {
     "chainId": "teritori-1",
     "chainName": "Teritori-1",
     "gnoAddress": "testnet.gno.teritori.com:26657"
+  },
+  {
+    "chainId": "dev",
+    "chainName": "localhost",
+    "gnoAddress": "localhost:36657"
   }
 ]
