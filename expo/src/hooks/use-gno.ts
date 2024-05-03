@@ -101,12 +101,18 @@ export interface GnoResponse {
   helloStream: (name: string) => Promise<AsyncIterable<HelloStreamResponse>>;
 }
 
+enum Status {
+  Stopped,
+  Starting,
+  Started,
+}
+
 let clientInstance: PromiseClient<typeof GnoNativeService> | undefined = undefined;
-let bridgeInstance: boolean = false;
+let bridgeStatus: Status = Status.Stopped;
 
 export const useGno = (): GnoResponse => {
   const getClient = async () => {
-    if (!bridgeInstance) {
+    if (bridgeStatus === Status.Stopped) {
       await initBridge();
     }
 
@@ -127,20 +133,22 @@ export const useGno = (): GnoResponse => {
   };
 
   const closeBridge = async () => {
-    if (bridgeInstance) {
+    if (bridgeStatus !== Status.Stopped) {
       console.log('Closing bridge...');
       await GoBridge.closeBridge();
       console.log('Bridge closed.');
-      bridgeInstance = false;
+      bridgeStatus = Status.Stopped;
+      clientInstance = undefined;
     }
   };
 
   const initBridge = async () => {
-    if (!bridgeInstance) {
+    if (bridgeStatus === Status.Stopped) {
       console.log('Initializing bridge...');
+      bridgeStatus = Status.Starting;
       await GoBridge.initBridge();
       console.log('Bridge initialized.');
-      bridgeInstance = true;
+      bridgeStatus = Status.Started;
     }
   };
 
