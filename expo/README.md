@@ -7,7 +7,7 @@ Develop for Gno using your app's native language
 We created a Javascript object helper (useGno) that wraps the RPC API. The
 useGno object is defined in the GnoNative repo at `/expo/src/hooks/use-gno.ts`.
 
-The RPC API documentation is avalaible in the Buf registry:
+The RPC API documentation is available in the Buf registry:
 
 - [Documentation](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1)
 
