@@ -47,8 +47,8 @@ import { GoBridge } from '../GoBridge';
 import * as Grpc from '../grpc/client';
 import { GnoAccount } from '../hooks/types';
 
-export interface GnokeyContextProps {
-  initGnokey: (config: ConfigProps) => Promise<boolean>;
+export interface GnoNativeContextProps {
+  init: (config: ConfigProps) => Promise<boolean>;
 
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
   getRemote: () => Promise<string>;
@@ -109,7 +109,7 @@ interface ConfigProps {
   chain_id: string;
 }
 
-interface GnokeyProviderProps {
+interface GnoNativeProviderProps {
   config: ConfigProps;
   children: React.ReactNode;
 }
@@ -120,9 +120,9 @@ enum BridgeStatus {
   Started,
 }
 
-const GnokeyContext = createContext<GnokeyContextProps | null>(null);
+const GnoNativeContext = createContext<GnoNativeContextProps | null>(null);
 
-const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => {
+const GnoNativeProvider: React.FC<GnoNativeProviderProps> = ({ children, config }) => {
   const [initialized, setInitialized] = useState(false);
   const [clientInstance, setClientInstance] = useState<
     PromiseClient<typeof GnoNativeService> | undefined
@@ -131,14 +131,14 @@ const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => 
 
   useEffect(() => {
     (async () => {
-      await initGnokey(config);
+      await init(config);
       setInitialized(true);
     })();
   }, []);
 
-  async function initGnokey(config): Promise<boolean> {
+  async function init(config): Promise<boolean> {
     console.log(
-      '🍄 Initializing Gnokey on remote: %s chain_id: %s',
+      '🍄 Initializing GnoNative on remote: %s chain_id: %s',
       config.remote,
       config.chain_id,
     );
@@ -160,10 +160,10 @@ const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => 
     console.log('GoBridge GRPC client instance. Done.');
 
     try {
-      await client.setRemote(new SetRemoteRequest({ remote: 'gno.land:26657' }));
-      await client.setChainID(new SetChainIDRequest({ chainId: 'portal-loop' }));
+      await client.setRemote(new SetRemoteRequest({ remote: config.remote }));
+      await client.setChainID(new SetChainIDRequest({ chainId: config.chain_id }));
 
-      console.log('✅ Gnokey bridge initialized.');
+      console.log('✅ GnoNative bridge initialized.');
     } catch (error) {
       console.error(error);
       return false;
@@ -435,7 +435,7 @@ const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => 
   };
 
   const value = {
-    initGnokey,
+    init,
     setRemote,
     getRemote,
     setChainID,
@@ -470,16 +470,16 @@ const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => 
     return null;
   }
 
-  return <GnokeyContext.Provider value={value}>{children}</GnokeyContext.Provider>;
+  return <GnoNativeContext.Provider value={value}>{children}</GnoNativeContext.Provider>;
 };
 
-function useGnokeyContext() {
-  const context = useContext(GnokeyContext) as GnokeyContextProps;
+function useGnoNativeContext() {
+  const context = useContext(GnoNativeContext) as GnoNativeContextProps;
 
   if (context === undefined) {
-    throw new Error('useGnokeyContext must be used within a GnokeyProvider');
+    throw new Error('useGnoNativeContext must be used within a GnoNativeProvider');
   }
   return context;
 }
 
-export { useGnokeyContext, GnokeyProvider };
+export { useGnoNativeContext, GnoNativeProvider };

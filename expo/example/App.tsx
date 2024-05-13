@@ -1,4 +1,4 @@
-import { GnokeyProvider, useGnokeyContext } from '@gnolang/gnonative';
+import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -9,14 +9,14 @@ const config = {
 
 export default function App() {
   return (
-    <GnokeyProvider config={config}>
+    <GnoNativeProvider config={config}>
       <InnerApp />
-    </GnokeyProvider>
+    </GnoNativeProvider>
   );
 }
 
 const InnerApp = () => {
-  const gno = useGnokeyContext();
+  const gno = useGnoNativeContext();
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const InnerApp = () => {
       try {
         const accounts = await gno.listKeyInfo();
         console.log(accounts);
+
+        const remote = await gno.getRemote();
+        const chainId = await gno.getChainID();
+        console.log('Remote %s ChainId %s', remote, chainId);
 
         setGreeting(await gno.hello('Gno'));
 
