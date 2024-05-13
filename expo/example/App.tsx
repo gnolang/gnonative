@@ -1,14 +1,30 @@
-import * as Gnonative from '@gnolang/gnonative';
+import { GnokeyProvider, useGnokeyContext } from '@gnolang/gnonative';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+const config = {
+  remote: 'https://gno.berty.io',
+  chain_id: 'dev',
+};
+
 export default function App() {
-  const gno = Gnonative.useGno();
+  return (
+    <GnokeyProvider config={config}>
+      <InnerApp />
+    </GnokeyProvider>
+  );
+}
+
+const InnerApp = () => {
+  const gno = useGnokeyContext();
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
-    const greeting = async () => {
+    (async () => {
       try {
+        const accounts = await gno.listKeyInfo();
+        console.log(accounts);
+
         setGreeting(await gno.hello('Gno'));
 
         for await (const res of await gno.helloStream('Gno')) {
@@ -17,16 +33,16 @@ export default function App() {
       } catch (error) {
         console.log(error);
       }
-    };
-    greeting();
+    })();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Hey {greeting}</Text>
+      <Text>Gnonative App</Text>
+      <Text>{greeting}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

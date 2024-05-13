@@ -41,12 +41,15 @@ import {
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 import { GnoNativeService } from '@buf/gnolang_gnonative.connectrpc_es/rpc_connect';
 import { PromiseClient } from '@connectrpc/connect';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-import { GnoAccount } from './types';
 import { GoBridge } from '../GoBridge';
 import * as Grpc from '../grpc/client';
+import { GnoAccount } from '../hooks/types';
 
-export interface GnoResponse {
+export interface GnokeyContextProps {
+  initGnokey: (config: ConfigProps) => Promise<boolean>;
+
   setRemote: (remote: string) => Promise<SetRemoteResponse>;
   getRemote: () => Promise<string>;
   setChainID: (chainId: string) => Promise<SetChainIDResponse>;
@@ -79,7 +82,7 @@ export interface GnoResponse {
   call: (
     packagePath: string,
     fnc: string,
-    args: Array<string>,
+    args: string[],
     gasFee: string,
     gasWanted: number,
     send?: string,
@@ -94,61 +97,88 @@ export interface GnoResponse {
   ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
-  closeBridge: () => Promise<void>;
-  initBridge: () => Promise<void>;
+  // closeBridge: () => Promise<void>;
+  // initBridge: () => Promise<void>;
   // debug
   hello: (name: string) => Promise<string>;
   helloStream: (name: string) => Promise<AsyncIterable<HelloStreamResponse>>;
 }
 
-enum Status {
+interface ConfigProps {
+  remote: string;
+  chain_id: string;
+}
+
+interface GnokeyProviderProps {
+  config: ConfigProps;
+  children: React.ReactNode;
+}
+
+enum BridgeStatus {
   Stopped,
   Starting,
   Started,
 }
 
-let clientInstance: PromiseClient<typeof GnoNativeService> | undefined = undefined;
-let bridgeStatus: Status = Status.Stopped;
+const GnokeyContext = createContext<GnokeyContextProps | null>(null);
 
-export const useGno = (): GnoResponse => {
-  const getClient = async () => {
-    if (bridgeStatus === Status.Stopped) {
+const GnokeyProvider: React.FC<GnokeyProviderProps> = ({ children, config }) => {
+  const [initialized, setInitialized] = useState(false);
+  const [clientInstance, setClientInstance] = useState<
+    PromiseClient<typeof GnoNativeService> | undefined
+  >(undefined);
+  const [bridgeStatus, setBridgeStatus] = useState(BridgeStatus.Stopped);
+
+  useEffect(() => {
+    (async () => {
+      await initGnokey(config);
+      setInitialized(true);
+    })();
+  }, []);
+
+  async function initGnokey(config): Promise<boolean> {
+    console.log(
+      '🍄 Initializing Gnokey on remote: %s chain_id: %s',
+      config.remote,
+      config.chain_id,
+    );
+
+    if (bridgeStatus === BridgeStatus.Stopped) {
+      console.log('Bridge stopped. Initializing...');
       await initBridge();
     }
 
-    if (clientInstance) return clientInstance;
-
-    console.log('Creating GRPC client instance...');
+    if (clientInstance) {
+      console.error('GoBridge already initialized.');
+      return true;
+    }
 
     const port = await GoBridge.getTcpPort();
-    clientInstance = Grpc.createClient(port);
+    console.log('GoBridge GRPC client instance port: %s', port);
+    const client = await Grpc.createClient(port);
+    setClientInstance(client);
+    console.log('GoBridge GRPC client instance. Done.');
 
-    console.log('Creating GRPC client instance... done.');
+    try {
+      await client.setRemote(new SetRemoteRequest({ remote: 'gno.land:26657' }));
+      await client.setChainID(new SetChainIDRequest({ chainId: 'portal-loop' }));
 
-    // Set the initial configuration where it's different from the default.
-    await clientInstance.setRemote(new SetRemoteRequest({ remote: 'gno.land:26657' }));
-    await clientInstance.setChainID(new SetChainIDRequest({ chainId: 'portal-loop' }));
-
-    return clientInstance;
-  };
-
-  const closeBridge = async () => {
-    if (bridgeStatus !== Status.Stopped) {
-      console.log('Closing bridge...');
-      await GoBridge.closeBridge();
-      console.log('Bridge closed.');
-      bridgeStatus = Status.Stopped;
-      clientInstance = undefined;
+      console.log('✅ Gnokey bridge initialized.');
+    } catch (error) {
+      console.error(error);
+      return false;
     }
-  };
+
+    return true;
+  }
 
   const initBridge = async () => {
-    if (bridgeStatus === Status.Stopped) {
+    if (bridgeStatus === BridgeStatus.Stopped) {
       console.log('Initializing bridge...');
-      bridgeStatus = Status.Starting;
+      setBridgeStatus(BridgeStatus.Starting);
       await GoBridge.initBridge();
       console.log('Bridge initialized.');
-      bridgeStatus = Status.Started;
+      setBridgeStatus(BridgeStatus.Started);
     }
   };
 
@@ -250,6 +280,14 @@ export const useGno = (): GnoResponse => {
     return response;
   };
 
+  const getClient = async () => {
+    if (!clientInstance) {
+      throw new Error('GoBridge client instance not initialized.');
+    }
+
+    return clientInstance;
+  };
+
   const setPassword = async (password: string) => {
     const client = await getClient();
     const response = await client.setPassword(new SetPasswordRequest({ password }));
@@ -320,7 +358,7 @@ export const useGno = (): GnoResponse => {
   const call = async (
     packagePath: string,
     fnc: string,
-    args: Array<string>,
+    args: string[],
     gasFee: string,
     gasWanted: number,
     send?: string,
@@ -396,9 +434,8 @@ export const useGno = (): GnoResponse => {
     return client.helloStream(new HelloRequest({ name }));
   };
 
-  return {
-    initBridge,
-    closeBridge,
+  const value = {
+    initGnokey,
     setRemote,
     getRemote,
     setChainID,
@@ -428,4 +465,21 @@ export const useGno = (): GnoResponse => {
     hello,
     helloStream,
   };
+
+  if (!initialized) {
+    return null;
+  }
+
+  return <GnokeyContext.Provider value={value}>{children}</GnokeyContext.Provider>;
 };
+
+function useGnokeyContext() {
+  const context = useContext(GnokeyContext) as GnokeyContextProps;
+
+  if (context === undefined) {
+    throw new Error('useGnokeyContext must be used within a GnokeyProvider');
+  }
+  return context;
+}
+
+export { useGnokeyContext, GnokeyProvider };
