@@ -1,6 +1,5 @@
-import { GnokeyProvider } from '@gnolang/gnonative';
-import { useGnokeyContext } from '@gnolang/gnonative/provider/gnokey-provider';
-import React, { useEffect } from 'react';
+import { GnokeyProvider, useGnokeyContext } from '@gnolang/gnonative';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const config = {
@@ -11,21 +10,26 @@ const config = {
 export default function App() {
   return (
     <GnokeyProvider config={config}>
-      <View style={styles.container}>
-        <InnerApp />
-      </View>
+      <InnerApp />
     </GnokeyProvider>
   );
 }
 
 const InnerApp = () => {
   const gno = useGnokeyContext();
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     (async () => {
       try {
         const accounts = await gno.listKeyInfo();
         console.log(accounts);
+
+        setGreeting(await gno.hello('Gno'));
+
+        for await (const res of await gno.helloStream('Gno')) {
+          console.log(res.greeting);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -33,8 +37,9 @@ const InnerApp = () => {
   }, []);
 
   return (
-    <View>
-      <Text>Inner App</Text>
+    <View style={styles.container}>
+      <Text>Gnonative App</Text>
+      <Text>{greeting}</Text>
     </View>
   );
 };

@@ -6,7 +6,6 @@ import { ChangeEventPayload, GnonativeViewProps } from './Gnonative.types';
 import GnonativeModule from './GnonativeModule';
 import GnonativeView from './GnonativeView';
 import 'fast-text-encoding';
-import { GnokeyProvider } from './provider/gnokey-provider';
 
 (Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
 
@@ -18,5 +17,5 @@ export function addChangeListener(listener: (event: ChangeEventPayload) => void)
 
 export { ChangeEventPayload, GnonativeView, GnonativeViewProps };
 export { useGno } from './hooks/use-gno';
-export { GnokeyProvider };
+export * from './provider/gnokey-provider';
 export * from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
