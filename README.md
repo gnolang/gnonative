@@ -40,14 +40,14 @@ Start a new terminal to get the changes to the environment.
 
 (optional) To install Android Studio, download and install the latest
 android-studio-{version}-mac.dmg from https://developer.android.com/studio .
-(Tested with Giraffe 2022.3.1 .)
+(Tested with Jellyfish 2023.3.1 .)
 
-### Install prerequisites for Ubuntu 18.04, 20.04 and 22.04
+### Install prerequisites for Ubuntu 20.04, 22.04 and 24.04
 
 To install asdf, follow instructions at https://asdf-vm.com . In short, in
 a terminal enter:
 
-    sudo apt install curl git
+    sudo apt install curl git make
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf
     echo '. "$HOME/.asdf/asdf.sh"' >> ~/.profile
     source ~/.profile
@@ -56,7 +56,7 @@ Start a new terminal to get the changes to the environment.
 
 (optional) To install Android Studio, download the latest
 android-studio-{version}-linux.tar.gz from
-https://developer.android.com/studio . (Tested with Giraffe 2022.3.1 .)
+https://developer.android.com/studio . (Tested with Jellyfish 2023.3.1 .)
 In a terminal, enter the following with the correct {version}:
 
     sudo tar -C /usr/local -xzf android-studio-{version}-linux.tar.gz
