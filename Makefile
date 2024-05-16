@@ -32,7 +32,9 @@ gomobile := $(GO_BIND_BIN_DIR)/gomobile
 gobind := $(GO_BIND_BIN_DIR)/gobind
 
 # go files and dependencies
-go_files := $(shell find . -iname '*.go')
+go_framework_files := $(shell find framework -iname '*.go')
+go_service_files := $(shell find service -iname '*.go')
+go_files := $(go_framework_files) $(go_service_files)
 go_deps := go.mod go.sum $(go_files)
 
 # rewrite shell path

@@ -155,7 +155,7 @@ const GnoNativeProvider: React.FC<GnoNativeProviderProps> = ({ children, config 
 
     const port = await GoBridge.getTcpPort();
     console.log('GoBridge GRPC client instance port: %s', port);
-    const client = await Grpc.createClient(port);
+    const client = Grpc.createClient(port);
     setClientInstance(client);
     console.log('GoBridge GRPC client instance. Done.');
 
@@ -482,4 +482,4 @@ function useGnoNativeContext() {
   return context;
 }
 
-export { useGnoNativeContext, GnoNativeProvider };
+export { GnoNativeProvider, useGnoNativeContext };
