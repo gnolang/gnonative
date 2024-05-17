@@ -38,7 +38,7 @@ jobs:
           asdf plugin add nodejs
           asdf install nodejs
           echo "node_version=$(asdf current nodejs | xargs | cut -d ' ' -f 2)" >> $GITHUB_ENV
-          asdf global nodejs env.node_version
+          asdf global nodejs ${{ env.node_version }}
 
       - name: Cache go modules
         uses: actions/cache@v4
