@@ -70,10 +70,9 @@ cd frontend
 npm install @bufbuild/buf @bufbuild/protobuf @bufbuild/protoc-gen-es @connectrpc/connect @connectrpc/connect-web @connectrpc/protoc-gen-connect-es buffer
 
 mkdir -p src/api
-gnonative=`go list -m -mod=mod -f "{{.Dir}}" "github.com/gnolang/gnonative"`
-cp -r $gnonative/api/gen/es/* ./src/api/
-cp $gnonative/templates/es/use-gno-web.ts ./src/api/use-gno.ts
-cp $gnonative/templates/images/logo-universal.png ./src/assets/images
+cp -r ../../../../api/gen/es/* ./src/api/
+cp ../../../../templates/es/use-gno-web.ts ./src/api/use-gno.ts
+cp ../../../../templates/images/logo-universal.png ./src/assets/images 
 ```
 
 Open `src/App.tsx` and replace the contents with the following code:
