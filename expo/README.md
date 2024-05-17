@@ -1,11 +1,14 @@
-# gnonative
+<h2 align="center">⚛️ @gnolang/gnonative ⚛️</h2>
 
-Develop for Gno using your app's native language
+### Bring Your Gno.land (d)Apps to React Native Effortlessly!
+
+## Overview
+
+`@gnolang/gnonative` simplifies the process of access the Gno.land (d)apps to mobile by using gRPC to connect with core blockchain functions.
+
+It helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
 
 # API documentation
-
-We created a Javascript object helper (useGno) that wraps the RPC API. The
-useGno object is defined in the GnoNative repo at `/expo/src/hooks/use-gno.ts`.
 
 The RPC API documentation is available in the Buf registry:
 
@@ -43,38 +46,55 @@ We prepared for you an example Hello World code.
 Open App.js and replace the content with this:
 
 ```tsx
+import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import * as Gnonative from '@gnolang/gnonative';
+const config = {
+  remote: 'https://gno.berty.io',
+  chain_id: 'dev',
+};
 
 export default function App() {
-  const gno = Gnonative.useGno();
+  return (
+    <GnoNativeProvider config={config}>
+      <InnerApp />
+    </GnoNativeProvider>
+  );
+}
+
+const InnerApp = () => {
+  const gno = useGnoNativeContext();
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
-    const greeting = async () => {
+    (async () => {
       try {
-        // sync Hello function
+        const accounts = await gno.listKeyInfo();
+        console.log(accounts);
+
+        const remote = await gno.getRemote();
+        const chainId = await gno.getChainID();
+        console.log('Remote %s ChainId %s', remote, chainId);
+
         setGreeting(await gno.hello('Gno'));
 
-        // async Hello function
         for await (const res of await gno.helloStream('Gno')) {
           console.log(res.greeting);
         }
       } catch (error) {
         console.log(error);
       }
-    };
-    greeting();
+    })();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Hey {greeting}</Text>
+      <Text>Gnonative App</Text>
+      <Text>{greeting}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
