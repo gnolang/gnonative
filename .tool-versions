@@ -1,6 +1,6 @@
-nodejs 18.16.0
+nodejs 21.7.3
 ruby 3.2.2
-cocoapods 1.12.1
+cocoapods 1.15.2
 java openjdk-18.0.1.1
 yarn 1.22.19
 golang 1.21.7

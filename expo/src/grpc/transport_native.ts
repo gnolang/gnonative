@@ -16,21 +16,10 @@ import {
 } from '@connectrpc/connect/protocol';
 import { requestHeader } from '@connectrpc/connect/protocol-grpc-web';
 import { GrpcWebTransportOptions } from '@connectrpc/connect-web';
+import { toByteArray } from 'base64-js';
 import { CodedError } from 'expo-modules-core';
-import { decode } from 'js-base64';
 
 import { GoBridge } from '../GoBridge';
-
-function base64ToBytes(base64: string): Uint8Array {
-  const binString = decode(base64);
-  const bytes = new Uint8Array(binString.length);
-
-  for (let i = 0; i < binString.length; i++) {
-    bytes[i] = binString.charCodeAt(i);
-  }
-
-  return bytes;
-}
 
 export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Transport {
   const useBinaryFormat = options.useBinaryFormat ?? true;
@@ -77,10 +66,10 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
             const header: Headers | undefined = new Headers();
             const trailer: Headers | undefined = new Headers();
 
-            const data = base64ToBytes(res);
+            const data = toByteArray(res);
             const message = parse(data);
 
-            return <UnaryResponse<I, O>>{
+            return {
               stream: false,
               service,
               method,
@@ -162,7 +151,7 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
               for (; ;) {
                 try {
                   const res = await GoBridge.streamClientReceive(streamId);
-                  const data = base64ToBytes(res);
+                  const data = toByteArray(res);
                   const message = parse(data);
                   yield message;
                 } catch (e) {
