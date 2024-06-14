@@ -6,6 +6,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -341,7 +342,7 @@ func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_g
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.QEvalResponse{Result: result}), nil
+	return connect.NewResponse(&api_gen.QEvalResponse{Result: strings.TrimSpace(result)}), nil
 }
 
 func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
