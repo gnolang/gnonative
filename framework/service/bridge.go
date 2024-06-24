@@ -70,6 +70,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 		if config.UseTcpListener {
 			svcOpts = append(svcOpts, service.WithUseTcpListener())
+			svcOpts = append(svcOpts, service.WithTcpAddr("localhost:0"))
 		}
 
 		if config.DisableUdsListener {
