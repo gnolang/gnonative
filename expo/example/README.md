@@ -36,15 +36,15 @@ npm install
 npx expo prebuild --clean
 ```
 
-Now the module is compiled, we can build the example app.
+Now the module is compiled, we can build the example app:
 
-### Android
+- Android
 
 ```
 npx expo run:android
 ```
 
-### iOS
+- iOS
 
 ```
 npx expo run:ios
