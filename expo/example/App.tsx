@@ -16,22 +16,22 @@ export default function App() {
 }
 
 const InnerApp = () => {
-  const gno = useGnoNativeContext();
+  const { gnonative } = useGnoNativeContext();
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     (async () => {
       try {
-        const accounts = await gno.listKeyInfo();
+        const accounts = await gnonative.listKeyInfo();
         console.log(accounts);
 
-        const remote = await gno.getRemote();
-        const chainId = await gno.getChainID();
+        const remote = await gnonative.getRemote();
+        const chainId = await gnonative.getChainID();
         console.log('Remote %s ChainId %s', remote, chainId);
 
-        setGreeting(await gno.hello('Gno'));
+        setGreeting(await gnonative.hello('Gno'));
 
-        for await (const res of await gno.helloStream('Gno')) {
+        for await (const res of await gnonative.helloStream('Gno')) {
           console.log(res.greeting);
         }
       } catch (error) {

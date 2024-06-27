@@ -16,6 +16,7 @@ export function addChangeListener(listener: (event: ChangeEventPayload) => void)
 }
 
 export { ChangeEventPayload, GnonativeView, GnonativeViewProps };
-export { useGno } from './hooks/use-gno';
 export * from './provider/gnonative-provider';
 export * from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+
+export * from './api/GnoNativeApi';
