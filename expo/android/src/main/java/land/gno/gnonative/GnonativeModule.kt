@@ -35,6 +35,17 @@ class GnonativeModule : Module() {
       rootDir = context!!.filesDir
     }
 
+    OnDestroy {
+      try {
+        if (bridgeGnoNative != null) {
+          bridgeGnoNative?.close()
+          bridgeGnoNative = null
+        }
+      } catch (err: Exception) {
+        Log.d("Error: OnDestroy", err.toString())
+      }
+    }
+
     // Defines event names that the module can send to JavaScript.
     Events("onChange")
 
