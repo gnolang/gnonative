@@ -2958,6 +2958,100 @@ func (x *AddressFromBech32Response) GetAddress() []byte {
 	return nil
 }
 
+type AddressFromMnemonicRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Mnemonic string `protobuf:"bytes,1,opt,name=mnemonic,proto3" json:"mnemonic,omitempty"`
+}
+
+func (x *AddressFromMnemonicRequest) Reset() {
+	*x = AddressFromMnemonicRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnonativetypes_proto_msgTypes[58]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddressFromMnemonicRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddressFromMnemonicRequest) ProtoMessage() {}
+
+func (x *AddressFromMnemonicRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[58]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddressFromMnemonicRequest.ProtoReflect.Descriptor instead.
+func (*AddressFromMnemonicRequest) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *AddressFromMnemonicRequest) GetMnemonic() string {
+	if x != nil {
+		return x.Mnemonic
+	}
+	return ""
+}
+
+type AddressFromMnemonicResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Address []byte `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (x *AddressFromMnemonicResponse) Reset() {
+	*x = AddressFromMnemonicResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gnonativetypes_proto_msgTypes[59]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddressFromMnemonicResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddressFromMnemonicResponse) ProtoMessage() {}
+
+func (x *AddressFromMnemonicResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[59]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddressFromMnemonicResponse.ProtoReflect.Descriptor instead.
+func (*AddressFromMnemonicResponse) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *AddressFromMnemonicResponse) GetAddress() []byte {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
 type HelloRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2969,7 +3063,7 @@ type HelloRequest struct {
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[58]
+		mi := &file_gnonativetypes_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2982,7 +3076,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[58]
+	mi := &file_gnonativetypes_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2995,7 +3089,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{58}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -3016,7 +3110,7 @@ type HelloResponse struct {
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[59]
+		mi := &file_gnonativetypes_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3029,7 +3123,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[59]
+	mi := &file_gnonativetypes_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3042,7 +3136,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{59}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *HelloResponse) GetGreeting() string {
@@ -3063,7 +3157,7 @@ type HelloStreamRequest struct {
 func (x *HelloStreamRequest) Reset() {
 	*x = HelloStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[60]
+		mi := &file_gnonativetypes_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3076,7 +3170,7 @@ func (x *HelloStreamRequest) String() string {
 func (*HelloStreamRequest) ProtoMessage() {}
 
 func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[60]
+	mi := &file_gnonativetypes_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3089,7 +3183,7 @@ func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamRequest.ProtoReflect.Descriptor instead.
 func (*HelloStreamRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{60}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *HelloStreamRequest) GetName() string {
@@ -3110,7 +3204,7 @@ type HelloStreamResponse struct {
 func (x *HelloStreamResponse) Reset() {
 	*x = HelloStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_gnonativetypes_proto_msgTypes[61]
+		mi := &file_gnonativetypes_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3123,7 +3217,7 @@ func (x *HelloStreamResponse) String() string {
 func (*HelloStreamResponse) ProtoMessage() {}
 
 func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[61]
+	mi := &file_gnonativetypes_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3136,7 +3230,7 @@ func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamResponse.ProtoReflect.Descriptor instead.
 func (*HelloStreamResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{61}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *HelloStreamResponse) GetGreeting() string {
@@ -3391,21 +3485,28 @@ var file_gnonativetypes_proto_rawDesc = []byte{
 	0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x35, 0x0a, 0x19, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
 	0x46, 0x72, 0x6f, 0x6d, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x22, 0x0a, 0x0c,
-	0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65,
-	0x22, 0x2b, 0x0a, 0x0d, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x38, 0x0a, 0x1a,
+	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46, 0x72, 0x6f, 0x6d, 0x4d, 0x6e, 0x65, 0x6d, 0x6f,
+	0x6e, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x6e,
+	0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x6e,
+	0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x22, 0x37, 0x0a, 0x1b, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x46, 0x72, 0x6f, 0x6d, 0x4d, 0x6e, 0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22,
+	0x22, 0x0a, 0x0c, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e,
+	0x61, 0x6d, 0x65, 0x22, 0x2b, 0x0a, 0x0d, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67,
+	0x22, 0x28, 0x0a, 0x12, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x31, 0x0a, 0x13, 0x48, 0x65,
+	0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x28, 0x0a,
-	0x12, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x31, 0x0a, 0x13, 0x48, 0x65, 0x6c, 0x6c, 0x6f,
-	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a,
-	0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67,
-	0x2f, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67,
-	0x65, 0x6e, 0x2f, 0x67, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x29, 0x5a,
+	0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e, 0x6f, 0x6c,
+	0x61, 0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x67, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3420,7 +3521,7 @@ func file_gnonativetypes_proto_rawDescGZIP() []byte {
 	return file_gnonativetypes_proto_rawDescData
 }
 
-var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 62)
+var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 64)
 var file_gnonativetypes_proto_goTypes = []any{
 	(*SetRemoteRequest)(nil),                  // 0: land.gno.gnonative.v1.SetRemoteRequest
 	(*SetRemoteResponse)(nil),                 // 1: land.gno.gnonative.v1.SetRemoteResponse
@@ -3480,10 +3581,12 @@ var file_gnonativetypes_proto_goTypes = []any{
 	(*AddressToBech32Response)(nil),           // 55: land.gno.gnonative.v1.AddressToBech32Response
 	(*AddressFromBech32Request)(nil),          // 56: land.gno.gnonative.v1.AddressFromBech32Request
 	(*AddressFromBech32Response)(nil),         // 57: land.gno.gnonative.v1.AddressFromBech32Response
-	(*HelloRequest)(nil),                      // 58: land.gno.gnonative.v1.HelloRequest
-	(*HelloResponse)(nil),                     // 59: land.gno.gnonative.v1.HelloResponse
-	(*HelloStreamRequest)(nil),                // 60: land.gno.gnonative.v1.HelloStreamRequest
-	(*HelloStreamResponse)(nil),               // 61: land.gno.gnonative.v1.HelloStreamResponse
+	(*AddressFromMnemonicRequest)(nil),        // 58: land.gno.gnonative.v1.AddressFromMnemonicRequest
+	(*AddressFromMnemonicResponse)(nil),       // 59: land.gno.gnonative.v1.AddressFromMnemonicResponse
+	(*HelloRequest)(nil),                      // 60: land.gno.gnonative.v1.HelloRequest
+	(*HelloResponse)(nil),                     // 61: land.gno.gnonative.v1.HelloResponse
+	(*HelloStreamRequest)(nil),                // 62: land.gno.gnonative.v1.HelloStreamRequest
+	(*HelloStreamResponse)(nil),               // 63: land.gno.gnonative.v1.HelloStreamResponse
 }
 var file_gnonativetypes_proto_depIdxs = []int32{
 	13, // 0: land.gno.gnonative.v1.BaseAccount.coins:type_name -> land.gno.gnonative.v1.Coin
@@ -4208,7 +4311,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[58].Exporter = func(v any, i int) any {
-			switch v := v.(*HelloRequest); i {
+			switch v := v.(*AddressFromMnemonicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4220,7 +4323,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[59].Exporter = func(v any, i int) any {
-			switch v := v.(*HelloResponse); i {
+			switch v := v.(*AddressFromMnemonicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4232,7 +4335,7 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[60].Exporter = func(v any, i int) any {
-			switch v := v.(*HelloStreamRequest); i {
+			switch v := v.(*HelloRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4244,6 +4347,30 @@ func file_gnonativetypes_proto_init() {
 			}
 		}
 		file_gnonativetypes_proto_msgTypes[61].Exporter = func(v any, i int) any {
+			switch v := v.(*HelloResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnonativetypes_proto_msgTypes[62].Exporter = func(v any, i int) any {
+			switch v := v.(*HelloStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gnonativetypes_proto_msgTypes[63].Exporter = func(v any, i int) any {
 			switch v := v.(*HelloStreamResponse); i {
 			case 0:
 				return &v.state
@@ -4262,7 +4389,7 @@ func file_gnonativetypes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_gnonativetypes_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   62,
+			NumMessages:   64,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

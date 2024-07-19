@@ -288,7 +288,7 @@ var file_rpc_proto_rawDesc = []byte{
 	0x72, 0x65, 0x73, 0x10, 0xd6, 0x01, 0x12, 0x14, 0x0a, 0x0f, 0x45, 0x72, 0x72, 0x4e, 0x6f, 0x53,
 	0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x10, 0xd7, 0x01, 0x12, 0x13, 0x0a, 0x0e,
 	0x45, 0x72, 0x72, 0x47, 0x61, 0x73, 0x4f, 0x76, 0x65, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x10, 0xd8,
-	0x01, 0x32, 0x8d, 0x17, 0x0a, 0x10, 0x47, 0x6e, 0x6f, 0x4e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53,
+	0x01, 0x32, 0x8b, 0x18, 0x0a, 0x10, 0x47, 0x6e, 0x6f, 0x4e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x5e, 0x0a, 0x09, 0x53, 0x65, 0x74, 0x52, 0x65, 0x6d,
 	0x6f, 0x74, 0x65, 0x12, 0x27, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67,
 	0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x52,
@@ -461,22 +461,30 @@ var file_rpc_proto_rawDesc = []byte{
 	0x65, 0x73, 0x74, 0x1a, 0x30, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67,
 	0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x46, 0x72, 0x6f, 0x6d, 0x42, 0x65, 0x63, 0x68, 0x33, 0x32, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x23,
-	0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74,
-	0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67,
-	0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c,
-	0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x66, 0x0a, 0x0b, 0x48, 0x65, 0x6c,
-	0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x29, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e,
-	0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31,
-	0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67,
-	0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c,
-	0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30,
-	0x01, 0x42, 0x2f, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x67, 0x6e, 0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76,
-	0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x67, 0x6f, 0xa2, 0x02, 0x03, 0x52,
-	0x54, 0x47, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x7c, 0x0a, 0x13, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x46, 0x72, 0x6f, 0x6d, 0x4d, 0x6e, 0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x12, 0x31, 0x2e, 0x6c,
+	0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46, 0x72, 0x6f, 0x6d,
+	0x4d, 0x6e, 0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x32, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61,
+	0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x46,
+	0x72, 0x6f, 0x6d, 0x4d, 0x6e, 0x65, 0x6d, 0x6f, 0x6e, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x23, 0x2e, 0x6c,
+	0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x24, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f,
+	0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x66, 0x0a, 0x0b, 0x48, 0x65, 0x6c, 0x6c, 0x6f,
+	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x29, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e,
+	0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48,
+	0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x2a, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f,
+	0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x42,
+	0x2f, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6e,
+	0x6f, 0x6c, 0x61, 0x6e, 0x67, 0x2f, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x67, 0x6f, 0xa2, 0x02, 0x03, 0x52, 0x54, 0x47,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -522,36 +530,38 @@ var file_rpc_proto_goTypes = []any{
 	(*RunRequest)(nil),                        // 25: land.gno.gnonative.v1.RunRequest
 	(*AddressToBech32Request)(nil),            // 26: land.gno.gnonative.v1.AddressToBech32Request
 	(*AddressFromBech32Request)(nil),          // 27: land.gno.gnonative.v1.AddressFromBech32Request
-	(*HelloRequest)(nil),                      // 28: land.gno.gnonative.v1.HelloRequest
-	(*HelloStreamRequest)(nil),                // 29: land.gno.gnonative.v1.HelloStreamRequest
-	(*SetRemoteResponse)(nil),                 // 30: land.gno.gnonative.v1.SetRemoteResponse
-	(*GetRemoteResponse)(nil),                 // 31: land.gno.gnonative.v1.GetRemoteResponse
-	(*SetChainIDResponse)(nil),                // 32: land.gno.gnonative.v1.SetChainIDResponse
-	(*GetChainIDResponse)(nil),                // 33: land.gno.gnonative.v1.GetChainIDResponse
-	(*GenerateRecoveryPhraseResponse)(nil),    // 34: land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
-	(*ListKeyInfoResponse)(nil),               // 35: land.gno.gnonative.v1.ListKeyInfoResponse
-	(*HasKeyByNameResponse)(nil),              // 36: land.gno.gnonative.v1.HasKeyByNameResponse
-	(*HasKeyByAddressResponse)(nil),           // 37: land.gno.gnonative.v1.HasKeyByAddressResponse
-	(*HasKeyByNameOrAddressResponse)(nil),     // 38: land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
-	(*GetKeyInfoByNameResponse)(nil),          // 39: land.gno.gnonative.v1.GetKeyInfoByNameResponse
-	(*GetKeyInfoByAddressResponse)(nil),       // 40: land.gno.gnonative.v1.GetKeyInfoByAddressResponse
-	(*GetKeyInfoByNameOrAddressResponse)(nil), // 41: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
-	(*CreateAccountResponse)(nil),             // 42: land.gno.gnonative.v1.CreateAccountResponse
-	(*SelectAccountResponse)(nil),             // 43: land.gno.gnonative.v1.SelectAccountResponse
-	(*SetPasswordResponse)(nil),               // 44: land.gno.gnonative.v1.SetPasswordResponse
-	(*GetActiveAccountResponse)(nil),          // 45: land.gno.gnonative.v1.GetActiveAccountResponse
-	(*QueryAccountResponse)(nil),              // 46: land.gno.gnonative.v1.QueryAccountResponse
-	(*DeleteAccountResponse)(nil),             // 47: land.gno.gnonative.v1.DeleteAccountResponse
-	(*QueryResponse)(nil),                     // 48: land.gno.gnonative.v1.QueryResponse
-	(*RenderResponse)(nil),                    // 49: land.gno.gnonative.v1.RenderResponse
-	(*QEvalResponse)(nil),                     // 50: land.gno.gnonative.v1.QEvalResponse
-	(*CallResponse)(nil),                      // 51: land.gno.gnonative.v1.CallResponse
-	(*SendResponse)(nil),                      // 52: land.gno.gnonative.v1.SendResponse
-	(*RunResponse)(nil),                       // 53: land.gno.gnonative.v1.RunResponse
-	(*AddressToBech32Response)(nil),           // 54: land.gno.gnonative.v1.AddressToBech32Response
-	(*AddressFromBech32Response)(nil),         // 55: land.gno.gnonative.v1.AddressFromBech32Response
-	(*HelloResponse)(nil),                     // 56: land.gno.gnonative.v1.HelloResponse
-	(*HelloStreamResponse)(nil),               // 57: land.gno.gnonative.v1.HelloStreamResponse
+	(*AddressFromMnemonicRequest)(nil),        // 28: land.gno.gnonative.v1.AddressFromMnemonicRequest
+	(*HelloRequest)(nil),                      // 29: land.gno.gnonative.v1.HelloRequest
+	(*HelloStreamRequest)(nil),                // 30: land.gno.gnonative.v1.HelloStreamRequest
+	(*SetRemoteResponse)(nil),                 // 31: land.gno.gnonative.v1.SetRemoteResponse
+	(*GetRemoteResponse)(nil),                 // 32: land.gno.gnonative.v1.GetRemoteResponse
+	(*SetChainIDResponse)(nil),                // 33: land.gno.gnonative.v1.SetChainIDResponse
+	(*GetChainIDResponse)(nil),                // 34: land.gno.gnonative.v1.GetChainIDResponse
+	(*GenerateRecoveryPhraseResponse)(nil),    // 35: land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
+	(*ListKeyInfoResponse)(nil),               // 36: land.gno.gnonative.v1.ListKeyInfoResponse
+	(*HasKeyByNameResponse)(nil),              // 37: land.gno.gnonative.v1.HasKeyByNameResponse
+	(*HasKeyByAddressResponse)(nil),           // 38: land.gno.gnonative.v1.HasKeyByAddressResponse
+	(*HasKeyByNameOrAddressResponse)(nil),     // 39: land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
+	(*GetKeyInfoByNameResponse)(nil),          // 40: land.gno.gnonative.v1.GetKeyInfoByNameResponse
+	(*GetKeyInfoByAddressResponse)(nil),       // 41: land.gno.gnonative.v1.GetKeyInfoByAddressResponse
+	(*GetKeyInfoByNameOrAddressResponse)(nil), // 42: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
+	(*CreateAccountResponse)(nil),             // 43: land.gno.gnonative.v1.CreateAccountResponse
+	(*SelectAccountResponse)(nil),             // 44: land.gno.gnonative.v1.SelectAccountResponse
+	(*SetPasswordResponse)(nil),               // 45: land.gno.gnonative.v1.SetPasswordResponse
+	(*GetActiveAccountResponse)(nil),          // 46: land.gno.gnonative.v1.GetActiveAccountResponse
+	(*QueryAccountResponse)(nil),              // 47: land.gno.gnonative.v1.QueryAccountResponse
+	(*DeleteAccountResponse)(nil),             // 48: land.gno.gnonative.v1.DeleteAccountResponse
+	(*QueryResponse)(nil),                     // 49: land.gno.gnonative.v1.QueryResponse
+	(*RenderResponse)(nil),                    // 50: land.gno.gnonative.v1.RenderResponse
+	(*QEvalResponse)(nil),                     // 51: land.gno.gnonative.v1.QEvalResponse
+	(*CallResponse)(nil),                      // 52: land.gno.gnonative.v1.CallResponse
+	(*SendResponse)(nil),                      // 53: land.gno.gnonative.v1.SendResponse
+	(*RunResponse)(nil),                       // 54: land.gno.gnonative.v1.RunResponse
+	(*AddressToBech32Response)(nil),           // 55: land.gno.gnonative.v1.AddressToBech32Response
+	(*AddressFromBech32Response)(nil),         // 56: land.gno.gnonative.v1.AddressFromBech32Response
+	(*AddressFromMnemonicResponse)(nil),       // 57: land.gno.gnonative.v1.AddressFromMnemonicResponse
+	(*HelloResponse)(nil),                     // 58: land.gno.gnonative.v1.HelloResponse
+	(*HelloStreamResponse)(nil),               // 59: land.gno.gnonative.v1.HelloStreamResponse
 }
 var file_rpc_proto_depIdxs = []int32{
 	0,  // 0: land.gno.gnonative.v1.ErrDetails.codes:type_name -> land.gno.gnonative.v1.ErrCode
@@ -581,38 +591,40 @@ var file_rpc_proto_depIdxs = []int32{
 	25, // 24: land.gno.gnonative.v1.GnoNativeService.Run:input_type -> land.gno.gnonative.v1.RunRequest
 	26, // 25: land.gno.gnonative.v1.GnoNativeService.AddressToBech32:input_type -> land.gno.gnonative.v1.AddressToBech32Request
 	27, // 26: land.gno.gnonative.v1.GnoNativeService.AddressFromBech32:input_type -> land.gno.gnonative.v1.AddressFromBech32Request
-	28, // 27: land.gno.gnonative.v1.GnoNativeService.Hello:input_type -> land.gno.gnonative.v1.HelloRequest
-	29, // 28: land.gno.gnonative.v1.GnoNativeService.HelloStream:input_type -> land.gno.gnonative.v1.HelloStreamRequest
-	30, // 29: land.gno.gnonative.v1.GnoNativeService.SetRemote:output_type -> land.gno.gnonative.v1.SetRemoteResponse
-	31, // 30: land.gno.gnonative.v1.GnoNativeService.GetRemote:output_type -> land.gno.gnonative.v1.GetRemoteResponse
-	32, // 31: land.gno.gnonative.v1.GnoNativeService.SetChainID:output_type -> land.gno.gnonative.v1.SetChainIDResponse
-	33, // 32: land.gno.gnonative.v1.GnoNativeService.GetChainID:output_type -> land.gno.gnonative.v1.GetChainIDResponse
-	34, // 33: land.gno.gnonative.v1.GnoNativeService.GenerateRecoveryPhrase:output_type -> land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
-	35, // 34: land.gno.gnonative.v1.GnoNativeService.ListKeyInfo:output_type -> land.gno.gnonative.v1.ListKeyInfoResponse
-	36, // 35: land.gno.gnonative.v1.GnoNativeService.HasKeyByName:output_type -> land.gno.gnonative.v1.HasKeyByNameResponse
-	37, // 36: land.gno.gnonative.v1.GnoNativeService.HasKeyByAddress:output_type -> land.gno.gnonative.v1.HasKeyByAddressResponse
-	38, // 37: land.gno.gnonative.v1.GnoNativeService.HasKeyByNameOrAddress:output_type -> land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
-	39, // 38: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByName:output_type -> land.gno.gnonative.v1.GetKeyInfoByNameResponse
-	40, // 39: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByAddress:output_type -> land.gno.gnonative.v1.GetKeyInfoByAddressResponse
-	41, // 40: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByNameOrAddress:output_type -> land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
-	42, // 41: land.gno.gnonative.v1.GnoNativeService.CreateAccount:output_type -> land.gno.gnonative.v1.CreateAccountResponse
-	43, // 42: land.gno.gnonative.v1.GnoNativeService.SelectAccount:output_type -> land.gno.gnonative.v1.SelectAccountResponse
-	44, // 43: land.gno.gnonative.v1.GnoNativeService.SetPassword:output_type -> land.gno.gnonative.v1.SetPasswordResponse
-	45, // 44: land.gno.gnonative.v1.GnoNativeService.GetActiveAccount:output_type -> land.gno.gnonative.v1.GetActiveAccountResponse
-	46, // 45: land.gno.gnonative.v1.GnoNativeService.QueryAccount:output_type -> land.gno.gnonative.v1.QueryAccountResponse
-	47, // 46: land.gno.gnonative.v1.GnoNativeService.DeleteAccount:output_type -> land.gno.gnonative.v1.DeleteAccountResponse
-	48, // 47: land.gno.gnonative.v1.GnoNativeService.Query:output_type -> land.gno.gnonative.v1.QueryResponse
-	49, // 48: land.gno.gnonative.v1.GnoNativeService.Render:output_type -> land.gno.gnonative.v1.RenderResponse
-	50, // 49: land.gno.gnonative.v1.GnoNativeService.QEval:output_type -> land.gno.gnonative.v1.QEvalResponse
-	51, // 50: land.gno.gnonative.v1.GnoNativeService.Call:output_type -> land.gno.gnonative.v1.CallResponse
-	52, // 51: land.gno.gnonative.v1.GnoNativeService.Send:output_type -> land.gno.gnonative.v1.SendResponse
-	53, // 52: land.gno.gnonative.v1.GnoNativeService.Run:output_type -> land.gno.gnonative.v1.RunResponse
-	54, // 53: land.gno.gnonative.v1.GnoNativeService.AddressToBech32:output_type -> land.gno.gnonative.v1.AddressToBech32Response
-	55, // 54: land.gno.gnonative.v1.GnoNativeService.AddressFromBech32:output_type -> land.gno.gnonative.v1.AddressFromBech32Response
-	56, // 55: land.gno.gnonative.v1.GnoNativeService.Hello:output_type -> land.gno.gnonative.v1.HelloResponse
-	57, // 56: land.gno.gnonative.v1.GnoNativeService.HelloStream:output_type -> land.gno.gnonative.v1.HelloStreamResponse
-	29, // [29:57] is the sub-list for method output_type
-	1,  // [1:29] is the sub-list for method input_type
+	28, // 27: land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic:input_type -> land.gno.gnonative.v1.AddressFromMnemonicRequest
+	29, // 28: land.gno.gnonative.v1.GnoNativeService.Hello:input_type -> land.gno.gnonative.v1.HelloRequest
+	30, // 29: land.gno.gnonative.v1.GnoNativeService.HelloStream:input_type -> land.gno.gnonative.v1.HelloStreamRequest
+	31, // 30: land.gno.gnonative.v1.GnoNativeService.SetRemote:output_type -> land.gno.gnonative.v1.SetRemoteResponse
+	32, // 31: land.gno.gnonative.v1.GnoNativeService.GetRemote:output_type -> land.gno.gnonative.v1.GetRemoteResponse
+	33, // 32: land.gno.gnonative.v1.GnoNativeService.SetChainID:output_type -> land.gno.gnonative.v1.SetChainIDResponse
+	34, // 33: land.gno.gnonative.v1.GnoNativeService.GetChainID:output_type -> land.gno.gnonative.v1.GetChainIDResponse
+	35, // 34: land.gno.gnonative.v1.GnoNativeService.GenerateRecoveryPhrase:output_type -> land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
+	36, // 35: land.gno.gnonative.v1.GnoNativeService.ListKeyInfo:output_type -> land.gno.gnonative.v1.ListKeyInfoResponse
+	37, // 36: land.gno.gnonative.v1.GnoNativeService.HasKeyByName:output_type -> land.gno.gnonative.v1.HasKeyByNameResponse
+	38, // 37: land.gno.gnonative.v1.GnoNativeService.HasKeyByAddress:output_type -> land.gno.gnonative.v1.HasKeyByAddressResponse
+	39, // 38: land.gno.gnonative.v1.GnoNativeService.HasKeyByNameOrAddress:output_type -> land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
+	40, // 39: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByName:output_type -> land.gno.gnonative.v1.GetKeyInfoByNameResponse
+	41, // 40: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByAddress:output_type -> land.gno.gnonative.v1.GetKeyInfoByAddressResponse
+	42, // 41: land.gno.gnonative.v1.GnoNativeService.GetKeyInfoByNameOrAddress:output_type -> land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
+	43, // 42: land.gno.gnonative.v1.GnoNativeService.CreateAccount:output_type -> land.gno.gnonative.v1.CreateAccountResponse
+	44, // 43: land.gno.gnonative.v1.GnoNativeService.SelectAccount:output_type -> land.gno.gnonative.v1.SelectAccountResponse
+	45, // 44: land.gno.gnonative.v1.GnoNativeService.SetPassword:output_type -> land.gno.gnonative.v1.SetPasswordResponse
+	46, // 45: land.gno.gnonative.v1.GnoNativeService.GetActiveAccount:output_type -> land.gno.gnonative.v1.GetActiveAccountResponse
+	47, // 46: land.gno.gnonative.v1.GnoNativeService.QueryAccount:output_type -> land.gno.gnonative.v1.QueryAccountResponse
+	48, // 47: land.gno.gnonative.v1.GnoNativeService.DeleteAccount:output_type -> land.gno.gnonative.v1.DeleteAccountResponse
+	49, // 48: land.gno.gnonative.v1.GnoNativeService.Query:output_type -> land.gno.gnonative.v1.QueryResponse
+	50, // 49: land.gno.gnonative.v1.GnoNativeService.Render:output_type -> land.gno.gnonative.v1.RenderResponse
+	51, // 50: land.gno.gnonative.v1.GnoNativeService.QEval:output_type -> land.gno.gnonative.v1.QEvalResponse
+	52, // 51: land.gno.gnonative.v1.GnoNativeService.Call:output_type -> land.gno.gnonative.v1.CallResponse
+	53, // 52: land.gno.gnonative.v1.GnoNativeService.Send:output_type -> land.gno.gnonative.v1.SendResponse
+	54, // 53: land.gno.gnonative.v1.GnoNativeService.Run:output_type -> land.gno.gnonative.v1.RunResponse
+	55, // 54: land.gno.gnonative.v1.GnoNativeService.AddressToBech32:output_type -> land.gno.gnonative.v1.AddressToBech32Response
+	56, // 55: land.gno.gnonative.v1.GnoNativeService.AddressFromBech32:output_type -> land.gno.gnonative.v1.AddressFromBech32Response
+	57, // 56: land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic:output_type -> land.gno.gnonative.v1.AddressFromMnemonicResponse
+	58, // 57: land.gno.gnonative.v1.GnoNativeService.Hello:output_type -> land.gno.gnonative.v1.HelloResponse
+	59, // 58: land.gno.gnonative.v1.GnoNativeService.HelloStream:output_type -> land.gno.gnonative.v1.HelloStreamResponse
+	30, // [30:59] is the sub-list for method output_type
+	1,  // [1:30] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name

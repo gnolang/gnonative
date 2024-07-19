@@ -1575,6 +1575,54 @@ export declare class AddressFromBech32Response extends Message<AddressFromBech32
 }
 
 /**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicRequest
+ */
+export declare class AddressFromMnemonicRequest extends Message<AddressFromMnemonicRequest> {
+  /**
+   * @generated from field: string mnemonic = 1;
+   */
+  mnemonic: string;
+
+  constructor(data?: PartialMessage<AddressFromMnemonicRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.AddressFromMnemonicRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressFromMnemonicRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressFromMnemonicRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressFromMnemonicRequest;
+
+  static equals(a: AddressFromMnemonicRequest | PlainMessage<AddressFromMnemonicRequest> | undefined, b: AddressFromMnemonicRequest | PlainMessage<AddressFromMnemonicRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicResponse
+ */
+export declare class AddressFromMnemonicResponse extends Message<AddressFromMnemonicResponse> {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+
+  constructor(data?: PartialMessage<AddressFromMnemonicResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.AddressFromMnemonicResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddressFromMnemonicResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddressFromMnemonicResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddressFromMnemonicResponse;
+
+  static equals(a: AddressFromMnemonicResponse | PlainMessage<AddressFromMnemonicResponse> | undefined, b: AddressFromMnemonicResponse | PlainMessage<AddressFromMnemonicResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnonative.v1.HelloRequest
  */
 export declare class HelloRequest extends Message<HelloRequest> {

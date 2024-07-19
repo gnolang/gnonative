@@ -285,6 +285,14 @@ type AddressFromBech32Response struct {
 	Address []byte `json:"address" yaml:"address"`
 }
 
+type AddressFromMnemonicRequest struct {
+	Mnemonic string `json:"mnemonic" yaml:"mnemonic"`
+}
+
+type AddressFromMnemonicResponse struct {
+	Address []byte `json:"address" yaml:"address"`
+}
+
 type HelloRequest struct {
 	Name string
 }

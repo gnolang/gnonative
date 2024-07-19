@@ -289,6 +289,14 @@ message AddressFromBech32Response {
 	bytes address = 1;
 }
 
+message AddressFromMnemonicRequest {
+	string mnemonic = 1;
+}
+
+message AddressFromMnemonicResponse {
+	bytes address = 1;
+}
+
 message HelloRequest {
 	string name = 1 [json_name = "Name"];
 }

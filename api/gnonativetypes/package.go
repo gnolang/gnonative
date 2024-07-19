@@ -70,6 +70,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	AddressToBech32Response{},
 	AddressFromBech32Request{},
 	AddressFromBech32Response{},
+	AddressFromMnemonicRequest{},
+	AddressFromMnemonicResponse{},
 	HelloRequest{},
 	HelloResponse{},
 	HelloStreamRequest{},
