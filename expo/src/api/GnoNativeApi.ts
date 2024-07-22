@@ -1,6 +1,7 @@
 import {
   AddressFromBech32Request,
   AddressToBech32Request,
+  AddressFromMnemonicRequest,
   CallRequest,
   CallResponse,
   CreateAccountRequest,
@@ -340,6 +341,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const client = await this.#getClient();
     const response = await client.addressToBech32(new AddressToBech32Request({ address }));
     return response.bech32Address;
+  }
+
+  async addressFromMnemonic(mnemonic: string) {
+    const client = await this.#getClient();
+    const response = await client.addressFromMnemonic(new AddressFromMnemonicRequest({ mnemonic }));
+    return response.address;
   }
 
   async addressFromBech32(bech32Address: string) {

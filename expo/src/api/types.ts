@@ -71,6 +71,7 @@ export interface GnoKeyApi {
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
+  addressFromMnemonic: (mnemonic: string) => Promise<Uint8Array>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
   // debug
   hello: (name: string) => Promise<string>;
