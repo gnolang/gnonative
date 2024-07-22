@@ -489,6 +489,16 @@ func (s *gnoNativeService) AddressFromBech32(ctx context.Context, req *connect.R
 	return connect.NewResponse(&api_gen.AddressFromBech32Response{Address: address.Bytes()}), nil
 }
 
+func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *connect.Request[api_gen.AddressFromMnemonicRequest]) (*connect.Response[api_gen.AddressFromMnemonicResponse], error) {
+	kb := crypto_keys.NewInMemory()
+	info, err := kb.CreateAccount("temporary", req.Msg.Mnemonic, "", "", uint32(0), uint32(0))
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}), nil
+}
+
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
 	s.logger.Debug("Hello called")
 	defer s.logger.Debug("Hello returned ok")

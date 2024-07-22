@@ -29,6 +29,13 @@ const InnerApp = () => {
         const chainId = await gnonative.getChainID();
         console.log('Remote %s ChainId %s', remote, chainId);
 
+        const phrase = await gnonative.generateRecoveryPhrase();
+        const address = await gnonative.addressFromMnemonic(phrase);
+        const addressStr = await gnonative.addressToBech32(address);
+
+        console.log('Phrase:', phrase);
+        console.log('Address:', addressStr);
+
         setGreeting(await gnonative.hello('Gno'));
 
         for await (const res of await gnonative.helloStream('Gno')) {

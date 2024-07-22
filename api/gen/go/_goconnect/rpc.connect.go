@@ -105,6 +105,9 @@ const (
 	// GnoNativeServiceAddressFromBech32Procedure is the fully-qualified name of the GnoNativeService's
 	// AddressFromBech32 RPC.
 	GnoNativeServiceAddressFromBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/AddressFromBech32"
+	// GnoNativeServiceAddressFromMnemonicProcedure is the fully-qualified name of the
+	// GnoNativeService's AddressFromMnemonic RPC.
+	GnoNativeServiceAddressFromMnemonicProcedure = "/land.gno.gnonative.v1.GnoNativeService/AddressFromMnemonic"
 	// GnoNativeServiceHelloProcedure is the fully-qualified name of the GnoNativeService's Hello RPC.
 	GnoNativeServiceHelloProcedure = "/land.gno.gnonative.v1.GnoNativeService/Hello"
 	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
@@ -141,6 +144,7 @@ var (
 	gnoNativeServiceRunMethodDescriptor                       = gnoNativeServiceServiceDescriptor.Methods().ByName("Run")
 	gnoNativeServiceAddressToBech32MethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressToBech32")
 	gnoNativeServiceAddressFromBech32MethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromBech32")
+	gnoNativeServiceAddressFromMnemonicMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromMnemonic")
 	gnoNativeServiceHelloMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Hello")
 	gnoNativeServiceHelloStreamMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("HelloStream")
 )
@@ -239,6 +243,8 @@ type GnoNativeServiceClient interface {
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
+	// Convert a mnemonic (as in CreateAccount) to a byte array address.
+	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -411,6 +417,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		addressFromMnemonic: connect.NewClient[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse](
+			httpClient,
+			baseURL+GnoNativeServiceAddressFromMnemonicProcedure,
+			connect.WithSchema(gnoNativeServiceAddressFromMnemonicMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloProcedure,
@@ -454,6 +466,7 @@ type gnoNativeServiceClient struct {
 	run                       *connect.Client[_go.RunRequest, _go.RunResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
+	addressFromMnemonic       *connect.Client[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse]
 	hello                     *connect.Client[_go.HelloRequest, _go.HelloResponse]
 	helloStream               *connect.Client[_go.HelloStreamRequest, _go.HelloStreamResponse]
 }
@@ -588,6 +601,11 @@ func (c *gnoNativeServiceClient) AddressFromBech32(ctx context.Context, req *con
 	return c.addressFromBech32.CallUnary(ctx, req)
 }
 
+// AddressFromMnemonic calls land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic.
+func (c *gnoNativeServiceClient) AddressFromMnemonic(ctx context.Context, req *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error) {
+	return c.addressFromMnemonic.CallUnary(ctx, req)
+}
+
 // Hello calls land.gno.gnonative.v1.GnoNativeService.Hello.
 func (c *gnoNativeServiceClient) Hello(ctx context.Context, req *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
@@ -693,6 +711,8 @@ type GnoNativeServiceHandler interface {
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
+	// Convert a mnemonic (as in CreateAccount) to a byte array address.
+	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -861,6 +881,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceAddressFromMnemonicHandler := connect.NewUnaryHandler(
+		GnoNativeServiceAddressFromMnemonicProcedure,
+		svc.AddressFromMnemonic,
+		connect.WithSchema(gnoNativeServiceAddressFromMnemonicMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHelloProcedure,
 		svc.Hello,
@@ -927,6 +953,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceAddressToBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressFromBech32Procedure:
 			gnoNativeServiceAddressFromBech32Handler.ServeHTTP(w, r)
+		case GnoNativeServiceAddressFromMnemonicProcedure:
+			gnoNativeServiceAddressFromMnemonicHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloProcedure:
 			gnoNativeServiceHelloHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloStreamProcedure:
@@ -1042,6 +1070,10 @@ func (UnimplementedGnoNativeServiceHandler) AddressToBech32(context.Context, *co
 
 func (UnimplementedGnoNativeServiceHandler) AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressFromBech32 is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {

@@ -605,6 +605,26 @@ export const AddressFromBech32Response = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicRequest
+ */
+export const AddressFromMnemonicRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "land.gno.gnonative.v1.AddressFromMnemonicRequest",
+  () => [
+    { no: 1, name: "mnemonic", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicResponse
+ */
+export const AddressFromMnemonicResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "land.gno.gnonative.v1.AddressFromMnemonicResponse",
+  () => [
+    { no: 1, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnonative.v1.HelloRequest
  */
 export const HelloRequest = /*@__PURE__*/ proto3.makeMessageType(

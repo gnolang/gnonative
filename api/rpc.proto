@@ -127,6 +127,9 @@ service GnoNativeService {
   // Convert a bech32 string address to a byte array address.
   rpc AddressFromBech32(AddressFromBech32Request) returns (AddressFromBech32Response);
 
+  // Convert a mnemonic (as in CreateAccount) to a byte array address.
+  rpc AddressFromMnemonic(AddressFromMnemonicRequest) returns (AddressFromMnemonicResponse);
+
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);
   // HelloStream is for debug purposes
