@@ -1,5 +1,5 @@
-// This file implements the gRPC API methods defined in service/rpc/api_gen.proto . For documentation,
-// see that file and related request/response fields in the generated gnonativetypes.proto .
+// This file implements the gRPC API methods defined in api/rpc.proto . For documentation,
+// see that file and related request/response fields in the generated api/gnonativetypes.proto .
 
 package service
 
