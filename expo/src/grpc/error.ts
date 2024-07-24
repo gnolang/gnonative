@@ -86,4 +86,4 @@ class GRPCError extends Error {
   }
 }
 
-export { GRPCError };
+export { GRPCError, ErrCode };

@@ -18,5 +18,7 @@ export function addChangeListener(listener: (event: ChangeEventPayload) => void)
 export { ChangeEventPayload, GnonativeView, GnonativeViewProps };
 export * from './provider/gnonative-provider';
 export * from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+export * from '@buf/gnolang_gnonative.bufbuild_es/rpc_pb';
+export { GRPCError } from './grpc/error';
 
 export * from './api/GnoNativeApi';

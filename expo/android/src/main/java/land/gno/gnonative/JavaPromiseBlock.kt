@@ -26,7 +26,8 @@ class PromiseBlock(val promise: Promise): IPromiseBlock {
     if (err?.message == "EOF") {
       this.promise.reject(GoBridgeCoreEOF())
     } else {
-      this.promise.reject(GoBridgeCoreError(err))
+      // Only the reject()'s message argument will be thrown to React Native, so put the error message in.
+      this.promise.reject("invoke method error", err?.message, null)
     }
 
     this.remove() // cleanup the promise
