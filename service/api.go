@@ -17,6 +17,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
+	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	api_gen "github.com/gnolang/gnonative/api/gen/go"
 )
@@ -176,7 +177,7 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 
 	key, err := s.getSigner().Keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
 	if err != nil {
-		return nil, err
+		return nil, getGrpcError(err)
 	}
 
 	info, err := convertKeyInfo(key)
@@ -316,7 +317,7 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 
 	bres, err := s.client.Query(cfg)
 	if err != nil {
-		return nil, err
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&api_gen.QueryResponse{Result: bres.Response.Data}), nil
@@ -327,7 +328,7 @@ func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_
 
 	result, _, err := s.client.Render(req.Msg.PackagePath, req.Msg.Args)
 	if err != nil {
-		return nil, err
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&api_gen.RenderResponse{Result: result}), nil
@@ -338,7 +339,7 @@ func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_g
 
 	result, _, err := s.client.QEval(req.Msg.PackagePath, req.Msg.Expression)
 	if err != nil {
-		return nil, err
+		return nil, getGrpcError(err)
 	}
 
 	return connect.NewResponse(&api_gen.QEvalResponse{Result: result}), nil
@@ -568,6 +569,16 @@ func getGrpcError(err error) error {
 		return api_gen.ErrCode_ErrNoSignatures
 	} else if errors.As(err, &std.GasOverflowError{}) {
 		return api_gen.ErrCode_ErrGasOverflow
+	}
+
+	// The following match errors in https://github.com/gnolang/gno/blob/master/gno.land/pkg/sdk/vm/errors.go .
+
+	if errors.As(err, &vm.InvalidPkgPathError{}) {
+		return api_gen.ErrCode_ErrInvalidPkgPath
+	} else if errors.As(err, &vm.InvalidStmtError{}) {
+		return api_gen.ErrCode_ErrInvalidStmt
+	} else if errors.As(err, &vm.InvalidExprError{}) {
+		return api_gen.ErrCode_ErrInvalidExpr
 	} else {
 		return err
 	}

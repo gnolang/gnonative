@@ -159,7 +159,7 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Create a new account the keybase using the name an password specified by SetAccount.
+     * Create a new account in the keybase using the name and password specified by SetAccount.
      * If an account with the same name already exists in the keybase,
      * this replaces it. (If you don't want to replace it, then it's your responsibility
      * to use GetKeyInfoByName to check if it exists before calling this.)
@@ -173,7 +173,9 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * SelectAccount selects the active account to use for later operations
+     * SelectAccount selects the active account to use for later operations. If the response has_password is
+     * false, then you should set the password before using a method which needs it.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SelectAccount
      */
@@ -239,6 +241,8 @@ export const GnoNativeService = {
     },
     /**
      * Make an ABCI query to the remote node.
+     * If the request path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
+     * If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Query
      */
@@ -251,8 +255,9 @@ export const GnoNativeService = {
     /**
      * Render calls the Render function for package_path with optional args. The
      * package path should include the prefix like "gno.land/". This is similar to
-     * using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+     * using a browser URL <nodeURL>/<pkgPath>:<args> where <pkgPath> doesn't have
      * the prefix like "gno.land/".
+     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Render
      */
@@ -268,7 +273,7 @@ export const GnoNativeService = {
      * is usually a function call like "GetBoardIDFromName(\"testboard\")". The
      * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-     * If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.QEval
      */

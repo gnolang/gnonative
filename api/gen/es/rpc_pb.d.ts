@@ -219,11 +219,28 @@ export declare enum ErrCode {
   ErrNoSignatures = 215,
 
   /**
-   * ErrGasOverflow that an action results in a gas consumption unsigned integer overflow
+   * ErrGasOverflow indicates that an action results in a gas consumption unsigned integer overflow
    *
    * @generated from enum value: ErrGasOverflow = 216;
    */
   ErrGasOverflow = 216,
+
+  /**
+   * ErrInvalidPkgPath indicates that the package path is not recognized.
+   *
+   * @generated from enum value: ErrInvalidPkgPath = 217;
+   */
+  ErrInvalidPkgPath = 217,
+
+  /**
+   * @generated from enum value: ErrInvalidStmt = 218;
+   */
+  ErrInvalidStmt = 218,
+
+  /**
+   * @generated from enum value: ErrInvalidExpr = 219;
+   */
+  ErrInvalidExpr = 219,
 }
 
 /**
