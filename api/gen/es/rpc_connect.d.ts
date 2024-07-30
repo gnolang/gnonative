@@ -175,7 +175,7 @@ export declare const GnoNativeService: {
     /**
      * SelectAccount selects the active account to use for later operations. If the response has_password is
      * false, then you should set the password before using a method which needs it.
-     * If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SelectAccount
      */
@@ -241,8 +241,8 @@ export declare const GnoNativeService: {
     },
     /**
      * Make an ABCI query to the remote node.
-     * If the request path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
-     * If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+     * If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+     * If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Query
      */
@@ -257,7 +257,7 @@ export declare const GnoNativeService: {
      * package path should include the prefix like "gno.land/". This is similar to
      * using a browser URL <nodeURL>/<pkgPath>:<args> where <pkgPath> doesn't have
      * the prefix like "gno.land/".
-     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Render
      */
@@ -273,7 +273,7 @@ export declare const GnoNativeService: {
      * is usually a function call like "GetBoardIDFromName(\"testboard\")". The
      * return value is a typed expression like
      * "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+     * If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.QEval
      */

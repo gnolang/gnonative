@@ -65,7 +65,7 @@ service GnoNativeService {
 
   // SelectAccount selects the active account to use for later operations. If the response has_password is
   // false, then you should set the password before using a method which needs it.
-  // If the key doesn't exist, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
   // Set the password for the active account in the keybase, used for later operations.
@@ -91,15 +91,15 @@ service GnoNativeService {
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 
   // Make an ABCI query to the remote node.
-  // If the request path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrUnknownRequest.
-  // If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+  // If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+  // If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc Query(QueryRequest) returns (QueryResponse);
 
   // Render calls the Render function for package_path with optional args. The
   // package path should include the prefix like "gno.land/". This is similar to
   // using a browser URL <nodeURL>/<pkgPath>:<args> where <pkgPath> doesn't have
   // the prefix like "gno.land/".
-  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc Render(RenderRequest) returns (RenderResponse);
 
   // QEval evaluates the given expression with the realm code at package_path.
@@ -107,7 +107,7 @@ service GnoNativeService {
   // is usually a function call like "GetBoardIDFromName(\"testboard\")". The
   // return value is a typed expression like
   // "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnomobile.v1.ErrCode).ErrInvalidPkgPath.
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
   // Call a specific realm function.
