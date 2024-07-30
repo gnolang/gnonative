@@ -51,6 +51,9 @@ export const ErrCode = /*@__PURE__*/ proto3.makeEnum(
     {no: 214, name: "ErrTooManySignatures"},
     {no: 215, name: "ErrNoSignatures"},
     {no: 216, name: "ErrGasOverflow"},
+    {no: 217, name: "ErrInvalidPkgPath"},
+    {no: 218, name: "ErrInvalidStmt"},
+    {no: 219, name: "ErrInvalidExpr"},
   ],
 );
 

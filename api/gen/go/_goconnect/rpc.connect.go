@@ -187,12 +187,14 @@ type GnoNativeServiceClient interface {
 	// Get the information for the key in the keybase with the given name or bech32 string address.
 	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
-	// Create a new account the keybase using the name an password specified by SetAccount.
+	// Create a new account in the keybase using the name and password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
 	// this replaces it. (If you don't want to replace it, then it's your responsibility
 	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error)
-	// SelectAccount selects the active account to use for later operations
+	// SelectAccount selects the active account to use for later operations. If the response has_password is
+	// false, then you should set the password before using a method which needs it.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error)
 	// Set the password for the active account in the keybase, used for later operations.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -213,18 +215,21 @@ type GnoNativeServiceClient interface {
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
+	// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+	// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error)
 	// Render calls the Render function for package_path with optional args. The
 	// package path should include the prefix like "gno.land/". This is similar to
-	// using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+	// using a browser URL <nodeURL>/<pkgPath>:<args> where <pkgPath> doesn't have
 	// the prefix like "gno.land/".
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	Render(context.Context, *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error)
 	// QEval evaluates the given expression with the realm code at package_path.
 	// The package path should include the prefix like "gno.land/". The expression
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
 	// Call a specific realm function.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -655,12 +660,14 @@ type GnoNativeServiceHandler interface {
 	// Get the information for the key in the keybase with the given name or bech32 string address.
 	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
-	// Create a new account the keybase using the name an password specified by SetAccount.
+	// Create a new account in the keybase using the name and password specified by SetAccount.
 	// If an account with the same name already exists in the keybase,
 	// this replaces it. (If you don't want to replace it, then it's your responsibility
 	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error)
-	// SelectAccount selects the active account to use for later operations
+	// SelectAccount selects the active account to use for later operations. If the response has_password is
+	// false, then you should set the password before using a method which needs it.
+	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	SelectAccount(context.Context, *connect.Request[_go.SelectAccountRequest]) (*connect.Response[_go.SelectAccountResponse], error)
 	// Set the password for the active account in the keybase, used for later operations.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -681,18 +688,21 @@ type GnoNativeServiceHandler interface {
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error)
 	// Make an ABCI query to the remote node.
+	// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+	// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	Query(context.Context, *connect.Request[_go.QueryRequest]) (*connect.Response[_go.QueryResponse], error)
 	// Render calls the Render function for package_path with optional args. The
 	// package path should include the prefix like "gno.land/". This is similar to
-	// using a browser URL <testnet>/<pkgPath>:<args> where <pkgPath> doesn't have
+	// using a browser URL <nodeURL>/<pkgPath>:<args> where <pkgPath> doesn't have
 	// the prefix like "gno.land/".
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	Render(context.Context, *connect.Request[_go.RenderRequest]) (*connect.Response[_go.RenderResponse], error)
 	// QEval evaluates the given expression with the realm code at package_path.
 	// The package path should include the prefix like "gno.land/". The expression
 	// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
 	// return value is a typed expression like
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
 	// Call a specific realm function.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.

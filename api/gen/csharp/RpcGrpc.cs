@@ -564,7 +564,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Create a new account the keybase using the name an password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password specified by SetAccount.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -579,7 +579,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// SelectAccount selects the active account to use for later operations
+      /// SelectAccount selects the active account to use for later operations. If the response has_password is
+      /// false, then you should set the password before using a method which needs it.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -650,6 +652,8 @@ namespace Land.Gno.Gnonative.V1 {
 
       /// <summary>
       /// Make an ABCI query to the remote node.
+      /// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -663,8 +667,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <summary>
       /// Render calls the Render function for package_path with optional args. The
       /// package path should include the prefix like "gno.land/". This is similar to
-      /// using a browser URL &lt;testnet>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
+      /// using a browser URL &lt;nodeURL>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
       /// the prefix like "gno.land/".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -681,7 +686,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
       /// return value is a typed expression like
       /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-      /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1453,7 +1458,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_GetKeyInfoByNameOrAddress, null, options, request);
       }
       /// <summary>
-      /// Create a new account the keybase using the name an password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password specified by SetAccount.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1469,7 +1474,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CreateAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new account the keybase using the name an password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password specified by SetAccount.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1483,7 +1488,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAccount, null, options, request);
       }
       /// <summary>
-      /// Create a new account the keybase using the name an password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password specified by SetAccount.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1499,7 +1504,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CreateAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new account the keybase using the name an password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password specified by SetAccount.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1513,7 +1518,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAccount, null, options, request);
       }
       /// <summary>
-      /// SelectAccount selects the active account to use for later operations
+      /// SelectAccount selects the active account to use for later operations. If the response has_password is
+      /// false, then you should set the password before using a method which needs it.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1526,7 +1533,9 @@ namespace Land.Gno.Gnonative.V1 {
         return SelectAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// SelectAccount selects the active account to use for later operations
+      /// SelectAccount selects the active account to use for later operations. If the response has_password is
+      /// false, then you should set the password before using a method which needs it.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1537,7 +1546,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_SelectAccount, null, options, request);
       }
       /// <summary>
-      /// SelectAccount selects the active account to use for later operations
+      /// SelectAccount selects the active account to use for later operations. If the response has_password is
+      /// false, then you should set the password before using a method which needs it.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1550,7 +1561,9 @@ namespace Land.Gno.Gnonative.V1 {
         return SelectAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// SelectAccount selects the active account to use for later operations
+      /// SelectAccount selects the active account to use for later operations. If the response has_password is
+      /// false, then you should set the password before using a method which needs it.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1794,6 +1807,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Make an ABCI query to the remote node.
+      /// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1807,6 +1822,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Make an ABCI query to the remote node.
+      /// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1818,6 +1835,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Make an ABCI query to the remote node.
+      /// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1831,6 +1850,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Make an ABCI query to the remote node.
+      /// If the request path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request data has a package path that is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1843,8 +1864,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <summary>
       /// Render calls the Render function for package_path with optional args. The
       /// package path should include the prefix like "gno.land/". This is similar to
-      /// using a browser URL &lt;testnet>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
+      /// using a browser URL &lt;nodeURL>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
       /// the prefix like "gno.land/".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1859,8 +1881,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <summary>
       /// Render calls the Render function for package_path with optional args. The
       /// package path should include the prefix like "gno.land/". This is similar to
-      /// using a browser URL &lt;testnet>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
+      /// using a browser URL &lt;nodeURL>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
       /// the prefix like "gno.land/".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1873,8 +1896,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <summary>
       /// Render calls the Render function for package_path with optional args. The
       /// package path should include the prefix like "gno.land/". This is similar to
-      /// using a browser URL &lt;testnet>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
+      /// using a browser URL &lt;nodeURL>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
       /// the prefix like "gno.land/".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1889,8 +1913,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <summary>
       /// Render calls the Render function for package_path with optional args. The
       /// package path should include the prefix like "gno.land/". This is similar to
-      /// using a browser URL &lt;testnet>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
+      /// using a browser URL &lt;nodeURL>/&lt;pkgPath>:&lt;args> where &lt;pkgPath> doesn't have
       /// the prefix like "gno.land/".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1906,7 +1931,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
       /// return value is a typed expression like
       /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-      /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1924,7 +1949,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
       /// return value is a typed expression like
       /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-      /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1940,7 +1965,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
       /// return value is a typed expression like
       /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-      /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1958,7 +1983,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// is usually a function call like "GetBoardIDFromName(\"testboard\")". The
       /// return value is a typed expression like
       /// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
-      /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
