@@ -126,6 +126,23 @@ service GnoNativeService {
   // This returns the "console" output.
   rpc Run(RunRequest) returns (stream RunResponse);
 
+  // Make an unsigned transaction to call a specific realm function.
+  rpc MakeCallTx(CallRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to send currency to an account on the blockchain.
+  rpc MakeSendTx(SendRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+  rpc MakeRunTx(RunRequest) returns (MakeTxResponse);
+
+  // Sign the transaction using the active account.
+  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  rpc SignTx(SignTxRequest) returns (SignTxResponse);
+
+  // Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+  rpc BroadcastTxCommit(BroadcastTxCommitRequest) returns (stream BroadcastTxCommitResponse);
+
   // Convert a byte array address to a bech32 string address.
   rpc AddressToBech32(AddressToBech32Request) returns (AddressToBech32Response);
 

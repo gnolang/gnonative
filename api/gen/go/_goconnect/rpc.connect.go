@@ -99,6 +99,20 @@ const (
 	GnoNativeServiceSendProcedure = "/land.gno.gnonative.v1.GnoNativeService/Send"
 	// GnoNativeServiceRunProcedure is the fully-qualified name of the GnoNativeService's Run RPC.
 	GnoNativeServiceRunProcedure = "/land.gno.gnonative.v1.GnoNativeService/Run"
+	// GnoNativeServiceMakeCallTxProcedure is the fully-qualified name of the GnoNativeService's
+	// MakeCallTx RPC.
+	GnoNativeServiceMakeCallTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeCallTx"
+	// GnoNativeServiceMakeSendTxProcedure is the fully-qualified name of the GnoNativeService's
+	// MakeSendTx RPC.
+	GnoNativeServiceMakeSendTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeSendTx"
+	// GnoNativeServiceMakeRunTxProcedure is the fully-qualified name of the GnoNativeService's
+	// MakeRunTx RPC.
+	GnoNativeServiceMakeRunTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeRunTx"
+	// GnoNativeServiceSignTxProcedure is the fully-qualified name of the GnoNativeService's SignTx RPC.
+	GnoNativeServiceSignTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/SignTx"
+	// GnoNativeServiceBroadcastTxCommitProcedure is the fully-qualified name of the GnoNativeService's
+	// BroadcastTxCommit RPC.
+	GnoNativeServiceBroadcastTxCommitProcedure = "/land.gno.gnonative.v1.GnoNativeService/BroadcastTxCommit"
 	// GnoNativeServiceAddressToBech32Procedure is the fully-qualified name of the GnoNativeService's
 	// AddressToBech32 RPC.
 	GnoNativeServiceAddressToBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/AddressToBech32"
@@ -142,6 +156,11 @@ var (
 	gnoNativeServiceCallMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Call")
 	gnoNativeServiceSendMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Send")
 	gnoNativeServiceRunMethodDescriptor                       = gnoNativeServiceServiceDescriptor.Methods().ByName("Run")
+	gnoNativeServiceMakeCallTxMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeCallTx")
+	gnoNativeServiceMakeSendTxMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeSendTx")
+	gnoNativeServiceMakeRunTxMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeRunTx")
+	gnoNativeServiceSignTxMethodDescriptor                    = gnoNativeServiceServiceDescriptor.Methods().ByName("SignTx")
+	gnoNativeServiceBroadcastTxCommitMethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("BroadcastTxCommit")
 	gnoNativeServiceAddressToBech32MethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressToBech32")
 	gnoNativeServiceAddressFromBech32MethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromBech32")
 	gnoNativeServiceAddressFromMnemonicMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromMnemonic")
@@ -244,6 +263,18 @@ type GnoNativeServiceClient interface {
 	// call realm functions and use println() to output to the "console".
 	// This returns the "console" output.
 	Run(context.Context, *connect.Request[_go.RunRequest]) (*connect.ServerStreamForClient[_go.RunResponse], error)
+	// Make an unsigned transaction to call a specific realm function.
+	MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to send currency to an account on the blockchain.
+	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Sign the transaction using the active account.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error)
+	// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+	BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest]) (*connect.ServerStreamForClient[_go.BroadcastTxCommitResponse], error)
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -410,6 +441,36 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		makeCallTx: connect.NewClient[_go.CallRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeCallTxProcedure,
+			connect.WithSchema(gnoNativeServiceMakeCallTxMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		makeSendTx: connect.NewClient[_go.SendRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeSendTxProcedure,
+			connect.WithSchema(gnoNativeServiceMakeSendTxMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		makeRunTx: connect.NewClient[_go.RunRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeRunTxProcedure,
+			connect.WithSchema(gnoNativeServiceMakeRunTxMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		signTx: connect.NewClient[_go.SignTxRequest, _go.SignTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceSignTxProcedure,
+			connect.WithSchema(gnoNativeServiceSignTxMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		broadcastTxCommit: connect.NewClient[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse](
+			httpClient,
+			baseURL+GnoNativeServiceBroadcastTxCommitProcedure,
+			connect.WithSchema(gnoNativeServiceBroadcastTxCommitMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		addressToBech32: connect.NewClient[_go.AddressToBech32Request, _go.AddressToBech32Response](
 			httpClient,
 			baseURL+GnoNativeServiceAddressToBech32Procedure,
@@ -469,6 +530,11 @@ type gnoNativeServiceClient struct {
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
 	send                      *connect.Client[_go.SendRequest, _go.SendResponse]
 	run                       *connect.Client[_go.RunRequest, _go.RunResponse]
+	makeCallTx                *connect.Client[_go.CallRequest, _go.MakeTxResponse]
+	makeSendTx                *connect.Client[_go.SendRequest, _go.MakeTxResponse]
+	makeRunTx                 *connect.Client[_go.RunRequest, _go.MakeTxResponse]
+	signTx                    *connect.Client[_go.SignTxRequest, _go.SignTxResponse]
+	broadcastTxCommit         *connect.Client[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
 	addressFromMnemonic       *connect.Client[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse]
@@ -596,6 +662,31 @@ func (c *gnoNativeServiceClient) Run(ctx context.Context, req *connect.Request[_
 	return c.run.CallServerStream(ctx, req)
 }
 
+// MakeCallTx calls land.gno.gnonative.v1.GnoNativeService.MakeCallTx.
+func (c *gnoNativeServiceClient) MakeCallTx(ctx context.Context, req *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeCallTx.CallUnary(ctx, req)
+}
+
+// MakeSendTx calls land.gno.gnonative.v1.GnoNativeService.MakeSendTx.
+func (c *gnoNativeServiceClient) MakeSendTx(ctx context.Context, req *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeSendTx.CallUnary(ctx, req)
+}
+
+// MakeRunTx calls land.gno.gnonative.v1.GnoNativeService.MakeRunTx.
+func (c *gnoNativeServiceClient) MakeRunTx(ctx context.Context, req *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeRunTx.CallUnary(ctx, req)
+}
+
+// SignTx calls land.gno.gnonative.v1.GnoNativeService.SignTx.
+func (c *gnoNativeServiceClient) SignTx(ctx context.Context, req *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {
+	return c.signTx.CallUnary(ctx, req)
+}
+
+// BroadcastTxCommit calls land.gno.gnonative.v1.GnoNativeService.BroadcastTxCommit.
+func (c *gnoNativeServiceClient) BroadcastTxCommit(ctx context.Context, req *connect.Request[_go.BroadcastTxCommitRequest]) (*connect.ServerStreamForClient[_go.BroadcastTxCommitResponse], error) {
+	return c.broadcastTxCommit.CallServerStream(ctx, req)
+}
+
 // AddressToBech32 calls land.gno.gnonative.v1.GnoNativeService.AddressToBech32.
 func (c *gnoNativeServiceClient) AddressToBech32(ctx context.Context, req *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {
 	return c.addressToBech32.CallUnary(ctx, req)
@@ -717,6 +808,18 @@ type GnoNativeServiceHandler interface {
 	// call realm functions and use println() to output to the "console".
 	// This returns the "console" output.
 	Run(context.Context, *connect.Request[_go.RunRequest], *connect.ServerStream[_go.RunResponse]) error
+	// Make an unsigned transaction to call a specific realm function.
+	MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to send currency to an account on the blockchain.
+	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Sign the transaction using the active account.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error)
+	// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+	BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest], *connect.ServerStream[_go.BroadcastTxCommitResponse]) error
 	// Convert a byte array address to a bech32 string address.
 	AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error)
 	// Convert a bech32 string address to a byte array address.
@@ -879,6 +982,36 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceMakeCallTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeCallTxProcedure,
+		svc.MakeCallTx,
+		connect.WithSchema(gnoNativeServiceMakeCallTxMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceMakeSendTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeSendTxProcedure,
+		svc.MakeSendTx,
+		connect.WithSchema(gnoNativeServiceMakeSendTxMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceMakeRunTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeRunTxProcedure,
+		svc.MakeRunTx,
+		connect.WithSchema(gnoNativeServiceMakeRunTxMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceSignTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSignTxProcedure,
+		svc.SignTx,
+		connect.WithSchema(gnoNativeServiceSignTxMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceBroadcastTxCommitHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceBroadcastTxCommitProcedure,
+		svc.BroadcastTxCommit,
+		connect.WithSchema(gnoNativeServiceBroadcastTxCommitMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceAddressToBech32Handler := connect.NewUnaryHandler(
 		GnoNativeServiceAddressToBech32Procedure,
 		svc.AddressToBech32,
@@ -959,6 +1092,16 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceSendHandler.ServeHTTP(w, r)
 		case GnoNativeServiceRunProcedure:
 			gnoNativeServiceRunHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeCallTxProcedure:
+			gnoNativeServiceMakeCallTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeSendTxProcedure:
+			gnoNativeServiceMakeSendTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeRunTxProcedure:
+			gnoNativeServiceMakeRunTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSignTxProcedure:
+			gnoNativeServiceSignTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceBroadcastTxCommitProcedure:
+			gnoNativeServiceBroadcastTxCommitHandler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressToBech32Procedure:
 			gnoNativeServiceAddressToBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressFromBech32Procedure:
@@ -1072,6 +1215,26 @@ func (UnimplementedGnoNativeServiceHandler) Send(context.Context, *connect.Reque
 
 func (UnimplementedGnoNativeServiceHandler) Run(context.Context, *connect.Request[_go.RunRequest], *connect.ServerStream[_go.RunResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Run is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeCallTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeSendTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeRunTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SignTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest], *connect.ServerStream[_go.BroadcastTxCommitResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.BroadcastTxCommit is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) AddressToBech32(context.Context, *connect.Request[_go.AddressToBech32Request]) (*connect.Response[_go.AddressToBech32Response], error) {

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/gnolang/gno/tm2/pkg/amino"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
@@ -357,24 +358,9 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	}
 	s.lock.RUnlock()
 
-	cfg := gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
-	}
+	cfg, msgs := convertCallRequest(req.Msg)
 
-	msgs := make([]gnoclient.MsgCall, 0)
-
-	for _, msg := range req.Msg.Msgs {
-		msgs = append(msgs, gnoclient.MsgCall{
-			PkgPath:  msg.PackagePath,
-			FuncName: msg.Fnc,
-			Args:     msg.Args,
-			Send:     msg.Send,
-		})
-	}
-
-	bres, err := s.client.Call(cfg, msgs...)
+	bres, err := s.client.Call(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -389,6 +375,32 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
+func convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgCall) {
+	var callerAddress crypto.Address
+	if req.CallerAddress != nil {
+		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	}
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:        req.GasFee,
+		GasWanted:     req.GasWanted,
+		Memo:          req.Memo,
+		CallerAddress: callerAddress,
+	}
+
+	msgs := make([]gnoclient.MsgCall, 0)
+
+	for _, msg := range req.Msgs {
+		msgs = append(msgs, gnoclient.MsgCall{
+			PkgPath:  msg.PackagePath,
+			FuncName: msg.Fnc,
+			Args:     msg.Args,
+			Send:     msg.Send,
+		})
+	}
+
+	return cfg, msgs
+}
+
 func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
 	for _, msg := range req.Msg.Msgs {
 		s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("send", msg.Send))
@@ -401,22 +413,9 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	}
 	s.lock.RUnlock()
 
-	cfg := gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
-	}
+	cfg, msgs := convertSendRequest(req.Msg)
 
-	msgs := make([]gnoclient.MsgSend, 0)
-
-	for _, msg := range req.Msg.Msgs {
-		msgs = append(msgs, gnoclient.MsgSend{
-			ToAddress: crypto.AddressFromBytes(msg.ToAddress),
-			Send:      msg.Send,
-		})
-	}
-
-	_, err := s.client.Send(cfg, msgs...)
+	_, err := s.client.Send(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -429,6 +428,30 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
+func convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgSend) {
+	var callerAddress crypto.Address
+	if req.CallerAddress != nil {
+		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	}
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:        req.GasFee,
+		GasWanted:     req.GasWanted,
+		Memo:          req.Memo,
+		CallerAddress: callerAddress,
+	}
+
+	msgs := make([]gnoclient.MsgSend, 0)
+
+	for _, msg := range req.Msgs {
+		msgs = append(msgs, gnoclient.MsgSend{
+			ToAddress: crypto.AddressFromBytes(msg.ToAddress),
+			Send:      msg.Send,
+		})
+	}
+
+	return cfg, msgs
+}
+
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
 	s.lock.RLock()
 	if s.activeAccount == nil {
@@ -437,15 +460,38 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	}
 	s.lock.RUnlock()
 
-	cfg := gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+	cfg, msgs := convertRunRequest(req.Msg)
+
+	bres, err := s.client.Run(*cfg, msgs...)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.RunResponse{
+		Result: string(bres.DeliverTx.Data),
+	}); err != nil {
+		s.logger.Error("Run stream.Send returned error", zap.Error(err))
+		return err
+	}
+
+	return nil
+}
+
+func convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgRun) {
+	var callerAddress crypto.Address
+	if req.CallerAddress != nil {
+		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	}
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:        req.GasFee,
+		GasWanted:     req.GasWanted,
+		Memo:          req.Memo,
+		CallerAddress: callerAddress,
 	}
 
 	msgs := make([]gnoclient.MsgRun, 0)
 
-	for _, msg := range req.Msg.Msgs {
+	for _, msg := range req.Msgs {
 		memPkg := &std.MemPackage{
 			Files: []*std.MemFile{
 				{
@@ -460,15 +506,96 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 		})
 	}
 
-	bres, err := s.client.Run(cfg, msgs...)
+	return cfg, msgs
+}
+
+func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.CallRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("MakeCallTx", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
+	}
+
+	cfg, msgs := convertCallRequest(req.Msg)
+	tx, err := s.client.MakeCallTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[api_gen.SendRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	cfg, msgs := convertSendRequest(req.Msg)
+	tx, err := s.client.MakeSendTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[api_gen.RunRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	cfg, msgs := convertRunRequest(req.Msg)
+	tx, err := s.client.MakeRunTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_gen.SignTxRequest]) (*connect.Response[api_gen.SignTxResponse], error) {
+	s.lock.RLock()
+	if s.activeAccount == nil {
+		s.lock.RUnlock()
+		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	}
+	s.lock.RUnlock()
+
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+		return nil, err
+	}
+
+	signedTx, err := s.client.SignTx(tx, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	signedTxJSON, err := amino.MarshalJSON(signedTx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}), nil
+}
+
+func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
+	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse]) error {
+	signedTx := &std.Tx{}
+	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
+		return err
+	}
+
+	bres, err := s.client.BroadcastTxCommit(signedTx)
 	if err != nil {
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.RunResponse{
-		Result: string(bres.DeliverTx.Data),
+	if err := stream.Send(&api_gen.BroadcastTxCommitResponse{
+		Result: bres.DeliverTx.Data,
 	}); err != nil {
-		s.logger.Error("Run stream.Send returned error", zap.Error(err))
+		s.logger.Error("BroadcastTxCommit stream.Send returned error", zap.Error(err))
 		return err
 	}
 

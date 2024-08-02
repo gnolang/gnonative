@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse } from "./gnonativetypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -321,6 +321,63 @@ export const GnoNativeService = {
       name: "Run",
       I: RunRequest,
       O: RunResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * Make an unsigned transaction to call a specific realm function.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.MakeCallTx
+     */
+    makeCallTx: {
+      name: "MakeCallTx",
+      I: CallRequest,
+      O: MakeTxResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Make an unsigned transaction to send currency to an account on the blockchain.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.MakeSendTx
+     */
+    makeSendTx: {
+      name: "MakeSendTx",
+      I: SendRequest,
+      O: MakeTxResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.MakeRunTx
+     */
+    makeRunTx: {
+      name: "MakeRunTx",
+      I: RunRequest,
+      O: MakeTxResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Sign the transaction using the active account.
+     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SignTx
+     */
+    signTx: {
+      name: "SignTx",
+      I: SignTxRequest,
+      O: SignTxResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.BroadcastTxCommit
+     */
+    broadcastTxCommit: {
+      name: "BroadcastTxCommit",
+      I: BroadcastTxCommitRequest,
+      O: BroadcastTxCommitResponse,
       kind: MethodKind.ServerStreaming,
     },
     /**
