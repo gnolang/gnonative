@@ -223,8 +223,10 @@ message CallRequest {
 	string gas_fee = 1;
 	sint64 gas_wanted = 2;
 	string memo = 3;
+	// If CallerAddress is empty then get it from the active account
+	bytes caller_address = 4;
 	// list of calls to make in one transaction
-	repeated MsgCall msgs = 4 [json_name = "Msgs"];
+	repeated MsgCall msgs = 5 [json_name = "Msgs"];
 }
 
 message CallResponse {
@@ -244,8 +246,10 @@ message SendRequest {
 	sint64 gas_wanted = 2;
 	// Memo is optional
 	string memo = 3;
+	// If CallerAddress is empty then get it from the active account
+	bytes caller_address = 4;
 	// list of send operations to make in one transaction
-	repeated MsgSend msgs = 4 [json_name = "Msgs"];
+	repeated MsgSend msgs = 5 [json_name = "Msgs"];
 }
 
 message SendResponse {
@@ -264,13 +268,43 @@ message RunRequest {
 	sint64 gas_wanted = 2;
 	// Memo is optional
 	string memo = 3;
+	// If CallerAddress is empty then get it from the active account
+	bytes caller_address = 4;
 	// list of run operations to make in one transaction
-	repeated MsgRun msgs = 4 [json_name = "Msgs"];
+	repeated MsgRun msgs = 5 [json_name = "Msgs"];
 }
 
 message RunResponse {
 	// The "console" output from the run
 	string result = 1;
+}
+
+message MakeTxResponse {
+	// The JSON encoding of the unsigned transaction
+	string tx_json = 1;
+}
+
+message SignTxRequest {
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	string tx_json = 1;
+	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+	uint64 account_number = 2;
+	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+	uint64 sequence_number = 3;
+}
+
+message SignTxResponse {
+	// The JSON encoding of the signed transaction (to use in BroadcastTx)
+	string signed_tx_json = 1 [json_name = "tx_json"];
+}
+
+message BroadcastTxCommitRequest {
+	// The JSON encoding of the signed transaction (from SignTx)
+	string signed_tx_json = 1 [json_name = "tx_json"];
+}
+
+message BroadcastTxCommitResponse {
+	bytes result = 1;
 }
 
 message AddressToBech32Request {

@@ -145,6 +145,16 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RunResponse> __Marshaller_land_gno_gnonative_v1_RunResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RunResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.MakeTxResponse> __Marshaller_land_gno_gnonative_v1_MakeTxResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.MakeTxResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SignTxRequest> __Marshaller_land_gno_gnonative_v1_SignTxRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SignTxRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SignTxResponse> __Marshaller_land_gno_gnonative_v1_SignTxResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SignTxResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest> __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.AddressToBech32Request> __Marshaller_land_gno_gnonative_v1_AddressToBech32Request = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.AddressToBech32Response> __Marshaller_land_gno_gnonative_v1_AddressToBech32Response = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.AddressToBech32Response.Parser));
@@ -356,6 +366,46 @@ namespace Land.Gno.Gnonative.V1 {
         "Run",
         __Marshaller_land_gno_gnonative_v1_RunRequest,
         __Marshaller_land_gno_gnonative_v1_RunResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse> __Method_MakeCallTx = new grpc::Method<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "MakeCallTx",
+        __Marshaller_land_gno_gnonative_v1_CallRequest,
+        __Marshaller_land_gno_gnonative_v1_MakeTxResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse> __Method_MakeSendTx = new grpc::Method<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "MakeSendTx",
+        __Marshaller_land_gno_gnonative_v1_SendRequest,
+        __Marshaller_land_gno_gnonative_v1_MakeTxResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse> __Method_MakeRunTx = new grpc::Method<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "MakeRunTx",
+        __Marshaller_land_gno_gnonative_v1_RunRequest,
+        __Marshaller_land_gno_gnonative_v1_MakeTxResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.SignTxRequest, global::Land.Gno.Gnonative.V1.SignTxResponse> __Method_SignTx = new grpc::Method<global::Land.Gno.Gnonative.V1.SignTxRequest, global::Land.Gno.Gnonative.V1.SignTxResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SignTx",
+        __Marshaller_land_gno_gnonative_v1_SignTxRequest,
+        __Marshaller_land_gno_gnonative_v1_SignTxResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> __Method_BroadcastTxCommit = new grpc::Method<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "BroadcastTxCommit",
+        __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitRequest,
+        __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response> __Method_AddressToBech32 = new grpc::Method<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(
@@ -739,6 +789,69 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>A task indicating completion of the handler.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task Run(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::IServerStreamWriter<global::Land.Gno.Gnonative.V1.RunResponse> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Make an unsigned transaction to call a specific realm function.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeCallTx(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Make an unsigned transaction to send currency to an account on the blockchain.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeSendTx(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeRunTx(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Sign the transaction using the active account.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.SignTxResponse> SignTx(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task BroadcastTxCommit(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest request, grpc::IServerStreamWriter<global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2080,6 +2193,230 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncServerStreamingCall(__Method_Run, null, options, request);
       }
       /// <summary>
+      /// Make an unsigned transaction to call a specific realm function.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeCallTx(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeCallTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to call a specific realm function.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeCallTx(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_MakeCallTx, null, options, request);
+      }
+      /// <summary>
+      /// Make an unsigned transaction to call a specific realm function.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeCallTxAsync(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeCallTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to call a specific realm function.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeCallTxAsync(global::Land.Gno.Gnonative.V1.CallRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_MakeCallTx, null, options, request);
+      }
+      /// <summary>
+      /// Make an unsigned transaction to send currency to an account on the blockchain.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeSendTx(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeSendTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to send currency to an account on the blockchain.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeSendTx(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_MakeSendTx, null, options, request);
+      }
+      /// <summary>
+      /// Make an unsigned transaction to send currency to an account on the blockchain.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeSendTxAsync(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeSendTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to send currency to an account on the blockchain.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeSendTxAsync(global::Land.Gno.Gnonative.V1.SendRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_MakeSendTx, null, options, request);
+      }
+      /// <summary>
+      /// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeRunTx(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeRunTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.MakeTxResponse MakeRunTx(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_MakeRunTx, null, options, request);
+      }
+      /// <summary>
+      /// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeRunTxAsync(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return MakeRunTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.MakeTxResponse> MakeRunTxAsync(global::Land.Gno.Gnonative.V1.RunRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_MakeRunTx, null, options, request);
+      }
+      /// <summary>
+      /// Sign the transaction using the active account.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.SignTxResponse SignTx(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SignTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Sign the transaction using the active account.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.SignTxResponse SignTx(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SignTx, null, options, request);
+      }
+      /// <summary>
+      /// Sign the transaction using the active account.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.SignTxResponse> SignTxAsync(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SignTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Sign the transaction using the active account.
+      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.SignTxResponse> SignTxAsync(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SignTx, null, options, request);
+      }
+      /// <summary>
+      /// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> BroadcastTxCommit(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BroadcastTxCommit(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> BroadcastTxCommit(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_BroadcastTxCommit, null, options, request);
+      }
+      /// <summary>
       /// Convert a byte array address to a bech32 string address.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2333,6 +2670,11 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_Call, serviceImpl.Call)
           .AddMethod(__Method_Send, serviceImpl.Send)
           .AddMethod(__Method_Run, serviceImpl.Run)
+          .AddMethod(__Method_MakeCallTx, serviceImpl.MakeCallTx)
+          .AddMethod(__Method_MakeSendTx, serviceImpl.MakeSendTx)
+          .AddMethod(__Method_MakeRunTx, serviceImpl.MakeRunTx)
+          .AddMethod(__Method_SignTx, serviceImpl.SignTx)
+          .AddMethod(__Method_BroadcastTxCommit, serviceImpl.BroadcastTxCommit)
           .AddMethod(__Method_AddressToBech32, serviceImpl.AddressToBech32)
           .AddMethod(__Method_AddressFromBech32, serviceImpl.AddressFromBech32)
           .AddMethod(__Method_AddressFromMnemonic, serviceImpl.AddressFromMnemonic)
@@ -2371,6 +2713,11 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_Call, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.CallResponse>(serviceImpl.Call));
       serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.SendResponse>(serviceImpl.Send));
       serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.RunResponse>(serviceImpl.Run));
+      serviceBinder.AddMethod(__Method_MakeCallTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(serviceImpl.MakeCallTx));
+      serviceBinder.AddMethod(__Method_MakeSendTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(serviceImpl.MakeSendTx));
+      serviceBinder.AddMethod(__Method_MakeRunTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.MakeTxResponse>(serviceImpl.MakeRunTx));
+      serviceBinder.AddMethod(__Method_SignTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SignTxRequest, global::Land.Gno.Gnonative.V1.SignTxResponse>(serviceImpl.SignTx));
+      serviceBinder.AddMethod(__Method_BroadcastTxCommit, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse>(serviceImpl.BroadcastTxCommit));
       serviceBinder.AddMethod(__Method_AddressToBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(serviceImpl.AddressToBech32));
       serviceBinder.AddMethod(__Method_AddressFromBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromBech32Request, global::Land.Gno.Gnonative.V1.AddressFromBech32Response>(serviceImpl.AddressFromBech32));
       serviceBinder.AddMethod(__Method_AddressFromMnemonic, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest, global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse>(serviceImpl.AddressFromMnemonic));

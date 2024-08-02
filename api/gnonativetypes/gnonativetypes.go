@@ -219,6 +219,8 @@ type CallRequest struct {
 	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	Memo      string `json:"memo" yaml:"memo"`
+	// If CallerAddress is empty then get it from the active account
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of calls to make in one transaction
 	Msgs []MsgCall
 }
@@ -240,6 +242,8 @@ type SendRequest struct {
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
+	// If CallerAddress is empty then get it from the active account
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of send operations to make in one transaction
 	Msgs []MsgSend
 }
@@ -260,6 +264,8 @@ type RunRequest struct {
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
+	// If CallerAddress is empty then get it from the active account
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of run operations to make in one transaction
 	Msgs []MsgRun
 }
@@ -267,6 +273,34 @@ type RunRequest struct {
 type RunResponse struct {
 	// The "console" output from the run
 	Result string `json:"result" yaml:"result"`
+}
+
+type MakeTxResponse struct {
+	// The JSON encoding of the unsigned transaction
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type SignTxRequest struct {
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
+	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+	SequenceNumber uint64 `json:"sequence_number" yaml:"sequence_number"`
+}
+
+type SignTxResponse struct {
+	// The JSON encoding of the signed transaction (to use in BroadcastTx)
+	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type BroadcastTxCommitRequest struct {
+	// The JSON encoding of the signed transaction (from SignTx)
+	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type BroadcastTxCommitResponse struct {
+	Result []byte `json:"result" yaml:"result"`
 }
 
 type AddressToBech32Request struct {
