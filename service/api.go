@@ -61,7 +61,7 @@ func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *conn
 	return connect.NewResponse(&api_gen.GenerateRecoveryPhraseResponse{Phrase: phrase}), nil
 }
 
-func convertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
+func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 	return &api_gen.KeyInfo{
 		Type:    uint32(key.GetType()),
 		Name:    key.GetName(),
@@ -81,7 +81,7 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 	formatedKeys := make([]*api_gen.KeyInfo, 0)
 
 	for _, key := range keys {
-		info, err := convertKeyInfo(key)
+		info, err := ConvertKeyInfo(key)
 		if err != nil {
 			return nil, err
 		}
@@ -133,7 +133,7 @@ func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 		return nil, getGrpcError(err)
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := ConvertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect
 		return nil, getGrpcError(err)
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := ConvertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 		return nil, getGrpcError(err)
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := ConvertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 		return nil, getGrpcError(err)
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := ConvertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
@@ -198,7 +198,7 @@ func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Reque
 		return nil, getGrpcError(err)
 	}
 
-	info, err := convertKeyInfo(key)
+	info, err := ConvertKeyInfo(key)
 	if err != nil {
 		return nil, err
 	}
@@ -250,7 +250,7 @@ func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Re
 		return nil, api_gen.ErrCode_ErrNoActiveAccount
 	}
 
-	info, err := convertKeyInfo(account.keyInfo)
+	info, err := ConvertKeyInfo(account.keyInfo)
 	if err != nil {
 		return nil, err
 	}
