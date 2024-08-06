@@ -34,7 +34,11 @@ func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[a
 }
 
 func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
-	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.remote}), nil
+	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.ClientGetRemote()}), nil
+}
+
+func (s *gnoNativeService) ClientGetRemote() string {
+	return s.remote
 }
 
 func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
@@ -73,7 +77,7 @@ func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
 
-	keys, err := s.getSigner().Keybase.List()
+	keys, err := s.ClientListKeyInfo()
 	if err != nil {
 		return nil, err
 	}
@@ -90,6 +94,10 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 	}
 
 	return connect.NewResponse(&api_gen.ListKeyInfoResponse{Keys: formatedKeys}), nil
+}
+
+func (s *gnoNativeService) ClientListKeyInfo() ([]crypto_keys.Info, error) {
+	return s.getSigner().Keybase.List()
 }
 
 func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
@@ -351,14 +359,14 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
+	cfg, msgs := convertCallRequest(req.Msg)
+
 	s.lock.RLock()
 	if s.activeAccount == nil {
 		s.lock.RUnlock()
 		return api_gen.ErrCode_ErrNoActiveAccount
 	}
 	s.lock.RUnlock()
-
-	cfg, msgs := convertCallRequest(req.Msg)
 
 	bres, err := s.client.Call(*cfg, msgs...)
 	if err != nil {
@@ -556,19 +564,12 @@ func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[a
 }
 
 func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_gen.SignTxRequest]) (*connect.Response[api_gen.SignTxResponse], error) {
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
-	}
-	s.lock.RUnlock()
-
 	var tx std.Tx
 	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
 		return nil, err
 	}
 
-	signedTx, err := s.client.SignTx(tx, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	signedTx, err := s.ClientSignTx(tx, req.Msg.AccountNumber, req.Msg.SequenceNumber)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -578,6 +579,17 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_
 		return nil, err
 	}
 	return connect.NewResponse(&api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}), nil
+}
+
+func (s *gnoNativeService) ClientSignTx(tx std.Tx, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
+	s.lock.RLock()
+	if s.activeAccount == nil {
+		s.lock.RUnlock()
+		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	}
+	s.lock.RUnlock()
+
+	return s.client.SignTx(tx, accountNumber, sequenceNumber)
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],

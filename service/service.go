@@ -15,6 +15,8 @@ import (
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
+	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
+	"github.com/gnolang/gno/tm2/pkg/std"
 	api_gen "github.com/gnolang/gnonative/api/gen/go"
 	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
 	"github.com/pkg/errors"
@@ -29,6 +31,11 @@ type GnoNativeService interface {
 	GetUDSPath() string
 	GetTcpAddr() string
 	GetTcpPort() int
+	ClientGetRemote() string
+	// Use the configured gnoclient to call the signer's Keybase.List
+	ClientListKeyInfo() ([]crypto_keys.Info, error)
+	// Use the configured gnoclient to call SignTx
+	ClientSignTx(tx std.Tx, accountNumber, sequenceNumber uint64) (*std.Tx, error)
 
 	io.Closer
 }
