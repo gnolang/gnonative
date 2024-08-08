@@ -23,6 +23,7 @@ type BridgeConfig struct {
 	TmpDir             string
 	UseTcpListener     bool
 	DisableUdsListener bool
+	UseGnokeyMobile    bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -75,6 +76,10 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 		if config.DisableUdsListener {
 			svcOpts = append(svcOpts, service.WithDisableUdsListener())
+		}
+
+		if config.UseGnokeyMobile {
+			svcOpts = append(svcOpts, service.WithUseGnokeyMobile())
 		}
 
 		serviceServer, err := service.NewGnoNativeService(svcOpts...)
