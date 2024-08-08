@@ -397,6 +397,53 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 
 	cfg, msgs := convertCallRequest(req.Msg)
 
+	if s.useGnokeyMobile {
+		c, err := s.getClient()
+		if err != nil {
+			return getGrpcError(err)
+		}
+		tx, err := c.MakeCallTx(*cfg, msgs...)
+		if err != nil {
+			return err
+		}
+		txJSON, err := amino.MarshalJSON(tx)
+		if err != nil {
+			return err
+		}
+
+		// Use Gnokey Mobile to sign.
+		// Note that req.Msg.CallerAddress must be set to the desired signer. The app can get the
+		// address using ListKeyInfo.
+		signedTxJSON, err := s.gnokeyMobileClient.SignTx(
+			context.Background(),
+			connect.NewRequest(&api_gen.SignTxRequest{
+				TxJson: string(txJSON),
+			}),
+		)
+		if err != nil {
+			return err
+		}
+		signedTx := &std.Tx{}
+		if err := amino.UnmarshalJSON([]byte(signedTxJSON.Msg.SignedTxJson), signedTx); err != nil {
+			return err
+		}
+
+		// Now broadcast
+		bres, err := c.BroadcastTxCommit(signedTx)
+		if err != nil {
+			return getGrpcError(err)
+		}
+
+		if err := stream.Send(&api_gen.CallResponse{
+			Result: bres.DeliverTx.Data,
+		}); err != nil {
+			s.logger.Error("Call stream.Send returned error", zap.Error(err))
+			return err
+		}
+
+		return nil
+	}
+
 	s.lock.RLock()
 	if s.activeAccount == nil {
 		s.lock.RUnlock()
