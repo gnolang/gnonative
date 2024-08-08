@@ -34,6 +34,16 @@ func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[a
 }
 
 func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
+	if s.useGnokeyMobile {
+		// Always get the remote from the Gnokey Mobile service
+		res, err := s.gnokeyMobileClient.GetRemote(context.Background(), req)
+		if err != nil {
+			return nil, err
+		}
+
+		return connect.NewResponse(res.Msg), nil
+	}
+
 	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.ClientGetRemote()}), nil
 }
 
@@ -76,6 +86,16 @@ func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 
 func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
+
+	if s.useGnokeyMobile {
+		// Always get the list of keys from the Gnokey Mobile service
+		res, err := s.gnokeyMobileClient.ListKeyInfo(context.Background(), req)
+		if err != nil {
+			return nil, err
+		}
+
+		return connect.NewResponse(res.Msg), nil
+	}
 
 	keys, err := s.ClientListKeyInfo()
 	if err != nil {
