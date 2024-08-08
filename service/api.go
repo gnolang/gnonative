@@ -272,8 +272,12 @@ func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Re
 func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
+	c, err := s.getClient()
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	// gnoclient wants the bech32 address.
-	account, _, err := s.client.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
+	account, _, err := c.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -324,7 +328,11 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 		Data: req.Msg.Data,
 	}
 
-	bres, err := s.client.Query(cfg)
+	c, err := s.getClient()
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	bres, err := c.Query(cfg)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -335,7 +343,11 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
 	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
 
-	result, _, err := s.client.Render(req.Msg.PackagePath, req.Msg.Args)
+	c, err := s.getClient()
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	result, _, err := c.Render(req.Msg.PackagePath, req.Msg.Args)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -346,7 +358,11 @@ func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_
 func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
 	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
-	result, _, err := s.client.QEval(req.Msg.PackagePath, req.Msg.Expression)
+	c, err := s.getClient()
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	result, _, err := c.QEval(req.Msg.PackagePath, req.Msg.Expression)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
