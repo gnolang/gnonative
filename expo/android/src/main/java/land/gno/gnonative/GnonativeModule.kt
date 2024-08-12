@@ -88,6 +88,19 @@ class GnonativeModule : Module() {
       }
     }
 
+    AsyncFunction("startGnokeyMobileService") { promise: Promise ->
+      try {
+        bridgeGnoNative?.let {
+          bridgeGnoNative!!.startGnokeyMobileService()
+          promise.resolve(true)
+        } ?: run {
+          throw GoBridgeNotStartedError()
+        }
+        } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
     AsyncFunction("invokeGrpcMethod") { method: String, jsonMessage: String, promise: Promise ->
       try {
         bridgeGnoNative?.let {
