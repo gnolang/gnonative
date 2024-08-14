@@ -13,6 +13,7 @@ import (
 	"github.com/peterbourgon/unixtransport"
 	"go.uber.org/multierr"
 
+	gnokey_mobile_service "github.com/gnolang/gnokey-mobile/service"
 	api_gen "github.com/gnolang/gnonative/api/gen/go"
 	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
 	"github.com/gnolang/gnonative/service"
@@ -23,6 +24,7 @@ type BridgeConfig struct {
 	TmpDir             string
 	UseTcpListener     bool
 	DisableUdsListener bool
+	UseGnokeyMobile    bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -37,6 +39,8 @@ type Bridge struct {
 	workers    run.Group
 
 	serviceServer service.GnoNativeService
+
+	gnokeyMobileService gnokey_mobile_service.GnokeyMobileService
 
 	ServiceClient
 }
@@ -75,6 +79,10 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 		if config.DisableUdsListener {
 			svcOpts = append(svcOpts, service.WithDisableUdsListener())
+		}
+
+		if config.UseGnokeyMobile {
+			svcOpts = append(svcOpts, service.WithUseGnokeyMobile())
 		}
 
 		serviceServer, err := service.NewGnoNativeService(svcOpts...)
@@ -152,6 +160,28 @@ func (b *Bridge) GetTcpAddr() string {
 	return b.serviceServer.GetTcpAddr()
 }
 
+// Start the Gnokey Mobile service and save it in gnokeyMobileService. This will be closed in Close().
+// If the gnonative serviceServer is not started, do nothing.
+// If gnokeyMobileService is already started, do nothing.
+func (b *Bridge) StartGnokeyMobileService() error {
+	if b.serviceServer == nil {
+		return nil
+	}
+	if b.gnokeyMobileService != nil {
+		// Already started
+		return nil
+	}
+
+	// Use the default options
+	gnokeyMobileService, err := gnokey_mobile_service.NewGnokeyMobileService(b.serviceServer)
+	if err != nil {
+		return err
+	}
+
+	b.gnokeyMobileService = gnokeyMobileService
+	return nil
+}
+
 func (b *Bridge) Close() error {
 	var errs error
 
@@ -176,6 +206,8 @@ func (b *Bridge) Close() error {
 		if !api_gen.Is(err, api_gen.ErrCode_ErrBridgeInterrupted) {
 			errs = multierr.Append(errs, err)
 		}
+
+		// TODO: Close b.gnokeyMobileService
 
 		cancel()
 	}
