@@ -23,7 +23,7 @@ export interface Config {
   remote: string;
   chain_id: string;
   // If true, initBridge also starts a Gnokey Mobile service. (Only needed for the Gnokey Mobile app.)
-  start_gnokey_mobile_service: boolean;
+  start_gnokey_mobile_service?: boolean;
 }
 
 export interface GnoKeyApi {
