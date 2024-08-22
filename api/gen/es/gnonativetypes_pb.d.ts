@@ -153,6 +153,34 @@ export declare type SetPasswordResponse = Message<"land.gno.gnonative.v1.SetPass
 export declare const SetPasswordResponseSchema: GenMessage<SetPasswordResponse>;
 
 /**
+ * @generated from message land.gno.gnonative.v1.UpdatePasswordRequest
+ */
+export declare type UpdatePasswordRequest = Message<"land.gno.gnonative.v1.UpdatePasswordRequest"> & {
+  /**
+   * @generated from field: string new_password = 1;
+   */
+  newPassword: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.UpdatePasswordRequest.
+ * Use `create(UpdatePasswordRequestSchema)` to create a new message.
+ */
+export declare const UpdatePasswordRequestSchema: GenMessage<UpdatePasswordRequest>;
+
+/**
+ * @generated from message land.gno.gnonative.v1.UpdatePasswordResponse
+ */
+export declare type UpdatePasswordResponse = Message<"land.gno.gnonative.v1.UpdatePasswordResponse"> & {
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.UpdatePasswordResponse.
+ * Use `create(UpdatePasswordResponseSchema)` to create a new message.
+ */
+export declare const UpdatePasswordResponseSchema: GenMessage<UpdatePasswordResponse>;
+
+/**
  * @generated from message land.gno.gnonative.v1.GenerateRecoveryPhraseRequest
  */
 export declare type GenerateRecoveryPhraseRequest = Message<"land.gno.gnonative.v1.GenerateRecoveryPhraseRequest"> & {

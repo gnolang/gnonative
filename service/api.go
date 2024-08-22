@@ -267,6 +267,24 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&api_gen.SetPasswordResponse{}), nil
 }
 
+func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Request[api_gen.UpdatePasswordRequest]) (*connect.Response[api_gen.UpdatePasswordResponse], error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	if s.activeAccount == nil {
+		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	}
+
+	getNewPass := func() (string, error) { return req.Msg.NewPassword, nil }
+	if err := s.getSigner().Keybase.Update(s.activeAccount.keyInfo.GetName(), s.activeAccount.password, getNewPass); err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	s.activeAccount.password = req.Msg.NewPassword
+	s.getSigner().Password = req.Msg.NewPassword
+
+	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
+}
+
 func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Request[api_gen.GetActiveAccountRequest]) (*connect.Response[api_gen.GetActiveAccountResponse], error) {
 	s.logger.Debug("GetActiveAccount called")
 

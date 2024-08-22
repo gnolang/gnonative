@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse } from "./gnonativetypes_pb.js";
+import { AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdatePasswordRequest, UpdatePasswordResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -196,6 +196,19 @@ export const GnoNativeService = {
       name: "SetPassword",
       I: SetPasswordRequest,
       O: SetPasswordResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Update the keybase for the active account to use the new password.
+     * Before calling this, you must call SetPassword with the current password.
+     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.UpdatePassword
+     */
+    updatePassword: {
+      name: "UpdatePassword",
+      I: UpdatePasswordRequest,
+      O: UpdatePasswordResponse,
       kind: MethodKind.Unary,
     },
     /**
