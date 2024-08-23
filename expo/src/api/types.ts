@@ -10,6 +10,7 @@ import {
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
+  UpdatePasswordResponse,
   KeyInfo,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
@@ -46,6 +47,7 @@ export interface GnoKeyApi {
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<KeyInfo | undefined>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   setPassword: (password: string) => Promise<SetPasswordResponse>;
+  updatePassword: (password: string) => Promise<UpdatePasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (

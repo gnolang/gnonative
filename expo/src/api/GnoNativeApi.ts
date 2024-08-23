@@ -40,6 +40,8 @@ import {
   SetPasswordResponse,
   SetRemoteRequest,
   SetRemoteResponse,
+  UpdatePasswordRequest,
+  UpdatePasswordResponse,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 import { GnoNativeService } from '@buf/gnolang_gnonative.connectrpc_es/rpc_connect';
 import { PromiseClient } from '@connectrpc/connect';
@@ -225,6 +227,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   async setPassword(password: string): Promise<SetPasswordResponse> {
     const client = await this.#getClient();
     const response = await client.setPassword(new SetPasswordRequest({ password }));
+    return response;
+  }
+
+  async updatePassword(newPassword: string): Promise<UpdatePasswordResponse> {
+    const client = await this.#getClient();
+    const response = await client.setPassword(new UpdatePasswordRequest({ newPassword }));
     return response;
   }
 
