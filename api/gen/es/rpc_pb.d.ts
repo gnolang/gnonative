@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
-import type { AddressFromBech32RequestSchema, AddressFromBech32ResponseSchema, AddressFromMnemonicRequestSchema, AddressFromMnemonicResponseSchema, AddressToBech32RequestSchema, AddressToBech32ResponseSchema, BroadcastTxCommitRequestSchema, BroadcastTxCommitResponseSchema, CallRequestSchema, CallResponseSchema, CreateAccountRequestSchema, CreateAccountResponseSchema, DeleteAccountRequestSchema, DeleteAccountResponseSchema, GenerateRecoveryPhraseRequestSchema, GenerateRecoveryPhraseResponseSchema, GetActiveAccountRequestSchema, GetActiveAccountResponseSchema, GetChainIDRequestSchema, GetChainIDResponseSchema, GetKeyInfoByAddressRequestSchema, GetKeyInfoByAddressResponseSchema, GetKeyInfoByNameOrAddressRequestSchema, GetKeyInfoByNameOrAddressResponseSchema, GetKeyInfoByNameRequestSchema, GetKeyInfoByNameResponseSchema, GetRemoteRequestSchema, GetRemoteResponseSchema, HasKeyByAddressRequestSchema, HasKeyByAddressResponseSchema, HasKeyByNameOrAddressRequestSchema, HasKeyByNameOrAddressResponseSchema, HasKeyByNameRequestSchema, HasKeyByNameResponseSchema, HelloRequestSchema, HelloResponseSchema, HelloStreamRequestSchema, HelloStreamResponseSchema, ListKeyInfoRequestSchema, ListKeyInfoResponseSchema, MakeTxResponseSchema, QEvalRequestSchema, QEvalResponseSchema, QueryAccountRequestSchema, QueryAccountResponseSchema, QueryRequestSchema, QueryResponseSchema, RenderRequestSchema, RenderResponseSchema, RunRequestSchema, RunResponseSchema, SelectAccountRequestSchema, SelectAccountResponseSchema, SendRequestSchema, SendResponseSchema, SetChainIDRequestSchema, SetChainIDResponseSchema, SetPasswordRequestSchema, SetPasswordResponseSchema, SetRemoteRequestSchema, SetRemoteResponseSchema, SignTxRequestSchema, SignTxResponseSchema } from "./gnonativetypes_pb";
+import type { AddressFromBech32RequestSchema, AddressFromBech32ResponseSchema, AddressFromMnemonicRequestSchema, AddressFromMnemonicResponseSchema, AddressToBech32RequestSchema, AddressToBech32ResponseSchema, BroadcastTxCommitRequestSchema, BroadcastTxCommitResponseSchema, CallRequestSchema, CallResponseSchema, CreateAccountRequestSchema, CreateAccountResponseSchema, DeleteAccountRequestSchema, DeleteAccountResponseSchema, GenerateRecoveryPhraseRequestSchema, GenerateRecoveryPhraseResponseSchema, GetActiveAccountRequestSchema, GetActiveAccountResponseSchema, GetChainIDRequestSchema, GetChainIDResponseSchema, GetKeyInfoByAddressRequestSchema, GetKeyInfoByAddressResponseSchema, GetKeyInfoByNameOrAddressRequestSchema, GetKeyInfoByNameOrAddressResponseSchema, GetKeyInfoByNameRequestSchema, GetKeyInfoByNameResponseSchema, GetRemoteRequestSchema, GetRemoteResponseSchema, HasKeyByAddressRequestSchema, HasKeyByAddressResponseSchema, HasKeyByNameOrAddressRequestSchema, HasKeyByNameOrAddressResponseSchema, HasKeyByNameRequestSchema, HasKeyByNameResponseSchema, HelloRequestSchema, HelloResponseSchema, HelloStreamRequestSchema, HelloStreamResponseSchema, ListKeyInfoRequestSchema, ListKeyInfoResponseSchema, MakeTxResponseSchema, QEvalRequestSchema, QEvalResponseSchema, QueryAccountRequestSchema, QueryAccountResponseSchema, QueryRequestSchema, QueryResponseSchema, RenderRequestSchema, RenderResponseSchema, RunRequestSchema, RunResponseSchema, SelectAccountRequestSchema, SelectAccountResponseSchema, SendRequestSchema, SendResponseSchema, SetChainIDRequestSchema, SetChainIDResponseSchema, SetPasswordRequestSchema, SetPasswordResponseSchema, SetRemoteRequestSchema, SetRemoteResponseSchema, SignTxRequestSchema, SignTxResponseSchema, UpdatePasswordRequestSchema, UpdatePasswordResponseSchema } from "./gnonativetypes_pb";
 
 /**
  * Describes the file rpc.proto.
@@ -443,6 +443,18 @@ export declare const GnoNativeService: GenService<{
     methodKind: "unary";
     input: typeof SetPasswordRequestSchema;
     output: typeof SetPasswordResponseSchema;
+  },
+  /**
+   * Update the keybase for the active account to use the new password.
+   * Before calling this, you must call SetPassword with the current password.
+   * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+   *
+   * @generated from rpc land.gno.gnonative.v1.GnoNativeService.UpdatePassword
+   */
+  updatePassword: {
+    methodKind: "unary";
+    input: typeof UpdatePasswordRequestSchema;
+    output: typeof UpdatePasswordResponseSchema;
   },
   /**
    * GetActiveAccount gets the active account which was set by SelectAccount.

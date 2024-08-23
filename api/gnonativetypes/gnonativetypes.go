@@ -35,6 +35,13 @@ type SetPasswordRequest struct {
 type SetPasswordResponse struct {
 }
 
+type UpdatePasswordRequest struct {
+	NewPassword string `json:"new_password" yaml:"new_password"`
+}
+
+type UpdatePasswordResponse struct {
+}
+
 type GenerateRecoveryPhraseRequest struct {
 }
 

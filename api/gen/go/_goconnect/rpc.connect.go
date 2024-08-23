@@ -78,6 +78,9 @@ const (
 	// GnoNativeServiceSetPasswordProcedure is the fully-qualified name of the GnoNativeService's
 	// SetPassword RPC.
 	GnoNativeServiceSetPasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetPassword"
+	// GnoNativeServiceUpdatePasswordProcedure is the fully-qualified name of the GnoNativeService's
+	// UpdatePassword RPC.
+	GnoNativeServiceUpdatePasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/UpdatePassword"
 	// GnoNativeServiceGetActiveAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// GetActiveAccount RPC.
 	GnoNativeServiceGetActiveAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetActiveAccount"
@@ -147,6 +150,7 @@ var (
 	gnoNativeServiceCreateAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("CreateAccount")
 	gnoNativeServiceSelectAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("SelectAccount")
 	gnoNativeServiceSetPasswordMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("SetPassword")
+	gnoNativeServiceUpdatePasswordMethodDescriptor            = gnoNativeServiceServiceDescriptor.Methods().ByName("UpdatePassword")
 	gnoNativeServiceGetActiveAccountMethodDescriptor          = gnoNativeServiceServiceDescriptor.Methods().ByName("GetActiveAccount")
 	gnoNativeServiceQueryAccountMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("QueryAccount")
 	gnoNativeServiceDeleteAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("DeleteAccount")
@@ -219,6 +223,10 @@ type GnoNativeServiceClient interface {
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
+	// Update the keybase for the active account to use the new password.
+	// Before calling this, you must call SetPassword with the current password.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
@@ -387,6 +395,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		updatePassword: connect.NewClient[_go.UpdatePasswordRequest, _go.UpdatePasswordResponse](
+			httpClient,
+			baseURL+GnoNativeServiceUpdatePasswordProcedure,
+			connect.WithSchema(gnoNativeServiceUpdatePasswordMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		getActiveAccount: connect.NewClient[_go.GetActiveAccountRequest, _go.GetActiveAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetActiveAccountProcedure,
@@ -521,6 +535,7 @@ type gnoNativeServiceClient struct {
 	createAccount             *connect.Client[_go.CreateAccountRequest, _go.CreateAccountResponse]
 	selectAccount             *connect.Client[_go.SelectAccountRequest, _go.SelectAccountResponse]
 	setPassword               *connect.Client[_go.SetPasswordRequest, _go.SetPasswordResponse]
+	updatePassword            *connect.Client[_go.UpdatePasswordRequest, _go.UpdatePasswordResponse]
 	getActiveAccount          *connect.Client[_go.GetActiveAccountRequest, _go.GetActiveAccountResponse]
 	queryAccount              *connect.Client[_go.QueryAccountRequest, _go.QueryAccountResponse]
 	deleteAccount             *connect.Client[_go.DeleteAccountRequest, _go.DeleteAccountResponse]
@@ -615,6 +630,11 @@ func (c *gnoNativeServiceClient) SelectAccount(ctx context.Context, req *connect
 // SetPassword calls land.gno.gnonative.v1.GnoNativeService.SetPassword.
 func (c *gnoNativeServiceClient) SetPassword(ctx context.Context, req *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
 	return c.setPassword.CallUnary(ctx, req)
+}
+
+// UpdatePassword calls land.gno.gnonative.v1.GnoNativeService.UpdatePassword.
+func (c *gnoNativeServiceClient) UpdatePassword(ctx context.Context, req *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error) {
+	return c.updatePassword.CallUnary(ctx, req)
 }
 
 // GetActiveAccount calls land.gno.gnonative.v1.GnoNativeService.GetActiveAccount.
@@ -764,6 +784,10 @@ type GnoNativeServiceHandler interface {
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
+	// Update the keybase for the active account to use the new password.
+	// Before calling this, you must call SetPassword with the current password.
+	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
 	// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// (To check if there is an active account, use ListKeyInfo and check the
@@ -928,6 +952,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceUpdatePasswordHandler := connect.NewUnaryHandler(
+		GnoNativeServiceUpdatePasswordProcedure,
+		svc.UpdatePassword,
+		connect.WithSchema(gnoNativeServiceUpdatePasswordMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceGetActiveAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetActiveAccountProcedure,
 		svc.GetActiveAccount,
@@ -1074,6 +1104,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceSelectAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSetPasswordProcedure:
 			gnoNativeServiceSetPasswordHandler.ServeHTTP(w, r)
+		case GnoNativeServiceUpdatePasswordProcedure:
+			gnoNativeServiceUpdatePasswordHandler.ServeHTTP(w, r)
 		case GnoNativeServiceGetActiveAccountProcedure:
 			gnoNativeServiceGetActiveAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQueryAccountProcedure:
@@ -1179,6 +1211,10 @@ func (UnimplementedGnoNativeServiceHandler) SelectAccount(context.Context, *conn
 
 func (UnimplementedGnoNativeServiceHandler) SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetPassword is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.UpdatePassword is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) GetActiveAccount(context.Context, *connect.Request[_go.GetActiveAccountRequest]) (*connect.Response[_go.GetActiveAccountResponse], error) {

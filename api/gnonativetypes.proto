@@ -39,6 +39,13 @@ message SetPasswordRequest {
 message SetPasswordResponse {
 }
 
+message UpdatePasswordRequest {
+	string new_password = 1;
+}
+
+message UpdatePasswordResponse {
+}
+
 message GenerateRecoveryPhraseRequest {
 }
 
