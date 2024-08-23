@@ -232,7 +232,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async updatePassword(newPassword: string): Promise<UpdatePasswordResponse> {
     const client = await this.#getClient();
-    const response = await client.setPassword(new UpdatePasswordRequest({ newPassword }));
+    const response = await client.updatePassword(new UpdatePasswordRequest({ newPassword }));
     return response;
   }
 
