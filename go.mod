@@ -8,7 +8,7 @@ require (
 	connectrpc.com/connect v1.16.2
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/gnolang/gno v0.1.1
+	github.com/gnolang/gno v0.1.2-0.20240826090356-651f5aac3706
 	github.com/gnolang/gnokey-mobile v0.0.0-20240814140149-eb333b936c7c
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff/v3 v3.4.0
@@ -69,7 +69,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace (
-	github.com/gnolang/gno => github.com/jefft0/gno v0.2641.1 // temporary until merging https://github.com/gnolang/gno/pull/2641
-	golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
-)
+replace golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82

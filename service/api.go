@@ -14,6 +14,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
+	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"go.uber.org/zap"
 
@@ -419,14 +420,17 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
-	cfg, msgs := convertCallRequest(req.Msg)
+	cfg, msgs, err := s.convertCallRequest(req.Msg)
+	if err != nil {
+		return err
+	}
 
 	if s.useGnokeyMobile {
 		c, err := s.getClient()
 		if err != nil {
 			return getGrpcError(err)
 		}
-		tx, err := c.MakeCallTx(*cfg, msgs...)
+		tx, err := gnoclient.NewCallTx(*cfg, msgs...)
 		if err != nil {
 			return err
 		}
@@ -490,30 +494,45 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
-func convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgCall) {
+func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []vm.MsgCall, error) {
 	var callerAddress crypto.Address
 	if req.CallerAddress != nil {
 		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	} else {
+		// Get the caller address from the active account
+		s.lock.RLock()
+		account := s.activeAccount
+		s.lock.RUnlock()
+		if account == nil {
+			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
+		}
+
+		callerAddress = account.keyInfo.GetAddress()
 	}
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:        req.GasFee,
-		GasWanted:     req.GasWanted,
-		Memo:          req.Memo,
-		CallerAddress: callerAddress,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	msgs := make([]gnoclient.MsgCall, 0)
+	msgs := make([]vm.MsgCall, 0)
 
 	for _, msg := range req.Msgs {
-		msgs = append(msgs, gnoclient.MsgCall{
-			PkgPath:  msg.PackagePath,
-			FuncName: msg.Fnc,
-			Args:     msg.Args,
-			Send:     msg.Send,
+		send, err := std.ParseCoins(msg.Send)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+
+		msgs = append(msgs, vm.MsgCall{
+			Caller:  callerAddress,
+			PkgPath: msg.PackagePath,
+			Func:    msg.Fnc,
+			Args:    msg.Args,
+			Send:    send,
 		})
 	}
 
-	return cfg, msgs
+	return cfg, msgs, nil
 }
 
 func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
@@ -528,9 +547,12 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	}
 	s.lock.RUnlock()
 
-	cfg, msgs := convertSendRequest(req.Msg)
+	cfg, msgs, err := s.convertSendRequest(req.Msg)
+	if err != nil {
+		return err
+	}
 
-	_, err := s.client.Send(*cfg, msgs...)
+	_, err = s.client.Send(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -543,28 +565,43 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
-func convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgSend) {
+func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []bank.MsgSend, error) {
 	var callerAddress crypto.Address
 	if req.CallerAddress != nil {
 		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	} else {
+		// Get the caller address from the active account
+		s.lock.RLock()
+		account := s.activeAccount
+		s.lock.RUnlock()
+		if account == nil {
+			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
+		}
+
+		callerAddress = account.keyInfo.GetAddress()
 	}
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:        req.GasFee,
-		GasWanted:     req.GasWanted,
-		Memo:          req.Memo,
-		CallerAddress: callerAddress,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	msgs := make([]gnoclient.MsgSend, 0)
+	msgs := make([]bank.MsgSend, 0)
 
 	for _, msg := range req.Msgs {
-		msgs = append(msgs, gnoclient.MsgSend{
-			ToAddress: crypto.AddressFromBytes(msg.ToAddress),
-			Send:      msg.Send,
+		send, err := std.ParseCoins(msg.Send)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+
+		msgs = append(msgs, bank.MsgSend{
+			FromAddress: callerAddress,
+			ToAddress:   crypto.AddressFromBytes(msg.ToAddress),
+			Amount:      send,
 		})
 	}
 
-	return cfg, msgs
+	return cfg, msgs, nil
 }
 
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
@@ -575,7 +612,10 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	}
 	s.lock.RUnlock()
 
-	cfg, msgs := convertRunRequest(req.Msg)
+	cfg, msgs, err := s.convertRunRequest(req.Msg)
+	if err != nil {
+		return err
+	}
 
 	bres, err := s.client.Run(*cfg, msgs...)
 	if err != nil {
@@ -592,21 +632,35 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	return nil
 }
 
-func convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []gnoclient.MsgRun) {
+func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []vm.MsgRun, error) {
 	var callerAddress crypto.Address
 	if req.CallerAddress != nil {
 		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
+	} else {
+		// Get the caller address from the active account
+		s.lock.RLock()
+		account := s.activeAccount
+		s.lock.RUnlock()
+		if account == nil {
+			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
+		}
+
+		callerAddress = account.keyInfo.GetAddress()
 	}
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:        req.GasFee,
-		GasWanted:     req.GasWanted,
-		Memo:          req.Memo,
-		CallerAddress: callerAddress,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	msgs := make([]gnoclient.MsgRun, 0)
+	msgs := make([]vm.MsgRun, 0)
 
 	for _, msg := range req.Msgs {
+		send, err := std.ParseCoins(msg.Send)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+
 		memPkg := &std.MemPackage{
 			Files: []*std.MemFile{
 				{
@@ -615,13 +669,14 @@ func convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []gnoclie
 				},
 			},
 		}
-		msgs = append(msgs, gnoclient.MsgRun{
+		msgs = append(msgs, vm.MsgRun{
+			Caller:  callerAddress,
 			Package: memPkg,
-			Send:    msg.Send,
+			Send:    send,
 		})
 	}
 
-	return cfg, msgs
+	return cfg, msgs, nil
 }
 
 func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.CallRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
@@ -629,8 +684,11 @@ func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[
 		s.logger.Debug("MakeCallTx", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
-	cfg, msgs := convertCallRequest(req.Msg)
-	tx, err := s.client.MakeCallTx(*cfg, msgs...)
+	cfg, msgs, err := s.convertCallRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewCallTx(*cfg, msgs...)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -643,8 +701,11 @@ func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[
 }
 
 func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[api_gen.SendRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	cfg, msgs := convertSendRequest(req.Msg)
-	tx, err := s.client.MakeSendTx(*cfg, msgs...)
+	cfg, msgs, err := s.convertSendRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewSendTx(*cfg, msgs...)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -657,8 +718,11 @@ func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[
 }
 
 func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[api_gen.RunRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	cfg, msgs := convertRunRequest(req.Msg)
-	tx, err := s.client.MakeRunTx(*cfg, msgs...)
+	cfg, msgs, err := s.convertRunRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewRunTx(*cfg, msgs...)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}

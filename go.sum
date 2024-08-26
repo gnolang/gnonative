@@ -57,6 +57,8 @@ github.com/fortytw2/leaktest v1.3.0/go.mod h1:jDsjWgpAGjm2CA7WthBh/CdZYEPF31XHqu
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
+github.com/gnolang/gno v0.1.2-0.20240826090356-651f5aac3706 h1:0kpoNeuErRec3JOt31mx/NbBgGrrD9BE5MNC9kKUgWk=
+github.com/gnolang/gno v0.1.2-0.20240826090356-651f5aac3706/go.mod h1:dBaL1Au2MNLol+3FXdCv+IKLJnMKtTmIt778zsKjVu0=
 github.com/gnolang/gnokey-mobile v0.0.0-20240814140149-eb333b936c7c h1:rL7dVjWOpdQxmbsh69HrgAklolhydTZmPvgo6BpgdhE=
 github.com/gnolang/gnokey-mobile v0.0.0-20240814140149-eb333b936c7c/go.mod h1:2NrHp15t6QXGNDruOpw6/xN6z50kquVvZs6uxvUNhsQ=
 github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 h1:GKvsK3oLWG9B1GL7WP/VqwM6C92j5tIvB844oggL9Lk=
@@ -92,8 +94,6 @@ github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/ad
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0 h1:bkypFPDjIYGfCYD5mRBvpqxfYX1YCS1PXdKYWi8FsN0=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0/go.mod h1:P+Lt/0by1T8bfcF3z737NnSbmxQAppXMRziHUxPOC8k=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
-github.com/jefft0/gno v0.2641.1 h1:8kZl+QtfAWhEJxowoTT/BfwJD8UX8UNIvGprPAiG4c4=
-github.com/jefft0/gno v0.2641.1/go.mod h1:dBaL1Au2MNLol+3FXdCv+IKLJnMKtTmIt778zsKjVu0=
 github.com/jessevdk/go-flags v0.0.0-20141203071132-1679536dcc89/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jrick/logrotate v1.0.0/go.mod h1:LNinyqDIJnpAur+b8yyulnQw/wDuN1+BYKlTRt3OuAQ=
