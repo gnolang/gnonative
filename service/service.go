@@ -61,7 +61,7 @@ type gnoNativeService struct {
 	useGnokeyMobile    bool
 	gnokeyMobileClient gnokey_mobile_goconnect.GnokeyMobileServiceClient
 
-	// Map of key name to userAccount.
+	// Map of key bech32 to userAccount.
 	userAccounts map[string]*userAccount
 	// The active account in userAccounts, or nil if none
 	activeAccount *userAccount

@@ -231,11 +231,12 @@ func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Reque
 		return nil, err
 	}
 
+	bech32 := crypto.AddressToBech32(key.GetAddress())
 	s.lock.Lock()
-	account, ok := s.userAccounts[req.Msg.NameOrBech32]
+	account, ok := s.userAccounts[bech32]
 	if !ok {
 		account = &userAccount{}
-		s.userAccounts[req.Msg.NameOrBech32] = account
+		s.userAccounts[bech32] = account
 	}
 	account.keyInfo = key
 	s.activeAccount = account
@@ -343,14 +344,19 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 }
 
 func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
+	// Get the key from the Keybase so that we know its address
+	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		return nil, getGrpcError(err)
 	}
 
+	bech32 := crypto.AddressToBech32(key.GetAddress())
 	s.lock.Lock()
-	delete(s.userAccounts, req.Msg.NameOrBech32)
-	if s.activeAccount != nil &&
-		(s.activeAccount.keyInfo.GetName() == req.Msg.NameOrBech32 || crypto.AddressToBech32(s.activeAccount.keyInfo.GetAddress()) == req.Msg.NameOrBech32) {
+	delete(s.userAccounts, bech32)
+	if s.activeAccount != nil && crypto.AddressToBech32(s.activeAccount.keyInfo.GetAddress()) == bech32 {
 		// The deleted account was the active account.
 		s.activeAccount = nil
 	}
