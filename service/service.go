@@ -48,6 +48,7 @@ type userAccount struct {
 
 type gnoNativeService struct {
 	logger  *zap.Logger
+	keybase crypto_keys.Keybase
 	client  *gnoclient.Client
 	tcpAddr string
 	tcpPort int
@@ -138,9 +139,9 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		return svc, nil
 	}
 
-	kb, _ := keys.NewKeyBaseFromDir(cfg.RootDir)
+	svc.keybase, _ = keys.NewKeyBaseFromDir(cfg.RootDir)
 	signer := &gnoclient.SignerFromKeybase{
-		Keybase: kb,
+		Keybase: svc.keybase,
 		ChainID: cfg.ChainID,
 	}
 

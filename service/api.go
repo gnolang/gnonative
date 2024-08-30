@@ -118,13 +118,13 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) ClientListKeyInfo() ([]crypto_keys.Info, error) {
-	return s.getSigner().Keybase.List()
+	return s.keybase.List()
 }
 
 func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
 	s.logger.Debug("HasKeyByName called")
 
-	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
+	has, err := s.keybase.HasByName(req.Msg.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -135,7 +135,7 @@ func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Reques
 func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
 	s.logger.Debug("HasKeyByAddress called")
 
-	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	has, err := s.keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -146,7 +146,7 @@ func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Req
 func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameOrAddressRequest]) (*connect.Response[api_gen.HasKeyByNameOrAddressResponse], error) {
 	s.logger.Debug("HasKeyByNameOrAddress called")
 
-	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
+	has, err := s.keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -157,7 +157,7 @@ func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *conne
 func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameRequest]) (*connect.Response[api_gen.GetKeyInfoByNameResponse], error) {
 	s.logger.Debug("GetKeyInfoByName called")
 
-	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
+	key, err := s.keybase.GetByName(req.Msg.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -173,7 +173,7 @@ func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	key, err := s.keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -189,7 +189,7 @@ func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect
 func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByNameOrAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByNameOrAddress called")
 
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -205,7 +205,7 @@ func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Request[api_gen.CreateAccountRequest]) (*connect.Response[api_gen.CreateAccountResponse], error) {
 	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
-	key, err := s.getSigner().Keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
+	key, err := s.keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -222,7 +222,7 @@ func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Reque
 	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -277,7 +277,7 @@ func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Requ
 	}
 
 	getNewPass := func() (string, error) { return req.Msg.NewPassword, nil }
-	if err := s.getSigner().Keybase.Update(s.activeAccount.keyInfo.GetName(), s.activeAccount.password, getNewPass); err != nil {
+	if err := s.keybase.Update(s.activeAccount.keyInfo.GetName(), s.activeAccount.password, getNewPass); err != nil {
 		return nil, getGrpcError(err)
 	}
 
@@ -346,11 +346,11 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 
 func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
 	// Get the key from the Keybase so that we know its address
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
+	if err := s.keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		return nil, getGrpcError(err)
 	}
 
