@@ -53,12 +53,14 @@ func (s *gnoNativeService) ClientGetRemote() string {
 }
 
 func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
-	s.getSigner().ChainID = req.Msg.ChainId
+	s.lock.Lock()
+	s.chainID = req.Msg.ChainId
+	s.lock.Unlock()
 	return connect.NewResponse(&api_gen.SetChainIDResponse{}), nil
 }
 
 func (s *gnoNativeService) GetChainID(ctx context.Context, req *connect.Request[api_gen.GetChainIDRequest]) (*connect.Response[api_gen.GetChainIDResponse], error) {
-	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.getSigner().ChainID}), nil
+	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.chainID}), nil
 }
 
 func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[api_gen.GenerateRecoveryPhraseRequest]) (*connect.Response[api_gen.GenerateRecoveryPhraseResponse], error) {
@@ -237,32 +239,32 @@ func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Reque
 	account, ok := s.userAccounts[bech32]
 	if !ok {
 		account = &userAccount{}
+		account.signer = &gnoclient.SignerFromKeybase{
+			Keybase: s.keybase,
+			ChainID: s.chainID,
+		}
 		s.userAccounts[bech32] = account
 	}
 	account.keyInfo = key
 	s.activeAccount = account
 	s.lock.Unlock()
 
-	s.getSigner().Account = req.Msg.NameOrBech32
-	s.getSigner().Password = account.password
+	account.signer.Account = req.Msg.NameOrBech32
 	return connect.NewResponse(&api_gen.SelectAccountResponse{
 		Key:         info,
-		HasPassword: account.password != "",
+		HasPassword: account.signer.Password != "",
 	}), nil
 }
 
 func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request[api_gen.SetPasswordRequest]) (*connect.Response[api_gen.SetPasswordResponse], error) {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-	if s.activeAccount == nil {
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(nil)
+	if err != nil {
+		return nil, err
 	}
-	s.activeAccount.password = req.Msg.Password
-
-	s.getSigner().Password = req.Msg.Password
+	signer.Password = req.Msg.Password
 
 	// Check the password.
-	if err := s.getSigner().Validate(); err != nil {
+	if err := signer.Validate(); err != nil {
 		return nil, getGrpcError(err)
 	}
 
@@ -270,19 +272,17 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Request[api_gen.UpdatePasswordRequest]) (*connect.Response[api_gen.UpdatePasswordResponse], error) {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-	if s.activeAccount == nil {
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(nil)
+	if err != nil {
+		return nil, err
 	}
 
 	getNewPass := func() (string, error) { return req.Msg.NewPassword, nil }
-	if err := s.keybase.Update(s.activeAccount.keyInfo.GetName(), s.activeAccount.password, getNewPass); err != nil {
+	if err := s.keybase.Update(s.activeAccount.keyInfo.GetName(), signer.Password, getNewPass); err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	s.activeAccount.password = req.Msg.NewPassword
-	s.getSigner().Password = req.Msg.NewPassword
+	signer.Password = req.Msg.NewPassword
 
 	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
 }
@@ -305,7 +305,7 @@ func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Re
 
 	return connect.NewResponse(&api_gen.GetActiveAccountResponse{
 		Key:         info,
-		HasPassword: account.password != "",
+		HasPassword: account.signer.Password != "",
 	}), nil
 }
 
@@ -472,14 +472,16 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		return nil
 	}
 
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
-	bres, err := s.client.Call(*cfg, msgs...)
+	c := &gnoclient.Client{
+		Signer:    signer,
+		RPCClient: s.client.RPCClient,
+	}
+	bres, err := c.Call(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}

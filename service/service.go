@@ -14,6 +14,7 @@ import (
 	"connectrpc.com/grpcreflect"
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/std"
@@ -42,8 +43,8 @@ type GnoNativeService interface {
 }
 
 type userAccount struct {
-	keyInfo  keys.Info
-	password string
+	keyInfo keys.Info
+	signer  *gnoclient.SignerFromKeybase
 }
 
 type gnoNativeService struct {
@@ -57,6 +58,8 @@ type gnoNativeService struct {
 	// The remote node address used to create client.RPCClient. We need to save this
 	// here because the remote is a private member of the HTTP struct.
 	remote string
+	// TODO: Allow each userAccount to have its own chain ID
+	chainID string
 
 	// Gnokey Mobile support
 	useGnokeyMobile    bool
@@ -150,6 +153,7 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		return nil, err
 	}
 	svc.remote = cfg.Remote
+	svc.chainID = cfg.ChainID
 
 	svc.client = &gnoclient.Client{
 		Signer:    signer,
@@ -190,14 +194,29 @@ func (s *gnoNativeService) getClient() (*gnoclient.Client, error) {
 	return s.client, nil
 }
 
-// Get s.client.Signer as a SignerFromKeybase.
-func (s *gnoNativeService) getSigner() *gnoclient.SignerFromKeybase {
-	signer, ok := s.client.Signer.(*gnoclient.SignerFromKeybase)
-	if !ok {
-		// We only set s.client.Signer in initService, so this shouldn't happen.
-		panic("signer is not gnoclient.SignerFromKeybase")
+// Look up addr in s.userAccounts and return the signer.
+// (Also set the signer.ChainID to s.chainID. This may change if we allow each userAccount to have its own chain ID.)
+// If there is no active account with the given address, return ErrCode_ErrNoActiveAccount.
+func (s *gnoNativeService) getSigner(addr []byte) (*gnoclient.SignerFromKeybase, error) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
+
+	if addr == nil {
+		if s.activeAccount == nil {
+			return nil, api_gen.ErrCode_ErrNoActiveAccount
+		}
+
+		return s.activeAccount.signer, nil
 	}
-	return signer
+
+	bech32 := crypto.AddressToBech32(crypto.AddressFromBytes(addr))
+	account, ok := s.userAccounts[bech32]
+	if !ok {
+		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	}
+
+	account.signer.ChainID = s.chainID
+	return account.signer, nil
 }
 
 func (s *gnoNativeService) createUdsGrpcServer(cfg *Config) error {
