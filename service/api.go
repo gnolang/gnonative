@@ -26,7 +26,7 @@ import (
 
 func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
 	var err error
-	s.client.RPCClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
+	s.rpcClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
 	if err != nil {
 		return nil, api_gen.ErrCode_ErrSetRemote.Wrap(err)
 	}
@@ -312,7 +312,7 @@ func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Re
 func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -373,7 +373,7 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 		Data: req.Msg.Data,
 	}
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -388,7 +388,7 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
 	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -403,7 +403,7 @@ func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_
 func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
 	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -426,10 +426,6 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	}
 
 	if s.useGnokeyMobile {
-		c, err := s.getClient()
-		if err != nil {
-			return getGrpcError(err)
-		}
 		tx, err := gnoclient.NewCallTx(*cfg, msgs...)
 		if err != nil {
 			return err
@@ -457,6 +453,10 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		}
 
 		// Now broadcast
+		c, err := s.getClient(nil)
+		if err != nil {
+			return getGrpcError(err)
+		}
 		bres, err := c.BroadcastTxCommit(signedTx)
 		if err != nil {
 			return getGrpcError(err)
@@ -477,9 +477,9 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		return err
 	}
 
-	c := &gnoclient.Client{
-		Signer:    signer,
-		RPCClient: s.client.RPCClient,
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
 	}
 	bres, err := c.Call(*cfg, msgs...)
 	if err != nil {
@@ -542,19 +542,21 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 		s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("send", msg.Send))
 	}
 
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
 	cfg, msgs, err := s.convertSendRequest(req.Msg)
 	if err != nil {
 		return err
 	}
 
-	_, err = s.client.Send(*cfg, msgs...)
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	_, err = c.Send(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -607,19 +609,21 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 }
 
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
 	cfg, msgs, err := s.convertRunRequest(req.Msg)
 	if err != nil {
 		return err
 	}
 
-	bres, err := s.client.Run(*cfg, msgs...)
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.Run(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -755,14 +759,15 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_
 }
 
 func (s *gnoNativeService) ClientSignTx(tx std.Tx, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(nil)
+	if err != nil {
+		return nil, err
 	}
-	s.lock.RUnlock()
-
-	return s.client.SignTx(tx, accountNumber, sequenceNumber)
+	c := &gnoclient.Client{
+		Signer:    signer,
+		RPCClient: s.rpcClient,
+	}
+	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
@@ -772,7 +777,11 @@ func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.R
 		return err
 	}
 
-	bres, err := s.client.BroadcastTxCommit(signedTx)
+	c, err := s.getClient(nil)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.BroadcastTxCommit(signedTx)
 	if err != nil {
 		return getGrpcError(err)
 	}

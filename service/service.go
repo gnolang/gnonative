@@ -48,13 +48,13 @@ type userAccount struct {
 }
 
 type gnoNativeService struct {
-	logger  *zap.Logger
-	keybase crypto_keys.Keybase
-	client  *gnoclient.Client
-	tcpAddr string
-	tcpPort int
-	udsPath string
-	lock    sync.RWMutex
+	logger    *zap.Logger
+	keybase   crypto_keys.Keybase
+	rpcClient *rpcclient.RPCClient
+	tcpAddr   string
+	tcpPort   int
+	udsPath   string
+	lock      sync.RWMutex
 	// The remote node address used to create client.RPCClient. We need to save this
 	// here because the remote is a private member of the HTTP struct.
 	remote string
@@ -130,10 +130,9 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		)
 
 		// For Gnokey Mobile, we don't need a local svc.client.Keybase .
-		svc.client = &gnoclient.Client{}
 
 		// This will set svc.remote and set up svc.client.RPCClient .
-		_, err := svc.getClient()
+		_, err := svc.getClient(nil)
 		if err != nil {
 			return nil, err
 		}
@@ -143,31 +142,23 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 	}
 
 	svc.keybase, _ = keys.NewKeyBaseFromDir(cfg.RootDir)
-	signer := &gnoclient.SignerFromKeybase{
-		Keybase: svc.keybase,
-		ChainID: cfg.ChainID,
-	}
 
-	rpcClient, err := rpcclient.NewHTTPClient(cfg.Remote)
+	var err error
+	svc.rpcClient, err = rpcclient.NewHTTPClient(cfg.Remote)
 	if err != nil {
 		return nil, err
 	}
 	svc.remote = cfg.Remote
 	svc.chainID = cfg.ChainID
 
-	svc.client = &gnoclient.Client{
-		Signer:    signer,
-		RPCClient: rpcClient,
-	}
-
 	return svc, nil
 }
 
-// Get the gnoclient.Client . If not useGnokeyMobile then just return s.client .
+// Get a gnoclient.Client with the RPCClient and the given signer. If not useGnokeyMobile then just use s.rpcClient .
 // If useGnokeyMobile then query gnokeyMobileClient for the gno.land remote node
-// address (which may have changed) and reconfigure s.client.RPCClient and
+// address (which may have changed) and reconfigure s.rpcClient and
 // s.remote if necessary.
-func (s *gnoNativeService) getClient() (*gnoclient.Client, error) {
+func (s *gnoNativeService) getClient(signer gnoclient.Signer) (*gnoclient.Client, error) {
 	if s.useGnokeyMobile {
 		// Get the current Remote from Gnokey Mobile
 		res, err := s.gnokeyMobileClient.GetRemote(
@@ -183,7 +174,7 @@ func (s *gnoNativeService) getClient() (*gnoclient.Client, error) {
 
 			// Gnokey Mobile has changed the remote (or this is the first call)
 			// Imitate gnoNativeService.SetRemote
-			s.client.RPCClient, err = rpcclient.NewHTTPClient(res.Msg.Remote)
+			s.rpcClient, err = rpcclient.NewHTTPClient(res.Msg.Remote)
 			if err != nil {
 				return nil, err
 			}
@@ -191,7 +182,10 @@ func (s *gnoNativeService) getClient() (*gnoclient.Client, error) {
 		}
 	}
 
-	return s.client, nil
+	return &gnoclient.Client{
+		Signer:    signer,
+		RPCClient: s.rpcClient,
+	}, nil
 }
 
 // Look up addr in s.userAccounts and return the signer.
