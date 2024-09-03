@@ -30,6 +30,8 @@ type GetChainIDResponse struct {
 
 type SetPasswordRequest struct {
 	Password string `json:"password" yaml:"password"`
+	// The address of the account to set the password
+	Address []byte `json:"address" yaml:"address"`
 }
 
 type SetPasswordResponse struct {
@@ -37,6 +39,8 @@ type SetPasswordResponse struct {
 
 type UpdatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
+	// The address of the account to update the password
+	Address []byte `json:"address" yaml:"address"`
 }
 
 type UpdatePasswordResponse struct {
@@ -150,10 +154,30 @@ type SelectAccountResponse struct {
 	HasPassword bool `json:"has_password" yaml:"has_password"`
 }
 
+type ActivateAccountRequest struct {
+	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+}
+
+type ActivateAccountResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+	// True if the password has been set. If false, then call SetPassword.
+	HasPassword bool `json:"has_password" yaml:"has_password"`
+}
+
 type GetActiveAccountRequest struct {
 }
 
 type GetActiveAccountResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+	// True if the password has been set. If false, then call SetPassword.
+	HasPassword bool `json:"has_password" yaml:"has_password"`
+}
+
+type GetActivatedAccountRequest struct {
+	Address []byte `json:"address" yaml:"address"`
+}
+
+type GetActivatedAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
 	// True if the password has been set. If false, then call SetPassword.
 	HasPassword bool `json:"has_password" yaml:"has_password"`
@@ -226,7 +250,7 @@ type CallRequest struct {
 	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	Memo      string `json:"memo" yaml:"memo"`
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of calls to make in one transaction
 	Msgs []MsgCall
@@ -249,7 +273,7 @@ type SendRequest struct {
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of send operations to make in one transaction
 	Msgs []MsgSend
@@ -271,7 +295,7 @@ type RunRequest struct {
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
 	// list of run operations to make in one transaction
 	Msgs []MsgRun
@@ -290,6 +314,8 @@ type MakeTxResponse struct {
 type SignTxRequest struct {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The address of the account to sign the transaction
+	Address []byte `json:"address" yaml:"address"`
 	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
 	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
 	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.

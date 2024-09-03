@@ -66,23 +66,36 @@ service GnoNativeService {
   // SelectAccount selects the active account to use for later operations. If the response has_password is
   // false, then you should set the password before using a method which needs it.
   // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+  // DEPRECATED. Use ActivateAccount.
   rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
 
-  // Set the password for the active account in the keybase, used for later operations.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+  // false, then you should call SetPassword before using a method which needs it.
+  // If the account is already activated, return its info.
+  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+  rpc ActivateAccount(ActivateAccountRequest) returns (ActivateAccountResponse);
+
+  // Set the password for the account in the keybase with the given address.
+  // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
-  // Update the keybase for the active account to use the new password.
+  // Update the keybase to use the new password for the account in the keybase with the given address.
   // Before calling this, you must call SetPassword with the current password.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
 
   // GetActiveAccount gets the active account which was set by SelectAccount.
   // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // (To check if there is an active account, use ListKeyInfo and check the
   // length of the result.)
+  // DEPRECATED: Use GetActivatedAccount.
   rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
+
+  // GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+  // If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+  // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  rpc GetActivatedAccount(GetActivatedAccountRequest) returns (GetActivatedAccountResponse);
 
   // QueryAccount retrieves account information from the blockchain for a given
   // address.
@@ -115,20 +128,21 @@ service GnoNativeService {
   // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
-  // Call a specific realm function.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Call a specific realm function. Sign the transaction with the given caller_address.
+  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (stream CallResponse);
 
-  // Send currency from the active account to an account on the blockchain.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Send currency from the account with the given caller_address to an account on the blockchain.
+  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc Send(SendRequest) returns (stream SendResponse);
 
   // Temporarily load the code in package on the blockchain and run main() which can
-  // call realm functions and use println() to output to the "console".
+  // call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
   // This returns the "console" output.
+  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   rpc Run(RunRequest) returns (stream RunResponse);
 
   // Make an unsigned transaction to call a specific realm function.
@@ -140,8 +154,8 @@ service GnoNativeService {
   // Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
   rpc MakeRunTx(RunRequest) returns (MakeTxResponse);
 
-  // Sign the transaction using the active account.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Sign the transaction using the account with the given address.
+  // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc SignTx(SignTxRequest) returns (SignTxResponse);
 
@@ -196,7 +210,7 @@ enum ErrCode {
   ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 151;
-  // ErrNoActiveAccount indicates that no active account has been set with SelectAccount
+  // ErrNoActiveAccount indicates that no account with the given address has been activated with ActivateAccount
   ErrNoActiveAccount = 152;
   ErrRunGRPCServer = 153;
   // ErrDecryptionFailed indicates a decryption failure including a wrong password

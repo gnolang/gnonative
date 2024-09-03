@@ -34,6 +34,8 @@ message GetChainIDResponse {
 
 message SetPasswordRequest {
 	string password = 1;
+	// The address of the account to set the password
+	bytes address = 2;
 }
 
 message SetPasswordResponse {
@@ -41,6 +43,8 @@ message SetPasswordResponse {
 
 message UpdatePasswordRequest {
 	string new_password = 1;
+	// The address of the account to update the password
+	bytes address = 2;
 }
 
 message UpdatePasswordResponse {
@@ -154,10 +158,30 @@ message SelectAccountResponse {
 	bool has_password = 2;
 }
 
+message ActivateAccountRequest {
+	string name_or_bech32 = 1;
+}
+
+message ActivateAccountResponse {
+	KeyInfo key = 1 [json_name = "key_info"];
+	// True if the password has been set. If false, then call SetPassword.
+	bool has_password = 2;
+}
+
 message GetActiveAccountRequest {
 }
 
 message GetActiveAccountResponse {
+	KeyInfo key = 1 [json_name = "key_info"];
+	// True if the password has been set. If false, then call SetPassword.
+	bool has_password = 2;
+}
+
+message GetActivatedAccountRequest {
+	bytes address = 1;
+}
+
+message GetActivatedAccountResponse {
 	KeyInfo key = 1 [json_name = "key_info"];
 	// True if the password has been set. If false, then call SetPassword.
 	bool has_password = 2;
@@ -230,7 +254,7 @@ message CallRequest {
 	string gas_fee = 1;
 	sint64 gas_wanted = 2;
 	string memo = 3;
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	bytes caller_address = 4;
 	// list of calls to make in one transaction
 	repeated MsgCall msgs = 5 [json_name = "Msgs"];
@@ -253,7 +277,7 @@ message SendRequest {
 	sint64 gas_wanted = 2;
 	// Memo is optional
 	string memo = 3;
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	bytes caller_address = 4;
 	// list of send operations to make in one transaction
 	repeated MsgSend msgs = 5 [json_name = "Msgs"];
@@ -275,7 +299,7 @@ message RunRequest {
 	sint64 gas_wanted = 2;
 	// Memo is optional
 	string memo = 3;
-	// If CallerAddress is empty then get it from the active account
+	// The address of the account to sign the transaction
 	bytes caller_address = 4;
 	// list of run operations to make in one transaction
 	repeated MsgRun msgs = 5 [json_name = "Msgs"];
@@ -294,10 +318,12 @@ message MakeTxResponse {
 message SignTxRequest {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	string tx_json = 1;
+	// The address of the account to sign the transaction
+	bytes address = 2;
 	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
-	uint64 account_number = 2;
+	uint64 account_number = 3;
 	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
-	uint64 sequence_number = 3;
+	uint64 sequence_number = 4;
 }
 
 message SignTxResponse {

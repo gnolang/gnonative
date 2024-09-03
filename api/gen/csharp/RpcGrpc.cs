@@ -105,6 +105,10 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SelectAccountResponse> __Marshaller_land_gno_gnonative_v1_SelectAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SelectAccountResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ActivateAccountRequest> __Marshaller_land_gno_gnonative_v1_ActivateAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ActivateAccountRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ActivateAccountResponse> __Marshaller_land_gno_gnonative_v1_ActivateAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ActivateAccountResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SetPasswordRequest> __Marshaller_land_gno_gnonative_v1_SetPasswordRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SetPasswordRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SetPasswordResponse> __Marshaller_land_gno_gnonative_v1_SetPasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SetPasswordResponse.Parser));
@@ -116,6 +120,10 @@ namespace Land.Gno.Gnonative.V1 {
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.GetActiveAccountRequest> __Marshaller_land_gno_gnonative_v1_GetActiveAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.GetActiveAccountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.GetActiveAccountResponse> __Marshaller_land_gno_gnonative_v1_GetActiveAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.GetActiveAccountResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest> __Marshaller_land_gno_gnonative_v1_GetActivatedAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> __Marshaller_land_gno_gnonative_v1_GetActivatedAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QueryAccountRequest> __Marshaller_land_gno_gnonative_v1_QueryAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QueryAccountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -292,6 +300,14 @@ namespace Land.Gno.Gnonative.V1 {
         __Marshaller_land_gno_gnonative_v1_SelectAccountResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse> __Method_ActivateAccount = new grpc::Method<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ActivateAccount",
+        __Marshaller_land_gno_gnonative_v1_ActivateAccountRequest,
+        __Marshaller_land_gno_gnonative_v1_ActivateAccountResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse> __Method_SetPassword = new grpc::Method<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -314,6 +330,14 @@ namespace Land.Gno.Gnonative.V1 {
         "GetActiveAccount",
         __Marshaller_land_gno_gnonative_v1_GetActiveAccountRequest,
         __Marshaller_land_gno_gnonative_v1_GetActiveAccountResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> __Method_GetActivatedAccount = new grpc::Method<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetActivatedAccount",
+        __Marshaller_land_gno_gnonative_v1_GetActivatedAccountRequest,
+        __Marshaller_land_gno_gnonative_v1_GetActivatedAccountResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QueryAccountRequest, global::Land.Gno.Gnonative.V1.QueryAccountResponse> __Method_QueryAccount = new grpc::Method<global::Land.Gno.Gnonative.V1.QueryAccountRequest, global::Land.Gno.Gnonative.V1.QueryAccountResponse>(
@@ -644,6 +668,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// SelectAccount selects the active account to use for later operations. If the response has_password is
       /// false, then you should set the password before using a method which needs it.
       /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// DEPRECATED. Use ActivateAccount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -655,8 +680,23 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Set the password for the active account in the keybase, used for later operations.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+      /// false, then you should call SetPassword before using a method which needs it.
+      /// If the account is already activated, return its info.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.ActivateAccountResponse> ActivateAccount(global::Land.Gno.Gnonative.V1.ActivateAccountRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Set the password for the account in the keybase with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -669,9 +709,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Update the keybase for the active account to use the new password.
+      /// Update the keybase to use the new password for the account in the keybase with the given address.
       /// Before calling this, you must call SetPassword with the current password.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -687,12 +727,27 @@ namespace Land.Gno.Gnonative.V1 {
       /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// (To check if there is an active account, use ListKeyInfo and check the
       /// length of the result.)
+      /// DEPRECATED: Use GetActivatedAccount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.GetActiveAccountResponse> GetActiveAccount(global::Land.Gno.Gnonative.V1.GetActiveAccountRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+      /// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> GetActivatedAccount(global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -774,8 +829,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Call a specific realm function.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Call a specific realm function. Sign the transaction with the given caller_address.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
       /// </summary>
@@ -790,8 +845,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Send currency from the active account to an account on the blockchain.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Send currency from the account with the given caller_address to an account on the blockchain.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -806,8 +861,9 @@ namespace Land.Gno.Gnonative.V1 {
 
       /// <summary>
       /// Temporarily load the code in package on the blockchain and run main() which can
-      /// call realm functions and use println() to output to the "console".
+      /// call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
       /// This returns the "console" output.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="responseStream">Used for sending responses back to the client.</param>
@@ -856,8 +912,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Sign the transaction using the active account.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Sign the transaction using the account with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -1660,6 +1716,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// SelectAccount selects the active account to use for later operations. If the response has_password is
       /// false, then you should set the password before using a method which needs it.
       /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// DEPRECATED. Use ActivateAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1675,6 +1732,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// SelectAccount selects the active account to use for later operations. If the response has_password is
       /// false, then you should set the password before using a method which needs it.
       /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// DEPRECATED. Use ActivateAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1688,6 +1746,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// SelectAccount selects the active account to use for later operations. If the response has_password is
       /// false, then you should set the password before using a method which needs it.
       /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// DEPRECATED. Use ActivateAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1703,6 +1762,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// SelectAccount selects the active account to use for later operations. If the response has_password is
       /// false, then you should set the password before using a method which needs it.
       /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// DEPRECATED. Use ActivateAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1713,8 +1773,68 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SelectAccount, null, options, request);
       }
       /// <summary>
-      /// Set the password for the active account in the keybase, used for later operations.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+      /// false, then you should call SetPassword before using a method which needs it.
+      /// If the account is already activated, return its info.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ActivateAccountResponse ActivateAccount(global::Land.Gno.Gnonative.V1.ActivateAccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ActivateAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+      /// false, then you should call SetPassword before using a method which needs it.
+      /// If the account is already activated, return its info.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ActivateAccountResponse ActivateAccount(global::Land.Gno.Gnonative.V1.ActivateAccountRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ActivateAccount, null, options, request);
+      }
+      /// <summary>
+      /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+      /// false, then you should call SetPassword before using a method which needs it.
+      /// If the account is already activated, return its info.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ActivateAccountResponse> ActivateAccountAsync(global::Land.Gno.Gnonative.V1.ActivateAccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ActivateAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+      /// false, then you should call SetPassword before using a method which needs it.
+      /// If the account is already activated, return its info.
+      /// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ActivateAccountResponse> ActivateAccountAsync(global::Land.Gno.Gnonative.V1.ActivateAccountRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ActivateAccount, null, options, request);
+      }
+      /// <summary>
+      /// Set the password for the account in the keybase with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1728,8 +1848,8 @@ namespace Land.Gno.Gnonative.V1 {
         return SetPassword(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Set the password for the active account in the keybase, used for later operations.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Set the password for the account in the keybase with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1741,8 +1861,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_SetPassword, null, options, request);
       }
       /// <summary>
-      /// Set the password for the active account in the keybase, used for later operations.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Set the password for the account in the keybase with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1756,8 +1876,8 @@ namespace Land.Gno.Gnonative.V1 {
         return SetPasswordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Set the password for the active account in the keybase, used for later operations.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Set the password for the account in the keybase with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1769,9 +1889,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SetPassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase for the active account to use the new password.
+      /// Update the keybase to use the new password for the account in the keybase with the given address.
       /// Before calling this, you must call SetPassword with the current password.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1784,9 +1904,9 @@ namespace Land.Gno.Gnonative.V1 {
         return UpdatePassword(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase for the active account to use the new password.
+      /// Update the keybase to use the new password for the account in the keybase with the given address.
       /// Before calling this, you must call SetPassword with the current password.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1797,9 +1917,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_UpdatePassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase for the active account to use the new password.
+      /// Update the keybase to use the new password for the account in the keybase with the given address.
       /// Before calling this, you must call SetPassword with the current password.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1812,9 +1932,9 @@ namespace Land.Gno.Gnonative.V1 {
         return UpdatePasswordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase for the active account to use the new password.
+      /// Update the keybase to use the new password for the account in the keybase with the given address.
       /// Before calling this, you must call SetPassword with the current password.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1829,6 +1949,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// (To check if there is an active account, use ListKeyInfo and check the
       /// length of the result.)
+      /// DEPRECATED: Use GetActivatedAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1845,6 +1966,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// (To check if there is an active account, use ListKeyInfo and check the
       /// length of the result.)
+      /// DEPRECATED: Use GetActivatedAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1859,6 +1981,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// (To check if there is an active account, use ListKeyInfo and check the
       /// length of the result.)
+      /// DEPRECATED: Use GetActivatedAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1875,6 +1998,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// (To check if there is an active account, use ListKeyInfo and check the
       /// length of the result.)
+      /// DEPRECATED: Use GetActivatedAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -1883,6 +2007,62 @@ namespace Land.Gno.Gnonative.V1 {
       public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.GetActiveAccountResponse> GetActiveAccountAsync(global::Land.Gno.Gnonative.V1.GetActiveAccountRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetActiveAccount, null, options, request);
+      }
+      /// <summary>
+      /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+      /// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse GetActivatedAccount(global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetActivatedAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+      /// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse GetActivatedAccount(global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetActivatedAccount, null, options, request);
+      }
+      /// <summary>
+      /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+      /// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> GetActivatedAccountAsync(global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetActivatedAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+      /// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> GetActivatedAccountAsync(global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetActivatedAccount, null, options, request);
       }
       /// <summary>
       /// QueryAccount retrieves account information from the blockchain for a given
@@ -2189,8 +2369,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_QEval, null, options, request);
       }
       /// <summary>
-      /// Call a specific realm function.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Call a specific realm function. Sign the transaction with the given caller_address.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
       /// </summary>
@@ -2205,8 +2385,8 @@ namespace Land.Gno.Gnonative.V1 {
         return Call(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Call a specific realm function.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Call a specific realm function. Sign the transaction with the given caller_address.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
       /// </summary>
@@ -2219,8 +2399,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncServerStreamingCall(__Method_Call, null, options, request);
       }
       /// <summary>
-      /// Send currency from the active account to an account on the blockchain.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Send currency from the account with the given caller_address to an account on the blockchain.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2234,8 +2414,8 @@ namespace Land.Gno.Gnonative.V1 {
         return Send(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Send currency from the active account to an account on the blockchain.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Send currency from the account with the given caller_address to an account on the blockchain.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2248,8 +2428,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Temporarily load the code in package on the blockchain and run main() which can
-      /// call realm functions and use println() to output to the "console".
+      /// call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
       /// This returns the "console" output.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2263,8 +2444,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Temporarily load the code in package on the blockchain and run main() which can
-      /// call realm functions and use println() to output to the "console".
+      /// call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
       /// This returns the "console" output.
+      /// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -2419,8 +2601,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_MakeRunTx, null, options, request);
       }
       /// <summary>
-      /// Sign the transaction using the active account.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Sign the transaction using the account with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2434,8 +2616,8 @@ namespace Land.Gno.Gnonative.V1 {
         return SignTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Sign the transaction using the active account.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Sign the transaction using the account with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2447,8 +2629,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_SignTx, null, options, request);
       }
       /// <summary>
-      /// Sign the transaction using the active account.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Sign the transaction using the account with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2462,8 +2644,8 @@ namespace Land.Gno.Gnonative.V1 {
         return SignTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Sign the transaction using the active account.
-      /// If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// Sign the transaction using the account with the given address.
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2742,9 +2924,11 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_GetKeyInfoByNameOrAddress, serviceImpl.GetKeyInfoByNameOrAddress)
           .AddMethod(__Method_CreateAccount, serviceImpl.CreateAccount)
           .AddMethod(__Method_SelectAccount, serviceImpl.SelectAccount)
+          .AddMethod(__Method_ActivateAccount, serviceImpl.ActivateAccount)
           .AddMethod(__Method_SetPassword, serviceImpl.SetPassword)
           .AddMethod(__Method_UpdatePassword, serviceImpl.UpdatePassword)
           .AddMethod(__Method_GetActiveAccount, serviceImpl.GetActiveAccount)
+          .AddMethod(__Method_GetActivatedAccount, serviceImpl.GetActivatedAccount)
           .AddMethod(__Method_QueryAccount, serviceImpl.QueryAccount)
           .AddMethod(__Method_DeleteAccount, serviceImpl.DeleteAccount)
           .AddMethod(__Method_Query, serviceImpl.Query)
@@ -2786,9 +2970,11 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_GetKeyInfoByNameOrAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetKeyInfoByNameOrAddressRequest, global::Land.Gno.Gnonative.V1.GetKeyInfoByNameOrAddressResponse>(serviceImpl.GetKeyInfoByNameOrAddress));
       serviceBinder.AddMethod(__Method_CreateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CreateAccountRequest, global::Land.Gno.Gnonative.V1.CreateAccountResponse>(serviceImpl.CreateAccount));
       serviceBinder.AddMethod(__Method_SelectAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SelectAccountRequest, global::Land.Gno.Gnonative.V1.SelectAccountResponse>(serviceImpl.SelectAccount));
+      serviceBinder.AddMethod(__Method_ActivateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(serviceImpl.ActivateAccount));
       serviceBinder.AddMethod(__Method_SetPassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse>(serviceImpl.SetPassword));
       serviceBinder.AddMethod(__Method_UpdatePassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.UpdatePasswordRequest, global::Land.Gno.Gnonative.V1.UpdatePasswordResponse>(serviceImpl.UpdatePassword));
       serviceBinder.AddMethod(__Method_GetActiveAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetActiveAccountRequest, global::Land.Gno.Gnonative.V1.GetActiveAccountResponse>(serviceImpl.GetActiveAccount));
+      serviceBinder.AddMethod(__Method_GetActivatedAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse>(serviceImpl.GetActivatedAccount));
       serviceBinder.AddMethod(__Method_QueryAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QueryAccountRequest, global::Land.Gno.Gnonative.V1.QueryAccountResponse>(serviceImpl.QueryAccount));
       serviceBinder.AddMethod(__Method_DeleteAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.DeleteAccountRequest, global::Land.Gno.Gnonative.V1.DeleteAccountResponse>(serviceImpl.DeleteAccount));
       serviceBinder.AddMethod(__Method_Query, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QueryRequest, global::Land.Gno.Gnonative.V1.QueryResponse>(serviceImpl.Query));

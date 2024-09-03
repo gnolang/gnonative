@@ -37,7 +37,7 @@ type GnoNativeService interface {
 	// Use the configured gnoclient to call the signer's Keybase.List
 	ClientListKeyInfo() ([]crypto_keys.Info, error)
 	// Use the configured gnoclient to call SignTx
-	ClientSignTx(tx std.Tx, accountNumber, sequenceNumber uint64) (*std.Tx, error)
+	ClientSignTx(tx std.Tx, addr []byte, accountNumber, sequenceNumber uint64) (*std.Tx, error)
 
 	io.Closer
 }
