@@ -26,7 +26,7 @@ import (
 
 func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
 	var err error
-	s.client.RPCClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
+	s.rpcClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
 	if err != nil {
 		return nil, api_gen.ErrCode_ErrSetRemote.Wrap(err)
 	}
@@ -53,12 +53,14 @@ func (s *gnoNativeService) ClientGetRemote() string {
 }
 
 func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
-	s.getSigner().ChainID = req.Msg.ChainId
+	s.lock.Lock()
+	s.chainID = req.Msg.ChainId
+	s.lock.Unlock()
 	return connect.NewResponse(&api_gen.SetChainIDResponse{}), nil
 }
 
 func (s *gnoNativeService) GetChainID(ctx context.Context, req *connect.Request[api_gen.GetChainIDRequest]) (*connect.Response[api_gen.GetChainIDResponse], error) {
-	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.getSigner().ChainID}), nil
+	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.chainID}), nil
 }
 
 func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[api_gen.GenerateRecoveryPhraseRequest]) (*connect.Response[api_gen.GenerateRecoveryPhraseResponse], error) {
@@ -118,13 +120,13 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) ClientListKeyInfo() ([]crypto_keys.Info, error) {
-	return s.getSigner().Keybase.List()
+	return s.keybase.List()
 }
 
 func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
 	s.logger.Debug("HasKeyByName called")
 
-	has, err := s.getSigner().Keybase.HasByName(req.Msg.Name)
+	has, err := s.keybase.HasByName(req.Msg.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -135,7 +137,7 @@ func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Reques
 func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
 	s.logger.Debug("HasKeyByAddress called")
 
-	has, err := s.getSigner().Keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	has, err := s.keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -146,7 +148,7 @@ func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Req
 func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameOrAddressRequest]) (*connect.Response[api_gen.HasKeyByNameOrAddressResponse], error) {
 	s.logger.Debug("HasKeyByNameOrAddress called")
 
-	has, err := s.getSigner().Keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
+	has, err := s.keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -157,7 +159,7 @@ func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *conne
 func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameRequest]) (*connect.Response[api_gen.GetKeyInfoByNameResponse], error) {
 	s.logger.Debug("GetKeyInfoByName called")
 
-	key, err := s.getSigner().Keybase.GetByName(req.Msg.Name)
+	key, err := s.keybase.GetByName(req.Msg.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -173,7 +175,7 @@ func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	key, err := s.getSigner().Keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	key, err := s.keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -189,7 +191,7 @@ func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect
 func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByNameOrAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByNameOrAddress called")
 
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -205,7 +207,7 @@ func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Request[api_gen.CreateAccountRequest]) (*connect.Response[api_gen.CreateAccountResponse], error) {
 	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
-	key, err := s.getSigner().Keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
+	key, err := s.keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -219,10 +221,10 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 }
 
 func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Request[api_gen.SelectAccountRequest]) (*connect.Response[api_gen.SelectAccountResponse], error) {
-	s.logger.Debug("SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
+	s.logger.Debug("DEPRECATED: SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -237,32 +239,71 @@ func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Reque
 	account, ok := s.userAccounts[bech32]
 	if !ok {
 		account = &userAccount{}
+		account.signer = &gnoclient.SignerFromKeybase{
+			Keybase: s.keybase,
+			ChainID: s.chainID,
+		}
 		s.userAccounts[bech32] = account
 	}
 	account.keyInfo = key
 	s.activeAccount = account
 	s.lock.Unlock()
 
-	s.getSigner().Account = req.Msg.NameOrBech32
-	s.getSigner().Password = account.password
+	account.signer.Account = req.Msg.NameOrBech32
 	return connect.NewResponse(&api_gen.SelectAccountResponse{
 		Key:         info,
-		HasPassword: account.password != "",
+		HasPassword: account.signer.Password != "",
+	}), nil
+}
+
+func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Request[api_gen.ActivateAccountRequest]) (*connect.Response[api_gen.ActivateAccountResponse], error) {
+	s.logger.Debug("ActivateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
+
+	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	info, err := ConvertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	bech32 := crypto.AddressToBech32(key.GetAddress())
+	s.lock.Lock()
+	account, ok := s.userAccounts[bech32]
+	if !ok {
+		account = &userAccount{}
+		account.signer = &gnoclient.SignerFromKeybase{
+			Keybase: s.keybase,
+			ChainID: s.chainID,
+		}
+		s.userAccounts[bech32] = account
+	}
+	account.keyInfo = key
+	s.lock.Unlock()
+
+	account.signer.Account = req.Msg.NameOrBech32
+	return connect.NewResponse(&api_gen.ActivateAccountResponse{
+		Key:         info,
+		HasPassword: account.signer.Password != "",
 	}), nil
 }
 
 func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request[api_gen.SetPasswordRequest]) (*connect.Response[api_gen.SetPasswordResponse], error) {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-	if s.activeAccount == nil {
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.Address)
+	if err != nil {
+		return nil, err
 	}
-	s.activeAccount.password = req.Msg.Password
-
-	s.getSigner().Password = req.Msg.Password
+	signer.Password = req.Msg.Password
 
 	// Check the password.
-	if err := s.getSigner().Validate(); err != nil {
+	if err := signer.Validate(); err != nil {
+		if keyerror.IsErrWrongPassword(err) {
+			// Wrong password, so unset the password
+			signer.Password = ""
+		}
 		return nil, getGrpcError(err)
 	}
 
@@ -270,25 +311,23 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Request[api_gen.UpdatePasswordRequest]) (*connect.Response[api_gen.UpdatePasswordResponse], error) {
-	s.lock.Lock()
-	defer s.lock.Unlock()
-	if s.activeAccount == nil {
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.Address)
+	if err != nil {
+		return nil, err
 	}
 
 	getNewPass := func() (string, error) { return req.Msg.NewPassword, nil }
-	if err := s.getSigner().Keybase.Update(s.activeAccount.keyInfo.GetName(), s.activeAccount.password, getNewPass); err != nil {
+	if err := s.keybase.Update(s.activeAccount.keyInfo.GetName(), signer.Password, getNewPass); err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	s.activeAccount.password = req.Msg.NewPassword
-	s.getSigner().Password = req.Msg.NewPassword
+	signer.Password = req.Msg.NewPassword
 
 	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
 }
 
 func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Request[api_gen.GetActiveAccountRequest]) (*connect.Response[api_gen.GetActiveAccountResponse], error) {
-	s.logger.Debug("GetActiveAccount called")
+	s.logger.Debug("DEPRECATED: GetActiveAccount called")
 
 	s.lock.RLock()
 	account := s.activeAccount
@@ -305,14 +344,39 @@ func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Re
 
 	return connect.NewResponse(&api_gen.GetActiveAccountResponse{
 		Key:         info,
-		HasPassword: account.password != "",
+		HasPassword: account.signer.Password != "",
+	}), nil
+}
+
+func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect.Request[api_gen.GetActivatedAccountRequest]) (*connect.Response[api_gen.GetActivatedAccountResponse], error) {
+	s.logger.Debug("GetActivatedAccount called")
+
+	if req.Msg.Address == nil {
+		return nil, api_gen.ErrCode_ErrInvalidAddress
+	}
+
+	s.lock.Lock()
+	account, ok := s.userAccounts[crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))]
+	s.lock.Unlock()
+	if !ok {
+		return nil, api_gen.ErrCode_ErrNoActiveAccount
+	}
+
+	info, err := ConvertKeyInfo(account.keyInfo)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.GetActivatedAccountResponse{
+		Key:         info,
+		HasPassword: account.signer.Password != "",
 	}), nil
 }
 
 func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
 	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -346,11 +410,11 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 
 func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
 	// Get the key from the Keybase so that we know its address
-	key, err := s.getSigner().Keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	if err := s.getSigner().Keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
+	if err := s.keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
 		return nil, getGrpcError(err)
 	}
 
@@ -373,7 +437,7 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 		Data: req.Msg.Data,
 	}
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -388,7 +452,7 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
 	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -403,7 +467,7 @@ func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_
 func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
 	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
-	c, err := s.getClient()
+	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -426,10 +490,6 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	}
 
 	if s.useGnokeyMobile {
-		c, err := s.getClient()
-		if err != nil {
-			return getGrpcError(err)
-		}
 		tx, err := gnoclient.NewCallTx(*cfg, msgs...)
 		if err != nil {
 			return err
@@ -445,7 +505,8 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		signedTxJSON, err := s.gnokeyMobileClient.SignTx(
 			context.Background(),
 			connect.NewRequest(&api_gen.SignTxRequest{
-				TxJson: string(txJSON),
+				TxJson:  string(txJSON),
+				Address: req.Msg.CallerAddress,
 			}),
 		)
 		if err != nil {
@@ -457,6 +518,10 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		}
 
 		// Now broadcast
+		c, err := s.getClient(nil)
+		if err != nil {
+			return getGrpcError(err)
+		}
 		bres, err := c.BroadcastTxCommit(signedTx)
 		if err != nil {
 			return getGrpcError(err)
@@ -472,14 +537,16 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		return nil
 	}
 
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
-	bres, err := s.client.Call(*cfg, msgs...)
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.Call(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -540,19 +607,21 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 		s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("send", msg.Send))
 	}
 
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
 	cfg, msgs, err := s.convertSendRequest(req.Msg)
 	if err != nil {
 		return err
 	}
 
-	_, err = s.client.Send(*cfg, msgs...)
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	_, err = c.Send(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -605,19 +674,21 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 }
 
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return api_gen.ErrCode_ErrNoActiveAccount
+	signer, err := s.getSigner(req.Msg.CallerAddress)
+	if err != nil {
+		return err
 	}
-	s.lock.RUnlock()
 
 	cfg, msgs, err := s.convertRunRequest(req.Msg)
 	if err != nil {
 		return err
 	}
 
-	bres, err := s.client.Run(*cfg, msgs...)
+	c, err := s.getClient(signer)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.Run(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
@@ -740,7 +811,7 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_
 		return nil, err
 	}
 
-	signedTx, err := s.ClientSignTx(tx, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	signedTx, err := s.ClientSignTx(tx, req.Msg.Address, req.Msg.AccountNumber, req.Msg.SequenceNumber)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -752,15 +823,16 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_
 	return connect.NewResponse(&api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}), nil
 }
 
-func (s *gnoNativeService) ClientSignTx(tx std.Tx, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
-	s.lock.RLock()
-	if s.activeAccount == nil {
-		s.lock.RUnlock()
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
+func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
+	signer, err := s.getSigner(addr)
+	if err != nil {
+		return nil, err
 	}
-	s.lock.RUnlock()
-
-	return s.client.SignTx(tx, accountNumber, sequenceNumber)
+	c := &gnoclient.Client{
+		Signer:    signer,
+		RPCClient: s.rpcClient,
+	}
+	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
@@ -770,7 +842,11 @@ func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.R
 		return err
 	}
 
-	bres, err := s.client.BroadcastTxCommit(signedTx)
+	c, err := s.getClient(nil)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.BroadcastTxCommit(signedTx)
 	if err != nil {
 		return getGrpcError(err)
 	}

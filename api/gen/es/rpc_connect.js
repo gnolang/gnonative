@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdatePasswordRequest, UpdatePasswordResponse } from "./gnonativetypes_pb.js";
+import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdatePasswordRequest, UpdatePasswordResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -176,6 +176,7 @@ export const GnoNativeService = {
      * SelectAccount selects the active account to use for later operations. If the response has_password is
      * false, then you should set the password before using a method which needs it.
      * If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+     * DEPRECATED. Use ActivateAccount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SelectAccount
      */
@@ -186,8 +187,22 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Set the password for the active account in the keybase, used for later operations.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
+     * false, then you should call SetPassword before using a method which needs it.
+     * If the account is already activated, return its info.
+     * If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.ActivateAccount
+     */
+    activateAccount: {
+      name: "ActivateAccount",
+      I: ActivateAccountRequest,
+      O: ActivateAccountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Set the password for the account in the keybase with the given address.
+     * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SetPassword
@@ -199,9 +214,9 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Update the keybase for the active account to use the new password.
+     * Update the keybase to use the new password for the account in the keybase with the given address.
      * Before calling this, you must call SetPassword with the current password.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.UpdatePassword
      */
@@ -216,6 +231,7 @@ export const GnoNativeService = {
      * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      * (To check if there is an active account, use ListKeyInfo and check the
      * length of the result.)
+     * DEPRECATED: Use GetActivatedAccount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.GetActiveAccount
      */
@@ -223,6 +239,19 @@ export const GnoNativeService = {
       name: "GetActiveAccount",
       I: GetActiveAccountRequest,
       O: GetActiveAccountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
+     * If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+     * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.GetActivatedAccount
+     */
+    getActivatedAccount: {
+      name: "GetActivatedAccount",
+      I: GetActivatedAccountRequest,
+      O: GetActivatedAccountResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -297,8 +326,8 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Call a specific realm function.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * Call a specific realm function. Sign the transaction with the given caller_address.
+     * If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
      * If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
      *
@@ -311,8 +340,8 @@ export const GnoNativeService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
-     * Send currency from the active account to an account on the blockchain.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * Send currency from the account with the given caller_address to an account on the blockchain.
+     * If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Send
@@ -325,8 +354,9 @@ export const GnoNativeService = {
     },
     /**
      * Temporarily load the code in package on the blockchain and run main() which can
-     * call realm functions and use println() to output to the "console".
+     * call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
      * This returns the "console" output.
+     * If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Run
      */
@@ -370,8 +400,8 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Sign the transaction using the active account.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+     * Sign the transaction using the account with the given address.
+     * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SignTx

@@ -132,6 +132,13 @@ export declare type SetPasswordRequest = Message<"land.gno.gnonative.v1.SetPassw
    * @generated from field: string password = 1;
    */
   password: string;
+
+  /**
+   * The address of the account to set the password
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address: Uint8Array;
 };
 
 /**
@@ -160,6 +167,13 @@ export declare type UpdatePasswordRequest = Message<"land.gno.gnonative.v1.Updat
    * @generated from field: string new_password = 1;
    */
   newPassword: string;
+
+  /**
+   * The address of the account to update the password
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address: Uint8Array;
 };
 
 /**
@@ -618,6 +632,45 @@ export declare type SelectAccountResponse = Message<"land.gno.gnonative.v1.Selec
 export declare const SelectAccountResponseSchema: GenMessage<SelectAccountResponse>;
 
 /**
+ * @generated from message land.gno.gnonative.v1.ActivateAccountRequest
+ */
+export declare type ActivateAccountRequest = Message<"land.gno.gnonative.v1.ActivateAccountRequest"> & {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.ActivateAccountRequest.
+ * Use `create(ActivateAccountRequestSchema)` to create a new message.
+ */
+export declare const ActivateAccountRequestSchema: GenMessage<ActivateAccountRequest>;
+
+/**
+ * @generated from message land.gno.gnonative.v1.ActivateAccountResponse
+ */
+export declare type ActivateAccountResponse = Message<"land.gno.gnonative.v1.ActivateAccountResponse"> & {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key?: KeyInfo;
+
+  /**
+   * True if the password has been set. If false, then call SetPassword.
+   *
+   * @generated from field: bool has_password = 2;
+   */
+  hasPassword: boolean;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.ActivateAccountResponse.
+ * Use `create(ActivateAccountResponseSchema)` to create a new message.
+ */
+export declare const ActivateAccountResponseSchema: GenMessage<ActivateAccountResponse>;
+
+/**
  * @generated from message land.gno.gnonative.v1.GetActiveAccountRequest
  */
 export declare type GetActiveAccountRequest = Message<"land.gno.gnonative.v1.GetActiveAccountRequest"> & {
@@ -651,6 +704,45 @@ export declare type GetActiveAccountResponse = Message<"land.gno.gnonative.v1.Ge
  * Use `create(GetActiveAccountResponseSchema)` to create a new message.
  */
 export declare const GetActiveAccountResponseSchema: GenMessage<GetActiveAccountResponse>;
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetActivatedAccountRequest
+ */
+export declare type GetActivatedAccountRequest = Message<"land.gno.gnonative.v1.GetActivatedAccountRequest"> & {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address: Uint8Array;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.GetActivatedAccountRequest.
+ * Use `create(GetActivatedAccountRequestSchema)` to create a new message.
+ */
+export declare const GetActivatedAccountRequestSchema: GenMessage<GetActivatedAccountRequest>;
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetActivatedAccountResponse
+ */
+export declare type GetActivatedAccountResponse = Message<"land.gno.gnonative.v1.GetActivatedAccountResponse"> & {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key?: KeyInfo;
+
+  /**
+   * True if the password has been set. If false, then call SetPassword.
+   *
+   * @generated from field: bool has_password = 2;
+   */
+  hasPassword: boolean;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.GetActivatedAccountResponse.
+ * Use `create(GetActivatedAccountResponseSchema)` to create a new message.
+ */
+export declare const GetActivatedAccountResponseSchema: GenMessage<GetActivatedAccountResponse>;
 
 /**
  * @generated from message land.gno.gnonative.v1.QueryAccountRequest
@@ -907,7 +999,7 @@ export declare type CallRequest = Message<"land.gno.gnonative.v1.CallRequest"> &
   memo: string;
 
   /**
-   * If CallerAddress is empty then get it from the active account
+   * The address of the account to sign the transaction
    *
    * @generated from field: bytes caller_address = 4;
    */
@@ -991,7 +1083,7 @@ export declare type SendRequest = Message<"land.gno.gnonative.v1.SendRequest"> &
   memo: string;
 
   /**
-   * If CallerAddress is empty then get it from the active account
+   * The address of the account to sign the transaction
    *
    * @generated from field: bytes caller_address = 4;
    */
@@ -1071,7 +1163,7 @@ export declare type RunRequest = Message<"land.gno.gnonative.v1.RunRequest"> & {
   memo: string;
 
   /**
-   * If CallerAddress is empty then get it from the active account
+   * The address of the account to sign the transaction
    *
    * @generated from field: bytes caller_address = 4;
    */
@@ -1139,16 +1231,23 @@ export declare type SignTxRequest = Message<"land.gno.gnonative.v1.SignTxRequest
   txJson: string;
 
   /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address: Uint8Array;
+
+  /**
    * The signer's account number on the blockchain. If 0 then query the blockchain for the value.
    *
-   * @generated from field: uint64 account_number = 2;
+   * @generated from field: uint64 account_number = 3;
    */
   accountNumber: bigint;
 
   /**
    * The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
    *
-   * @generated from field: uint64 sequence_number = 3;
+   * @generated from field: uint64 sequence_number = 4;
    */
   sequenceNumber: bigint;
 };
