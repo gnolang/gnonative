@@ -27,14 +27,14 @@ self.define_singleton_method(use_autolinking_method_symbol) do |*args|
     origin_autolinking_method.call()
   end
 end
- 
+
 platform :ios, podfile_properties['ios.deploymentTarget'] || '13.4'
 install! 'cocoapods',
   :deterministic_uuids => false
 
 prepare_react_native_project!
 
-target 'gnoboard' do
+target 'Gnoboard' do
   use_expo_modules!
   config = use_native_modules!
 
