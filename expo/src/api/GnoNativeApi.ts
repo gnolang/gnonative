@@ -10,6 +10,8 @@ import {
   GenerateRecoveryPhraseRequest,
   GetActiveAccountRequest,
   GetActiveAccountResponse,
+  GetActivatedAccountRequest,
+  GetActivatedAccountResponse,
   GetChainIDRequest,
   GetKeyInfoByAddressRequest,
   GetKeyInfoByNameOrAddressRequest,
@@ -32,6 +34,8 @@ import {
   RenderRequest,
   SelectAccountRequest,
   SelectAccountResponse,
+  ActivateAccountRequest,
+  ActivateAccountResponse,
   SendRequest,
   SendResponse,
   SetChainIDRequest,
@@ -213,6 +217,16 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response;
   }
 
+  async activateAccount(nameOrBech32: string): Promise<ActivateAccountResponse> {
+    const client = await this.#getClient();
+    const response = await client.activateAccount(
+      new ActivateAccountRequest({
+        nameOrBech32,
+      }),
+    );
+    return response;
+  }
+
   async getClient(): Promise<PromiseClient<typeof GnoNativeService>> {
     if (!this.clientInstance) {
       throw new Error('GoBridge client instance not initialized.');
@@ -224,21 +238,27 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return this.clientInstance !== undefined;
   }
 
-  async setPassword(password: string): Promise<SetPasswordResponse> {
+  async setPassword(password: string, address?: Uint8Array): Promise<SetPasswordResponse> {
     const client = await this.#getClient();
-    const response = await client.setPassword(new SetPasswordRequest({ password }));
+    const response = await client.setPassword(new SetPasswordRequest({ password, address }));
     return response;
   }
 
-  async updatePassword(newPassword: string): Promise<UpdatePasswordResponse> {
+  async updatePassword(newPassword: string, address?: Uint8Array): Promise<UpdatePasswordResponse> {
     const client = await this.#getClient();
-    const response = await client.updatePassword(new UpdatePasswordRequest({ newPassword }));
+    const response = await client.updatePassword(new UpdatePasswordRequest({ newPassword, address }));
     return response;
   }
 
   async getActiveAccount(): Promise<GetActiveAccountResponse> {
     const client = await this.#getClient();
     const response = await client.getActiveAccount(new GetActiveAccountRequest());
+    return response;
+  }
+
+  async getActivatedAccount(): Promise<GetActivatedAccountResponse> {
+    const client = await this.#getClient();
+    const response = await client.getActivatedAccount(new GetActivatedAccountRequest());
     return response;
   }
 
@@ -303,6 +323,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     args: string[],
     gasFee: string,
     gasWanted: number,
+    callerAddress?: Uint8Array,
     send?: string,
     memo?: string,
   ): Promise<AsyncIterable<CallResponse>> {
@@ -312,6 +333,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
+        callerAddress,
         msgs: [
           new MsgCall({
             packagePath,
@@ -330,6 +352,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     send: string,
     gasFee: string,
     gasWanted: number,
+    callerAddress?: Uint8Array,
     memo?: string,
   ): Promise<AsyncIterable<SendResponse>> {
     const client = await this.#getClient();
@@ -338,6 +361,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         gasFee,
         gasWanted: BigInt(gasWanted),
         memo,
+        callerAddress,
         msgs: [
           new MsgSend({
             toAddress,
