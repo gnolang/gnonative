@@ -104,8 +104,8 @@ $(gen_sum): $(gen_src)
 	)
 
 _api.generate.modules:
-	$(call check-program, yarn)
-	cd api; yarn
+	$(call check-program, npm)
+	cd api; npm install
 
 _api.clean.modules:
 	cd api; rm -fr node_modules
@@ -188,8 +188,8 @@ asdf.install_tools: asdf.add_plugins
 ########################################
 # Script to create a new app
 
-yarn_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill@3.2.1 react-native-get-random-values text-encoding base-64 react-native-fetch-api
-yarn_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
+npm_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill@3.2.1 react-native-get-random-values text-encoding base-64 react-native-fetch-api
+npm_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
 OUTPUT_DIR := $(make_dir)/examples/js/react-native
 
 new-app:
@@ -207,14 +207,14 @@ endif
 
 # creates a new react native app using Expo script. Also creates ios and android folders
 new-react-native-app:
-	$(call check-program, yarn)
+	$(call check-program, npx)
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "creating a new gno awesome project at: $(OUTPUT_DIR)"
-	cd $(OUTPUT_DIR) && yarn create expo $(APP_NAME) --template expo-template-blank-typescript
+	cd $(OUTPUT_DIR) && npx create-expo-app@latest $(APP_NAME) --template expo-template-blank-typescript
 	@echo "Creating ios and android folders"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn expo prebuild
-	@echo "Installing yarn dependencies"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && yarn add ${yarn_basic_dependencies} && yarn add -D ${yarn_basic_dev_dependencies}
+	cd $(OUTPUT_DIR)/$(APP_NAME) && npm expo prebuild
+	@echo "Installing npm dependencies"
+	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies} && npm install -D ${npm_basic_dev_dependencies}
 	@echo "Building GnoCore.xcframework for the new app"
 	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
