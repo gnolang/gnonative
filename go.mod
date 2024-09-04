@@ -9,7 +9,7 @@ require (
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
 	github.com/gnolang/gno v0.1.2-0.20240826090356-651f5aac3706
-	github.com/gnolang/gnokey-mobile v0.0.0-20240814140149-eb333b936c7c
+	github.com/gnolang/gnokey-mobile v0.0.0-20240903152400-9942eff89ef6
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff/v3 v3.4.0
 	github.com/peterbourgon/unixtransport v0.0.3

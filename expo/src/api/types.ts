@@ -2,10 +2,12 @@ import {
   CallResponse,
   DeleteAccountResponse,
   GetActiveAccountResponse,
+  GetActivatedAccountResponse,
   HelloStreamResponse,
   QueryAccountResponse,
   QueryResponse,
   SelectAccountResponse,
+  ActivateAccountResponse,
   SendResponse,
   SetChainIDResponse,
   SetPasswordResponse,
@@ -46,9 +48,11 @@ export interface GnoKeyApi {
   getKeyInfoByAddress: (address: Uint8Array) => Promise<KeyInfo | undefined>;
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<KeyInfo | undefined>;
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
-  setPassword: (password: string) => Promise<SetPasswordResponse>;
-  updatePassword: (password: string) => Promise<UpdatePasswordResponse>;
+  activateAccount: (nameOrBech32: string) => Promise<ActivateAccountResponse>;
+  setPassword: (password: string, address?: Uint8Array) => Promise<SetPasswordResponse>;
+  updatePassword: (password: string, address?: Uint8Array) => Promise<UpdatePasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
+  getActivatedAccount: () => Promise<GetActivatedAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (
     nameOrBech32: string,
@@ -64,6 +68,7 @@ export interface GnoKeyApi {
     args: string[],
     gasFee: string,
     gasWanted: number,
+    callerAddress?: Uint8Array,
     send?: string,
     memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
@@ -72,6 +77,7 @@ export interface GnoKeyApi {
     send: string,
     gasFee: string,
     gasWanted: number,
+    callerAddress?: Uint8Array,
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
