@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '@gno/components/pages';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -13,7 +13,7 @@ export type Props = NativeStackScreenProps<RouterWelcomeStack, 'Board'>;
 const Board: React.FC<Props> = ({ route }) => {
   const { board, thread } = route.params;
 
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [renderedBoard, setRenderedBoard] = useState<string | undefined>(undefined);
@@ -23,7 +23,7 @@ const Board: React.FC<Props> = ({ route }) => {
       try {
         setLoading('Calling Gno Render Function...');
 
-        const response = await gno.render('gno.land/r/demo/boards', 'testboard/1');
+        const response = await gnonative.render('gno.land/r/demo/boards', 'testboard/1');
         setRenderedBoard(response);
 
         setLoading(undefined);

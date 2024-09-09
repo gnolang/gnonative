@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import NetworkList from '@gno/components/change-network/network-list';
 import chains from '@gno/resources/chains/chains.json';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RoutePath } from '@gno/router/path';
-import { NetworkMetainfo } from '@gno/native_modules/types';
+import { NetworkMetainfo } from '@gno/GoBridge/types';
 
 const ChangeNetwork = () => {
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [currentChainId, setCurrentChainId] = useState<string | undefined>(undefined);
@@ -23,8 +23,8 @@ const ChangeNetwork = () => {
         setCurrentChainId(undefined);
         setCurrentRemote(undefined);
         setLoading('Loading network...');
-        const chainId = await gno.getChainID();
-        const remote = await gno.getRemote();
+        const chainId = await gnonative.getChainID();
+        const remote = await gnonative.getRemote();
         setCurrentChainId(chainId);
         setCurrentRemote(remote);
         setLoading(undefined);
@@ -39,8 +39,8 @@ const ChangeNetwork = () => {
   const onNetworkChange = async (networkMetainfo: NetworkMetainfo) => {
     try {
       setLoading('Changing network...');
-      await gno.setChainID(networkMetainfo.chainId);
-      await gno.setRemote(networkMetainfo.gnoAddress);
+      await gnonative.setChainID(networkMetainfo.chainId);
+      await gnonative.setRemote(networkMetainfo.gnoAddress);
       setLoading(undefined);
       navigation.navigate(RoutePath.Home);
     } catch (error: unknown | Error) {

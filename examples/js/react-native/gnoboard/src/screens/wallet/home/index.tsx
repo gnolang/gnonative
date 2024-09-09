@@ -7,9 +7,9 @@ import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import Text from '@gno/components/texts';
 import styled from 'styled-components/native';
 import CurrentAccount from '@gno/components/account/CurrentAccoutn';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import Loading from '@gno/screens/loading';
-import { GnoAccount } from '@gno/native_modules/types';
+import { GnoAccount } from '@gno/GoBridge/types';
 import { QueryAccountResponse } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
@@ -19,7 +19,7 @@ import { GRPCError } from '@gno/grpc/error';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
 
   const [loading, setLoading] = React.useState<string | undefined>(undefined);
   const [account, setAccount] = React.useState<GnoAccount | undefined>(undefined);
@@ -33,10 +33,10 @@ export const Home: React.FC = () => {
       setBalance(undefined);
 
       try {
-        const response = await gno.getActiveAccount();
+        const response = await gnonative.getActiveAccount();
         setAccount(response.key);
         if (response.key) {
-          const balance = await gno.queryAccount(response.key.address);
+          const balance = await gnonative.queryAccount(response.key.address);
           setBalance(balance);
         }
       } catch (error: ConnectError | unknown) {

@@ -6,7 +6,7 @@ import { requestHeader } from '@connectrpc/connect/protocol-connect';
 import { requestHeader as webRequestHeader } from '@connectrpc/connect/protocol-grpc-web';
 import { GrpcWebTransportOptions } from '@connectrpc/connect-web';
 import { Message, MethodKind } from '@bufbuild/protobuf';
-import { GoBridge } from '@gno/native_modules';
+import { GoBridge } from '@gno/GoBridge';
 
 function base64ToBytes(base64: string): Uint8Array {
   const binString = atob(base64);

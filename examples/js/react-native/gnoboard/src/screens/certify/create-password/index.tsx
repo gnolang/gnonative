@@ -3,7 +3,7 @@ import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
 import TextInput from '@gno/components/textinput';
 import Button from '@gno/components/buttons';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -28,7 +28,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [showModal, setShowModal] = useState(false);
 
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
 
   const createAccount = async (override: boolean = false) => {
@@ -42,17 +42,17 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
 
     try {
       if (!override) {
-        const hasKeyByName = await gno.hasKeyByName(name);
+        const hasKeyByName = await gnonative.hasKeyByName(name);
         if (hasKeyByName) {
           setShowModal(true);
           return;
         }
       }
 
-      const response = await gno.createAccount(name, phrase, password);
+      const response = await gnonative.createAccount(name, phrase, password);
       console.log('createAccount response: ' + response);
-      await gno.selectAccount(name);
-      await gno.setPassword(password);
+      await gnonative.selectAccount(name);
+      await gnonative.setPassword(password);
       navigation.navigate(RoutePath.Home);
     } catch (error) {
       setError(JSON.stringify(error));

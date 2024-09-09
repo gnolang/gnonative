@@ -1,17 +1,17 @@
 import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import SideMenuAccountList from '@gno/components/common/side-menu-account-list/side-menu-account-list';
-import { GnoAccount } from '@gno/native_modules/types';
+import { GnoAccount } from '@gno/GoBridge/types';
 import { RoutePath } from '@gno/router/path';
 import ReenterPassword from './ReenterPassword';
 
 const SwitchAccounts = () => {
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [accounts, setAccounts] = useState<GnoAccount[]>([]);
@@ -21,7 +21,7 @@ const SwitchAccounts = () => {
     const unsubscribe = navigation.addListener('focus', async () => {
       try {
         setLoading('Loading accounts...');
-        const response = await gno.listKeyInfo();
+        const response = await gnonative.listKeyInfo();
 
         setAccounts(response);
         setLoading(undefined);
@@ -36,7 +36,7 @@ const SwitchAccounts = () => {
   const onChangeAccountHandler = async (value: GnoAccount) => {
     try {
       setLoading('Changing account...');
-      const response = await gno.selectAccount(value.name);
+      const response = await gnonative.selectAccount(value.name);
       setLoading(undefined);
       if (!response.hasPassword) {
         setReenterPassword(value.name);
