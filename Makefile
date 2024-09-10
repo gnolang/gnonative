@@ -13,6 +13,7 @@ APP_NAME ?= gnoboard
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
 gnoboard_dir := $(make_dir)/examples/js/react-native/gnoboard
+expo_dir := $(make_dir)/expo
 
 # Argument Defaults
 APP_OUTPUT_DIR ?= $(make_dir)/examples/js/react-native/$(APP_NAME)
@@ -188,91 +189,35 @@ asdf.install_tools: asdf.add_plugins
 ########################################
 # Script to create a new app
 
-npm_basic_dependencies := @bufbuild/protobuf @connectrpc/connect @connectrpc/connect-web react-native-polyfill-globals react-native-url-polyfill web-streams-polyfill@3.2.1 react-native-get-random-values text-encoding base-64 react-native-fetch-api
-npm_basic_dev_dependencies = @tsconfig/react-native babel-plugin-module-resolver
+npm_basic_dependencies := @gnolang/gnonative
 OUTPUT_DIR := $(make_dir)/examples/js/react-native
 
 new-app:
 ifndef APP_NAME
 	$(error APP_NAME is undefined. Please set APP_NAME to the name of your app)
 endif
+	$(call check-program, npm)
+	npm config set @buf:registry https://buf.build/gen/npm/v1/
 	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/js/react-native
-	$(MAKE) add-app-json-entry APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
 	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
-	$(MAKE) new-app-build-android APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
-ifeq ($(OS),Darwin)
-	$(MAKE) new-app-build-ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
-	$(MAKE) copy-ios-project-pbxproj
-endif
 
 # creates a new react native app using Expo script. Also creates ios and android folders
 new-react-native-app:
+	$(call check-program, npm)
 	$(call check-program, npx)
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "creating a new gno awesome project at: $(OUTPUT_DIR)"
 	cd $(OUTPUT_DIR) && npx create-expo-app@latest $(APP_NAME) --template expo-template-blank-typescript
 	@echo "Creating ios and android folders"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && npm expo prebuild
+	cd $(OUTPUT_DIR)/$(APP_NAME) && npx expo prebuild
 	@echo "Installing npm dependencies"
-	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies} && npm install -D ${npm_basic_dev_dependencies}
+	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies}
 	@echo "Building GnoCore.xcframework for the new app"
 	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
 # copy js files from gnoboard to the new app
 copy-js-files:
-	$(call check-program, jq)
 	@echo "Copying js files"
-	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/grpc
-	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/src/hooks
-	@cp -r $(gnoboard_dir)/src/grpc $(OUTPUT_DIR)/$(APP_NAME)/src
-	@cp -r $(gnoboard_dir)/src/hooks $(OUTPUT_DIR)/$(APP_NAME)/src
-	@cp -r $(gnoboard_dir)/src/native_modules $(OUTPUT_DIR)/$(APP_NAME)/src
-	@cp -r $(gnoboard_dir)/Makefile $(OUTPUT_DIR)/$(APP_NAME)
-	@cp -r $(gnoboard_dir)/android/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/android
-	@cp -r $(gnoboard_dir)/ios/.gitignore $(OUTPUT_DIR)/$(APP_NAME)/ios
-	@cp $(make_dir)/templates/tsconfig.json $(OUTPUT_DIR)/$(APP_NAME)/tsconfig.json
-	@cp $(make_dir)/templates/babel.config.js $(OUTPUT_DIR)/$(APP_NAME)/babel.config.js
-	@cp $(make_dir)/templates/metro.config.js $(OUTPUT_DIR)/$(APP_NAME)/metro.config.js
-	@cp $(make_dir)/templates/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
+	@cp $(expo_dir)/example/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
 
-# build GnoCore.xcframework for the new app
-new-app-build-ios:
-	@echo "Copying ios files"
-	@mkdir -p $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/Sources
-	@cp -r $(gnoboard_dir)/ios/gnoboard/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/
-	@cp $(gnoboard_dir)/ios/gnoboard/gnoboard-Bridging-Header.h $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME)/$(APP_NAME)-Bridging-Header.h
-	@cp -r $(gnoboard_dir)/ios/Sources $(OUTPUT_DIR)/$(APP_NAME)/ios/
-	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
-
-# build the Android project files for the new app
-new-app-build-android:
-	@echo "Copying Android project files"
-	@$(eval MAIN_APP_PATH := $(shell find $(OUTPUT_DIR)/$(APP_NAME)/android/app/src/main/java -name 'MainApplication.kt')) # ./android/app/src/main/java/com/anonymous/<APP_NAME>/MainApplication.kt
-	@$(eval MAIN_APP_FILE := $(shell basename $(MAIN_APP_PATH))) # MainApplication.kt
-	@$(eval MAIN_APP_DIR := $(shell dirname $(MAIN_APP_PATH))) # ./android/app/src/main/java/com/anonymous/<APP_NAME>
-	@$(eval PACKAGE_PREFIX := $(shell sed -n 's/package \(.*\)\.$(APP_NAME)/\1/'p $(MAIN_APP_DIR)/$(MAIN_APP_FILE))) # e.g. com.anonymous
-	@cp -r $(gnoboard_dir)/android/app/src/main/java/land/gno/gobridge $(MAIN_APP_DIR)/.. # copy gobridge directory
-	@cp -r $(gnoboard_dir)/android/app/src/main/java/land/gno/rootdir $(MAIN_APP_DIR)/.. # copy rootdir directory
-	@perl -pi -e "s/land\.gno/$(PACKAGE_PREFIX)/" $(MAIN_APP_DIR)/../gobridge/* # in gobridge, replace land.gno by PACKAGE_PREFIX (e.g. com.anonymous)
-	@perl -pi -e "s/land\.gno/$(PACKAGE_PREFIX)/" $(MAIN_APP_DIR)/../rootdir/* # in rootdir, replace land.gno by PACKAGE_PREFIX (e.g. com.anonymous)
-	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.gobridge.GoBridgePackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for gobridge (e.g. import com.anonymous.gobridge.GoBridgePackage)
-	@perl -pi -e '/^package ./ and $$_.="\nimport '"$(PACKAGE_PREFIX)"'.rootdir.RootDirPackage"' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # add the right import path for rootdir (e.g. import com.anonymous.rootdir.RootDirPackage)
-	@perl -pi -e 's/return PackageList\(this\)\.packages/return PackageList\(this\)\.packages.apply \{\n\t\t\t\tadd(RootDirPackage())\n\t\t\t\tadd(GoBridgePackage())\n\t\t\t\}/' $(MAIN_APP_DIR)/$(MAIN_APP_FILE) # replace the default package list by one adding gobridge and rootdir
-	@perl -pi -e '/^def projectRoot/ and $$_.="def frameworkDir = \"\$$\{rootDir\.getAbsoluteFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getParentFile\(\)\.getAbsolutePath\(\)\}/framework\"\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the projectRoot variable in build.gradle
-	@perl -pi -e '/^dependencies/ and $$_.="\timplementation fileTree(dir: \"\$$\{frameworkDir\}/android\", include: \[\"\*\.jar\", \"\*\.aar\"\]\)\n"' $(OUTPUT_DIR)/$(APP_NAME)/android/app/build.gradle # add the framework dependency in build.gradle
-	@cd $(OUTPUT_DIR)/$(APP_NAME) && $(MAKE) node_modules TEMPLATE_PROJECT=$(APP_NAME)
-
-JSON_FILE := $(OUTPUT_DIR)/$(APP_NAME)/app.json
-# add tsconfigPaths entry to app.json
-add-app-json-entry:
-	@echo "Adding tsconfigPaths entry to app.json"
-	jq '.expo.experiments = {"tsconfigPaths": true}'  $(JSON_FILE) > $(JSON_FILE).tmp && mv $(JSON_FILE).tmp  $(JSON_FILE)
-
-# copy ios project.pbxproj from gnoboard to the new app and replace 'gnoboard' with the new app name
-copy-ios-project-pbxproj:
-	@echo "Copying ios project.pbxproj"
-	@cp $(gnoboard_dir)/ios/gnoboard.xcodeproj/project.pbxproj $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
-	@cd $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj
-	@sed -i.pbxproj 's/gnoboard/$(APP_NAME)/g' $(OUTPUT_DIR)/$(APP_NAME)/ios/$(APP_NAME).xcodeproj/project.pbxproj
-
-.PHONY: new-app new-react-native-app copy-js-files new-app-build-ios add-app-json-entry copy-ios-project-pbxproj
+.PHONY: new-app configure-npm new-react-native-app copy-js-files

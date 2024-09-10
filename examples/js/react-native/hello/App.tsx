@@ -1,42 +1,65 @@
-import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-// order matters here
-import "react-native-polyfill-globals/auto";
-
-import { StatusBar } from "expo-status-bar";
-import { useGno } from "@gno/hooks/use-gno";
-
-// Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
-// Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
-(Symbol as any).asyncIterator =
-  Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator");
+const config = {
+  remote: 'https://gno.berty.io',
+  chain_id: 'dev',
+};
 
 export default function App() {
-  const gno = useGno();
-  const [board, setBoard] = React.useState("");
+  return (
+    <GnoNativeProvider config={config}>
+      <InnerApp />
+    </GnoNativeProvider>
+  );
+}
 
-  React.useEffect(() => {
-    gno
-      .render("gno.land/r/demo/boards", "testboard/1")
-      .then((res) => setBoard(res))
-      .catch((err) => setBoard(err));
+const InnerApp = () => {
+  const { gnonative } = useGnoNativeContext();
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const accounts = await gnonative.listKeyInfo();
+        console.log(accounts);
+
+        const remote = await gnonative.getRemote();
+        const chainId = await gnonative.getChainID();
+        console.log('Remote %s ChainId %s', remote, chainId);
+
+        const phrase = await gnonative.generateRecoveryPhrase();
+        const address = await gnonative.addressFromMnemonic(phrase);
+        const addressStr = await gnonative.addressToBech32(address);
+
+        console.log('Phrase:', phrase);
+        console.log('Address:', addressStr);
+
+        setGreeting(await gnonative.hello('Gno'));
+
+        for await (const res of await gnonative.helloStream('Gno')) {
+          console.log(res.greeting);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   return (
     <View style={styles.container}>
-      <TextInput multiline={true} numberOfLines={40} value={board} />
-      <StatusBar style="auto" />
+      <Text>Gnonative App</Text>
+      <Text>{greeting}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
