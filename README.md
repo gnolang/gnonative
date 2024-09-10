@@ -2,7 +2,7 @@
 
 Gno Native Kit is a framework that allows developers to build and port gno.land (d)apps written in the (d)app's native language.
 
-Current Gno (d)apps run on desktop/laptop computers which have Go installed. To run on mobile, the (d)app would need to bundle the Go runtime, which is complicated for most developers. 
+Current Gno (d)apps run on desktop/laptop computers which have Go installed. To run on mobile, the (d)app would need to bundle the Go runtime, which is complicated for most developers.
 
 However, Gno Native Kit helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
 These API calls are a programming language-independent wrapper on top of the core supported APIs like [gnoclient](https://github.com/gnolang/gno/tree/master/gno.land/pkg/gnoclient) and [crypto/keys](https://github.com/gnolang/gno/tree/master/tm2/pkg/crypto/keys).
@@ -76,12 +76,12 @@ cd gnonative
 
 #### Set up the Android NDK
 
-* Launch Android Studio and accept the default startup options. Create a new
-  default project (so that we get the main screen).
-* On the Tools menu, open the SDK Manager.
-* In the "SDK Tools" tab, click "Show Package Details". Expand
-  "NDK (Side by side)" and check "23.1.7779620".
-* Click OK to install and close the SDK Manager.
+-   Launch Android Studio and accept the default startup options. Create a new
+    default project (so that we get the main screen).
+-   On the Tools menu, open the SDK Manager.
+-   In the "SDK Tools" tab, click "Show Package Details". Expand
+    "NDK (Side by side)" and check "23.1.7779620".
+-   Click OK to install and close the SDK Manager.
 
 #### Install the tools with asdf (only need to do once)
 
@@ -101,7 +101,7 @@ make build.android
 
 ```console
 cd examples/js/react-native/gnoboard
-yarn start
+npm start
 ```
 
 #### Connect your Android phone/emulator and bind its port to metro
@@ -125,6 +125,7 @@ If you prefer the CLI option:
 ```console
 android-studio ./android
 ```
+
 Once done, bind the port to metro:
 
 ```console
@@ -145,7 +146,7 @@ See more: https://developer.android.com/studio/run#basic-build-run
 make asdf.install_tools
 ```
 
-If you get an error like "https://github.com/CocoaPods/CLAide.git (at master@97b765e) is not yet checked out" then reinstall cocoapods like this: 
+If you get an error like "https://github.com/CocoaPods/CLAide.git (at master@97b765e) is not yet checked out" then reinstall cocoapods like this:
 
 ```console
 asdf uninstall cocoapods
@@ -162,7 +163,7 @@ make build.ios
 
 ```console
 cd examples/js/react-native/gnoboard
-yarn start
+npm start
 ```
 
 #### Open Xcode and connect your iOS device
