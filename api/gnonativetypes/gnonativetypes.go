@@ -39,8 +39,8 @@ type SetPasswordResponse struct {
 
 type UpdatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
-	// The address of the account to update the password
-	Address []byte `json:"address" yaml:"address"`
+	// The addresses of the account to update the password
+	Addresses [][]byte `json:"addresses" yaml:"addresses"`
 }
 
 type UpdatePasswordResponse struct {

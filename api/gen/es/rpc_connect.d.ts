@@ -214,8 +214,9 @@ export declare const GnoNativeService: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Update the keybase to use the new password for the account in the keybase with the given address.
-     * Before calling this, you must call SetPassword with the current password.
+     * Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+     * Before calling this, you must call SetPassword with the current password for each account.
+     * If there is an error, then roll back all accounts to the current password.
      * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.UpdatePassword

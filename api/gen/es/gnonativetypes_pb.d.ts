@@ -240,11 +240,11 @@ export declare class UpdatePasswordRequest extends Message<UpdatePasswordRequest
   newPassword: string;
 
   /**
-   * The address of the account to update the password
+   * The addresses of the account to update the password
    *
-   * @generated from field: bytes address = 2;
+   * @generated from field: repeated bytes addresses = 2;
    */
-  address: Uint8Array;
+  addresses: Uint8Array[];
 
   constructor(data?: PartialMessage<UpdatePasswordRequest>);
 
@@ -2053,5 +2053,29 @@ export declare class HelloStreamResponse extends Message<HelloStreamResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HelloStreamResponse;
 
   static equals(a: HelloStreamResponse | PlainMessage<HelloStreamResponse> | undefined, b: HelloStreamResponse | PlainMessage<HelloStreamResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.GNONATIVETYPES_BytesList
+ */
+export declare class GNONATIVETYPES_BytesList extends Message<GNONATIVETYPES_BytesList> {
+  /**
+   * @generated from field: repeated bytes Value = 1;
+   */
+  Value: Uint8Array[];
+
+  constructor(data?: PartialMessage<GNONATIVETYPES_BytesList>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.GNONATIVETYPES_BytesList";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GNONATIVETYPES_BytesList;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GNONATIVETYPES_BytesList;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GNONATIVETYPES_BytesList;
+
+  static equals(a: GNONATIVETYPES_BytesList | PlainMessage<GNONATIVETYPES_BytesList> | undefined, b: GNONATIVETYPES_BytesList | PlainMessage<GNONATIVETYPES_BytesList> | undefined): boolean;
 }
 

@@ -105,7 +105,7 @@ export const UpdatePasswordRequest = proto3.makeMessageType(
   "land.gno.gnonative.v1.UpdatePasswordRequest",
   () => [
     { no: 1, name: "new_password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "addresses", kind: "scalar", T: 12 /* ScalarType.BYTES */, repeated: true },
   ],
 );
 
@@ -779,6 +779,16 @@ export const HelloStreamResponse = proto3.makeMessageType(
   "land.gno.gnonative.v1.HelloStreamResponse",
   () => [
     { no: 1, name: "greeting", jsonName: "Greeting", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnonative.v1.GNONATIVETYPES_BytesList
+ */
+export const GNONATIVETYPES_BytesList = proto3.makeMessageType(
+  "land.gno.gnonative.v1.GNONATIVETYPES_BytesList",
+  () => [
+    { no: 1, name: "Value", kind: "scalar", T: 12 /* ScalarType.BYTES */, repeated: true },
   ],
 );
 
