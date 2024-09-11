@@ -6,7 +6,7 @@ import { Modal } from '@gno/components/modal';
 import { Spacer } from '@gno/components/row';
 import TextInput from '@gno/components/textinput';
 import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { useState } from 'react';
 import { Modal as NativeModal } from 'react-native';
 
@@ -17,7 +17,7 @@ export type Props = {
 };
 
 const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | undefined>(undefined);
 
@@ -26,7 +26,7 @@ const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
 
     try {
       setError(undefined);
-      await gno.setPassword(password);
+      await gnonative.setPassword(password);
       onClose(true);
     } catch (error) {
       const err = new GRPCError(error);

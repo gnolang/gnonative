@@ -28,16 +28,7 @@ To run the app, run the following command:
 
 ```console
 cd examples/js/react-native/MyApp
-make android.reverse_tcp # for Android, after you have connected an Android device (simulator or real device)
-yarn start
-```
-
-and then run the following command in another terminal in the repo folder:
-
-```console
-cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
-cd examples/js/react-native/MyApp
-npx react-native [run-android|run-ios]
+npx expo [run:android|run-ios]
 ```
 
 ## Using Gno in your App
@@ -46,25 +37,30 @@ To use Gno in your app, you can import the `useGno` hook from
 `@gno/hooks/use-gno`:
 
 ```ts
-import { useGno } from '@gno/hooks/use-gno';
+import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
+
+const config = {
+  remote: 'https://gno.berty.io',
+  chain_id: 'dev',
+};
 
 export default function App() {
-  const gno = useGno();
+  return (
+    <GnoNativeProvider config={config}>
+      <InnerApp />
+    </GnoNativeProvider>
+  );
+}
 
-  React.useEffect(() => {
-    gno.getRemote()
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-  }, []);
+const InnerApp = () => {
+  const { gnonative } = useGnoNativeContext();
 
-...
-```
-
-## Regenerate dependencies
-
-If you changed some Go code, or updated the React-Native dependencies, you have to build them again:
-```console
-cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
-APP_NAME=MyApp make build.ios # for iOS
-APP_NAME=MyApp make build.android # for Android
+  useEffect(() => {
+    (async () => {
+      try {
+        const remote = await gnonative.getRemote();
+        const chainId = await gnonative.getChainID();
+        console.log('Remote %s ChainId %s', remote, chainId);
+        ...
+}
 ```

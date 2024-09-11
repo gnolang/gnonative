@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Linking, ScrollView, StyleSheet, View } from 'react-native';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { Buffer } from 'buffer';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
 import { ErrCode } from '@buf/gnolang_gnonative.bufbuild_es/rpc_pb';
@@ -24,7 +24,7 @@ function DevMode() {
   const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
   const navigate = useNavigation<RouterWelcomeStackProp>();
 
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
 
   const onPostPress = async () => {
     setLoading('Replying to a post...');
@@ -33,14 +33,14 @@ function DevMode() {
     const gasWanted = 2000000;
     const args: Array<string> = ['1', '1', '1', postContent];
     try {
-      for await (const response of await gno.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
+      for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
         console.log('response: ', response);
         setAppConsole(Buffer.from(response.result).toString());
       }
     } catch (error: ConnectError | unknown) {
       const err = new GRPCError(error);
       if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-        const account = await gno.getActiveAccount();
+        const account = await gnonative.getActiveAccount();
         setReenterPassword(account.key?.name);
         return;
       }

@@ -14,8 +14,8 @@
     "storybook-watch": "sb-rn-watcher"
   },
   "dependencies": {
-    "@buf/gnolang_gnonative.bufbuild_es": "^1.7.2-20240904125102-a86ba793db3b.2",
-    "@buf/gnolang_gnonative.connectrpc_es": "^1.4.0-20240904125102-a86ba793db3b.3",
+    "@buf/gnolang_gnonative.bufbuild_es": "^1.7.2-20240905152811-1254a97aecd9.2",
+    "@buf/gnolang_gnonative.connectrpc_es": "^1.4.0-20240905152811-1254a97aecd9.3",
     "@bufbuild/protobuf": "^1.7.2",
     "@connectrpc/connect": "^1.4.0",
     "@connectrpc/connect-web": "^1.4.0",

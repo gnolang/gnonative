@@ -1,6 +1,6 @@
 import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
@@ -16,13 +16,13 @@ export type Props = NativeStackScreenProps<RouterWelcomeStack, 'RemoveConfirm'>;
 const RemoveConfirm = ({ route }: Props) => {
   const accountName = route.params.accountName;
 
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [error, setError] = useState<string | undefined>(undefined);
 
   const onConfirm = async () => {
     try {
-      await gno.deleteAccount(accountName, undefined, true);
+      await gnonative.deleteAccount(accountName, undefined, true);
       navigation.navigate(RoutePath.Home);
     } catch (error) {
       setError(error?.toString());

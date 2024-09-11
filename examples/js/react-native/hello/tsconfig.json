@@ -1,11 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@gno/*": ["src/*"],
-      "@styles/*": ["src/styles/*"],
-      "@api/*": ["../../../../api/gen/es/*"]
-    }
+    "strict": true
   }
 }

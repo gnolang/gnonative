@@ -3,7 +3,7 @@ import Layout from '@gno/components/pages';
 import { Spacer } from '@gno/components/row';
 import SeedBox from '@gno/components/seedbox';
 import Text from '@gno/components/texts';
-import { useGno } from '@gno/hooks/use-gno';
+import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';
 import { useNavigation } from '@react-navigation/native';
@@ -19,12 +19,12 @@ const text = {
 
 const YourSeedPhrase: React.FC = () => {
   const [phrase, setPhrase] = useState<string | undefined>(undefined);
-  const gno = useGno();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
 
   const onReviewPressHandler = async () => {
     try {
-      setPhrase(await gno.generateRecoveryPhrase());
+      setPhrase(await gnonative.generateRecoveryPhrase());
     } catch (error) {
       console.log(error);
     }

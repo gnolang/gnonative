@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Gnoboard",
-    "slug": "Gnoboard",
+    "name": "gnoboard",
     "version": "1.0.0",
+    "slug": "gnoboard",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
