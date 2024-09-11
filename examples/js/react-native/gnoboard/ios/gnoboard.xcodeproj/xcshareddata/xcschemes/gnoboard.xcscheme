@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "gnoboard.app"
-               BlueprintName = "gnoboard"
-               ReferencedContainer = "container:gnoboard.xcodeproj">
+               BuildableName = "Gnoboard.app"
+               BlueprintName = "Gnoboard"
+               ReferencedContainer = "container:Gnoboard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "gnoboardTests.xctest"
-               BlueprintName = "gnoboardTests"
-               ReferencedContainer = "container:gnoboard.xcodeproj">
+               BuildableName = "GnoboardTests.xctest"
+               BlueprintName = "GnoboardTests"
+               ReferencedContainer = "container:Gnoboard.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "gnoboard.app"
-            BlueprintName = "gnoboard"
-            ReferencedContainer = "container:gnoboard.xcodeproj">
+            BuildableName = "Gnoboard.app"
+            BlueprintName = "Gnoboard"
+            ReferencedContainer = "container:Gnoboard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "gnoboard.app"
-            BlueprintName = "gnoboard"
-            ReferencedContainer = "container:gnoboard.xcodeproj">
+            BuildableName = "Gnoboard.app"
+            BlueprintName = "Gnoboard"
+            ReferencedContainer = "container:Gnoboard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -6,9 +6,9 @@ TEMPLATE_PROJECT := gnoboard
 
 # - Node: Handle node_modules
 
-node_modules: package.json yarn.lock
-	$(call check-program, yarn)
-	(yarn && touch $@) || true
+node_modules: package.json package-lock.json
+	$(call check-program, npm)
+	(npm install && touch $@) || true
 .PHONY: node_modules
 
 ios/${TEMPLATE_PROJECT}.xcworkspace: ios/${TEMPLATE_PROJECT}.xcodeproj ios/Podfile node_modules

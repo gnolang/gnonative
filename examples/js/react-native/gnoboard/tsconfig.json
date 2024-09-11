@@ -4,8 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@gno/*": ["src/*"],
-      "@styles/*": ["src/styles/*"],
-      "@api/*": ["../../../../api/gen/es/*"]
+      "@styles/*": ["src/styles/*"]
     }
   }
 }

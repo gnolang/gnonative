@@ -10,7 +10,6 @@ module.exports = function (api) {
           extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
           alias: {
             '@gno': './src/',
-            '@api': '../../../../api/gen/es',
           },
         },
       ],

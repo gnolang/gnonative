@@ -1,4 +1,4 @@
-import { KeyInfo } from '@api/gnonativetypes_pb';
+import { KeyInfo } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
 export type GnoConfig = {
   Remote: string;
