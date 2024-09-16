@@ -50,7 +50,7 @@ export interface GnoKeyApi {
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   activateAccount: (nameOrBech32: string) => Promise<ActivateAccountResponse>;
   setPassword: (password: string, address?: Uint8Array) => Promise<SetPasswordResponse>;
-  updatePassword: (password: string, address?: Uint8Array) => Promise<UpdatePasswordResponse>;
+  updatePassword: (password: string, addresses: Uint8Array[]) => Promise<UpdatePasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
   getActivatedAccount: () => Promise<GetActivatedAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;

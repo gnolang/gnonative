@@ -244,9 +244,9 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response;
   }
 
-  async updatePassword(newPassword: string, address?: Uint8Array): Promise<UpdatePasswordResponse> {
+  async updatePassword(newPassword: string, addresses: Uint8Array[]): Promise<UpdatePasswordResponse> {
     const client = await this.#getClient();
-    const response = await client.updatePassword(new UpdatePasswordRequest({ newPassword, address }));
+    const response = await client.updatePassword(new UpdatePasswordRequest({ newPassword, addresses }));
     return response;
   }
 
