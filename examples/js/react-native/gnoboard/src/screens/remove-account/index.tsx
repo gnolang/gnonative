@@ -10,7 +10,7 @@ import { GnoAccount } from '@gno/GoBridge/types';
 import { RoutePath } from '@gno/router/path';
 
 const RemoveAccount = () => {
-  const gnonative = useGnoNativeContext();
+  const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [accounts, setAccounts] = useState<GnoAccount[]>([]);

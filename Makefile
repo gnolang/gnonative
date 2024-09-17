@@ -190,7 +190,7 @@ asdf.install_tools: asdf.add_plugins
 # Script to create a new app
 
 npm_basic_dependencies := @gnolang/gnonative
-OUTPUT_DIR := $(make_dir)/examples/js/react-native
+OUTPUT_DIR := $(make_dir)/examples/js/expo
 
 new-app:
 ifndef APP_NAME
@@ -198,11 +198,11 @@ ifndef APP_NAME
 endif
 	$(call check-program, npm)
 	npm config set @buf:registry https://buf.build/gen/npm/v1/
-	$(MAKE) new-react-native-app OUTPUT_DIR=$(make_dir)/examples/js/react-native
-	$(MAKE) copy-js-files APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(make_dir)/examples/js/react-native
+	$(MAKE) new-expo-app OUTPUT_DIR=$(make_dir)/examples/js/expo
+	$(MAKE) copy-js-files OUTPUT_DIR=$(make_dir)/examples/js/expo APP_NAME=$(APP_NAME)
 
-# creates a new react native app using Expo script. Also creates ios and android folders
-new-react-native-app:
+# creates a new Expo app using Expo script. Also creates ios and android folders
+new-expo-app:
 	$(call check-program, npm)
 	$(call check-program, npx)
 	@mkdir -p $(OUTPUT_DIR)
@@ -212,12 +212,10 @@ new-react-native-app:
 	cd $(OUTPUT_DIR)/$(APP_NAME) && npx expo prebuild
 	@echo "Installing npm dependencies"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies}
-	@echo "Building GnoCore.xcframework for the new app"
-	$(MAKE) build.ios APP_NAME=$(APP_NAME) APP_OUTPUT_DIR=$(OUTPUT_DIR)/$(APP_NAME)
 
 # copy js files from gnoboard to the new app
 copy-js-files:
 	@echo "Copying js files"
 	@cp $(expo_dir)/example/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
 
-.PHONY: new-app configure-npm new-react-native-app copy-js-files
+.PHONY: new-app configure-npm new-expo-app copy-js-files

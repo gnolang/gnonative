@@ -1,6 +1,17 @@
-import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-polyfill-globals/auto';
+// order of imports is important
+
+import {
+  GnoNativeProvider,
+  useGnoNativeContext,
+} from './provider/gnonative-provider';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+
+// Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
+// Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
+(Symbol as any).asyncIterator =
+  Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
 
 const config = {
   remote: 'https://gno.berty.io',
@@ -16,7 +27,7 @@ export default function App() {
 }
 
 const InnerApp = () => {
-  const { gnonative } = useGnoNativeContext();
+  const {gnonative} = useGnoNativeContext();
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
