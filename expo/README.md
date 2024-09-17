@@ -29,7 +29,7 @@ npm config set @buf:registry  https://buf.build/gen/npm/v1/
 ## Create new Expo app
 
 ```
-npx create-expo-app my-app
+npx create-expo-app my-app --template expo-template-blank-typescript
 cd my-app
 ```
 
@@ -43,7 +43,7 @@ npm install @gnolang/gnonative
 
 We prepared for you an example Hello World code.
 
-Open App.js and replace the content with this:
+Open App.tsx and replace the content with this:
 
 ```tsx
 import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
