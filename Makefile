@@ -212,8 +212,6 @@ new-expo-app:
 	cd $(OUTPUT_DIR)/$(APP_NAME) && npx expo prebuild
 	@echo "Installing npm dependencies"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies}
-	@echo "Building GnoCore.xcframework for the new app"
-	$(MAKE) framework.ios && $(MAKE) framework.android
 
 # copy js files from gnoboard to the new app
 copy-js-files:

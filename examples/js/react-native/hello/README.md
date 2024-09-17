@@ -5,6 +5,17 @@ Then we tweaked the project to add gnonative capabilities. We will give you belo
 
 > **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
+## Pre-requisites
+
+Compile the Go Framework:
+
+```bash
+cd $(go list -m -f '{{.Dir}}') # go to the root of the repo
+make framework.ios # for iOS
+make framework.android # for Android
+cd - # go back to the previous directory for the next steps
+```
+
 ## Step 1: Install the dependencies
 
 ```bash
