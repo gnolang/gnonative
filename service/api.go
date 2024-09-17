@@ -311,17 +311,34 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Request[api_gen.UpdatePasswordRequest]) (*connect.Response[api_gen.UpdatePasswordResponse], error) {
-	signer, err := s.getSigner(req.Msg.Address)
-	if err != nil {
-		return nil, err
+	s.lock.Lock()
+	defer s.lock.Unlock()
+
+	// Get all the signers, before trying to update the password.
+	var signers = make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
+	for i := range len(req.Msg.Addresses) {
+		var err error
+		if signers[i], err = s.getSigner(req.Msg.Addresses[i]); err != nil {
+			return nil, err
+		}
 	}
 
-	getNewPass := func() (string, error) { return req.Msg.NewPassword, nil }
-	if err := s.keybase.Update(s.activeAccount.keyInfo.GetName(), signer.Password, getNewPass); err != nil {
-		return nil, getGrpcError(err)
+	getNewPassword := func() (string, error) { return req.Msg.NewPassword, nil }
+	for i := range len(req.Msg.Addresses) {
+		if err := s.keybase.Update(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
+			// Roll back the passwords. Don't check the error from Update.
+			for j := range i {
+				getOldPassword := func() (string, error) { return signers[j].Password, nil }
+				s.keybase.Update(signers[j].Account, req.Msg.NewPassword, getOldPassword)
+			}
+			return nil, getGrpcError(err)
+		}
 	}
 
-	signer.Password = req.Msg.NewPassword
+	// Success. Update the Password in all the signers.
+	for i := range len(req.Msg.Addresses) {
+		signers[i].Password = req.Msg.NewPassword
+	}
 
 	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
 }

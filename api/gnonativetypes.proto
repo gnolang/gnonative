@@ -43,8 +43,8 @@ message SetPasswordResponse {
 
 message UpdatePasswordRequest {
 	string new_password = 1;
-	// The address of the account to update the password
-	bytes address = 2;
+	// The addresses of the account to update the password
+	repeated bytes addresses = 2;
 }
 
 message UpdatePasswordResponse {
@@ -378,4 +378,8 @@ message HelloStreamRequest {
 
 message HelloStreamResponse {
 	string greeting = 1 [json_name = "Greeting"];
+}
+
+message GNONATIVETYPES_BytesList {
+	repeated bytes Value = 1;
 }

@@ -237,8 +237,9 @@ type GnoNativeServiceClient interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
-	// Update the keybase to use the new password for the account in the keybase with the given address.
-	// Before calling this, you must call SetPassword with the current password.
+	// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+	// Before calling this, you must call SetPassword with the current password for each account.
+	// If there is an error, then roll back all accounts to the current password.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.
@@ -834,8 +835,9 @@ type GnoNativeServiceHandler interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
-	// Update the keybase to use the new password for the account in the keybase with the given address.
-	// Before calling this, you must call SetPassword with the current password.
+	// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+	// Before calling this, you must call SetPassword with the current password for each account.
+	// If there is an error, then roll back all accounts to the current password.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
 	// GetActiveAccount gets the active account which was set by SelectAccount.

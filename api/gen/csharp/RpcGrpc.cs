@@ -709,8 +709,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Update the keybase to use the new password for the account in the keybase with the given address.
-      /// Before calling this, you must call SetPassword with the current password.
+      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Before calling this, you must call SetPassword with the current password for each account.
+      /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -1889,8 +1890,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SetPassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase to use the new password for the account in the keybase with the given address.
-      /// Before calling this, you must call SetPassword with the current password.
+      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Before calling this, you must call SetPassword with the current password for each account.
+      /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1904,8 +1906,9 @@ namespace Land.Gno.Gnonative.V1 {
         return UpdatePassword(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase to use the new password for the account in the keybase with the given address.
-      /// Before calling this, you must call SetPassword with the current password.
+      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Before calling this, you must call SetPassword with the current password for each account.
+      /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1917,8 +1920,9 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_UpdatePassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase to use the new password for the account in the keybase with the given address.
-      /// Before calling this, you must call SetPassword with the current password.
+      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Before calling this, you must call SetPassword with the current password for each account.
+      /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -1932,8 +1936,9 @@ namespace Land.Gno.Gnonative.V1 {
         return UpdatePasswordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase to use the new password for the account in the keybase with the given address.
-      /// Before calling this, you must call SetPassword with the current password.
+      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Before calling this, you must call SetPassword with the current password for each account.
+      /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
