@@ -1,4 +1,4 @@
-PROJECT_DIR := ..
+PROJECT_DIR := $(shell go list -m -f '{{.Dir}}')
 
 ANDROID_FRAMEWORK_SRC_DIR := $(PROJECT_DIR)/framework/android
 ANDROID_FRAMEWORK_OUTPUT_DIR := android/libs
