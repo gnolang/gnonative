@@ -101,6 +101,7 @@ make framework.android
 
 ```console
 cd examples/js/expo/gnoboard
+npm install
 npm start
 ```
 
