@@ -94,7 +94,7 @@ make asdf.install_tools
 #### Build the Go code as a library
 
 ```console
-make build.android
+make framework.android
 ```
 
 #### Start metro
@@ -156,7 +156,7 @@ make asdf.install_tools
 #### Build the Go code as a library
 
 ```console
-make build.ios
+make framework.ios
 ```
 
 #### Start metro
