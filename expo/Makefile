@@ -18,7 +18,7 @@ go_service_files := $(shell find $(PROJECT_DIR)/service -iname '*.go')
 go_files := $(go_framework_files) $(go_service_files)
 go_deps := $(PROJECT_DIR)/go.mod $(PROJECT_DIR)/go.sum $(go_files)
 
-build: framework.android framework.ios
+build: build.android build.ios
 
 clean: clean.android clean.ios
 	cd $(PROJECT_DIR); $(MAKE) clean
