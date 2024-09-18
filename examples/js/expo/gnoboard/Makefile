@@ -6,16 +6,18 @@ TEMPLATE_PROJECT := gnoboard
 
 # - Node: Handle node_modules
 
+build.android: node_modules
+	$(call check-program, npx)
+	npx expo run:android
+
+build.ios: node_modules
+	$(call check-program, npx)
+	npx expo run:ios
+
 node_modules: package.json package-lock.json
 	$(call check-program, npm)
 	(npm install && touch $@) || true
 .PHONY: node_modules
-
-ios/${TEMPLATE_PROJECT}.xcworkspace: ios/${TEMPLATE_PROJECT}.xcodeproj ios/Podfile node_modules
-	$(call check-program, bundle)
-	cd ios && pod install
-	touch $@
-.PHONY: ios/${TEMPLATE_PROJECT}.xcworkspace
 
 # - Helpers
 
