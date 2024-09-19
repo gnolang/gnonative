@@ -11,7 +11,7 @@ Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0
 
 ## Expo module
 
-To use Gno Native Kit, we advice you to use the Expo module in your Expo React-Native project. Please read the [README](expo/README.md) in the `expo` folder.
+To use Gno Native Kit, we advise you to use the Expo module in your Expo React-Native project. Please read the [README](expo/README.md) in the `expo` folder.
 
 In the `expo/example` folder, you can find a minimal app using the Expo module.
 
@@ -19,7 +19,7 @@ Other examples are available in the `example/js/expo` folder.
 
 ## Bare React-Native project
 
-If you are interested of using Gno Native Kit in a bare React-Native project, please check the `hello` example app in the `example/js/react-native/hello` folder.
+If you are interested in using Gno Native Kit in a bare React-Native project, please check the `hello` example app in the `example/js/react-native/hello` folder.
 
 ## Prerequisites for building Gno Native Kit or example apps
 
@@ -98,7 +98,7 @@ To launch Android Studio, in a terminal enter:
 make asdf.install_tools
 ```
 
-If you get an error like "https://github.com/CocoaPods/CLAide.git (at master@97b765e) is not yet checked out" then reinstall cocoapods like this:
+On macOS, if you get an error like "https://github.com/CocoaPods/CLAide.git (at master@97b765e) is not yet checked out" then reinstall cocoapods like this:
 
 ```sh
 asdf uninstall cocoapods
