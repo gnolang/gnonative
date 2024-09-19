@@ -12,11 +12,9 @@ APP_NAME ?= gnoboard
 # Define the directory that contains the current Makefile
 make_dir := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 cache_dir := $(make_dir)/.cache
-gnoboard_dir := $(make_dir)/examples/js/react-native/gnoboard
 expo_dir := $(make_dir)/expo
 
 # Argument Defaults
-APP_OUTPUT_DIR ?= $(make_dir)/examples/js/react-native/$(APP_NAME)
 IOS_OUTPUT_FRAMEWORK_DIR ?= framework/ios
 ANDROID_OUTPUT_LIBS_DIR ?= framework/android
 GO_BIND_BIN_DIR ?= $(cache_dir)/bind
@@ -44,20 +42,8 @@ PATH := $(GO_BIND_BIN_DIR):$(PATH)
 
 # * Main commands
 
-# `all` and `build` command builds everything (generate, build.ios, build.android)
-all build: generate build.ios build.android
-
-# Build iOS framework
-build.ios: generate framework.ios
-ifeq ($(OS),Darwin)
-	@echo "generate iOS framework"
-	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
-	cd $(APP_OUTPUT_DIR); $(MAKE) ios/$(APP_NAME).xcworkspace TEMPLATE_PROJECT=$(APP_NAME)
-endif
-
-# Build Android aar & jar
-build.android: generate framework.android
-	cd $(APP_OUTPUT_DIR); $(MAKE) node_modules
+# `all` and `build` command build the Go Framework
+all build: framework
 
 # Generate API from protofiles
 generate: api.generate
@@ -66,14 +52,10 @@ generate: api.generate
 regenerate: api.clean api.generate
 
 # Clean all generated files
-clean: bind.clean
-
-# Force clean (clean and remove node_modules)
-fclean:
-	cd $(APP_OUTPUT_DIR); ls; rm -rf node_modules
+clean: framework.clean
 	rm -rf $(cache_dir)
 
-.PHONY: generate regenerate build.ios build.android clean fclean
+.PHONY: generate regenerate clean
 
 # - API : Handle API generation and cleaning
 
@@ -82,8 +64,8 @@ api.clean: _api.clean.protocol _api.clean.modules
 
 # - API - rpc
 
-protos_src := $(wildcard service/rpc/*.proto)
-gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard service/gnonativetypes/*.go)
+protos_src := $(wildcard api/*.proto)
+gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard api/gnonativetypes/*.go)
 gen_sum := gen.sum
 
 _api.generate.protocol: $(gen_sum)
@@ -104,7 +86,9 @@ $(gen_sum): $(gen_src)
 		go mod tidy \
 	)
 
-_api.generate.modules:
+_api.generate.modules: api/package-lock.json
+
+api/package-lock.json:
 	$(call check-program, npm)
 	cd api; npm install
 
@@ -140,6 +124,7 @@ framework.ios: $(gnocore_xcframework)
 .PHONY: framework.ios
 
 $(gnocore_xcframework): $(bind_init_files) $(go_deps)
+	$(MAKE) generate
 ifeq ($(OS),Darwin)
 	@mkdir -p $(dir $@)
 	# need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
@@ -157,6 +142,7 @@ framework.android: $(gnocore_aar) $(gnocore_jar)
 .PHONY: framework.android
 
 $(gnocore_aar): $(bind_init_files) $(go_deps)
+	$(MAKE) generate
 	@mkdir -p $(dir $@) .cache/bind/android
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gnonative \
@@ -165,10 +151,11 @@ $(gnocore_aar): $(bind_init_files) $(go_deps)
 _bind.clean.android:
 	rm -rf $(gnocore_jar) $(gnocore_aar)
 
+# - Bind
+framework: framework.ios framework.android
+.PHONY: framework
 
-# - Bind - cleaning
-
-bind.clean: _bind.clean.ios _bind.clean.android
+framework.clean: _bind.clean.ios _bind.clean.android
 	rm -rf $(bind_init_files)
 
 # - asdf
@@ -213,7 +200,7 @@ new-expo-app:
 	@echo "Installing npm dependencies"
 	cd $(OUTPUT_DIR)/$(APP_NAME) && npm install ${npm_basic_dependencies}
 
-# copy js files from gnoboard to the new app
+# copy js files from the Expo example app to the new app
 copy-js-files:
 	@echo "Copying js files"
 	@cp $(expo_dir)/example/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx

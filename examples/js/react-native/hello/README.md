@@ -178,7 +178,7 @@ Edit `android/app/build.gradle`:
 +                def makefileDir = "${rootDir.getPath()}/../../../../.."
 +                workingDir makefileDir
 +                environment 'PWD', makefileDir
-+                commandLine 'make', 'build.android'
++                commandLine 'make', 'framework.android'
 +            }
 +        } else {
 +            logger.warn('Warning: make command not found in PATH')
