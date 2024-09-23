@@ -133,8 +133,8 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   async signTx(
     txJson: string,
     address: Uint8Array,
-    accountNumber: bigint,
-    sequenceNumber: bigint,
+    accountNumber: bigint = BigInt(0),
+    sequenceNumber: bigint = BigInt(0),
   ): Promise<SignTxResponse> {
     const client = this.#getClient();
     const response = client.signTx({ txJson, address, accountNumber, sequenceNumber });
