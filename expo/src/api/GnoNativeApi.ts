@@ -438,7 +438,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response.address;
   }
 
-  async BroadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>> {
+  async broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>> {
     const client = this.#getClient();
     const response = client.broadcastTxCommit({ signedTxJson });
     return response;

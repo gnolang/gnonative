@@ -14,6 +14,9 @@ import {
   SetRemoteResponse,
   UpdatePasswordResponse,
   KeyInfo,
+  SignTxResponse,
+  MakeTxResponse,
+  BroadcastTxCommitResponse,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
 export enum BridgeStatus {
@@ -83,6 +86,23 @@ export interface GnoKeyApi {
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromMnemonic: (mnemonic: string) => Promise<Uint8Array>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
+  signTx(
+    txJson: string,
+    address: Uint8Array,
+    accountNumber?: bigint,
+    sequenceNumber?: bigint,
+  ): Promise<SignTxResponse>;
+  makeCallTx(
+    packagePath: string,
+    fnc: string,
+    args: string[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress?: Uint8Array,
+    send?: string,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
+  broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
   // debug
   hello: (name: string) => Promise<string>;
   helloStream: (name: string) => Promise<AsyncIterable<HelloStreamResponse>>;
