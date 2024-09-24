@@ -6,7 +6,7 @@ export type GnoConfig = {
   KeyName: string;
   Password: string;
   GasFee: string;
-  GasWanted: number;
+  GasWanted: bigint;
   Mnemonic: string;
 };
 

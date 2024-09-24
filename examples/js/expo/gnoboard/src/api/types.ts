@@ -14,6 +14,9 @@ import {
   SetRemoteResponse,
   UpdatePasswordResponse,
   KeyInfo,
+  SignTxResponse,
+  MakeTxResponse,
+  BroadcastTxCommitResponse,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
 export enum BridgeStatus {
@@ -50,7 +53,7 @@ export interface GnoKeyApi {
   selectAccount: (nameOrBech32: string) => Promise<SelectAccountResponse>;
   activateAccount: (nameOrBech32: string) => Promise<ActivateAccountResponse>;
   setPassword: (password: string, address?: Uint8Array) => Promise<SetPasswordResponse>;
-  updatePassword: (password: string, address?: Uint8Array) => Promise<UpdatePasswordResponse>;
+  updatePassword: (password: string, addresses: Uint8Array[]) => Promise<UpdatePasswordResponse>;
   getActiveAccount: () => Promise<GetActiveAccountResponse>;
   getActivatedAccount: () => Promise<GetActivatedAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
@@ -67,7 +70,7 @@ export interface GnoKeyApi {
     fnc: string,
     args: string[],
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     send?: string,
     memo?: string,
@@ -76,13 +79,30 @@ export interface GnoKeyApi {
     toAddress: Uint8Array,
     send: string,
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromMnemonic: (mnemonic: string) => Promise<Uint8Array>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
+  signTx(
+    txJson: string,
+    address: Uint8Array,
+    accountNumber?: bigint,
+    sequenceNumber?: bigint,
+  ): Promise<SignTxResponse>;
+  makeCallTx(
+    packagePath: string,
+    fnc: string,
+    args: string[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress?: Uint8Array,
+    send?: string,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
+  broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
   // debug
   hello: (name: string) => Promise<string>;
   helloStream: (name: string) => Promise<AsyncIterable<HelloStreamResponse>>;
