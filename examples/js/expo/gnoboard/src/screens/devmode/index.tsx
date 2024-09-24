@@ -30,7 +30,7 @@ function DevMode() {
     setLoading('Replying to a post...');
     setAppConsole('replying to a post...');
     const gasFee = '1000000ugnot';
-    const gasWanted = 2000000;
+    const gasWanted = BigInt(2000000);
     const args: Array<string> = ['1', '1', '1', postContent];
     try {
       for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {

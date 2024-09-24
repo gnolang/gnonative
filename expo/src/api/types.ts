@@ -70,7 +70,7 @@ export interface GnoKeyApi {
     fnc: string,
     args: string[],
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     send?: string,
     memo?: string,
@@ -79,7 +79,7 @@ export interface GnoKeyApi {
     toAddress: Uint8Array,
     send: string,
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;

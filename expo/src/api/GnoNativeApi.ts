@@ -367,7 +367,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     fnc: string,
     args: string[],
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     send?: string,
     memo?: string,
@@ -376,7 +376,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const reponse = client.call(
       new CallRequest({
         gasFee,
-        gasWanted: BigInt(gasWanted),
+        gasWanted,
         memo,
         callerAddress,
         msgs: [
@@ -396,7 +396,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     toAddress: Uint8Array,
     send: string,
     gasFee: string,
-    gasWanted: number,
+    gasWanted: bigint,
     callerAddress?: Uint8Array,
     memo?: string,
   ): Promise<AsyncIterable<SendResponse>> {
@@ -404,7 +404,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const reponse = client.send(
       new SendRequest({
         gasFee,
-        gasWanted: BigInt(gasWanted),
+        gasWanted,
         memo,
         callerAddress,
         msgs: [

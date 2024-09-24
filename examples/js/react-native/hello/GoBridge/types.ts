@@ -1,4 +1,4 @@
-import { KeyInfo } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+import {KeyInfo} from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
 export type GnoConfig = {
   Remote: string;
@@ -6,7 +6,7 @@ export type GnoConfig = {
   KeyName: string;
   Password: string;
   GasFee: string;
-  GasWanted: number;
+  GasWanted: bigint;
   Mnemonic: string;
 };
 
