@@ -1,4 +1,4 @@
-import { NetworkMetainfo } from '@gno/native_modules/types';
+import { NetworkMetainfo } from '@gno/types';
 import NetworkListItem from '../network-list-item';
 import Text from '@gno/components/texts';
 import styled from 'styled-components/native';

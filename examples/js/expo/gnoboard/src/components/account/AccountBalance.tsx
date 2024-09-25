@@ -1,7 +1,7 @@
 import Text from '../texts';
 import styled from 'styled-components/native';
 import { colors } from '@gno/styles';
-import { BaseAccount } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+import { BaseAccount } from '@gnolang/gnonative';
 import Row from '../row';
 
 export type Props = {

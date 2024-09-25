@@ -1,6 +1,6 @@
 import Icons from '@gno/components/icons';
 import Text from '@gno/components/texts';
-import { NetworkMetainfo } from '@gno/native_modules/types';
+import { NetworkMetainfo } from '@gno/types';
 import { colors } from '@gno/styles';
 import styled from 'styled-components/native';
 

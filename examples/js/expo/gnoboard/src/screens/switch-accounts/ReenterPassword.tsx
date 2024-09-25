@@ -1,12 +1,10 @@
-import { GRPCError } from '@gno/grpc/error';
-import { ErrCode } from '@buf/gnolang_gnonative.bufbuild_es/rpc_pb';
 import Alert from '@gno/components/alert';
 import Button from '@gno/components/buttons';
 import { Modal } from '@gno/components/modal';
 import { Spacer } from '@gno/components/row';
 import TextInput from '@gno/components/textinput';
 import Text from '@gno/components/texts';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { ErrCode, GRPCError, useGnoNativeContext } from '@gnolang/gnonative';
 import { useState } from 'react';
 import { Modal as NativeModal } from 'react-native';
 

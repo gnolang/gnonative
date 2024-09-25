@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '@gno/components/pages';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
