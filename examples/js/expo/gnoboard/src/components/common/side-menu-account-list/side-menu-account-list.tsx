@@ -1,9 +1,9 @@
-import { GnoAccount } from '@gno/native_modules/types';
+import { KeyInfo } from '@gnolang/gnonative';
 import SideMenuAccountItem from '../side-menu-account-item/side-menu-account-item';
 
 interface SideMenuAccountListProps {
-  accounts: GnoAccount[];
-  changeAccount: (account: GnoAccount) => void;
+  accounts: KeyInfo[];
+  changeAccount: (account: KeyInfo) => void;
 }
 
 const SideMenuAccountList: React.FC<SideMenuAccountListProps> = ({ accounts, changeAccount }) => {

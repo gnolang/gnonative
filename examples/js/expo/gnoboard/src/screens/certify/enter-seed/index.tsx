@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
 import Button from '@gno/components/buttons';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { useNavigation } from '@react-navigation/native';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';

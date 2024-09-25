@@ -7,22 +7,18 @@ import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import Text from '@gno/components/texts';
 import styled from 'styled-components/native';
 import CurrentAccount from '@gno/components/account/CurrentAccoutn';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
 import Loading from '@gno/screens/loading';
-import { GnoAccount } from '@gno/GoBridge/types';
-import { QueryAccountResponse } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
 import { ConnectError } from '@connectrpc/connect';
-import { ErrCode } from '@buf/gnolang_gnonative.bufbuild_es/rpc_pb';
-import { GRPCError } from '@gno/grpc/error';
+import { ErrCode, GRPCError, useGnoNativeContext, KeyInfo, QueryAccountResponse } from '@gnolang/gnonative';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const { gnonative } = useGnoNativeContext();
 
   const [loading, setLoading] = React.useState<string | undefined>(undefined);
-  const [account, setAccount] = React.useState<GnoAccount | undefined>(undefined);
+  const [account, setAccount] = React.useState<KeyInfo | undefined>(undefined);
   const [balance, setBalance] = React.useState<QueryAccountResponse | undefined>(undefined);
   const [unknownAddress, setUnknownAddress] = React.useState<boolean>(false);
 

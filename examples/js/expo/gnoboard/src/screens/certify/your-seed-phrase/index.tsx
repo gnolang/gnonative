@@ -3,7 +3,7 @@ import Layout from '@gno/components/pages';
 import { Spacer } from '@gno/components/row';
 import SeedBox from '@gno/components/seedbox';
 import Text from '@gno/components/texts';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';
 import { useNavigation } from '@react-navigation/native';

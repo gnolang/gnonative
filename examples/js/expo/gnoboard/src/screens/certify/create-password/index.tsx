@@ -3,7 +3,7 @@ import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
 import TextInput from '@gno/components/textinput';
 import Button from '@gno/components/buttons';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';

@@ -1,7 +1,7 @@
 // order of imports is important
 import 'react-native-polyfill-globals/auto';
 
-import { GnoNativeProvider } from '@gno/provider/gnonative-provider';
+import { GnoNativeProvider } from '@gnolang/gnonative';
 import CustomRouter from '@gno/router/custom-router';
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.

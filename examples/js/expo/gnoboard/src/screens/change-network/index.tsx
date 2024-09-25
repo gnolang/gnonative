@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import NetworkList from '@gno/components/change-network/network-list';
 import chains from '@gno/resources/chains/chains.json';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { RoutePath } from '@gno/router/path';
-import { NetworkMetainfo } from '@gno/GoBridge/types';
+import { NetworkMetainfo } from '@gno/types';
 
 const ChangeNetwork = () => {
   const { gnonative } = useGnoNativeContext();

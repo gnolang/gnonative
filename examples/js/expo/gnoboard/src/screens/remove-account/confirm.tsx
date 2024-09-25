@@ -1,6 +1,6 @@
 import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
-import { useGnoNativeContext } from '@gno/provider/gnonative-provider';
+import { useGnoNativeContext } from '@gnolang/gnonative';
 import { RouterWelcomeStack, RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
