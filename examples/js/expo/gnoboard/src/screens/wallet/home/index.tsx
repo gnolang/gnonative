@@ -35,10 +35,12 @@ export const Home: React.FC = () => {
           const balance = await gnonative.queryAccount(response.key.address);
           setBalance(balance);
         }
-      } catch (error: ConnectError | unknown) {
-        const err = new GRPCError(error);
-        if (err.errCode() === ErrCode.ErrNoActiveAccount) {
-          setUnknownAddress(true);
+      } catch (error) {
+        if (error instanceof ConnectError) {
+          const err = new GRPCError(error);
+          if (err.errCode() === ErrCode.ErrNoActiveAccount) {
+            setUnknownAddress(true);
+          }
         }
       } finally {
         setLoading(undefined);
