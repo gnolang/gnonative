@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "storybook-generate": "sb-rn-get-stories",
+    "ts:check": "tsc",
     "storybook-watch": "sb-rn-watcher"
   },
   "dependencies": {

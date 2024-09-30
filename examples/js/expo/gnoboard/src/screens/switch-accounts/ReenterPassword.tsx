@@ -7,6 +7,7 @@ import Text from '@gno/components/texts';
 import { ErrCode, GRPCError, useGnoNativeContext } from '@gnolang/gnonative';
 import { useState } from 'react';
 import { Modal as NativeModal } from 'react-native';
+import { ConnectError } from '@connectrpc/connect';
 
 export type Props = {
   visible: boolean;
@@ -27,12 +28,14 @@ const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
       await gnonative.setPassword(password);
       onClose(true);
     } catch (error) {
-      const err = new GRPCError(error);
-      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-        setError('Wrong password, please try again.');
-      } else {
-        setError(JSON.stringify(error));
+      if (error instanceof ConnectError) {
+        const err = new GRPCError(error);
+        if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+          setError('Wrong password, please try again.');
+          return;
+        }
       }
+      setError(JSON.stringify(error));
     }
   };
 

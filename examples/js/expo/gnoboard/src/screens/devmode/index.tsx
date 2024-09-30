@@ -35,12 +35,14 @@ function DevMode() {
         console.log('response: ', response);
         setAppConsole(Buffer.from(response.result).toString());
       }
-    } catch (error: ConnectError | unknown) {
-      const err = new GRPCError(error);
-      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-        const account = await gnonative.getActiveAccount();
-        setReenterPassword(account.key?.name);
-        return;
+    } catch (error) {
+      if (error instanceof ConnectError) {
+        const err = new GRPCError(error);
+        if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+          const account = await gnonative.getActiveAccount();
+          setReenterPassword(account.key?.name);
+          return;
+        }
       }
       console.log(error);
       setAppConsole('error' + JSON.stringify(error));
