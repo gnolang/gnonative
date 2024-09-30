@@ -24,9 +24,12 @@ go_service_files := $(shell find $(PROJECT_DIR)/service -iname '*.go')
 go_files := $(go_framework_files) $(go_service_files)
 go_deps := $(PROJECT_DIR)/go.mod $(PROJECT_DIR)/go.sum $(go_files)
 
+ts_check:
+	npm run ts:check
+
 # - Node: Handle node_modules
 
-node_modules: package.json package-lock.json
+node_modules: ts_check package.json package-lock.json
 	$(call check-program, npm)
 	(npm install && touch $@) || true
 .PHONY: node_modules
