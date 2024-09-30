@@ -23,20 +23,24 @@ export default {
 };
 
 export const Basic = () => {
+  // This callback isn't used by the storybook
+  const onNetworkChange = async () => {}
   return (
     <>
-      <NetworkList networkMetainfos={chains} currentNetworkId='test3' />
+      <NetworkList networkMetainfos={chains} currentChainId='test3' onNetworkChange={onNetworkChange} />
     </>
   );
 };
 
 export const ListItem = ({ networkMetainfo }: Props) => {
+  // This callback isn't used by the storybook
+  const onPress = async () => {}
   return (
     <>
       <Spacer />
-      <NetworkListItem networkMetainfo={networkMetainfo} currentNetworkId={undefined} />
+      <NetworkListItem networkMetainfo={networkMetainfo} currentChainId={undefined} onPress={onPress} />
       <Spacer />
-      <NetworkListItem networkMetainfo={networkMetainfo} currentNetworkId={'test3'} />
+      <NetworkListItem networkMetainfo={networkMetainfo} currentChainId={'test3'} onPress={onPress} />
     </>
   );
 };
