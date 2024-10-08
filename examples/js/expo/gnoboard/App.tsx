@@ -2,6 +2,7 @@
 import 'react-native-polyfill-globals/auto';
 
 import { GnoNativeProvider } from '@gnolang/gnonative';
+import { GnoboardProvider } from '@gno/provider/gnoboard-provider';
 import CustomRouter from '@gno/router/custom-router';
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <GnoNativeProvider config={defaultConfig}>
-      <CustomRouter />
+      <GnoboardProvider>
+        <CustomRouter/>
+      </GnoboardProvider>
     </GnoNativeProvider>
   );
 }
