@@ -12,27 +12,25 @@ import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
 import { ConnectError } from '@connectrpc/connect';
 import { ErrCode, GRPCError, useGnoNativeContext, KeyInfo, QueryAccountResponse } from '@gnolang/gnonative';
+import { useGnoboardContext } from '@gno/provider/gnoboard-provider';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const { gnonative } = useGnoNativeContext();
 
+  const { account } = useGnoboardContext();
   const [loading, setLoading] = React.useState<string | undefined>(undefined);
-  const [account, setAccount] = React.useState<KeyInfo | undefined>(undefined);
   const [balance, setBalance] = React.useState<QueryAccountResponse | undefined>(undefined);
   const [unknownAddress, setUnknownAddress] = React.useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
       setUnknownAddress(false);
-      setAccount(undefined);
       setBalance(undefined);
 
       try {
-        const response = await gnonative.getActiveAccount();
-        setAccount(response.key);
-        if (response.key) {
-          const balance = await gnonative.queryAccount(response.key.address);
+        if (account) {
+          const balance = await gnonative.queryAccount(account.address);
           setBalance(balance);
         }
       } catch (error) {
@@ -47,7 +45,7 @@ export const Home: React.FC = () => {
       }
     });
     return unsubscribe;
-  }, [navigation]);
+  }, [navigation, account]);
 
   if (loading) {
     return <Loading message={loading} />;
