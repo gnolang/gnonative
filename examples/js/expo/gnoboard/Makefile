@@ -29,14 +29,14 @@ ts_check:
 
 # - Node: Handle node_modules
 
-node_modules: ts_check package.json package-lock.json
+node_modules: package.json package-lock.json
 	$(call check-program, npm)
 	(npm install && touch $@) || true
 .PHONY: node_modules
 
 ######### ANDROID #########
 
-android: node_modules $(ANDROID_FRAMEWORK_SRC)
+android: node_modules ts_check $(ANDROID_FRAMEWORK_SRC)
 	$(call check-program, npx)
 	npx expo run:android
 .PHONY: build.android
@@ -46,7 +46,7 @@ $(ANDROID_FRAMEWORK_SRC): $(go_deps)
 
 ######### IOS #########
 
-ios: node_modules $(IOS_FRAMEWORK_SRC)
+ios: node_modules ts_check $(IOS_FRAMEWORK_SRC)
 	$(call check-program, npx)
 	npx expo run:ios
 .PHONY: build.ios
