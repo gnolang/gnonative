@@ -14,24 +14,31 @@ import { ConnectError } from '@connectrpc/connect';
 import { useNavigation } from '@react-navigation/native';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';
+import { useGnoboardContext } from '@gno/provider/gnoboard-provider';
 
 function DevMode() {
   const [postContent, setPostContent] = useState('');
   const [appConsole, setAppConsole] = useState<string>('');
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
+  const [reenterPasswordAddress, setReenterPasswordAddress] = useState<Uint8Array | undefined>(undefined);
   const navigate = useNavigation<RouterWelcomeStackProp>();
 
   const { gnonative } = useGnoNativeContext();
+  const { account } = useGnoboardContext();
 
   const onPostPress = async () => {
+    if (!account)
+      // shouldn't happen, but just in case
+      throw new Error("No active account");
+
     setLoading('Replying to a post...');
     setAppConsole('replying to a post...');
     const gasFee = '1000000ugnot';
     const gasWanted = BigInt(2000000);
     const args: Array<string> = ['1', '1', '1', postContent];
     try {
-      for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted)) {
+      for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted, account.address)) {
         console.log('response: ', response);
         setAppConsole(Buffer.from(response.result).toString());
       }
@@ -39,8 +46,8 @@ function DevMode() {
       if (error instanceof ConnectError) {
         const err = new GRPCError(error);
         if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-          const account = await gnonative.getActiveAccount();
-          setReenterPassword(account.key?.name);
+          setReenterPassword(account.name);
+          setReenterPasswordAddress(account.address);
           return;
         }
       }
@@ -86,7 +93,7 @@ function DevMode() {
         </Layout.Body>
       </Layout.Container>
       {reenterPassword ? (
-        <ReenterPassword visible={Boolean(reenterPassword)} accountName={reenterPassword} onClose={onCloseReenterPassword} />
+        <ReenterPassword visible={Boolean(reenterPassword)} accountName={reenterPassword} accountAddress={reenterPasswordAddress!} onClose={onCloseReenterPassword} />
       ) : null}
     </>
   );

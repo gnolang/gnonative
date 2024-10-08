@@ -16,6 +16,7 @@ const SwitchAccounts = () => {
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [accounts, setAccounts] = useState<KeyInfo[]>([]);
   const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
+  const [reenterPasswordAddress, setReenterPasswordAddress] = useState<Uint8Array | undefined>(undefined);
   const { setAccount } = useGnoboardContext();
 
   useEffect(() => {
@@ -42,6 +43,7 @@ const SwitchAccounts = () => {
       setLoading(undefined);
       if (!response.hasPassword) {
         setReenterPassword(value.name);
+        setReenterPasswordAddress(value.address);
         return;
       }
       navigation.navigate(RoutePath.Home);
@@ -71,7 +73,7 @@ const SwitchAccounts = () => {
         </Layout.Body>
       </Layout.Container>
       {reenterPassword ? (
-        <ReenterPassword visible={Boolean(reenterPassword)} accountName={reenterPassword} onClose={onCloseReenterPassword} />
+        <ReenterPassword visible={Boolean(reenterPassword)} accountName={reenterPassword} accountAddress={reenterPasswordAddress!} onClose={onCloseReenterPassword} />
       ) : null}
     </>
   );
