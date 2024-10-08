@@ -11,6 +11,7 @@ import TextInput from '@gno/components/textinput';
 import Alert from '@gno/components/alert';
 import { Spacer } from '@gno/components/row';
 import { ModalConfirm } from '@gno/components/modal';
+import { useGnoboardContext } from '@gno/provider/gnoboard-provider';
 
 const walletContent = {
   title: 'Import with Seed Phrase',
@@ -27,6 +28,7 @@ const EnterSeedPhrase = () => {
   const [showModal, setShowModal] = useState(false);
   const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
+  const { setAccount } = useGnoboardContext();
 
   const recoverAccount = async (override: boolean = false) => {
     if (!recoveryPhrase || !name || !password || !confirmPassword) return;
@@ -47,8 +49,9 @@ const EnterSeedPhrase = () => {
       }
 
       const response = await gnonative.createAccount(name, recoveryPhrase, password);
-      await gnonative.selectAccount(name);
-      await gnonative.setPassword(password);
+      await gnonative.activateAccount(name);
+      await gnonative.setPassword(password, response!.address);
+      setAccount(response);
       console.log('createAccount response: ' + response);
       navigation.navigate(RoutePath.Home);
     } catch (error) {
