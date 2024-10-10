@@ -12,6 +12,7 @@ import SeedBox from '@gno/components/seedbox';
 import Alert from '@gno/components/alert';
 import { Spacer } from '@gno/components/row';
 import { ModalConfirm } from '@gno/components/modal';
+import { useGnoboardContext } from '@gno/provider/gnoboard-provider';
 
 const text = {
   title: 'Create\na Password',
@@ -27,7 +28,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | undefined>(undefined);
   const [showModal, setShowModal] = useState(false);
-
+  const { setAccount } = useGnoboardContext();
   const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
 
@@ -51,8 +52,9 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
 
       const response = await gnonative.createAccount(name, phrase, password);
       console.log('createAccount response: ' + response);
-      await gnonative.selectAccount(name);
-      await gnonative.setPassword(password);
+      await gnonative.activateAccount(name);
+      setAccount(response);
+      await gnonative.setPassword(password, response!.address);
       navigation.navigate(RoutePath.Home);
     } catch (error) {
       setError(JSON.stringify(error));

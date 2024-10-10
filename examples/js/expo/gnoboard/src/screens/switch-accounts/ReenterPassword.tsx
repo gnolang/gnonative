@@ -12,10 +12,11 @@ import { ConnectError } from '@connectrpc/connect';
 export type Props = {
   visible: boolean;
   accountName: string;
+  accountAddress: Uint8Array;
   onClose: (sucess: boolean) => void;
 };
 
-const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
+const ReenterPassword = ({ visible, accountName, accountAddress, onClose }: Props) => {
   const { gnonative } = useGnoNativeContext();
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | undefined>(undefined);
@@ -25,7 +26,7 @@ const ReenterPassword = ({ visible, accountName, onClose }: Props) => {
 
     try {
       setError(undefined);
-      await gnonative.setPassword(password);
+      await gnonative.setPassword(password, accountAddress);
       onClose(true);
     } catch (error) {
       if (error instanceof ConnectError) {
