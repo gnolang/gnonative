@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetActiveAccountRequest, GetActiveAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SelectAccountRequest, SelectAccountResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdatePasswordRequest, UpdatePasswordResponse } from "./gnonativetypes_pb.js";
+import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RunRequest, RunResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdatePasswordRequest, UpdatePasswordResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -173,20 +173,6 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * SelectAccount selects the active account to use for later operations. If the response has_password is
-     * false, then you should set the password before using a method which needs it.
-     * If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
-     * DEPRECATED. Use ActivateAccount.
-     *
-     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SelectAccount
-     */
-    selectAccount: {
-      name: "SelectAccount",
-      I: SelectAccountRequest,
-      O: SelectAccountResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
      * Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
      * false, then you should call SetPassword before using a method which needs it.
      * If the account is already activated, return its info.
@@ -225,21 +211,6 @@ export const GnoNativeService = {
       name: "UpdatePassword",
       I: UpdatePasswordRequest,
       O: UpdatePasswordResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * GetActiveAccount gets the active account which was set by SelectAccount.
-     * If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
-     * (To check if there is an active account, use ListKeyInfo and check the
-     * length of the result.)
-     * DEPRECATED: Use GetActivatedAccount.
-     *
-     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.GetActiveAccount
-     */
-    getActiveAccount: {
-      name: "GetActiveAccount",
-      I: GetActiveAccountRequest,
-      O: GetActiveAccountResponse,
       kind: MethodKind.Unary,
     },
     /**

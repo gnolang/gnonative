@@ -148,30 +148,11 @@ message CreateAccountResponse {
 	KeyInfo key = 1 [json_name = "key_info"];
 }
 
-message SelectAccountRequest {
-	string name_or_bech32 = 1;
-}
-
-message SelectAccountResponse {
-	KeyInfo key = 1 [json_name = "key_info"];
-	// True if the password has been set. If false, then call SetPassword.
-	bool has_password = 2;
-}
-
 message ActivateAccountRequest {
 	string name_or_bech32 = 1;
 }
 
 message ActivateAccountResponse {
-	KeyInfo key = 1 [json_name = "key_info"];
-	// True if the password has been set. If false, then call SetPassword.
-	bool has_password = 2;
-}
-
-message GetActiveAccountRequest {
-}
-
-message GetActiveAccountResponse {
 	KeyInfo key = 1 [json_name = "key_info"];
 	// True if the password has been set. If false, then call SetPassword.
 	bool has_password = 2;

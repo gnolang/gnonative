@@ -67,8 +67,6 @@ type gnoNativeService struct {
 
 	// Map of key bech32 to userAccount.
 	userAccounts map[string]*userAccount
-	// The active account in userAccounts, or nil if none
-	activeAccount *userAccount
 
 	listeners []net.Listener
 	server    *http.Server
@@ -194,14 +192,6 @@ func (s *gnoNativeService) getClient(signer gnoclient.Signer) (*gnoclient.Client
 func (s *gnoNativeService) getSigner(addr []byte) (*gnoclient.SignerFromKeybase, error) {
 	s.lock.RLock()
 	defer s.lock.RUnlock()
-
-	if addr == nil {
-		if s.activeAccount == nil {
-			return nil, api_gen.ErrCode_ErrNoActiveAccount
-		}
-
-		return s.activeAccount.signer, nil
-	}
 
 	bech32 := crypto.AddressToBech32(crypto.AddressFromBytes(addr))
 	account, ok := s.userAccounts[bech32]
