@@ -340,27 +340,6 @@ export const CreateAccountResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnonative.v1.SelectAccountRequest
- */
-export const SelectAccountRequest = proto3.makeMessageType(
-  "land.gno.gnonative.v1.SelectAccountRequest",
-  () => [
-    { no: 1, name: "name_or_bech32", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message land.gno.gnonative.v1.SelectAccountResponse
- */
-export const SelectAccountResponse = proto3.makeMessageType(
-  "land.gno.gnonative.v1.SelectAccountResponse",
-  () => [
-    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
-    { no: 2, name: "has_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-  ],
-);
-
-/**
  * @generated from message land.gno.gnonative.v1.ActivateAccountRequest
  */
 export const ActivateAccountRequest = proto3.makeMessageType(
@@ -375,25 +354,6 @@ export const ActivateAccountRequest = proto3.makeMessageType(
  */
 export const ActivateAccountResponse = proto3.makeMessageType(
   "land.gno.gnonative.v1.ActivateAccountResponse",
-  () => [
-    { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
-    { no: 2, name: "has_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-  ],
-);
-
-/**
- * @generated from message land.gno.gnonative.v1.GetActiveAccountRequest
- */
-export const GetActiveAccountRequest = proto3.makeMessageType(
-  "land.gno.gnonative.v1.GetActiveAccountRequest",
-  [],
-);
-
-/**
- * @generated from message land.gno.gnonative.v1.GetActiveAccountResponse
- */
-export const GetActiveAccountResponse = proto3.makeMessageType(
-  "land.gno.gnonative.v1.GetActiveAccountResponse",
   () => [
     { no: 1, name: "key", jsonName: "key_info", kind: "message", T: KeyInfo },
     { no: 2, name: "has_password", kind: "scalar", T: 8 /* ScalarType.BOOL */ },

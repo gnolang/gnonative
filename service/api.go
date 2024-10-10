@@ -220,42 +220,6 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&api_gen.CreateAccountResponse{Key: info}), nil
 }
 
-func (s *gnoNativeService) SelectAccount(ctx context.Context, req *connect.Request[api_gen.SelectAccountRequest]) (*connect.Response[api_gen.SelectAccountResponse], error) {
-	s.logger.Debug("DEPRECATED: SelectAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
-
-	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
-	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
-	if err != nil {
-		return nil, getGrpcError(err)
-	}
-
-	info, err := ConvertKeyInfo(key)
-	if err != nil {
-		return nil, err
-	}
-
-	bech32 := crypto.AddressToBech32(key.GetAddress())
-	s.lock.Lock()
-	account, ok := s.userAccounts[bech32]
-	if !ok {
-		account = &userAccount{}
-		account.signer = &gnoclient.SignerFromKeybase{
-			Keybase: s.keybase,
-			ChainID: s.chainID,
-		}
-		s.userAccounts[bech32] = account
-	}
-	account.keyInfo = key
-	s.activeAccount = account
-	s.lock.Unlock()
-
-	account.signer.Account = req.Msg.NameOrBech32
-	return connect.NewResponse(&api_gen.SelectAccountResponse{
-		Key:         info,
-		HasPassword: account.signer.Password != "",
-	}), nil
-}
-
 func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Request[api_gen.ActivateAccountRequest]) (*connect.Response[api_gen.ActivateAccountResponse], error) {
 	s.logger.Debug("ActivateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
@@ -343,28 +307,6 @@ func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Requ
 	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
 }
 
-func (s *gnoNativeService) GetActiveAccount(ctx context.Context, req *connect.Request[api_gen.GetActiveAccountRequest]) (*connect.Response[api_gen.GetActiveAccountResponse], error) {
-	s.logger.Debug("DEPRECATED: GetActiveAccount called")
-
-	s.lock.RLock()
-	account := s.activeAccount
-	s.lock.RUnlock()
-
-	if account == nil {
-		return nil, api_gen.ErrCode_ErrNoActiveAccount
-	}
-
-	info, err := ConvertKeyInfo(account.keyInfo)
-	if err != nil {
-		return nil, err
-	}
-
-	return connect.NewResponse(&api_gen.GetActiveAccountResponse{
-		Key:         info,
-		HasPassword: account.signer.Password != "",
-	}), nil
-}
-
 func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect.Request[api_gen.GetActivatedAccountRequest]) (*connect.Response[api_gen.GetActivatedAccountResponse], error) {
 	s.logger.Debug("GetActivatedAccount called")
 
@@ -438,10 +380,6 @@ func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Reque
 	bech32 := crypto.AddressToBech32(key.GetAddress())
 	s.lock.Lock()
 	delete(s.userAccounts, bech32)
-	if s.activeAccount != nil && crypto.AddressToBech32(s.activeAccount.keyInfo.GetAddress()) == bech32 {
-		// The deleted account was the active account.
-		s.activeAccount = nil
-	}
 	s.lock.Unlock()
 	return connect.NewResponse(&api_gen.DeleteAccountResponse{}), nil
 }
@@ -579,20 +517,6 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 }
 
 func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []vm.MsgCall, error) {
-	var callerAddress crypto.Address
-	if req.CallerAddress != nil {
-		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
-	} else {
-		// Get the caller address from the active account
-		s.lock.RLock()
-		account := s.activeAccount
-		s.lock.RUnlock()
-		if account == nil {
-			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
-		}
-
-		callerAddress = account.keyInfo.GetAddress()
-	}
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -608,7 +532,7 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 		}
 
 		msgs = append(msgs, vm.MsgCall{
-			Caller:  callerAddress,
+			Caller:  crypto.AddressFromBytes(req.CallerAddress),
 			PkgPath: msg.PackagePath,
 			Func:    msg.Fnc,
 			Args:    msg.Args,
@@ -652,20 +576,6 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 }
 
 func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []bank.MsgSend, error) {
-	var callerAddress crypto.Address
-	if req.CallerAddress != nil {
-		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
-	} else {
-		// Get the caller address from the active account
-		s.lock.RLock()
-		account := s.activeAccount
-		s.lock.RUnlock()
-		if account == nil {
-			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
-		}
-
-		callerAddress = account.keyInfo.GetAddress()
-	}
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -681,7 +591,7 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 		}
 
 		msgs = append(msgs, bank.MsgSend{
-			FromAddress: callerAddress,
+			FromAddress: crypto.AddressFromBytes(req.CallerAddress),
 			ToAddress:   crypto.AddressFromBytes(msg.ToAddress),
 			Amount:      send,
 		})
@@ -721,20 +631,6 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 }
 
 func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []vm.MsgRun, error) {
-	var callerAddress crypto.Address
-	if req.CallerAddress != nil {
-		callerAddress = crypto.AddressFromBytes(req.CallerAddress)
-	} else {
-		// Get the caller address from the active account
-		s.lock.RLock()
-		account := s.activeAccount
-		s.lock.RUnlock()
-		if account == nil {
-			return nil, nil, api_gen.ErrCode_ErrNoActiveAccount
-		}
-
-		callerAddress = account.keyInfo.GetAddress()
-	}
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -758,7 +654,7 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 			},
 		}
 		msgs = append(msgs, vm.MsgRun{
-			Caller:  callerAddress,
+			Caller:  crypto.AddressFromBytes(req.CallerAddress),
 			Package: memPkg,
 			Send:    send,
 		})

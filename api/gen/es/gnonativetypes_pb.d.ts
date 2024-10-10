@@ -845,61 +845,6 @@ export declare class CreateAccountResponse extends Message<CreateAccountResponse
 }
 
 /**
- * @generated from message land.gno.gnonative.v1.SelectAccountRequest
- */
-export declare class SelectAccountRequest extends Message<SelectAccountRequest> {
-  /**
-   * @generated from field: string name_or_bech32 = 1;
-   */
-  nameOrBech32: string;
-
-  constructor(data?: PartialMessage<SelectAccountRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.SelectAccountRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccountRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccountRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountRequest;
-
-  static equals(a: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined, b: SelectAccountRequest | PlainMessage<SelectAccountRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnonative.v1.SelectAccountResponse
- */
-export declare class SelectAccountResponse extends Message<SelectAccountResponse> {
-  /**
-   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
-   */
-  key?: KeyInfo;
-
-  /**
-   * True if the password has been set. If false, then call SetPassword.
-   *
-   * @generated from field: bool has_password = 2;
-   */
-  hasPassword: boolean;
-
-  constructor(data?: PartialMessage<SelectAccountResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.SelectAccountResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SelectAccountResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SelectAccountResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SelectAccountResponse;
-
-  static equals(a: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined, b: SelectAccountResponse | PlainMessage<SelectAccountResponse> | undefined): boolean;
-}
-
-/**
  * @generated from message land.gno.gnonative.v1.ActivateAccountRequest
  */
 export declare class ActivateAccountRequest extends Message<ActivateAccountRequest> {
@@ -952,56 +897,6 @@ export declare class ActivateAccountResponse extends Message<ActivateAccountResp
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ActivateAccountResponse;
 
   static equals(a: ActivateAccountResponse | PlainMessage<ActivateAccountResponse> | undefined, b: ActivateAccountResponse | PlainMessage<ActivateAccountResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnonative.v1.GetActiveAccountRequest
- */
-export declare class GetActiveAccountRequest extends Message<GetActiveAccountRequest> {
-  constructor(data?: PartialMessage<GetActiveAccountRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.GetActiveAccountRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccountRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccountRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountRequest;
-
-  static equals(a: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined, b: GetActiveAccountRequest | PlainMessage<GetActiveAccountRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message land.gno.gnonative.v1.GetActiveAccountResponse
- */
-export declare class GetActiveAccountResponse extends Message<GetActiveAccountResponse> {
-  /**
-   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
-   */
-  key?: KeyInfo;
-
-  /**
-   * True if the password has been set. If false, then call SetPassword.
-   *
-   * @generated from field: bool has_password = 2;
-   */
-  hasPassword: boolean;
-
-  constructor(data?: PartialMessage<GetActiveAccountResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.GetActiveAccountResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetActiveAccountResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetActiveAccountResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetActiveAccountResponse;
-
-  static equals(a: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined, b: GetActiveAccountResponse | PlainMessage<GetActiveAccountResponse> | undefined): boolean;
 }
 
 /**

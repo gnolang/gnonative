@@ -63,12 +63,6 @@ service GnoNativeService {
   // to use GetKeyInfoByName to check if it exists before calling this.)
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 
-  // SelectAccount selects the active account to use for later operations. If the response has_password is
-  // false, then you should set the password before using a method which needs it.
-  // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
-  // DEPRECATED. Use ActivateAccount.
-  rpc SelectAccount(SelectAccountRequest) returns (SelectAccountResponse);
-
   // Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
   // false, then you should call SetPassword before using a method which needs it.
   // If the account is already activated, return its info.
@@ -85,13 +79,6 @@ service GnoNativeService {
   // If there is an error, then roll back all accounts to the current password.
   // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
-
-  // GetActiveAccount gets the active account which was set by SelectAccount.
-  // If no active account has been set with SelectAccount, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
-  // (To check if there is an active account, use ListKeyInfo and check the
-  // length of the result.)
-  // DEPRECATED: Use GetActivatedAccount.
-  rpc GetActiveAccount(GetActiveAccountRequest) returns (GetActiveAccountResponse);
 
   // GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
   // If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.

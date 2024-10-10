@@ -144,30 +144,11 @@ type CreateAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
 }
 
-type SelectAccountRequest struct {
-	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
-}
-
-type SelectAccountResponse struct {
-	Key *KeyInfo `json:"key_info" yaml:"key_info"`
-	// True if the password has been set. If false, then call SetPassword.
-	HasPassword bool `json:"has_password" yaml:"has_password"`
-}
-
 type ActivateAccountRequest struct {
 	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
 }
 
 type ActivateAccountResponse struct {
-	Key *KeyInfo `json:"key_info" yaml:"key_info"`
-	// True if the password has been set. If false, then call SetPassword.
-	HasPassword bool `json:"has_password" yaml:"has_password"`
-}
-
-type GetActiveAccountRequest struct {
-}
-
-type GetActiveAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
 	// True if the password has been set. If false, then call SetPassword.
 	HasPassword bool `json:"has_password" yaml:"has_password"`
