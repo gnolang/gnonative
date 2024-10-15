@@ -18,7 +18,7 @@
     "@bufbuild/protobuf": "^1.7.2",
     "@connectrpc/connect": "^1.4.0",
     "@connectrpc/connect-web": "^1.4.0",
-    "@gnolang/gnonative": "^3.0.0",
+    "@gnolang/gnonative": "^3.0.2",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
