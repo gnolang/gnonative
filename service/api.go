@@ -289,11 +289,11 @@ func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Requ
 
 	getNewPassword := func() (string, error) { return req.Msg.NewPassword, nil }
 	for i := range len(req.Msg.Addresses) {
-		if err := s.keybase.Update(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
-			// Roll back the passwords. Don't check the error from Update.
+		if err := s.keybase.Rotate(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
+			// Roll back the passwords. Don't check the error from Rotate.
 			for j := range i {
 				getOldPassword := func() (string, error) { return signers[j].Password, nil }
-				s.keybase.Update(signers[j].Account, req.Msg.NewPassword, getOldPassword)
+				s.keybase.Rotate(signers[j].Account, req.Msg.NewPassword, getOldPassword)
 			}
 			return nil, getGrpcError(err)
 		}
