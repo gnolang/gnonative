@@ -37,13 +37,13 @@ type SetPasswordRequest struct {
 type SetPasswordResponse struct {
 }
 
-type UpdatePasswordRequest struct {
+type RotatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
-	// The addresses of the account to update the password
+	// The addresses of the account to rotate the password
 	Addresses [][]byte `json:"addresses" yaml:"addresses"`
 }
 
-type UpdatePasswordResponse struct {
+type RotatePasswordResponse struct {
 }
 
 type GenerateRecoveryPhraseRequest struct {
