@@ -41,13 +41,13 @@ message SetPasswordRequest {
 message SetPasswordResponse {
 }
 
-message UpdatePasswordRequest {
+message RotatePasswordRequest {
 	string new_password = 1;
-	// The addresses of the account to update the password
+	// The addresses of the account to rotate the password
 	repeated bytes addresses = 2;
 }
 
-message UpdatePasswordResponse {
+message RotatePasswordResponse {
 }
 
 message GenerateRecoveryPhraseRequest {

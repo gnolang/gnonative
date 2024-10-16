@@ -99,10 +99,10 @@ export const SetPasswordResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnonative.v1.UpdatePasswordRequest
+ * @generated from message land.gno.gnonative.v1.RotatePasswordRequest
  */
-export const UpdatePasswordRequest = proto3.makeMessageType(
-  "land.gno.gnonative.v1.UpdatePasswordRequest",
+export const RotatePasswordRequest = proto3.makeMessageType(
+  "land.gno.gnonative.v1.RotatePasswordRequest",
   () => [
     { no: 1, name: "new_password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "addresses", kind: "scalar", T: 12 /* ScalarType.BYTES */, repeated: true },
@@ -110,10 +110,10 @@ export const UpdatePasswordRequest = proto3.makeMessageType(
 );
 
 /**
- * @generated from message land.gno.gnonative.v1.UpdatePasswordResponse
+ * @generated from message land.gno.gnonative.v1.RotatePasswordResponse
  */
-export const UpdatePasswordResponse = proto3.makeMessageType(
-  "land.gno.gnonative.v1.UpdatePasswordResponse",
+export const RotatePasswordResponse = proto3.makeMessageType(
+  "land.gno.gnonative.v1.RotatePasswordResponse",
   [],
 );
 

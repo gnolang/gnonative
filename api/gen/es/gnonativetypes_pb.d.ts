@@ -231,53 +231,53 @@ export declare class SetPasswordResponse extends Message<SetPasswordResponse> {
 }
 
 /**
- * @generated from message land.gno.gnonative.v1.UpdatePasswordRequest
+ * @generated from message land.gno.gnonative.v1.RotatePasswordRequest
  */
-export declare class UpdatePasswordRequest extends Message<UpdatePasswordRequest> {
+export declare class RotatePasswordRequest extends Message<RotatePasswordRequest> {
   /**
    * @generated from field: string new_password = 1;
    */
   newPassword: string;
 
   /**
-   * The addresses of the account to update the password
+   * The addresses of the account to rotate the password
    *
    * @generated from field: repeated bytes addresses = 2;
    */
   addresses: Uint8Array[];
 
-  constructor(data?: PartialMessage<UpdatePasswordRequest>);
+  constructor(data?: PartialMessage<RotatePasswordRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.UpdatePasswordRequest";
+  static readonly typeName = "land.gno.gnonative.v1.RotatePasswordRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdatePasswordRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RotatePasswordRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdatePasswordRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RotatePasswordRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdatePasswordRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RotatePasswordRequest;
 
-  static equals(a: UpdatePasswordRequest | PlainMessage<UpdatePasswordRequest> | undefined, b: UpdatePasswordRequest | PlainMessage<UpdatePasswordRequest> | undefined): boolean;
+  static equals(a: RotatePasswordRequest | PlainMessage<RotatePasswordRequest> | undefined, b: RotatePasswordRequest | PlainMessage<RotatePasswordRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message land.gno.gnonative.v1.UpdatePasswordResponse
+ * @generated from message land.gno.gnonative.v1.RotatePasswordResponse
  */
-export declare class UpdatePasswordResponse extends Message<UpdatePasswordResponse> {
-  constructor(data?: PartialMessage<UpdatePasswordResponse>);
+export declare class RotatePasswordResponse extends Message<RotatePasswordResponse> {
+  constructor(data?: PartialMessage<RotatePasswordResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "land.gno.gnonative.v1.UpdatePasswordResponse";
+  static readonly typeName = "land.gno.gnonative.v1.RotatePasswordResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdatePasswordResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RotatePasswordResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdatePasswordResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RotatePasswordResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdatePasswordResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RotatePasswordResponse;
 
-  static equals(a: UpdatePasswordResponse | PlainMessage<UpdatePasswordResponse> | undefined, b: UpdatePasswordResponse | PlainMessage<UpdatePasswordResponse> | undefined): boolean;
+  static equals(a: RotatePasswordResponse | PlainMessage<RotatePasswordResponse> | undefined, b: RotatePasswordResponse | PlainMessage<RotatePasswordResponse> | undefined): boolean;
 }
 
 /**

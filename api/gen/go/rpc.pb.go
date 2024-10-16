@@ -407,12 +407,12 @@ var file_rpc_proto_rawDesc = []byte{
 	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e,
 	0x67, 0x6e, 0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x65, 0x74, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6d, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6d, 0x0a, 0x0e, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x50, 0x61,
 	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x2c, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e,
-	0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71,
+	0x6f, 0x2e, 0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x52,
+	0x6f, 0x74, 0x61, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x6c, 0x61, 0x6e, 0x64, 0x2e, 0x67, 0x6e, 0x6f, 0x2e,
-	0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64,
+	0x67, 0x6e, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x76, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x6f, 0x74,
 	0x61, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x12, 0x7c, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61,
 	0x74, 0x65, 0x64, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x31, 0x2e, 0x6c, 0x61, 0x6e,
@@ -569,7 +569,7 @@ var file_rpc_proto_goTypes = []any{
 	(*CreateAccountRequest)(nil),              // 14: land.gno.gnonative.v1.CreateAccountRequest
 	(*ActivateAccountRequest)(nil),            // 15: land.gno.gnonative.v1.ActivateAccountRequest
 	(*SetPasswordRequest)(nil),                // 16: land.gno.gnonative.v1.SetPasswordRequest
-	(*UpdatePasswordRequest)(nil),             // 17: land.gno.gnonative.v1.UpdatePasswordRequest
+	(*RotatePasswordRequest)(nil),             // 17: land.gno.gnonative.v1.RotatePasswordRequest
 	(*GetActivatedAccountRequest)(nil),        // 18: land.gno.gnonative.v1.GetActivatedAccountRequest
 	(*QueryAccountRequest)(nil),               // 19: land.gno.gnonative.v1.QueryAccountRequest
 	(*DeleteAccountRequest)(nil),              // 20: land.gno.gnonative.v1.DeleteAccountRequest
@@ -601,7 +601,7 @@ var file_rpc_proto_goTypes = []any{
 	(*CreateAccountResponse)(nil),             // 46: land.gno.gnonative.v1.CreateAccountResponse
 	(*ActivateAccountResponse)(nil),           // 47: land.gno.gnonative.v1.ActivateAccountResponse
 	(*SetPasswordResponse)(nil),               // 48: land.gno.gnonative.v1.SetPasswordResponse
-	(*UpdatePasswordResponse)(nil),            // 49: land.gno.gnonative.v1.UpdatePasswordResponse
+	(*RotatePasswordResponse)(nil),            // 49: land.gno.gnonative.v1.RotatePasswordResponse
 	(*GetActivatedAccountResponse)(nil),       // 50: land.gno.gnonative.v1.GetActivatedAccountResponse
 	(*QueryAccountResponse)(nil),              // 51: land.gno.gnonative.v1.QueryAccountResponse
 	(*DeleteAccountResponse)(nil),             // 52: land.gno.gnonative.v1.DeleteAccountResponse
@@ -637,7 +637,7 @@ var file_rpc_proto_depIdxs = []int32{
 	14, // 13: land.gno.gnonative.v1.GnoNativeService.CreateAccount:input_type -> land.gno.gnonative.v1.CreateAccountRequest
 	15, // 14: land.gno.gnonative.v1.GnoNativeService.ActivateAccount:input_type -> land.gno.gnonative.v1.ActivateAccountRequest
 	16, // 15: land.gno.gnonative.v1.GnoNativeService.SetPassword:input_type -> land.gno.gnonative.v1.SetPasswordRequest
-	17, // 16: land.gno.gnonative.v1.GnoNativeService.UpdatePassword:input_type -> land.gno.gnonative.v1.UpdatePasswordRequest
+	17, // 16: land.gno.gnonative.v1.GnoNativeService.RotatePassword:input_type -> land.gno.gnonative.v1.RotatePasswordRequest
 	18, // 17: land.gno.gnonative.v1.GnoNativeService.GetActivatedAccount:input_type -> land.gno.gnonative.v1.GetActivatedAccountRequest
 	19, // 18: land.gno.gnonative.v1.GnoNativeService.QueryAccount:input_type -> land.gno.gnonative.v1.QueryAccountRequest
 	20, // 19: land.gno.gnonative.v1.GnoNativeService.DeleteAccount:input_type -> land.gno.gnonative.v1.DeleteAccountRequest
@@ -672,7 +672,7 @@ var file_rpc_proto_depIdxs = []int32{
 	46, // 48: land.gno.gnonative.v1.GnoNativeService.CreateAccount:output_type -> land.gno.gnonative.v1.CreateAccountResponse
 	47, // 49: land.gno.gnonative.v1.GnoNativeService.ActivateAccount:output_type -> land.gno.gnonative.v1.ActivateAccountResponse
 	48, // 50: land.gno.gnonative.v1.GnoNativeService.SetPassword:output_type -> land.gno.gnonative.v1.SetPasswordResponse
-	49, // 51: land.gno.gnonative.v1.GnoNativeService.UpdatePassword:output_type -> land.gno.gnonative.v1.UpdatePasswordResponse
+	49, // 51: land.gno.gnonative.v1.GnoNativeService.RotatePassword:output_type -> land.gno.gnonative.v1.RotatePasswordResponse
 	50, // 52: land.gno.gnonative.v1.GnoNativeService.GetActivatedAccount:output_type -> land.gno.gnonative.v1.GetActivatedAccountResponse
 	51, // 53: land.gno.gnonative.v1.GnoNativeService.QueryAccount:output_type -> land.gno.gnonative.v1.QueryAccountResponse
 	52, // 54: land.gno.gnonative.v1.GnoNativeService.DeleteAccount:output_type -> land.gno.gnonative.v1.DeleteAccountResponse

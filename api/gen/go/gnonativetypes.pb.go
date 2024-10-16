@@ -435,30 +435,30 @@ func (*SetPasswordResponse) Descriptor() ([]byte, []int) {
 	return file_gnonativetypes_proto_rawDescGZIP(), []int{9}
 }
 
-type UpdatePasswordRequest struct {
+type RotatePasswordRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	NewPassword string `protobuf:"bytes,1,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
-	// The addresses of the account to update the password
+	// The addresses of the account to rotate the password
 	Addresses [][]byte `protobuf:"bytes,2,rep,name=addresses,proto3" json:"addresses,omitempty"`
 }
 
-func (x *UpdatePasswordRequest) Reset() {
-	*x = UpdatePasswordRequest{}
+func (x *RotatePasswordRequest) Reset() {
+	*x = RotatePasswordRequest{}
 	mi := &file_gnonativetypes_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdatePasswordRequest) String() string {
+func (x *RotatePasswordRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdatePasswordRequest) ProtoMessage() {}
+func (*RotatePasswordRequest) ProtoMessage() {}
 
-func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
+func (x *RotatePasswordRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_gnonativetypes_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -470,45 +470,45 @@ func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdatePasswordRequest.ProtoReflect.Descriptor instead.
-func (*UpdatePasswordRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RotatePasswordRequest.ProtoReflect.Descriptor instead.
+func (*RotatePasswordRequest) Descriptor() ([]byte, []int) {
 	return file_gnonativetypes_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *UpdatePasswordRequest) GetNewPassword() string {
+func (x *RotatePasswordRequest) GetNewPassword() string {
 	if x != nil {
 		return x.NewPassword
 	}
 	return ""
 }
 
-func (x *UpdatePasswordRequest) GetAddresses() [][]byte {
+func (x *RotatePasswordRequest) GetAddresses() [][]byte {
 	if x != nil {
 		return x.Addresses
 	}
 	return nil
 }
 
-type UpdatePasswordResponse struct {
+type RotatePasswordResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *UpdatePasswordResponse) Reset() {
-	*x = UpdatePasswordResponse{}
+func (x *RotatePasswordResponse) Reset() {
+	*x = RotatePasswordResponse{}
 	mi := &file_gnonativetypes_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdatePasswordResponse) String() string {
+func (x *RotatePasswordResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdatePasswordResponse) ProtoMessage() {}
+func (*RotatePasswordResponse) ProtoMessage() {}
 
-func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
+func (x *RotatePasswordResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_gnonativetypes_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -520,8 +520,8 @@ func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdatePasswordResponse.ProtoReflect.Descriptor instead.
-func (*UpdatePasswordResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RotatePasswordResponse.ProtoReflect.Descriptor instead.
+func (*RotatePasswordResponse) Descriptor() ([]byte, []int) {
 	return file_gnonativetypes_proto_rawDescGZIP(), []int{11}
 }
 
@@ -3577,12 +3577,12 @@ var file_gnonativetypes_proto_rawDesc = []byte{
 	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07,
 	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x15, 0x0a, 0x13, 0x53, 0x65, 0x74, 0x50, 0x61,
 	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x58,
-	0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x0a, 0x15, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x6e, 0x65, 0x77, 0x5f, 0x70,
 	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6e,
 	0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x64,
 	0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x09, 0x61,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x22, 0x18, 0x0a, 0x16, 0x55, 0x70, 0x64, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x22, 0x18, 0x0a, 0x16, 0x52, 0x6f, 0x74, 0x61,
 	0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x22, 0x1f, 0x0a, 0x1d, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x52, 0x65,
 	0x63, 0x6f, 0x76, 0x65, 0x72, 0x79, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75,
@@ -3885,8 +3885,8 @@ var file_gnonativetypes_proto_goTypes = []any{
 	(*GetChainIDResponse)(nil),                // 7: land.gno.gnonative.v1.GetChainIDResponse
 	(*SetPasswordRequest)(nil),                // 8: land.gno.gnonative.v1.SetPasswordRequest
 	(*SetPasswordResponse)(nil),               // 9: land.gno.gnonative.v1.SetPasswordResponse
-	(*UpdatePasswordRequest)(nil),             // 10: land.gno.gnonative.v1.UpdatePasswordRequest
-	(*UpdatePasswordResponse)(nil),            // 11: land.gno.gnonative.v1.UpdatePasswordResponse
+	(*RotatePasswordRequest)(nil),             // 10: land.gno.gnonative.v1.RotatePasswordRequest
+	(*RotatePasswordResponse)(nil),            // 11: land.gno.gnonative.v1.RotatePasswordResponse
 	(*GenerateRecoveryPhraseRequest)(nil),     // 12: land.gno.gnonative.v1.GenerateRecoveryPhraseRequest
 	(*GenerateRecoveryPhraseResponse)(nil),    // 13: land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
 	(*KeyInfo)(nil),                           // 14: land.gno.gnonative.v1.KeyInfo
