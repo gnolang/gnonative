@@ -33,9 +33,9 @@ namespace Land.Gno.Gnonative.V1 {
             "R2V0Q2hhaW5JRFJlc3BvbnNlEhkKCGNoYWluX2lkGAEgASgJUgdjaGFpbklk",
             "IkoKElNldFBhc3N3b3JkUmVxdWVzdBIaCghwYXNzd29yZBgBIAEoCVIIcGFz",
             "c3dvcmQSGAoHYWRkcmVzcxgCIAEoDFIHYWRkcmVzcyIVChNTZXRQYXNzd29y",
-            "ZFJlc3BvbnNlIlgKFVVwZGF0ZVBhc3N3b3JkUmVxdWVzdBIhCgxuZXdfcGFz",
+            "ZFJlc3BvbnNlIlgKFVJvdGF0ZVBhc3N3b3JkUmVxdWVzdBIhCgxuZXdfcGFz",
             "c3dvcmQYASABKAlSC25ld1Bhc3N3b3JkEhwKCWFkZHJlc3NlcxgCIAMoDFIJ",
-            "YWRkcmVzc2VzIhgKFlVwZGF0ZVBhc3N3b3JkUmVzcG9uc2UiHwodR2VuZXJh",
+            "YWRkcmVzc2VzIhgKFlJvdGF0ZVBhc3N3b3JkUmVzcG9uc2UiHwodR2VuZXJh",
             "dGVSZWNvdmVyeVBocmFzZVJlcXVlc3QiOAoeR2VuZXJhdGVSZWNvdmVyeVBo",
             "cmFzZVJlc3BvbnNlEhYKBnBocmFzZRgBIAEoCVIGcGhyYXNlImQKB0tleUlu",
             "Zm8SEgoEdHlwZRgBIAEoDVIEdHlwZRISCgRuYW1lGAIgASgJUgRuYW1lEhcK",
@@ -147,8 +147,8 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.GetChainIDResponse), global::Land.Gno.Gnonative.V1.GetChainIDResponse.Parser, new[]{ "ChainId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SetPasswordRequest), global::Land.Gno.Gnonative.V1.SetPasswordRequest.Parser, new[]{ "Password", "Address" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SetPasswordResponse), global::Land.Gno.Gnonative.V1.SetPasswordResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest), global::Land.Gno.Gnonative.V1.UpdatePasswordRequest.Parser, new[]{ "NewPassword", "Addresses" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.UpdatePasswordResponse), global::Land.Gno.Gnonative.V1.UpdatePasswordResponse.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RotatePasswordRequest), global::Land.Gno.Gnonative.V1.RotatePasswordRequest.Parser, new[]{ "NewPassword", "Addresses" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RotatePasswordResponse), global::Land.Gno.Gnonative.V1.RotatePasswordResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.GenerateRecoveryPhraseRequest), global::Land.Gno.Gnonative.V1.GenerateRecoveryPhraseRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.GenerateRecoveryPhraseResponse), global::Land.Gno.Gnonative.V1.GenerateRecoveryPhraseResponse.Parser, new[]{ "Phrase" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.KeyInfo), global::Land.Gno.Gnonative.V1.KeyInfo.Parser, new[]{ "Type", "Name", "PubKey", "Address" }, null, null, null, null),
@@ -2054,16 +2054,16 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class UpdatePasswordRequest : pb::IMessage<UpdatePasswordRequest>
+  public sealed partial class RotatePasswordRequest : pb::IMessage<RotatePasswordRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<UpdatePasswordRequest> _parser = new pb::MessageParser<UpdatePasswordRequest>(() => new UpdatePasswordRequest());
+    private static readonly pb::MessageParser<RotatePasswordRequest> _parser = new pb::MessageParser<RotatePasswordRequest>(() => new RotatePasswordRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<UpdatePasswordRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<RotatePasswordRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2079,7 +2079,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordRequest() {
+    public RotatePasswordRequest() {
       OnConstruction();
     }
 
@@ -2087,7 +2087,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordRequest(UpdatePasswordRequest other) : this() {
+    public RotatePasswordRequest(RotatePasswordRequest other) : this() {
       newPassword_ = other.newPassword_;
       addresses_ = other.addresses_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -2095,8 +2095,8 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordRequest Clone() {
-      return new UpdatePasswordRequest(this);
+    public RotatePasswordRequest Clone() {
+      return new RotatePasswordRequest(this);
     }
 
     /// <summary>Field number for the "new_password" field.</summary>
@@ -2117,7 +2117,7 @@ namespace Land.Gno.Gnonative.V1 {
         = pb::FieldCodec.ForBytes(18);
     private readonly pbc::RepeatedField<pb::ByteString> addresses_ = new pbc::RepeatedField<pb::ByteString>();
     /// <summary>
-    /// The addresses of the account to update the password
+    /// The addresses of the account to rotate the password
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2128,12 +2128,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as UpdatePasswordRequest);
+      return Equals(other as RotatePasswordRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(UpdatePasswordRequest other) {
+    public bool Equals(RotatePasswordRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2211,7 +2211,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(UpdatePasswordRequest other) {
+    public void MergeFrom(RotatePasswordRequest other) {
       if (other == null) {
         return;
       }
@@ -2281,16 +2281,16 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class UpdatePasswordResponse : pb::IMessage<UpdatePasswordResponse>
+  public sealed partial class RotatePasswordResponse : pb::IMessage<RotatePasswordResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<UpdatePasswordResponse> _parser = new pb::MessageParser<UpdatePasswordResponse>(() => new UpdatePasswordResponse());
+    private static readonly pb::MessageParser<RotatePasswordResponse> _parser = new pb::MessageParser<RotatePasswordResponse>(() => new RotatePasswordResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<UpdatePasswordResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<RotatePasswordResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2306,7 +2306,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordResponse() {
+    public RotatePasswordResponse() {
       OnConstruction();
     }
 
@@ -2314,25 +2314,25 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordResponse(UpdatePasswordResponse other) : this() {
+    public RotatePasswordResponse(RotatePasswordResponse other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdatePasswordResponse Clone() {
-      return new UpdatePasswordResponse(this);
+    public RotatePasswordResponse Clone() {
+      return new RotatePasswordResponse(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as UpdatePasswordResponse);
+      return Equals(other as RotatePasswordResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(UpdatePasswordResponse other) {
+    public bool Equals(RotatePasswordResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2392,7 +2392,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(UpdatePasswordResponse other) {
+    public void MergeFrom(RotatePasswordResponse other) {
       if (other == null) {
         return;
       }

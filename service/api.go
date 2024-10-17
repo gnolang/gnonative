@@ -274,7 +274,7 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&api_gen.SetPasswordResponse{}), nil
 }
 
-func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Request[api_gen.UpdatePasswordRequest]) (*connect.Response[api_gen.UpdatePasswordResponse], error) {
+func (s *gnoNativeService) RotatePassword(ctx context.Context, req *connect.Request[api_gen.RotatePasswordRequest]) (*connect.Response[api_gen.RotatePasswordResponse], error) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 
@@ -289,11 +289,11 @@ func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Requ
 
 	getNewPassword := func() (string, error) { return req.Msg.NewPassword, nil }
 	for i := range len(req.Msg.Addresses) {
-		if err := s.keybase.Update(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
-			// Roll back the passwords. Don't check the error from Update.
+		if err := s.keybase.Rotate(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
+			// Roll back the passwords. Don't check the error from Rotate.
 			for j := range i {
 				getOldPassword := func() (string, error) { return signers[j].Password, nil }
-				s.keybase.Update(signers[j].Account, req.Msg.NewPassword, getOldPassword)
+				s.keybase.Rotate(signers[j].Account, req.Msg.NewPassword, getOldPassword)
 			}
 			return nil, getGrpcError(err)
 		}
@@ -304,7 +304,7 @@ func (s *gnoNativeService) UpdatePassword(ctx context.Context, req *connect.Requ
 		signers[i].Password = req.Msg.NewPassword
 	}
 
-	return connect.NewResponse(&api_gen.UpdatePasswordResponse{}), nil
+	return connect.NewResponse(&api_gen.RotatePasswordResponse{}), nil
 }
 
 func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect.Request[api_gen.GetActivatedAccountRequest]) (*connect.Response[api_gen.GetActivatedAccountResponse], error) {

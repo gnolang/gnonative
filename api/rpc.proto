@@ -74,11 +74,11 @@ service GnoNativeService {
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
-  // Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+  // Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
   // Before calling this, you must call SetPassword with the current password for each account.
   // If there is an error, then roll back all accounts to the current password.
   // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
-  rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+  rpc RotatePassword(RotatePasswordRequest) returns (RotatePasswordResponse);
 
   // GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
   // If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.

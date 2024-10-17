@@ -109,9 +109,9 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SetPasswordResponse> __Marshaller_land_gno_gnonative_v1_SetPasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SetPasswordResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.UpdatePasswordRequest> __Marshaller_land_gno_gnonative_v1_UpdatePasswordRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.UpdatePasswordRequest.Parser));
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RotatePasswordRequest> __Marshaller_land_gno_gnonative_v1_RotatePasswordRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RotatePasswordRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.UpdatePasswordResponse> __Marshaller_land_gno_gnonative_v1_UpdatePasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.UpdatePasswordResponse.Parser));
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RotatePasswordResponse> __Marshaller_land_gno_gnonative_v1_RotatePasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RotatePasswordResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest> __Marshaller_land_gno_gnonative_v1_GetActivatedAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -300,12 +300,12 @@ namespace Land.Gno.Gnonative.V1 {
         __Marshaller_land_gno_gnonative_v1_SetPasswordResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.UpdatePasswordRequest, global::Land.Gno.Gnonative.V1.UpdatePasswordResponse> __Method_UpdatePassword = new grpc::Method<global::Land.Gno.Gnonative.V1.UpdatePasswordRequest, global::Land.Gno.Gnonative.V1.UpdatePasswordResponse>(
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse> __Method_RotatePassword = new grpc::Method<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "UpdatePassword",
-        __Marshaller_land_gno_gnonative_v1_UpdatePasswordRequest,
-        __Marshaller_land_gno_gnonative_v1_UpdatePasswordResponse);
+        "RotatePassword",
+        __Marshaller_land_gno_gnonative_v1_RotatePasswordRequest,
+        __Marshaller_land_gno_gnonative_v1_RotatePasswordResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse> __Method_GetActivatedAccount = new grpc::Method<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse>(
@@ -670,7 +670,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -679,7 +679,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.UpdatePasswordResponse> UpdatePassword(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.RotatePasswordResponse> RotatePassword(global::Land.Gno.Gnonative.V1.RotatePasswordRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1775,7 +1775,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SetPassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -1786,12 +1786,12 @@ namespace Land.Gno.Gnonative.V1 {
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Land.Gno.Gnonative.V1.UpdatePasswordResponse UpdatePassword(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Land.Gno.Gnonative.V1.RotatePasswordResponse RotatePassword(global::Land.Gno.Gnonative.V1.RotatePasswordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return UpdatePassword(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return RotatePassword(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -1800,12 +1800,12 @@ namespace Land.Gno.Gnonative.V1 {
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Land.Gno.Gnonative.V1.UpdatePasswordResponse UpdatePassword(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest request, grpc::CallOptions options)
+      public virtual global::Land.Gno.Gnonative.V1.RotatePasswordResponse RotatePassword(global::Land.Gno.Gnonative.V1.RotatePasswordRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_UpdatePassword, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_RotatePassword, null, options, request);
       }
       /// <summary>
-      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -1816,12 +1816,12 @@ namespace Land.Gno.Gnonative.V1 {
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.UpdatePasswordResponse> UpdatePasswordAsync(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.RotatePasswordResponse> RotatePasswordAsync(global::Land.Gno.Gnonative.V1.RotatePasswordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return UpdatePasswordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return RotatePasswordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+      /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -1830,9 +1830,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.UpdatePasswordResponse> UpdatePasswordAsync(global::Land.Gno.Gnonative.V1.UpdatePasswordRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.RotatePasswordResponse> RotatePasswordAsync(global::Land.Gno.Gnonative.V1.RotatePasswordRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_UpdatePassword, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_RotatePassword, null, options, request);
       }
       /// <summary>
       /// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
@@ -2751,7 +2751,7 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_CreateAccount, serviceImpl.CreateAccount)
           .AddMethod(__Method_ActivateAccount, serviceImpl.ActivateAccount)
           .AddMethod(__Method_SetPassword, serviceImpl.SetPassword)
-          .AddMethod(__Method_UpdatePassword, serviceImpl.UpdatePassword)
+          .AddMethod(__Method_RotatePassword, serviceImpl.RotatePassword)
           .AddMethod(__Method_GetActivatedAccount, serviceImpl.GetActivatedAccount)
           .AddMethod(__Method_QueryAccount, serviceImpl.QueryAccount)
           .AddMethod(__Method_DeleteAccount, serviceImpl.DeleteAccount)
@@ -2795,7 +2795,7 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_CreateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CreateAccountRequest, global::Land.Gno.Gnonative.V1.CreateAccountResponse>(serviceImpl.CreateAccount));
       serviceBinder.AddMethod(__Method_ActivateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(serviceImpl.ActivateAccount));
       serviceBinder.AddMethod(__Method_SetPassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse>(serviceImpl.SetPassword));
-      serviceBinder.AddMethod(__Method_UpdatePassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.UpdatePasswordRequest, global::Land.Gno.Gnonative.V1.UpdatePasswordResponse>(serviceImpl.UpdatePassword));
+      serviceBinder.AddMethod(__Method_RotatePassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse>(serviceImpl.RotatePassword));
       serviceBinder.AddMethod(__Method_GetActivatedAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse>(serviceImpl.GetActivatedAccount));
       serviceBinder.AddMethod(__Method_QueryAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QueryAccountRequest, global::Land.Gno.Gnonative.V1.QueryAccountResponse>(serviceImpl.QueryAccount));
       serviceBinder.AddMethod(__Method_DeleteAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.DeleteAccountRequest, global::Land.Gno.Gnonative.V1.DeleteAccountResponse>(serviceImpl.DeleteAccount));

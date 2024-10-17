@@ -78,9 +78,9 @@ const (
 	// GnoNativeServiceSetPasswordProcedure is the fully-qualified name of the GnoNativeService's
 	// SetPassword RPC.
 	GnoNativeServiceSetPasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetPassword"
-	// GnoNativeServiceUpdatePasswordProcedure is the fully-qualified name of the GnoNativeService's
-	// UpdatePassword RPC.
-	GnoNativeServiceUpdatePasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/UpdatePassword"
+	// GnoNativeServiceRotatePasswordProcedure is the fully-qualified name of the GnoNativeService's
+	// RotatePassword RPC.
+	GnoNativeServiceRotatePasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/RotatePassword"
 	// GnoNativeServiceGetActivatedAccountProcedure is the fully-qualified name of the
 	// GnoNativeService's GetActivatedAccount RPC.
 	GnoNativeServiceGetActivatedAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/GetActivatedAccount"
@@ -150,7 +150,7 @@ var (
 	gnoNativeServiceCreateAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("CreateAccount")
 	gnoNativeServiceActivateAccountMethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("ActivateAccount")
 	gnoNativeServiceSetPasswordMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("SetPassword")
-	gnoNativeServiceUpdatePasswordMethodDescriptor            = gnoNativeServiceServiceDescriptor.Methods().ByName("UpdatePassword")
+	gnoNativeServiceRotatePasswordMethodDescriptor            = gnoNativeServiceServiceDescriptor.Methods().ByName("RotatePassword")
 	gnoNativeServiceGetActivatedAccountMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("GetActivatedAccount")
 	gnoNativeServiceQueryAccountMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("QueryAccount")
 	gnoNativeServiceDeleteAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("DeleteAccount")
@@ -224,11 +224,11 @@ type GnoNativeServiceClient interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
-	// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+	// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
 	// Before calling this, you must call SetPassword with the current password for each account.
 	// If there is an error, then roll back all accounts to the current password.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
-	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
+	RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error)
 	// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
 	// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -397,10 +397,10 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		updatePassword: connect.NewClient[_go.UpdatePasswordRequest, _go.UpdatePasswordResponse](
+		rotatePassword: connect.NewClient[_go.RotatePasswordRequest, _go.RotatePasswordResponse](
 			httpClient,
-			baseURL+GnoNativeServiceUpdatePasswordProcedure,
-			connect.WithSchema(gnoNativeServiceUpdatePasswordMethodDescriptor),
+			baseURL+GnoNativeServiceRotatePasswordProcedure,
+			connect.WithSchema(gnoNativeServiceRotatePasswordMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getActivatedAccount: connect.NewClient[_go.GetActivatedAccountRequest, _go.GetActivatedAccountResponse](
@@ -537,7 +537,7 @@ type gnoNativeServiceClient struct {
 	createAccount             *connect.Client[_go.CreateAccountRequest, _go.CreateAccountResponse]
 	activateAccount           *connect.Client[_go.ActivateAccountRequest, _go.ActivateAccountResponse]
 	setPassword               *connect.Client[_go.SetPasswordRequest, _go.SetPasswordResponse]
-	updatePassword            *connect.Client[_go.UpdatePasswordRequest, _go.UpdatePasswordResponse]
+	rotatePassword            *connect.Client[_go.RotatePasswordRequest, _go.RotatePasswordResponse]
 	getActivatedAccount       *connect.Client[_go.GetActivatedAccountRequest, _go.GetActivatedAccountResponse]
 	queryAccount              *connect.Client[_go.QueryAccountRequest, _go.QueryAccountResponse]
 	deleteAccount             *connect.Client[_go.DeleteAccountRequest, _go.DeleteAccountResponse]
@@ -634,9 +634,9 @@ func (c *gnoNativeServiceClient) SetPassword(ctx context.Context, req *connect.R
 	return c.setPassword.CallUnary(ctx, req)
 }
 
-// UpdatePassword calls land.gno.gnonative.v1.GnoNativeService.UpdatePassword.
-func (c *gnoNativeServiceClient) UpdatePassword(ctx context.Context, req *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error) {
-	return c.updatePassword.CallUnary(ctx, req)
+// RotatePassword calls land.gno.gnonative.v1.GnoNativeService.RotatePassword.
+func (c *gnoNativeServiceClient) RotatePassword(ctx context.Context, req *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error) {
+	return c.rotatePassword.CallUnary(ctx, req)
 }
 
 // GetActivatedAccount calls land.gno.gnonative.v1.GnoNativeService.GetActivatedAccount.
@@ -787,11 +787,11 @@ type GnoNativeServiceHandler interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
-	// Update the keybase to use the new password for the accounts in the keybase with the given addresses.
+	// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
 	// Before calling this, you must call SetPassword with the current password for each account.
 	// If there is an error, then roll back all accounts to the current password.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
-	UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error)
+	RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error)
 	// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
 	// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -956,10 +956,10 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
-	gnoNativeServiceUpdatePasswordHandler := connect.NewUnaryHandler(
-		GnoNativeServiceUpdatePasswordProcedure,
-		svc.UpdatePassword,
-		connect.WithSchema(gnoNativeServiceUpdatePasswordMethodDescriptor),
+	gnoNativeServiceRotatePasswordHandler := connect.NewUnaryHandler(
+		GnoNativeServiceRotatePasswordProcedure,
+		svc.RotatePassword,
+		connect.WithSchema(gnoNativeServiceRotatePasswordMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetActivatedAccountHandler := connect.NewUnaryHandler(
@@ -1108,8 +1108,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceActivateAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSetPasswordProcedure:
 			gnoNativeServiceSetPasswordHandler.ServeHTTP(w, r)
-		case GnoNativeServiceUpdatePasswordProcedure:
-			gnoNativeServiceUpdatePasswordHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRotatePasswordProcedure:
+			gnoNativeServiceRotatePasswordHandler.ServeHTTP(w, r)
 		case GnoNativeServiceGetActivatedAccountProcedure:
 			gnoNativeServiceGetActivatedAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQueryAccountProcedure:
@@ -1217,8 +1217,8 @@ func (UnimplementedGnoNativeServiceHandler) SetPassword(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetPassword is not implemented"))
 }
 
-func (UnimplementedGnoNativeServiceHandler) UpdatePassword(context.Context, *connect.Request[_go.UpdatePasswordRequest]) (*connect.Response[_go.UpdatePasswordResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.UpdatePassword is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.RotatePassword is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) GetActivatedAccount(context.Context, *connect.Request[_go.GetActivatedAccountRequest]) (*connect.Response[_go.GetActivatedAccountResponse], error) {
