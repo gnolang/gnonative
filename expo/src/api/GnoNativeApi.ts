@@ -43,8 +43,8 @@ import {
   SetRemoteRequest,
   SetRemoteResponse,
   SignTxResponse,
-  UpdatePasswordRequest,
-  UpdatePasswordResponse,
+  RotatePasswordRequest,
+  RotatePasswordResponse,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 import { GnoNativeService } from '@buf/gnolang_gnonative.connectrpc_es/rpc_connect';
 import { PromiseClient } from '@connectrpc/connect';
@@ -272,12 +272,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response;
   }
 
-  async updatePassword(
+  async rotatePassword(
     newPassword: string,
     addresses: Uint8Array[],
-  ): Promise<UpdatePasswordResponse> {
+  ): Promise<RotatePasswordResponse> {
     const client = this.#getClient();
-    const response = client.updatePassword(new UpdatePasswordRequest({ newPassword, addresses }));
+    const response = client.rotatePassword(new RotatePasswordRequest({ newPassword, addresses }));
     return response;
   }
 
