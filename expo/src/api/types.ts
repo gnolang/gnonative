@@ -10,7 +10,7 @@ import {
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
-  UpdatePasswordResponse,
+  RotatePasswordResponse,
   KeyInfo,
   SignTxResponse,
   MakeTxResponse,
@@ -50,7 +50,7 @@ export interface GnoKeyApi {
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<KeyInfo | undefined>;
   activateAccount: (nameOrBech32: string) => Promise<ActivateAccountResponse>;
   setPassword: (password: string, address: Uint8Array) => Promise<SetPasswordResponse>;
-  updatePassword: (password: string, addresses: Uint8Array[]) => Promise<UpdatePasswordResponse>;
+  rotatePassword: (password: string, addresses: Uint8Array[]) => Promise<RotatePasswordResponse>;
   getActivatedAccount: () => Promise<GetActivatedAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
   deleteAccount: (
