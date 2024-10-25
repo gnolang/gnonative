@@ -25,6 +25,7 @@ import {
   ListKeyInfoRequest,
   MakeTxResponse,
   MsgCall,
+  Coin,
   MsgSend,
   QEvalRequest,
   QueryAccountRequest,
@@ -374,7 +375,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async send(
     toAddress: Uint8Array,
-    send: string,
+    amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
     callerAddress: Uint8Array,
@@ -390,7 +391,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         msgs: [
           new MsgSend({
             toAddress,
-            send,
+            amount,
           }),
         ],
       }),
