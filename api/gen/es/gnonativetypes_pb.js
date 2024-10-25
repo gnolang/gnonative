@@ -528,7 +528,7 @@ export const MsgSend = proto3.makeMessageType(
   "land.gno.gnonative.v1.MsgSend",
   () => [
     { no: 1, name: "to_address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-    { no: 2, name: "send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "amount", kind: "message", T: Coin, repeated: true },
   ],
 );
 

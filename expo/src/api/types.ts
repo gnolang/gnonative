@@ -15,6 +15,7 @@ import {
   SignTxResponse,
   MakeTxResponse,
   BroadcastTxCommitResponse,
+  Coin,
 } from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
 
 export enum BridgeStatus {
@@ -73,7 +74,7 @@ export interface GnoKeyApi {
   ) => Promise<AsyncIterable<CallResponse>>;
   send: (
     toAddress: Uint8Array,
-    send: string,
+    amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
     callerAddress: Uint8Array,
@@ -94,8 +95,16 @@ export interface GnoKeyApi {
     args: string[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress?: Uint8Array,
+    callerAddress: Uint8Array,
     send?: string,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
+  makeSendTx(
+    toAddress: Uint8Array,
+    amount: Coin[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
     memo?: string,
   ): Promise<MakeTxResponse>;
   broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;

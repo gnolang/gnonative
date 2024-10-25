@@ -99,41 +99,42 @@ namespace Land.Gno.Gnonative.V1 {
             "UglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRk",
             "cmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFu",
             "ZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ0NhbGxSBE1zZ3MiJgoMQ2FsbFJlc3Bv",
-            "bnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0IjwKB01zZ1NlbmQSHQoKdG9f",
-            "YWRkcmVzcxgBIAEoDFIJdG9BZGRyZXNzEhIKBHNlbmQYAiABKAlSBHNlbmQi",
-            "tAEKC1NlbmRSZXF1ZXN0EhcKB2dhc19mZWUYASABKAlSBmdhc0ZlZRIdCgpn",
-            "YXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVt",
-            "bxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIyCgRt",
-            "c2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1NlbmRSBE1z",
-            "Z3MiDgoMU2VuZFJlc3BvbnNlIjYKBk1zZ1J1bhIYCgdwYWNrYWdlGAEgASgJ",
-            "UgdwYWNrYWdlEhIKBHNlbmQYAiABKAlSBHNlbmQisgEKClJ1blJlcXVlc3QS",
-            "FwoHZ2FzX2ZlZRgBIAEoCVIGZ2FzRmVlEh0KCmdhc193YW50ZWQYAiABKBJS",
-            "CWdhc1dhbnRlZBISCgRtZW1vGAMgASgJUgRtZW1vEiUKDmNhbGxlcl9hZGRy",
-            "ZXNzGAQgASgMUg1jYWxsZXJBZGRyZXNzEjEKBG1zZ3MYBSADKAsyHS5sYW5k",
-            "Lmduby5nbm9uYXRpdmUudjEuTXNnUnVuUgRNc2dzIiUKC1J1blJlc3BvbnNl",
-            "EhYKBnJlc3VsdBgBIAEoCVIGcmVzdWx0IikKDk1ha2VUeFJlc3BvbnNlEhcK",
-            "B3R4X2pzb24YASABKAlSBnR4SnNvbiKSAQoNU2lnblR4UmVxdWVzdBIXCgd0",
-            "eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRkcmVzcxgCIAEoDFIHYWRkcmVz",
-            "cxIlCg5hY2NvdW50X251bWJlchgDIAEoBFINYWNjb3VudE51bWJlchInCg9z",
-            "ZXF1ZW5jZV9udW1iZXIYBCABKARSDnNlcXVlbmNlTnVtYmVyIjEKDlNpZ25U",
-            "eFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIjsK",
-            "GEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNvbhgB",
-            "IAEoCVIHdHhfanNvbiIzChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlEhYK",
-            "BnJlc3VsdBgBIAEoDFIGcmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gzMlJlcXVl",
-            "c3QSGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNzVG9CZWNo",
-            "MzJSZXNwb25zZRIlCg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRk",
-            "cmVzcyJBChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVjaDMyX2Fk",
-            "ZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zyb21CZWNo",
-            "MzJSZXNwb25zZRIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgKGkFkZHJl",
-            "c3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJUghtbmVt",
-            "b25pYyI3ChtBZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoHYWRkcmVz",
-            "cxgBIAEoDFIHYWRkcmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEo",
-            "CVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghH",
-            "cmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIE",
-            "TmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJ",
-            "UghHcmVldGluZyIwChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSFAoFVmFs",
-            "dWUYASADKAxSBVZhbHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9nbm9uYXRp",
-            "dmUvYXBpL2dlbi9nb2IGcHJvdG8z"));
+            "bnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0Il0KB01zZ1NlbmQSHQoKdG9f",
+            "YWRkcmVzcxgBIAEoDFIJdG9BZGRyZXNzEjMKBmFtb3VudBgCIAMoCzIbLmxh",
+            "bmQuZ25vLmdub25hdGl2ZS52MS5Db2luUgZhbW91bnQitAEKC1NlbmRSZXF1",
+            "ZXN0EhcKB2dhc19mZWUYASABKAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIg",
+            "ASgSUglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJf",
+            "YWRkcmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4u",
+            "bGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1NlbmRSBE1zZ3MiDgoMU2VuZFJl",
+            "c3BvbnNlIjYKBk1zZ1J1bhIYCgdwYWNrYWdlGAEgASgJUgdwYWNrYWdlEhIK",
+            "BHNlbmQYAiABKAlSBHNlbmQisgEKClJ1blJlcXVlc3QSFwoHZ2FzX2ZlZRgB",
+            "IAEoCVIGZ2FzRmVlEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBIS",
+            "CgRtZW1vGAMgASgJUgRtZW1vEiUKDmNhbGxlcl9hZGRyZXNzGAQgASgMUg1j",
+            "YWxsZXJBZGRyZXNzEjEKBG1zZ3MYBSADKAsyHS5sYW5kLmduby5nbm9uYXRp",
+            "dmUudjEuTXNnUnVuUgRNc2dzIiUKC1J1blJlc3BvbnNlEhYKBnJlc3VsdBgB",
+            "IAEoCVIGcmVzdWx0IikKDk1ha2VUeFJlc3BvbnNlEhcKB3R4X2pzb24YASAB",
+            "KAlSBnR4SnNvbiKSAQoNU2lnblR4UmVxdWVzdBIXCgd0eF9qc29uGAEgASgJ",
+            "UgZ0eEpzb24SGAoHYWRkcmVzcxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50",
+            "X251bWJlchgDIAEoBFINYWNjb3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1i",
+            "ZXIYBCABKARSDnNlcXVlbmNlTnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8K",
+            "DnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIjsKGEJyb2FkY2FzdFR4",
+            "Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNv",
+            "biIzChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlEhYKBnJlc3VsdBgBIAEo",
+            "DFIGcmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSGAoHYWRkcmVz",
+            "cxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIl",
+            "Cg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyJBChhBZGRy",
+            "ZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVjaDMyX2FkZHJlc3MYASABKAlS",
+            "DWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIY",
+            "CgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgKGkFkZHJlc3NGcm9tTW5lbW9u",
+            "aWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJUghtbmVtb25pYyI3ChtBZGRy",
+            "ZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoHYWRkcmVzcxgBIAEoDFIHYWRk",
+            "cmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1I",
+            "ZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJI",
+            "ZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxs",
+            "b1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIw",
+            "ChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSFAoFVmFsdWUYASADKAxSBVZh",
+            "bHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9nbm9uYXRpdmUvYXBpL2dlbi9n",
+            "b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -187,7 +188,7 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgCall), global::Land.Gno.Gnonative.V1.MsgCall.Parser, new[]{ "PackagePath", "Fnc", "Args", "Send" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.CallRequest), global::Land.Gno.Gnonative.V1.CallRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "CallerAddress", "Msgs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.CallResponse), global::Land.Gno.Gnonative.V1.CallResponse.Parser, new[]{ "Result" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgSend), global::Land.Gno.Gnonative.V1.MsgSend.Parser, new[]{ "ToAddress", "Send" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgSend), global::Land.Gno.Gnonative.V1.MsgSend.Parser, new[]{ "ToAddress", "Amount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendRequest), global::Land.Gno.Gnonative.V1.SendRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "CallerAddress", "Msgs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendResponse), global::Land.Gno.Gnonative.V1.SendResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgRun), global::Land.Gno.Gnonative.V1.MsgRun.Parser, new[]{ "Package", "Send" }, null, null, null, null),
@@ -3165,6 +3166,9 @@ namespace Land.Gno.Gnonative.V1 {
     /// <summary>Field number for the "denom" field.</summary>
     public const int DenomFieldNumber = 1;
     private string denom_ = "";
+    /// <summary>
+    /// Example: "ugnot"
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Denom {
@@ -10961,7 +10965,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MsgSend(MsgSend other) : this() {
       toAddress_ = other.toAddress_;
-      send_ = other.send_;
+      amount_ = other.amount_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -10987,19 +10991,18 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
-    /// <summary>Field number for the "send" field.</summary>
-    public const int SendFieldNumber = 2;
-    private string send_ = "";
+    /// <summary>Field number for the "amount" field.</summary>
+    public const int AmountFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.Coin> _repeated_amount_codec
+        = pb::FieldCodec.ForMessage(18, global::Land.Gno.Gnonative.V1.Coin.Parser);
+    private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> amount_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin>();
     /// <summary>
-    /// Example: "1000ugnot"
+    /// Example: [ {Denom: "ugnot", Amount: 1000} ]
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Send {
-      get { return send_; }
-      set {
-        send_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> Amount {
+      get { return amount_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11018,7 +11021,7 @@ namespace Land.Gno.Gnonative.V1 {
         return true;
       }
       if (ToAddress != other.ToAddress) return false;
-      if (Send != other.Send) return false;
+      if(!amount_.Equals(other.amount_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -11027,7 +11030,7 @@ namespace Land.Gno.Gnonative.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (ToAddress.Length != 0) hash ^= ToAddress.GetHashCode();
-      if (Send.Length != 0) hash ^= Send.GetHashCode();
+      hash ^= amount_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11050,10 +11053,7 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(ToAddress);
       }
-      if (Send.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Send);
-      }
+      amount_.WriteTo(output, _repeated_amount_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11068,10 +11068,7 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(ToAddress);
       }
-      if (Send.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Send);
-      }
+      amount_.WriteTo(ref output, _repeated_amount_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -11085,9 +11082,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (ToAddress.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(ToAddress);
       }
-      if (Send.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Send);
-      }
+      size += amount_.CalculateSize(_repeated_amount_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -11103,9 +11098,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (other.ToAddress.Length != 0) {
         ToAddress = other.ToAddress;
       }
-      if (other.Send.Length != 0) {
-        Send = other.Send;
-      }
+      amount_.Add(other.amount_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -11130,7 +11123,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 18: {
-            Send = input.ReadString();
+            amount_.AddEntriesFrom(input, _repeated_amount_codec);
             break;
           }
         }
@@ -11157,7 +11150,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 18: {
-            Send = input.ReadString();
+            amount_.AddEntriesFrom(ref input, _repeated_amount_codec);
             break;
           }
         }

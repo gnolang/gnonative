@@ -25,6 +25,7 @@ import {
   ListKeyInfoRequest,
   MakeTxResponse,
   MsgCall,
+  Coin,
   MsgSend,
   QEvalRequest,
   QueryAccountRequest,
@@ -223,7 +224,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     args: string[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress?: Uint8Array,
+    callerAddress: Uint8Array,
     send?: string,
     memo?: string,
   ): Promise<MakeTxResponse> {
@@ -239,6 +240,30 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
           fnc,
           args,
           send,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async makeSendTx(
+    toAddress: Uint8Array,
+    amount: Coin[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeSendTx({
+      gasFee,
+      gasWanted,
+      memo,
+      callerAddress,
+      msgs: [
+        {
+          toAddress,
+          amount,
         },
       ],
     });
@@ -374,7 +399,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async send(
     toAddress: Uint8Array,
-    send: string,
+    amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
     callerAddress: Uint8Array,
@@ -390,7 +415,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         msgs: [
           new MsgSend({
             toAddress,
-            send,
+            amount,
           }),
         ],
       }),

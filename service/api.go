@@ -544,7 +544,10 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 
 func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
 	for _, msg := range req.Msg.Msgs {
-		s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("send", msg.Send))
+		for _, coin := range msg.Amount {
+			s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("denom", coin.Denom),
+				zap.Int64("amount", coin.Amount))
+		}
 	}
 
 	signer, err := s.getSigner(req.Msg.CallerAddress)
@@ -584,15 +587,15 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 	msgs := make([]bank.MsgSend, 0)
 
 	for _, msg := range req.Msgs {
-		send, err := std.ParseCoins(msg.Send)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
+		amount := make([]std.Coin, 0)
+		for _, coin := range msg.Amount {
+			amount = append(amount, std.NewCoin(coin.Denom, coin.Amount))
 		}
 
 		msgs = append(msgs, bank.MsgSend{
 			FromAddress: crypto.AddressFromBytes(req.CallerAddress),
 			ToAddress:   crypto.AddressFromBytes(msg.ToAddress),
-			Amount:      send,
+			Amount:      amount,
 		})
 	}
 

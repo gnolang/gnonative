@@ -68,6 +68,7 @@ message KeyInfo {
 // Coin holds some amount of one currency.
 // A negative amount is invalid.
 message Coin {
+	// Example: "ugnot"
 	string denom = 1;
 	sint64 amount = 2;
 }
@@ -249,8 +250,8 @@ message MsgSend {
 	// Example: The response of calling AddressFromBech32 with
 	// "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
 	bytes to_address = 1;
-	// Example: "1000ugnot"
-	string send = 2;
+	// Example: [ {Denom: "ugnot", Amount: 1000} ]
+	repeated Coin amount = 2;
 }
 
 message SendRequest {
