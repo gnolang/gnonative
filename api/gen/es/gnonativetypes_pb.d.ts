@@ -372,6 +372,8 @@ export declare class KeyInfo extends Message<KeyInfo> {
  */
 export declare class Coin extends Message<Coin> {
   /**
+   * Example: "ugnot"
+   *
    * @generated from field: string denom = 1;
    */
   denom: string;
@@ -1361,11 +1363,11 @@ export declare class MsgSend extends Message<MsgSend> {
   toAddress: Uint8Array;
 
   /**
-   * Example: "1000ugnot"
+   * Example: [ {Denom: "ugnot", Amount: 1000} ]
    *
-   * @generated from field: string send = 2;
+   * @generated from field: repeated land.gno.gnonative.v1.Coin amount = 2;
    */
-  send: string;
+  amount: Coin[];
 
   constructor(data?: PartialMessage<MsgSend>);
 

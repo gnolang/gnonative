@@ -64,6 +64,7 @@ type KeyInfo struct {
 // Coin holds some amount of one currency.
 // A negative amount is invalid.
 type Coin struct {
+	// Example: "ugnot"
 	Denom  string `json:"denom"`
 	Amount int64  `json:"amount"`
 }
@@ -245,8 +246,8 @@ type MsgSend struct {
 	// Example: The response of calling AddressFromBech32 with
 	// "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
 	ToAddress []byte `json:"to_address" yaml:"to_address"`
-	// Example: "1000ugnot"
-	Send string `json:"send" yaml:"send"`
+	// Example: [ {Denom: "ugnot", Amount: 1000} ]
+	Amount []Coin `json:"amount" yaml:"amount"`
 }
 
 type SendRequest struct {
