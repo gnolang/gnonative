@@ -95,7 +95,7 @@ export interface GnoKeyApi {
     args: string[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress?: Uint8Array,
+    callerAddress: Uint8Array,
     send?: string,
     memo?: string,
   ): Promise<MakeTxResponse>;
@@ -104,7 +104,7 @@ export interface GnoKeyApi {
     amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress?: Uint8Array,
+    callerAddress: Uint8Array,
     memo?: string,
   ): Promise<MakeTxResponse>;
   broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
