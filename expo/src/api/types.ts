@@ -99,6 +99,14 @@ export interface GnoKeyApi {
     send?: string,
     memo?: string,
   ): Promise<MakeTxResponse>;
+  makeSendTx(
+    toAddress: Uint8Array,
+    amount: Coin[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress?: Uint8Array,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
   broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
   // debug
   hello: (name: string) => Promise<string>;

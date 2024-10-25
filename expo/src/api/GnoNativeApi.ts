@@ -246,6 +246,30 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return reponse;
   }
 
+  async makeSendTx(
+    toAddress: Uint8Array,
+    amount: Coin[],
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress?: Uint8Array,
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeSendTx({
+      gasFee,
+      gasWanted,
+      memo,
+      callerAddress,
+      msgs: [
+        {
+          toAddress,
+          amount,
+        },
+      ],
+    });
+    return reponse;
+  }
+
   async activateAccount(nameOrBech32: string): Promise<ActivateAccountResponse> {
     const client = this.#getClient();
     const response = client.activateAccount(
