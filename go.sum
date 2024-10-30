@@ -61,6 +61,8 @@ github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWo
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/gnolang/gno v0.0.0-20241029141810-12bd8da50dc1 h1:MCnDuYOD9MCO5AVN0eHXs9jrLWdHq5P5rYxR1xtQ4XI=
 github.com/gnolang/gno v0.0.0-20241029141810-12bd8da50dc1/go.mod h1:vmnj2WrqRU9/FsHcRSXQdXzQPYYaYns/kYa+x+C0v14=
+github.com/gnolang/gnokey-mobile v0.0.0-20241030095249-f1dc64684f11 h1:+vcuV5AEjgMJnRwTq/PodMDWl0Zhg6KkIN7FTFC6Ad0=
+github.com/gnolang/gnokey-mobile v0.0.0-20241030095249-f1dc64684f11/go.mod h1:VDPyDoL7KOpjlhwmM8gO8aBwo04KbM23RbubKOGFDz8=
 github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 h1:GKvsK3oLWG9B1GL7WP/VqwM6C92j5tIvB844oggL9Lk=
 github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216/go.mod h1:xJhtEL7ahjM1WJipt89gel8tHzfIl/LyMY+lCYh38d8=
 github.com/go-logr/logr v1.2.2/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=
