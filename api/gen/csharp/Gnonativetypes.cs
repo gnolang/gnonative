@@ -92,49 +92,49 @@ namespace Land.Gno.Gnonative.V1 {
             "c2USFgoGcmVzdWx0GAEgASgJUgZyZXN1bHQiUQoMUUV2YWxSZXF1ZXN0EiEK",
             "DHBhY2thZ2VfcGF0aBgBIAEoCVILcGFja2FnZVBhdGgSHgoKZXhwcmVzc2lv",
             "bhgCIAEoCVIKZXhwcmVzc2lvbiInCg1RRXZhbFJlc3BvbnNlEhYKBnJlc3Vs",
-            "dBgBIAEoCVIGcmVzdWx0ImYKB01zZ0NhbGwSIQoMcGFja2FnZV9wYXRoGAEg",
-            "ASgJUgtwYWNrYWdlUGF0aBIQCgNmbmMYAiABKAlSA2ZuYxISCgRhcmdzGAMg",
-            "AygJUgRhcmdzEhIKBHNlbmQYBCABKAlSBHNlbmQitAEKC0NhbGxSZXF1ZXN0",
-            "EhcKB2dhc19mZWUYASABKAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIgASgS",
-            "UglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRk",
-            "cmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFu",
-            "ZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ0NhbGxSBE1zZ3MiJgoMQ2FsbFJlc3Bv",
-            "bnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0Il0KB01zZ1NlbmQSHQoKdG9f",
-            "YWRkcmVzcxgBIAEoDFIJdG9BZGRyZXNzEjMKBmFtb3VudBgCIAMoCzIbLmxh",
-            "bmQuZ25vLmdub25hdGl2ZS52MS5Db2luUgZhbW91bnQitAEKC1NlbmRSZXF1",
-            "ZXN0EhcKB2dhc19mZWUYASABKAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIg",
-            "ASgSUglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJf",
-            "YWRkcmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4u",
-            "bGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1NlbmRSBE1zZ3MiDgoMU2VuZFJl",
-            "c3BvbnNlIjYKBk1zZ1J1bhIYCgdwYWNrYWdlGAEgASgJUgdwYWNrYWdlEhIK",
-            "BHNlbmQYAiABKAlSBHNlbmQisgEKClJ1blJlcXVlc3QSFwoHZ2FzX2ZlZRgB",
-            "IAEoCVIGZ2FzRmVlEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBIS",
-            "CgRtZW1vGAMgASgJUgRtZW1vEiUKDmNhbGxlcl9hZGRyZXNzGAQgASgMUg1j",
-            "YWxsZXJBZGRyZXNzEjEKBG1zZ3MYBSADKAsyHS5sYW5kLmduby5nbm9uYXRp",
-            "dmUudjEuTXNnUnVuUgRNc2dzIiUKC1J1blJlc3BvbnNlEhYKBnJlc3VsdBgB",
-            "IAEoCVIGcmVzdWx0IikKDk1ha2VUeFJlc3BvbnNlEhcKB3R4X2pzb24YASAB",
-            "KAlSBnR4SnNvbiKSAQoNU2lnblR4UmVxdWVzdBIXCgd0eF9qc29uGAEgASgJ",
-            "UgZ0eEpzb24SGAoHYWRkcmVzcxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50",
-            "X251bWJlchgDIAEoBFINYWNjb3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1i",
-            "ZXIYBCABKARSDnNlcXVlbmNlTnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8K",
-            "DnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIjsKGEJyb2FkY2FzdFR4",
-            "Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNv",
-            "biIzChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlEhYKBnJlc3VsdBgBIAEo",
-            "DFIGcmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSGAoHYWRkcmVz",
-            "cxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIl",
-            "Cg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyJBChhBZGRy",
-            "ZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVjaDMyX2FkZHJlc3MYASABKAlS",
-            "DWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIY",
-            "CgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgKGkFkZHJlc3NGcm9tTW5lbW9u",
-            "aWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJUghtbmVtb25pYyI3ChtBZGRy",
-            "ZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoHYWRkcmVzcxgBIAEoDFIHYWRk",
-            "cmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1I",
-            "ZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJI",
-            "ZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxs",
-            "b1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIw",
-            "ChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSFAoFVmFsdWUYASADKAxSBVZh",
-            "bHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9nbm9uYXRpdmUvYXBpL2dlbi9n",
-            "b2IGcHJvdG8z"));
+            "dBgBIAEoCVIGcmVzdWx0IoMBCgdNc2dDYWxsEiEKDHBhY2thZ2VfcGF0aBgB",
+            "IAEoCVILcGFja2FnZVBhdGgSEAoDZm5jGAIgASgJUgNmbmMSEgoEYXJncxgD",
+            "IAMoCVIEYXJncxIvCgRzZW5kGAQgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZl",
+            "LnYxLkNvaW5SBHNlbmQitAEKC0NhbGxSZXF1ZXN0EhcKB2dhc19mZWUYASAB",
+            "KAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQSEgoE",
+            "bWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFINY2Fs",
+            "bGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZl",
+            "LnYxLk1zZ0NhbGxSBE1zZ3MiJgoMQ2FsbFJlc3BvbnNlEhYKBnJlc3VsdBgB",
+            "IAEoDFIGcmVzdWx0Il0KB01zZ1NlbmQSHQoKdG9fYWRkcmVzcxgBIAEoDFIJ",
+            "dG9BZGRyZXNzEjMKBmFtb3VudBgCIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2",
+            "ZS52MS5Db2luUgZhbW91bnQitAEKC1NlbmRSZXF1ZXN0EhcKB2dhc19mZWUY",
+            "ASABKAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQS",
+            "EgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFIN",
+            "Y2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0",
+            "aXZlLnYxLk1zZ1NlbmRSBE1zZ3MiDgoMU2VuZFJlc3BvbnNlIjYKBk1zZ1J1",
+            "bhIYCgdwYWNrYWdlGAEgASgJUgdwYWNrYWdlEhIKBHNlbmQYAiABKAlSBHNl",
+            "bmQisgEKClJ1blJlcXVlc3QSFwoHZ2FzX2ZlZRgBIAEoCVIGZ2FzRmVlEh0K",
+            "Cmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBISCgRtZW1vGAMgASgJUgRt",
+            "ZW1vEiUKDmNhbGxlcl9hZGRyZXNzGAQgASgMUg1jYWxsZXJBZGRyZXNzEjEK",
+            "BG1zZ3MYBSADKAsyHS5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnUnVuUgRN",
+            "c2dzIiUKC1J1blJlc3BvbnNlEhYKBnJlc3VsdBgBIAEoCVIGcmVzdWx0IikK",
+            "Dk1ha2VUeFJlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4SnNvbiKSAQoN",
+            "U2lnblR4UmVxdWVzdBIXCgd0eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRk",
+            "cmVzcxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50X251bWJlchgDIAEoBFIN",
+            "YWNjb3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1iZXIYBCABKARSDnNlcXVl",
+            "bmNlTnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29u",
+            "GAEgASgJUgd0eF9qc29uIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIf",
+            "Cg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNvbiIzChlCcm9hZGNhc3RU",
+            "eENvbW1pdFJlc3BvbnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0IjIKFkFk",
+            "ZHJlc3NUb0JlY2gzMlJlcXVlc3QSGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVz",
+            "cyJAChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIlCg5iZWNoMzJfYWRkcmVz",
+            "cxgBIAEoCVINYmVjaDMyQWRkcmVzcyJBChhBZGRyZXNzRnJvbUJlY2gzMlJl",
+            "cXVlc3QSJQoOYmVjaDMyX2FkZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3Mi",
+            "NQoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIYCgdhZGRyZXNzGAEgASgM",
+            "UgdhZGRyZXNzIjgKGkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhoKCG1u",
+            "ZW1vbmljGAEgASgJUghtbmVtb25pYyI3ChtBZGRyZXNzRnJvbU1uZW1vbmlj",
+            "UmVzcG9uc2USGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVzcyIiCgxIZWxsb1Jl",
+            "cXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoK",
+            "CGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVl",
+            "c3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNl",
+            "EhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIwChhHTk9OQVRJVkVUWVBF",
+            "U19CeXRlc0xpc3QSFAoFVmFsdWUYASADKAxSBVZhbHVlQilaJ2dpdGh1Yi5j",
+            "b20vZ25vbGFuZy9nbm9uYXRpdmUvYXBpL2dlbi9nb2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -10120,7 +10120,7 @@ namespace Land.Gno.Gnonative.V1 {
       packagePath_ = other.packagePath_;
       fnc_ = other.fnc_;
       args_ = other.args_.Clone();
-      send_ = other.send_;
+      send_ = other.send_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -10177,14 +10177,13 @@ namespace Land.Gno.Gnonative.V1 {
 
     /// <summary>Field number for the "send" field.</summary>
     public const int SendFieldNumber = 4;
-    private string send_ = "";
+    private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.Coin> _repeated_send_codec
+        = pb::FieldCodec.ForMessage(34, global::Land.Gno.Gnonative.V1.Coin.Parser);
+    private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> send_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Send {
+    public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> Send {
       get { return send_; }
-      set {
-        send_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10205,7 +10204,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (PackagePath != other.PackagePath) return false;
       if (Fnc != other.Fnc) return false;
       if(!args_.Equals(other.args_)) return false;
-      if (Send != other.Send) return false;
+      if(!send_.Equals(other.send_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10216,7 +10215,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (PackagePath.Length != 0) hash ^= PackagePath.GetHashCode();
       if (Fnc.Length != 0) hash ^= Fnc.GetHashCode();
       hash ^= args_.GetHashCode();
-      if (Send.Length != 0) hash ^= Send.GetHashCode();
+      hash ^= send_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10244,10 +10243,7 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteString(Fnc);
       }
       args_.WriteTo(output, _repeated_args_codec);
-      if (Send.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Send);
-      }
+      send_.WriteTo(output, _repeated_send_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10267,10 +10263,7 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteString(Fnc);
       }
       args_.WriteTo(ref output, _repeated_args_codec);
-      if (Send.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Send);
-      }
+      send_.WriteTo(ref output, _repeated_send_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -10288,9 +10281,7 @@ namespace Land.Gno.Gnonative.V1 {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Fnc);
       }
       size += args_.CalculateSize(_repeated_args_codec);
-      if (Send.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Send);
-      }
+      size += send_.CalculateSize(_repeated_send_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -10310,9 +10301,7 @@ namespace Land.Gno.Gnonative.V1 {
         Fnc = other.Fnc;
       }
       args_.Add(other.args_);
-      if (other.Send.Length != 0) {
-        Send = other.Send;
-      }
+      send_.Add(other.send_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -10345,7 +10334,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 34: {
-            Send = input.ReadString();
+            send_.AddEntriesFrom(input, _repeated_send_codec);
             break;
           }
         }
@@ -10380,7 +10369,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 34: {
-            Send = input.ReadString();
+            send_.AddEntriesFrom(ref input, _repeated_send_codec);
             break;
           }
         }

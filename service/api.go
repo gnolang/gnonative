@@ -526,9 +526,9 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 	msgs := make([]vm.MsgCall, 0)
 
 	for _, msg := range req.Msgs {
-		send, err := std.ParseCoins(msg.Send)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
+		send := make([]std.Coin, 0)
+		for _, coin := range msg.Send {
+			send = append(send, std.NewCoin(coin.Denom, coin.Amount))
 		}
 
 		msgs = append(msgs, vm.MsgCall{

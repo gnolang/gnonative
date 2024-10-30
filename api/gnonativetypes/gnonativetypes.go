@@ -225,7 +225,7 @@ type MsgCall struct {
 	// list of arguments specific to the function
 	// Example: ["1", "1", "2", "my reply"]
 	Args []string `json:"args" yaml:"args"`
-	Send string   `json:"send" yaml:"send"`
+	Send []Coin   `json:"send" yaml:"send"`
 }
 
 type CallRequest struct {

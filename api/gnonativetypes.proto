@@ -229,7 +229,7 @@ message MsgCall {
 	// list of arguments specific to the function
 	// Example: ["1", "1", "2", "my reply"]
 	repeated string args = 3;
-	string send = 4;
+	repeated Coin send = 4;
 }
 
 message CallRequest {

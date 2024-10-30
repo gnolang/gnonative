@@ -493,7 +493,7 @@ export const MsgCall = proto3.makeMessageType(
     { no: 1, name: "package_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "fnc", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "args", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 4, name: "send", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "send", kind: "message", T: Coin, repeated: true },
   ],
 );
 
