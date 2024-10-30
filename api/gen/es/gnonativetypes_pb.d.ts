@@ -1259,9 +1259,9 @@ export declare class MsgCall extends Message<MsgCall> {
   args: string[];
 
   /**
-   * @generated from field: string send = 4;
+   * @generated from field: repeated land.gno.gnonative.v1.Coin send = 4;
    */
-  send: string;
+  send: Coin[];
 
   constructor(data?: PartialMessage<MsgCall>);
 
