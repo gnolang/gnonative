@@ -92,18 +92,6 @@ public class GnonativeModule: Module {
       }
     }
     
-    AsyncFunction("startGnokeyMobileService") { (promise: Promise) in
-      do {
-        guard let service = self.bridge else {
-          throw GnoError(.notStarted)
-        }
-        try service.startGnokeyMobileService()
-        promise.resolve(true)
-      } catch let error {
-        promise.reject(error)
-      }
-    }
-    
     AsyncFunction("closeBridge") { (promise: Promise) in
       do {
         guard let service = self.bridge else {

@@ -4,7 +4,6 @@ export interface GoBridgeInterface {
   initBridge(): Promise<void>;
   closeBridge(): Promise<void>;
   getTcpPort(): Promise<number>;
-  startGnokeyMobileService(): Promise<void>;
   invokeGrpcMethod(method: string, jsonMessage: string): Promise<string>;
   createStreamClient(method: string, jsonMessage: string): Promise<string>;
   streamClientReceive(id: string): Promise<string>;
@@ -22,10 +21,6 @@ class GoBridge implements GoBridgeInterface {
 
   getTcpPort(): Promise<number> {
     return GnonativeModule.getTcpPort();
-  }
-
-  startGnokeyMobileService(): Promise<void> {
-    return GnonativeModule.startGnokeyMobileService();
   }
 
   invokeGrpcMethod(method: string, jsonMessage: string): Promise<string> {
