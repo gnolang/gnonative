@@ -36,21 +36,7 @@ func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[a
 }
 
 func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
-	if s.useGnokeyMobile {
-		// Always get the remote from the Gnokey Mobile service
-		res, err := s.gnokeyMobileClient.GetRemote(context.Background(), req)
-		if err != nil {
-			return nil, err
-		}
-
-		return connect.NewResponse(res.Msg), nil
-	}
-
-	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.ClientGetRemote()}), nil
-}
-
-func (s *gnoNativeService) ClientGetRemote() string {
-	return s.remote
+	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.remote}), nil
 }
 
 func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
@@ -91,17 +77,7 @@ func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
 	s.logger.Debug("ListKeyInfo called")
 
-	if s.useGnokeyMobile {
-		// Always get the list of keys from the Gnokey Mobile service
-		res, err := s.gnokeyMobileClient.ListKeyInfo(context.Background(), req)
-		if err != nil {
-			return nil, err
-		}
-
-		return connect.NewResponse(res.Msg), nil
-	}
-
-	keys, err := s.ClientListKeyInfo()
+	keys, err := s.keybase.List()
 	if err != nil {
 		return nil, err
 	}
@@ -118,10 +94,6 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 	}
 
 	return connect.NewResponse(&api_gen.ListKeyInfoResponse{Keys: formatedKeys}), nil
-}
-
-func (s *gnoNativeService) ClientListKeyInfo() ([]crypto_keys.Info, error) {
-	return s.keybase.List()
 }
 
 func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
@@ -442,54 +414,6 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	cfg, msgs, err := s.convertCallRequest(req.Msg)
 	if err != nil {
 		return err
-	}
-
-	if s.useGnokeyMobile {
-		tx, err := gnoclient.NewCallTx(*cfg, msgs...)
-		if err != nil {
-			return err
-		}
-		txJSON, err := amino.MarshalJSON(tx)
-		if err != nil {
-			return err
-		}
-
-		// Use Gnokey Mobile to sign.
-		// Note that req.Msg.CallerAddress must be set to the desired signer. The app can get the
-		// address using ListKeyInfo.
-		signedTxJSON, err := s.gnokeyMobileClient.SignTx(
-			context.Background(),
-			connect.NewRequest(&api_gen.SignTxRequest{
-				TxJson:  string(txJSON),
-				Address: req.Msg.CallerAddress,
-			}),
-		)
-		if err != nil {
-			return err
-		}
-		signedTx := &std.Tx{}
-		if err := amino.UnmarshalJSON([]byte(signedTxJSON.Msg.SignedTxJson), signedTx); err != nil {
-			return err
-		}
-
-		// Now broadcast
-		c, err := s.getClient(nil)
-		if err != nil {
-			return getGrpcError(err)
-		}
-		bres, err := c.BroadcastTxCommit(signedTx)
-		if err != nil {
-			return getGrpcError(err)
-		}
-
-		if err := stream.Send(&api_gen.CallResponse{
-			Result: bres.DeliverTx.Data,
-		}); err != nil {
-			s.logger.Error("Call stream.Send returned error", zap.Error(err))
-			return err
-		}
-
-		return nil
 	}
 
 	signer, err := s.getSigner(req.Msg.CallerAddress)

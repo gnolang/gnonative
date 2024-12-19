@@ -86,10 +86,6 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         new SetChainIDRequest({ chainId: this.config.chain_id }),
       );
       console.log('✅ GnoNative bridge initialized.');
-      if (this.config.start_gnokey_mobile_service) {
-        await this.startGnokeyMobileService();
-        console.log('✅ Gnokey Mobile service started.');
-      }
       return true;
     } catch (error) {
       console.error(error);
@@ -471,9 +467,6 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   }
   getTcpPort(): Promise<number> {
     return GoBridge.getTcpPort();
-  }
-  startGnokeyMobileService(): Promise<void> {
-    return GoBridge.startGnokeyMobileService();
   }
   invokeGrpcMethod(method: string, jsonMessage: string): Promise<string> {
     return GoBridge.invokeGrpcMethod(method, jsonMessage);

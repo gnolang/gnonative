@@ -24,7 +24,6 @@ type Config struct {
 	UdsPath            string
 	UseTcpListener     bool
 	DisableUdsListener bool
-	UseGnokeyMobile    bool
 }
 
 type GnoNativeOption func(cfg *Config) error
@@ -324,16 +323,6 @@ var WithUseTcpListener = func() GnoNativeOption {
 var WithDisableUdsListener = func() GnoNativeOption {
 	return func(cfg *Config) error {
 		cfg.DisableUdsListener = true
-		return nil
-	}
-}
-
-// --- Gnokey Mobile options ---
-
-// WithUseGnokeyMobile sets the gRPC service to use Gnokey Mobile for key-based operations.
-var WithUseGnokeyMobile = func() GnoNativeOption {
-	return func(cfg *Config) error {
-		cfg.UseGnokeyMobile = true
 		return nil
 	}
 }
