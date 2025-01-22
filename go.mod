@@ -8,7 +8,7 @@ require (
 	connectrpc.com/connect v1.16.2
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/gnolang/gno v0.0.0-20241029141810-12bd8da50dc1
+	github.com/gnolang/gno v0.0.0-20250114141614-d54d00470dd1
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff/v3 v3.4.0
 	github.com/peterbourgon/unixtransport v0.0.3
@@ -19,7 +19,7 @@ require (
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
 	golang.org/x/net v0.28.0
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
-	google.golang.org/protobuf v1.34.2
+	google.golang.org/protobuf v1.35.1
 	moul.io/u v1.27.0
 )
 
@@ -31,7 +31,6 @@ require (
 	github.com/cosmos/ledger-cosmos-go v0.13.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
-	github.com/gnolang/overflow v0.0.0-20170615021017-4d914c927216 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
@@ -42,6 +41,7 @@ require (
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
+	github.com/sig-0/insertion-queue v0.0.0-20241004125609-6b3ca841346b // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/zondax/hid v0.9.2 // indirect

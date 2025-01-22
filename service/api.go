@@ -675,6 +675,33 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
+
+func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest],
+	stream *connect.ServerStream[api_gen.EstimateGasResponse]) error {
+	signedTx := &std.Tx{}
+	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
+		return err
+	}
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	amount, err := c.EstimateGas(signedTx)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.EstimateGasResponse{
+		Amount: amount,
+	}); err != nil {
+		s.logger.Error("EstimateGas stream.Send returned error", zap.Error(err))
+		return err
+	}
+
+	return nil
+}
+
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
 	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse]) error {
 	signedTx := &std.Tx{}

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RotatePasswordRequest, RotatePasswordResponse, RunRequest, RunResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse } from "./gnonativetypes_pb.js";
+import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, EstimateGasRequest, EstimateGasResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RotatePasswordRequest, RotatePasswordResponse, RunRequest, RunResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -369,6 +369,18 @@ export const GnoNativeService = {
       name: "MakeRunTx",
       I: RunRequest,
       O: MakeTxResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
+     * The estimation process assumes the transaction is properly signed.
+     *
+     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.EstimateGas
+     */
+    estimateGas: {
+      name: "EstimateGas",
+      I: EstimateGasRequest,
+      O: EstimateGasResponse,
       kind: MethodKind.Unary,
     },
     /**

@@ -313,6 +313,15 @@ message SignTxResponse {
 	string signed_tx_json = 1 [json_name = "tx_json"];
 }
 
+message EstimateGasRequest {
+	// The JSON encoding of the signed transaction (from SignTx)
+	string signed_tx_json = 1 [json_name = "tx_json"];
+}
+
+message EstimateGasResponse {
+	sint64 amount = 1;
+}
+
 message BroadcastTxCommitRequest {
 	// The JSON encoding of the signed transaction (from SignTx)
 	string signed_tx_json = 1 [json_name = "tx_json"];

@@ -1663,6 +1663,56 @@ export declare class SignTxResponse extends Message<SignTxResponse> {
 }
 
 /**
+ * @generated from message land.gno.gnonative.v1.EstimateGasRequest
+ */
+export declare class EstimateGasRequest extends Message<EstimateGasRequest> {
+  /**
+   * The JSON encoding of the signed transaction (from SignTx)
+   *
+   * @generated from field: string signed_tx_json = 1 [json_name = "tx_json"];
+   */
+  signedTxJson: string;
+
+  constructor(data?: PartialMessage<EstimateGasRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.EstimateGasRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EstimateGasRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EstimateGasRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EstimateGasRequest;
+
+  static equals(a: EstimateGasRequest | PlainMessage<EstimateGasRequest> | undefined, b: EstimateGasRequest | PlainMessage<EstimateGasRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateGasResponse
+ */
+export declare class EstimateGasResponse extends Message<EstimateGasResponse> {
+  /**
+   * @generated from field: sint64 amount = 1;
+   */
+  amount: bigint;
+
+  constructor(data?: PartialMessage<EstimateGasResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "land.gno.gnonative.v1.EstimateGasResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EstimateGasResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EstimateGasResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EstimateGasResponse;
+
+  static equals(a: EstimateGasResponse | PlainMessage<EstimateGasResponse> | undefined, b: EstimateGasResponse | PlainMessage<EstimateGasResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitRequest
  */
 export declare class BroadcastTxCommitRequest extends Message<BroadcastTxCommitRequest> {

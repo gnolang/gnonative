@@ -309,6 +309,15 @@ type SignTxResponse struct {
 	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
 }
 
+type EstimateGasRequest struct {
+	// The JSON encoding of the signed transaction (from SignTx)
+	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type EstimateGasResponse struct {
+	Amount int64 `json:"amount" yaml:"amount"`
+}
+
 type BroadcastTxCommitRequest struct {
 	// The JSON encoding of the signed transaction (from SignTx)
 	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`

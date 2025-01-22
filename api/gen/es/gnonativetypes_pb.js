@@ -623,6 +623,26 @@ export const SignTxResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message land.gno.gnonative.v1.EstimateGasRequest
+ */
+export const EstimateGasRequest = proto3.makeMessageType(
+  "land.gno.gnonative.v1.EstimateGasRequest",
+  () => [
+    { no: 1, name: "signed_tx_json", jsonName: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateGasResponse
+ */
+export const EstimateGasResponse = proto3.makeMessageType(
+  "land.gno.gnonative.v1.EstimateGasResponse",
+  () => [
+    { no: 1, name: "amount", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+  ],
+);
+
+/**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitRequest
  */
 export const BroadcastTxCommitRequest = proto3.makeMessageType(
