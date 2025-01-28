@@ -59,3 +59,6 @@ yarn-error.log
 # go framework
 android/libs/*
 ios/Frameworks/*
+
+# api vendor
+src/api/vendor/

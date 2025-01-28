@@ -1,3 +1,6 @@
+import { PromiseClient } from '@connectrpc/connect';
+
+import { GnoKeyApi, BridgeStatus, Config } from './types';
 import {
   AddressFromBech32Request,
   AddressToBech32Request,
@@ -46,11 +49,10 @@ import {
   SignTxResponse,
   RotatePasswordRequest,
   RotatePasswordResponse,
-} from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
-import { GnoNativeService } from '@buf/gnolang_gnonative.connectrpc_es/rpc_connect';
-import { PromiseClient } from '@connectrpc/connect';
-
-import { GnoKeyApi, BridgeStatus, Config } from './types';
+  EstimateGasRequest,
+  EstimateGasResponse,
+} from './vendor/gnonativetypes_pb';
+import { GnoNativeService } from './vendor/rpc_connect';
 import { GoBridge, GoBridgeInterface } from '../GoBridge';
 import * as Grpc from '../grpc/client';
 
@@ -81,8 +83,8 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     console.log('GoBridge GRPC client instance. Done.');
 
     try {
-      await this.clientInstance.setRemote(new SetRemoteRequest({ remote: this.config.remote }));
-      await this.clientInstance.setChainID(
+      await this.clientInstance?.setRemote(new SetRemoteRequest({ remote: this.config.remote }));
+      await this.clientInstance?.setChainID(
         new SetChainIDRequest({ chainId: this.config.chain_id }),
       );
       console.log('✅ GnoNative bridge initialized.');
@@ -131,6 +133,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   ): Promise<SignTxResponse> {
     const client = this.#getClient();
     const response = client.signTx({ txJson, address, accountNumber, sequenceNumber });
+    return response;
+  }
+
+  async estimateGas(signedTxJson: string): Promise<EstimateGasResponse> {
+    const client = this.#getClient();
+    const response = client.estimateGas(new EstimateGasRequest({ signedTxJson }));
     return response;
   }
 
