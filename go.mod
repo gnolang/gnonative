@@ -18,6 +18,7 @@ require (
 	go.uber.org/zap v1.27.0
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
 	golang.org/x/net v0.28.0
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	google.golang.org/protobuf v1.35.1
 	moul.io/u v1.27.0
 )
