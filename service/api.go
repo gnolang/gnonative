@@ -249,7 +249,7 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 
 func (s *gnoNativeService) RotatePassword(ctx context.Context, req *connect.Request[api_gen.RotatePasswordRequest]) (*connect.Response[api_gen.RotatePasswordResponse], error) {
 	// Get all the signers, before trying to update the password.
-	var signers = make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
+	signers := make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
 	for i := range len(req.Msg.Addresses) {
 		var err error
 		if signers[i], err = s.getSigner(req.Msg.Addresses[i]); err != nil {
@@ -675,7 +675,6 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
-
 func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest]) (*connect.Response[api_gen.EstimateGasResponse], error) {
 	signedTx := &std.Tx{}
 	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
@@ -695,7 +694,8 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
-	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse]) error {
+	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse],
+) error {
 	signedTx := &std.Tx{}
 	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
 		return err
@@ -743,6 +743,21 @@ func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *connect
 	}
 
 	return connect.NewResponse(&api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}), nil
+}
+
+func (s *gnoNativeService) UpdateGasWantedTx(ctx context.Context, req *connect.Request[api_gen.UpdateGasWantedTxRequest]) (*connect.Response[api_gen.UpdateGasWantedTxResponse], error) {
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+		return nil, err
+	}
+
+	tx.Fee.GasWanted = req.Msg.GasWanted
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.UpdateGasWantedTxResponse{TxJson: string(txJSON)}), nil
 }
 
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {

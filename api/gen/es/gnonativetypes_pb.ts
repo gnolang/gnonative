@@ -2836,6 +2836,86 @@ export class AddressFromMnemonicResponse extends Message<AddressFromMnemonicResp
 }
 
 /**
+ * @generated from message land.gno.gnonative.v1.UpdateGasWantedTxRequest
+ */
+export class UpdateGasWantedTxRequest extends Message<UpdateGasWantedTxRequest> {
+  /**
+   * @generated from field: string tx_json = 1;
+   */
+  txJson = "";
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted = protoInt64.zero;
+
+  constructor(data?: PartialMessage<UpdateGasWantedTxRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "land.gno.gnonative.v1.UpdateGasWantedTxRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateGasWantedTxRequest {
+    return new UpdateGasWantedTxRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateGasWantedTxRequest {
+    return new UpdateGasWantedTxRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateGasWantedTxRequest {
+    return new UpdateGasWantedTxRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateGasWantedTxRequest | PlainMessage<UpdateGasWantedTxRequest> | undefined, b: UpdateGasWantedTxRequest | PlainMessage<UpdateGasWantedTxRequest> | undefined): boolean {
+    return proto3.util.equals(UpdateGasWantedTxRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message land.gno.gnonative.v1.UpdateGasWantedTxResponse
+ */
+export class UpdateGasWantedTxResponse extends Message<UpdateGasWantedTxResponse> {
+  /**
+   * @generated from field: string tx_json = 1;
+   */
+  txJson = "";
+
+  constructor(data?: PartialMessage<UpdateGasWantedTxResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "land.gno.gnonative.v1.UpdateGasWantedTxResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateGasWantedTxResponse {
+    return new UpdateGasWantedTxResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateGasWantedTxResponse {
+    return new UpdateGasWantedTxResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateGasWantedTxResponse {
+    return new UpdateGasWantedTxResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateGasWantedTxResponse | PlainMessage<UpdateGasWantedTxResponse> | undefined, b: UpdateGasWantedTxResponse | PlainMessage<UpdateGasWantedTxResponse> | undefined): boolean {
+    return proto3.util.equals(UpdateGasWantedTxResponse, a, b);
+  }
+}
+
+/**
  * @generated from message land.gno.gnonative.v1.HelloRequest
  */
 export class HelloRequest extends Message<HelloRequest> {

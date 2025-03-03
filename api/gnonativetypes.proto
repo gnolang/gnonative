@@ -355,6 +355,15 @@ message AddressFromMnemonicResponse {
 	bytes address = 1;
 }
 
+message UpdateGasWantedTxRequest {
+	string tx_json = 1;
+	sint64 gas_wanted = 2;
+}
+
+message UpdateGasWantedTxResponse {
+	string tx_json = 1;
+}
+
 message HelloRequest {
 	string name = 1 [json_name = "Name"];
 }

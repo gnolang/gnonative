@@ -4,11 +4,9 @@ type SetRemoteRequest struct {
 	Remote string `json:"remote" yaml:"remote"`
 }
 
-type SetRemoteResponse struct {
-}
+type SetRemoteResponse struct{}
 
-type GetRemoteRequest struct {
-}
+type GetRemoteRequest struct{}
 
 type GetRemoteResponse struct {
 	Remote string `json:"remote" yaml:"remote"`
@@ -18,11 +16,9 @@ type SetChainIDRequest struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
 }
 
-type SetChainIDResponse struct {
-}
+type SetChainIDResponse struct{}
 
-type GetChainIDRequest struct {
-}
+type GetChainIDRequest struct{}
 
 type GetChainIDResponse struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
@@ -34,8 +30,7 @@ type SetPasswordRequest struct {
 	Address []byte `json:"address" yaml:"address"`
 }
 
-type SetPasswordResponse struct {
-}
+type SetPasswordResponse struct{}
 
 type RotatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
@@ -43,11 +38,9 @@ type RotatePasswordRequest struct {
 	Addresses [][]byte `json:"addresses" yaml:"addresses"`
 }
 
-type RotatePasswordResponse struct {
-}
+type RotatePasswordResponse struct{}
 
-type GenerateRecoveryPhraseRequest struct {
-}
+type GenerateRecoveryPhraseRequest struct{}
 
 type GenerateRecoveryPhraseResponse struct {
 	Phrase string `json:"phrase" yaml:"phrase"`
@@ -77,8 +70,7 @@ type BaseAccount struct {
 	Sequence      uint64 `json:"sequence" yaml:"sequence"`
 }
 
-type ListKeyInfoRequest struct {
-}
+type ListKeyInfoRequest struct{}
 
 type ListKeyInfoResponse struct {
 	Keys []*KeyInfo `json:"key_info" yaml:"key_info"`
@@ -179,8 +171,7 @@ type DeleteAccountRequest struct {
 	SkipPassword bool   `json:"skip_password" yaml:"skip_password"`
 }
 
-type DeleteAccountResponse struct {
-}
+type DeleteAccountResponse struct{}
 
 type QueryRequest struct {
 	// Example: "vm/qrender"
@@ -261,8 +252,7 @@ type SendRequest struct {
 	Msgs []MsgSend
 }
 
-type SendResponse struct {
-}
+type SendResponse struct{}
 
 type MsgRun struct {
 	// The code for the script package. Must have main().
@@ -349,6 +339,15 @@ type AddressFromMnemonicRequest struct {
 
 type AddressFromMnemonicResponse struct {
 	Address []byte `json:"address" yaml:"address"`
+}
+
+type UpdateGasWantedTxRequest struct {
+	TxJSON    string `json:"tx_json" yaml:"tx_json"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+}
+
+type UpdateGasWantedTxResponse struct {
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
 }
 
 type HelloRequest struct {
