@@ -128,9 +128,6 @@ const (
 	// GnoNativeServiceAddressFromMnemonicProcedure is the fully-qualified name of the
 	// GnoNativeService's AddressFromMnemonic RPC.
 	GnoNativeServiceAddressFromMnemonicProcedure = "/land.gno.gnonative.v1.GnoNativeService/AddressFromMnemonic"
-	// GnoNativeServiceUpdateGasWantedTxProcedure is the fully-qualified name of the GnoNativeService's
-	// UpdateGasWantedTx RPC.
-	GnoNativeServiceUpdateGasWantedTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/UpdateGasWantedTx"
 	// GnoNativeServiceHelloProcedure is the fully-qualified name of the GnoNativeService's Hello RPC.
 	GnoNativeServiceHelloProcedure = "/land.gno.gnonative.v1.GnoNativeService/Hello"
 	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
@@ -245,8 +242,8 @@ type GnoNativeServiceClient interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-	// The estimation process assumes the transaction is properly signed.
+	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -260,8 +257,6 @@ type GnoNativeServiceClient interface {
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
 	// Convert a mnemonic (as in CreateAccount) to a byte array address.
 	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
-	// Update the GasWanted field of the transaction with the given amount.
-	UpdateGasWantedTx(context.Context, *connect.Request[_go.UpdateGasWantedTxRequest]) (*connect.Response[_go.UpdateGasWantedTxResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -483,12 +478,6 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 			connect.WithClientOptions(opts...),
 		),
-		updateGasWantedTx: connect.NewClient[_go.UpdateGasWantedTxRequest, _go.UpdateGasWantedTxResponse](
-			httpClient,
-			baseURL+GnoNativeServiceUpdateGasWantedTxProcedure,
-			connect.WithSchema(gnoNativeServiceMethods.ByName("UpdateGasWantedTx")),
-			connect.WithClientOptions(opts...),
-		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloProcedure,
@@ -540,7 +529,6 @@ type gnoNativeServiceClient struct {
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
 	addressFromMnemonic       *connect.Client[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse]
-	updateGasWantedTx         *connect.Client[_go.UpdateGasWantedTxRequest, _go.UpdateGasWantedTxResponse]
 	hello                     *connect.Client[_go.HelloRequest, _go.HelloResponse]
 	helloStream               *connect.Client[_go.HelloStreamRequest, _go.HelloStreamResponse]
 }
@@ -715,11 +703,6 @@ func (c *gnoNativeServiceClient) AddressFromMnemonic(ctx context.Context, req *c
 	return c.addressFromMnemonic.CallUnary(ctx, req)
 }
 
-// UpdateGasWantedTx calls land.gno.gnonative.v1.GnoNativeService.UpdateGasWantedTx.
-func (c *gnoNativeServiceClient) UpdateGasWantedTx(ctx context.Context, req *connect.Request[_go.UpdateGasWantedTxRequest]) (*connect.Response[_go.UpdateGasWantedTxResponse], error) {
-	return c.updateGasWantedTx.CallUnary(ctx, req)
-}
-
 // Hello calls land.gno.gnonative.v1.GnoNativeService.Hello.
 func (c *gnoNativeServiceClient) Hello(ctx context.Context, req *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
@@ -838,8 +821,8 @@ type GnoNativeServiceHandler interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-	// The estimation process assumes the transaction is properly signed.
+	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -853,8 +836,6 @@ type GnoNativeServiceHandler interface {
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
 	// Convert a mnemonic (as in CreateAccount) to a byte array address.
 	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
-	// Update the GasWanted field of the transaction with the given amount.
-	UpdateGasWantedTx(context.Context, *connect.Request[_go.UpdateGasWantedTxRequest]) (*connect.Response[_go.UpdateGasWantedTxResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -1072,12 +1053,6 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 		connect.WithHandlerOptions(opts...),
 	)
-	gnoNativeServiceUpdateGasWantedTxHandler := connect.NewUnaryHandler(
-		GnoNativeServiceUpdateGasWantedTxProcedure,
-		svc.UpdateGasWantedTx,
-		connect.WithSchema(gnoNativeServiceMethods.ByName("UpdateGasWantedTx")),
-		connect.WithHandlerOptions(opts...),
-	)
 	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHelloProcedure,
 		svc.Hello,
@@ -1160,8 +1135,6 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceAddressFromBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressFromMnemonicProcedure:
 			gnoNativeServiceAddressFromMnemonicHandler.ServeHTTP(w, r)
-		case GnoNativeServiceUpdateGasWantedTxProcedure:
-			gnoNativeServiceUpdateGasWantedTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloProcedure:
 			gnoNativeServiceHelloHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloStreamProcedure:
@@ -1309,10 +1282,6 @@ func (UnimplementedGnoNativeServiceHandler) AddressFromBech32(context.Context, *
 
 func (UnimplementedGnoNativeServiceHandler) AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic is not implemented"))
-}
-
-func (UnimplementedGnoNativeServiceHandler) UpdateGasWantedTx(context.Context, *connect.Request[_go.UpdateGasWantedTxRequest]) (*connect.Response[_go.UpdateGasWantedTxResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.UpdateGasWantedTx is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {

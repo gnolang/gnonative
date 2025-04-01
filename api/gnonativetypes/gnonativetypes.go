@@ -300,12 +300,27 @@ type SignTxResponse struct {
 }
 
 type EstimateGasRequest struct {
-	// The JSON encoding of the signed transaction (from SignTx)
-	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The address of the account to sign the transaction
+	Address []byte `json:"address" yaml:"address"`
+	// The security margin to apply to the estimated gas amount.
+	// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// It will be multiplied by the estimated gas amount.
+	SecurityMargin uint32 `json:"security_margin" yaml:"security_margin"`
+	// The update boolean to update the gas wanted field in the transaction if true.
+	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
+	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
+	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+	SequenceNumber uint64 `json:"sequence_number" yaml:"sequence_number"`
 }
 
 type EstimateGasResponse struct {
-	Amount int64 `json:"amount" yaml:"amount"`
+	// The JSON encoding of the unsigned transaction
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The estimated gas wanted for the transaction
+	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
 }
 
 type BroadcastTxCommitRequest struct {
@@ -339,15 +354,6 @@ type AddressFromMnemonicRequest struct {
 
 type AddressFromMnemonicResponse struct {
 	Address []byte `json:"address" yaml:"address"`
-}
-
-type UpdateGasWantedTxRequest struct {
-	TxJSON    string `json:"tx_json" yaml:"tx_json"`
-	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
-}
-
-type UpdateGasWantedTxResponse struct {
-	TxJSON string `json:"tx_json" yaml:"tx_json"`
 }
 
 type HelloRequest struct {

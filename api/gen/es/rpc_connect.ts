@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, EstimateGasRequest, EstimateGasResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RotatePasswordRequest, RotatePasswordResponse, RunRequest, RunResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse, UpdateGasWantedTxRequest, UpdateGasWantedTxResponse } from "./gnonativetypes_pb.js";
+import { ActivateAccountRequest, ActivateAccountResponse, AddressFromBech32Request, AddressFromBech32Response, AddressFromMnemonicRequest, AddressFromMnemonicResponse, AddressToBech32Request, AddressToBech32Response, BroadcastTxCommitRequest, BroadcastTxCommitResponse, CallRequest, CallResponse, CreateAccountRequest, CreateAccountResponse, DeleteAccountRequest, DeleteAccountResponse, EstimateGasRequest, EstimateGasResponse, GenerateRecoveryPhraseRequest, GenerateRecoveryPhraseResponse, GetActivatedAccountRequest, GetActivatedAccountResponse, GetChainIDRequest, GetChainIDResponse, GetKeyInfoByAddressRequest, GetKeyInfoByAddressResponse, GetKeyInfoByNameOrAddressRequest, GetKeyInfoByNameOrAddressResponse, GetKeyInfoByNameRequest, GetKeyInfoByNameResponse, GetRemoteRequest, GetRemoteResponse, HasKeyByAddressRequest, HasKeyByAddressResponse, HasKeyByNameOrAddressRequest, HasKeyByNameOrAddressResponse, HasKeyByNameRequest, HasKeyByNameResponse, HelloRequest, HelloResponse, HelloStreamRequest, HelloStreamResponse, ListKeyInfoRequest, ListKeyInfoResponse, MakeTxResponse, QEvalRequest, QEvalResponse, QueryAccountRequest, QueryAccountResponse, QueryRequest, QueryResponse, RenderRequest, RenderResponse, RotatePasswordRequest, RotatePasswordResponse, RunRequest, RunResponse, SendRequest, SendResponse, SetChainIDRequest, SetChainIDResponse, SetPasswordRequest, SetPasswordResponse, SetRemoteRequest, SetRemoteResponse, SignTxRequest, SignTxResponse } from "./gnonativetypes_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -372,8 +372,8 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-     * The estimation process assumes the transaction is properly signed.
+     * EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+     * If UpdateTx is true, then update the transaction with the gasWanted amount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.EstimateGas
      */
@@ -438,17 +438,6 @@ export const GnoNativeService = {
       name: "AddressFromMnemonic",
       I: AddressFromMnemonicRequest,
       O: AddressFromMnemonicResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * Update the GasWanted field of the transaction with the given amount.
-     *
-     * @generated from rpc land.gno.gnonative.v1.GnoNativeService.UpdateGasWantedTx
-     */
-    updateGasWantedTx: {
-      name: "UpdateGasWantedTx",
-      I: UpdateGasWantedTxRequest,
-      O: UpdateGasWantedTxResponse,
       kind: MethodKind.Unary,
     },
     /**

@@ -175,10 +175,6 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse> __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest> __Marshaller_land_gno_gnonative_v1_UpdateGasWantedTxRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse> __Marshaller_land_gno_gnonative_v1_UpdateGasWantedTxResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.HelloRequest> __Marshaller_land_gno_gnonative_v1_HelloRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.HelloRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.HelloResponse> __Marshaller_land_gno_gnonative_v1_HelloResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.HelloResponse.Parser));
@@ -458,14 +454,6 @@ namespace Land.Gno.Gnonative.V1 {
         "AddressFromMnemonic",
         __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicRequest,
         __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicResponse);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest, global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse> __Method_UpdateGasWantedTx = new grpc::Method<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest, global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "UpdateGasWantedTx",
-        __Marshaller_land_gno_gnonative_v1_UpdateGasWantedTxRequest,
-        __Marshaller_land_gno_gnonative_v1_UpdateGasWantedTxResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse> __Method_Hello = new grpc::Method<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse>(
@@ -882,8 +870,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-      /// The estimation process assumes the transaction is properly signed.
+      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -953,18 +941,6 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse> AddressFromMnemonic(global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      /// <summary>
-      /// Update the GasWanted field of the transaction with the given amount.
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse> UpdateGasWantedTx(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2476,8 +2452,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_MakeRunTx, null, options, request);
       }
       /// <summary>
-      /// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-      /// The estimation process assumes the transaction is properly signed.
+      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2490,8 +2466,8 @@ namespace Land.Gno.Gnonative.V1 {
         return EstimateGas(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-      /// The estimation process assumes the transaction is properly signed.
+      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -2502,8 +2478,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_EstimateGas, null, options, request);
       }
       /// <summary>
-      /// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-      /// The estimation process assumes the transaction is properly signed.
+      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2516,8 +2492,8 @@ namespace Land.Gno.Gnonative.V1 {
         return EstimateGasAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-      /// The estimation process assumes the transaction is properly signed.
+      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -2752,54 +2728,6 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_AddressFromMnemonic, null, options, request);
       }
       /// <summary>
-      /// Update the GasWanted field of the transaction with the given amount.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse UpdateGasWantedTx(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return UpdateGasWantedTx(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// Update the GasWanted field of the transaction with the given amount.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse UpdateGasWantedTx(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_UpdateGasWantedTx, null, options, request);
-      }
-      /// <summary>
-      /// Update the GasWanted field of the transaction with the given amount.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse> UpdateGasWantedTxAsync(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return UpdateGasWantedTxAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// Update the GasWanted field of the transaction with the given amount.
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse> UpdateGasWantedTxAsync(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_UpdateGasWantedTx, null, options, request);
-      }
-      /// <summary>
       /// Hello is for debug purposes
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2919,7 +2847,6 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_AddressToBech32, serviceImpl.AddressToBech32)
           .AddMethod(__Method_AddressFromBech32, serviceImpl.AddressFromBech32)
           .AddMethod(__Method_AddressFromMnemonic, serviceImpl.AddressFromMnemonic)
-          .AddMethod(__Method_UpdateGasWantedTx, serviceImpl.UpdateGasWantedTx)
           .AddMethod(__Method_Hello, serviceImpl.Hello)
           .AddMethod(__Method_HelloStream, serviceImpl.HelloStream).Build();
     }
@@ -2965,7 +2892,6 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_AddressToBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(serviceImpl.AddressToBech32));
       serviceBinder.AddMethod(__Method_AddressFromBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromBech32Request, global::Land.Gno.Gnonative.V1.AddressFromBech32Response>(serviceImpl.AddressFromBech32));
       serviceBinder.AddMethod(__Method_AddressFromMnemonic, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest, global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse>(serviceImpl.AddressFromMnemonic));
-      serviceBinder.AddMethod(__Method_UpdateGasWantedTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest, global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse>(serviceImpl.UpdateGasWantedTx));
       serviceBinder.AddMethod(__Method_Hello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse>(serviceImpl.Hello));
       serviceBinder.AddMethod(__Method_HelloStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.HelloStreamRequest, global::Land.Gno.Gnonative.V1.HelloStreamResponse>(serviceImpl.HelloStream));
     }

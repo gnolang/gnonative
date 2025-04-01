@@ -142,8 +142,8 @@ service GnoNativeService {
   // Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
   rpc MakeRunTx(RunRequest) returns (MakeTxResponse);
 
-  // EstimateGas returns the least amount of gas required for the transaction to go through on the chain (minimum gas wanted).
-  // The estimation process assumes the transaction is properly signed.
+  // EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+  // If UpdateTx is true, then update the transaction with the gasWanted amount.
   rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
 
   // Sign the transaction using the account with the given address.
@@ -162,9 +162,6 @@ service GnoNativeService {
 
   // Convert a mnemonic (as in CreateAccount) to a byte array address.
   rpc AddressFromMnemonic(AddressFromMnemonicRequest) returns (AddressFromMnemonicResponse);
-
-  // Update the GasWanted field of the transaction with the given amount.
-  rpc UpdateGasWantedTx(UpdateGasWantedTxRequest) returns (UpdateGasWantedTxResponse);
 
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);

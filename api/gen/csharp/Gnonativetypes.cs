@@ -118,29 +118,30 @@ namespace Land.Gno.Gnonative.V1 {
             "cmVzcxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50X251bWJlchgDIAEoBFIN",
             "YWNjb3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1iZXIYBCABKARSDnNlcXVl",
             "bmNlTnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29u",
-            "GAEgASgJUgd0eF9qc29uIjUKEkVzdGltYXRlR2FzUmVxdWVzdBIfCg5zaWdu",
-            "ZWRfdHhfanNvbhgBIAEoCVIHdHhfanNvbiItChNFc3RpbWF0ZUdhc1Jlc3Bv",
-            "bnNlEhYKBmFtb3VudBgBIAEoElIGYW1vdW50IjsKGEJyb2FkY2FzdFR4Q29t",
-            "bWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNvbiIz",
-            "ChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlEhYKBnJlc3VsdBgBIAEoDFIG",
-            "cmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSGAoHYWRkcmVzcxgB",
-            "IAEoDFIHYWRkcmVzcyJAChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIlCg5i",
-            "ZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyJBChhBZGRyZXNz",
-            "RnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVjaDMyX2FkZHJlc3MYASABKAlSDWJl",
-            "Y2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIYCgdh",
-            "ZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgKGkFkZHJlc3NGcm9tTW5lbW9uaWNS",
-            "ZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJUghtbmVtb25pYyI3ChtBZGRyZXNz",
-            "RnJvbU1uZW1vbmljUmVzcG9uc2USGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVz",
-            "cyJSChhVcGRhdGVHYXNXYW50ZWRUeFJlcXVlc3QSFwoHdHhfanNvbhgBIAEo",
-            "CVIGdHhKc29uEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZCI0ChlV",
-            "cGRhdGVHYXNXYW50ZWRUeFJlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4",
-            "SnNvbiIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1I",
-            "ZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJI",
-            "ZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxs",
-            "b1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIw",
-            "ChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSFAoFVmFsdWUYASADKAxSBVZh",
-            "bHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9nbm9uYXRpdmUvYXBpL2dlbi9n",
-            "b2IGcHJvdG8z"));
+            "GAEgASgJUgd0eF9qc29uIt0BChJFc3RpbWF0ZUdhc1JlcXVlc3QSFwoHdHhf",
+            "anNvbhgBIAEoCVIGdHhKc29uEhgKB2FkZHJlc3MYAiABKAxSB2FkZHJlc3MS",
+            "JwoPc2VjdXJpdHlfbWFyZ2luGAMgASgNUg5zZWN1cml0eU1hcmdpbhIbCgl1",
+            "cGRhdGVfdHgYBCABKAhSCHVwZGF0ZVR4EiUKDmFjY291bnRfbnVtYmVyGAUg",
+            "ASgEUg1hY2NvdW50TnVtYmVyEicKD3NlcXVlbmNlX251bWJlchgGIAEoBFIO",
+            "c2VxdWVuY2VOdW1iZXIiTQoTRXN0aW1hdGVHYXNSZXNwb25zZRIXCgd0eF9q",
+            "c29uGAEgASgJUgZ0eEpzb24SHQoKZ2FzX3dhbnRlZBgCIAEoElIJZ2FzV2Fu",
+            "dGVkIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhf",
+            "anNvbhgBIAEoCVIHdHhfanNvbiIzChlCcm9hZGNhc3RUeENvbW1pdFJlc3Bv",
+            "bnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gz",
+            "MlJlcXVlc3QSGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNz",
+            "VG9CZWNoMzJSZXNwb25zZRIlCg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVj",
+            "aDMyQWRkcmVzcyJBChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVj",
+            "aDMyX2FkZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zy",
+            "b21CZWNoMzJSZXNwb25zZRIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgK",
+            "GkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJ",
+            "UghtbmVtb25pYyI3ChtBZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoH",
+            "YWRkcmVzcxgBIAEoDFIHYWRkcmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFt",
+            "ZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEg",
+            "ASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgB",
+            "IAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5n",
+            "GAEgASgJUghHcmVldGluZyIwChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QS",
+            "FAoFVmFsdWUYASADKAxSBVZhbHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9n",
+            "bm9uYXRpdmUvYXBpL2dlbi9nb2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -203,8 +204,8 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MakeTxResponse), global::Land.Gno.Gnonative.V1.MakeTxResponse.Parser, new[]{ "TxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxRequest), global::Land.Gno.Gnonative.V1.SignTxRequest.Parser, new[]{ "TxJson", "Address", "AccountNumber", "SequenceNumber" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxResponse), global::Land.Gno.Gnonative.V1.SignTxResponse.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasRequest), global::Land.Gno.Gnonative.V1.EstimateGasRequest.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasResponse), global::Land.Gno.Gnonative.V1.EstimateGasResponse.Parser, new[]{ "Amount" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasRequest), global::Land.Gno.Gnonative.V1.EstimateGasRequest.Parser, new[]{ "TxJson", "Address", "SecurityMargin", "UpdateTx", "AccountNumber", "SequenceNumber" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasResponse), global::Land.Gno.Gnonative.V1.EstimateGasResponse.Parser, new[]{ "TxJson", "GasWanted" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest), global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse), global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Request), global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser, new[]{ "Address" }, null, null, null, null),
@@ -213,8 +214,6 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressFromBech32Response), global::Land.Gno.Gnonative.V1.AddressFromBech32Response.Parser, new[]{ "Address" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest), global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest.Parser, new[]{ "Mnemonic" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse), global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse.Parser, new[]{ "Address" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest), global::Land.Gno.Gnonative.V1.UpdateGasWantedTxRequest.Parser, new[]{ "TxJson", "GasWanted" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse), global::Land.Gno.Gnonative.V1.UpdateGasWantedTxResponse.Parser, new[]{ "TxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.HelloRequest), global::Land.Gno.Gnonative.V1.HelloRequest.Parser, new[]{ "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.HelloResponse), global::Land.Gno.Gnonative.V1.HelloResponse.Parser, new[]{ "Greeting" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.HelloStreamRequest), global::Land.Gno.Gnonative.V1.HelloStreamRequest.Parser, new[]{ "Name" }, null, null, null, null),
@@ -13209,7 +13208,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EstimateGasRequest(EstimateGasRequest other) : this() {
-      signedTxJson_ = other.signedTxJson_;
+      txJson_ = other.txJson_;
+      address_ = other.address_;
+      securityMargin_ = other.securityMargin_;
+      updateTx_ = other.updateTx_;
+      accountNumber_ = other.accountNumber_;
+      sequenceNumber_ = other.sequenceNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -13219,18 +13223,95 @@ namespace Land.Gno.Gnonative.V1 {
       return new EstimateGasRequest(this);
     }
 
-    /// <summary>Field number for the "signed_tx_json" field.</summary>
-    public const int SignedTxJsonFieldNumber = 1;
-    private string signedTxJson_ = "";
+    /// <summary>Field number for the "tx_json" field.</summary>
+    public const int TxJsonFieldNumber = 1;
+    private string txJson_ = "";
     /// <summary>
-    /// The JSON encoding of the signed transaction (from SignTx)
+    /// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string SignedTxJson {
-      get { return signedTxJson_; }
+    public string TxJson {
+      get { return txJson_; }
       set {
-        signedTxJson_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        txJson_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "address" field.</summary>
+    public const int AddressFieldNumber = 2;
+    private pb::ByteString address_ = pb::ByteString.Empty;
+    /// <summary>
+    /// The address of the account to sign the transaction
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Address {
+      get { return address_; }
+      set {
+        address_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "security_margin" field.</summary>
+    public const int SecurityMarginFieldNumber = 3;
+    private uint securityMargin_;
+    /// <summary>
+    /// The security margin to apply to the estimated gas amount.
+    /// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+    /// It will be multiplied by the estimated gas amount.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint SecurityMargin {
+      get { return securityMargin_; }
+      set {
+        securityMargin_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "update_tx" field.</summary>
+    public const int UpdateTxFieldNumber = 4;
+    private bool updateTx_;
+    /// <summary>
+    /// The update boolean to update the gas wanted field in the transaction if true.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UpdateTx {
+      get { return updateTx_; }
+      set {
+        updateTx_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "account_number" field.</summary>
+    public const int AccountNumberFieldNumber = 5;
+    private ulong accountNumber_;
+    /// <summary>
+    /// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong AccountNumber {
+      get { return accountNumber_; }
+      set {
+        accountNumber_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sequence_number" field.</summary>
+    public const int SequenceNumberFieldNumber = 6;
+    private ulong sequenceNumber_;
+    /// <summary>
+    /// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong SequenceNumber {
+      get { return sequenceNumber_; }
+      set {
+        sequenceNumber_ = value;
       }
     }
 
@@ -13249,7 +13330,12 @@ namespace Land.Gno.Gnonative.V1 {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (SignedTxJson != other.SignedTxJson) return false;
+      if (TxJson != other.TxJson) return false;
+      if (Address != other.Address) return false;
+      if (SecurityMargin != other.SecurityMargin) return false;
+      if (UpdateTx != other.UpdateTx) return false;
+      if (AccountNumber != other.AccountNumber) return false;
+      if (SequenceNumber != other.SequenceNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -13257,7 +13343,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (SignedTxJson.Length != 0) hash ^= SignedTxJson.GetHashCode();
+      if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
+      if (Address.Length != 0) hash ^= Address.GetHashCode();
+      if (SecurityMargin != 0) hash ^= SecurityMargin.GetHashCode();
+      if (UpdateTx != false) hash ^= UpdateTx.GetHashCode();
+      if (AccountNumber != 0UL) hash ^= AccountNumber.GetHashCode();
+      if (SequenceNumber != 0UL) hash ^= SequenceNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -13276,9 +13367,29 @@ namespace Land.Gno.Gnonative.V1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (SignedTxJson.Length != 0) {
+      if (TxJson.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(SignedTxJson);
+        output.WriteString(TxJson);
+      }
+      if (Address.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Address);
+      }
+      if (SecurityMargin != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SecurityMargin);
+      }
+      if (UpdateTx != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(UpdateTx);
+      }
+      if (AccountNumber != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(AccountNumber);
+      }
+      if (SequenceNumber != 0UL) {
+        output.WriteRawTag(48);
+        output.WriteUInt64(SequenceNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -13290,9 +13401,29 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (SignedTxJson.Length != 0) {
+      if (TxJson.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(SignedTxJson);
+        output.WriteString(TxJson);
+      }
+      if (Address.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Address);
+      }
+      if (SecurityMargin != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SecurityMargin);
+      }
+      if (UpdateTx != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(UpdateTx);
+      }
+      if (AccountNumber != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(AccountNumber);
+      }
+      if (SequenceNumber != 0UL) {
+        output.WriteRawTag(48);
+        output.WriteUInt64(SequenceNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -13304,8 +13435,23 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (SignedTxJson.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(SignedTxJson);
+      if (TxJson.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TxJson);
+      }
+      if (Address.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Address);
+      }
+      if (SecurityMargin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SecurityMargin);
+      }
+      if (UpdateTx != false) {
+        size += 1 + 1;
+      }
+      if (AccountNumber != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(AccountNumber);
+      }
+      if (SequenceNumber != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SequenceNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -13319,8 +13465,23 @@ namespace Land.Gno.Gnonative.V1 {
       if (other == null) {
         return;
       }
-      if (other.SignedTxJson.Length != 0) {
-        SignedTxJson = other.SignedTxJson;
+      if (other.TxJson.Length != 0) {
+        TxJson = other.TxJson;
+      }
+      if (other.Address.Length != 0) {
+        Address = other.Address;
+      }
+      if (other.SecurityMargin != 0) {
+        SecurityMargin = other.SecurityMargin;
+      }
+      if (other.UpdateTx != false) {
+        UpdateTx = other.UpdateTx;
+      }
+      if (other.AccountNumber != 0UL) {
+        AccountNumber = other.AccountNumber;
+      }
+      if (other.SequenceNumber != 0UL) {
+        SequenceNumber = other.SequenceNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -13342,7 +13503,27 @@ namespace Land.Gno.Gnonative.V1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            SignedTxJson = input.ReadString();
+            TxJson = input.ReadString();
+            break;
+          }
+          case 18: {
+            Address = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            SecurityMargin = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            UpdateTx = input.ReadBool();
+            break;
+          }
+          case 40: {
+            AccountNumber = input.ReadUInt64();
+            break;
+          }
+          case 48: {
+            SequenceNumber = input.ReadUInt64();
             break;
           }
         }
@@ -13365,7 +13546,27 @@ namespace Land.Gno.Gnonative.V1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            SignedTxJson = input.ReadString();
+            TxJson = input.ReadString();
+            break;
+          }
+          case 18: {
+            Address = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            SecurityMargin = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            UpdateTx = input.ReadBool();
+            break;
+          }
+          case 40: {
+            AccountNumber = input.ReadUInt64();
+            break;
+          }
+          case 48: {
+            SequenceNumber = input.ReadUInt64();
             break;
           }
         }
@@ -13410,7 +13611,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EstimateGasResponse(EstimateGasResponse other) : this() {
-      amount_ = other.amount_;
+      txJson_ = other.txJson_;
+      gasWanted_ = other.gasWanted_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -13420,15 +13622,33 @@ namespace Land.Gno.Gnonative.V1 {
       return new EstimateGasResponse(this);
     }
 
-    /// <summary>Field number for the "amount" field.</summary>
-    public const int AmountFieldNumber = 1;
-    private long amount_;
+    /// <summary>Field number for the "tx_json" field.</summary>
+    public const int TxJsonFieldNumber = 1;
+    private string txJson_ = "";
+    /// <summary>
+    /// The JSON encoding of the unsigned transaction
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Amount {
-      get { return amount_; }
+    public string TxJson {
+      get { return txJson_; }
       set {
-        amount_ = value;
+        txJson_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "gas_wanted" field.</summary>
+    public const int GasWantedFieldNumber = 2;
+    private long gasWanted_;
+    /// <summary>
+    /// The estimated gas wanted for the transaction
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long GasWanted {
+      get { return gasWanted_; }
+      set {
+        gasWanted_ = value;
       }
     }
 
@@ -13447,7 +13667,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Amount != other.Amount) return false;
+      if (TxJson != other.TxJson) return false;
+      if (GasWanted != other.GasWanted) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -13455,7 +13676,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Amount != 0L) hash ^= Amount.GetHashCode();
+      if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
+      if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -13474,9 +13696,13 @@ namespace Land.Gno.Gnonative.V1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Amount != 0L) {
-        output.WriteRawTag(8);
-        output.WriteSInt64(Amount);
+      if (TxJson.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TxJson);
+      }
+      if (GasWanted != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(GasWanted);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -13488,9 +13714,13 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Amount != 0L) {
-        output.WriteRawTag(8);
-        output.WriteSInt64(Amount);
+      if (TxJson.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TxJson);
+      }
+      if (GasWanted != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(GasWanted);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -13502,8 +13732,11 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Amount != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Amount);
+      if (TxJson.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TxJson);
+      }
+      if (GasWanted != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(GasWanted);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -13517,8 +13750,11 @@ namespace Land.Gno.Gnonative.V1 {
       if (other == null) {
         return;
       }
-      if (other.Amount != 0L) {
-        Amount = other.Amount;
+      if (other.TxJson.Length != 0) {
+        TxJson = other.TxJson;
+      }
+      if (other.GasWanted != 0L) {
+        GasWanted = other.GasWanted;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -13539,8 +13775,12 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Amount = input.ReadSInt64();
+          case 10: {
+            TxJson = input.ReadString();
+            break;
+          }
+          case 16: {
+            GasWanted = input.ReadSInt64();
             break;
           }
         }
@@ -13562,8 +13802,12 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            Amount = input.ReadSInt64();
+          case 10: {
+            TxJson = input.ReadString();
+            break;
+          }
+          case 16: {
+            GasWanted = input.ReadSInt64();
             break;
           }
         }
@@ -15161,439 +15405,6 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class UpdateGasWantedTxRequest : pb::IMessage<UpdateGasWantedTxRequest>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<UpdateGasWantedTxRequest> _parser = new pb::MessageParser<UpdateGasWantedTxRequest>(() => new UpdateGasWantedTxRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<UpdateGasWantedTxRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[69]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxRequest(UpdateGasWantedTxRequest other) : this() {
-      txJson_ = other.txJson_;
-      gasWanted_ = other.gasWanted_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxRequest Clone() {
-      return new UpdateGasWantedTxRequest(this);
-    }
-
-    /// <summary>Field number for the "tx_json" field.</summary>
-    public const int TxJsonFieldNumber = 1;
-    private string txJson_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string TxJson {
-      get { return txJson_; }
-      set {
-        txJson_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "gas_wanted" field.</summary>
-    public const int GasWantedFieldNumber = 2;
-    private long gasWanted_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long GasWanted {
-      get { return gasWanted_; }
-      set {
-        gasWanted_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as UpdateGasWantedTxRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(UpdateGasWantedTxRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (TxJson != other.TxJson) return false;
-      if (GasWanted != other.GasWanted) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
-      if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (TxJson.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(TxJson);
-      }
-      if (GasWanted != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(GasWanted);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (TxJson.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(TxJson);
-      }
-      if (GasWanted != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(GasWanted);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (TxJson.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(TxJson);
-      }
-      if (GasWanted != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(GasWanted);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(UpdateGasWantedTxRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.TxJson.Length != 0) {
-        TxJson = other.TxJson;
-      }
-      if (other.GasWanted != 0L) {
-        GasWanted = other.GasWanted;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            TxJson = input.ReadString();
-            break;
-          }
-          case 16: {
-            GasWanted = input.ReadSInt64();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            TxJson = input.ReadString();
-            break;
-          }
-          case 16: {
-            GasWanted = input.ReadSInt64();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class UpdateGasWantedTxResponse : pb::IMessage<UpdateGasWantedTxResponse>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<UpdateGasWantedTxResponse> _parser = new pb::MessageParser<UpdateGasWantedTxResponse>(() => new UpdateGasWantedTxResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<UpdateGasWantedTxResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[70]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxResponse(UpdateGasWantedTxResponse other) : this() {
-      txJson_ = other.txJson_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateGasWantedTxResponse Clone() {
-      return new UpdateGasWantedTxResponse(this);
-    }
-
-    /// <summary>Field number for the "tx_json" field.</summary>
-    public const int TxJsonFieldNumber = 1;
-    private string txJson_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string TxJson {
-      get { return txJson_; }
-      set {
-        txJson_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as UpdateGasWantedTxResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(UpdateGasWantedTxResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (TxJson != other.TxJson) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (TxJson.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(TxJson);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (TxJson.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(TxJson);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (TxJson.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(TxJson);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(UpdateGasWantedTxResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.TxJson.Length != 0) {
-        TxJson = other.TxJson;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            TxJson = input.ReadString();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            TxJson = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class HelloRequest : pb::IMessage<HelloRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -15608,7 +15419,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[71]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[69]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15806,7 +15617,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[72]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[70]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16004,7 +15815,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[73]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[71]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16202,7 +16013,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[74]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[72]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16400,7 +16211,7 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[75]; }
+      get { return global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor.MessageTypes[73]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -2466,11 +2466,48 @@ export class SignTxResponse extends Message<SignTxResponse> {
  */
 export class EstimateGasRequest extends Message<EstimateGasRequest> {
   /**
-   * The JSON encoding of the signed transaction (from SignTx)
+   * The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
    *
-   * @generated from field: string signed_tx_json = 1 [json_name = "tx_json"];
+   * @generated from field: string tx_json = 1;
    */
-  signedTxJson = "";
+  txJson = "";
+
+  /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address = new Uint8Array(0);
+
+  /**
+   * The security margin to apply to the estimated gas amount.
+   * This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the estimated gas amount.
+   *
+   * @generated from field: uint32 security_margin = 3;
+   */
+  securityMargin = 0;
+
+  /**
+   * The update boolean to update the gas wanted field in the transaction if true.
+   *
+   * @generated from field: bool update_tx = 4;
+   */
+  updateTx = false;
+
+  /**
+   * The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+   *
+   * @generated from field: uint64 account_number = 5;
+   */
+  accountNumber = protoInt64.zero;
+
+  /**
+   * The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+   *
+   * @generated from field: uint64 sequence_number = 6;
+   */
+  sequenceNumber = protoInt64.zero;
 
   constructor(data?: PartialMessage<EstimateGasRequest>) {
     super();
@@ -2480,7 +2517,12 @@ export class EstimateGasRequest extends Message<EstimateGasRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "land.gno.gnonative.v1.EstimateGasRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "signed_tx_json", jsonName: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "address", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 3, name: "security_margin", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "update_tx", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "account_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 6, name: "sequence_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EstimateGasRequest {
@@ -2505,9 +2547,18 @@ export class EstimateGasRequest extends Message<EstimateGasRequest> {
  */
 export class EstimateGasResponse extends Message<EstimateGasResponse> {
   /**
-   * @generated from field: sint64 amount = 1;
+   * The JSON encoding of the unsigned transaction
+   *
+   * @generated from field: string tx_json = 1;
    */
-  amount = protoInt64.zero;
+  txJson = "";
+
+  /**
+   * The estimated gas wanted for the transaction
+   *
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted = protoInt64.zero;
 
   constructor(data?: PartialMessage<EstimateGasResponse>) {
     super();
@@ -2517,7 +2568,8 @@ export class EstimateGasResponse extends Message<EstimateGasResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "land.gno.gnonative.v1.EstimateGasResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "amount", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
+    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EstimateGasResponse {
@@ -2832,86 +2884,6 @@ export class AddressFromMnemonicResponse extends Message<AddressFromMnemonicResp
 
   static equals(a: AddressFromMnemonicResponse | PlainMessage<AddressFromMnemonicResponse> | undefined, b: AddressFromMnemonicResponse | PlainMessage<AddressFromMnemonicResponse> | undefined): boolean {
     return proto3.util.equals(AddressFromMnemonicResponse, a, b);
-  }
-}
-
-/**
- * @generated from message land.gno.gnonative.v1.UpdateGasWantedTxRequest
- */
-export class UpdateGasWantedTxRequest extends Message<UpdateGasWantedTxRequest> {
-  /**
-   * @generated from field: string tx_json = 1;
-   */
-  txJson = "";
-
-  /**
-   * @generated from field: sint64 gas_wanted = 2;
-   */
-  gasWanted = protoInt64.zero;
-
-  constructor(data?: PartialMessage<UpdateGasWantedTxRequest>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "land.gno.gnonative.v1.UpdateGasWantedTxRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "gas_wanted", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateGasWantedTxRequest {
-    return new UpdateGasWantedTxRequest().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateGasWantedTxRequest {
-    return new UpdateGasWantedTxRequest().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateGasWantedTxRequest {
-    return new UpdateGasWantedTxRequest().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UpdateGasWantedTxRequest | PlainMessage<UpdateGasWantedTxRequest> | undefined, b: UpdateGasWantedTxRequest | PlainMessage<UpdateGasWantedTxRequest> | undefined): boolean {
-    return proto3.util.equals(UpdateGasWantedTxRequest, a, b);
-  }
-}
-
-/**
- * @generated from message land.gno.gnonative.v1.UpdateGasWantedTxResponse
- */
-export class UpdateGasWantedTxResponse extends Message<UpdateGasWantedTxResponse> {
-  /**
-   * @generated from field: string tx_json = 1;
-   */
-  txJson = "";
-
-  constructor(data?: PartialMessage<UpdateGasWantedTxResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "land.gno.gnonative.v1.UpdateGasWantedTxResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "tx_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateGasWantedTxResponse {
-    return new UpdateGasWantedTxResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateGasWantedTxResponse {
-    return new UpdateGasWantedTxResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateGasWantedTxResponse {
-    return new UpdateGasWantedTxResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UpdateGasWantedTxResponse | PlainMessage<UpdateGasWantedTxResponse> | undefined, b: UpdateGasWantedTxResponse | PlainMessage<UpdateGasWantedTxResponse> | undefined): boolean {
-    return proto3.util.equals(UpdateGasWantedTxResponse, a, b);
   }
 }
 

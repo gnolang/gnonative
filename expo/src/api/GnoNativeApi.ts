@@ -51,8 +51,6 @@ import {
   RotatePasswordResponse,
   EstimateGasRequest,
   EstimateGasResponse,
-  UpdateGasWantedTxRequest,
-  UpdateGasWantedTxResponse,
 } from './vendor/gnonativetypes_pb';
 import { GnoNativeService } from './vendor/rpc_connect';
 import { GoBridge, GoBridgeInterface } from '../GoBridge';
@@ -138,15 +136,25 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response;
   }
 
-  async estimateGas(signedTxJson: string): Promise<EstimateGasResponse> {
+  async estimateGas(
+    txJson: string,
+    address: Uint8Array,
+    securityMargin: number,
+    updateTx: boolean,
+    accountNumber: bigint = BigInt(0),
+    sequenceNumber: bigint = BigInt(0),
+  ): Promise<EstimateGasResponse> {
     const client = this.#getClient();
-    const response = client.estimateGas(new EstimateGasRequest({ signedTxJson }));
-    return response;
-  }
-
-  async updateGasWantedTx(txJson: string, gasWanted: bigint): Promise<UpdateGasWantedTxResponse> {
-    const client = this.#getClient();
-    const response = client.updateGasWantedTx(new UpdateGasWantedTxRequest({ txJson, gasWanted }));
+    const response = client.estimateGas(
+      new EstimateGasRequest({
+        txJson,
+        address,
+        securityMargin,
+        updateTx,
+        accountNumber,
+        sequenceNumber,
+      }),
+    );
     return response;
   }
 

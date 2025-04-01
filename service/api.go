@@ -676,21 +676,41 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 }
 
 func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest]) (*connect.Response[api_gen.EstimateGasResponse], error) {
-	signedTx := &std.Tx{}
-	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
 		return nil, err
+	}
+
+	signedTx, err := s.ClientSignTx(tx, req.Msg.Address, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	if err != nil {
+		return nil, getGrpcError(err)
 	}
 
 	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
+
 	amount, err := c.EstimateGas(signedTx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.EstimateGasResponse{Amount: amount}), nil
+	// Apply the security margin.
+	// The security margin is a decimal numeral without the decimal seprator.
+	gasWanted := int64(float64(amount) * float64(req.Msg.SecurityMargin) / 100)
+
+	// Update the transaction
+	if req.Msg.UpdateTx {
+		tx.Fee.GasWanted = gasWanted
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: amount}), nil
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
@@ -743,21 +763,6 @@ func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *connect
 	}
 
 	return connect.NewResponse(&api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}), nil
-}
-
-func (s *gnoNativeService) UpdateGasWantedTx(ctx context.Context, req *connect.Request[api_gen.UpdateGasWantedTxRequest]) (*connect.Response[api_gen.UpdateGasWantedTxResponse], error) {
-	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
-		return nil, err
-	}
-
-	tx.Fee.GasWanted = req.Msg.GasWanted
-
-	txJSON, err := amino.MarshalJSON(tx)
-	if err != nil {
-		return nil, err
-	}
-	return connect.NewResponse(&api_gen.UpdateGasWantedTxResponse{TxJson: string(txJSON)}), nil
 }
 
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {

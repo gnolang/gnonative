@@ -17,7 +17,6 @@ import {
   MakeTxResponse,
   BroadcastTxCommitResponse,
   Coin,
-  UpdateGasWantedTxResponse,
 } from './vendor/gnonativetypes_pb';
 
 export enum BridgeStatus {
@@ -89,8 +88,14 @@ export interface GnoKeyApi {
     accountNumber?: bigint,
     sequenceNumber?: bigint,
   ): Promise<SignTxResponse>;
-  estimateGas(signedTxJson: string): Promise<EstimateGasResponse>;
-  updateGasWantedTx(txJson: string, gasWanted: bigint): Promise<UpdateGasWantedTxResponse>;
+  estimateGas(
+    txJson: string,
+    address: Uint8Array,
+    securityMargin: number,
+    updateTx: boolean,
+    accountNumber?: bigint,
+    sequenceNumber?: bigint,
+  ): Promise<EstimateGasResponse>;
   makeCallTx(
     packagePath: string,
     fnc: string,
