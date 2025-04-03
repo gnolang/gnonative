@@ -710,7 +710,7 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: amount}), nil
+	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
