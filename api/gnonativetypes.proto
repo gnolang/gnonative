@@ -313,6 +313,30 @@ message SignTxResponse {
 	string signed_tx_json = 1 [json_name = "tx_json"];
 }
 
+message EstimateGasRequest {
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	string tx_json = 1;
+	// The address of the account to sign the transaction
+	bytes address = 2;
+	// The security margin to apply to the estimated gas amount.
+	// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// It will be multiplied by the estimated gas amount.
+	uint32 security_margin = 3;
+	// The update boolean to update the gas wanted field in the transaction if true.
+	bool update_tx = 4;
+	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+	uint64 account_number = 5;
+	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+	uint64 sequence_number = 6;
+}
+
+message EstimateGasResponse {
+	// The JSON encoding of the unsigned transaction
+	string tx_json = 1;
+	// The estimated gas wanted for the transaction
+	sint64 gas_wanted = 2;
+}
+
 message BroadcastTxCommitRequest {
 	// The JSON encoding of the signed transaction (from SignTx)
 	string signed_tx_json = 1 [json_name = "tx_json"];

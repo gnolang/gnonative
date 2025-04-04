@@ -249,7 +249,7 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 
 func (s *gnoNativeService) RotatePassword(ctx context.Context, req *connect.Request[api_gen.RotatePasswordRequest]) (*connect.Response[api_gen.RotatePasswordResponse], error) {
 	// Get all the signers, before trying to update the password.
-	var signers = make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
+	signers := make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
 	for i := range len(req.Msg.Addresses) {
 		var err error
 		if signers[i], err = s.getSigner(req.Msg.Addresses[i]); err != nil {
@@ -675,8 +675,47 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
+func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest]) (*connect.Response[api_gen.EstimateGasResponse], error) {
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+		return nil, err
+	}
+
+	signedTx, err := s.ClientSignTx(tx, req.Msg.Address, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	amount, err := c.EstimateGas(signedTx)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	// Apply the security margin.
+	// The security margin is a decimal numeral without the decimal seprator.
+	gasWanted := int64(float64(amount) * float64(req.Msg.SecurityMargin) / 100)
+
+	// Update the transaction
+	if req.Msg.UpdateTx {
+		tx.Fee.GasWanted = gasWanted
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+}
+
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
-	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse]) error {
+	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse],
+) error {
 	signedTx := &std.Tx{}
 	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
 		return err

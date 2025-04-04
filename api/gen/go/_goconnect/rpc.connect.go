@@ -111,6 +111,9 @@ const (
 	// GnoNativeServiceMakeRunTxProcedure is the fully-qualified name of the GnoNativeService's
 	// MakeRunTx RPC.
 	GnoNativeServiceMakeRunTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeRunTx"
+	// GnoNativeServiceEstimateGasProcedure is the fully-qualified name of the GnoNativeService's
+	// EstimateGas RPC.
+	GnoNativeServiceEstimateGasProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateGas"
 	// GnoNativeServiceSignTxProcedure is the fully-qualified name of the GnoNativeService's SignTx RPC.
 	GnoNativeServiceSignTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/SignTx"
 	// GnoNativeServiceBroadcastTxCommitProcedure is the fully-qualified name of the GnoNativeService's
@@ -130,46 +133,6 @@ const (
 	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
 	// HelloStream RPC.
 	GnoNativeServiceHelloStreamProcedure = "/land.gno.gnonative.v1.GnoNativeService/HelloStream"
-)
-
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	gnoNativeServiceServiceDescriptor                         = _go.File_rpc_proto.Services().ByName("GnoNativeService")
-	gnoNativeServiceSetRemoteMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("SetRemote")
-	gnoNativeServiceGetRemoteMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("GetRemote")
-	gnoNativeServiceSetChainIDMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("SetChainID")
-	gnoNativeServiceGetChainIDMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("GetChainID")
-	gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor    = gnoNativeServiceServiceDescriptor.Methods().ByName("GenerateRecoveryPhrase")
-	gnoNativeServiceListKeyInfoMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("ListKeyInfo")
-	gnoNativeServiceHasKeyByNameMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByName")
-	gnoNativeServiceHasKeyByAddressMethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByAddress")
-	gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor     = gnoNativeServiceServiceDescriptor.Methods().ByName("HasKeyByNameOrAddress")
-	gnoNativeServiceGetKeyInfoByNameMethodDescriptor          = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByName")
-	gnoNativeServiceGetKeyInfoByAddressMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByAddress")
-	gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor = gnoNativeServiceServiceDescriptor.Methods().ByName("GetKeyInfoByNameOrAddress")
-	gnoNativeServiceCreateAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("CreateAccount")
-	gnoNativeServiceActivateAccountMethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("ActivateAccount")
-	gnoNativeServiceSetPasswordMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("SetPassword")
-	gnoNativeServiceRotatePasswordMethodDescriptor            = gnoNativeServiceServiceDescriptor.Methods().ByName("RotatePassword")
-	gnoNativeServiceGetActivatedAccountMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("GetActivatedAccount")
-	gnoNativeServiceQueryAccountMethodDescriptor              = gnoNativeServiceServiceDescriptor.Methods().ByName("QueryAccount")
-	gnoNativeServiceDeleteAccountMethodDescriptor             = gnoNativeServiceServiceDescriptor.Methods().ByName("DeleteAccount")
-	gnoNativeServiceQueryMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Query")
-	gnoNativeServiceRenderMethodDescriptor                    = gnoNativeServiceServiceDescriptor.Methods().ByName("Render")
-	gnoNativeServiceQEvalMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("QEval")
-	gnoNativeServiceCallMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Call")
-	gnoNativeServiceSendMethodDescriptor                      = gnoNativeServiceServiceDescriptor.Methods().ByName("Send")
-	gnoNativeServiceRunMethodDescriptor                       = gnoNativeServiceServiceDescriptor.Methods().ByName("Run")
-	gnoNativeServiceMakeCallTxMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeCallTx")
-	gnoNativeServiceMakeSendTxMethodDescriptor                = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeSendTx")
-	gnoNativeServiceMakeRunTxMethodDescriptor                 = gnoNativeServiceServiceDescriptor.Methods().ByName("MakeRunTx")
-	gnoNativeServiceSignTxMethodDescriptor                    = gnoNativeServiceServiceDescriptor.Methods().ByName("SignTx")
-	gnoNativeServiceBroadcastTxCommitMethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("BroadcastTxCommit")
-	gnoNativeServiceAddressToBech32MethodDescriptor           = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressToBech32")
-	gnoNativeServiceAddressFromBech32MethodDescriptor         = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromBech32")
-	gnoNativeServiceAddressFromMnemonicMethodDescriptor       = gnoNativeServiceServiceDescriptor.Methods().ByName("AddressFromMnemonic")
-	gnoNativeServiceHelloMethodDescriptor                     = gnoNativeServiceServiceDescriptor.Methods().ByName("Hello")
-	gnoNativeServiceHelloStreamMethodDescriptor               = gnoNativeServiceServiceDescriptor.Methods().ByName("HelloStream")
 )
 
 // GnoNativeServiceClient is a client for the land.gno.gnonative.v1.GnoNativeService service.
@@ -279,6 +242,9 @@ type GnoNativeServiceClient interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -306,215 +272,222 @@ type GnoNativeServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GnoNativeServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	gnoNativeServiceMethods := _go.File_rpc_proto.Services().ByName("GnoNativeService").Methods()
 	return &gnoNativeServiceClient{
 		setRemote: connect.NewClient[_go.SetRemoteRequest, _go.SetRemoteResponse](
 			httpClient,
 			baseURL+GnoNativeServiceSetRemoteProcedure,
-			connect.WithSchema(gnoNativeServiceSetRemoteMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("SetRemote")),
 			connect.WithClientOptions(opts...),
 		),
 		getRemote: connect.NewClient[_go.GetRemoteRequest, _go.GetRemoteResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetRemoteProcedure,
-			connect.WithSchema(gnoNativeServiceGetRemoteMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetRemote")),
 			connect.WithClientOptions(opts...),
 		),
 		setChainID: connect.NewClient[_go.SetChainIDRequest, _go.SetChainIDResponse](
 			httpClient,
 			baseURL+GnoNativeServiceSetChainIDProcedure,
-			connect.WithSchema(gnoNativeServiceSetChainIDMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("SetChainID")),
 			connect.WithClientOptions(opts...),
 		),
 		getChainID: connect.NewClient[_go.GetChainIDRequest, _go.GetChainIDResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetChainIDProcedure,
-			connect.WithSchema(gnoNativeServiceGetChainIDMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetChainID")),
 			connect.WithClientOptions(opts...),
 		),
 		generateRecoveryPhrase: connect.NewClient[_go.GenerateRecoveryPhraseRequest, _go.GenerateRecoveryPhraseResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGenerateRecoveryPhraseProcedure,
-			connect.WithSchema(gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GenerateRecoveryPhrase")),
 			connect.WithClientOptions(opts...),
 		),
 		listKeyInfo: connect.NewClient[_go.ListKeyInfoRequest, _go.ListKeyInfoResponse](
 			httpClient,
 			baseURL+GnoNativeServiceListKeyInfoProcedure,
-			connect.WithSchema(gnoNativeServiceListKeyInfoMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("ListKeyInfo")),
 			connect.WithClientOptions(opts...),
 		),
 		hasKeyByName: connect.NewClient[_go.HasKeyByNameRequest, _go.HasKeyByNameResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHasKeyByNameProcedure,
-			connect.WithSchema(gnoNativeServiceHasKeyByNameMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByName")),
 			connect.WithClientOptions(opts...),
 		),
 		hasKeyByAddress: connect.NewClient[_go.HasKeyByAddressRequest, _go.HasKeyByAddressResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHasKeyByAddressProcedure,
-			connect.WithSchema(gnoNativeServiceHasKeyByAddressMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByAddress")),
 			connect.WithClientOptions(opts...),
 		),
 		hasKeyByNameOrAddress: connect.NewClient[_go.HasKeyByNameOrAddressRequest, _go.HasKeyByNameOrAddressResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHasKeyByNameOrAddressProcedure,
-			connect.WithSchema(gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByNameOrAddress")),
 			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByName: connect.NewClient[_go.GetKeyInfoByNameRequest, _go.GetKeyInfoByNameResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetKeyInfoByNameProcedure,
-			connect.WithSchema(gnoNativeServiceGetKeyInfoByNameMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByName")),
 			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByAddress: connect.NewClient[_go.GetKeyInfoByAddressRequest, _go.GetKeyInfoByAddressResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetKeyInfoByAddressProcedure,
-			connect.WithSchema(gnoNativeServiceGetKeyInfoByAddressMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByAddress")),
 			connect.WithClientOptions(opts...),
 		),
 		getKeyInfoByNameOrAddress: connect.NewClient[_go.GetKeyInfoByNameOrAddressRequest, _go.GetKeyInfoByNameOrAddressResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetKeyInfoByNameOrAddressProcedure,
-			connect.WithSchema(gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByNameOrAddress")),
 			connect.WithClientOptions(opts...),
 		),
 		createAccount: connect.NewClient[_go.CreateAccountRequest, _go.CreateAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceCreateAccountProcedure,
-			connect.WithSchema(gnoNativeServiceCreateAccountMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("CreateAccount")),
 			connect.WithClientOptions(opts...),
 		),
 		activateAccount: connect.NewClient[_go.ActivateAccountRequest, _go.ActivateAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceActivateAccountProcedure,
-			connect.WithSchema(gnoNativeServiceActivateAccountMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("ActivateAccount")),
 			connect.WithClientOptions(opts...),
 		),
 		setPassword: connect.NewClient[_go.SetPasswordRequest, _go.SetPasswordResponse](
 			httpClient,
 			baseURL+GnoNativeServiceSetPasswordProcedure,
-			connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("SetPassword")),
 			connect.WithClientOptions(opts...),
 		),
 		rotatePassword: connect.NewClient[_go.RotatePasswordRequest, _go.RotatePasswordResponse](
 			httpClient,
 			baseURL+GnoNativeServiceRotatePasswordProcedure,
-			connect.WithSchema(gnoNativeServiceRotatePasswordMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("RotatePassword")),
 			connect.WithClientOptions(opts...),
 		),
 		getActivatedAccount: connect.NewClient[_go.GetActivatedAccountRequest, _go.GetActivatedAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceGetActivatedAccountProcedure,
-			connect.WithSchema(gnoNativeServiceGetActivatedAccountMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("GetActivatedAccount")),
 			connect.WithClientOptions(opts...),
 		),
 		queryAccount: connect.NewClient[_go.QueryAccountRequest, _go.QueryAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceQueryAccountProcedure,
-			connect.WithSchema(gnoNativeServiceQueryAccountMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QueryAccount")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteAccount: connect.NewClient[_go.DeleteAccountRequest, _go.DeleteAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceDeleteAccountProcedure,
-			connect.WithSchema(gnoNativeServiceDeleteAccountMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("DeleteAccount")),
 			connect.WithClientOptions(opts...),
 		),
 		query: connect.NewClient[_go.QueryRequest, _go.QueryResponse](
 			httpClient,
 			baseURL+GnoNativeServiceQueryProcedure,
-			connect.WithSchema(gnoNativeServiceQueryMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Query")),
 			connect.WithClientOptions(opts...),
 		),
 		render: connect.NewClient[_go.RenderRequest, _go.RenderResponse](
 			httpClient,
 			baseURL+GnoNativeServiceRenderProcedure,
-			connect.WithSchema(gnoNativeServiceRenderMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Render")),
 			connect.WithClientOptions(opts...),
 		),
 		qEval: connect.NewClient[_go.QEvalRequest, _go.QEvalResponse](
 			httpClient,
 			baseURL+GnoNativeServiceQEvalProcedure,
-			connect.WithSchema(gnoNativeServiceQEvalMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QEval")),
 			connect.WithClientOptions(opts...),
 		),
 		call: connect.NewClient[_go.CallRequest, _go.CallResponse](
 			httpClient,
 			baseURL+GnoNativeServiceCallProcedure,
-			connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Call")),
 			connect.WithClientOptions(opts...),
 		),
 		send: connect.NewClient[_go.SendRequest, _go.SendResponse](
 			httpClient,
 			baseURL+GnoNativeServiceSendProcedure,
-			connect.WithSchema(gnoNativeServiceSendMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Send")),
 			connect.WithClientOptions(opts...),
 		),
 		run: connect.NewClient[_go.RunRequest, _go.RunResponse](
 			httpClient,
 			baseURL+GnoNativeServiceRunProcedure,
-			connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Run")),
 			connect.WithClientOptions(opts...),
 		),
 		makeCallTx: connect.NewClient[_go.CallRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeCallTxProcedure,
-			connect.WithSchema(gnoNativeServiceMakeCallTxMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeCallTx")),
 			connect.WithClientOptions(opts...),
 		),
 		makeSendTx: connect.NewClient[_go.SendRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeSendTxProcedure,
-			connect.WithSchema(gnoNativeServiceMakeSendTxMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeSendTx")),
 			connect.WithClientOptions(opts...),
 		),
 		makeRunTx: connect.NewClient[_go.RunRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeRunTxProcedure,
-			connect.WithSchema(gnoNativeServiceMakeRunTxMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRunTx")),
+			connect.WithClientOptions(opts...),
+		),
+		estimateGas: connect.NewClient[_go.EstimateGasRequest, _go.EstimateGasResponse](
+			httpClient,
+			baseURL+GnoNativeServiceEstimateGasProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGas")),
 			connect.WithClientOptions(opts...),
 		),
 		signTx: connect.NewClient[_go.SignTxRequest, _go.SignTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceSignTxProcedure,
-			connect.WithSchema(gnoNativeServiceSignTxMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("SignTx")),
 			connect.WithClientOptions(opts...),
 		),
 		broadcastTxCommit: connect.NewClient[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse](
 			httpClient,
 			baseURL+GnoNativeServiceBroadcastTxCommitProcedure,
-			connect.WithSchema(gnoNativeServiceBroadcastTxCommitMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("BroadcastTxCommit")),
 			connect.WithClientOptions(opts...),
 		),
 		addressToBech32: connect.NewClient[_go.AddressToBech32Request, _go.AddressToBech32Response](
 			httpClient,
 			baseURL+GnoNativeServiceAddressToBech32Procedure,
-			connect.WithSchema(gnoNativeServiceAddressToBech32MethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("AddressToBech32")),
 			connect.WithClientOptions(opts...),
 		),
 		addressFromBech32: connect.NewClient[_go.AddressFromBech32Request, _go.AddressFromBech32Response](
 			httpClient,
 			baseURL+GnoNativeServiceAddressFromBech32Procedure,
-			connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromBech32")),
 			connect.WithClientOptions(opts...),
 		),
 		addressFromMnemonic: connect.NewClient[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse](
 			httpClient,
 			baseURL+GnoNativeServiceAddressFromMnemonicProcedure,
-			connect.WithSchema(gnoNativeServiceAddressFromMnemonicMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 			connect.WithClientOptions(opts...),
 		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloProcedure,
-			connect.WithSchema(gnoNativeServiceHelloMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("Hello")),
 			connect.WithClientOptions(opts...),
 		),
 		helloStream: connect.NewClient[_go.HelloStreamRequest, _go.HelloStreamResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloStreamProcedure,
-			connect.WithSchema(gnoNativeServiceHelloStreamMethodDescriptor),
+			connect.WithSchema(gnoNativeServiceMethods.ByName("HelloStream")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -550,6 +523,7 @@ type gnoNativeServiceClient struct {
 	makeCallTx                *connect.Client[_go.CallRequest, _go.MakeTxResponse]
 	makeSendTx                *connect.Client[_go.SendRequest, _go.MakeTxResponse]
 	makeRunTx                 *connect.Client[_go.RunRequest, _go.MakeTxResponse]
+	estimateGas               *connect.Client[_go.EstimateGasRequest, _go.EstimateGasResponse]
 	signTx                    *connect.Client[_go.SignTxRequest, _go.SignTxResponse]
 	broadcastTxCommit         *connect.Client[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
@@ -699,6 +673,11 @@ func (c *gnoNativeServiceClient) MakeRunTx(ctx context.Context, req *connect.Req
 	return c.makeRunTx.CallUnary(ctx, req)
 }
 
+// EstimateGas calls land.gno.gnonative.v1.GnoNativeService.EstimateGas.
+func (c *gnoNativeServiceClient) EstimateGas(ctx context.Context, req *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error) {
+	return c.estimateGas.CallUnary(ctx, req)
+}
+
 // SignTx calls land.gno.gnonative.v1.GnoNativeService.SignTx.
 func (c *gnoNativeServiceClient) SignTx(ctx context.Context, req *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {
 	return c.signTx.CallUnary(ctx, req)
@@ -842,6 +821,9 @@ type GnoNativeServiceHandler interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -866,214 +848,221 @@ type GnoNativeServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	gnoNativeServiceMethods := _go.File_rpc_proto.Services().ByName("GnoNativeService").Methods()
 	gnoNativeServiceSetRemoteHandler := connect.NewUnaryHandler(
 		GnoNativeServiceSetRemoteProcedure,
 		svc.SetRemote,
-		connect.WithSchema(gnoNativeServiceSetRemoteMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("SetRemote")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetRemoteHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetRemoteProcedure,
 		svc.GetRemote,
-		connect.WithSchema(gnoNativeServiceGetRemoteMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetRemote")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceSetChainIDHandler := connect.NewUnaryHandler(
 		GnoNativeServiceSetChainIDProcedure,
 		svc.SetChainID,
-		connect.WithSchema(gnoNativeServiceSetChainIDMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("SetChainID")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetChainIDHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetChainIDProcedure,
 		svc.GetChainID,
-		connect.WithSchema(gnoNativeServiceGetChainIDMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetChainID")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGenerateRecoveryPhraseHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGenerateRecoveryPhraseProcedure,
 		svc.GenerateRecoveryPhrase,
-		connect.WithSchema(gnoNativeServiceGenerateRecoveryPhraseMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GenerateRecoveryPhrase")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceListKeyInfoHandler := connect.NewUnaryHandler(
 		GnoNativeServiceListKeyInfoProcedure,
 		svc.ListKeyInfo,
-		connect.WithSchema(gnoNativeServiceListKeyInfoMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("ListKeyInfo")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceHasKeyByNameHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHasKeyByNameProcedure,
 		svc.HasKeyByName,
-		connect.WithSchema(gnoNativeServiceHasKeyByNameMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByName")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceHasKeyByAddressHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHasKeyByAddressProcedure,
 		svc.HasKeyByAddress,
-		connect.WithSchema(gnoNativeServiceHasKeyByAddressMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceHasKeyByNameOrAddressHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHasKeyByNameOrAddressProcedure,
 		svc.HasKeyByNameOrAddress,
-		connect.WithSchema(gnoNativeServiceHasKeyByNameOrAddressMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("HasKeyByNameOrAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetKeyInfoByNameHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetKeyInfoByNameProcedure,
 		svc.GetKeyInfoByName,
-		connect.WithSchema(gnoNativeServiceGetKeyInfoByNameMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByName")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetKeyInfoByAddressHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetKeyInfoByAddressProcedure,
 		svc.GetKeyInfoByAddress,
-		connect.WithSchema(gnoNativeServiceGetKeyInfoByAddressMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetKeyInfoByNameOrAddressHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetKeyInfoByNameOrAddressProcedure,
 		svc.GetKeyInfoByNameOrAddress,
-		connect.WithSchema(gnoNativeServiceGetKeyInfoByNameOrAddressMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetKeyInfoByNameOrAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceCreateAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceCreateAccountProcedure,
 		svc.CreateAccount,
-		connect.WithSchema(gnoNativeServiceCreateAccountMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("CreateAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceActivateAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceActivateAccountProcedure,
 		svc.ActivateAccount,
-		connect.WithSchema(gnoNativeServiceActivateAccountMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("ActivateAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceSetPasswordHandler := connect.NewUnaryHandler(
 		GnoNativeServiceSetPasswordProcedure,
 		svc.SetPassword,
-		connect.WithSchema(gnoNativeServiceSetPasswordMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("SetPassword")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceRotatePasswordHandler := connect.NewUnaryHandler(
 		GnoNativeServiceRotatePasswordProcedure,
 		svc.RotatePassword,
-		connect.WithSchema(gnoNativeServiceRotatePasswordMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("RotatePassword")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceGetActivatedAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceGetActivatedAccountProcedure,
 		svc.GetActivatedAccount,
-		connect.WithSchema(gnoNativeServiceGetActivatedAccountMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("GetActivatedAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceQueryAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceQueryAccountProcedure,
 		svc.QueryAccount,
-		connect.WithSchema(gnoNativeServiceQueryAccountMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QueryAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceDeleteAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceDeleteAccountProcedure,
 		svc.DeleteAccount,
-		connect.WithSchema(gnoNativeServiceDeleteAccountMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("DeleteAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceQueryHandler := connect.NewUnaryHandler(
 		GnoNativeServiceQueryProcedure,
 		svc.Query,
-		connect.WithSchema(gnoNativeServiceQueryMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Query")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceRenderHandler := connect.NewUnaryHandler(
 		GnoNativeServiceRenderProcedure,
 		svc.Render,
-		connect.WithSchema(gnoNativeServiceRenderMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Render")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceQEvalHandler := connect.NewUnaryHandler(
 		GnoNativeServiceQEvalProcedure,
 		svc.QEval,
-		connect.WithSchema(gnoNativeServiceQEvalMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QEval")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceCallHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceCallProcedure,
 		svc.Call,
-		connect.WithSchema(gnoNativeServiceCallMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Call")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceSendHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceSendProcedure,
 		svc.Send,
-		connect.WithSchema(gnoNativeServiceSendMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Send")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceRunHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceRunProcedure,
 		svc.Run,
-		connect.WithSchema(gnoNativeServiceRunMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Run")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceMakeCallTxHandler := connect.NewUnaryHandler(
 		GnoNativeServiceMakeCallTxProcedure,
 		svc.MakeCallTx,
-		connect.WithSchema(gnoNativeServiceMakeCallTxMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeCallTx")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceMakeSendTxHandler := connect.NewUnaryHandler(
 		GnoNativeServiceMakeSendTxProcedure,
 		svc.MakeSendTx,
-		connect.WithSchema(gnoNativeServiceMakeSendTxMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeSendTx")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceMakeRunTxHandler := connect.NewUnaryHandler(
 		GnoNativeServiceMakeRunTxProcedure,
 		svc.MakeRunTx,
-		connect.WithSchema(gnoNativeServiceMakeRunTxMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRunTx")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceEstimateGasHandler := connect.NewUnaryHandler(
+		GnoNativeServiceEstimateGasProcedure,
+		svc.EstimateGas,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGas")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceSignTxHandler := connect.NewUnaryHandler(
 		GnoNativeServiceSignTxProcedure,
 		svc.SignTx,
-		connect.WithSchema(gnoNativeServiceSignTxMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("SignTx")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceBroadcastTxCommitHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceBroadcastTxCommitProcedure,
 		svc.BroadcastTxCommit,
-		connect.WithSchema(gnoNativeServiceBroadcastTxCommitMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("BroadcastTxCommit")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceAddressToBech32Handler := connect.NewUnaryHandler(
 		GnoNativeServiceAddressToBech32Procedure,
 		svc.AddressToBech32,
-		connect.WithSchema(gnoNativeServiceAddressToBech32MethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("AddressToBech32")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceAddressFromBech32Handler := connect.NewUnaryHandler(
 		GnoNativeServiceAddressFromBech32Procedure,
 		svc.AddressFromBech32,
-		connect.WithSchema(gnoNativeServiceAddressFromBech32MethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromBech32")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceAddressFromMnemonicHandler := connect.NewUnaryHandler(
 		GnoNativeServiceAddressFromMnemonicProcedure,
 		svc.AddressFromMnemonic,
-		connect.WithSchema(gnoNativeServiceAddressFromMnemonicMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHelloProcedure,
 		svc.Hello,
-		connect.WithSchema(gnoNativeServiceHelloMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("Hello")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceHelloStreamHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceHelloStreamProcedure,
 		svc.HelloStream,
-		connect.WithSchema(gnoNativeServiceHelloStreamMethodDescriptor),
+		connect.WithSchema(gnoNativeServiceMethods.ByName("HelloStream")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/land.gno.gnonative.v1.GnoNativeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -1134,6 +1123,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceMakeSendTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceMakeRunTxProcedure:
 			gnoNativeServiceMakeRunTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceEstimateGasProcedure:
+			gnoNativeServiceEstimateGasHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSignTxProcedure:
 			gnoNativeServiceSignTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceBroadcastTxCommitProcedure:
@@ -1267,6 +1258,10 @@ func (UnimplementedGnoNativeServiceHandler) MakeSendTx(context.Context, *connect
 
 func (UnimplementedGnoNativeServiceHandler) MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeRunTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.EstimateGas is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {

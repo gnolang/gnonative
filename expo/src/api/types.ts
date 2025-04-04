@@ -13,10 +13,11 @@ import {
   RotatePasswordResponse,
   KeyInfo,
   SignTxResponse,
+  EstimateGasResponse,
   MakeTxResponse,
   BroadcastTxCommitResponse,
   Coin,
-} from '@buf/gnolang_gnonative.bufbuild_es/gnonativetypes_pb';
+} from './vendor/gnonativetypes_pb';
 
 export enum BridgeStatus {
   Stopped,
@@ -87,6 +88,14 @@ export interface GnoKeyApi {
     accountNumber?: bigint,
     sequenceNumber?: bigint,
   ): Promise<SignTxResponse>;
+  estimateGas(
+    txJson: string,
+    address: Uint8Array,
+    securityMargin: number,
+    updateTx: boolean,
+    accountNumber?: bigint,
+    sequenceNumber?: bigint,
+  ): Promise<EstimateGasResponse>;
   makeCallTx(
     packagePath: string,
     fnc: string,

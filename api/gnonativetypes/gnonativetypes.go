@@ -4,11 +4,9 @@ type SetRemoteRequest struct {
 	Remote string `json:"remote" yaml:"remote"`
 }
 
-type SetRemoteResponse struct {
-}
+type SetRemoteResponse struct{}
 
-type GetRemoteRequest struct {
-}
+type GetRemoteRequest struct{}
 
 type GetRemoteResponse struct {
 	Remote string `json:"remote" yaml:"remote"`
@@ -18,11 +16,9 @@ type SetChainIDRequest struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
 }
 
-type SetChainIDResponse struct {
-}
+type SetChainIDResponse struct{}
 
-type GetChainIDRequest struct {
-}
+type GetChainIDRequest struct{}
 
 type GetChainIDResponse struct {
 	ChainID string `json:"chain_id" yaml:"chain_id"`
@@ -34,8 +30,7 @@ type SetPasswordRequest struct {
 	Address []byte `json:"address" yaml:"address"`
 }
 
-type SetPasswordResponse struct {
-}
+type SetPasswordResponse struct{}
 
 type RotatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
@@ -43,11 +38,9 @@ type RotatePasswordRequest struct {
 	Addresses [][]byte `json:"addresses" yaml:"addresses"`
 }
 
-type RotatePasswordResponse struct {
-}
+type RotatePasswordResponse struct{}
 
-type GenerateRecoveryPhraseRequest struct {
-}
+type GenerateRecoveryPhraseRequest struct{}
 
 type GenerateRecoveryPhraseResponse struct {
 	Phrase string `json:"phrase" yaml:"phrase"`
@@ -77,8 +70,7 @@ type BaseAccount struct {
 	Sequence      uint64 `json:"sequence" yaml:"sequence"`
 }
 
-type ListKeyInfoRequest struct {
-}
+type ListKeyInfoRequest struct{}
 
 type ListKeyInfoResponse struct {
 	Keys []*KeyInfo `json:"key_info" yaml:"key_info"`
@@ -179,8 +171,7 @@ type DeleteAccountRequest struct {
 	SkipPassword bool   `json:"skip_password" yaml:"skip_password"`
 }
 
-type DeleteAccountResponse struct {
-}
+type DeleteAccountResponse struct{}
 
 type QueryRequest struct {
 	// Example: "vm/qrender"
@@ -261,8 +252,7 @@ type SendRequest struct {
 	Msgs []MsgSend
 }
 
-type SendResponse struct {
-}
+type SendResponse struct{}
 
 type MsgRun struct {
 	// The code for the script package. Must have main().
@@ -307,6 +297,30 @@ type SignTxRequest struct {
 type SignTxResponse struct {
 	// The JSON encoding of the signed transaction (to use in BroadcastTx)
 	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type EstimateGasRequest struct {
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The address of the account to sign the transaction
+	Address []byte `json:"address" yaml:"address"`
+	// The security margin to apply to the estimated gas amount.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// It will be multiplied by the estimated gas amount.
+	SecurityMargin uint32 `json:"security_margin" yaml:"security_margin"`
+	// The update boolean to update the gas wanted field in the transaction if true.
+	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
+	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
+	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+	SequenceNumber uint64 `json:"sequence_number" yaml:"sequence_number"`
+}
+
+type EstimateGasResponse struct {
+	// The JSON encoding of the unsigned transaction
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The estimated gas wanted for the transaction
+	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
 }
 
 type BroadcastTxCommitRequest struct {

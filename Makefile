@@ -147,7 +147,7 @@ $(gnocore_aar): $(bind_init_files) $(go_deps)
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gnonative \
 		-javapkg=gnolang.gno \
-		-o $@ -target android -androidapi 21 ./framework/service
+		-o $@ -target android/arm64,android/amd64 -androidapi 21 ./framework/service
 _bind.clean.android:
 	rm -rf $(gnocore_jar) $(gnocore_aar)
 
