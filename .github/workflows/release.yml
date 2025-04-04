@@ -27,6 +27,8 @@ jobs:
 
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v3
+        with:
+          asdf_version: 0.15.0
 
       - name: Setup Go version
         run: |
