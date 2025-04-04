@@ -305,7 +305,7 @@ type EstimateGasRequest struct {
 	// The address of the account to sign the transaction
 	Address []byte `json:"address" yaml:"address"`
 	// The security margin to apply to the estimated gas amount.
-	// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
 	// It will be multiplied by the estimated gas amount.
 	SecurityMargin uint32 `json:"security_margin" yaml:"security_margin"`
 	// The update boolean to update the gas wanted field in the transaction if true.
