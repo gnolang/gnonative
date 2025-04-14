@@ -432,6 +432,8 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 
 	if err := stream.Send(&api_gen.CallResponse{
 		Result: bres.DeliverTx.Data,
+		Hash:   bres.Hash,
+		Height: bres.Height,
 	}); err != nil {
 		s.logger.Error("Call stream.Send returned error", zap.Error(err))
 		return err
@@ -489,12 +491,15 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	if err != nil {
 		return getGrpcError(err)
 	}
-	_, err = c.Send(*cfg, msgs...)
+	bres, err := c.Send(*cfg, msgs...)
 	if err != nil {
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.SendResponse{}); err != nil {
+	if err := stream.Send(&api_gen.SendResponse{
+		Hash:   bres.Hash,
+		Height: bres.Height,
+	}); err != nil {
 		s.logger.Error("Send stream.Send returned error", zap.Error(err))
 		return err
 	}
@@ -549,6 +554,8 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 
 	if err := stream.Send(&api_gen.RunResponse{
 		Result: string(bres.DeliverTx.Data),
+		Hash:   bres.Hash,
+		Height: bres.Height,
 	}); err != nil {
 		s.logger.Error("Run stream.Send returned error", zap.Error(err))
 		return err
@@ -732,6 +739,8 @@ func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.R
 
 	if err := stream.Send(&api_gen.BroadcastTxCommitResponse{
 		Result: bres.DeliverTx.Data,
+		Hash:   bres.Hash,
+		Height: bres.Height,
 	}); err != nil {
 		s.logger.Error("BroadcastTxCommit stream.Send returned error", zap.Error(err))
 		return err

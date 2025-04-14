@@ -870,7 +870,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
       /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -2452,7 +2452,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_MakeRunTx, null, options, request);
       }
       /// <summary>
-      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
       /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2466,7 +2466,7 @@ namespace Land.Gno.Gnonative.V1 {
         return EstimateGas(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
       /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2478,7 +2478,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_EstimateGas, null, options, request);
       }
       /// <summary>
-      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
       /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2492,7 +2492,7 @@ namespace Land.Gno.Gnonative.V1 {
         return EstimateGasAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+      /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
       /// If UpdateTx is true, then update the transaction with the gasWanted amount.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>

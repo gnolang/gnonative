@@ -1,6 +1,6 @@
 db011306fec5f34668398da58861399025f4abc8  Makefile
-7a387d7bfb5d14219f29c20f514ba776614ce115  api/gnonativetypes.proto
-b3a62b4554dce917cce1508d128ce8eb13728362  api/gnonativetypes/gnonativetypes.go
+0e412091f1a154757feab346c180d7d66bbb21c9  api/gnonativetypes.proto
+d04862a1dae9e71b4ed147a99127e7285eadb718  api/gnonativetypes/gnonativetypes.go
 c68dfdb1ce5523ded45cf1ea8b047c818fa287b2  api/gnonativetypes/package.go
-5121c32fa3005f1c424cea70c1d527cfa906fec2  api/rpc.proto
+4c8d735f44576d927eed99a8ef941ff1c05d9b8b  api/rpc.proto
 82528f7a615e9c3f322667fcc4e1100a00b1a708  buf.gen.yaml
