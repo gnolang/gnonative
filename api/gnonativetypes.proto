@@ -244,6 +244,10 @@ message CallRequest {
 
 message CallResponse {
 	bytes result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
 }
 
 message MsgSend {
@@ -266,6 +270,10 @@ message SendRequest {
 }
 
 message SendResponse {
+	// The transaction hash
+	bytes hash = 1;
+	// The transaction height
+	sint64 height = 2;
 }
 
 message MsgRun {
@@ -290,6 +298,10 @@ message RunRequest {
 message RunResponse {
 	// The "console" output from the run
 	string result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
 }
 
 message MakeTxResponse {
@@ -319,7 +331,7 @@ message EstimateGasRequest {
 	// The address of the account to sign the transaction
 	bytes address = 2;
 	// The security margin to apply to the estimated gas amount.
-	// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
 	// It will be multiplied by the estimated gas amount.
 	uint32 security_margin = 3;
 	// The update boolean to update the gas wanted field in the transaction if true.
@@ -344,6 +356,10 @@ message BroadcastTxCommitRequest {
 
 message BroadcastTxCommitResponse {
 	bytes result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
 }
 
 message AddressToBech32Request {

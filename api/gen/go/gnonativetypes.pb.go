@@ -2361,8 +2361,12 @@ func (x *CallRequest) GetMsgs() []*MsgCall {
 }
 
 type CallResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Result []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	// The transaction hash
+	Hash []byte `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	// The transaction height
+	Height        int64 `protobuf:"zigzag64,3,opt,name=height,proto3" json:"height,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2402,6 +2406,20 @@ func (x *CallResponse) GetResult() []byte {
 		return x.Result
 	}
 	return nil
+}
+
+func (x *CallResponse) GetHash() []byte {
+	if x != nil {
+		return x.Hash
+	}
+	return nil
+}
+
+func (x *CallResponse) GetHeight() int64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
 }
 
 type MsgSend struct {
@@ -2539,7 +2557,11 @@ func (x *SendRequest) GetMsgs() []*MsgSend {
 }
 
 type SendResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The transaction hash
+	Hash []byte `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
+	// The transaction height
+	Height        int64 `protobuf:"zigzag64,2,opt,name=height,proto3" json:"height,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2572,6 +2594,20 @@ func (x *SendResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SendResponse.ProtoReflect.Descriptor instead.
 func (*SendResponse) Descriptor() ([]byte, []int) {
 	return file_gnonativetypes_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *SendResponse) GetHash() []byte {
+	if x != nil {
+		return x.Hash
+	}
+	return nil
+}
+
+func (x *SendResponse) GetHeight() int64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
 }
 
 type MsgRun struct {
@@ -2711,7 +2747,11 @@ func (x *RunRequest) GetMsgs() []*MsgRun {
 type RunResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The "console" output from the run
-	Result        string `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result string `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	// The transaction hash
+	Hash []byte `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	// The transaction height
+	Height        int64 `protobuf:"zigzag64,3,opt,name=height,proto3" json:"height,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2751,6 +2791,20 @@ func (x *RunResponse) GetResult() string {
 		return x.Result
 	}
 	return ""
+}
+
+func (x *RunResponse) GetHash() []byte {
+	if x != nil {
+		return x.Hash
+	}
+	return nil
+}
+
+func (x *RunResponse) GetHeight() int64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
 }
 
 type MakeTxResponse struct {
@@ -2922,7 +2976,7 @@ type EstimateGasRequest struct {
 	// The address of the account to sign the transaction
 	Address []byte `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	// The security margin to apply to the estimated gas amount.
-	// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
 	// It will be multiplied by the estimated gas amount.
 	SecurityMargin uint32 `protobuf:"varint,3,opt,name=security_margin,json=securityMargin,proto3" json:"security_margin,omitempty"`
 	// The update boolean to update the gas wanted field in the transaction if true.
@@ -3107,8 +3161,12 @@ func (x *BroadcastTxCommitRequest) GetSignedTxJson() string {
 }
 
 type BroadcastTxCommitResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Result []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	// The transaction hash
+	Hash []byte `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	// The transaction height
+	Height        int64 `protobuf:"zigzag64,3,opt,name=height,proto3" json:"height,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3148,6 +3206,20 @@ func (x *BroadcastTxCommitResponse) GetResult() []byte {
 		return x.Result
 	}
 	return nil
+}
+
+func (x *BroadcastTxCommitResponse) GetHash() []byte {
+	if x != nil {
+		return x.Hash
+	}
+	return nil
+}
+
+func (x *BroadcastTxCommitResponse) GetHeight() int64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
 }
 
 type AddressToBech32Request struct {
@@ -3759,9 +3831,11 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"gas_wanted\x18\x02 \x01(\x12R\tgasWanted\x12\x12\n" +
 	"\x04memo\x18\x03 \x01(\tR\x04memo\x12%\n" +
 	"\x0ecaller_address\x18\x04 \x01(\fR\rcallerAddress\x122\n" +
-	"\x04msgs\x18\x05 \x03(\v2\x1e.land.gno.gnonative.v1.MsgCallR\x04Msgs\"&\n" +
+	"\x04msgs\x18\x05 \x03(\v2\x1e.land.gno.gnonative.v1.MsgCallR\x04Msgs\"R\n" +
 	"\fCallResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\fR\x06result\"]\n" +
+	"\x06result\x18\x01 \x01(\fR\x06result\x12\x12\n" +
+	"\x04hash\x18\x02 \x01(\fR\x04hash\x12\x16\n" +
+	"\x06height\x18\x03 \x01(\x12R\x06height\"]\n" +
 	"\aMsgSend\x12\x1d\n" +
 	"\n" +
 	"to_address\x18\x01 \x01(\fR\ttoAddress\x123\n" +
@@ -3772,8 +3846,10 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"gas_wanted\x18\x02 \x01(\x12R\tgasWanted\x12\x12\n" +
 	"\x04memo\x18\x03 \x01(\tR\x04memo\x12%\n" +
 	"\x0ecaller_address\x18\x04 \x01(\fR\rcallerAddress\x122\n" +
-	"\x04msgs\x18\x05 \x03(\v2\x1e.land.gno.gnonative.v1.MsgSendR\x04Msgs\"\x0e\n" +
-	"\fSendResponse\"6\n" +
+	"\x04msgs\x18\x05 \x03(\v2\x1e.land.gno.gnonative.v1.MsgSendR\x04Msgs\":\n" +
+	"\fSendResponse\x12\x12\n" +
+	"\x04hash\x18\x01 \x01(\fR\x04hash\x12\x16\n" +
+	"\x06height\x18\x02 \x01(\x12R\x06height\"6\n" +
 	"\x06MsgRun\x12\x18\n" +
 	"\apackage\x18\x01 \x01(\tR\apackage\x12\x12\n" +
 	"\x04send\x18\x02 \x01(\tR\x04send\"\xb2\x01\n" +
@@ -3784,9 +3860,11 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"gas_wanted\x18\x02 \x01(\x12R\tgasWanted\x12\x12\n" +
 	"\x04memo\x18\x03 \x01(\tR\x04memo\x12%\n" +
 	"\x0ecaller_address\x18\x04 \x01(\fR\rcallerAddress\x121\n" +
-	"\x04msgs\x18\x05 \x03(\v2\x1d.land.gno.gnonative.v1.MsgRunR\x04Msgs\"%\n" +
+	"\x04msgs\x18\x05 \x03(\v2\x1d.land.gno.gnonative.v1.MsgRunR\x04Msgs\"Q\n" +
 	"\vRunResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\")\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\x12\x12\n" +
+	"\x04hash\x18\x02 \x01(\fR\x04hash\x12\x16\n" +
+	"\x06height\x18\x03 \x01(\x12R\x06height\")\n" +
 	"\x0eMakeTxResponse\x12\x17\n" +
 	"\atx_json\x18\x01 \x01(\tR\x06txJson\"\x92\x01\n" +
 	"\rSignTxRequest\x12\x17\n" +
@@ -3808,9 +3886,11 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\n" +
 	"gas_wanted\x18\x02 \x01(\x12R\tgasWanted\";\n" +
 	"\x18BroadcastTxCommitRequest\x12\x1f\n" +
-	"\x0esigned_tx_json\x18\x01 \x01(\tR\atx_json\"3\n" +
+	"\x0esigned_tx_json\x18\x01 \x01(\tR\atx_json\"_\n" +
 	"\x19BroadcastTxCommitResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\fR\x06result\"2\n" +
+	"\x06result\x18\x01 \x01(\fR\x06result\x12\x12\n" +
+	"\x04hash\x18\x02 \x01(\fR\x04hash\x12\x16\n" +
+	"\x06height\x18\x03 \x01(\x12R\x06height\"2\n" +
 	"\x16AddressToBech32Request\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\fR\aaddress\"@\n" +
 	"\x17AddressToBech32Response\x12%\n" +

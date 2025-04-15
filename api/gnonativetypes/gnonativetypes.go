@@ -231,6 +231,10 @@ type CallRequest struct {
 
 type CallResponse struct {
 	Result []byte `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
 }
 
 type MsgSend struct {
@@ -252,7 +256,12 @@ type SendRequest struct {
 	Msgs []MsgSend
 }
 
-type SendResponse struct{}
+type SendResponse struct {
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
+}
 
 type MsgRun struct {
 	// The code for the script package. Must have main().
@@ -276,6 +285,10 @@ type RunRequest struct {
 type RunResponse struct {
 	// The "console" output from the run
 	Result string `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
 }
 
 type MakeTxResponse struct {
@@ -330,6 +343,10 @@ type BroadcastTxCommitRequest struct {
 
 type BroadcastTxCommitResponse struct {
 	Result []byte `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
 }
 
 type AddressToBech32Request struct {

@@ -372,7 +372,7 @@ export const GnoNativeService = {
       kind: MethodKind.Unary,
     },
     /**
-     * EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+     * EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
      * If UpdateTx is true, then update the transaction with the gasWanted amount.
      *
      * @generated from rpc land.gno.gnonative.v1.GnoNativeService.EstimateGas

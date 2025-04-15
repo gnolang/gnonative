@@ -99,49 +99,53 @@ namespace Land.Gno.Gnonative.V1 {
             "KAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQSEgoE",
             "bWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFINY2Fs",
             "bGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZl",
-            "LnYxLk1zZ0NhbGxSBE1zZ3MiJgoMQ2FsbFJlc3BvbnNlEhYKBnJlc3VsdBgB",
-            "IAEoDFIGcmVzdWx0Il0KB01zZ1NlbmQSHQoKdG9fYWRkcmVzcxgBIAEoDFIJ",
-            "dG9BZGRyZXNzEjMKBmFtb3VudBgCIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2",
-            "ZS52MS5Db2luUgZhbW91bnQitAEKC1NlbmRSZXF1ZXN0EhcKB2dhc19mZWUY",
-            "ASABKAlSBmdhc0ZlZRIdCgpnYXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQS",
-            "EgoEbWVtbxgDIAEoCVIEbWVtbxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFIN",
-            "Y2FsbGVyQWRkcmVzcxIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0",
-            "aXZlLnYxLk1zZ1NlbmRSBE1zZ3MiDgoMU2VuZFJlc3BvbnNlIjYKBk1zZ1J1",
-            "bhIYCgdwYWNrYWdlGAEgASgJUgdwYWNrYWdlEhIKBHNlbmQYAiABKAlSBHNl",
-            "bmQisgEKClJ1blJlcXVlc3QSFwoHZ2FzX2ZlZRgBIAEoCVIGZ2FzRmVlEh0K",
-            "Cmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBISCgRtZW1vGAMgASgJUgRt",
-            "ZW1vEiUKDmNhbGxlcl9hZGRyZXNzGAQgASgMUg1jYWxsZXJBZGRyZXNzEjEK",
-            "BG1zZ3MYBSADKAsyHS5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnUnVuUgRN",
-            "c2dzIiUKC1J1blJlc3BvbnNlEhYKBnJlc3VsdBgBIAEoCVIGcmVzdWx0IikK",
-            "Dk1ha2VUeFJlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4SnNvbiKSAQoN",
-            "U2lnblR4UmVxdWVzdBIXCgd0eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRk",
-            "cmVzcxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50X251bWJlchgDIAEoBFIN",
-            "YWNjb3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1iZXIYBCABKARSDnNlcXVl",
-            "bmNlTnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29u",
-            "GAEgASgJUgd0eF9qc29uIt0BChJFc3RpbWF0ZUdhc1JlcXVlc3QSFwoHdHhf",
-            "anNvbhgBIAEoCVIGdHhKc29uEhgKB2FkZHJlc3MYAiABKAxSB2FkZHJlc3MS",
-            "JwoPc2VjdXJpdHlfbWFyZ2luGAMgASgNUg5zZWN1cml0eU1hcmdpbhIbCgl1",
-            "cGRhdGVfdHgYBCABKAhSCHVwZGF0ZVR4EiUKDmFjY291bnRfbnVtYmVyGAUg",
-            "ASgEUg1hY2NvdW50TnVtYmVyEicKD3NlcXVlbmNlX251bWJlchgGIAEoBFIO",
-            "c2VxdWVuY2VOdW1iZXIiTQoTRXN0aW1hdGVHYXNSZXNwb25zZRIXCgd0eF9q",
-            "c29uGAEgASgJUgZ0eEpzb24SHQoKZ2FzX3dhbnRlZBgCIAEoElIJZ2FzV2Fu",
-            "dGVkIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhf",
-            "anNvbhgBIAEoCVIHdHhfanNvbiIzChlCcm9hZGNhc3RUeENvbW1pdFJlc3Bv",
-            "bnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0IjIKFkFkZHJlc3NUb0JlY2gz",
-            "MlJlcXVlc3QSGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNz",
-            "VG9CZWNoMzJSZXNwb25zZRIlCg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVj",
-            "aDMyQWRkcmVzcyJBChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVj",
-            "aDMyX2FkZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zy",
-            "b21CZWNoMzJSZXNwb25zZRIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgK",
-            "GkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJ",
-            "UghtbmVtb25pYyI3ChtBZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoH",
-            "YWRkcmVzcxgBIAEoDFIHYWRkcmVzcyIiCgxIZWxsb1JlcXVlc3QSEgoEbmFt",
-            "ZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEg",
-            "ASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgB",
-            "IAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5n",
-            "GAEgASgJUghHcmVldGluZyIwChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QS",
-            "FAoFVmFsdWUYASADKAxSBVZhbHVlQilaJ2dpdGh1Yi5jb20vZ25vbGFuZy9n",
-            "bm9uYXRpdmUvYXBpL2dlbi9nb2IGcHJvdG8z"));
+            "LnYxLk1zZ0NhbGxSBE1zZ3MiUgoMQ2FsbFJlc3BvbnNlEhYKBnJlc3VsdBgB",
+            "IAEoDFIGcmVzdWx0EhIKBGhhc2gYAiABKAxSBGhhc2gSFgoGaGVpZ2h0GAMg",
+            "ASgSUgZoZWlnaHQiXQoHTXNnU2VuZBIdCgp0b19hZGRyZXNzGAEgASgMUgl0",
+            "b0FkZHJlc3MSMwoGYW1vdW50GAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZl",
+            "LnYxLkNvaW5SBmFtb3VudCK0AQoLU2VuZFJlcXVlc3QSFwoHZ2FzX2ZlZRgB",
+            "IAEoCVIGZ2FzRmVlEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dhbnRlZBIS",
+            "CgRtZW1vGAMgASgJUgRtZW1vEiUKDmNhbGxlcl9hZGRyZXNzGAQgASgMUg1j",
+            "YWxsZXJBZGRyZXNzEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRp",
+            "dmUudjEuTXNnU2VuZFIETXNncyI6CgxTZW5kUmVzcG9uc2USEgoEaGFzaBgB",
+            "IAEoDFIEaGFzaBIWCgZoZWlnaHQYAiABKBJSBmhlaWdodCI2CgZNc2dSdW4S",
+            "GAoHcGFja2FnZRgBIAEoCVIHcGFja2FnZRISCgRzZW5kGAIgASgJUgRzZW5k",
+            "IrIBCgpSdW5SZXF1ZXN0EhcKB2dhc19mZWUYASABKAlSBmdhc0ZlZRIdCgpn",
+            "YXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQSEgoEbWVtbxgDIAEoCVIEbWVt",
+            "bxIlCg5jYWxsZXJfYWRkcmVzcxgEIAEoDFINY2FsbGVyQWRkcmVzcxIxCgRt",
+            "c2dzGAUgAygLMh0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1J1blIETXNn",
+            "cyJRCgtSdW5SZXNwb25zZRIWCgZyZXN1bHQYASABKAlSBnJlc3VsdBISCgRo",
+            "YXNoGAIgASgMUgRoYXNoEhYKBmhlaWdodBgDIAEoElIGaGVpZ2h0IikKDk1h",
+            "a2VUeFJlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4SnNvbiKSAQoNU2ln",
+            "blR4UmVxdWVzdBIXCgd0eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRkcmVz",
+            "cxgCIAEoDFIHYWRkcmVzcxIlCg5hY2NvdW50X251bWJlchgDIAEoBFINYWNj",
+            "b3VudE51bWJlchInCg9zZXF1ZW5jZV9udW1iZXIYBCABKARSDnNlcXVlbmNl",
+            "TnVtYmVyIjEKDlNpZ25UeFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29uGAEg",
+            "ASgJUgd0eF9qc29uIt0BChJFc3RpbWF0ZUdhc1JlcXVlc3QSFwoHdHhfanNv",
+            "bhgBIAEoCVIGdHhKc29uEhgKB2FkZHJlc3MYAiABKAxSB2FkZHJlc3MSJwoP",
+            "c2VjdXJpdHlfbWFyZ2luGAMgASgNUg5zZWN1cml0eU1hcmdpbhIbCgl1cGRh",
+            "dGVfdHgYBCABKAhSCHVwZGF0ZVR4EiUKDmFjY291bnRfbnVtYmVyGAUgASgE",
+            "Ug1hY2NvdW50TnVtYmVyEicKD3NlcXVlbmNlX251bWJlchgGIAEoBFIOc2Vx",
+            "dWVuY2VOdW1iZXIiTQoTRXN0aW1hdGVHYXNSZXNwb25zZRIXCgd0eF9qc29u",
+            "GAEgASgJUgZ0eEpzb24SHQoKZ2FzX3dhbnRlZBgCIAEoElIJZ2FzV2FudGVk",
+            "IjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNv",
+            "bhgBIAEoCVIHdHhfanNvbiJfChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNl",
+            "EhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0EhIKBGhhc2gYAiABKAxSBGhhc2gS",
+            "FgoGaGVpZ2h0GAMgASgSUgZoZWlnaHQiMgoWQWRkcmVzc1RvQmVjaDMyUmVx",
+            "dWVzdBIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIkAKF0FkZHJlc3NUb0Jl",
+            "Y2gzMlJlc3BvbnNlEiUKDmJlY2gzMl9hZGRyZXNzGAEgASgJUg1iZWNoMzJB",
+            "ZGRyZXNzIkEKGEFkZHJlc3NGcm9tQmVjaDMyUmVxdWVzdBIlCg5iZWNoMzJf",
+            "YWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyI1ChlBZGRyZXNzRnJvbUJl",
+            "Y2gzMlJlc3BvbnNlEhgKB2FkZHJlc3MYASABKAxSB2FkZHJlc3MiOAoaQWRk",
+            "cmVzc0Zyb21NbmVtb25pY1JlcXVlc3QSGgoIbW5lbW9uaWMYASABKAlSCG1u",
+            "ZW1vbmljIjcKG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIYCgdhZGRy",
+            "ZXNzGAEgASgMUgdhZGRyZXNzIiIKDEhlbGxvUmVxdWVzdBISCgRuYW1lGAEg",
+            "ASgJUgROYW1lIisKDUhlbGxvUmVzcG9uc2USGgoIZ3JlZXRpbmcYASABKAlS",
+            "CEdyZWV0aW5nIigKEkhlbGxvU3RyZWFtUmVxdWVzdBISCgRuYW1lGAEgASgJ",
+            "UgROYW1lIjEKE0hlbGxvU3RyZWFtUmVzcG9uc2USGgoIZ3JlZXRpbmcYASAB",
+            "KAlSCEdyZWV0aW5nIjAKGEdOT05BVElWRVRZUEVTX0J5dGVzTGlzdBIUCgVW",
+            "YWx1ZRgBIAMoDFIFVmFsdWVCKVonZ2l0aHViLmNvbS9nbm9sYW5nL2dub25h",
+            "dGl2ZS9hcGkvZ2VuL2dvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -194,20 +198,20 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.QEvalResponse), global::Land.Gno.Gnonative.V1.QEvalResponse.Parser, new[]{ "Result" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgCall), global::Land.Gno.Gnonative.V1.MsgCall.Parser, new[]{ "PackagePath", "Fnc", "Args", "Send" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.CallRequest), global::Land.Gno.Gnonative.V1.CallRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "CallerAddress", "Msgs" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.CallResponse), global::Land.Gno.Gnonative.V1.CallResponse.Parser, new[]{ "Result" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.CallResponse), global::Land.Gno.Gnonative.V1.CallResponse.Parser, new[]{ "Result", "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgSend), global::Land.Gno.Gnonative.V1.MsgSend.Parser, new[]{ "ToAddress", "Amount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendRequest), global::Land.Gno.Gnonative.V1.SendRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "CallerAddress", "Msgs" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendResponse), global::Land.Gno.Gnonative.V1.SendResponse.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SendResponse), global::Land.Gno.Gnonative.V1.SendResponse.Parser, new[]{ "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MsgRun), global::Land.Gno.Gnonative.V1.MsgRun.Parser, new[]{ "Package", "Send" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunRequest), global::Land.Gno.Gnonative.V1.RunRequest.Parser, new[]{ "GasFee", "GasWanted", "Memo", "CallerAddress", "Msgs" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunResponse), global::Land.Gno.Gnonative.V1.RunResponse.Parser, new[]{ "Result" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.RunResponse), global::Land.Gno.Gnonative.V1.RunResponse.Parser, new[]{ "Result", "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.MakeTxResponse), global::Land.Gno.Gnonative.V1.MakeTxResponse.Parser, new[]{ "TxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxRequest), global::Land.Gno.Gnonative.V1.SignTxRequest.Parser, new[]{ "TxJson", "Address", "AccountNumber", "SequenceNumber" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxResponse), global::Land.Gno.Gnonative.V1.SignTxResponse.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasRequest), global::Land.Gno.Gnonative.V1.EstimateGasRequest.Parser, new[]{ "TxJson", "Address", "SecurityMargin", "UpdateTx", "AccountNumber", "SequenceNumber" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasResponse), global::Land.Gno.Gnonative.V1.EstimateGasResponse.Parser, new[]{ "TxJson", "GasWanted" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest), global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse), global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser, new[]{ "Result" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse), global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser, new[]{ "Result", "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Request), global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser, new[]{ "Address" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Response), global::Land.Gno.Gnonative.V1.AddressToBech32Response.Parser, new[]{ "Bech32Address" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressFromBech32Request), global::Land.Gno.Gnonative.V1.AddressFromBech32Request.Parser, new[]{ "Bech32Address" }, null, null, null, null),
@@ -10765,6 +10769,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CallResponse(CallResponse other) : this() {
       result_ = other.result_;
+      hash_ = other.hash_;
+      height_ = other.height_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -10786,6 +10792,36 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
+    /// <summary>Field number for the "hash" field.</summary>
+    public const int HashFieldNumber = 2;
+    private pb::ByteString hash_ = pb::ByteString.Empty;
+    /// <summary>
+    /// The transaction hash
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Hash {
+      get { return hash_; }
+      set {
+        hash_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 3;
+    private long height_;
+    /// <summary>
+    /// The transaction height
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -10802,6 +10838,8 @@ namespace Land.Gno.Gnonative.V1 {
         return true;
       }
       if (Result != other.Result) return false;
+      if (Hash != other.Hash) return false;
+      if (Height != other.Height) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10810,6 +10848,8 @@ namespace Land.Gno.Gnonative.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Result.Length != 0) hash ^= Result.GetHashCode();
+      if (Hash.Length != 0) hash ^= Hash.GetHashCode();
+      if (Height != 0L) hash ^= Height.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10832,6 +10872,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10846,6 +10894,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -10858,6 +10914,12 @@ namespace Land.Gno.Gnonative.V1 {
       int size = 0;
       if (Result.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Result);
+      }
+      if (Hash.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Hash);
+      }
+      if (Height != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Height);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -10873,6 +10935,12 @@ namespace Land.Gno.Gnonative.V1 {
       }
       if (other.Result.Length != 0) {
         Result = other.Result;
+      }
+      if (other.Hash.Length != 0) {
+        Hash = other.Hash;
+      }
+      if (other.Height != 0L) {
+        Height = other.Height;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -10897,6 +10965,14 @@ namespace Land.Gno.Gnonative.V1 {
             Result = input.ReadBytes();
             break;
           }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
+            break;
+          }
         }
       }
     #endif
@@ -10918,6 +10994,14 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           case 10: {
             Result = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
             break;
           }
         }
@@ -11537,6 +11621,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SendResponse(SendResponse other) : this() {
+      hash_ = other.hash_;
+      height_ = other.height_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -11544,6 +11630,36 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SendResponse Clone() {
       return new SendResponse(this);
+    }
+
+    /// <summary>Field number for the "hash" field.</summary>
+    public const int HashFieldNumber = 1;
+    private pb::ByteString hash_ = pb::ByteString.Empty;
+    /// <summary>
+    /// The transaction hash
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Hash {
+      get { return hash_; }
+      set {
+        hash_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 2;
+    private long height_;
+    /// <summary>
+    /// The transaction height
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11561,6 +11677,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Hash != other.Hash) return false;
+      if (Height != other.Height) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -11568,6 +11686,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Hash.Length != 0) hash ^= Hash.GetHashCode();
+      if (Height != 0L) hash ^= Height.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11586,6 +11706,14 @@ namespace Land.Gno.Gnonative.V1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (Hash.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11596,6 +11724,14 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Hash.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(16);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -11606,6 +11742,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Hash.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Hash);
+      }
+      if (Height != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Height);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -11617,6 +11759,12 @@ namespace Land.Gno.Gnonative.V1 {
     public void MergeFrom(SendResponse other) {
       if (other == null) {
         return;
+      }
+      if (other.Hash.Length != 0) {
+        Hash = other.Hash;
+      }
+      if (other.Height != 0L) {
+        Height = other.Height;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -11637,6 +11785,14 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 16: {
+            Height = input.ReadSInt64();
+            break;
+          }
         }
       }
     #endif
@@ -11656,6 +11812,14 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 10: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 16: {
+            Height = input.ReadSInt64();
+            break;
+          }
         }
       }
     }
@@ -12285,6 +12449,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RunResponse(RunResponse other) : this() {
       result_ = other.result_;
+      hash_ = other.hash_;
+      height_ = other.height_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -12309,6 +12475,36 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
+    /// <summary>Field number for the "hash" field.</summary>
+    public const int HashFieldNumber = 2;
+    private pb::ByteString hash_ = pb::ByteString.Empty;
+    /// <summary>
+    /// The transaction hash
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Hash {
+      get { return hash_; }
+      set {
+        hash_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 3;
+    private long height_;
+    /// <summary>
+    /// The transaction height
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -12325,6 +12521,8 @@ namespace Land.Gno.Gnonative.V1 {
         return true;
       }
       if (Result != other.Result) return false;
+      if (Hash != other.Hash) return false;
+      if (Height != other.Height) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -12333,6 +12531,8 @@ namespace Land.Gno.Gnonative.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Result.Length != 0) hash ^= Result.GetHashCode();
+      if (Hash.Length != 0) hash ^= Hash.GetHashCode();
+      if (Height != 0L) hash ^= Height.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -12355,6 +12555,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteString(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -12369,6 +12577,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteString(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -12381,6 +12597,12 @@ namespace Land.Gno.Gnonative.V1 {
       int size = 0;
       if (Result.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Result);
+      }
+      if (Hash.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Hash);
+      }
+      if (Height != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Height);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -12396,6 +12618,12 @@ namespace Land.Gno.Gnonative.V1 {
       }
       if (other.Result.Length != 0) {
         Result = other.Result;
+      }
+      if (other.Hash.Length != 0) {
+        Hash = other.Hash;
+      }
+      if (other.Height != 0L) {
+        Height = other.Height;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -12420,6 +12648,14 @@ namespace Land.Gno.Gnonative.V1 {
             Result = input.ReadString();
             break;
           }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
+            break;
+          }
         }
       }
     #endif
@@ -12441,6 +12677,14 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           case 10: {
             Result = input.ReadString();
+            break;
+          }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
             break;
           }
         }
@@ -13258,7 +13502,7 @@ namespace Land.Gno.Gnonative.V1 {
     private uint securityMargin_;
     /// <summary>
     /// The security margin to apply to the estimated gas amount.
-    /// This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+    /// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
     /// It will be multiplied by the estimated gas amount.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -14054,6 +14298,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BroadcastTxCommitResponse(BroadcastTxCommitResponse other) : this() {
       result_ = other.result_;
+      hash_ = other.hash_;
+      height_ = other.height_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -14075,6 +14321,36 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
+    /// <summary>Field number for the "hash" field.</summary>
+    public const int HashFieldNumber = 2;
+    private pb::ByteString hash_ = pb::ByteString.Empty;
+    /// <summary>
+    /// The transaction hash
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Hash {
+      get { return hash_; }
+      set {
+        hash_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 3;
+    private long height_;
+    /// <summary>
+    /// The transaction height
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -14091,6 +14367,8 @@ namespace Land.Gno.Gnonative.V1 {
         return true;
       }
       if (Result != other.Result) return false;
+      if (Hash != other.Hash) return false;
+      if (Height != other.Height) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -14099,6 +14377,8 @@ namespace Land.Gno.Gnonative.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Result.Length != 0) hash ^= Result.GetHashCode();
+      if (Hash.Length != 0) hash ^= Hash.GetHashCode();
+      if (Height != 0L) hash ^= Height.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -14121,6 +14401,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -14135,6 +14423,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(10);
         output.WriteBytes(Result);
       }
+      if (Hash.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Hash);
+      }
+      if (Height != 0L) {
+        output.WriteRawTag(24);
+        output.WriteSInt64(Height);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -14147,6 +14443,12 @@ namespace Land.Gno.Gnonative.V1 {
       int size = 0;
       if (Result.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Result);
+      }
+      if (Hash.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Hash);
+      }
+      if (Height != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Height);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -14162,6 +14464,12 @@ namespace Land.Gno.Gnonative.V1 {
       }
       if (other.Result.Length != 0) {
         Result = other.Result;
+      }
+      if (other.Hash.Length != 0) {
+        Hash = other.Hash;
+      }
+      if (other.Height != 0L) {
+        Height = other.Height;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -14186,6 +14494,14 @@ namespace Land.Gno.Gnonative.V1 {
             Result = input.ReadBytes();
             break;
           }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
+            break;
+          }
         }
       }
     #endif
@@ -14207,6 +14523,14 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           case 10: {
             Result = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Hash = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            Height = input.ReadSInt64();
             break;
           }
         }

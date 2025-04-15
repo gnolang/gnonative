@@ -242,7 +242,7 @@ type GnoNativeServiceClient interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
 	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.
@@ -821,7 +821,7 @@ type GnoNativeServiceHandler interface {
 	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// EstimateGas estimate the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
+	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
 	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// Sign the transaction using the account with the given address.

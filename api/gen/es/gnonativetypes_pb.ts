@@ -1992,6 +1992,20 @@ export class CallResponse extends Message<CallResponse> {
    */
   result = new Uint8Array(0);
 
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash = new Uint8Array(0);
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height = protoInt64.zero;
+
   constructor(data?: PartialMessage<CallResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2001,6 +2015,8 @@ export class CallResponse extends Message<CallResponse> {
   static readonly typeName = "land.gno.gnonative.v1.CallResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "hash", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 3, name: "height", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CallResponse {
@@ -2139,6 +2155,20 @@ export class SendRequest extends Message<SendRequest> {
  * @generated from message land.gno.gnonative.v1.SendResponse
  */
 export class SendResponse extends Message<SendResponse> {
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 1;
+   */
+  hash = new Uint8Array(0);
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 2;
+   */
+  height = protoInt64.zero;
+
   constructor(data?: PartialMessage<SendResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2147,6 +2177,8 @@ export class SendResponse extends Message<SendResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "land.gno.gnonative.v1.SendResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "hash", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "height", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendResponse {
@@ -2292,6 +2324,20 @@ export class RunResponse extends Message<RunResponse> {
    */
   result = "";
 
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash = new Uint8Array(0);
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height = protoInt64.zero;
+
   constructor(data?: PartialMessage<RunResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2301,6 +2347,8 @@ export class RunResponse extends Message<RunResponse> {
   static readonly typeName = "land.gno.gnonative.v1.RunResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "hash", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 3, name: "height", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RunResponse {
@@ -2481,7 +2529,7 @@ export class EstimateGasRequest extends Message<EstimateGasRequest> {
 
   /**
    * The security margin to apply to the estimated gas amount.
-   * This number is represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
    * It will be multiplied by the estimated gas amount.
    *
    * @generated from field: uint32 security_margin = 3;
@@ -2637,6 +2685,20 @@ export class BroadcastTxCommitResponse extends Message<BroadcastTxCommitResponse
    */
   result = new Uint8Array(0);
 
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash = new Uint8Array(0);
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height = protoInt64.zero;
+
   constructor(data?: PartialMessage<BroadcastTxCommitResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2646,6 +2708,8 @@ export class BroadcastTxCommitResponse extends Message<BroadcastTxCommitResponse
   static readonly typeName = "land.gno.gnonative.v1.BroadcastTxCommitResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 2, name: "hash", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 3, name: "height", kind: "scalar", T: 18 /* ScalarType.SINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BroadcastTxCommitResponse {
