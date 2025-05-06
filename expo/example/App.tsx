@@ -27,7 +27,7 @@ const InnerApp = () => {
 
         const remote = await gnonative.getRemote();
         const chainId = await gnonative.getChainID();
-        console.log('Remote %s ChainId %s', remote, chainId);
+        console.log(`Remote ${remote} ChainId ${chainId}`);
 
         const phrase = await gnonative.generateRecoveryPhrase();
         const address = await gnonative.addressFromMnemonic(phrase);

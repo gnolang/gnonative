@@ -1,14 +1,14 @@
-import { createPromiseClient, PromiseClient } from '@connectrpc/connect';
+import { createClient as cc, Client } from '@connectrpc/connect';
 
 import { createNativeGrpcTransport } from './transport_native';
-import { GnoNativeService } from '../api/vendor/rpc_connect';
+import { GnoNativeService } from '../api/vendor/rpc_pb';
 
 // Create a GnoNativeService client
-export function createClient(_port: number): PromiseClient<typeof GnoNativeService> {
+export function createClient(_port: number): Client<typeof GnoNativeService> {
   const transport = createNativeGrpcTransport({
     baseUrl: '',
     useBinaryFormat: false,
   });
 
-  return createPromiseClient(GnoNativeService, transport);
+  return cc(GnoNativeService, transport);
 }
