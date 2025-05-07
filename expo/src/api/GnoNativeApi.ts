@@ -1,65 +1,34 @@
-import { PromiseClient } from '@connectrpc/connect';
+import { Client } from '@connectrpc/connect';
 
 import { GnoKeyApi, BridgeStatus, Config } from './types';
 import {
-  AddressFromBech32Request,
-  AddressToBech32Request,
-  AddressFromMnemonicRequest,
   BroadcastTxCommitResponse,
-  CallRequest,
   CallResponse,
-  CreateAccountRequest,
-  DeleteAccountRequest,
   DeleteAccountResponse,
-  GenerateRecoveryPhraseRequest,
-  GetActivatedAccountRequest,
   GetActivatedAccountResponse,
-  GetChainIDRequest,
-  GetKeyInfoByAddressRequest,
-  GetKeyInfoByNameOrAddressRequest,
-  GetKeyInfoByNameRequest,
-  GetRemoteRequest,
-  HasKeyByAddressRequest,
-  HasKeyByNameOrAddressRequest,
-  HasKeyByNameRequest,
-  HelloRequest,
   HelloStreamResponse,
   KeyInfo,
-  ListKeyInfoRequest,
   MakeTxResponse,
-  MsgCall,
   Coin,
-  MsgSend,
-  QEvalRequest,
-  QueryAccountRequest,
   QueryAccountResponse,
-  QueryRequest,
   QueryResponse,
-  RenderRequest,
-  ActivateAccountRequest,
   ActivateAccountResponse,
-  SendRequest,
   SendResponse,
-  SetChainIDRequest,
   SetChainIDResponse,
-  SetPasswordRequest,
   SetPasswordResponse,
-  SetRemoteRequest,
   SetRemoteResponse,
   SignTxResponse,
-  RotatePasswordRequest,
   RotatePasswordResponse,
-  EstimateGasRequest,
   EstimateGasResponse,
 } from './vendor/gnonativetypes_pb';
-import { GnoNativeService } from './vendor/rpc_connect';
+import { GnoNativeService } from './vendor/rpc_pb';
 import { GoBridge, GoBridgeInterface } from '../GoBridge';
 import * as Grpc from '../grpc/client';
 
 export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   bridgeStatus = BridgeStatus.Stopped;
   config: Config;
-  clientInstance: PromiseClient<typeof GnoNativeService> | undefined;
+  clientInstance: Client<typeof GnoNativeService> | undefined;
 
   constructor(config: Config) {
     this.config = config;
@@ -83,10 +52,8 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     console.log('GoBridge GRPC client instance. Done.');
 
     try {
-      await this.clientInstance?.setRemote(new SetRemoteRequest({ remote: this.config.remote }));
-      await this.clientInstance?.setChainID(
-        new SetChainIDRequest({ chainId: this.config.chain_id }),
-      );
+      await this.clientInstance?.setRemote({ remote: this.config.remote });
+      await this.clientInstance?.setChainID({ chainId: this.config.chain_id });
       console.log('✅ GnoNative bridge initialized.');
       return true;
     } catch (error) {
@@ -115,13 +82,13 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async setRemote(remote: string): Promise<SetRemoteResponse> {
     const client = this.#getClient();
-    const response = client.setRemote(new SetRemoteRequest({ remote }));
+    const response = client.setRemote({ remote });
     return response;
   }
 
   async getRemote(): Promise<string> {
     const client = this.#getClient();
-    const response = await client.getRemote(new GetRemoteRequest());
+    const response = await client.getRemote({});
     return response.remote;
   }
 
@@ -145,28 +112,26 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     sequenceNumber: bigint = BigInt(0),
   ): Promise<EstimateGasResponse> {
     const client = this.#getClient();
-    const response = client.estimateGas(
-      new EstimateGasRequest({
-        txJson,
-        address,
-        securityMargin,
-        updateTx,
-        accountNumber,
-        sequenceNumber,
-      }),
-    );
+    const response = client.estimateGas({
+      txJson,
+      address,
+      securityMargin,
+      updateTx,
+      accountNumber,
+      sequenceNumber,
+    });
     return response;
   }
 
   async setChainID(chainId: string): Promise<SetChainIDResponse> {
     const client = this.#getClient();
-    const response = client.setChainID(new SetChainIDRequest({ chainId }));
+    const response = client.setChainID({ chainId });
     return response;
   }
 
   async getChainID() {
     const client = this.#getClient();
-    const response = await client.getChainID(new GetChainIDRequest());
+    const response = await client.getChainID({});
     return response.chainId;
   }
 
@@ -176,65 +141,59 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     password: string,
   ): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
-    const reponse = await client.createAccount(
-      new CreateAccountRequest({
-        nameOrBech32,
-        mnemonic,
-        password,
-      }),
-    );
+    const reponse = await client.createAccount({
+      nameOrBech32,
+      mnemonic,
+      password,
+    });
     return reponse.key;
   }
 
   async generateRecoveryPhrase() {
     const client = this.#getClient();
-    const response = await client.generateRecoveryPhrase(new GenerateRecoveryPhraseRequest());
+    const response = await client.generateRecoveryPhrase({});
     return response.phrase;
   }
 
   async hasKeyByName(name: string) {
     const client = this.#getClient();
-    const response = await client.hasKeyByName(new HasKeyByNameRequest({ name }));
+    const response = await client.hasKeyByName({ name });
     return response.has;
   }
 
   async hasKeyByAddress(address: Uint8Array) {
     const client = this.#getClient();
-    const response = await client.hasKeyByAddress(new HasKeyByAddressRequest({ address }));
+    const response = await client.hasKeyByAddress({ address });
     return response.has;
   }
 
   async hasKeyByNameOrAddress(nameOrBech32: string) {
     const client = this.#getClient();
-    const response = await client.hasKeyByNameOrAddress(
-      new HasKeyByNameOrAddressRequest({ nameOrBech32 }),
-    );
+    const response = await client.hasKeyByNameOrAddress({ nameOrBech32 });
     return response.has;
   }
 
   async getKeyInfoByName(name: string): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
-    const response = await client.getKeyInfoByName(new GetKeyInfoByNameRequest({ name }));
+    const response = await client.getKeyInfoByName({ name });
     return response.key;
   }
 
   async getKeyInfoByAddress(address: Uint8Array): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
-    const response = await client.getKeyInfoByAddress(new GetKeyInfoByAddressRequest({ address }));
+    const response = await client.getKeyInfoByAddress({ address });
     return response.key;
   }
 
   async getKeyInfoByNameOrAddress(nameOrBech32: string): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
-    const response = await client.getKeyInfoByNameOrAddress(
-      new GetKeyInfoByNameOrAddressRequest({ nameOrBech32 }),
-    );
+    const response = await client.getKeyInfoByNameOrAddress({ nameOrBech32 });
     return response.key;
   }
 
   async listKeyInfo(): Promise<KeyInfo[]> {
     const client = this.#getClient();
-    const response = await client.listKeyInfo(new ListKeyInfoRequest());
+    const response = await client.listKeyInfo({});
     return response.keys;
   }
 
@@ -292,15 +251,11 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async activateAccount(nameOrBech32: string): Promise<ActivateAccountResponse> {
     const client = this.#getClient();
-    const response = client.activateAccount(
-      new ActivateAccountRequest({
-        nameOrBech32,
-      }),
-    );
+    const response = client.activateAccount({ nameOrBech32 });
     return response;
   }
 
-  async getClient(): Promise<PromiseClient<typeof GnoNativeService>> {
+  async getClient(): Promise<Client<typeof GnoNativeService>> {
     if (!this.clientInstance) {
       throw new Error('GoBridge client instance not initialized.');
     }
@@ -313,7 +268,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
 
   async setPassword(password: string, address: Uint8Array): Promise<SetPasswordResponse> {
     const client = this.#getClient();
-    const response = client.setPassword(new SetPasswordRequest({ password, address }));
+    const response = client.setPassword({ password, address });
     return response;
   }
 
@@ -322,19 +277,19 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     addresses: Uint8Array[],
   ): Promise<RotatePasswordResponse> {
     const client = this.#getClient();
-    const response = client.rotatePassword(new RotatePasswordRequest({ newPassword, addresses }));
+    const response = client.rotatePassword({ newPassword, addresses });
     return response;
   }
 
   async getActivatedAccount(): Promise<GetActivatedAccountResponse> {
     const client = this.#getClient();
-    const response = client.getActivatedAccount(new GetActivatedAccountRequest());
+    const response = client.getActivatedAccount({});
     return response;
   }
 
   async queryAccount(address: Uint8Array): Promise<QueryAccountResponse> {
     const client = this.#getClient();
-    const reponse = client.queryAccount(new QueryAccountRequest({ address }));
+    const reponse = client.queryAccount({ address });
     return reponse;
   }
 
@@ -344,46 +299,25 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     skipPassword: boolean,
   ): Promise<DeleteAccountResponse> {
     const client = this.#getClient();
-    const response = client.deleteAccount(
-      new DeleteAccountRequest({
-        nameOrBech32,
-        password,
-        skipPassword,
-      }),
-    );
+    const response = client.deleteAccount({ nameOrBech32, password, skipPassword });
     return response;
   }
 
   async query(path: string, data: Uint8Array): Promise<QueryResponse> {
     const client = this.#getClient();
-    const reponse = client.query(
-      new QueryRequest({
-        path,
-        data,
-      }),
-    );
+    const reponse = client.query({ path, data });
     return reponse;
   }
 
   async render(packagePath: string, args: string) {
     const client = this.#getClient();
-    const reponse = await client.render(
-      new RenderRequest({
-        packagePath,
-        args,
-      }),
-    );
+    const reponse = await client.render({ packagePath, args });
     return reponse.result;
   }
 
   async qEval(packagePath: string, expression: string) {
     const client = this.#getClient();
-    const reponse = await client.qEval(
-      new QEvalRequest({
-        packagePath,
-        expression,
-      }),
-    );
+    const reponse = await client.qEval({ packagePath, expression });
     return reponse.result;
   }
 
@@ -398,22 +332,20 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     memo?: string,
   ): Promise<AsyncIterable<CallResponse>> {
     const client = this.#getClient();
-    const reponse = client.call(
-      new CallRequest({
-        gasFee,
-        gasWanted,
-        memo,
-        callerAddress,
-        msgs: [
-          new MsgCall({
-            packagePath,
-            fnc,
-            args,
-            send,
-          }),
-        ],
-      }),
-    );
+    const reponse = client.call({
+      gasFee,
+      gasWanted,
+      memo,
+      callerAddress,
+      msgs: [
+        {
+          packagePath,
+          fnc,
+          args,
+          send,
+        },
+      ],
+    });
     return reponse;
   }
 
@@ -426,40 +358,36 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     memo?: string,
   ): Promise<AsyncIterable<SendResponse>> {
     const client = this.#getClient();
-    const reponse = client.send(
-      new SendRequest({
-        gasFee,
-        gasWanted,
-        memo,
-        callerAddress,
-        msgs: [
-          new MsgSend({
-            toAddress,
-            amount,
-          }),
-        ],
-      }),
-    );
+    const reponse = client.send({
+      gasFee,
+      gasWanted,
+      memo,
+      callerAddress,
+      msgs: [
+        {
+          toAddress,
+          amount,
+        },
+      ],
+    });
     return reponse;
   }
 
   async addressToBech32(address: Uint8Array) {
     const client = this.#getClient();
-    const response = await client.addressToBech32(new AddressToBech32Request({ address }));
+    const response = await client.addressToBech32({ address });
     return response.bech32Address;
   }
 
   async addressFromMnemonic(mnemonic: string) {
     const client = this.#getClient();
-    const response = await client.addressFromMnemonic(new AddressFromMnemonicRequest({ mnemonic }));
+    const response = await client.addressFromMnemonic({ mnemonic });
     return response.address;
   }
 
   async addressFromBech32(bech32Address: string) {
     const client = this.#getClient();
-    const response = await client.addressFromBech32(
-      new AddressFromBech32Request({ bech32Address }),
-    );
+    const response = await client.addressFromBech32({ bech32Address });
     return response.address;
   }
 
@@ -472,14 +400,14 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   // // debug
   async hello(name: string) {
     const client = this.#getClient();
-    const response = await client.hello(new HelloRequest({ name }));
+    const response = await client.hello({ name });
     return response.greeting;
   }
 
   // // debug
   async helloStream(name: string): Promise<AsyncIterable<HelloStreamResponse>> {
     const client = this.#getClient();
-    return client.helloStream(new HelloRequest({ name }));
+    return client.helloStream({ name });
   }
 
   // Go Bridge Interface:
