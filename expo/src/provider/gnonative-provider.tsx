@@ -25,7 +25,7 @@ const GnoNativeProvider: React.FC<GnoNativeProviderProps> = ({ children, config 
     })();
   }, []);
 
-  async function init(config): Promise<boolean> {
+  async function init(config: Config): Promise<boolean> {
     console.log(
       '🍄 Initializing GnoNative Context on remote: %s chain_id: %s',
       config.remote,

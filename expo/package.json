@@ -36,8 +36,8 @@
     "fast-text-encoding": "^1.0.6"
   },
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "expo-module-scripts": "^3.4.1",
+    "@types/react": "~19.0.0",
+    "expo-module-scripts": "^4.1.7",
     "expo-modules-core": "~1.11.12"
   },
   "peerDependencies": {
