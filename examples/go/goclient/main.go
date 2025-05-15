@@ -134,8 +134,8 @@ func exampleAction(client _goconnect.GnoNativeServiceClient) error {
 	res, err := client.Render(
 		context.Background(),
 		connect.NewRequest(&api_gen.RenderRequest{
-			PackagePath: "gno.land/r/demo/boards",
-			Args:        "gnonative/1",
+			PackagePath: "gno.land/r/gnoland/pages",
+			Args:        "p/partners",
 		}),
 	)
 	if err != nil {
