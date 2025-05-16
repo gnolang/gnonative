@@ -688,9 +688,18 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	signedTx, err := s.ClientSignTx(tx, req.Msg.Address, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	signer, err := s.getSigner(req.Msg.Address)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return nil, err
+	}
+	info, err := signer.Info()
+	if err != nil {
+		return nil, err
+	}
+
+	// Set the tx signature using the public key. No need to sign to get the actual signature bytes.
+	tx.Signatures = []std.Signature{
+		{PubKey: info.GetPubKey()},
 	}
 
 	c, err := s.getClient(nil)
@@ -698,7 +707,7 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, getGrpcError(err)
 	}
 
-	amount, err := c.EstimateGas(signedTx)
+	amount, err := c.EstimateGas(&tx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
