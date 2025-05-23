@@ -128,6 +128,12 @@ const (
 	// GnoNativeServiceAddressFromMnemonicProcedure is the fully-qualified name of the
 	// GnoNativeService's AddressFromMnemonic RPC.
 	GnoNativeServiceAddressFromMnemonicProcedure = "/land.gno.gnonative.v1.GnoNativeService/AddressFromMnemonic"
+	// GnoNativeServiceValidateMnemonicWordProcedure is the fully-qualified name of the
+	// GnoNativeService's ValidateMnemonicWord RPC.
+	GnoNativeServiceValidateMnemonicWordProcedure = "/land.gno.gnonative.v1.GnoNativeService/ValidateMnemonicWord"
+	// GnoNativeServiceValidateMnemonicPhraseProcedure is the fully-qualified name of the
+	// GnoNativeService's ValidateMnemonicPhrase RPC.
+	GnoNativeServiceValidateMnemonicPhraseProcedure = "/land.gno.gnonative.v1.GnoNativeService/ValidateMnemonicPhrase"
 	// GnoNativeServiceHelloProcedure is the fully-qualified name of the GnoNativeService's Hello RPC.
 	GnoNativeServiceHelloProcedure = "/land.gno.gnonative.v1.GnoNativeService/Hello"
 	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
@@ -257,6 +263,12 @@ type GnoNativeServiceClient interface {
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
 	// Convert a mnemonic (as in CreateAccount) to a byte array address.
 	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
+	// Validate a single mnemonic word (for example, as in CreateAccount).
+	// In the response, set valid true if the mnemonic word is valid.
+	ValidateMnemonicWord(context.Context, *connect.Request[_go.ValidateMnemonicWordRequest]) (*connect.Response[_go.ValidateMnemonicWordResponse], error)
+	// Validate a mnemonic phrase (for example, as in CreateAccount).
+	// In the response, set valid true if the mnemonic phrase is valid.
+	ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -478,6 +490,18 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 			connect.WithClientOptions(opts...),
 		),
+		validateMnemonicWord: connect.NewClient[_go.ValidateMnemonicWordRequest, _go.ValidateMnemonicWordResponse](
+			httpClient,
+			baseURL+GnoNativeServiceValidateMnemonicWordProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicWord")),
+			connect.WithClientOptions(opts...),
+		),
+		validateMnemonicPhrase: connect.NewClient[_go.ValidateMnemonicPhraseRequest, _go.ValidateMnemonicPhraseResponse](
+			httpClient,
+			baseURL+GnoNativeServiceValidateMnemonicPhraseProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicPhrase")),
+			connect.WithClientOptions(opts...),
+		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloProcedure,
@@ -529,6 +553,8 @@ type gnoNativeServiceClient struct {
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
 	addressFromMnemonic       *connect.Client[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse]
+	validateMnemonicWord      *connect.Client[_go.ValidateMnemonicWordRequest, _go.ValidateMnemonicWordResponse]
+	validateMnemonicPhrase    *connect.Client[_go.ValidateMnemonicPhraseRequest, _go.ValidateMnemonicPhraseResponse]
 	hello                     *connect.Client[_go.HelloRequest, _go.HelloResponse]
 	helloStream               *connect.Client[_go.HelloStreamRequest, _go.HelloStreamResponse]
 }
@@ -703,6 +729,16 @@ func (c *gnoNativeServiceClient) AddressFromMnemonic(ctx context.Context, req *c
 	return c.addressFromMnemonic.CallUnary(ctx, req)
 }
 
+// ValidateMnemonicWord calls land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicWord.
+func (c *gnoNativeServiceClient) ValidateMnemonicWord(ctx context.Context, req *connect.Request[_go.ValidateMnemonicWordRequest]) (*connect.Response[_go.ValidateMnemonicWordResponse], error) {
+	return c.validateMnemonicWord.CallUnary(ctx, req)
+}
+
+// ValidateMnemonicPhrase calls land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicPhrase.
+func (c *gnoNativeServiceClient) ValidateMnemonicPhrase(ctx context.Context, req *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error) {
+	return c.validateMnemonicPhrase.CallUnary(ctx, req)
+}
+
 // Hello calls land.gno.gnonative.v1.GnoNativeService.Hello.
 func (c *gnoNativeServiceClient) Hello(ctx context.Context, req *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
 	return c.hello.CallUnary(ctx, req)
@@ -836,6 +872,12 @@ type GnoNativeServiceHandler interface {
 	AddressFromBech32(context.Context, *connect.Request[_go.AddressFromBech32Request]) (*connect.Response[_go.AddressFromBech32Response], error)
 	// Convert a mnemonic (as in CreateAccount) to a byte array address.
 	AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error)
+	// Validate a single mnemonic word (for example, as in CreateAccount).
+	// In the response, set valid true if the mnemonic word is valid.
+	ValidateMnemonicWord(context.Context, *connect.Request[_go.ValidateMnemonicWordRequest]) (*connect.Response[_go.ValidateMnemonicWordResponse], error)
+	// Validate a mnemonic phrase (for example, as in CreateAccount).
+	// In the response, set valid true if the mnemonic phrase is valid.
+	ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -1053,6 +1095,18 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("AddressFromMnemonic")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceValidateMnemonicWordHandler := connect.NewUnaryHandler(
+		GnoNativeServiceValidateMnemonicWordProcedure,
+		svc.ValidateMnemonicWord,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicWord")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceValidateMnemonicPhraseHandler := connect.NewUnaryHandler(
+		GnoNativeServiceValidateMnemonicPhraseProcedure,
+		svc.ValidateMnemonicPhrase,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicPhrase")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHelloProcedure,
 		svc.Hello,
@@ -1135,6 +1189,10 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceAddressFromBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressFromMnemonicProcedure:
 			gnoNativeServiceAddressFromMnemonicHandler.ServeHTTP(w, r)
+		case GnoNativeServiceValidateMnemonicWordProcedure:
+			gnoNativeServiceValidateMnemonicWordHandler.ServeHTTP(w, r)
+		case GnoNativeServiceValidateMnemonicPhraseProcedure:
+			gnoNativeServiceValidateMnemonicPhraseHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloProcedure:
 			gnoNativeServiceHelloHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloStreamProcedure:
@@ -1282,6 +1340,14 @@ func (UnimplementedGnoNativeServiceHandler) AddressFromBech32(context.Context, *
 
 func (UnimplementedGnoNativeServiceHandler) AddressFromMnemonic(context.Context, *connect.Request[_go.AddressFromMnemonicRequest]) (*connect.Response[_go.AddressFromMnemonicResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.AddressFromMnemonic is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) ValidateMnemonicWord(context.Context, *connect.Request[_go.ValidateMnemonicWordRequest]) (*connect.Response[_go.ValidateMnemonicWordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicWord is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicPhrase is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {

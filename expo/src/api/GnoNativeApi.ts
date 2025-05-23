@@ -391,6 +391,18 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response.address;
   }
 
+  async validateMnemonicWord(word: string) {
+    const client = this.#getClient();
+    const response = await client.validateMnemonicWord({ word });
+    return response.valid;
+  }
+
+  async validateMnemonicPhrase(phrase: string) {
+    const client = this.#getClient();
+    const response = await client.validateMnemonicPhrase({ phrase });
+    return response.valid;
+  }
+
   async broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>> {
     const client = this.#getClient();
     const response = client.broadcastTxCommit({ signedTxJson });

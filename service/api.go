@@ -6,6 +6,7 @@ package service
 import (
 	"context"
 	"errors"
+	"slices"
 	"time"
 
 	"connectrpc.com/connect"
@@ -781,6 +782,16 @@ func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *connect
 	}
 
 	return connect.NewResponse(&api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}), nil
+}
+
+func (s *gnoNativeService) ValidateMnemonicWord(ctx context.Context, req *connect.Request[api_gen.ValidateMnemonicWordRequest]) (*connect.Response[api_gen.ValidateMnemonicWordResponse], error) {
+	valid := slices.Contains(bip39.EnglishWordList, req.Msg.Word)
+	return connect.NewResponse(&api_gen.ValidateMnemonicWordResponse{Valid: valid}), nil
+}
+
+func (s *gnoNativeService) ValidateMnemonicPhrase(ctx context.Context, req *connect.Request[api_gen.ValidateMnemonicPhraseRequest]) (*connect.Response[api_gen.ValidateMnemonicPhraseResponse], error) {
+	_, err := bip39.MnemonicToByteArray(req.Msg.Phrase)
+	return connect.NewResponse(&api_gen.ValidateMnemonicPhraseResponse{Valid: err == nil}), nil
 }
 
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
