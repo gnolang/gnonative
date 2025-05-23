@@ -163,6 +163,14 @@ service GnoNativeService {
   // Convert a mnemonic (as in CreateAccount) to a byte array address.
   rpc AddressFromMnemonic(AddressFromMnemonicRequest) returns (AddressFromMnemonicResponse);
 
+  // Validate a single mnemonic word (for example, as in CreateAccount).
+  // In the response, set valid true if the mnemonic word is valid.
+  rpc ValidateMnemonicWord(ValidateMnemonicWordRequest) returns (ValidateMnemonicWordResponse);
+
+  // Validate a mnemonic phrase (for example, as in CreateAccount).
+  // In the response, set valid true if the mnemonic phrase is valid.
+  rpc ValidateMnemonicPhrase(ValidateMnemonicPhraseRequest) returns (ValidateMnemonicPhraseResponse);
+
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);
   // HelloStream is for debug purposes

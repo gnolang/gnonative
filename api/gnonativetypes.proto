@@ -386,6 +386,22 @@ message AddressFromMnemonicResponse {
 	bytes address = 1;
 }
 
+message ValidateMnemonicWordRequest {
+	string word = 1;
+}
+
+message ValidateMnemonicWordResponse {
+	bool valid = 1;
+}
+
+message ValidateMnemonicPhraseRequest {
+	string phrase = 1;
+}
+
+message ValidateMnemonicPhraseResponse {
+	bool valid = 1;
+}
+
 message HelloRequest {
 	string name = 1 [json_name = "Name"];
 }

@@ -175,6 +175,14 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse> __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest> __Marshaller_land_gno_gnonative_v1_ValidateMnemonicWordRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse> __Marshaller_land_gno_gnonative_v1_ValidateMnemonicWordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest> __Marshaller_land_gno_gnonative_v1_ValidateMnemonicPhraseRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse> __Marshaller_land_gno_gnonative_v1_ValidateMnemonicPhraseResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.HelloRequest> __Marshaller_land_gno_gnonative_v1_HelloRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.HelloRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.HelloResponse> __Marshaller_land_gno_gnonative_v1_HelloResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.HelloResponse.Parser));
@@ -454,6 +462,22 @@ namespace Land.Gno.Gnonative.V1 {
         "AddressFromMnemonic",
         __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicRequest,
         __Marshaller_land_gno_gnonative_v1_AddressFromMnemonicResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse> __Method_ValidateMnemonicWord = new grpc::Method<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ValidateMnemonicWord",
+        __Marshaller_land_gno_gnonative_v1_ValidateMnemonicWordRequest,
+        __Marshaller_land_gno_gnonative_v1_ValidateMnemonicWordResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse> __Method_ValidateMnemonicPhrase = new grpc::Method<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ValidateMnemonicPhrase",
+        __Marshaller_land_gno_gnonative_v1_ValidateMnemonicPhraseRequest,
+        __Marshaller_land_gno_gnonative_v1_ValidateMnemonicPhraseResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse> __Method_Hello = new grpc::Method<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse>(
@@ -941,6 +965,32 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse> AddressFromMnemonic(global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Validate a single mnemonic word (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic word is valid.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse> ValidateMnemonicWord(global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Validate a mnemonic phrase (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic phrase is valid.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse> ValidateMnemonicPhrase(global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2728,6 +2778,110 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_AddressFromMnemonic, null, options, request);
       }
       /// <summary>
+      /// Validate a single mnemonic word (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic word is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse ValidateMnemonicWord(global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ValidateMnemonicWord(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Validate a single mnemonic word (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic word is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse ValidateMnemonicWord(global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ValidateMnemonicWord, null, options, request);
+      }
+      /// <summary>
+      /// Validate a single mnemonic word (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic word is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse> ValidateMnemonicWordAsync(global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ValidateMnemonicWordAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Validate a single mnemonic word (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic word is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse> ValidateMnemonicWordAsync(global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ValidateMnemonicWord, null, options, request);
+      }
+      /// <summary>
+      /// Validate a mnemonic phrase (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic phrase is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse ValidateMnemonicPhrase(global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ValidateMnemonicPhrase(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Validate a mnemonic phrase (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic phrase is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse ValidateMnemonicPhrase(global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ValidateMnemonicPhrase, null, options, request);
+      }
+      /// <summary>
+      /// Validate a mnemonic phrase (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic phrase is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse> ValidateMnemonicPhraseAsync(global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ValidateMnemonicPhraseAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Validate a mnemonic phrase (for example, as in CreateAccount).
+      /// In the response, set valid true if the mnemonic phrase is valid.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse> ValidateMnemonicPhraseAsync(global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ValidateMnemonicPhrase, null, options, request);
+      }
+      /// <summary>
       /// Hello is for debug purposes
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2847,6 +3001,8 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_AddressToBech32, serviceImpl.AddressToBech32)
           .AddMethod(__Method_AddressFromBech32, serviceImpl.AddressFromBech32)
           .AddMethod(__Method_AddressFromMnemonic, serviceImpl.AddressFromMnemonic)
+          .AddMethod(__Method_ValidateMnemonicWord, serviceImpl.ValidateMnemonicWord)
+          .AddMethod(__Method_ValidateMnemonicPhrase, serviceImpl.ValidateMnemonicPhrase)
           .AddMethod(__Method_Hello, serviceImpl.Hello)
           .AddMethod(__Method_HelloStream, serviceImpl.HelloStream).Build();
     }
@@ -2892,6 +3048,8 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_AddressToBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(serviceImpl.AddressToBech32));
       serviceBinder.AddMethod(__Method_AddressFromBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromBech32Request, global::Land.Gno.Gnonative.V1.AddressFromBech32Response>(serviceImpl.AddressFromBech32));
       serviceBinder.AddMethod(__Method_AddressFromMnemonic, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromMnemonicRequest, global::Land.Gno.Gnonative.V1.AddressFromMnemonicResponse>(serviceImpl.AddressFromMnemonic));
+      serviceBinder.AddMethod(__Method_ValidateMnemonicWord, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ValidateMnemonicWordRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicWordResponse>(serviceImpl.ValidateMnemonicWord));
+      serviceBinder.AddMethod(__Method_ValidateMnemonicPhrase, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseRequest, global::Land.Gno.Gnonative.V1.ValidateMnemonicPhraseResponse>(serviceImpl.ValidateMnemonicPhrase));
       serviceBinder.AddMethod(__Method_Hello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.HelloRequest, global::Land.Gno.Gnonative.V1.HelloResponse>(serviceImpl.Hello));
       serviceBinder.AddMethod(__Method_HelloStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.HelloStreamRequest, global::Land.Gno.Gnonative.V1.HelloStreamResponse>(serviceImpl.HelloStream));
     }

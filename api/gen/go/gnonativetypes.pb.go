@@ -3486,6 +3486,182 @@ func (x *AddressFromMnemonicResponse) GetAddress() []byte {
 	return nil
 }
 
+type ValidateMnemonicWordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Word          string                 `protobuf:"bytes,1,opt,name=word,proto3" json:"word,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateMnemonicWordRequest) Reset() {
+	*x = ValidateMnemonicWordRequest{}
+	mi := &file_gnonativetypes_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateMnemonicWordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateMnemonicWordRequest) ProtoMessage() {}
+
+func (x *ValidateMnemonicWordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[69]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateMnemonicWordRequest.ProtoReflect.Descriptor instead.
+func (*ValidateMnemonicWordRequest) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{69}
+}
+
+func (x *ValidateMnemonicWordRequest) GetWord() string {
+	if x != nil {
+		return x.Word
+	}
+	return ""
+}
+
+type ValidateMnemonicWordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateMnemonicWordResponse) Reset() {
+	*x = ValidateMnemonicWordResponse{}
+	mi := &file_gnonativetypes_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateMnemonicWordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateMnemonicWordResponse) ProtoMessage() {}
+
+func (x *ValidateMnemonicWordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateMnemonicWordResponse.ProtoReflect.Descriptor instead.
+func (*ValidateMnemonicWordResponse) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *ValidateMnemonicWordResponse) GetValid() bool {
+	if x != nil {
+		return x.Valid
+	}
+	return false
+}
+
+type ValidateMnemonicPhraseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phrase        string                 `protobuf:"bytes,1,opt,name=phrase,proto3" json:"phrase,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateMnemonicPhraseRequest) Reset() {
+	*x = ValidateMnemonicPhraseRequest{}
+	mi := &file_gnonativetypes_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateMnemonicPhraseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateMnemonicPhraseRequest) ProtoMessage() {}
+
+func (x *ValidateMnemonicPhraseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateMnemonicPhraseRequest.ProtoReflect.Descriptor instead.
+func (*ValidateMnemonicPhraseRequest) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{71}
+}
+
+func (x *ValidateMnemonicPhraseRequest) GetPhrase() string {
+	if x != nil {
+		return x.Phrase
+	}
+	return ""
+}
+
+type ValidateMnemonicPhraseResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateMnemonicPhraseResponse) Reset() {
+	*x = ValidateMnemonicPhraseResponse{}
+	mi := &file_gnonativetypes_proto_msgTypes[72]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateMnemonicPhraseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateMnemonicPhraseResponse) ProtoMessage() {}
+
+func (x *ValidateMnemonicPhraseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[72]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateMnemonicPhraseResponse.ProtoReflect.Descriptor instead.
+func (*ValidateMnemonicPhraseResponse) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *ValidateMnemonicPhraseResponse) GetValid() bool {
+	if x != nil {
+		return x.Valid
+	}
+	return false
+}
+
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,json=Name,proto3" json:"name,omitempty"`
@@ -3495,7 +3671,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[69]
+	mi := &file_gnonativetypes_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3507,7 +3683,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[69]
+	mi := &file_gnonativetypes_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3520,7 +3696,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{69}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -3539,7 +3715,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[70]
+	mi := &file_gnonativetypes_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3551,7 +3727,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[70]
+	mi := &file_gnonativetypes_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3564,7 +3740,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{70}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *HelloResponse) GetGreeting() string {
@@ -3583,7 +3759,7 @@ type HelloStreamRequest struct {
 
 func (x *HelloStreamRequest) Reset() {
 	*x = HelloStreamRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[71]
+	mi := &file_gnonativetypes_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3595,7 +3771,7 @@ func (x *HelloStreamRequest) String() string {
 func (*HelloStreamRequest) ProtoMessage() {}
 
 func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[71]
+	mi := &file_gnonativetypes_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3608,7 +3784,7 @@ func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamRequest.ProtoReflect.Descriptor instead.
 func (*HelloStreamRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{71}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *HelloStreamRequest) GetName() string {
@@ -3627,7 +3803,7 @@ type HelloStreamResponse struct {
 
 func (x *HelloStreamResponse) Reset() {
 	*x = HelloStreamResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[72]
+	mi := &file_gnonativetypes_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3639,7 +3815,7 @@ func (x *HelloStreamResponse) String() string {
 func (*HelloStreamResponse) ProtoMessage() {}
 
 func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[72]
+	mi := &file_gnonativetypes_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3652,7 +3828,7 @@ func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamResponse.ProtoReflect.Descriptor instead.
 func (*HelloStreamResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{72}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *HelloStreamResponse) GetGreeting() string {
@@ -3671,7 +3847,7 @@ type GNONATIVETYPES_BytesList struct {
 
 func (x *GNONATIVETYPES_BytesList) Reset() {
 	*x = GNONATIVETYPES_BytesList{}
-	mi := &file_gnonativetypes_proto_msgTypes[73]
+	mi := &file_gnonativetypes_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3683,7 +3859,7 @@ func (x *GNONATIVETYPES_BytesList) String() string {
 func (*GNONATIVETYPES_BytesList) ProtoMessage() {}
 
 func (x *GNONATIVETYPES_BytesList) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[73]
+	mi := &file_gnonativetypes_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3696,7 +3872,7 @@ func (x *GNONATIVETYPES_BytesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GNONATIVETYPES_BytesList.ProtoReflect.Descriptor instead.
 func (*GNONATIVETYPES_BytesList) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{73}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *GNONATIVETYPES_BytesList) GetValue() [][]byte {
@@ -3902,7 +4078,15 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\x1aAddressFromMnemonicRequest\x12\x1a\n" +
 	"\bmnemonic\x18\x01 \x01(\tR\bmnemonic\"7\n" +
 	"\x1bAddressFromMnemonicResponse\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\fR\aaddress\"\"\n" +
+	"\aaddress\x18\x01 \x01(\fR\aaddress\"1\n" +
+	"\x1bValidateMnemonicWordRequest\x12\x12\n" +
+	"\x04word\x18\x01 \x01(\tR\x04word\"4\n" +
+	"\x1cValidateMnemonicWordResponse\x12\x14\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\"7\n" +
+	"\x1dValidateMnemonicPhraseRequest\x12\x16\n" +
+	"\x06phrase\x18\x01 \x01(\tR\x06phrase\"6\n" +
+	"\x1eValidateMnemonicPhraseResponse\x12\x14\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\"\"\n" +
 	"\fHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04Name\"+\n" +
 	"\rHelloResponse\x12\x1a\n" +
@@ -3926,7 +4110,7 @@ func file_gnonativetypes_proto_rawDescGZIP() []byte {
 	return file_gnonativetypes_proto_rawDescData
 }
 
-var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
+var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 78)
 var file_gnonativetypes_proto_goTypes = []any{
 	(*SetRemoteRequest)(nil),                  // 0: land.gno.gnonative.v1.SetRemoteRequest
 	(*SetRemoteResponse)(nil),                 // 1: land.gno.gnonative.v1.SetRemoteResponse
@@ -3997,11 +4181,15 @@ var file_gnonativetypes_proto_goTypes = []any{
 	(*AddressFromBech32Response)(nil),         // 66: land.gno.gnonative.v1.AddressFromBech32Response
 	(*AddressFromMnemonicRequest)(nil),        // 67: land.gno.gnonative.v1.AddressFromMnemonicRequest
 	(*AddressFromMnemonicResponse)(nil),       // 68: land.gno.gnonative.v1.AddressFromMnemonicResponse
-	(*HelloRequest)(nil),                      // 69: land.gno.gnonative.v1.HelloRequest
-	(*HelloResponse)(nil),                     // 70: land.gno.gnonative.v1.HelloResponse
-	(*HelloStreamRequest)(nil),                // 71: land.gno.gnonative.v1.HelloStreamRequest
-	(*HelloStreamResponse)(nil),               // 72: land.gno.gnonative.v1.HelloStreamResponse
-	(*GNONATIVETYPES_BytesList)(nil),          // 73: land.gno.gnonative.v1.GNONATIVETYPES_BytesList
+	(*ValidateMnemonicWordRequest)(nil),       // 69: land.gno.gnonative.v1.ValidateMnemonicWordRequest
+	(*ValidateMnemonicWordResponse)(nil),      // 70: land.gno.gnonative.v1.ValidateMnemonicWordResponse
+	(*ValidateMnemonicPhraseRequest)(nil),     // 71: land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
+	(*ValidateMnemonicPhraseResponse)(nil),    // 72: land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
+	(*HelloRequest)(nil),                      // 73: land.gno.gnonative.v1.HelloRequest
+	(*HelloResponse)(nil),                     // 74: land.gno.gnonative.v1.HelloResponse
+	(*HelloStreamRequest)(nil),                // 75: land.gno.gnonative.v1.HelloStreamRequest
+	(*HelloStreamResponse)(nil),               // 76: land.gno.gnonative.v1.HelloStreamResponse
+	(*GNONATIVETYPES_BytesList)(nil),          // 77: land.gno.gnonative.v1.GNONATIVETYPES_BytesList
 }
 var file_gnonativetypes_proto_depIdxs = []int32{
 	15, // 0: land.gno.gnonative.v1.BaseAccount.coins:type_name -> land.gno.gnonative.v1.Coin
@@ -4036,7 +4224,7 @@ func file_gnonativetypes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gnonativetypes_proto_rawDesc), len(file_gnonativetypes_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   74,
+			NumMessages:   78,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

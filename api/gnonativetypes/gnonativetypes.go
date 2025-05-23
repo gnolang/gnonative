@@ -373,6 +373,22 @@ type AddressFromMnemonicResponse struct {
 	Address []byte `json:"address" yaml:"address"`
 }
 
+type ValidateMnemonicWordRequest struct {
+	Word string `json:"word" yaml:"word"`
+}
+
+type ValidateMnemonicWordResponse struct {
+	Valid bool `json:"valid" yaml:"valid"`
+}
+
+type ValidateMnemonicPhraseRequest struct {
+	Phrase string `json:"phrase" yaml:"phrase"`
+}
+
+type ValidateMnemonicPhraseResponse struct {
+	Valid bool `json:"valid" yaml:"valid"`
+}
+
 type HelloRequest struct {
 	Name string
 }
