@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	"github.com/gnolang/gno/gnovm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
@@ -580,8 +579,8 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 			return nil, nil, getGrpcError(err)
 		}
 
-		memPkg := &gnovm.MemPackage{
-			Files: []*gnovm.MemFile{
+		memPkg := &std.MemPackage{
+			Files: []*std.MemFile{
 				{
 					Name: "main.gno",
 					Body: msg.Package,
