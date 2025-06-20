@@ -580,6 +580,8 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 		}
 
 		memPkg := &std.MemPackage{
+			Name: "main",
+			// Path will be automatically set by handler.
 			Files: []*std.MemFile{
 				{
 					Name: "main.gno",
