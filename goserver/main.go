@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"strings"
 
-	"github.com/gnolang/gnonative/service"
+	"github.com/gnolang/gnonative/v4/service"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
 

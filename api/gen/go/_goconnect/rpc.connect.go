@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	_go "github.com/gnolang/gnonative/api/gen/go"
+	_go "github.com/gnolang/gnonative/v4/api/gen/go"
 	http "net/http"
 	strings "strings"
 )

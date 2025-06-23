@@ -325,7 +325,7 @@ const file_rpc_proto_rawDesc = "" +
 	"\x14ValidateMnemonicWord\x122.land.gno.gnonative.v1.ValidateMnemonicWordRequest\x1a3.land.gno.gnonative.v1.ValidateMnemonicWordResponse\x12\x85\x01\n" +
 	"\x16ValidateMnemonicPhrase\x124.land.gno.gnonative.v1.ValidateMnemonicPhraseRequest\x1a5.land.gno.gnonative.v1.ValidateMnemonicPhraseResponse\x12R\n" +
 	"\x05Hello\x12#.land.gno.gnonative.v1.HelloRequest\x1a$.land.gno.gnonative.v1.HelloResponse\x12f\n" +
-	"\vHelloStream\x12).land.gno.gnonative.v1.HelloStreamRequest\x1a*.land.gno.gnonative.v1.HelloStreamResponse0\x01B/Z'github.com/gnolang/gnonative/api/gen/go\xa2\x02\x03RTGb\x06proto3"
+	"\vHelloStream\x12).land.gno.gnonative.v1.HelloStreamRequest\x1a*.land.gno.gnonative.v1.HelloStreamResponse0\x01B2Z*github.com/gnolang/gnonative/v4/api/gen/go\xa2\x02\x03RTGb\x06proto3"
 
 var (
 	file_rpc_proto_rawDescOnce sync.Once

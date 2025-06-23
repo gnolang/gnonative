@@ -4096,7 +4096,7 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\x13HelloStreamResponse\x12\x1a\n" +
 	"\bgreeting\x18\x01 \x01(\tR\bGreeting\"0\n" +
 	"\x18GNONATIVETYPES_BytesList\x12\x14\n" +
-	"\x05Value\x18\x01 \x03(\fR\x05ValueB)Z'github.com/gnolang/gnonative/api/gen/gob\x06proto3"
+	"\x05Value\x18\x01 \x03(\fR\x05ValueB,Z*github.com/gnolang/gnonative/v4/api/gen/gob\x06proto3"
 
 var (
 	file_gnonativetypes_proto_rawDescOnce sync.Once

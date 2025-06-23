@@ -2,10 +2,10 @@ version: v2
 plugins:
   - remote: buf.build/protocolbuffers/go
     out: ./api/gen/go
-    opt: module=github.com/gnolang/gnonative/api/gen/go
+    opt: module=github.com/gnolang/gnonative/v4/api/gen/go
   - remote: buf.build/connectrpc/go
     out: ./api/gen/go
-    opt: module=github.com/gnolang/gnonative/api/gen/go
+    opt: module=github.com/gnolang/gnonative/v4/api/gen/go
   - remote: buf.build/bufbuild/es:v2.2.5
     opt: target=ts
     out: ./api/gen/es

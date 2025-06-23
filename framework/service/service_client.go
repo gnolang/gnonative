@@ -15,7 +15,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
+	"github.com/gnolang/gnonative/v4/api/gen/go/_goconnect"
 )
 
 type PromiseBlock interface {

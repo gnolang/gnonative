@@ -13,9 +13,9 @@ import (
 	"github.com/peterbourgon/unixtransport"
 	"go.uber.org/multierr"
 
-	api_gen "github.com/gnolang/gnonative/api/gen/go"
-	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
-	"github.com/gnolang/gnonative/service"
+	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
+	"github.com/gnolang/gnonative/v4/api/gen/go/_goconnect"
+	"github.com/gnolang/gnonative/v4/service"
 )
 
 type BridgeConfig struct {

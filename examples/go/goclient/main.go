@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	api_gen "github.com/gnolang/gnonative/api/gen/go"
-	"github.com/gnolang/gnonative/api/gen/go/_goconnect"
+	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
+	"github.com/gnolang/gnonative/v4/api/gen/go/_goconnect"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"github.com/peterbourgon/unixtransport"
 )

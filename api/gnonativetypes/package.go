@@ -7,10 +7,10 @@ import (
 )
 
 var Package = amino.RegisterPackage(amino.NewPackage(
-	"github.com/gnolang/gnonative/api/gnonativetypes",
+	"github.com/gnolang/gnonative/v4/api/gnonativetypes",
 	"land.gno.gnonative.v1",
 	path.Join(amino.GetCallersDirname(), ".."),
-).WithP3GoPkgPath("github.com/gnolang/gnonative/api/gen/go").
+).WithP3GoPkgPath("github.com/gnolang/gnonative/v4/api/gen/go").
 	WithDependencies().WithTypes(
 	SetRemoteRequest{},
 	SetRemoteResponse{},

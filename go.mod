@@ -1,4 +1,4 @@
-module github.com/gnolang/gnonative
+module github.com/gnolang/gnonative/v4
 
 go 1.23.0
 

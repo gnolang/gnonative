@@ -135,8 +135,8 @@ namespace Land.Gno.Gnonative.V1 {
             "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5IZWxsb1Jlc3BvbnNlEmYKC0hlbGxv",
             "U3RyZWFtEikubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhlbGxvU3RyZWFtUmVx",
             "dWVzdBoqLmxhbmQuZ25vLmdub25hdGl2ZS52MS5IZWxsb1N0cmVhbVJlc3Bv",
-            "bnNlMAFCL1onZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS9hcGkvZ2Vu",
-            "L2dvogIDUlRHYgZwcm90bzM="));
+            "bnNlMAFCMloqZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS92NC9hcGkv",
+            "Z2VuL2dvogIDUlRHYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Land.Gno.Gnonative.V1.ErrCode), }, null, new pbr::GeneratedClrTypeInfo[] {
