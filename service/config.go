@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	api_gen "github.com/gnolang/gnonative/api/gen/go"
+	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

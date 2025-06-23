@@ -10,7 +10,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/commands"
 
 	// TODO: move these out.
-	"github.com/gnolang/gnonative/api/gnonativetypes"
+	"github.com/gnolang/gnonative/v4/api/gnonativetypes"
 )
 
 func main() {

@@ -4,7 +4,7 @@ package land.gno.gnonative.v1;
 
 import "gnonativetypes.proto";
 
-option go_package = "github.com/gnolang/gnonative/api/gen/go";
+option go_package = "github.com/gnolang/gnonative/v4/api/gen/go";
 option objc_class_prefix = "RTG";
 
 // GnoNativeService is the service to interact with the Gno blockchain
