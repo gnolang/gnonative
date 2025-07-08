@@ -72,6 +72,9 @@ const (
 	// GnoNativeServiceCreateAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// CreateAccount RPC.
 	GnoNativeServiceCreateAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/CreateAccount"
+	// GnoNativeServiceCreateLedgerProcedure is the fully-qualified name of the GnoNativeService's
+	// CreateLedger RPC.
+	GnoNativeServiceCreateLedgerProcedure = "/land.gno.gnonative.v1.GnoNativeService/CreateLedger"
 	// GnoNativeServiceActivateAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// ActivateAccount RPC.
 	GnoNativeServiceActivateAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/ActivateAccount"
@@ -179,11 +182,20 @@ type GnoNativeServiceClient interface {
 	// Get the information for the key in the keybase with the given name or bech32 string address.
 	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
-	// Create a new account in the keybase using the name and password specified by SetAccount.
+	// Create a new account in the keybase using the name and password.
+	// To use this key, you must call SetPassword.
 	// If an account with the same name already exists in the keybase,
 	// this replaces it. (If you don't want to replace it, then it's your responsibility
 	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error)
+	// Get the key info from the Ledger and create an entry in the keybase using the name.
+	// The Ledger must be unlocked and running the Cosmos app.
+	// Future signing with this key will use the Ledger.
+	// (To use this key, it is not necessary to call SetPassword.)
+	// If an account with the same name already exists in the keybase,
+	// this replaces it. (If you don't want to replace it, then it's your responsibility
+	// to use GetKeyInfoByName to check if it exists before calling this.)
+	CreateLedger(context.Context, *connect.Request[_go.CreateLedgerRequest]) (*connect.Response[_go.CreateLedgerResponse], error)
 	// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
 	// false, then you should call SetPassword before using a method which needs it.
 	// If the account is already activated, return its info.
@@ -364,6 +376,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("CreateAccount")),
 			connect.WithClientOptions(opts...),
 		),
+		createLedger: connect.NewClient[_go.CreateLedgerRequest, _go.CreateLedgerResponse](
+			httpClient,
+			baseURL+GnoNativeServiceCreateLedgerProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("CreateLedger")),
+			connect.WithClientOptions(opts...),
+		),
 		activateAccount: connect.NewClient[_go.ActivateAccountRequest, _go.ActivateAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceActivateAccountProcedure,
@@ -532,6 +550,7 @@ type gnoNativeServiceClient struct {
 	getKeyInfoByAddress       *connect.Client[_go.GetKeyInfoByAddressRequest, _go.GetKeyInfoByAddressResponse]
 	getKeyInfoByNameOrAddress *connect.Client[_go.GetKeyInfoByNameOrAddressRequest, _go.GetKeyInfoByNameOrAddressResponse]
 	createAccount             *connect.Client[_go.CreateAccountRequest, _go.CreateAccountResponse]
+	createLedger              *connect.Client[_go.CreateLedgerRequest, _go.CreateLedgerResponse]
 	activateAccount           *connect.Client[_go.ActivateAccountRequest, _go.ActivateAccountResponse]
 	setPassword               *connect.Client[_go.SetPasswordRequest, _go.SetPasswordResponse]
 	rotatePassword            *connect.Client[_go.RotatePasswordRequest, _go.RotatePasswordResponse]
@@ -622,6 +641,11 @@ func (c *gnoNativeServiceClient) GetKeyInfoByNameOrAddress(ctx context.Context, 
 // CreateAccount calls land.gno.gnonative.v1.GnoNativeService.CreateAccount.
 func (c *gnoNativeServiceClient) CreateAccount(ctx context.Context, req *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
 	return c.createAccount.CallUnary(ctx, req)
+}
+
+// CreateLedger calls land.gno.gnonative.v1.GnoNativeService.CreateLedger.
+func (c *gnoNativeServiceClient) CreateLedger(ctx context.Context, req *connect.Request[_go.CreateLedgerRequest]) (*connect.Response[_go.CreateLedgerResponse], error) {
+	return c.createLedger.CallUnary(ctx, req)
 }
 
 // ActivateAccount calls land.gno.gnonative.v1.GnoNativeService.ActivateAccount.
@@ -788,11 +812,20 @@ type GnoNativeServiceHandler interface {
 	// Get the information for the key in the keybase with the given name or bech32 string address.
 	// If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
 	GetKeyInfoByNameOrAddress(context.Context, *connect.Request[_go.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[_go.GetKeyInfoByNameOrAddressResponse], error)
-	// Create a new account in the keybase using the name and password specified by SetAccount.
+	// Create a new account in the keybase using the name and password.
+	// To use this key, you must call SetPassword.
 	// If an account with the same name already exists in the keybase,
 	// this replaces it. (If you don't want to replace it, then it's your responsibility
 	// to use GetKeyInfoByName to check if it exists before calling this.)
 	CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error)
+	// Get the key info from the Ledger and create an entry in the keybase using the name.
+	// The Ledger must be unlocked and running the Cosmos app.
+	// Future signing with this key will use the Ledger.
+	// (To use this key, it is not necessary to call SetPassword.)
+	// If an account with the same name already exists in the keybase,
+	// this replaces it. (If you don't want to replace it, then it's your responsibility
+	// to use GetKeyInfoByName to check if it exists before calling this.)
+	CreateLedger(context.Context, *connect.Request[_go.CreateLedgerRequest]) (*connect.Response[_go.CreateLedgerResponse], error)
 	// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
 	// false, then you should call SetPassword before using a method which needs it.
 	// If the account is already activated, return its info.
@@ -967,6 +1000,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		GnoNativeServiceCreateAccountProcedure,
 		svc.CreateAccount,
 		connect.WithSchema(gnoNativeServiceMethods.ByName("CreateAccount")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceCreateLedgerHandler := connect.NewUnaryHandler(
+		GnoNativeServiceCreateLedgerProcedure,
+		svc.CreateLedger,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("CreateLedger")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceActivateAccountHandler := connect.NewUnaryHandler(
@@ -1147,6 +1186,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceGetKeyInfoByNameOrAddressHandler.ServeHTTP(w, r)
 		case GnoNativeServiceCreateAccountProcedure:
 			gnoNativeServiceCreateAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceCreateLedgerProcedure:
+			gnoNativeServiceCreateLedgerHandler.ServeHTTP(w, r)
 		case GnoNativeServiceActivateAccountProcedure:
 			gnoNativeServiceActivateAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSetPasswordProcedure:
@@ -1256,6 +1297,10 @@ func (UnimplementedGnoNativeServiceHandler) GetKeyInfoByNameOrAddress(context.Co
 
 func (UnimplementedGnoNativeServiceHandler) CreateAccount(context.Context, *connect.Request[_go.CreateAccountRequest]) (*connect.Response[_go.CreateAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.CreateAccount is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) CreateLedger(context.Context, *connect.Request[_go.CreateLedgerRequest]) (*connect.Response[_go.CreateLedgerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.CreateLedger is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) ActivateAccount(context.Context, *connect.Request[_go.ActivateAccountRequest]) (*connect.Response[_go.ActivateAccountResponse], error) {

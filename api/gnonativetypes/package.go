@@ -45,6 +45,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	GetKeyInfoByNameOrAddressResponse{},
 	CreateAccountRequest{},
 	CreateAccountResponse{},
+	CreateLedgerRequest{},
+	CreateLedgerResponse{},
 	ActivateAccountRequest{},
 	ActivateAccountResponse{},
 	GetActivatedAccountRequest{},

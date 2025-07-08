@@ -193,6 +193,22 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 	return connect.NewResponse(&api_gen.CreateAccountResponse{Key: info}), nil
 }
 
+func (s *gnoNativeService) CreateLedger(ctx context.Context, req *connect.Request[api_gen.CreateLedgerRequest]) (*connect.Response[api_gen.CreateLedgerResponse], error) {
+	s.logger.Debug("CreateLedger called", zap.String("Name", req.Msg.Name))
+
+	key, err := s.keybase.CreateLedger(req.Msg.Name, crypto_keys.SigningAlgo(req.Msg.Algorithm), req.Msg.Hrp, req.Msg.Account, req.Msg.Index)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	info, err := ConvertKeyInfo(key)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.CreateLedgerResponse{Key: info}), nil
+}
+
 func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Request[api_gen.ActivateAccountRequest]) (*connect.Response[api_gen.ActivateAccountResponse], error) {
 	s.logger.Debug("ActivateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
 
@@ -435,7 +451,6 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		Hash:   bres.Hash,
 		Height: bres.Height,
 	}); err != nil {
-		s.logger.Error("Call stream.Send returned error", zap.Error(err))
 		return err
 	}
 

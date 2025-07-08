@@ -57,11 +57,21 @@ service GnoNativeService {
   // If the key doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
   rpc GetKeyInfoByNameOrAddress(GetKeyInfoByNameOrAddressRequest) returns (GetKeyInfoByNameOrAddressResponse);
 
-  // Create a new account in the keybase using the name and password specified by SetAccount.
+  // Create a new account in the keybase using the name and password.
+  // To use this key, you must call SetPassword.
   // If an account with the same name already exists in the keybase,
   // this replaces it. (If you don't want to replace it, then it's your responsibility
   // to use GetKeyInfoByName to check if it exists before calling this.)
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+
+  // Get the key info from the Ledger and create an entry in the keybase using the name.
+  // The Ledger must be unlocked and running the Cosmos app.
+  // Future signing with this key will use the Ledger.
+  // (To use this key, it is not necessary to call SetPassword.)
+  // If an account with the same name already exists in the keybase,
+  // this replaces it. (If you don't want to replace it, then it's your responsibility
+  // to use GetKeyInfoByName to check if it exists before calling this.)
+  rpc CreateLedger(CreateLedgerRequest) returns (CreateLedgerResponse);
 
   // Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
   // false, then you should call SetPassword before using a method which needs it.
