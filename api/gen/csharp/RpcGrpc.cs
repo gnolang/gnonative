@@ -101,6 +101,10 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CreateAccountResponse> __Marshaller_land_gno_gnonative_v1_CreateAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CreateAccountResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CreateLedgerRequest> __Marshaller_land_gno_gnonative_v1_CreateLedgerRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CreateLedgerRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CreateLedgerResponse> __Marshaller_land_gno_gnonative_v1_CreateLedgerResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CreateLedgerResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ActivateAccountRequest> __Marshaller_land_gno_gnonative_v1_ActivateAccountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ActivateAccountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.ActivateAccountResponse> __Marshaller_land_gno_gnonative_v1_ActivateAccountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.ActivateAccountResponse.Parser));
@@ -294,6 +298,14 @@ namespace Land.Gno.Gnonative.V1 {
         "CreateAccount",
         __Marshaller_land_gno_gnonative_v1_CreateAccountRequest,
         __Marshaller_land_gno_gnonative_v1_CreateAccountResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.CreateLedgerRequest, global::Land.Gno.Gnonative.V1.CreateLedgerResponse> __Method_CreateLedger = new grpc::Method<global::Land.Gno.Gnonative.V1.CreateLedgerRequest, global::Land.Gno.Gnonative.V1.CreateLedgerResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateLedger",
+        __Marshaller_land_gno_gnonative_v1_CreateLedgerRequest,
+        __Marshaller_land_gno_gnonative_v1_CreateLedgerResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse> __Method_ActivateAccount = new grpc::Method<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(
@@ -662,7 +674,8 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// Create a new account in the keybase using the name and password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password.
+      /// To use this key, you must call SetPassword.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -672,6 +685,24 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.CreateAccountResponse> CreateAccount(global::Land.Gno.Gnonative.V1.CreateAccountRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Get the key info from the Ledger and create an entry in the keybase using the name.
+      /// The Ledger must be unlocked and running the Cosmos app.
+      /// Future signing with this key will use the Ledger.
+      /// (To use this key, it is not necessary to call SetPassword.)
+      /// If an account with the same name already exists in the keybase,
+      /// this replaces it. (If you don't want to replace it, then it's your responsibility
+      /// to use GetKeyInfoByName to check if it exists before calling this.)
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.CreateLedgerResponse> CreateLedger(global::Land.Gno.Gnonative.V1.CreateLedgerRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1674,7 +1705,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_GetKeyInfoByNameOrAddress, null, options, request);
       }
       /// <summary>
-      /// Create a new account in the keybase using the name and password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password.
+      /// To use this key, you must call SetPassword.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1690,7 +1722,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CreateAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new account in the keybase using the name and password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password.
+      /// To use this key, you must call SetPassword.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1704,7 +1737,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAccount, null, options, request);
       }
       /// <summary>
-      /// Create a new account in the keybase using the name and password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password.
+      /// To use this key, you must call SetPassword.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1720,7 +1754,8 @@ namespace Land.Gno.Gnonative.V1 {
         return CreateAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new account in the keybase using the name and password specified by SetAccount.
+      /// Create a new account in the keybase using the name and password.
+      /// To use this key, you must call SetPassword.
       /// If an account with the same name already exists in the keybase,
       /// this replaces it. (If you don't want to replace it, then it's your responsibility
       /// to use GetKeyInfoByName to check if it exists before calling this.)
@@ -1732,6 +1767,78 @@ namespace Land.Gno.Gnonative.V1 {
       public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.CreateAccountResponse> CreateAccountAsync(global::Land.Gno.Gnonative.V1.CreateAccountRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAccount, null, options, request);
+      }
+      /// <summary>
+      /// Get the key info from the Ledger and create an entry in the keybase using the name.
+      /// The Ledger must be unlocked and running the Cosmos app.
+      /// Future signing with this key will use the Ledger.
+      /// (To use this key, it is not necessary to call SetPassword.)
+      /// If an account with the same name already exists in the keybase,
+      /// this replaces it. (If you don't want to replace it, then it's your responsibility
+      /// to use GetKeyInfoByName to check if it exists before calling this.)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.CreateLedgerResponse CreateLedger(global::Land.Gno.Gnonative.V1.CreateLedgerRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateLedger(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Get the key info from the Ledger and create an entry in the keybase using the name.
+      /// The Ledger must be unlocked and running the Cosmos app.
+      /// Future signing with this key will use the Ledger.
+      /// (To use this key, it is not necessary to call SetPassword.)
+      /// If an account with the same name already exists in the keybase,
+      /// this replaces it. (If you don't want to replace it, then it's your responsibility
+      /// to use GetKeyInfoByName to check if it exists before calling this.)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.CreateLedgerResponse CreateLedger(global::Land.Gno.Gnonative.V1.CreateLedgerRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateLedger, null, options, request);
+      }
+      /// <summary>
+      /// Get the key info from the Ledger and create an entry in the keybase using the name.
+      /// The Ledger must be unlocked and running the Cosmos app.
+      /// Future signing with this key will use the Ledger.
+      /// (To use this key, it is not necessary to call SetPassword.)
+      /// If an account with the same name already exists in the keybase,
+      /// this replaces it. (If you don't want to replace it, then it's your responsibility
+      /// to use GetKeyInfoByName to check if it exists before calling this.)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.CreateLedgerResponse> CreateLedgerAsync(global::Land.Gno.Gnonative.V1.CreateLedgerRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateLedgerAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Get the key info from the Ledger and create an entry in the keybase using the name.
+      /// The Ledger must be unlocked and running the Cosmos app.
+      /// Future signing with this key will use the Ledger.
+      /// (To use this key, it is not necessary to call SetPassword.)
+      /// If an account with the same name already exists in the keybase,
+      /// this replaces it. (If you don't want to replace it, then it's your responsibility
+      /// to use GetKeyInfoByName to check if it exists before calling this.)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.CreateLedgerResponse> CreateLedgerAsync(global::Land.Gno.Gnonative.V1.CreateLedgerRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateLedger, null, options, request);
       }
       /// <summary>
       /// Find the account in the keybase with the given name_or_bech32 and activate it. If the response has_password is
@@ -2980,6 +3087,7 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_GetKeyInfoByAddress, serviceImpl.GetKeyInfoByAddress)
           .AddMethod(__Method_GetKeyInfoByNameOrAddress, serviceImpl.GetKeyInfoByNameOrAddress)
           .AddMethod(__Method_CreateAccount, serviceImpl.CreateAccount)
+          .AddMethod(__Method_CreateLedger, serviceImpl.CreateLedger)
           .AddMethod(__Method_ActivateAccount, serviceImpl.ActivateAccount)
           .AddMethod(__Method_SetPassword, serviceImpl.SetPassword)
           .AddMethod(__Method_RotatePassword, serviceImpl.RotatePassword)
@@ -3027,6 +3135,7 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_GetKeyInfoByAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetKeyInfoByAddressRequest, global::Land.Gno.Gnonative.V1.GetKeyInfoByAddressResponse>(serviceImpl.GetKeyInfoByAddress));
       serviceBinder.AddMethod(__Method_GetKeyInfoByNameOrAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetKeyInfoByNameOrAddressRequest, global::Land.Gno.Gnonative.V1.GetKeyInfoByNameOrAddressResponse>(serviceImpl.GetKeyInfoByNameOrAddress));
       serviceBinder.AddMethod(__Method_CreateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CreateAccountRequest, global::Land.Gno.Gnonative.V1.CreateAccountResponse>(serviceImpl.CreateAccount));
+      serviceBinder.AddMethod(__Method_CreateLedger, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CreateLedgerRequest, global::Land.Gno.Gnonative.V1.CreateLedgerResponse>(serviceImpl.CreateLedger));
       serviceBinder.AddMethod(__Method_ActivateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(serviceImpl.ActivateAccount));
       serviceBinder.AddMethod(__Method_SetPassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse>(serviceImpl.SetPassword));
       serviceBinder.AddMethod(__Method_RotatePassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse>(serviceImpl.RotatePassword));

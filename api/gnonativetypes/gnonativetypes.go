@@ -137,6 +137,20 @@ type CreateAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
 }
 
+type CreateLedgerRequest struct {
+	Name string `json:"name" yaml:"name"`
+	// Supported algorithm is "secp256k1"
+	Algorithm string `json:"algorithm" yaml:"algorithm"`
+	// The human readable part of the address. Example: "g"
+	HRP     string `json:"hrp" yaml:"hrp"`
+	Account uint32 `json:"account" yaml:"account"`
+	Index   uint32 `json:"index" yaml:"index"`
+}
+
+type CreateLedgerResponse struct {
+	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+}
+
 type ActivateAccountRequest struct {
 	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
 }

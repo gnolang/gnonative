@@ -149,6 +149,20 @@ message CreateAccountResponse {
 	KeyInfo key = 1 [json_name = "key_info"];
 }
 
+message CreateLedgerRequest {
+	string name = 1;
+	// Supported algorithm is "secp256k1"
+	string algorithm = 2;
+	// The human readable part of the address. Example: "g"
+	string hrp = 3;
+	uint32 account = 4;
+	uint32 index = 5;
+}
+
+message CreateLedgerResponse {
+	KeyInfo key = 1 [json_name = "key_info"];
+}
+
 message ActivateAccountRequest {
 	string name_or_bech32 = 1;
 }
