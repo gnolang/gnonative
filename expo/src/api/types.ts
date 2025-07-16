@@ -69,6 +69,7 @@ export interface GnoKeyApi {
     gasWanted: bigint,
     callerAddress: Uint8Array,
     send?: Coin[],
+    maxDeposit?: Coin[],
     memo?: string,
   ) => Promise<AsyncIterable<CallResponse>>;
   send: (
@@ -106,6 +107,7 @@ export interface GnoKeyApi {
     gasWanted: bigint,
     callerAddress: Uint8Array,
     send?: Coin[],
+    maxDeposit?: Coin[],
     memo?: string,
   ): Promise<MakeTxResponse>;
   makeSendTx(

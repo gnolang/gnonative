@@ -230,7 +230,10 @@ type MsgCall struct {
 	// list of arguments specific to the function
 	// Example: ["1", "1", "2", "my reply"]
 	Args []string `json:"args" yaml:"args"`
-	Send []Coin   `json:"send" yaml:"send"`
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+	Send []Coin `json:"send" yaml:"send"`
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	MaxDeposit []Coin `json:"max_deposit" yaml:"max_deposit"`
 }
 
 type CallRequest struct {
@@ -281,8 +284,10 @@ type MsgRun struct {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
 	Package string `json:"package" yaml:"package"`
-	// Optional. Example: "1000ugnot"
-	Send string `json:"send" yaml:"send"`
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+	Send []Coin `json:"send" yaml:"send"`
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	MaxDeposit []Coin `json:"max_deposit" yaml:"max_deposit"`
 }
 
 type RunRequest struct {
