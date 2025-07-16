@@ -467,17 +467,13 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 	msgs := make([]vm.MsgCall, 0)
 
 	for _, msg := range req.Msgs {
-		send := make([]std.Coin, 0)
-		for _, coin := range msg.Send {
-			send = append(send, std.NewCoin(coin.Denom, coin.Amount))
-		}
-
 		msgs = append(msgs, vm.MsgCall{
-			Caller:  crypto.AddressFromBytes(req.CallerAddress),
-			PkgPath: msg.PackagePath,
-			Func:    msg.Fnc,
-			Args:    msg.Args,
-			Send:    send,
+			Caller:     crypto.AddressFromBytes(req.CallerAddress),
+			PkgPath:    msg.PackagePath,
+			Func:       msg.Fnc,
+			Args:       msg.Args,
+			Send:       convertCoins(msg.Send),
+			MaxDeposit: convertCoins(msg.MaxDeposit),
 		})
 	}
 
@@ -532,15 +528,10 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 	msgs := make([]bank.MsgSend, 0)
 
 	for _, msg := range req.Msgs {
-		amount := make([]std.Coin, 0)
-		for _, coin := range msg.Amount {
-			amount = append(amount, std.NewCoin(coin.Denom, coin.Amount))
-		}
-
 		msgs = append(msgs, bank.MsgSend{
 			FromAddress: crypto.AddressFromBytes(req.CallerAddress),
 			ToAddress:   crypto.AddressFromBytes(msg.ToAddress),
-			Amount:      amount,
+			Amount:      convertCoins(msg.Amount),
 		})
 	}
 
@@ -589,11 +580,6 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 	msgs := make([]vm.MsgRun, 0)
 
 	for _, msg := range req.Msgs {
-		send, err := std.ParseCoins(msg.Send)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
-		}
-
 		memPkg := &std.MemPackage{
 			Name: "main",
 			// Path will be automatically set by handler.
@@ -605,13 +591,23 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 			},
 		}
 		msgs = append(msgs, vm.MsgRun{
-			Caller:  crypto.AddressFromBytes(req.CallerAddress),
-			Package: memPkg,
-			Send:    send,
+			Caller:     crypto.AddressFromBytes(req.CallerAddress),
+			Package:    memPkg,
+			Send:       convertCoins(msg.Send),
+			MaxDeposit: convertCoins(msg.MaxDeposit),
 		})
 	}
 
 	return cfg, msgs, nil
+}
+
+// convertCoins converts an array of api_gen.Coin to an array of std.Coin
+func convertCoins(apiGenCoins []*api_gen.Coin) []std.Coin {
+	coins := make([]std.Coin, 0)
+	for _, coin := range apiGenCoins {
+		coins = append(coins, std.NewCoin(coin.Denom, coin.Amount))
+	}
+	return coins
 }
 
 func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.CallRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {

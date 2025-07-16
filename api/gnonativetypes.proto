@@ -243,7 +243,10 @@ message MsgCall {
 	// list of arguments specific to the function
 	// Example: ["1", "1", "2", "my reply"]
 	repeated string args = 3;
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
 	repeated Coin send = 4;
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	repeated Coin max_deposit = 5;
 }
 
 message CallRequest {
@@ -294,8 +297,10 @@ message MsgRun {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
 	string package = 1;
-	// Optional. Example: "1000ugnot"
-	string send = 2;
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+	repeated Coin send = 2;
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	repeated Coin max_deposit = 3;
 }
 
 message RunRequest {

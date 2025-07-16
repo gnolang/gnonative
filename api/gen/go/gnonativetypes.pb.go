@@ -2340,8 +2340,11 @@ type MsgCall struct {
 	Fnc string `protobuf:"bytes,2,opt,name=fnc,proto3" json:"fnc,omitempty"`
 	// list of arguments specific to the function
 	// Example: ["1", "1", "2", "my reply"]
-	Args          []string `protobuf:"bytes,3,rep,name=args,proto3" json:"args,omitempty"`
-	Send          []*Coin  `protobuf:"bytes,4,rep,name=send,proto3" json:"send,omitempty"`
+	Args []string `protobuf:"bytes,3,rep,name=args,proto3" json:"args,omitempty"`
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+	Send []*Coin `protobuf:"bytes,4,rep,name=send,proto3" json:"send,omitempty"`
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	MaxDeposit    []*Coin `protobuf:"bytes,5,rep,name=max_deposit,json=maxDeposit,proto3" json:"max_deposit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2400,6 +2403,13 @@ func (x *MsgCall) GetArgs() []string {
 func (x *MsgCall) GetSend() []*Coin {
 	if x != nil {
 		return x.Send
+	}
+	return nil
+}
+
+func (x *MsgCall) GetMaxDeposit() []*Coin {
+	if x != nil {
+		return x.MaxDeposit
 	}
 	return nil
 }
@@ -2737,8 +2747,10 @@ type MsgRun struct {
 	// The code for the script package. Must have main().
 	// Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
 	Package string `protobuf:"bytes,1,opt,name=package,proto3" json:"package,omitempty"`
-	// Optional. Example: "1000ugnot"
-	Send          string `protobuf:"bytes,2,opt,name=send,proto3" json:"send,omitempty"`
+	// Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+	Send []*Coin `protobuf:"bytes,2,rep,name=send,proto3" json:"send,omitempty"`
+	// Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+	MaxDeposit    []*Coin `protobuf:"bytes,3,rep,name=max_deposit,json=maxDeposit,proto3" json:"max_deposit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2780,11 +2792,18 @@ func (x *MsgRun) GetPackage() string {
 	return ""
 }
 
-func (x *MsgRun) GetSend() string {
+func (x *MsgRun) GetSend() []*Coin {
 	if x != nil {
 		return x.Send
 	}
-	return ""
+	return nil
+}
+
+func (x *MsgRun) GetMaxDeposit() []*Coin {
+	if x != nil {
+		return x.MaxDeposit
+	}
+	return nil
 }
 
 type RunRequest struct {
@@ -4125,12 +4144,14 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"expression\x18\x02 \x01(\tR\n" +
 	"expression\"'\n" +
 	"\rQEvalResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x83\x01\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\xc1\x01\n" +
 	"\aMsgCall\x12!\n" +
 	"\fpackage_path\x18\x01 \x01(\tR\vpackagePath\x12\x10\n" +
 	"\x03fnc\x18\x02 \x01(\tR\x03fnc\x12\x12\n" +
 	"\x04args\x18\x03 \x03(\tR\x04args\x12/\n" +
-	"\x04send\x18\x04 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\x04send\"\xb4\x01\n" +
+	"\x04send\x18\x04 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\x04send\x12<\n" +
+	"\vmax_deposit\x18\x05 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\n" +
+	"maxDeposit\"\xb4\x01\n" +
 	"\vCallRequest\x12\x17\n" +
 	"\agas_fee\x18\x01 \x01(\tR\x06gasFee\x12\x1d\n" +
 	"\n" +
@@ -4155,10 +4176,12 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\x04msgs\x18\x05 \x03(\v2\x1e.land.gno.gnonative.v1.MsgSendR\x04Msgs\":\n" +
 	"\fSendResponse\x12\x12\n" +
 	"\x04hash\x18\x01 \x01(\fR\x04hash\x12\x16\n" +
-	"\x06height\x18\x02 \x01(\x12R\x06height\"6\n" +
+	"\x06height\x18\x02 \x01(\x12R\x06height\"\x91\x01\n" +
 	"\x06MsgRun\x12\x18\n" +
-	"\apackage\x18\x01 \x01(\tR\apackage\x12\x12\n" +
-	"\x04send\x18\x02 \x01(\tR\x04send\"\xb2\x01\n" +
+	"\apackage\x18\x01 \x01(\tR\apackage\x12/\n" +
+	"\x04send\x18\x02 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\x04send\x12<\n" +
+	"\vmax_deposit\x18\x03 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\n" +
+	"maxDeposit\"\xb2\x01\n" +
 	"\n" +
 	"RunRequest\x12\x17\n" +
 	"\agas_fee\x18\x01 \x01(\tR\x06gasFee\x12\x1d\n" +
@@ -4335,15 +4358,18 @@ var file_gnonativetypes_proto_depIdxs = []int32{
 	14, // 8: land.gno.gnonative.v1.GetActivatedAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
 	16, // 9: land.gno.gnonative.v1.QueryAccountResponse.account_info:type_name -> land.gno.gnonative.v1.BaseAccount
 	15, // 10: land.gno.gnonative.v1.MsgCall.send:type_name -> land.gno.gnonative.v1.Coin
-	49, // 11: land.gno.gnonative.v1.CallRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
-	15, // 12: land.gno.gnonative.v1.MsgSend.amount:type_name -> land.gno.gnonative.v1.Coin
-	52, // 13: land.gno.gnonative.v1.SendRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
-	55, // 14: land.gno.gnonative.v1.RunRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	15, // 11: land.gno.gnonative.v1.MsgCall.max_deposit:type_name -> land.gno.gnonative.v1.Coin
+	49, // 12: land.gno.gnonative.v1.CallRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
+	15, // 13: land.gno.gnonative.v1.MsgSend.amount:type_name -> land.gno.gnonative.v1.Coin
+	52, // 14: land.gno.gnonative.v1.SendRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
+	15, // 15: land.gno.gnonative.v1.MsgRun.send:type_name -> land.gno.gnonative.v1.Coin
+	15, // 16: land.gno.gnonative.v1.MsgRun.max_deposit:type_name -> land.gno.gnonative.v1.Coin
+	55, // 17: land.gno.gnonative.v1.RunRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_gnonativetypes_proto_init() }

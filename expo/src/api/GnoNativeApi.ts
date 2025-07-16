@@ -205,6 +205,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     gasWanted: bigint,
     callerAddress: Uint8Array,
     send?: Coin[],
+    maxDeposit?: Coin[],
     memo?: string,
   ): Promise<MakeTxResponse> {
     const client = this.#getClient();
@@ -219,6 +220,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
           fnc,
           args,
           send,
+          maxDeposit,
         },
       ],
     });
@@ -329,6 +331,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     gasWanted: bigint,
     callerAddress: Uint8Array,
     send?: Coin[],
+    maxDeposit?: Coin[],
     memo?: string,
   ): Promise<AsyncIterable<CallResponse>> {
     const client = this.#getClient();
@@ -343,6 +346,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
           fnc,
           args,
           send,
+          maxDeposit,
         },
       ],
     });
