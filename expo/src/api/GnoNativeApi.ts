@@ -14,6 +14,7 @@ import {
   QueryResponse,
   ActivateAccountResponse,
   SendResponse,
+  RunResponse,
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
@@ -139,12 +140,36 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     nameOrBech32: string,
     mnemonic: string,
     password: string,
+    bip39Passwd?: string,
+    account?: number,
+    index?: number,
   ): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
     const reponse = await client.createAccount({
       nameOrBech32,
       mnemonic,
       password,
+      bip39Passwd,
+      account,
+      index,
+    });
+    return reponse.key;
+  }
+
+  async createLedger(
+    name: string,
+    algorithm: string,
+    hrp: string,
+    account?: number,
+    index?: number,
+  ): Promise<KeyInfo | undefined> {
+    const client = this.#getClient();
+    const reponse = await client.createLedger({
+      name,
+      algorithm,
+      hrp,
+      account,
+      index,
     });
     return reponse.key;
   }
@@ -245,6 +270,32 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         {
           toAddress,
           amount,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async makeRunTx(
+    pkg: string,
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
+    send?: Coin[],
+    maxDeposit?: Coin[],
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeRunTx({
+      gasFee,
+      gasWanted,
+      memo,
+      callerAddress,
+      msgs: [
+        {
+          package: pkg,
+          send,
+          maxDeposit,
         },
       ],
     });
@@ -371,6 +422,32 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
         {
           toAddress,
           amount,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async run(
+    pkg: string,
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
+    send?: Coin[],
+    maxDeposit?: Coin[],
+    memo?: string,
+  ): Promise<AsyncIterable<RunResponse>> {
+    const client = this.#getClient();
+    const reponse = client.run({
+      gasFee,
+      gasWanted,
+      callerAddress,
+      memo,
+      msgs: [
+        {
+          package: pkg,
+          send,
+          maxDeposit,
         },
       ],
     });

@@ -7,6 +7,7 @@ import {
   QueryResponse,
   ActivateAccountResponse,
   SendResponse,
+  RunResponse,
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
@@ -39,6 +40,16 @@ export interface GnoKeyApi {
     nameOrBech32: string,
     mnemonic: string,
     password: string,
+    bip39Passwd?: string,
+    account?: number,
+    index?: number,
+  ) => Promise<KeyInfo | undefined>;
+  createLedger: (
+    name: string,
+    algorithm: string,
+    hrp: string,
+    account?: number,
+    index?: number,
   ) => Promise<KeyInfo | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<KeyInfo[]>;
@@ -80,6 +91,15 @@ export interface GnoKeyApi {
     callerAddress: Uint8Array,
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;
+  run: (
+    pkg: string,
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
+    send?: Coin[],
+    maxDeposit?: Coin[],
+    memo?: string,
+  ) => Promise<AsyncIterable<RunResponse>>;
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromMnemonic: (mnemonic: string) => Promise<Uint8Array>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
@@ -118,6 +138,15 @@ export interface GnoKeyApi {
     callerAddress: Uint8Array,
     memo?: string,
   ): Promise<MakeTxResponse>;
+  makeRunTx: (
+    pkg: string,
+    gasFee: string,
+    gasWanted: bigint,
+    callerAddress: Uint8Array,
+    send?: Coin[],
+    maxDeposit?: Coin[],
+    memo?: string,
+  ) => Promise<MakeTxResponse>;
   broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
   // debug
   hello: (name: string) => Promise<string>;
