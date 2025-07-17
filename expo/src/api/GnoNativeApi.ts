@@ -140,12 +140,18 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     nameOrBech32: string,
     mnemonic: string,
     password: string,
+    bip39Passwd?: string,
+    account?: number,
+    index?: number,
   ): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
     const reponse = await client.createAccount({
       nameOrBech32,
       mnemonic,
       password,
+      bip39Passwd,
+      account,
+      index,
     });
     return reponse.key;
   }
@@ -154,12 +160,16 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     name: string,
     algorithm: string,
     hrp: string,
+    account?: number,
+    index?: number,
   ): Promise<KeyInfo | undefined> {
     const client = this.#getClient();
     const reponse = await client.createLedger({
       name,
       algorithm,
       hrp,
+      account,
+      index,
     });
     return reponse.key;
   }

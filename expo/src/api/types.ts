@@ -40,11 +40,16 @@ export interface GnoKeyApi {
     nameOrBech32: string,
     mnemonic: string,
     password: string,
+    bip39Passwd?: string,
+    account?: number,
+    index?: number,
   ) => Promise<KeyInfo | undefined>;
   createLedger: (
     name: string,
     algorithm: string,
     hrp: string,
+    account?: number,
+    index?: number,
   ) => Promise<KeyInfo | undefined>;
   generateRecoveryPhrase: () => Promise<string>;
   listKeyInfo: () => Promise<KeyInfo[]>;
