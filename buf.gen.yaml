@@ -6,7 +6,7 @@ plugins:
   - remote: buf.build/connectrpc/go
     out: ./api/gen/go
     opt: module=github.com/gnolang/gnonative/v4/api/gen/go
-  - remote: buf.build/bufbuild/es:v2.2.5
+  - remote: buf.build/bufbuild/es:v2.6.2
     opt: target=ts
     out: ./api/gen/es
   - remote: buf.build/protocolbuffers/csharp
