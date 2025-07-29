@@ -29,9 +29,9 @@
   "license": "MIT",
   "homepage": "https://github.com/gnolang/gnonative#readme",
   "dependencies": {
-    "@bufbuild/protobuf": "^2.2.5",
-    "@connectrpc/connect": "^2.0.2",
-    "@connectrpc/connect-web": "^2.0.2",
+    "@bufbuild/protobuf": "^2.6.2",
+    "@connectrpc/connect": "^2.0.3",
+    "@connectrpc/connect-web": "^2.0.3",
     "base64-js": "^1.5.1",
     "fast-text-encoding": "^1.0.6"
   },

@@ -59,8 +59,8 @@ clean: framework.clean
 
 # - API : Handle API generation and cleaning
 
-api.generate: _api.generate.protocol _api.generate.modules
-api.clean: _api.clean.protocol _api.clean.modules
+api.generate: _api.generate.protocol
+api.clean: _api.clean.protocol
 
 # - API - rpc
 
@@ -86,16 +86,7 @@ $(gen_sum): $(gen_src)
 		go mod tidy \
 	)
 
-_api.generate.modules: api/package-lock.json
-
-api/package-lock.json:
-	$(call check-program, npm)
-	cd api; npm install
-
-_api.clean.modules:
-	cd api; rm -fr node_modules
-
-.PHONY: api.generate _api.generate.protocol _api.generate.modules _api.clean.protocol _api.clean.modules
+.PHONY: api.generate _api.generate.protocol _api.clean.protocol
 
 # - Bind : Handle gomobile bind
 

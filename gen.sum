@@ -2,5 +2,5 @@
 4606ed9c6426464cc8c4d11ec15abbd6f32cdb8f  api/gnonativetypes/gnonativetypes.go
 5c1423cfce48514cbb29ce4a76e3a7017c055ba0  api/gnonativetypes/package.go
 5e9ce9eb1815d8d2771fe948fb20223df36ff182  api/rpc.proto
-6444ae88d6497a551ba1d5d611e1f81b1ce6a21c  buf.gen.yaml
-db011306fec5f34668398da58861399025f4abc8  Makefile
+426b4aee8f1f2b045062c7c745b4d3559d59daf9  buf.gen.yaml
+cfa69b131531fcb5ca340fbede8c7ccf094d62bb  Makefile
