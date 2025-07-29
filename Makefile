@@ -60,7 +60,7 @@ clean: framework.clean
 # - API : Handle API generation and cleaning
 
 api.generate: _api.generate.protocol
-api.clean: _api.clean.protocol _api.clean.modules
+api.clean: _api.clean.protocol
 
 # - API - rpc
 
