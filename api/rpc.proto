@@ -154,7 +154,14 @@ service GnoNativeService {
 
   // EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
   // If UpdateTx is true, then update the transaction with the gasWanted amount.
+  // This uses the remote node determined by SetRemote.
   rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
+
+  // EstimateGasFee estimates the fee for the transaction to go through on the chain (minimum gas wanted times the gas price), with a security margin.
+  // If UpdateTx is true, then update the transaction with the gasWanted amount.
+  // This uses the remote node determined by SetRemote.
+  // This is similar to EstimateGas but also fetches the gas price from the remote node.
+  rpc EstimateGasFee(EstimateGasFeeRequest) returns (EstimateGasFeeResponse);
 
   // Sign the transaction using the account with the given address.
   // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
