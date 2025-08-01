@@ -15,6 +15,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
+	"github.com/gnolang/gno/tm2/pkg/overflow"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"go.uber.org/zap"
@@ -701,13 +702,83 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	signer, err := s.getSigner(req.Msg.Address)
+	gasWanted, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.SecurityMargin, req.Msg.UpdateTx)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
 	if err != nil {
 		return nil, err
 	}
-	info, err := signer.Info()
+
+	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+}
+
+func (s *gnoNativeService) EstimateGasFee(ctx context.Context, req *connect.Request[api_gen.EstimateGasFeeRequest]) (*connect.Response[api_gen.EstimateGasFeeResponse], error) {
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+		return nil, err
+	}
+
+	gasWanted, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
 	if err != nil {
 		return nil, err
+	}
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	// Imitate gnokey CLI https://github.com/gnolang/gno/blob/de4b5b56c60126373ec0702234c196fdae365a0b/tm2/pkg/crypto/keys/client/broadcast.go#L142
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "auth/gasprice", Data: []byte{}})
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	gp := std.GasPrice{}
+	err = amino.UnmarshalJSON(qres.Response.Data, &gp)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	if gp.Gas == 0 {
+		// Can't get the gas price from the node
+		// TODO: Use a better error code
+		return nil, api_gen.ErrCode_ErrInvalidCoins
+	}
+	if gp.Price.Denom != "ugnot" {
+		return nil, api_gen.ErrCode_ErrInvalidCoins
+	}
+	fee := gasWanted/gp.Gas + 1
+	fee = overflow.Mulp(fee, gp.Price.Amount)
+	// fee buffer to cover the sudden change of gas price
+	feeBuffer := float64(req.Msg.PriceSecurityMargin) / 100
+	fee = int64(float64(fee) * feeBuffer)
+
+	return connect.NewResponse(&api_gen.EstimateGasFeeResponse{
+		TxJson:    string(txJSON),
+		GasWanted: gasWanted,
+		Fee: &api_gen.Coin{
+			Denom:  "ugnot",
+			Amount: fee,
+		}}), nil
+}
+
+// estimateGasWanted is a helper for EstimateGas, etc. Use the tx and address to call gnoclient.EstimateGas, then
+// multiply it by securityMarginPercent/100 and return the gas wanted. If updateTx is true, then update tx.Fee.GasWanted .
+func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securityMarginPercent uint32, updateTx bool) (int64, error) {
+	signer, err := s.getSigner(address)
+	if err != nil {
+		return 0, err
+	}
+	info, err := signer.Info()
+	if err != nil {
+		return 0, err
 	}
 
 	// Set the tx signature using the public key. No need to sign to get the actual signature bytes.
@@ -717,29 +788,24 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 
 	c, err := s.getClient(nil)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return 0, getGrpcError(err)
 	}
 
-	amount, err := c.EstimateGas(&tx)
+	amount, err := c.EstimateGas(tx)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return 0, getGrpcError(err)
 	}
 
 	// Apply the security margin.
 	// The security margin is a decimal numeral without the decimal seprator.
-	gasWanted := int64(float64(amount) * float64(req.Msg.SecurityMargin) / 100)
+	gasWanted := int64(float64(amount) * float64(securityMarginPercent) / 100)
 
 	// Update the transaction
-	if req.Msg.UpdateTx {
+	if updateTx {
 		tx.Fee.GasWanted = gasWanted
 	}
 
-	txJSON, err := amino.MarshalJSON(tx)
-	if err != nil {
-		return nil, err
-	}
-
-	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+	return gasWanted, nil
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],

@@ -342,10 +342,6 @@ type EstimateGasRequest struct {
 	SecurityMargin uint32 `json:"security_margin" yaml:"security_margin"`
 	// The update boolean to update the gas wanted field in the transaction if true.
 	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
-	// The signer's account number on the blockchain. If 0 then query the blockchain for the value.
-	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
-	// The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
-	SequenceNumber uint64 `json:"sequence_number" yaml:"sequence_number"`
 }
 
 type EstimateGasResponse struct {
@@ -353,6 +349,32 @@ type EstimateGasResponse struct {
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
 	// The estimated gas wanted for the transaction
 	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
+}
+
+type EstimateGasFeeRequest struct {
+	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The address of the account to sign the transaction
+	Address []byte `json:"address" yaml:"address"`
+	// The security margin to apply to the estimated gas amount.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// It will be multiplied by the estimated gas amount.
+	GasSecurityMargin uint32 `json:"gas_security_margin" yaml:"gas_security_margin"`
+	// The security margin to apply to the gas price.
+	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+	// It will be multiplied by the fetched gas price.
+	PriceSecurityMargin uint32 `json:"price_security_margin" yaml:"price_security_margin"`
+	// The update boolean to update the gas wanted field in the transaction if true.
+	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
+}
+
+type EstimateGasFeeResponse struct {
+	// The JSON encoding of the unsigned transaction
+	TxJSON string `json:"tx_json" yaml:"tx_json"`
+	// The estimated gas wanted for the transaction
+	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
+	// The estimated fee for the transaction
+	Fee Coin `json:"fee" yaml:"fee"`
 }
 
 type BroadcastTxCommitRequest struct {

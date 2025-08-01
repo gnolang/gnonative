@@ -15,6 +15,7 @@ import {
   KeyInfo,
   SignTxResponse,
   EstimateGasResponse,
+  EstimateGasFeeResponse,
   MakeTxResponse,
   BroadcastTxCommitResponse,
   Coin,
@@ -116,9 +117,14 @@ export interface GnoKeyApi {
     address: Uint8Array,
     securityMargin: number,
     updateTx: boolean,
-    accountNumber?: bigint,
-    sequenceNumber?: bigint,
   ): Promise<EstimateGasResponse>;
+  estimateGasFee(
+    txJson: string,
+    address: Uint8Array,
+    gasSecurityMargin: number,
+    priceSecurityMargin: number,
+    updateTx: boolean,
+  ): Promise<EstimateGasFeeResponse>;
   makeCallTx(
     packagePath: string,
     fnc: string,
