@@ -75,6 +75,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	SignTxResponse{},
 	EstimateGasRequest{},
 	EstimateGasResponse{},
+	EstimateTxFeesRequest{},
+	EstimateTxFeesResponse{},
 	BroadcastTxCommitRequest{},
 	BroadcastTxCommitResponse{},
 	AddressToBech32Request{},
