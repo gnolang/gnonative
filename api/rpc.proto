@@ -157,11 +157,13 @@ service GnoNativeService {
   // This uses the remote node determined by SetRemote.
   rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
 
-  // EstimateGasFee estimates the fee for the transaction to go through on the chain (minimum gas wanted times the gas price), with a security margin.
-  // If UpdateTx is true, then update the transaction with the gasWanted amount.
+  // EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
+  // The GasFee is the minimum gas wanted times the gas price, with a security margin.
+  // The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
+  // If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
   // This uses the remote node determined by SetRemote.
   // This is similar to EstimateGas but also fetches the gas price from the remote node.
-  rpc EstimateGasFee(EstimateGasFeeRequest) returns (EstimateGasFeeResponse);
+  rpc EstimateTxFees(EstimateTxFeesRequest) returns (EstimateTxFeesResponse);
 
   // Sign the transaction using the account with the given address.
   // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.

@@ -134,37 +134,37 @@ namespace Land.Gno.Gnonative.V1 {
             "UgdhZGRyZXNzEicKD3NlY3VyaXR5X21hcmdpbhgDIAEoDVIOc2VjdXJpdHlN",
             "YXJnaW4SGwoJdXBkYXRlX3R4GAQgASgIUgh1cGRhdGVUeCJNChNFc3RpbWF0",
             "ZUdhc1Jlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4SnNvbhIdCgpnYXNf",
-            "d2FudGVkGAIgASgSUglnYXNXYW50ZWQiywEKFUVzdGltYXRlR2FzRmVlUmVx",
+            "d2FudGVkGAIgASgSUglnYXNXYW50ZWQiywEKFUVzdGltYXRlVHhGZWVzUmVx",
             "dWVzdBIXCgd0eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRkcmVzcxgCIAEo",
             "DFIHYWRkcmVzcxIuChNnYXNfc2VjdXJpdHlfbWFyZ2luGAMgASgNUhFnYXNT",
             "ZWN1cml0eU1hcmdpbhIyChVwcmljZV9zZWN1cml0eV9tYXJnaW4YBCABKA1S",
             "E3ByaWNlU2VjdXJpdHlNYXJnaW4SGwoJdXBkYXRlX3R4GAUgASgIUgh1cGRh",
-            "dGVUeCJ/ChZFc3RpbWF0ZUdhc0ZlZVJlc3BvbnNlEhcKB3R4X2pzb24YASAB",
-            "KAlSBnR4SnNvbhIdCgpnYXNfd2FudGVkGAIgASgSUglnYXNXYW50ZWQSLQoD",
-            "ZmVlGAMgASgLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW5SA2ZlZSI7",
-            "ChhCcm9hZGNhc3RUeENvbW1pdFJlcXVlc3QSHwoOc2lnbmVkX3R4X2pzb24Y",
-            "ASABKAlSB3R4X2pzb24iXwoZQnJvYWRjYXN0VHhDb21taXRSZXNwb25zZRIW",
-            "CgZyZXN1bHQYASABKAxSBnJlc3VsdBISCgRoYXNoGAIgASgMUgRoYXNoEhYK",
-            "BmhlaWdodBgDIAEoElIGaGVpZ2h0IjIKFkFkZHJlc3NUb0JlY2gzMlJlcXVl",
-            "c3QSGAoHYWRkcmVzcxgBIAEoDFIHYWRkcmVzcyJAChdBZGRyZXNzVG9CZWNo",
-            "MzJSZXNwb25zZRIlCg5iZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRk",
-            "cmVzcyJBChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSJQoOYmVjaDMyX2Fk",
-            "ZHJlc3MYASABKAlSDWJlY2gzMkFkZHJlc3MiNQoZQWRkcmVzc0Zyb21CZWNo",
-            "MzJSZXNwb25zZRIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjgKGkFkZHJl",
-            "c3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhoKCG1uZW1vbmljGAEgASgJUghtbmVt",
-            "b25pYyI3ChtBZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USGAoHYWRkcmVz",
-            "cxgBIAEoDFIHYWRkcmVzcyIxChtWYWxpZGF0ZU1uZW1vbmljV29yZFJlcXVl",
-            "c3QSEgoEd29yZBgBIAEoCVIEd29yZCI0ChxWYWxpZGF0ZU1uZW1vbmljV29y",
-            "ZFJlc3BvbnNlEhQKBXZhbGlkGAEgASgIUgV2YWxpZCI3Ch1WYWxpZGF0ZU1u",
-            "ZW1vbmljUGhyYXNlUmVxdWVzdBIWCgZwaHJhc2UYASABKAlSBnBocmFzZSI2",
-            "Ch5WYWxpZGF0ZU1uZW1vbmljUGhyYXNlUmVzcG9uc2USFAoFdmFsaWQYASAB",
-            "KAhSBXZhbGlkIiIKDEhlbGxvUmVxdWVzdBISCgRuYW1lGAEgASgJUgROYW1l",
-            "IisKDUhlbGxvUmVzcG9uc2USGgoIZ3JlZXRpbmcYASABKAlSCEdyZWV0aW5n",
-            "IigKEkhlbGxvU3RyZWFtUmVxdWVzdBISCgRuYW1lGAEgASgJUgROYW1lIjEK",
-            "E0hlbGxvU3RyZWFtUmVzcG9uc2USGgoIZ3JlZXRpbmcYASABKAlSCEdyZWV0",
-            "aW5nIjAKGEdOT05BVElWRVRZUEVTX0J5dGVzTGlzdBIUCgVWYWx1ZRgBIAMo",
-            "DFIFVmFsdWVCLFoqZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS92NC9h",
-            "cGkvZ2VuL2dvYgZwcm90bzM="));
+            "dGVUeCKGAQoWRXN0aW1hdGVUeEZlZXNSZXNwb25zZRIXCgd0eF9qc29uGAEg",
+            "ASgJUgZ0eEpzb24SHQoKZ2FzX3dhbnRlZBgCIAEoElIJZ2FzV2FudGVkEjQK",
+            "B2dhc19mZWUYAyABKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pblIG",
+            "Z2FzRmVlIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRf",
+            "dHhfanNvbhgBIAEoCVIHdHhfanNvbiJfChlCcm9hZGNhc3RUeENvbW1pdFJl",
+            "c3BvbnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0EhIKBGhhc2gYAiABKAxS",
+            "BGhhc2gSFgoGaGVpZ2h0GAMgASgSUgZoZWlnaHQiMgoWQWRkcmVzc1RvQmVj",
+            "aDMyUmVxdWVzdBIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIkAKF0FkZHJl",
+            "c3NUb0JlY2gzMlJlc3BvbnNlEiUKDmJlY2gzMl9hZGRyZXNzGAEgASgJUg1i",
+            "ZWNoMzJBZGRyZXNzIkEKGEFkZHJlc3NGcm9tQmVjaDMyUmVxdWVzdBIlCg5i",
+            "ZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyI1ChlBZGRyZXNz",
+            "RnJvbUJlY2gzMlJlc3BvbnNlEhgKB2FkZHJlc3MYASABKAxSB2FkZHJlc3Mi",
+            "OAoaQWRkcmVzc0Zyb21NbmVtb25pY1JlcXVlc3QSGgoIbW5lbW9uaWMYASAB",
+            "KAlSCG1uZW1vbmljIjcKG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIY",
+            "CgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjEKG1ZhbGlkYXRlTW5lbW9uaWNX",
+            "b3JkUmVxdWVzdBISCgR3b3JkGAEgASgJUgR3b3JkIjQKHFZhbGlkYXRlTW5l",
+            "bW9uaWNXb3JkUmVzcG9uc2USFAoFdmFsaWQYASABKAhSBXZhbGlkIjcKHVZh",
+            "bGlkYXRlTW5lbW9uaWNQaHJhc2VSZXF1ZXN0EhYKBnBocmFzZRgBIAEoCVIG",
+            "cGhyYXNlIjYKHlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNwb25zZRIUCgV2",
+            "YWxpZBgBIAEoCFIFdmFsaWQiIgoMSGVsbG9SZXF1ZXN0EhIKBG5hbWUYASAB",
+            "KAlSBE5hbWUiKwoNSGVsbG9SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVII",
+            "R3JlZXRpbmciKAoSSGVsbG9TdHJlYW1SZXF1ZXN0EhIKBG5hbWUYASABKAlS",
+            "BE5hbWUiMQoTSGVsbG9TdHJlYW1SZXNwb25zZRIaCghncmVldGluZxgBIAEo",
+            "CVIIR3JlZXRpbmciMAoYR05PTkFUSVZFVFlQRVNfQnl0ZXNMaXN0EhQKBVZh",
+            "bHVlGAEgAygMUgVWYWx1ZUIsWipnaXRodWIuY29tL2dub2xhbmcvZ25vbmF0",
+            "aXZlL3Y0L2FwaS9nZW4vZ29iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -231,8 +231,8 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxResponse), global::Land.Gno.Gnonative.V1.SignTxResponse.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasRequest), global::Land.Gno.Gnonative.V1.EstimateGasRequest.Parser, new[]{ "TxJson", "Address", "SecurityMargin", "UpdateTx" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasResponse), global::Land.Gno.Gnonative.V1.EstimateGasResponse.Parser, new[]{ "TxJson", "GasWanted" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasFeeRequest), global::Land.Gno.Gnonative.V1.EstimateGasFeeRequest.Parser, new[]{ "TxJson", "Address", "GasSecurityMargin", "PriceSecurityMargin", "UpdateTx" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasFeeResponse), global::Land.Gno.Gnonative.V1.EstimateGasFeeResponse.Parser, new[]{ "TxJson", "GasWanted", "Fee" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest), global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest.Parser, new[]{ "TxJson", "Address", "GasSecurityMargin", "PriceSecurityMargin", "UpdateTx" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse), global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse.Parser, new[]{ "TxJson", "GasWanted", "GasFee" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest), global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse), global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser, new[]{ "Result", "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Request), global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser, new[]{ "Address" }, null, null, null, null),
@@ -14618,16 +14618,16 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class EstimateGasFeeRequest : pb::IMessage<EstimateGasFeeRequest>
+  public sealed partial class EstimateTxFeesRequest : pb::IMessage<EstimateTxFeesRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<EstimateGasFeeRequest> _parser = new pb::MessageParser<EstimateGasFeeRequest>(() => new EstimateGasFeeRequest());
+    private static readonly pb::MessageParser<EstimateTxFeesRequest> _parser = new pb::MessageParser<EstimateTxFeesRequest>(() => new EstimateTxFeesRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<EstimateGasFeeRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<EstimateTxFeesRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -14643,7 +14643,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeRequest() {
+    public EstimateTxFeesRequest() {
       OnConstruction();
     }
 
@@ -14651,7 +14651,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeRequest(EstimateGasFeeRequest other) : this() {
+    public EstimateTxFeesRequest(EstimateTxFeesRequest other) : this() {
       txJson_ = other.txJson_;
       address_ = other.address_;
       gasSecurityMargin_ = other.gasSecurityMargin_;
@@ -14662,8 +14662,8 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeRequest Clone() {
-      return new EstimateGasFeeRequest(this);
+    public EstimateTxFeesRequest Clone() {
+      return new EstimateTxFeesRequest(this);
     }
 
     /// <summary>Field number for the "tx_json" field.</summary>
@@ -14748,12 +14748,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as EstimateGasFeeRequest);
+      return Equals(other as EstimateTxFeesRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(EstimateGasFeeRequest other) {
+    public bool Equals(EstimateTxFeesRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -14878,7 +14878,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(EstimateGasFeeRequest other) {
+    public void MergeFrom(EstimateTxFeesRequest other) {
       if (other == null) {
         return;
       }
@@ -14983,16 +14983,16 @@ namespace Land.Gno.Gnonative.V1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class EstimateGasFeeResponse : pb::IMessage<EstimateGasFeeResponse>
+  public sealed partial class EstimateTxFeesResponse : pb::IMessage<EstimateTxFeesResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<EstimateGasFeeResponse> _parser = new pb::MessageParser<EstimateGasFeeResponse>(() => new EstimateGasFeeResponse());
+    private static readonly pb::MessageParser<EstimateTxFeesResponse> _parser = new pb::MessageParser<EstimateTxFeesResponse>(() => new EstimateTxFeesResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<EstimateGasFeeResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<EstimateTxFeesResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -15008,7 +15008,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeResponse() {
+    public EstimateTxFeesResponse() {
       OnConstruction();
     }
 
@@ -15016,17 +15016,17 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeResponse(EstimateGasFeeResponse other) : this() {
+    public EstimateTxFeesResponse(EstimateTxFeesResponse other) : this() {
       txJson_ = other.txJson_;
       gasWanted_ = other.gasWanted_;
-      fee_ = other.fee_ != null ? other.fee_.Clone() : null;
+      gasFee_ = other.gasFee_ != null ? other.gasFee_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public EstimateGasFeeResponse Clone() {
-      return new EstimateGasFeeResponse(this);
+    public EstimateTxFeesResponse Clone() {
+      return new EstimateTxFeesResponse(this);
     }
 
     /// <summary>Field number for the "tx_json" field.</summary>
@@ -15059,30 +15059,30 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
-    /// <summary>Field number for the "fee" field.</summary>
-    public const int FeeFieldNumber = 3;
-    private global::Land.Gno.Gnonative.V1.Coin fee_;
+    /// <summary>Field number for the "gas_fee" field.</summary>
+    public const int GasFeeFieldNumber = 3;
+    private global::Land.Gno.Gnonative.V1.Coin gasFee_;
     /// <summary>
     /// The estimated fee for the transaction
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Land.Gno.Gnonative.V1.Coin Fee {
-      get { return fee_; }
+    public global::Land.Gno.Gnonative.V1.Coin GasFee {
+      get { return gasFee_; }
       set {
-        fee_ = value;
+        gasFee_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as EstimateGasFeeResponse);
+      return Equals(other as EstimateTxFeesResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(EstimateGasFeeResponse other) {
+    public bool Equals(EstimateTxFeesResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -15091,7 +15091,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       if (TxJson != other.TxJson) return false;
       if (GasWanted != other.GasWanted) return false;
-      if (!object.Equals(Fee, other.Fee)) return false;
+      if (!object.Equals(GasFee, other.GasFee)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -15101,7 +15101,7 @@ namespace Land.Gno.Gnonative.V1 {
       int hash = 1;
       if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
       if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
-      if (fee_ != null) hash ^= Fee.GetHashCode();
+      if (gasFee_ != null) hash ^= GasFee.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -15128,9 +15128,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(16);
         output.WriteSInt64(GasWanted);
       }
-      if (fee_ != null) {
+      if (gasFee_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(Fee);
+        output.WriteMessage(GasFee);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -15150,9 +15150,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(16);
         output.WriteSInt64(GasWanted);
       }
-      if (fee_ != null) {
+      if (gasFee_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(Fee);
+        output.WriteMessage(GasFee);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -15170,8 +15170,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (GasWanted != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeSInt64Size(GasWanted);
       }
-      if (fee_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Fee);
+      if (gasFee_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GasFee);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -15181,7 +15181,7 @@ namespace Land.Gno.Gnonative.V1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(EstimateGasFeeResponse other) {
+    public void MergeFrom(EstimateTxFeesResponse other) {
       if (other == null) {
         return;
       }
@@ -15191,11 +15191,11 @@ namespace Land.Gno.Gnonative.V1 {
       if (other.GasWanted != 0L) {
         GasWanted = other.GasWanted;
       }
-      if (other.fee_ != null) {
-        if (fee_ == null) {
-          Fee = new global::Land.Gno.Gnonative.V1.Coin();
+      if (other.gasFee_ != null) {
+        if (gasFee_ == null) {
+          GasFee = new global::Land.Gno.Gnonative.V1.Coin();
         }
-        Fee.MergeFrom(other.Fee);
+        GasFee.MergeFrom(other.GasFee);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -15225,10 +15225,10 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 26: {
-            if (fee_ == null) {
-              Fee = new global::Land.Gno.Gnonative.V1.Coin();
+            if (gasFee_ == null) {
+              GasFee = new global::Land.Gno.Gnonative.V1.Coin();
             }
-            input.ReadMessage(Fee);
+            input.ReadMessage(GasFee);
             break;
           }
         }
@@ -15259,10 +15259,10 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 26: {
-            if (fee_ == null) {
-              Fee = new global::Land.Gno.Gnonative.V1.Coin();
+            if (gasFee_ == null) {
+              GasFee = new global::Land.Gno.Gnonative.V1.Coin();
             }
-            input.ReadMessage(Fee);
+            input.ReadMessage(GasFee);
             break;
           }
         }

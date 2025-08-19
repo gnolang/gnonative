@@ -364,7 +364,7 @@ message EstimateGasResponse {
 	sint64 gas_wanted = 2;
 }
 
-message EstimateGasFeeRequest {
+message EstimateTxFeesRequest {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	string tx_json = 1;
 	// The address of the account to sign the transaction
@@ -381,13 +381,13 @@ message EstimateGasFeeRequest {
 	bool update_tx = 5;
 }
 
-message EstimateGasFeeResponse {
+message EstimateTxFeesResponse {
 	// The JSON encoding of the unsigned transaction
 	string tx_json = 1;
 	// The estimated gas wanted for the transaction
 	sint64 gas_wanted = 2;
 	// The estimated fee for the transaction
-	Coin fee = 3;
+	Coin gas_fee = 3;
 }
 
 message BroadcastTxCommitRequest {

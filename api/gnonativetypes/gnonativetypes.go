@@ -351,7 +351,7 @@ type EstimateGasResponse struct {
 	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
 }
 
-type EstimateGasFeeRequest struct {
+type EstimateTxFeesRequest struct {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
 	// The address of the account to sign the transaction
@@ -368,13 +368,13 @@ type EstimateGasFeeRequest struct {
 	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
 }
 
-type EstimateGasFeeResponse struct {
+type EstimateTxFeesResponse struct {
 	// The JSON encoding of the unsigned transaction
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
 	// The estimated gas wanted for the transaction
 	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
 	// The estimated fee for the transaction
-	Fee Coin `json:"fee" yaml:"fee"`
+	GasFee Coin `json:"gas_fee" yaml:"gas_fee"`
 }
 
 type BroadcastTxCommitRequest struct {

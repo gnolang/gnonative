@@ -715,7 +715,7 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
 }
 
-func (s *gnoNativeService) EstimateGasFee(ctx context.Context, req *connect.Request[api_gen.EstimateGasFeeRequest]) (*connect.Response[api_gen.EstimateGasFeeResponse], error) {
+func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Request[api_gen.EstimateTxFeesRequest]) (*connect.Response[api_gen.EstimateTxFeesResponse], error) {
 	var tx std.Tx
 	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
 		return nil, err
@@ -724,11 +724,6 @@ func (s *gnoNativeService) EstimateGasFee(ctx context.Context, req *connect.Requ
 	gasWanted, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
 	if err != nil {
 		return nil, getGrpcError(err)
-	}
-
-	txJSON, err := amino.MarshalJSON(tx)
-	if err != nil {
-		return nil, err
 	}
 
 	c, err := s.getClient(nil)
@@ -748,7 +743,6 @@ func (s *gnoNativeService) EstimateGasFee(ctx context.Context, req *connect.Requ
 	}
 	if gp.Gas == 0 {
 		// Can't get the gas price from the node
-		// TODO: Use a better error code
 		return nil, api_gen.ErrCode_ErrInvalidCoins
 	}
 	if gp.Price.Denom != "ugnot" {
@@ -760,11 +754,20 @@ func (s *gnoNativeService) EstimateGasFee(ctx context.Context, req *connect.Requ
 	feeBuffer := float64(req.Msg.PriceSecurityMargin) / 100
 	fee = int64(float64(fee) * feeBuffer)
 
-	return connect.NewResponse(&api_gen.EstimateGasFeeResponse{
+	if req.Msg.UpdateTx {
+		tx.Fee.GasFee = std.NewCoin(gp.Price.Denom, fee)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.EstimateTxFeesResponse{
 		TxJson:    string(txJSON),
 		GasWanted: gasWanted,
-		Fee: &api_gen.Coin{
-			Denom:  "ugnot",
+		GasFee: &api_gen.Coin{
+			Denom:  gp.Price.Denom,
 			Amount: fee,
 		}}), nil
 }

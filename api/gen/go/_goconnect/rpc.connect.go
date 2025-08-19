@@ -117,9 +117,9 @@ const (
 	// GnoNativeServiceEstimateGasProcedure is the fully-qualified name of the GnoNativeService's
 	// EstimateGas RPC.
 	GnoNativeServiceEstimateGasProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateGas"
-	// GnoNativeServiceEstimateGasFeeProcedure is the fully-qualified name of the GnoNativeService's
-	// EstimateGasFee RPC.
-	GnoNativeServiceEstimateGasFeeProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateGasFee"
+	// GnoNativeServiceEstimateTxFeesProcedure is the fully-qualified name of the GnoNativeService's
+	// EstimateTxFees RPC.
+	GnoNativeServiceEstimateTxFeesProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateTxFees"
 	// GnoNativeServiceSignTxProcedure is the fully-qualified name of the GnoNativeService's SignTx RPC.
 	GnoNativeServiceSignTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/SignTx"
 	// GnoNativeServiceBroadcastTxCommitProcedure is the fully-qualified name of the GnoNativeService's
@@ -267,11 +267,13 @@ type GnoNativeServiceClient interface {
 	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	// This uses the remote node determined by SetRemote.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
-	// EstimateGasFee estimates the fee for the transaction to go through on the chain (minimum gas wanted times the gas price), with a security margin.
-	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
+	// The GasFee is the minimum gas wanted times the gas price, with a security margin.
+	// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
+	// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
 	// This uses the remote node determined by SetRemote.
 	// This is similar to EstimateGas but also fetches the gas price from the remote node.
-	EstimateGasFee(context.Context, *connect.Request[_go.EstimateGasFeeRequest]) (*connect.Response[_go.EstimateGasFeeResponse], error)
+	EstimateTxFees(context.Context, *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -487,10 +489,10 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGas")),
 			connect.WithClientOptions(opts...),
 		),
-		estimateGasFee: connect.NewClient[_go.EstimateGasFeeRequest, _go.EstimateGasFeeResponse](
+		estimateTxFees: connect.NewClient[_go.EstimateTxFeesRequest, _go.EstimateTxFeesResponse](
 			httpClient,
-			baseURL+GnoNativeServiceEstimateGasFeeProcedure,
-			connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGasFee")),
+			baseURL+GnoNativeServiceEstimateTxFeesProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateTxFees")),
 			connect.WithClientOptions(opts...),
 		),
 		signTx: connect.NewClient[_go.SignTxRequest, _go.SignTxResponse](
@@ -582,7 +584,7 @@ type gnoNativeServiceClient struct {
 	makeSendTx                *connect.Client[_go.SendRequest, _go.MakeTxResponse]
 	makeRunTx                 *connect.Client[_go.RunRequest, _go.MakeTxResponse]
 	estimateGas               *connect.Client[_go.EstimateGasRequest, _go.EstimateGasResponse]
-	estimateGasFee            *connect.Client[_go.EstimateGasFeeRequest, _go.EstimateGasFeeResponse]
+	estimateTxFees            *connect.Client[_go.EstimateTxFeesRequest, _go.EstimateTxFeesResponse]
 	signTx                    *connect.Client[_go.SignTxRequest, _go.SignTxResponse]
 	broadcastTxCommit         *connect.Client[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
@@ -744,9 +746,9 @@ func (c *gnoNativeServiceClient) EstimateGas(ctx context.Context, req *connect.R
 	return c.estimateGas.CallUnary(ctx, req)
 }
 
-// EstimateGasFee calls land.gno.gnonative.v1.GnoNativeService.EstimateGasFee.
-func (c *gnoNativeServiceClient) EstimateGasFee(ctx context.Context, req *connect.Request[_go.EstimateGasFeeRequest]) (*connect.Response[_go.EstimateGasFeeResponse], error) {
-	return c.estimateGasFee.CallUnary(ctx, req)
+// EstimateTxFees calls land.gno.gnonative.v1.GnoNativeService.EstimateTxFees.
+func (c *gnoNativeServiceClient) EstimateTxFees(ctx context.Context, req *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error) {
+	return c.estimateTxFees.CallUnary(ctx, req)
 }
 
 // SignTx calls land.gno.gnonative.v1.GnoNativeService.SignTx.
@@ -915,11 +917,13 @@ type GnoNativeServiceHandler interface {
 	// If UpdateTx is true, then update the transaction with the gasWanted amount.
 	// This uses the remote node determined by SetRemote.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
-	// EstimateGasFee estimates the fee for the transaction to go through on the chain (minimum gas wanted times the gas price), with a security margin.
-	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
+	// The GasFee is the minimum gas wanted times the gas price, with a security margin.
+	// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
+	// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
 	// This uses the remote node determined by SetRemote.
 	// This is similar to EstimateGas but also fetches the gas price from the remote node.
-	EstimateGasFee(context.Context, *connect.Request[_go.EstimateGasFeeRequest]) (*connect.Response[_go.EstimateGasFeeResponse], error)
+	EstimateTxFees(context.Context, *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -1131,10 +1135,10 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGas")),
 		connect.WithHandlerOptions(opts...),
 	)
-	gnoNativeServiceEstimateGasFeeHandler := connect.NewUnaryHandler(
-		GnoNativeServiceEstimateGasFeeProcedure,
-		svc.EstimateGasFee,
-		connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateGasFee")),
+	gnoNativeServiceEstimateTxFeesHandler := connect.NewUnaryHandler(
+		GnoNativeServiceEstimateTxFeesProcedure,
+		svc.EstimateTxFees,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("EstimateTxFees")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceSignTxHandler := connect.NewUnaryHandler(
@@ -1253,8 +1257,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceMakeRunTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceEstimateGasProcedure:
 			gnoNativeServiceEstimateGasHandler.ServeHTTP(w, r)
-		case GnoNativeServiceEstimateGasFeeProcedure:
-			gnoNativeServiceEstimateGasFeeHandler.ServeHTTP(w, r)
+		case GnoNativeServiceEstimateTxFeesProcedure:
+			gnoNativeServiceEstimateTxFeesHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSignTxProcedure:
 			gnoNativeServiceSignTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceBroadcastTxCommitProcedure:
@@ -1402,8 +1406,8 @@ func (UnimplementedGnoNativeServiceHandler) EstimateGas(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.EstimateGas is not implemented"))
 }
 
-func (UnimplementedGnoNativeServiceHandler) EstimateGasFee(context.Context, *connect.Request[_go.EstimateGasFeeRequest]) (*connect.Response[_go.EstimateGasFeeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.EstimateGasFee is not implemented"))
+func (UnimplementedGnoNativeServiceHandler) EstimateTxFees(context.Context, *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.EstimateTxFees is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {
