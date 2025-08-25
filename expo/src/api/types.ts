@@ -122,7 +122,7 @@ export interface GnoKeyApi {
     txJson: string,
     address: Uint8Array,
     gasSecurityMargin: number,
-    priceSecurityMargin: number,
+    getPriceSecurityMargin: number,
     updateTx: boolean,
   ): Promise<EstimateTxFeesResponse>;
   makeCallTx(

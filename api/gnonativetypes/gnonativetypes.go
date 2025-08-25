@@ -334,7 +334,7 @@ type SignTxResponse struct {
 type EstimateGasRequest struct {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
-	// The address of the account to sign the transaction
+	// The address of the account that will sign the transaction
 	Address []byte `json:"address" yaml:"address"`
 	// The security margin to apply to the estimated gas amount.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
@@ -354,7 +354,7 @@ type EstimateGasResponse struct {
 type EstimateTxFeesRequest struct {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	TxJSON string `json:"tx_json" yaml:"tx_json"`
-	// The address of the account to sign the transaction
+	// The address of the account that will sign the transaction
 	Address []byte `json:"address" yaml:"address"`
 	// The security margin to apply to the estimated gas amount.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
@@ -363,7 +363,7 @@ type EstimateTxFeesRequest struct {
 	// The security margin to apply to the gas price.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
 	// It will be multiplied by the fetched gas price.
-	PriceSecurityMargin uint32 `json:"price_security_margin" yaml:"price_security_margin"`
+	GasPriceSecurityMargin uint32 `json:"gas_price_security_margin" yaml:"gas_price_security_margin"`
 	// The update boolean to update the gas wanted field in the transaction if true.
 	UpdateTx bool `json:"update_tx" yaml:"update_tx"`
 }
@@ -375,6 +375,10 @@ type EstimateTxFeesResponse struct {
 	GasWanted int64 `json:"gas_wanted" yaml:"gas_wanted"`
 	// The estimated fee for the transaction
 	GasFee Coin `json:"gas_fee" yaml:"gas_fee"`
+	// The estimated storage delta for the transaction. Can be negative for "unlock"
+	StorageDelta int64 `json:"gas_wanted" yaml:"gas_wanted"`
+	// The estimated storage fee for the transaction. Can be negative for "unlock"
+	StorageFee Coin `json:"gas_fee" yaml:"gas_fee"`
 }
 
 type BroadcastTxCommitRequest struct {

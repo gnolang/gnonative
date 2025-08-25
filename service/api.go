@@ -11,6 +11,7 @@ import (
 
 	"connectrpc.com/connect"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
@@ -725,6 +726,9 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
+	// TODO: estimateGasWanted should return the tx events
+	events := []abci.Event{
+		&StorageDepositEvent{Type: "StorageDeposit", BytesDelta: 1000, FeeDelta: "100000ugnot"}}
 
 	c, err := s.getClient(nil)
 	if err != nil {
@@ -751,7 +755,7 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 	fee := gasWanted/gp.Gas + 1
 	fee = overflow.Mulp(fee, gp.Price.Amount)
 	// fee buffer to cover the sudden change of gas price
-	feeBuffer := float64(req.Msg.PriceSecurityMargin) / 100
+	feeBuffer := float64(req.Msg.GasPriceSecurityMargin) / 100
 	fee = int64(float64(fee) * feeBuffer)
 
 	if req.Msg.UpdateTx {
@@ -763,13 +767,23 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.EstimateTxFeesResponse{
+	response := &api_gen.EstimateTxFeesResponse{
 		TxJson:    string(txJSON),
 		GasWanted: gasWanted,
 		GasFee: &api_gen.Coin{
 			Denom:  gp.Price.Denom,
 			Amount: fee,
-		}}), nil
+		},
+	}
+	if delta, storageFee, ok := GetStorageInfo(events); ok {
+		response.StorageDelta = delta
+		response.StorageFee = &api_gen.Coin{
+			Denom:  storageFee.Denom,
+			Amount: storageFee.Amount,
+		}
+	}
+
+	return connect.NewResponse(response), nil
 }
 
 // estimateGasWanted is a helper for EstimateGas, etc. Use the tx and address to call gnoclient.EstimateGas, then
@@ -957,4 +971,39 @@ func getGrpcError(err error) error {
 	} else {
 		return err
 	}
+}
+
+// Temporary: Remove after merging https://github.com/gnolang/gno/pull/4630
+type StorageDepositEvent struct {
+	// "StorageDeposit" or "UnlockDeposit"
+	Type       string `json:"type"`
+	BytesDelta int64  `json:"bytes_delta"`
+	FeeDelta   string `json:"fee_delta"`
+}
+
+func (e StorageDepositEvent) AssertABCIEvent() {}
+
+// Temporary: Use tm2/pkg/crypto/keys/client after merging https://github.com/gnolang/gno/pull/4630
+func GetStorageInfo(events []abci.Event) (int64, std.Coin, bool) {
+	for _, event := range events {
+		depositEvent, ok := event.(StorageDepositEvent)
+		if !ok {
+			continue
+		}
+
+		fee, err := std.ParseCoin(depositEvent.FeeDelta)
+		if err != nil {
+			continue
+		}
+		bytes := depositEvent.BytesDelta
+		if depositEvent.Type == "UnlockDeposit" {
+			// For unlock, we want to display a negative bytes delta and fee
+			bytes = -bytes
+			fee.Amount = -fee.Amount
+		}
+
+		return bytes, fee, true
+	}
+
+	return 0, std.Coin{}, false
 }

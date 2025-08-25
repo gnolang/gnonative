@@ -134,37 +134,39 @@ namespace Land.Gno.Gnonative.V1 {
             "UgdhZGRyZXNzEicKD3NlY3VyaXR5X21hcmdpbhgDIAEoDVIOc2VjdXJpdHlN",
             "YXJnaW4SGwoJdXBkYXRlX3R4GAQgASgIUgh1cGRhdGVUeCJNChNFc3RpbWF0",
             "ZUdhc1Jlc3BvbnNlEhcKB3R4X2pzb24YASABKAlSBnR4SnNvbhIdCgpnYXNf",
-            "d2FudGVkGAIgASgSUglnYXNXYW50ZWQiywEKFUVzdGltYXRlVHhGZWVzUmVx",
+            "d2FudGVkGAIgASgSUglnYXNXYW50ZWQi0gEKFUVzdGltYXRlVHhGZWVzUmVx",
             "dWVzdBIXCgd0eF9qc29uGAEgASgJUgZ0eEpzb24SGAoHYWRkcmVzcxgCIAEo",
             "DFIHYWRkcmVzcxIuChNnYXNfc2VjdXJpdHlfbWFyZ2luGAMgASgNUhFnYXNT",
-            "ZWN1cml0eU1hcmdpbhIyChVwcmljZV9zZWN1cml0eV9tYXJnaW4YBCABKA1S",
-            "E3ByaWNlU2VjdXJpdHlNYXJnaW4SGwoJdXBkYXRlX3R4GAUgASgIUgh1cGRh",
-            "dGVUeCKGAQoWRXN0aW1hdGVUeEZlZXNSZXNwb25zZRIXCgd0eF9qc29uGAEg",
-            "ASgJUgZ0eEpzb24SHQoKZ2FzX3dhbnRlZBgCIAEoElIJZ2FzV2FudGVkEjQK",
-            "B2dhc19mZWUYAyABKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pblIG",
-            "Z2FzRmVlIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRf",
-            "dHhfanNvbhgBIAEoCVIHdHhfanNvbiJfChlCcm9hZGNhc3RUeENvbW1pdFJl",
-            "c3BvbnNlEhYKBnJlc3VsdBgBIAEoDFIGcmVzdWx0EhIKBGhhc2gYAiABKAxS",
-            "BGhhc2gSFgoGaGVpZ2h0GAMgASgSUgZoZWlnaHQiMgoWQWRkcmVzc1RvQmVj",
-            "aDMyUmVxdWVzdBIYCgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIkAKF0FkZHJl",
-            "c3NUb0JlY2gzMlJlc3BvbnNlEiUKDmJlY2gzMl9hZGRyZXNzGAEgASgJUg1i",
-            "ZWNoMzJBZGRyZXNzIkEKGEFkZHJlc3NGcm9tQmVjaDMyUmVxdWVzdBIlCg5i",
-            "ZWNoMzJfYWRkcmVzcxgBIAEoCVINYmVjaDMyQWRkcmVzcyI1ChlBZGRyZXNz",
-            "RnJvbUJlY2gzMlJlc3BvbnNlEhgKB2FkZHJlc3MYASABKAxSB2FkZHJlc3Mi",
-            "OAoaQWRkcmVzc0Zyb21NbmVtb25pY1JlcXVlc3QSGgoIbW5lbW9uaWMYASAB",
-            "KAlSCG1uZW1vbmljIjcKG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIY",
-            "CgdhZGRyZXNzGAEgASgMUgdhZGRyZXNzIjEKG1ZhbGlkYXRlTW5lbW9uaWNX",
-            "b3JkUmVxdWVzdBISCgR3b3JkGAEgASgJUgR3b3JkIjQKHFZhbGlkYXRlTW5l",
-            "bW9uaWNXb3JkUmVzcG9uc2USFAoFdmFsaWQYASABKAhSBXZhbGlkIjcKHVZh",
-            "bGlkYXRlTW5lbW9uaWNQaHJhc2VSZXF1ZXN0EhYKBnBocmFzZRgBIAEoCVIG",
-            "cGhyYXNlIjYKHlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNwb25zZRIUCgV2",
-            "YWxpZBgBIAEoCFIFdmFsaWQiIgoMSGVsbG9SZXF1ZXN0EhIKBG5hbWUYASAB",
-            "KAlSBE5hbWUiKwoNSGVsbG9SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVII",
-            "R3JlZXRpbmciKAoSSGVsbG9TdHJlYW1SZXF1ZXN0EhIKBG5hbWUYASABKAlS",
-            "BE5hbWUiMQoTSGVsbG9TdHJlYW1SZXNwb25zZRIaCghncmVldGluZxgBIAEo",
-            "CVIIR3JlZXRpbmciMAoYR05PTkFUSVZFVFlQRVNfQnl0ZXNMaXN0EhQKBVZh",
-            "bHVlGAEgAygMUgVWYWx1ZUIsWipnaXRodWIuY29tL2dub2xhbmcvZ25vbmF0",
-            "aXZlL3Y0L2FwaS9nZW4vZ29iBnByb3RvMw=="));
+            "ZWN1cml0eU1hcmdpbhI5ChlnYXNfcHJpY2Vfc2VjdXJpdHlfbWFyZ2luGAQg",
+            "ASgNUhZnYXNQcmljZVNlY3VyaXR5TWFyZ2luEhsKCXVwZGF0ZV90eBgFIAEo",
+            "CFIIdXBkYXRlVHgi5AEKFkVzdGltYXRlVHhGZWVzUmVzcG9uc2USFwoHdHhf",
+            "anNvbhgBIAEoCVIGdHhKc29uEh0KCmdhc193YW50ZWQYAiABKBJSCWdhc1dh",
+            "bnRlZBI0CgdnYXNfZmVlGAMgASgLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
+            "LkNvaW5SBmdhc0ZlZRIhCg1zdG9yYWdlX2RlbHRhGAQgASgSUgpnYXNfd2Fu",
+            "dGVkEjkKC3N0b3JhZ2VfZmVlGAUgASgLMhsubGFuZC5nbm8uZ25vbmF0aXZl",
+            "LnYxLkNvaW5SB2dhc19mZWUiOwoYQnJvYWRjYXN0VHhDb21taXRSZXF1ZXN0",
+            "Eh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIl8KGUJyb2FkY2Fz",
+            "dFR4Q29tbWl0UmVzcG9uc2USFgoGcmVzdWx0GAEgASgMUgZyZXN1bHQSEgoE",
+            "aGFzaBgCIAEoDFIEaGFzaBIWCgZoZWlnaHQYAyABKBJSBmhlaWdodCIyChZB",
+            "ZGRyZXNzVG9CZWNoMzJSZXF1ZXN0EhgKB2FkZHJlc3MYASABKAxSB2FkZHJl",
+            "c3MiQAoXQWRkcmVzc1RvQmVjaDMyUmVzcG9uc2USJQoOYmVjaDMyX2FkZHJl",
+            "c3MYASABKAlSDWJlY2gzMkFkZHJlc3MiQQoYQWRkcmVzc0Zyb21CZWNoMzJS",
+            "ZXF1ZXN0EiUKDmJlY2gzMl9hZGRyZXNzGAEgASgJUg1iZWNoMzJBZGRyZXNz",
+            "IjUKGUFkZHJlc3NGcm9tQmVjaDMyUmVzcG9uc2USGAoHYWRkcmVzcxgBIAEo",
+            "DFIHYWRkcmVzcyI4ChpBZGRyZXNzRnJvbU1uZW1vbmljUmVxdWVzdBIaCght",
+            "bmVtb25pYxgBIAEoCVIIbW5lbW9uaWMiNwobQWRkcmVzc0Zyb21NbmVtb25p",
+            "Y1Jlc3BvbnNlEhgKB2FkZHJlc3MYASABKAxSB2FkZHJlc3MiMQobVmFsaWRh",
+            "dGVNbmVtb25pY1dvcmRSZXF1ZXN0EhIKBHdvcmQYASABKAlSBHdvcmQiNAoc",
+            "VmFsaWRhdGVNbmVtb25pY1dvcmRSZXNwb25zZRIUCgV2YWxpZBgBIAEoCFIF",
+            "dmFsaWQiNwodVmFsaWRhdGVNbmVtb25pY1BocmFzZVJlcXVlc3QSFgoGcGhy",
+            "YXNlGAEgASgJUgZwaHJhc2UiNgoeVmFsaWRhdGVNbmVtb25pY1BocmFzZVJl",
+            "c3BvbnNlEhQKBXZhbGlkGAEgASgIUgV2YWxpZCIiCgxIZWxsb1JlcXVlc3QS",
+            "EgoEbmFtZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0",
+            "aW5nGAEgASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoE",
+            "bmFtZRgBIAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdy",
+            "ZWV0aW5nGAEgASgJUghHcmVldGluZyIwChhHTk9OQVRJVkVUWVBFU19CeXRl",
+            "c0xpc3QSFAoFVmFsdWUYASADKAxSBVZhbHVlQixaKmdpdGh1Yi5jb20vZ25v",
+            "bGFuZy9nbm9uYXRpdmUvdjQvYXBpL2dlbi9nb2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -231,8 +233,8 @@ namespace Land.Gno.Gnonative.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.SignTxResponse), global::Land.Gno.Gnonative.V1.SignTxResponse.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasRequest), global::Land.Gno.Gnonative.V1.EstimateGasRequest.Parser, new[]{ "TxJson", "Address", "SecurityMargin", "UpdateTx" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateGasResponse), global::Land.Gno.Gnonative.V1.EstimateGasResponse.Parser, new[]{ "TxJson", "GasWanted" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest), global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest.Parser, new[]{ "TxJson", "Address", "GasSecurityMargin", "PriceSecurityMargin", "UpdateTx" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse), global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse.Parser, new[]{ "TxJson", "GasWanted", "GasFee" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest), global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest.Parser, new[]{ "TxJson", "Address", "GasSecurityMargin", "GasPriceSecurityMargin", "UpdateTx" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse), global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse.Parser, new[]{ "TxJson", "GasWanted", "GasFee", "StorageDelta", "StorageFee" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest), global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser, new[]{ "SignedTxJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse), global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser, new[]{ "Result", "Hash", "Height" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.AddressToBech32Request), global::Land.Gno.Gnonative.V1.AddressToBech32Request.Parser, new[]{ "Address" }, null, null, null, null),
@@ -14120,7 +14122,7 @@ namespace Land.Gno.Gnonative.V1 {
     public const int AddressFieldNumber = 2;
     private pb::ByteString address_ = pb::ByteString.Empty;
     /// <summary>
-    /// The address of the account to sign the transaction
+    /// The address of the account that will sign the transaction
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -14655,7 +14657,7 @@ namespace Land.Gno.Gnonative.V1 {
       txJson_ = other.txJson_;
       address_ = other.address_;
       gasSecurityMargin_ = other.gasSecurityMargin_;
-      priceSecurityMargin_ = other.priceSecurityMargin_;
+      gasPriceSecurityMargin_ = other.gasPriceSecurityMargin_;
       updateTx_ = other.updateTx_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -14685,7 +14687,7 @@ namespace Land.Gno.Gnonative.V1 {
     public const int AddressFieldNumber = 2;
     private pb::ByteString address_ = pb::ByteString.Empty;
     /// <summary>
-    /// The address of the account to sign the transaction
+    /// The address of the account that will sign the transaction
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -14713,9 +14715,9 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
-    /// <summary>Field number for the "price_security_margin" field.</summary>
-    public const int PriceSecurityMarginFieldNumber = 4;
-    private uint priceSecurityMargin_;
+    /// <summary>Field number for the "gas_price_security_margin" field.</summary>
+    public const int GasPriceSecurityMarginFieldNumber = 4;
+    private uint gasPriceSecurityMargin_;
     /// <summary>
     /// The security margin to apply to the gas price.
     /// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
@@ -14723,10 +14725,10 @@ namespace Land.Gno.Gnonative.V1 {
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint PriceSecurityMargin {
-      get { return priceSecurityMargin_; }
+    public uint GasPriceSecurityMargin {
+      get { return gasPriceSecurityMargin_; }
       set {
-        priceSecurityMargin_ = value;
+        gasPriceSecurityMargin_ = value;
       }
     }
 
@@ -14763,7 +14765,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (TxJson != other.TxJson) return false;
       if (Address != other.Address) return false;
       if (GasSecurityMargin != other.GasSecurityMargin) return false;
-      if (PriceSecurityMargin != other.PriceSecurityMargin) return false;
+      if (GasPriceSecurityMargin != other.GasPriceSecurityMargin) return false;
       if (UpdateTx != other.UpdateTx) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -14775,7 +14777,7 @@ namespace Land.Gno.Gnonative.V1 {
       if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
       if (Address.Length != 0) hash ^= Address.GetHashCode();
       if (GasSecurityMargin != 0) hash ^= GasSecurityMargin.GetHashCode();
-      if (PriceSecurityMargin != 0) hash ^= PriceSecurityMargin.GetHashCode();
+      if (GasPriceSecurityMargin != 0) hash ^= GasPriceSecurityMargin.GetHashCode();
       if (UpdateTx != false) hash ^= UpdateTx.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -14807,9 +14809,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(24);
         output.WriteUInt32(GasSecurityMargin);
       }
-      if (PriceSecurityMargin != 0) {
+      if (GasPriceSecurityMargin != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(PriceSecurityMargin);
+        output.WriteUInt32(GasPriceSecurityMargin);
       }
       if (UpdateTx != false) {
         output.WriteRawTag(40);
@@ -14837,9 +14839,9 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(24);
         output.WriteUInt32(GasSecurityMargin);
       }
-      if (PriceSecurityMargin != 0) {
+      if (GasPriceSecurityMargin != 0) {
         output.WriteRawTag(32);
-        output.WriteUInt32(PriceSecurityMargin);
+        output.WriteUInt32(GasPriceSecurityMargin);
       }
       if (UpdateTx != false) {
         output.WriteRawTag(40);
@@ -14864,8 +14866,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (GasSecurityMargin != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GasSecurityMargin);
       }
-      if (PriceSecurityMargin != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PriceSecurityMargin);
+      if (GasPriceSecurityMargin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(GasPriceSecurityMargin);
       }
       if (UpdateTx != false) {
         size += 1 + 1;
@@ -14891,8 +14893,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (other.GasSecurityMargin != 0) {
         GasSecurityMargin = other.GasSecurityMargin;
       }
-      if (other.PriceSecurityMargin != 0) {
-        PriceSecurityMargin = other.PriceSecurityMargin;
+      if (other.GasPriceSecurityMargin != 0) {
+        GasPriceSecurityMargin = other.GasPriceSecurityMargin;
       }
       if (other.UpdateTx != false) {
         UpdateTx = other.UpdateTx;
@@ -14929,7 +14931,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 32: {
-            PriceSecurityMargin = input.ReadUInt32();
+            GasPriceSecurityMargin = input.ReadUInt32();
             break;
           }
           case 40: {
@@ -14968,7 +14970,7 @@ namespace Land.Gno.Gnonative.V1 {
             break;
           }
           case 32: {
-            PriceSecurityMargin = input.ReadUInt32();
+            GasPriceSecurityMargin = input.ReadUInt32();
             break;
           }
           case 40: {
@@ -15020,6 +15022,8 @@ namespace Land.Gno.Gnonative.V1 {
       txJson_ = other.txJson_;
       gasWanted_ = other.gasWanted_;
       gasFee_ = other.gasFee_ != null ? other.gasFee_.Clone() : null;
+      storageDelta_ = other.storageDelta_;
+      storageFee_ = other.storageFee_ != null ? other.storageFee_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -15074,6 +15078,36 @@ namespace Land.Gno.Gnonative.V1 {
       }
     }
 
+    /// <summary>Field number for the "storage_delta" field.</summary>
+    public const int StorageDeltaFieldNumber = 4;
+    private long storageDelta_;
+    /// <summary>
+    /// The estimated storage delta for the transaction. Can be negative for "unlock"
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long StorageDelta {
+      get { return storageDelta_; }
+      set {
+        storageDelta_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "storage_fee" field.</summary>
+    public const int StorageFeeFieldNumber = 5;
+    private global::Land.Gno.Gnonative.V1.Coin storageFee_;
+    /// <summary>
+    /// The estimated storage fee for the transaction. Can be negative for "unlock"
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Land.Gno.Gnonative.V1.Coin StorageFee {
+      get { return storageFee_; }
+      set {
+        storageFee_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -15092,6 +15126,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (TxJson != other.TxJson) return false;
       if (GasWanted != other.GasWanted) return false;
       if (!object.Equals(GasFee, other.GasFee)) return false;
+      if (StorageDelta != other.StorageDelta) return false;
+      if (!object.Equals(StorageFee, other.StorageFee)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -15102,6 +15138,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (TxJson.Length != 0) hash ^= TxJson.GetHashCode();
       if (GasWanted != 0L) hash ^= GasWanted.GetHashCode();
       if (gasFee_ != null) hash ^= GasFee.GetHashCode();
+      if (StorageDelta != 0L) hash ^= StorageDelta.GetHashCode();
+      if (storageFee_ != null) hash ^= StorageFee.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -15132,6 +15170,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(26);
         output.WriteMessage(GasFee);
       }
+      if (StorageDelta != 0L) {
+        output.WriteRawTag(32);
+        output.WriteSInt64(StorageDelta);
+      }
+      if (storageFee_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(StorageFee);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -15154,6 +15200,14 @@ namespace Land.Gno.Gnonative.V1 {
         output.WriteRawTag(26);
         output.WriteMessage(GasFee);
       }
+      if (StorageDelta != 0L) {
+        output.WriteRawTag(32);
+        output.WriteSInt64(StorageDelta);
+      }
+      if (storageFee_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(StorageFee);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -15172,6 +15226,12 @@ namespace Land.Gno.Gnonative.V1 {
       }
       if (gasFee_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(GasFee);
+      }
+      if (StorageDelta != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(StorageDelta);
+      }
+      if (storageFee_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(StorageFee);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -15196,6 +15256,15 @@ namespace Land.Gno.Gnonative.V1 {
           GasFee = new global::Land.Gno.Gnonative.V1.Coin();
         }
         GasFee.MergeFrom(other.GasFee);
+      }
+      if (other.StorageDelta != 0L) {
+        StorageDelta = other.StorageDelta;
+      }
+      if (other.storageFee_ != null) {
+        if (storageFee_ == null) {
+          StorageFee = new global::Land.Gno.Gnonative.V1.Coin();
+        }
+        StorageFee.MergeFrom(other.StorageFee);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -15231,6 +15300,17 @@ namespace Land.Gno.Gnonative.V1 {
             input.ReadMessage(GasFee);
             break;
           }
+          case 32: {
+            StorageDelta = input.ReadSInt64();
+            break;
+          }
+          case 42: {
+            if (storageFee_ == null) {
+              StorageFee = new global::Land.Gno.Gnonative.V1.Coin();
+            }
+            input.ReadMessage(StorageFee);
+            break;
+          }
         }
       }
     #endif
@@ -15263,6 +15343,17 @@ namespace Land.Gno.Gnonative.V1 {
               GasFee = new global::Land.Gno.Gnonative.V1.Coin();
             }
             input.ReadMessage(GasFee);
+            break;
+          }
+          case 32: {
+            StorageDelta = input.ReadSInt64();
+            break;
+          }
+          case 42: {
+            if (storageFee_ == null) {
+              StorageFee = new global::Land.Gno.Gnonative.V1.Coin();
+            }
+            input.ReadMessage(StorageFee);
             break;
           }
         }

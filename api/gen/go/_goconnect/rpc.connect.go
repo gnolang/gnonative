@@ -264,15 +264,16 @@ type GnoNativeServiceClient interface {
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	// If UpdateTx is true, then update the transaction with the GasWanted amount.
 	// This uses the remote node determined by SetRemote.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
 	// The GasFee is the minimum gas wanted times the gas price, with a security margin.
 	// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-	// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+	// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+	// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
 	// This uses the remote node determined by SetRemote.
-	// This is similar to EstimateGas but also fetches the gas price from the remote node.
+	// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
 	EstimateTxFees(context.Context, *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
@@ -914,15 +915,16 @@ type GnoNativeServiceHandler interface {
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
 	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-	// If UpdateTx is true, then update the transaction with the gasWanted amount.
+	// If UpdateTx is true, then update the transaction with the GasWanted amount.
 	// This uses the remote node determined by SetRemote.
 	EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error)
 	// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
 	// The GasFee is the minimum gas wanted times the gas price, with a security margin.
 	// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-	// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+	// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+	// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
 	// This uses the remote node determined by SetRemote.
-	// This is similar to EstimateGas but also fetches the gas price from the remote node.
+	// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
 	EstimateTxFees(context.Context, *connect.Request[_go.EstimateTxFeesRequest]) (*connect.Response[_go.EstimateTxFeesResponse], error)
 	// Sign the transaction using the account with the given address.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.

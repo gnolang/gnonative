@@ -125,7 +125,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     txJson: string,
     address: Uint8Array,
     gasSecurityMargin: number,
-    priceSecurityMargin: number,
+    gasPriceSecurityMargin: number,
     updateTx: boolean,
   ): Promise<EstimateTxFeesResponse> {
     const client = this.#getClient();
@@ -133,7 +133,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
       txJson,
       address,
       gasSecurityMargin,
-      priceSecurityMargin,
+      gasPriceSecurityMargin,
       updateTx,
     });
     return response;

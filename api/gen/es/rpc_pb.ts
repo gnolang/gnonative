@@ -628,7 +628,7 @@ export const GnoNativeService: GenService<{
   },
   /**
    * EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-   * If UpdateTx is true, then update the transaction with the gasWanted amount.
+   * If UpdateTx is true, then update the transaction with the GasWanted amount.
    * This uses the remote node determined by SetRemote.
    *
    * @generated from rpc land.gno.gnonative.v1.GnoNativeService.EstimateGas
@@ -642,9 +642,10 @@ export const GnoNativeService: GenService<{
    * EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
    * The GasFee is the minimum gas wanted times the gas price, with a security margin.
    * The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-   * If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+   * In MsgCall, etc. you can set MaxDeposit to StorageFee.
+   * If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
    * This uses the remote node determined by SetRemote.
-   * This is similar to EstimateGas but also fetches the gas price from the remote node.
+   * This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
    *
    * @generated from rpc land.gno.gnonative.v1.GnoNativeService.EstimateTxFees
    */

@@ -347,7 +347,7 @@ message SignTxResponse {
 message EstimateGasRequest {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	string tx_json = 1;
-	// The address of the account to sign the transaction
+	// The address of the account that will sign the transaction
 	bytes address = 2;
 	// The security margin to apply to the estimated gas amount.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
@@ -367,7 +367,7 @@ message EstimateGasResponse {
 message EstimateTxFeesRequest {
 	// The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
 	string tx_json = 1;
-	// The address of the account to sign the transaction
+	// The address of the account that will sign the transaction
 	bytes address = 2;
 	// The security margin to apply to the estimated gas amount.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
@@ -376,7 +376,7 @@ message EstimateTxFeesRequest {
 	// The security margin to apply to the gas price.
 	// This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
 	// It will be multiplied by the fetched gas price.
-	uint32 price_security_margin = 4;
+	uint32 gas_price_security_margin = 4;
 	// The update boolean to update the gas wanted field in the transaction if true.
 	bool update_tx = 5;
 }
@@ -388,6 +388,10 @@ message EstimateTxFeesResponse {
 	sint64 gas_wanted = 2;
 	// The estimated fee for the transaction
 	Coin gas_fee = 3;
+	// The estimated storage delta for the transaction. Can be negative for "unlock"
+	sint64 storage_delta = 4 [json_name = "gas_wanted"];
+	// The estimated storage fee for the transaction. Can be negative for "unlock"
+	Coin storage_fee = 5 [json_name = "gas_fee"];
 }
 
 message BroadcastTxCommitRequest {

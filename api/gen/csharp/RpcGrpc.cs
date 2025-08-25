@@ -938,7 +938,7 @@ namespace Land.Gno.Gnonative.V1 {
 
       /// <summary>
       /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
+      /// If UpdateTx is true, then update the transaction with the GasWanted amount.
       /// This uses the remote node determined by SetRemote.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -954,9 +954,10 @@ namespace Land.Gno.Gnonative.V1 {
       /// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
       /// The GasFee is the minimum gas wanted times the gas price, with a security margin.
       /// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-      /// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+      /// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+      /// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
       /// This uses the remote node determined by SetRemote.
-      /// This is similar to EstimateGas but also fetches the gas price from the remote node.
+      /// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2640,7 +2641,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
+      /// If UpdateTx is true, then update the transaction with the GasWanted amount.
       /// This uses the remote node determined by SetRemote.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2655,7 +2656,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
+      /// If UpdateTx is true, then update the transaction with the GasWanted amount.
       /// This uses the remote node determined by SetRemote.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2668,7 +2669,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
+      /// If UpdateTx is true, then update the transaction with the GasWanted amount.
       /// This uses the remote node determined by SetRemote.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2683,7 +2684,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
-      /// If UpdateTx is true, then update the transaction with the gasWanted amount.
+      /// If UpdateTx is true, then update the transaction with the GasWanted amount.
       /// This uses the remote node determined by SetRemote.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2698,9 +2699,10 @@ namespace Land.Gno.Gnonative.V1 {
       /// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
       /// The GasFee is the minimum gas wanted times the gas price, with a security margin.
       /// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-      /// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+      /// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+      /// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
       /// This uses the remote node determined by SetRemote.
-      /// This is similar to EstimateGas but also fetches the gas price from the remote node.
+      /// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2716,9 +2718,10 @@ namespace Land.Gno.Gnonative.V1 {
       /// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
       /// The GasFee is the minimum gas wanted times the gas price, with a security margin.
       /// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-      /// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+      /// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+      /// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
       /// This uses the remote node determined by SetRemote.
-      /// This is similar to EstimateGas but also fetches the gas price from the remote node.
+      /// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -2732,9 +2735,10 @@ namespace Land.Gno.Gnonative.V1 {
       /// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
       /// The GasFee is the minimum gas wanted times the gas price, with a security margin.
       /// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-      /// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+      /// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+      /// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
       /// This uses the remote node determined by SetRemote.
-      /// This is similar to EstimateGas but also fetches the gas price from the remote node.
+      /// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2750,9 +2754,10 @@ namespace Land.Gno.Gnonative.V1 {
       /// EstimateTxFees estimates the gas and storage fees for the transaction to go through on the chain.
       /// The GasFee is the minimum gas wanted times the gas price, with a security margin.
       /// The StorageFee is the change in storage bytes types the deposit storage price, which may be negative if unlocking storage.
-      /// If UpdateTx is true, then update the transaction with the gasWanted and max depisit fee amounts.
+      /// In MsgCall, etc. you can set MaxDeposit to StorageFee.
+      /// If UpdateTx is true, then update the transaction with the GasWanted and GasFee amounts.
       /// This uses the remote node determined by SetRemote.
-      /// This is similar to EstimateGas but also fetches the gas price from the remote node.
+      /// This is similar to EstimateGas but also fetches the gas price from the remote node and parses the storage event.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
