@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/gnolang/gno/gno.land/pkg/keyscli"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
@@ -703,7 +704,7 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	gasWanted, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.SecurityMargin, req.Msg.UpdateTx)
+	gasWanted, _, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.SecurityMargin, req.Msg.UpdateTx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -722,13 +723,10 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 		return nil, err
 	}
 
-	gasWanted, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
+	gasWanted, events, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// TODO: estimateGasWanted should return the tx events
-	events := []abci.Event{
-		&StorageDepositEvent{Type: "StorageDeposit", BytesDelta: 1000, FeeDelta: "100000ugnot"}}
 
 	c, err := s.getClient(nil)
 	if err != nil {
@@ -775,7 +773,7 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 			Amount: fee,
 		},
 	}
-	if delta, storageFee, ok := GetStorageInfo(events); ok {
+	if delta, storageFee, ok := keyscli.GetStorageInfo(events); ok {
 		response.StorageDelta = delta
 		response.StorageFee = &api_gen.Coin{
 			Denom:  storageFee.Denom,
@@ -788,14 +786,14 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 
 // estimateGasWanted is a helper for EstimateGas, etc. Use the tx and address to call gnoclient.EstimateGas, then
 // multiply it by securityMarginPercent/100 and return the gas wanted. If updateTx is true, then update tx.Fee.GasWanted .
-func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securityMarginPercent uint32, updateTx bool) (int64, error) {
+func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securityMarginPercent uint32, updateTx bool) (int64, []abci.Event, error) {
 	signer, err := s.getSigner(address)
 	if err != nil {
-		return 0, err
+		return 0, nil, err
 	}
 	info, err := signer.Info()
 	if err != nil {
-		return 0, err
+		return 0, nil, err
 	}
 
 	// Set the tx signature using the public key. No need to sign to get the actual signature bytes.
@@ -805,12 +803,12 @@ func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securit
 
 	c, err := s.getClient(nil)
 	if err != nil {
-		return 0, getGrpcError(err)
+		return 0, nil, getGrpcError(err)
 	}
 
-	amount, err := c.EstimateGas(tx)
+	amount, events, err := c.EstimateGas(tx)
 	if err != nil {
-		return 0, getGrpcError(err)
+		return 0, nil, getGrpcError(err)
 	}
 
 	// Apply the security margin.
@@ -822,7 +820,7 @@ func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securit
 		tx.Fee.GasWanted = gasWanted
 	}
 
-	return gasWanted, nil
+	return gasWanted, events, nil
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
@@ -982,28 +980,3 @@ type StorageDepositEvent struct {
 }
 
 func (e StorageDepositEvent) AssertABCIEvent() {}
-
-// Temporary: Use tm2/pkg/crypto/keys/client after merging https://github.com/gnolang/gno/pull/4630
-func GetStorageInfo(events []abci.Event) (int64, std.Coin, bool) {
-	for _, event := range events {
-		depositEvent, ok := event.(StorageDepositEvent)
-		if !ok {
-			continue
-		}
-
-		fee, err := std.ParseCoin(depositEvent.FeeDelta)
-		if err != nil {
-			continue
-		}
-		bytes := depositEvent.BytesDelta
-		if depositEvent.Type == "UnlockDeposit" {
-			// For unlock, we want to display a negative bytes delta and fee
-			bytes = -bytes
-			fee.Amount = -fee.Amount
-		}
-
-		return bytes, fee, true
-	}
-
-	return 0, std.Coin{}, false
-}
