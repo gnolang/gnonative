@@ -389,9 +389,9 @@ message EstimateTxFeesResponse {
 	// The estimated fee for the transaction
 	Coin gas_fee = 3;
 	// The estimated storage delta for the transaction. Can be negative for "unlock"
-	sint64 storage_delta = 4 [json_name = "gas_wanted"];
+	sint64 storage_delta = 4;
 	// The estimated storage fee for the transaction. Can be negative for "unlock"
-	Coin storage_fee = 5 [json_name = "gas_fee"];
+	Coin storage_fee = 5;
 }
 
 message BroadcastTxCommitRequest {

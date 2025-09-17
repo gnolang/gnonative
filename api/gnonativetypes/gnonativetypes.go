@@ -376,9 +376,9 @@ type EstimateTxFeesResponse struct {
 	// The estimated fee for the transaction
 	GasFee Coin `json:"gas_fee" yaml:"gas_fee"`
 	// The estimated storage delta for the transaction. Can be negative for "unlock"
-	StorageDelta int64 `json:"gas_wanted" yaml:"gas_wanted"`
+	StorageDelta int64 `json:"storage_delta" yaml:"storage_delta"`
 	// The estimated storage fee for the transaction. Can be negative for "unlock"
-	StorageFee Coin `json:"gas_fee" yaml:"gas_fee"`
+	StorageFee Coin `json:"storage_fee" yaml:"storage_fee"`
 }
 
 type BroadcastTxCommitRequest struct {
