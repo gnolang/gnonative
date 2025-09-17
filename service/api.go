@@ -10,11 +10,14 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/gnolang/gno/gno.land/pkg/keyscli"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
+	"github.com/gnolang/gno/tm2/pkg/overflow"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"go.uber.org/zap"
@@ -701,13 +704,96 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	signer, err := s.getSigner(req.Msg.Address)
+	gasWanted, _, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.SecurityMargin, req.Msg.UpdateTx)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
 	if err != nil {
 		return nil, err
 	}
-	info, err := signer.Info()
+
+	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+}
+
+func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Request[api_gen.EstimateTxFeesRequest]) (*connect.Response[api_gen.EstimateTxFeesResponse], error) {
+	var tx std.Tx
+	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+		return nil, err
+	}
+
+	gasWanted, events, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	// Imitate gnokey CLI https://github.com/gnolang/gno/blob/de4b5b56c60126373ec0702234c196fdae365a0b/tm2/pkg/crypto/keys/client/broadcast.go#L142
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "auth/gasprice", Data: []byte{}})
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	gp := std.GasPrice{}
+	err = amino.UnmarshalJSON(qres.Response.Data, &gp)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	if gp.Gas == 0 {
+		// Can't get the gas price from the node
+		return nil, api_gen.ErrCode_ErrInvalidCoins
+	}
+	if gp.Price.Denom != "ugnot" {
+		return nil, api_gen.ErrCode_ErrInvalidCoins
+	}
+	fee := gasWanted/gp.Gas + 1
+	fee = overflow.Mulp(fee, gp.Price.Amount)
+	// fee buffer to cover the sudden change of gas price
+	feeBuffer := float64(req.Msg.GasPriceSecurityMargin) / 100
+	fee = int64(float64(fee) * feeBuffer)
+
+	if req.Msg.UpdateTx {
+		tx.Fee.GasFee = std.NewCoin(gp.Price.Denom, fee)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
 	if err != nil {
 		return nil, err
+	}
+
+	response := &api_gen.EstimateTxFeesResponse{
+		TxJson:    string(txJSON),
+		GasWanted: gasWanted,
+		GasFee: &api_gen.Coin{
+			Denom:  gp.Price.Denom,
+			Amount: fee,
+		},
+	}
+	if delta, storageFee, ok := keyscli.GetStorageInfo(events); ok {
+		response.StorageDelta = delta
+		response.StorageFee = &api_gen.Coin{
+			Denom:  storageFee.Denom,
+			Amount: storageFee.Amount,
+		}
+	}
+
+	return connect.NewResponse(response), nil
+}
+
+// estimateGasWanted is a helper for EstimateGas, etc. Use the tx and address to call gnoclient.EstimateGas, then
+// multiply it by securityMarginPercent/100 and return the gas wanted. If updateTx is true, then update tx.Fee.GasWanted .
+func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securityMarginPercent uint32, updateTx bool) (int64, []abci.Event, error) {
+	signer, err := s.getSigner(address)
+	if err != nil {
+		return 0, nil, err
+	}
+	info, err := signer.Info()
+	if err != nil {
+		return 0, nil, err
 	}
 
 	// Set the tx signature using the public key. No need to sign to get the actual signature bytes.
@@ -717,29 +803,24 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 
 	c, err := s.getClient(nil)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return 0, nil, getGrpcError(err)
 	}
 
-	amount, err := c.EstimateGas(&tx)
+	amount, events, err := c.EstimateGas(tx)
 	if err != nil {
-		return nil, getGrpcError(err)
+		return 0, nil, getGrpcError(err)
 	}
 
 	// Apply the security margin.
 	// The security margin is a decimal numeral without the decimal seprator.
-	gasWanted := int64(float64(amount) * float64(req.Msg.SecurityMargin) / 100)
+	gasWanted := int64(float64(amount) * float64(securityMarginPercent) / 100)
 
 	// Update the transaction
-	if req.Msg.UpdateTx {
+	if updateTx {
 		tx.Fee.GasWanted = gasWanted
 	}
 
-	txJSON, err := amino.MarshalJSON(tx)
-	if err != nil {
-		return nil, err
-	}
-
-	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+	return gasWanted, events, nil
 }
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
@@ -889,3 +970,13 @@ func getGrpcError(err error) error {
 		return err
 	}
 }
+
+// Temporary: Remove after merging https://github.com/gnolang/gno/pull/4630
+type StorageDepositEvent struct {
+	// "StorageDeposit" or "UnlockDeposit"
+	Type       string `json:"type"`
+	BytesDelta int64  `json:"bytes_delta"`
+	FeeDelta   string `json:"fee_delta"`
+}
+
+func (e StorageDepositEvent) AssertABCIEvent() {}

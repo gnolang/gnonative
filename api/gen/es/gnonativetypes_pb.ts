@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file gnonativetypes.proto.
  */
 export const file_gnonativetypes: GenFile = /*@__PURE__*/
-  fileDesc("ChRnbm9uYXRpdmV0eXBlcy5wcm90bxIVbGFuZC5nbm8uZ25vbmF0aXZlLnYxIiIKEFNldFJlbW90ZVJlcXVlc3QSDgoGcmVtb3RlGAEgASgJIhMKEVNldFJlbW90ZVJlc3BvbnNlIhIKEEdldFJlbW90ZVJlcXVlc3QiIwoRR2V0UmVtb3RlUmVzcG9uc2USDgoGcmVtb3RlGAEgASgJIiUKEVNldENoYWluSURSZXF1ZXN0EhAKCGNoYWluX2lkGAEgASgJIhQKElNldENoYWluSURSZXNwb25zZSITChFHZXRDaGFpbklEUmVxdWVzdCImChJHZXRDaGFpbklEUmVzcG9uc2USEAoIY2hhaW5faWQYASABKAkiNwoSU2V0UGFzc3dvcmRSZXF1ZXN0EhAKCHBhc3N3b3JkGAEgASgJEg8KB2FkZHJlc3MYAiABKAwiFQoTU2V0UGFzc3dvcmRSZXNwb25zZSJAChVSb3RhdGVQYXNzd29yZFJlcXVlc3QSFAoMbmV3X3Bhc3N3b3JkGAEgASgJEhEKCWFkZHJlc3NlcxgCIAMoDCIYChZSb3RhdGVQYXNzd29yZFJlc3BvbnNlIh8KHUdlbmVyYXRlUmVjb3ZlcnlQaHJhc2VSZXF1ZXN0IjAKHkdlbmVyYXRlUmVjb3ZlcnlQaHJhc2VSZXNwb25zZRIOCgZwaHJhc2UYASABKAkiRwoHS2V5SW5mbxIMCgR0eXBlGAEgASgNEgwKBG5hbWUYAiABKAkSDwoHcHViX2tleRgDIAEoDBIPCgdhZGRyZXNzGAQgASgMIiUKBENvaW4SDQoFZGVub20YASABKAkSDgoGYW1vdW50GAIgASgSIoUBCgtCYXNlQWNjb3VudBIPCgdhZGRyZXNzGAEgASgMEioKBWNvaW5zGAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SDwoHcHViX2tleRgDIAEoDBIWCg5hY2NvdW50X251bWJlchgEIAEoBBIQCghzZXF1ZW5jZRgFIAEoBCIUChJMaXN0S2V5SW5mb1JlcXVlc3QiTQoTTGlzdEtleUluZm9SZXNwb25zZRI2CgRrZXlzGAEgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIiMKE0hhc0tleUJ5TmFtZVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIjChRIYXNLZXlCeU5hbWVSZXNwb25zZRILCgNoYXMYASABKAgiKQoWSGFzS2V5QnlBZGRyZXNzUmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIiYKF0hhc0tleUJ5QWRkcmVzc1Jlc3BvbnNlEgsKA2hhcxgBIAEoCCI2ChxIYXNLZXlCeU5hbWVPckFkZHJlc3NSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJIiwKHUhhc0tleUJ5TmFtZU9yQWRkcmVzc1Jlc3BvbnNlEgsKA2hhcxgBIAEoCCInChdHZXRLZXlJbmZvQnlOYW1lUmVxdWVzdBIMCgRuYW1lGAEgASgJIlEKGEdldEtleUluZm9CeU5hbWVSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iLQoaR2V0S2V5SW5mb0J5QWRkcmVzc1JlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCJUChtHZXRLZXlJbmZvQnlBZGRyZXNzUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIjoKIEdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJIloKIUdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iiAEKFENyZWF0ZUFjY291bnRSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJEhAKCG1uZW1vbmljGAIgASgJEhQKDGJpcDM5X3Bhc3N3ZBgDIAEoCRIQCghwYXNzd29yZBgEIAEoCRIPCgdhY2NvdW50GAUgASgNEg0KBWluZGV4GAYgASgNIk4KFUNyZWF0ZUFjY291bnRSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iYwoTQ3JlYXRlTGVkZ2VyUmVxdWVzdBIMCgRuYW1lGAEgASgJEhEKCWFsZ29yaXRobRgCIAEoCRILCgNocnAYAyABKAkSDwoHYWNjb3VudBgEIAEoDRINCgVpbmRleBgFIAEoDSJNChRDcmVhdGVMZWRnZXJSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iMAoWQWN0aXZhdGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSJmChdBY3RpdmF0ZUFjY291bnRSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8SFAoMaGFzX3Bhc3N3b3JkGAIgASgIIi0KGkdldEFjdGl2YXRlZEFjY291bnRSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwiagobR2V0QWN0aXZhdGVkQWNjb3VudFJlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbxIUCgxoYXNfcGFzc3dvcmQYAiABKAgiJgoTUXVlcnlBY2NvdW50UmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIlAKFFF1ZXJ5QWNjb3VudFJlc3BvbnNlEjgKDGFjY291bnRfaW5mbxgBIAEoCzIiLmxhbmQuZ25vLmdub25hdGl2ZS52MS5CYXNlQWNjb3VudCJXChREZWxldGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIVCg1za2lwX3Bhc3N3b3JkGAMgASgIIhcKFURlbGV0ZUFjY291bnRSZXNwb25zZSIqCgxRdWVyeVJlcXVlc3QSDAoEcGF0aBgBIAEoCRIMCgRkYXRhGAIgASgMIh8KDVF1ZXJ5UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMIjMKDVJlbmRlclJlcXVlc3QSFAoMcGFja2FnZV9wYXRoGAEgASgJEgwKBGFyZ3MYAiABKAkiIAoOUmVuZGVyUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJIjgKDFFFdmFsUmVxdWVzdBIUCgxwYWNrYWdlX3BhdGgYASABKAkSEgoKZXhwcmVzc2lvbhgCIAEoCSIfCg1RRXZhbFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSKXAQoHTXNnQ2FsbBIUCgxwYWNrYWdlX3BhdGgYASABKAkSCwoDZm5jGAIgASgJEgwKBGFyZ3MYAyADKAkSKQoEc2VuZBgEIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEjAKC21heF9kZXBvc2l0GAUgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4ijAEKC0NhbGxSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDmNhbGxlcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnQ2FsbFIETXNncyI8CgxDYWxsUmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIkoKB01zZ1NlbmQSEgoKdG9fYWRkcmVzcxgBIAEoDBIrCgZhbW91bnQYAiADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKMAQoLU2VuZFJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFgoOY2FsbGVyX2FkZHJlc3MYBCABKAwSMgoEbXNncxgFIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dTZW5kUgRNc2dzIiwKDFNlbmRSZXNwb25zZRIMCgRoYXNoGAEgASgMEg4KBmhlaWdodBgCIAEoEiJ2CgZNc2dSdW4SDwoHcGFja2FnZRgBIAEoCRIpCgRzZW5kGAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SMAoLbWF4X2RlcG9zaXQYAyADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKKAQoKUnVuUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5jYWxsZXJfYWRkcmVzcxgEIAEoDBIxCgRtc2dzGAUgAygLMh0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1J1blIETXNncyI7CgtSdW5SZXNwb25zZRIOCgZyZXN1bHQYASABKAkSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIiIQoOTWFrZVR4UmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCSJiCg1TaWduVHhSZXF1ZXN0Eg8KB3R4X2pzb24YASABKAkSDwoHYWRkcmVzcxgCIAEoDBIWCg5hY2NvdW50X251bWJlchgDIAEoBBIXCg9zZXF1ZW5jZV9udW1iZXIYBCABKAQiMQoOU2lnblR4UmVzcG9uc2USHwoOc2lnbmVkX3R4X2pzb24YASABKAlSB3R4X2pzb24ikwEKEkVzdGltYXRlR2FzUmVxdWVzdBIPCgd0eF9qc29uGAEgASgJEg8KB2FkZHJlc3MYAiABKAwSFwoPc2VjdXJpdHlfbWFyZ2luGAMgASgNEhEKCXVwZGF0ZV90eBgEIAEoCBIWCg5hY2NvdW50X251bWJlchgFIAEoBBIXCg9zZXF1ZW5jZV9udW1iZXIYBiABKAQiOgoTRXN0aW1hdGVHYXNSZXNwb25zZRIPCgd0eF9qc29uGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBIiOwoYQnJvYWRjYXN0VHhDb21taXRSZXF1ZXN0Eh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIkkKGUJyb2FkY2FzdFR4Q29tbWl0UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIikKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCIxChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIWCg5iZWNoMzJfYWRkcmVzcxgBIAEoCSIyChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSFgoOYmVjaDMyX2FkZHJlc3MYASABKAkiLAoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIi4KGkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhAKCG1uZW1vbmljGAEgASgJIi4KG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIisKG1ZhbGlkYXRlTW5lbW9uaWNXb3JkUmVxdWVzdBIMCgR3b3JkGAEgASgJIi0KHFZhbGlkYXRlTW5lbW9uaWNXb3JkUmVzcG9uc2USDQoFdmFsaWQYASABKAgiLwodVmFsaWRhdGVNbmVtb25pY1BocmFzZVJlcXVlc3QSDgoGcGhyYXNlGAEgASgJIi8KHlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNwb25zZRINCgV2YWxpZBgBIAEoCCIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIpChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSDQoFVmFsdWUYASADKAxCLFoqZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS92NC9hcGkvZ2VuL2dvYgZwcm90bzM");
+  fileDesc("ChRnbm9uYXRpdmV0eXBlcy5wcm90bxIVbGFuZC5nbm8uZ25vbmF0aXZlLnYxIiIKEFNldFJlbW90ZVJlcXVlc3QSDgoGcmVtb3RlGAEgASgJIhMKEVNldFJlbW90ZVJlc3BvbnNlIhIKEEdldFJlbW90ZVJlcXVlc3QiIwoRR2V0UmVtb3RlUmVzcG9uc2USDgoGcmVtb3RlGAEgASgJIiUKEVNldENoYWluSURSZXF1ZXN0EhAKCGNoYWluX2lkGAEgASgJIhQKElNldENoYWluSURSZXNwb25zZSITChFHZXRDaGFpbklEUmVxdWVzdCImChJHZXRDaGFpbklEUmVzcG9uc2USEAoIY2hhaW5faWQYASABKAkiNwoSU2V0UGFzc3dvcmRSZXF1ZXN0EhAKCHBhc3N3b3JkGAEgASgJEg8KB2FkZHJlc3MYAiABKAwiFQoTU2V0UGFzc3dvcmRSZXNwb25zZSJAChVSb3RhdGVQYXNzd29yZFJlcXVlc3QSFAoMbmV3X3Bhc3N3b3JkGAEgASgJEhEKCWFkZHJlc3NlcxgCIAMoDCIYChZSb3RhdGVQYXNzd29yZFJlc3BvbnNlIh8KHUdlbmVyYXRlUmVjb3ZlcnlQaHJhc2VSZXF1ZXN0IjAKHkdlbmVyYXRlUmVjb3ZlcnlQaHJhc2VSZXNwb25zZRIOCgZwaHJhc2UYASABKAkiRwoHS2V5SW5mbxIMCgR0eXBlGAEgASgNEgwKBG5hbWUYAiABKAkSDwoHcHViX2tleRgDIAEoDBIPCgdhZGRyZXNzGAQgASgMIiUKBENvaW4SDQoFZGVub20YASABKAkSDgoGYW1vdW50GAIgASgSIoUBCgtCYXNlQWNjb3VudBIPCgdhZGRyZXNzGAEgASgMEioKBWNvaW5zGAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SDwoHcHViX2tleRgDIAEoDBIWCg5hY2NvdW50X251bWJlchgEIAEoBBIQCghzZXF1ZW5jZRgFIAEoBCIUChJMaXN0S2V5SW5mb1JlcXVlc3QiTQoTTGlzdEtleUluZm9SZXNwb25zZRI2CgRrZXlzGAEgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIiMKE0hhc0tleUJ5TmFtZVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIjChRIYXNLZXlCeU5hbWVSZXNwb25zZRILCgNoYXMYASABKAgiKQoWSGFzS2V5QnlBZGRyZXNzUmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIiYKF0hhc0tleUJ5QWRkcmVzc1Jlc3BvbnNlEgsKA2hhcxgBIAEoCCI2ChxIYXNLZXlCeU5hbWVPckFkZHJlc3NSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJIiwKHUhhc0tleUJ5TmFtZU9yQWRkcmVzc1Jlc3BvbnNlEgsKA2hhcxgBIAEoCCInChdHZXRLZXlJbmZvQnlOYW1lUmVxdWVzdBIMCgRuYW1lGAEgASgJIlEKGEdldEtleUluZm9CeU5hbWVSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iLQoaR2V0S2V5SW5mb0J5QWRkcmVzc1JlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCJUChtHZXRLZXlJbmZvQnlBZGRyZXNzUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIjoKIEdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJIloKIUdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iiAEKFENyZWF0ZUFjY291bnRSZXF1ZXN0EhYKDm5hbWVfb3JfYmVjaDMyGAEgASgJEhAKCG1uZW1vbmljGAIgASgJEhQKDGJpcDM5X3Bhc3N3ZBgDIAEoCRIQCghwYXNzd29yZBgEIAEoCRIPCgdhY2NvdW50GAUgASgNEg0KBWluZGV4GAYgASgNIk4KFUNyZWF0ZUFjY291bnRSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iYwoTQ3JlYXRlTGVkZ2VyUmVxdWVzdBIMCgRuYW1lGAEgASgJEhEKCWFsZ29yaXRobRgCIAEoCRILCgNocnAYAyABKAkSDwoHYWNjb3VudBgEIAEoDRINCgVpbmRleBgFIAEoDSJNChRDcmVhdGVMZWRnZXJSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8iMAoWQWN0aXZhdGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSJmChdBY3RpdmF0ZUFjY291bnRSZXNwb25zZRI1CgNrZXkYASABKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuS2V5SW5mb1IIa2V5X2luZm8SFAoMaGFzX3Bhc3N3b3JkGAIgASgIIi0KGkdldEFjdGl2YXRlZEFjY291bnRSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwiagobR2V0QWN0aXZhdGVkQWNjb3VudFJlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbxIUCgxoYXNfcGFzc3dvcmQYAiABKAgiJgoTUXVlcnlBY2NvdW50UmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIlAKFFF1ZXJ5QWNjb3VudFJlc3BvbnNlEjgKDGFjY291bnRfaW5mbxgBIAEoCzIiLmxhbmQuZ25vLmdub25hdGl2ZS52MS5CYXNlQWNjb3VudCJXChREZWxldGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIVCg1za2lwX3Bhc3N3b3JkGAMgASgIIhcKFURlbGV0ZUFjY291bnRSZXNwb25zZSIqCgxRdWVyeVJlcXVlc3QSDAoEcGF0aBgBIAEoCRIMCgRkYXRhGAIgASgMIh8KDVF1ZXJ5UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMIjMKDVJlbmRlclJlcXVlc3QSFAoMcGFja2FnZV9wYXRoGAEgASgJEgwKBGFyZ3MYAiABKAkiIAoOUmVuZGVyUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJIjgKDFFFdmFsUmVxdWVzdBIUCgxwYWNrYWdlX3BhdGgYASABKAkSEgoKZXhwcmVzc2lvbhgCIAEoCSIfCg1RRXZhbFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSKXAQoHTXNnQ2FsbBIUCgxwYWNrYWdlX3BhdGgYASABKAkSCwoDZm5jGAIgASgJEgwKBGFyZ3MYAyADKAkSKQoEc2VuZBgEIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEjAKC21heF9kZXBvc2l0GAUgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4ijAEKC0NhbGxSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDmNhbGxlcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnQ2FsbFIETXNncyI8CgxDYWxsUmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIkoKB01zZ1NlbmQSEgoKdG9fYWRkcmVzcxgBIAEoDBIrCgZhbW91bnQYAiADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKMAQoLU2VuZFJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFgoOY2FsbGVyX2FkZHJlc3MYBCABKAwSMgoEbXNncxgFIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dTZW5kUgRNc2dzIiwKDFNlbmRSZXNwb25zZRIMCgRoYXNoGAEgASgMEg4KBmhlaWdodBgCIAEoEiJ2CgZNc2dSdW4SDwoHcGFja2FnZRgBIAEoCRIpCgRzZW5kGAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SMAoLbWF4X2RlcG9zaXQYAyADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKKAQoKUnVuUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5jYWxsZXJfYWRkcmVzcxgEIAEoDBIxCgRtc2dzGAUgAygLMh0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1J1blIETXNncyI7CgtSdW5SZXNwb25zZRIOCgZyZXN1bHQYASABKAkSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIiIQoOTWFrZVR4UmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCSJiCg1TaWduVHhSZXF1ZXN0Eg8KB3R4X2pzb24YASABKAkSDwoHYWRkcmVzcxgCIAEoDBIWCg5hY2NvdW50X251bWJlchgDIAEoBBIXCg9zZXF1ZW5jZV9udW1iZXIYBCABKAQiMQoOU2lnblR4UmVzcG9uc2USHwoOc2lnbmVkX3R4X2pzb24YASABKAlSB3R4X2pzb24iYgoSRXN0aW1hdGVHYXNSZXF1ZXN0Eg8KB3R4X2pzb24YASABKAkSDwoHYWRkcmVzcxgCIAEoDBIXCg9zZWN1cml0eV9tYXJnaW4YAyABKA0SEQoJdXBkYXRlX3R4GAQgASgIIjoKE0VzdGltYXRlR2FzUmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSIowBChVFc3RpbWF0ZVR4RmVlc1JlcXVlc3QSDwoHdHhfanNvbhgBIAEoCRIPCgdhZGRyZXNzGAIgASgMEhsKE2dhc19zZWN1cml0eV9tYXJnaW4YAyABKA0SIQoZZ2FzX3ByaWNlX3NlY3VyaXR5X21hcmdpbhgEIAEoDRIRCgl1cGRhdGVfdHgYBSABKAgitAEKFkVzdGltYXRlVHhGZWVzUmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEiwKB2dhc19mZWUYAyABKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIVCg1zdG9yYWdlX2RlbHRhGAQgASgSEjAKC3N0b3JhZ2VfZmVlGAUgASgLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4iOwoYQnJvYWRjYXN0VHhDb21taXRSZXF1ZXN0Eh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIkkKGUJyb2FkY2FzdFR4Q29tbWl0UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIikKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCIxChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIWCg5iZWNoMzJfYWRkcmVzcxgBIAEoCSIyChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSFgoOYmVjaDMyX2FkZHJlc3MYASABKAkiLAoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIi4KGkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhAKCG1uZW1vbmljGAEgASgJIi4KG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIisKG1ZhbGlkYXRlTW5lbW9uaWNXb3JkUmVxdWVzdBIMCgR3b3JkGAEgASgJIi0KHFZhbGlkYXRlTW5lbW9uaWNXb3JkUmVzcG9uc2USDQoFdmFsaWQYASABKAgiLwodVmFsaWRhdGVNbmVtb25pY1BocmFzZVJlcXVlc3QSDgoGcGhyYXNlGAEgASgJIi8KHlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNwb25zZRINCgV2YWxpZBgBIAEoCCIiCgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIrCg1IZWxsb1Jlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIoChJIZWxsb1N0cmVhbVJlcXVlc3QSEgoEbmFtZRgBIAEoCVIETmFtZSIxChNIZWxsb1N0cmVhbVJlc3BvbnNlEhoKCGdyZWV0aW5nGAEgASgJUghHcmVldGluZyIpChhHTk9OQVRJVkVUWVBFU19CeXRlc0xpc3QSDQoFVmFsdWUYASADKAxCLFoqZ2l0aHViLmNvbS9nbm9sYW5nL2dub25hdGl2ZS92NC9hcGkvZ2VuL2dvYgZwcm90bzM");
 
 /**
  * messages
@@ -1392,7 +1392,7 @@ export type EstimateGasRequest = Message<"land.gno.gnonative.v1.EstimateGasReque
   txJson: string;
 
   /**
-   * The address of the account to sign the transaction
+   * The address of the account that will sign the transaction
    *
    * @generated from field: bytes address = 2;
    */
@@ -1413,20 +1413,6 @@ export type EstimateGasRequest = Message<"land.gno.gnonative.v1.EstimateGasReque
    * @generated from field: bool update_tx = 4;
    */
   updateTx: boolean;
-
-  /**
-   * The signer's account number on the blockchain. If 0 then query the blockchain for the value.
-   *
-   * @generated from field: uint64 account_number = 5;
-   */
-  accountNumber: bigint;
-
-  /**
-   * The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
-   *
-   * @generated from field: uint64 sequence_number = 6;
-   */
-  sequenceNumber: bigint;
 };
 
 /**
@@ -1463,6 +1449,104 @@ export const EstimateGasResponseSchema: GenMessage<EstimateGasResponse> = /*@__P
   messageDesc(file_gnonativetypes, 62);
 
 /**
+ * @generated from message land.gno.gnonative.v1.EstimateTxFeesRequest
+ */
+export type EstimateTxFeesRequest = Message<"land.gno.gnonative.v1.EstimateTxFeesRequest"> & {
+  /**
+   * The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson: string;
+
+  /**
+   * The address of the account that will sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address: Uint8Array;
+
+  /**
+   * The security margin to apply to the estimated gas amount.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the estimated gas amount.
+   *
+   * @generated from field: uint32 gas_security_margin = 3;
+   */
+  gasSecurityMargin: number;
+
+  /**
+   * The security margin to apply to the gas price.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the fetched gas price.
+   *
+   * @generated from field: uint32 gas_price_security_margin = 4;
+   */
+  gasPriceSecurityMargin: number;
+
+  /**
+   * The update boolean to update the gas wanted field in the transaction if true.
+   *
+   * @generated from field: bool update_tx = 5;
+   */
+  updateTx: boolean;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.EstimateTxFeesRequest.
+ * Use `create(EstimateTxFeesRequestSchema)` to create a new message.
+ */
+export const EstimateTxFeesRequestSchema: GenMessage<EstimateTxFeesRequest> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 63);
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateTxFeesResponse
+ */
+export type EstimateTxFeesResponse = Message<"land.gno.gnonative.v1.EstimateTxFeesResponse"> & {
+  /**
+   * The JSON encoding of the unsigned transaction
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson: string;
+
+  /**
+   * The estimated gas wanted for the transaction
+   *
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted: bigint;
+
+  /**
+   * The estimated fee for the transaction
+   *
+   * @generated from field: land.gno.gnonative.v1.Coin gas_fee = 3;
+   */
+  gasFee?: Coin;
+
+  /**
+   * The estimated storage delta for the transaction. Can be negative for "unlock"
+   *
+   * @generated from field: sint64 storage_delta = 4;
+   */
+  storageDelta: bigint;
+
+  /**
+   * The estimated storage fee for the transaction. Can be negative for "unlock"
+   *
+   * @generated from field: land.gno.gnonative.v1.Coin storage_fee = 5;
+   */
+  storageFee?: Coin;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.EstimateTxFeesResponse.
+ * Use `create(EstimateTxFeesResponseSchema)` to create a new message.
+ */
+export const EstimateTxFeesResponseSchema: GenMessage<EstimateTxFeesResponse> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 64);
+
+/**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitRequest
  */
 export type BroadcastTxCommitRequest = Message<"land.gno.gnonative.v1.BroadcastTxCommitRequest"> & {
@@ -1479,7 +1563,7 @@ export type BroadcastTxCommitRequest = Message<"land.gno.gnonative.v1.BroadcastT
  * Use `create(BroadcastTxCommitRequestSchema)` to create a new message.
  */
 export const BroadcastTxCommitRequestSchema: GenMessage<BroadcastTxCommitRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 63);
+  messageDesc(file_gnonativetypes, 65);
 
 /**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitResponse
@@ -1510,7 +1594,7 @@ export type BroadcastTxCommitResponse = Message<"land.gno.gnonative.v1.Broadcast
  * Use `create(BroadcastTxCommitResponseSchema)` to create a new message.
  */
 export const BroadcastTxCommitResponseSchema: GenMessage<BroadcastTxCommitResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 64);
+  messageDesc(file_gnonativetypes, 66);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressToBech32Request
@@ -1527,7 +1611,7 @@ export type AddressToBech32Request = Message<"land.gno.gnonative.v1.AddressToBec
  * Use `create(AddressToBech32RequestSchema)` to create a new message.
  */
 export const AddressToBech32RequestSchema: GenMessage<AddressToBech32Request> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 65);
+  messageDesc(file_gnonativetypes, 67);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressToBech32Response
@@ -1544,7 +1628,7 @@ export type AddressToBech32Response = Message<"land.gno.gnonative.v1.AddressToBe
  * Use `create(AddressToBech32ResponseSchema)` to create a new message.
  */
 export const AddressToBech32ResponseSchema: GenMessage<AddressToBech32Response> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 66);
+  messageDesc(file_gnonativetypes, 68);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromBech32Request
@@ -1561,7 +1645,7 @@ export type AddressFromBech32Request = Message<"land.gno.gnonative.v1.AddressFro
  * Use `create(AddressFromBech32RequestSchema)` to create a new message.
  */
 export const AddressFromBech32RequestSchema: GenMessage<AddressFromBech32Request> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 67);
+  messageDesc(file_gnonativetypes, 69);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromBech32Response
@@ -1578,7 +1662,7 @@ export type AddressFromBech32Response = Message<"land.gno.gnonative.v1.AddressFr
  * Use `create(AddressFromBech32ResponseSchema)` to create a new message.
  */
 export const AddressFromBech32ResponseSchema: GenMessage<AddressFromBech32Response> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 68);
+  messageDesc(file_gnonativetypes, 70);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromMnemonicRequest
@@ -1595,7 +1679,7 @@ export type AddressFromMnemonicRequest = Message<"land.gno.gnonative.v1.AddressF
  * Use `create(AddressFromMnemonicRequestSchema)` to create a new message.
  */
 export const AddressFromMnemonicRequestSchema: GenMessage<AddressFromMnemonicRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 69);
+  messageDesc(file_gnonativetypes, 71);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromMnemonicResponse
@@ -1612,7 +1696,7 @@ export type AddressFromMnemonicResponse = Message<"land.gno.gnonative.v1.Address
  * Use `create(AddressFromMnemonicResponseSchema)` to create a new message.
  */
 export const AddressFromMnemonicResponseSchema: GenMessage<AddressFromMnemonicResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 70);
+  messageDesc(file_gnonativetypes, 72);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordRequest
@@ -1629,7 +1713,7 @@ export type ValidateMnemonicWordRequest = Message<"land.gno.gnonative.v1.Validat
  * Use `create(ValidateMnemonicWordRequestSchema)` to create a new message.
  */
 export const ValidateMnemonicWordRequestSchema: GenMessage<ValidateMnemonicWordRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 71);
+  messageDesc(file_gnonativetypes, 73);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordResponse
@@ -1646,7 +1730,7 @@ export type ValidateMnemonicWordResponse = Message<"land.gno.gnonative.v1.Valida
  * Use `create(ValidateMnemonicWordResponseSchema)` to create a new message.
  */
 export const ValidateMnemonicWordResponseSchema: GenMessage<ValidateMnemonicWordResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 72);
+  messageDesc(file_gnonativetypes, 74);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
@@ -1663,7 +1747,7 @@ export type ValidateMnemonicPhraseRequest = Message<"land.gno.gnonative.v1.Valid
  * Use `create(ValidateMnemonicPhraseRequestSchema)` to create a new message.
  */
 export const ValidateMnemonicPhraseRequestSchema: GenMessage<ValidateMnemonicPhraseRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 73);
+  messageDesc(file_gnonativetypes, 75);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
@@ -1680,7 +1764,7 @@ export type ValidateMnemonicPhraseResponse = Message<"land.gno.gnonative.v1.Vali
  * Use `create(ValidateMnemonicPhraseResponseSchema)` to create a new message.
  */
 export const ValidateMnemonicPhraseResponseSchema: GenMessage<ValidateMnemonicPhraseResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 74);
+  messageDesc(file_gnonativetypes, 76);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloRequest
@@ -1697,7 +1781,7 @@ export type HelloRequest = Message<"land.gno.gnonative.v1.HelloRequest"> & {
  * Use `create(HelloRequestSchema)` to create a new message.
  */
 export const HelloRequestSchema: GenMessage<HelloRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 75);
+  messageDesc(file_gnonativetypes, 77);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloResponse
@@ -1714,7 +1798,7 @@ export type HelloResponse = Message<"land.gno.gnonative.v1.HelloResponse"> & {
  * Use `create(HelloResponseSchema)` to create a new message.
  */
 export const HelloResponseSchema: GenMessage<HelloResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 76);
+  messageDesc(file_gnonativetypes, 78);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloStreamRequest
@@ -1731,7 +1815,7 @@ export type HelloStreamRequest = Message<"land.gno.gnonative.v1.HelloStreamReque
  * Use `create(HelloStreamRequestSchema)` to create a new message.
  */
 export const HelloStreamRequestSchema: GenMessage<HelloStreamRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 77);
+  messageDesc(file_gnonativetypes, 79);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloStreamResponse
@@ -1748,7 +1832,7 @@ export type HelloStreamResponse = Message<"land.gno.gnonative.v1.HelloStreamResp
  * Use `create(HelloStreamResponseSchema)` to create a new message.
  */
 export const HelloStreamResponseSchema: GenMessage<HelloStreamResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 78);
+  messageDesc(file_gnonativetypes, 80);
 
 /**
  * @generated from message land.gno.gnonative.v1.GNONATIVETYPES_BytesList
@@ -1765,5 +1849,5 @@ export type GNONATIVETYPES_BytesList = Message<"land.gno.gnonative.v1.GNONATIVET
  * Use `create(GNONATIVETYPES_BytesListSchema)` to create a new message.
  */
 export const GNONATIVETYPES_BytesListSchema: GenMessage<GNONATIVETYPES_BytesList> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 79);
+  messageDesc(file_gnonativetypes, 81);
 
