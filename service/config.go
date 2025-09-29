@@ -4,20 +4,24 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/gnolang/gno/tm2/pkg/db"
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
-const DEFAULT_TCP_ADDR = ":26658"
-const DEFAULT_SOCKET_SUBDIR = "s"
-const DEFAULT_SOCKET_FILE = "gno"
+const (
+	DEFAULT_TCP_ADDR      = ":26658"
+	DEFAULT_SOCKET_SUBDIR = "s"
+	DEFAULT_SOCKET_FILE   = "gno"
+)
 
 // Config describes a set of settings for a GnoNativeService
 type Config struct {
 	Logger             *zap.Logger
 	Remote             string
 	ChainID            string
+	NativeDB           db.DB
 	RootDir            string
 	TmpDir             string
 	TcpAddr            string
@@ -158,6 +162,16 @@ var WithFallbacChainID GnoNativeOption = func(cfg *Config) error {
 		return fallbackChainID.opt(cfg)
 	}
 	return nil
+}
+
+// --- NativeDB options ---
+
+// WithNativeDB sets the given native DB.
+var WithNativeDB = func(db db.DB) GnoNativeOption {
+	return func(cfg *Config) error {
+		cfg.NativeDB = db
+		return nil
+	}
 }
 
 // --- RootDir options ---

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -107,7 +108,16 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		return nil, err
 	}
 
-	svc.keybase, _ = keys.NewKeyBaseFromDir(cfg.RootDir)
+	if cfg.NativeDB != nil {
+		fmt.Println("remi: using provided native db")
+		svc.keybase = keys.NewDBKeybase(cfg.NativeDB)
+	} else {
+		var err error
+		svc.keybase, err = keys.NewKeyBaseFromDir(cfg.RootDir)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	var err error
 	svc.rpcClient, err = rpcclient.NewHTTPClient(cfg.Remote)
