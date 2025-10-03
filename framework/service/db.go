@@ -9,6 +9,8 @@ import (
 	mdb "github.com/gnolang/gno/tm2/pkg/db"
 )
 
+var errShort = fmt.Errorf("chunk blob: short buffer")
+
 // NativeDB is implemented in the native (Kotlin/Swift) layer.
 type NativeDB interface {
 	Get([]byte) []byte
@@ -17,7 +19,6 @@ type NativeDB interface {
 	SetSync([]byte, []byte)
 	Delete([]byte)
 	DeleteSync([]byte)
-	// GetAllKeys() [][]byte // needed for iteration support
 	ScanChunk(start, end, seekKey []byte, limit int, reverse bool) ([]byte, error)
 }
 
@@ -64,18 +65,6 @@ func (db *db) ReverseIterator(start, end []byte) mdb.Iterator {
 	it.fill()
 	return it
 }
-
-// Iterator creates a forward iterator over a domain of keys
-// func (d *db) Iterator(start, end []byte) mdb.Iterator {
-// 	d.ensureOpen()
-// 	return d.createIterator(start, end, false)
-// }
-
-// Iterator creates a forward iterator over a domain of keys
-// func (d *db) ReverseIterator(start, end []byte) mdb.Iterator {
-// 	d.ensureOpen()
-// 	return d.createIterator(start, end, true)
-// }
 
 func (d *db) Print() {
 	d.mu.RLock()
@@ -238,10 +227,36 @@ func (it *iterator) fill() {
 
 // --- framing decode ---
 
+// decodeChunkBlob parses a single binary blob produced by NativeDB.ScanChunk.
+//
+// Blob layout (all integers are big-endian):
+//
+//	+---------+-------------------+---------------------------------------+--------------------------+------------------------+
+//	| Offset  | Field             | Description                           | Type/Size                | Notes                  |
+//	+---------+-------------------+---------------------------------------+--------------------------+------------------------+
+//	| 0       | flags             | bit0 = hasMore (1 => more pages)      | uint8 (1 byte)           | other bits reserved    |
+//	| 1       | count             | number of K/V pairs that follow       | uint32 (4 bytes, BE)     | N                      |
+//	| 5       | pairs[0..N-1]     | repeated K/V frames:                  |                          |                        |
+//	|         |  - klen           | key length                            | uint32 (4 bytes, BE)     |                        |
+//	|         |  - key            | key bytes                             | klen bytes               |                        |
+//	|         |  - vlen           | value length                          | uint32 (4 bytes, BE)     |                        |
+//	|         |  - value          | value bytes                           | vlen bytes               |                        |
+//	| ...     | nextSeekLen       | length of the nextSeek key            | uint32 (4 bytes, BE)     | 0 if empty             |
+//	| ...     | nextSeek          | nextSeek key bytes                    | nextSeekLen bytes        |                        |
+//	+---------+-------------------+---------------------------------------+--------------------------+------------------------+
+//
+// Semantics:
+//   - The iterator uses 'hasMore' to know if additional pages exist.
+//   - 'nextSeek' is typically the last key of this page; pass it back as 'seekKey' (exclusive)
+//     on the next ScanChunk call to continue from the next item.
+//   - Keys/values are raw bytes; ordering and range checks are done on the raw key bytes.
+//
+// On decode errors (short buffer / lengths out of range), the function returns errShort.
 func decodeChunkBlob(b []byte) (pairs []kv, nextSeek []byte, hasMore bool, err error) {
 	if len(b) < 1+4 {
 		return nil, nil, false, errShort
 	}
+
 	flags := b[0]
 	hasMore = (flags & 0x01) != 0
 	b = b[1:]
@@ -288,122 +303,4 @@ func decodeChunkBlob(b []byte) (pairs []kv, nextSeek []byte, hasMore bool, err e
 		nextSeek = append([]byte(nil), b[:nlen]...)
 	}
 	return pairs, nextSeek, hasMore, nil
-}
-
-var errShort = fmt.Errorf("chunk blob: short buffer")
-
-// Old implementation of Iterator (in-memory, inefficient).
-
-// type dbIterator struct {
-// 	db      *db
-// 	keys    [][]byte
-// 	index   int
-// 	start   []byte
-// 	end     []byte
-// 	reverse bool
-// 	valid   bool
-// }
-//
-// func (d *db) createIterator(start, end []byte, reverse bool) mdb.Iterator {
-// 	// Get all keys from the native database
-// 	allKeys := d.NativeDB.GetAllKeys()
-//
-// 	// Filter keys within the domain
-// 	var filteredKeys [][]byte
-// 	for _, key := range allKeys {
-// 		if d.keyInDomain(key, start, end) {
-// 			filteredKeys = append(filteredKeys, key)
-// 		}
-// 	}
-//
-// 	// Sort keys
-// 	sort.Slice(filteredKeys, func(i, j int) bool {
-// 		if reverse {
-// 			return bytes.Compare(filteredKeys[i], filteredKeys[j]) > 0
-// 		}
-// 		return bytes.Compare(filteredKeys[i], filteredKeys[j]) < 0
-// 	})
-//
-// 	iterator := &dbIterator{
-// 		db:      d,
-// 		keys:    filteredKeys,
-// 		index:   0,
-// 		start:   copyBytes(start),
-// 		end:     copyBytes(end),
-// 		reverse: reverse,
-// 		valid:   len(filteredKeys) > 0,
-// 	}
-//
-// 	return iterator
-// }
-//
-// func (d *db) keyInDomain(key, start, end []byte) bool {
-// 	// Handle nil start (empty byteslice)
-// 	if start != nil && bytes.Compare(key, start) < 0 {
-// 		return false
-// 	}
-//
-// 	// Handle nil end (no upper limit)
-// 	if end != nil && bytes.Compare(key, end) >= 0 {
-// 		return false
-// 	}
-//
-// 	return true
-// }
-//
-// // Domain returns the start and end limits of the iterator
-// func (it *dbIterator) Domain() (start []byte, end []byte) {
-// 	return it.start, it.end
-// }
-//
-// // Valid returns whether the current position is valid
-// func (it *dbIterator) Valid() bool {
-// 	return it.valid && it.index >= 0 && it.index < len(it.keys)
-// }
-//
-// // Next moves the iterator to the next sequential key
-// func (it *dbIterator) Next() {
-// 	if !it.Valid() {
-// 		panic("iterator is not valid")
-// 	}
-//
-// 	it.index++
-// 	if it.index >= len(it.keys) {
-// 		it.valid = false
-// 	}
-// }
-//
-// // Key returns the key of the cursor
-// func (it *dbIterator) Key() []byte {
-// 	if !it.Valid() {
-// 		panic("iterator is not valid")
-// 	}
-//
-// 	return it.keys[it.index]
-// }
-//
-// // Value returns the value of the cursor
-// func (it *dbIterator) Value() []byte {
-// 	if !it.Valid() {
-// 		panic("iterator is not valid")
-// 	}
-//
-// 	key := it.keys[it.index]
-// 	return it.db.Get(key)
-// }
-//
-// // Close releases the Iterator
-// func (it *dbIterator) Close() {
-// 	it.valid = false
-// 	it.keys = nil
-// }
-
-// Helper function to copy byte slices
-func copyBytes(src []byte) []byte {
-	if src == nil {
-		return nil
-	}
-	dst := make([]byte, len(src))
-	copy(dst, src)
-	return dst
 }
