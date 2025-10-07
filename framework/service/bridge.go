@@ -69,13 +69,12 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			svcOpts = append(svcOpts,
 				service.WithNativeDB(&db{NativeDB: config.NativeDB}),
 			)
-		} else {
-			// store keybase in the root dir
-			svcOpts = append(svcOpts,
-				service.WithRootDir(config.RootDir),
-				service.WithTmpDir(config.TmpDir),
-			)
 		}
+
+		svcOpts = append(svcOpts,
+			service.WithRootDir(config.RootDir),
+			service.WithTmpDir(config.TmpDir),
+		)
 
 		if config.UseTcpListener {
 			svcOpts = append(svcOpts, service.WithUseTcpListener())

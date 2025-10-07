@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -109,7 +108,6 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 	}
 
 	if cfg.NativeDB != nil {
-		fmt.Println("remi: using provided native db")
 		svc.keybase = keys.NewDBKeybase(cfg.NativeDB)
 	} else {
 		var err error
