@@ -108,9 +108,11 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 	}
 
 	if cfg.NativeDB != nil {
+		cfg.Logger.Debug("using nativeDB for keybase")
 		svc.keybase = keys.NewDBKeybase(cfg.NativeDB)
 	} else {
 		var err error
+		cfg.Logger.Debug("using filesystem for keybase", zap.String("rootdir", cfg.RootDir))
 		svc.keybase, err = keys.NewKeyBaseFromDir(cfg.RootDir)
 		if err != nil {
 			return nil, err

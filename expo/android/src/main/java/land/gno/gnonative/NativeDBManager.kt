@@ -10,7 +10,6 @@ import gnolang.gno.gnonative.NativeDB
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 import java.security.KeyStore
-import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -18,15 +17,6 @@ import javax.crypto.spec.GCMParameterSpec
 import kotlin.math.min
 import androidx.core.content.edit
 
-/**
- * Implements gomobile-generated NativeDB with exact lowercase signatures:
- *   delete, deleteSync, get, has, scanChunk, set, setSync
- *
- * - AES/GCM per-app key from Android Keystore (prefers StrongBox, falls back gracefully)
- * - Values encrypted; ciphertext stored Base64 in SharedPreferences
- * - Keys stored as lowercase hex; separate sorted index for range scans
- * - scanChunk byte-for-byte matches framework/service/db.go format (BE u32 lengths)
- */
 class NativeDBManager(
   context: Context,
   private val prefsName: String = "gnonative_secure_db",
@@ -41,9 +31,7 @@ class NativeDBManager(
 
   // -------- crypto --------
   private val ks: KeyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply { load(null) }
-  private val rnd = SecureRandom()
 
-  // simple monitor for thread-safety (no coroutines needed)
   private val lock = Any()
 
   init {
@@ -51,7 +39,7 @@ class NativeDBManager(
     if (!prefs.contains(idxKey)) prefs.edit { putString(idxKey, "") }
   }
 
-  // ========== NativeDB (exact signatures) ==========
+  // ========== NativeDB implementation ==========
 
   override fun delete(p0: ByteArray?) {
     val key = requireKey(p0)
@@ -68,7 +56,6 @@ class NativeDBManager(
   }
 
   override fun deleteSync(p0: ByteArray?) {
-    // same semantics as delete in this backing store
     delete(p0)
   }
 
@@ -152,7 +139,6 @@ class NativeDBManager(
   }
 
   override fun setSync(p0: ByteArray?, p1: ByteArray?) {
-    // same semantics as set in this backing store
     set(p0, p1)
   }
 
@@ -193,9 +179,10 @@ class NativeDBManager(
     return lo
   }
 
-  // ----- crypto (AES/GCM, StrongBox preferred) -----
+  // crypto AES/GCM, StrongBox preferred
   private fun ensureAesKey() {
     if (getAesKey() != null) return
+
     val kg = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE)
     val base = KeyGenParameterSpec.Builder(
       keyAlias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
@@ -213,7 +200,7 @@ class NativeDBManager(
       kg.generateKey()
       return
     } catch (_: Throwable) {
-      // fall back
+      // fall back below without StrongBox
     }
 
     kg.init(
@@ -237,14 +224,13 @@ class NativeDBManager(
   private fun encrypt(plain: ByteArray): ByteArray {
     val key = getAesKey() ?: error("AES key missing")
 
-    // IMPORTANT: Do NOT pass a GCMParameterSpec here. Let Keystore generate a fresh IV.
     val c = Cipher.getInstance(AES_GCM)
     c.init(Cipher.ENCRYPT_MODE, key)
 
-    val iv = c.iv                      // Keystore-provided random IV (usually 12 bytes)
+    val iv = c.iv
     val ct = c.doFinal(plain)
 
-    // payload: [v=1][ivLen][iv][ct]
+    // payload: [version=1][ivLen][iv][ct]
     val out = ByteArray(1 + 1 + iv.size + ct.size)
     var i = 0
     out[i++] = 1
@@ -255,7 +241,7 @@ class NativeDBManager(
   }
 
   private fun decrypt(blob: ByteArray?): ByteArray? {
-    if (blob == null || blob.size < 1 + 1 + 12) return null
+    if (blob == null || blob.size < 1 + 1 + 12) return null // iv is usually 12 bytes
     var i = 0
     val ver = blob[i++]
     require(ver.toInt() == 1) { "bad payload version=$ver" }
@@ -273,7 +259,7 @@ class NativeDBManager(
     return c.doFinal(ct)
   }
 
-  // ----- chunk framing (must match Go) -----
+  // chunk framing (match Go format)
   private fun encodeChunkBlobBE(
     entries: List<Pair<ByteArray, ByteArray>>,
     nextSeek: ByteArray?,
