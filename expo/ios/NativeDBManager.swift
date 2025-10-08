@@ -1,5 +1,5 @@
 //
-//  KeystoreDriver.swift
+//  NativeDBManager.swift
 //  Pods
 //
 //  Created by Rémi BARBERO on 25/09/2025.
@@ -9,8 +9,8 @@ import Foundation
 import Security
 import GnoCore
 
-public class KeychainManager: NSObject, GnoGnonativeNativeDBProtocol {
-    public static var shared: KeychainManager = KeychainManager()
+public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
+    public static var shared: NativeDBManager = NativeDBManager()
     
     // MARK: - Private Properties
     private let service: String
