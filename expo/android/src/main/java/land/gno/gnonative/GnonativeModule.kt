@@ -17,6 +17,7 @@ class GnonativeModule : Module() {
   private var rootDir: File? = null
   private var socketPort = 0
   private var bridgeGnoNative: Bridge? = null
+  private var nativeDBManager: NativeDBManager? = null
 
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
@@ -33,6 +34,7 @@ class GnonativeModule : Module() {
     OnCreate {
       context = appContext.reactContext
       rootDir = context!!.filesDir
+      nativeDBManager = NativeDBManager(context!!)
     }
 
     OnDestroy {
@@ -53,8 +55,8 @@ class GnonativeModule : Module() {
       try {
         val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
         config.rootDir = rootDir!!.absolutePath
+        config.nativeDB = nativeDBManager
         bridgeGnoNative = Gnonative.newBridge(config)
-
         promise.resolve(true)
       } catch (err: CodedException) {
         promise.reject(err)

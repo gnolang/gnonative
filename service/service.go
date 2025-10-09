@@ -107,7 +107,17 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		return nil, err
 	}
 
-	svc.keybase, _ = keys.NewKeyBaseFromDir(cfg.RootDir)
+	if cfg.NativeDB != nil {
+		cfg.Logger.Debug("using nativeDB for keybase")
+		svc.keybase = keys.NewDBKeybase(cfg.NativeDB)
+	} else {
+		var err error
+		cfg.Logger.Debug("using filesystem for keybase", zap.String("rootdir", cfg.RootDir))
+		svc.keybase, err = keys.NewKeyBaseFromDir(cfg.RootDir)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	var err error
 	svc.rpcClient, err = rpcclient.NewHTTPClient(cfg.Remote)

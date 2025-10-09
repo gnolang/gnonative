@@ -60,6 +60,7 @@ public class GnonativeModule: Module {
         }
         config.rootDir = self.appRootDir!
         config.tmpDir = self.tmpDir!
+        config.nativeDB = NativeDBManager.shared
         
         // On simulator we can't create an UDS, see comment below
 #if targetEnvironment(simulator)

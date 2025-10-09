@@ -19,6 +19,7 @@ import (
 )
 
 type BridgeConfig struct {
+	NativeDB           NativeDB
 	RootDir            string
 	TmpDir             string
 	UseTcpListener     bool
@@ -63,6 +64,13 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 
 	// start gRPC service
 	{
+		if config.NativeDB != nil {
+			// use provided NativeDB
+			svcOpts = append(svcOpts,
+				service.WithNativeDB(&db{NativeDB: config.NativeDB}),
+			)
+		}
+
 		svcOpts = append(svcOpts,
 			service.WithRootDir(config.RootDir),
 			service.WithTmpDir(config.TmpDir),
