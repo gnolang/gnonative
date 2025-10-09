@@ -2,6 +2,7 @@ package gnonative
 
 import (
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"sync"
 	"sync/atomic"
@@ -11,14 +12,21 @@ import (
 
 var errShort = fmt.Errorf("chunk blob: short buffer")
 
+// Static assertions to ensure interface compliance.
+var (
+	_ mdb.DB       = (*db)(nil)
+	_ mdb.Batch    = (*batch)(nil)
+	_ mdb.Iterator = (*iterator)(nil)
+)
+
 // NativeDB is implemented in the native (Kotlin/Swift) layer.
 type NativeDB interface {
-	Get([]byte) []byte
-	Has(key []byte) bool
-	Set([]byte, []byte)
-	SetSync([]byte, []byte)
-	Delete([]byte)
-	DeleteSync([]byte)
+	Get(key []byte) ([]byte, error)
+	Has(key []byte) (bool, error)
+	Set(key, value []byte) error
+	SetSync(key, value []byte) error
+	Delete(key []byte) error
+	DeleteSync(key []byte) error
 	ScanChunk(start, end, seekKey []byte, limit int, reverse bool) ([]byte, error)
 }
 
@@ -31,17 +39,23 @@ type db struct {
 
 func (d *db) Close() error {
 	d.closed.Store(true)
+
 	return nil
 }
 
-func (d *db) ensureOpen() {
+func (d *db) ensureOpen() error {
 	if d.closed.Load() {
-		panic("db: use after Close")
+		return errors.New("db is closed")
 	}
+
+	return nil
 }
 
-func (db *db) Iterator(start, end []byte) mdb.Iterator {
-	db.ensureOpen()
+func (db *db) Iterator(start, end []byte) (mdb.Iterator, error) {
+	if err := db.ensureOpen(); err != nil {
+		return nil, err
+	}
+
 	it := &iterator{
 		db:         db,
 		start:      append([]byte(nil), start...),
@@ -49,12 +63,20 @@ func (db *db) Iterator(start, end []byte) mdb.Iterator {
 		reverse:    false,
 		chunkLimit: 256,
 	}
+
 	it.fill()
-	return it
+	if it.err != nil {
+		return nil, it.err
+	}
+
+	return it, nil
 }
 
-func (db *db) ReverseIterator(start, end []byte) mdb.Iterator {
-	db.ensureOpen()
+func (db *db) ReverseIterator(start, end []byte) (mdb.Iterator, error) {
+	if err := db.ensureOpen(); err != nil {
+		return nil, err
+	}
+
 	it := &iterator{
 		db:         db,
 		start:      append([]byte(nil), start...),
@@ -62,30 +84,46 @@ func (db *db) ReverseIterator(start, end []byte) mdb.Iterator {
 		reverse:    true,
 		chunkLimit: 256,
 	}
+
 	it.fill()
-	return it
+	if it.err != nil {
+		return nil, it.err
+	}
+
+	return it, nil
 }
 
-func (d *db) Print() {
+func (d *db) Print() error {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
-	// With only point ops exposed, we can't enumerate keys here.
-	// Keep as a stub or log something useful for debugging:
-	fmt.Println("db.Print(): NativeDB has no range API; nothing to print")
+	fmt.Println("db.closed: ", d.closed.Load())
+
+	return nil
 }
 
 func (d *db) Stats() map[string]string {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
-	// Return whatever you track on the Go side. Native side has no stats here.
+
 	return map[string]string{
 		"closed": fmt.Sprintf("%v", d.closed.Load()),
 	}
 }
 
 func (d *db) NewBatch() mdb.Batch {
-	d.ensureOpen()
+	if err := d.ensureOpen(); err != nil {
+		return &batch{err: err}
+	}
+
 	return &batch{db: d}
+}
+
+func (d *db) NewBatchWithSize(size int) mdb.Batch {
+	if err := d.ensureOpen(); err != nil {
+		return &batch{err: err}
+	}
+
+	return &batch{db: d, ops: make([]op, 0, size)}
 }
 
 // --- Batch implementation (pure Go) ---
@@ -93,6 +131,7 @@ func (d *db) NewBatch() mdb.Batch {
 type batch struct {
 	db  *db
 	ops []op
+	err error
 }
 
 type op struct {
@@ -101,51 +140,112 @@ type op struct {
 	value []byte // nil for delete
 }
 
-func (b *batch) Set(key, value []byte) {
-	b.db.ensureOpen()
+func (b *batch) Set(key, value []byte) error {
+	if err := b.db.ensureOpen(); err != nil {
+		return err
+	}
+
+	if b.err != nil {
+		return b.err
+	}
+
 	// Defensive copies: gomobile & callers must not mutate later.
 	k := append([]byte(nil), key...)
 	v := append([]byte(nil), value...)
 	b.ops = append(b.ops, op{del: false, key: k, value: v})
+
+	return nil
 }
 
-func (b *batch) Delete(key []byte) {
-	b.db.ensureOpen()
+func (b *batch) Delete(key []byte) error {
+	if err := b.db.ensureOpen(); err != nil {
+		return err
+	}
+
+	if b.err != nil {
+		return b.err
+	}
+
 	k := append([]byte(nil), key...)
 	b.ops = append(b.ops, op{del: true, key: k})
+
+	return nil
 }
 
 // Write applies ops using async variants.
-func (b *batch) Write() {
-	b.db.ensureOpen()
+func (b *batch) Write() error {
+	if err := b.db.ensureOpen(); err != nil {
+		return err
+	}
+
+	if b.err != nil {
+		return b.err
+	}
+
+	var errs []error
 	for _, o := range b.ops {
 		if o.del {
-			b.db.Delete(o.key)
+			if err := b.db.Delete(o.key); err != nil {
+				errs = append(errs, err)
+			}
 		} else {
-			b.db.Set(o.key, o.value)
+			if err := b.db.Set(o.key, o.value); err != nil {
+				errs = append(errs, err)
+			}
 		}
 	}
 	// Clear buffer to allow reuse if desired.
 	b.ops = b.ops[:0]
+
+	err := errors.Join(errs...)
+	return err
 }
 
 // WriteSync applies ops using sync variants.
-func (b *batch) WriteSync() {
-	b.db.ensureOpen()
+func (b *batch) WriteSync() error {
+	if err := b.db.ensureOpen(); err != nil {
+		return err
+	}
+
+	if b.err != nil {
+		return b.err
+	}
+
+	var errs []error
 	for _, o := range b.ops {
 		if o.del {
-			b.db.DeleteSync(o.key)
+			if err := b.db.DeleteSync(o.key); err != nil {
+				errs = append(errs, err)
+			}
 		} else {
-			b.db.SetSync(o.key, o.value)
+			if err := b.db.SetSync(o.key, o.value); err != nil {
+				errs = append(errs, err)
+			}
 		}
 	}
 	b.ops = b.ops[:0]
+
+	err := errors.Join(errs...)
+	return err
 }
 
-func (b *batch) Close() {
+func (b *batch) GetByteSize() (int, error) {
+	size := 0
+	for _, op := range b.ops {
+		size += len(op.key)
+		if !op.del {
+			size += len(op.value)
+		}
+	}
+	return size, nil
+}
+
+func (b *batch) Close() error {
 	// Drop buffered ops; allow GC.
 	b.ops = nil
 	b.db = nil
+
+	return nil
 }
 
 type kv struct {
@@ -164,17 +264,22 @@ type iterator struct {
 	hasMore    bool
 	closed     bool
 	chunkLimit int
+	err        error
 }
 
-func (it *iterator) Domain() (start, end []byte) { return it.start, it.end }
+func (it *iterator) Domain() (start, end []byte) {
+	return it.start, it.end
+}
 
 func (it *iterator) Valid() bool {
 	if it.closed {
 		return false
 	}
+
 	for it.i >= len(it.chunk) && it.hasMore {
 		it.fill()
 	}
+
 	return it.i < len(it.chunk)
 }
 
@@ -182,6 +287,7 @@ func (it *iterator) Next() {
 	if !it.Valid() {
 		return
 	}
+
 	cur := it.chunk[it.i]
 	it.i++
 	// keep seekKey strictly at the last returned key
@@ -192,6 +298,7 @@ func (it *iterator) Key() []byte {
 	if !it.Valid() {
 		return nil
 	}
+
 	return it.chunk[it.i].k
 }
 
@@ -199,27 +306,42 @@ func (it *iterator) Value() []byte {
 	if !it.Valid() {
 		return nil
 	}
+
 	return it.chunk[it.i].v
 }
-func (it *iterator) Close() { it.closed = true; it.chunk = nil }
+
+func (it *iterator) Error() error {
+	return it.err
+}
+
+func (it *iterator) Close() error {
+	it.closed = true
+	it.chunk = nil
+
+	return nil
+}
 
 func (it *iterator) fill() {
 	if it.closed {
 		return
 	}
+
 	blob, err := it.db.ScanChunk(it.start, it.end, it.seekKey, it.chunkLimit, it.reverse)
 	if err != nil {
-		it.chunk, it.i, it.hasMore = nil, 0, false
+		it.chunk, it.i, it.hasMore, it.err = nil, 0, false, err
 		return
 	}
+
 	pairs, nextSeek, hasMore, err := decodeChunkBlob(blob)
 	if err != nil {
-		it.chunk, it.i, it.hasMore = nil, 0, false
+		it.chunk, it.i, it.hasMore, it.err = nil, 0, false, err
 		return
 	}
+
 	it.chunk = pairs
 	it.i = 0
 	it.hasMore = hasMore
+
 	if len(nextSeek) > 0 {
 		it.seekKey = append(it.seekKey[:0], nextSeek...)
 	}

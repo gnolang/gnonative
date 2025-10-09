@@ -24,9 +24,10 @@ public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
     
     // MARK: - Public Interface Implementation
     
-    public func get(_ key: Data?) -> Data? {
-        guard let key = key else { return nil }
-        
+    public func get(_ key: Data?) throws -> Data {
+        guard let key = key, !key.isEmpty else {
+            throw NativeDBError.invalidArgument(description: "Key must not be nil or empty.")
+        }
         let account = keyToAccount(key)
         
         var query: [String: Any] = [
@@ -44,21 +45,25 @@ public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         
-        guard status == errSecSuccess else {
-            return nil
-        }
-        
-        return result as? Data
-    }
-    
-    public func delete(_ key: Data?) {
-        DispatchQueue.global(qos: .utility).async {
-            self.deleteSync(key)
+        switch status {
+        case errSecSuccess:
+            return (result as? Data) ?? Data()
+        case errSecItemNotFound:
+            // This is not an error; it's the expected result for a missing key.
+            return Data()
+        default:
+            throw NativeDBError.keychainError(status: status, message: "Failed to get item.")
         }
     }
     
-    public func deleteSync(_ key: Data?) {
-        guard let key = key else { return }
+    public func delete(_ key: Data?) throws {
+        try self.deleteSync(key)
+    }
+    
+    public func deleteSync(_ key: Data?) throws {
+        guard let key = key, !key.isEmpty else {
+            throw NativeDBError.invalidArgument(description: "Key must not be nil or empty.")
+        }
         
         let account = keyToAccount(key)
         
@@ -72,38 +77,63 @@ public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
             query[kSecAttrAccessGroup as String] = accessGroup
         }
         
-        SecItemDelete(query as CFDictionary)
+        let status = SecItemDelete(query as CFDictionary)
+        
+        // Deleting a non-existent item is not considered an error.
+        if status != errSecSuccess && status != errSecItemNotFound {
+            throw NativeDBError.keychainError(status: status, message: "Failed to delete item.")
+        }
     }
     
-    public func has(_ key: Data?) -> Bool {
-        guard let key = key else { return false }
+    public func has(_ key: Data?, ret0_ returnPointer: UnsafeMutablePointer<ObjCBool>?) throws {
+        // 1. Ensure the return pointer provided by the caller is valid.
+        guard let returnPointer = returnPointer else {
+            throw NativeDBError.invalidArgument(description: "Return pointer must not be nil.")
+        }
+        
+        // 2. Validate the input key.
+        guard let key = key, !key.isEmpty else {
+            throw NativeDBError.invalidArgument(description: "Key must not be nil or empty.")
+        }
         
         let account = keyToAccount(key)
         
         var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
-            kSecReturnData as String: false,
-            kSecMatchLimit as String: kSecMatchLimitOne
+            kSecAttrAccount as String: account
         ]
-        
         if let accessGroup = accessGroup {
             query[kSecAttrAccessGroup as String] = accessGroup
         }
         
         let status = SecItemCopyMatching(query as CFDictionary, nil)
-        return status == errSecSuccess
-    }
-    
-    public func set(_ key: Data?, p1 value: Data?) {
-        DispatchQueue.global(qos: .utility).async {
-            self.setSync(key, p1: value)
+        
+        // 3. Handle the result from the Keychain.
+        switch status {
+        case errSecSuccess:
+            // Key exists. Write `true` to the pointer's memory location.
+            returnPointer.pointee = ObjCBool(true)
+        case errSecItemNotFound:
+            // Key does not exist. Write `false` to the pointer's memory location.
+            returnPointer.pointee = ObjCBool(false)
+        default:
+            // A real keychain error occurred. Throw an error.
+            throw NativeDBError.keychainError(status: status, message: "Failed to check for item existence.")
         }
     }
     
-    public func setSync(_ key: Data?, p1 value: Data?) {
-        guard let key = key, let value = value else { return }
+    public func set(_ key: Data?, value: Data?) throws {
+        try self.setSync(key, value: value)
+    }
+    
+    public func setSync(_ key: Data?, value: Data?) throws {
+        guard let key = key, !key.isEmpty else {
+            throw NativeDBError.invalidArgument(description: "Key must not be nil or empty.")
+        }
+        guard let value = value else {
+            throw NativeDBError.invalidArgument(description: "Value must not be nil.")
+        }
         
         let account = keyToAccount(key)
         
@@ -124,13 +154,23 @@ public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
         
         let updateStatus = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
         
-        if updateStatus == errSecItemNotFound {
-            // Item doesn't exist, create new one
+        switch updateStatus {
+        case errSecSuccess:
+            // Update was successful.
+            return
+        case errSecItemNotFound:
+            // Item doesn't exist, so add it.
             var newItem = query
             newItem[kSecValueData as String] = value
             newItem[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
             
-            SecItemAdd(newItem as CFDictionary, nil)
+            let addStatus = SecItemAdd(newItem as CFDictionary, nil)
+            if addStatus != errSecSuccess {
+                throw NativeDBError.keychainError(status: addStatus, message: "Failed to add new item.")
+            }
+        default:
+            // Another error occurred during update.
+            throw NativeDBError.keychainError(status: updateStatus, message: "Failed to update item.")
         }
     }
     
@@ -258,5 +298,20 @@ public class NativeDBManager: NSObject, GnoGnonativeNativeDBProtocol {
         if let s = start, lt(k, s) { return false }    // k >= s
         if let e = end, !lt(k, e) { return false }     // k < e
         return true
+    }
+}
+
+public enum NativeDBError: Error, LocalizedError {
+    case invalidArgument(description: String)
+    case keychainError(status: OSStatus, message: String)
+    
+    public var errorDescription: String? {
+        switch self {
+        case .invalidArgument(let description):
+            return "Invalid Argument: \(description)"
+        case .keychainError(let status, let message):
+            let statusMessage = SecCopyErrorMessageString(status, nil) as String? ?? "Unknown error"
+            return "Keychain Error: \(message) (status: \(status), reason: \(statusMessage))"
+        }
     }
 }
