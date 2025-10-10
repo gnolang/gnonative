@@ -65,7 +65,7 @@ class NativeDBManager(
     val b64 = synchronized(lock) { prefs.getString("$entryPrefix$hex", null) }
       ?: return ByteArray(0) // gomobile generated non-null return -> use empty on miss
     val blob = Base64.decode(b64, Base64.NO_WRAP)
-    return decrypt(blob) ?: ByteArray(0)
+    return decrypt(blob) ?: throw Exception("Failed to decrypt value for key: $hex")
   }
 
   override fun has(p0: ByteArray?): Boolean {
@@ -112,7 +112,8 @@ class NativeDBManager(
       val pairs = ArrayList<Pair<ByteArray, ByteArray>>(page.size)
       for (h in page) {
         val b64 = prefs.getString("$entryPrefix$h", null) ?: continue
-        val v = decrypt(Base64.decode(b64, Base64.NO_WRAP)) ?: continue
+        val blob = Base64.decode(b64, Base64.NO_WRAP)
+        val v = decrypt(blob) ?: throw Exception("Failed to decrypt value for key: $h")
         pairs += (unhex(h) to v)
       }
 
