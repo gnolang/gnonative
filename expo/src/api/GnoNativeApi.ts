@@ -19,6 +19,7 @@ import {
   SetPasswordResponse,
   SetRemoteResponse,
   SignTxResponse,
+  RenameKeyResponse,
   RotatePasswordResponse,
   EstimateGasResponse,
   EstimateTxFeesResponse,
@@ -337,6 +338,15 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   async setPassword(password: string, address: Uint8Array): Promise<SetPasswordResponse> {
     const client = this.#getClient();
     const response = client.setPassword({ password, address });
+    return response;
+  }
+
+  async renameKey(
+    oldName: string,
+    newName: string,
+  ): Promise<RenameKeyResponse> {
+    const client = this.#getClient();
+    const response = client.renameKey({ oldName, newName });
     return response;
   }
 

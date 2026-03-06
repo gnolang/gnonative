@@ -22,6 +22,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	GetChainIDResponse{},
 	SetPasswordRequest{},
 	SetPasswordResponse{},
+	RenameKeyRequest{},
+	RenameKeyResponse{},
 	RotatePasswordRequest{},
 	RotatePasswordResponse{},
 	GenerateRecoveryPhraseRequest{},

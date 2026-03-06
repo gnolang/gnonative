@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"slices"
+	"strings"
 	"time"
 
 	"connectrpc.com/connect"
@@ -265,6 +266,36 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 	}
 
 	return connect.NewResponse(&api_gen.SetPasswordResponse{}), nil
+}
+
+func (s *gnoNativeService) RenameKey(ctx context.Context, req *connect.Request[api_gen.RenameKeyRequest]) (*connect.Response[api_gen.RenameKeyResponse], error) {
+	// We may need to change the key name in s.userAccounts, but we don't know the address. So get from disk.
+	key, err := s.keybase.GetByName(req.Msg.OldName)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	err = s.keybase.Rename(req.Msg.OldName, req.Msg.NewName)
+	if err != nil {
+		if strings.Contains(err.Error(), "already exists") {
+			return nil, api_gen.ErrCode_ErrKeyNameExists.Wrap(err)
+		}
+		return nil, getGrpcError(err)
+	}
+
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	if account, ok := s.userAccounts[crypto.AddressToBech32(crypto.AddressFromBytes(key.GetAddress().Bytes()))]; ok {
+		// Get the key info and update the account with the new name
+		newKeyInfo, err := s.keybase.GetByAddress(key.GetAddress())
+		if err != nil {
+			return nil, getGrpcError(err)
+		}
+
+		account.keyInfo = newKeyInfo
+	}
+
+	return connect.NewResponse(&api_gen.RenameKeyResponse{}), nil
 }
 
 func (s *gnoNativeService) RotatePassword(ctx context.Context, req *connect.Request[api_gen.RotatePasswordRequest]) (*connect.Response[api_gen.RotatePasswordResponse], error) {
