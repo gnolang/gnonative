@@ -113,6 +113,10 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SetPasswordResponse> __Marshaller_land_gno_gnonative_v1_SetPasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SetPasswordResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RenameKeyRequest> __Marshaller_land_gno_gnonative_v1_RenameKeyRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RenameKeyRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RenameKeyResponse> __Marshaller_land_gno_gnonative_v1_RenameKeyResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RenameKeyResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RotatePasswordRequest> __Marshaller_land_gno_gnonative_v1_RotatePasswordRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RotatePasswordRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.RotatePasswordResponse> __Marshaller_land_gno_gnonative_v1_RotatePasswordResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.RotatePasswordResponse.Parser));
@@ -326,6 +330,14 @@ namespace Land.Gno.Gnonative.V1 {
         "SetPassword",
         __Marshaller_land_gno_gnonative_v1_SetPasswordRequest,
         __Marshaller_land_gno_gnonative_v1_SetPasswordResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.RenameKeyRequest, global::Land.Gno.Gnonative.V1.RenameKeyResponse> __Method_RenameKey = new grpc::Method<global::Land.Gno.Gnonative.V1.RenameKeyRequest, global::Land.Gno.Gnonative.V1.RenameKeyResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RenameKey",
+        __Marshaller_land_gno_gnonative_v1_RenameKeyRequest,
+        __Marshaller_land_gno_gnonative_v1_RenameKeyResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse> __Method_RotatePassword = new grpc::Method<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse>(
@@ -744,6 +756,20 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.SetPasswordResponse> SetPassword(global::Land.Gno.Gnonative.V1.SetPasswordRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Rename an existing key from old_name to new_name.
+      /// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.RenameKeyResponse> RenameKey(global::Land.Gno.Gnonative.V1.RenameKeyRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1988,6 +2014,62 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SetPassword, null, options, request);
       }
       /// <summary>
+      /// Rename an existing key from old_name to new_name.
+      /// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.RenameKeyResponse RenameKey(global::Land.Gno.Gnonative.V1.RenameKeyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RenameKey(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Rename an existing key from old_name to new_name.
+      /// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.RenameKeyResponse RenameKey(global::Land.Gno.Gnonative.V1.RenameKeyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RenameKey, null, options, request);
+      }
+      /// <summary>
+      /// Rename an existing key from old_name to new_name.
+      /// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.RenameKeyResponse> RenameKeyAsync(global::Land.Gno.Gnonative.V1.RenameKeyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RenameKeyAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Rename an existing key from old_name to new_name.
+      /// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+      /// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.RenameKeyResponse> RenameKeyAsync(global::Land.Gno.Gnonative.V1.RenameKeyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RenameKey, null, options, request);
+      }
+      /// <summary>
       /// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
       /// Before calling this, you must call SetPassword with the current password for each account.
       /// If there is an error, then roll back all accounts to the current password.
@@ -3197,6 +3279,7 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_CreateLedger, serviceImpl.CreateLedger)
           .AddMethod(__Method_ActivateAccount, serviceImpl.ActivateAccount)
           .AddMethod(__Method_SetPassword, serviceImpl.SetPassword)
+          .AddMethod(__Method_RenameKey, serviceImpl.RenameKey)
           .AddMethod(__Method_RotatePassword, serviceImpl.RotatePassword)
           .AddMethod(__Method_GetActivatedAccount, serviceImpl.GetActivatedAccount)
           .AddMethod(__Method_QueryAccount, serviceImpl.QueryAccount)
@@ -3246,6 +3329,7 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_CreateLedger, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.CreateLedgerRequest, global::Land.Gno.Gnonative.V1.CreateLedgerResponse>(serviceImpl.CreateLedger));
       serviceBinder.AddMethod(__Method_ActivateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.ActivateAccountRequest, global::Land.Gno.Gnonative.V1.ActivateAccountResponse>(serviceImpl.ActivateAccount));
       serviceBinder.AddMethod(__Method_SetPassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SetPasswordRequest, global::Land.Gno.Gnonative.V1.SetPasswordResponse>(serviceImpl.SetPassword));
+      serviceBinder.AddMethod(__Method_RenameKey, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RenameKeyRequest, global::Land.Gno.Gnonative.V1.RenameKeyResponse>(serviceImpl.RenameKey));
       serviceBinder.AddMethod(__Method_RotatePassword, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RotatePasswordRequest, global::Land.Gno.Gnonative.V1.RotatePasswordResponse>(serviceImpl.RotatePassword));
       serviceBinder.AddMethod(__Method_GetActivatedAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.GetActivatedAccountRequest, global::Land.Gno.Gnonative.V1.GetActivatedAccountResponse>(serviceImpl.GetActivatedAccount));
       serviceBinder.AddMethod(__Method_QueryAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QueryAccountRequest, global::Land.Gno.Gnonative.V1.QueryAccountResponse>(serviceImpl.QueryAccount));

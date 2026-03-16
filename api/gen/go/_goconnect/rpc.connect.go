@@ -81,6 +81,9 @@ const (
 	// GnoNativeServiceSetPasswordProcedure is the fully-qualified name of the GnoNativeService's
 	// SetPassword RPC.
 	GnoNativeServiceSetPasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/SetPassword"
+	// GnoNativeServiceRenameKeyProcedure is the fully-qualified name of the GnoNativeService's
+	// RenameKey RPC.
+	GnoNativeServiceRenameKeyProcedure = "/land.gno.gnonative.v1.GnoNativeService/RenameKey"
 	// GnoNativeServiceRotatePasswordProcedure is the fully-qualified name of the GnoNativeService's
 	// RotatePassword RPC.
 	GnoNativeServiceRotatePasswordProcedure = "/land.gno.gnonative.v1.GnoNativeService/RotatePassword"
@@ -208,6 +211,10 @@ type GnoNativeServiceClient interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
+	// Rename an existing key from old_name to new_name.
+	// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+	RenameKey(context.Context, *connect.Request[_go.RenameKeyRequest]) (*connect.Response[_go.RenameKeyResponse], error)
 	// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
 	// Before calling this, you must call SetPassword with the current password for each account.
 	// If there is an error, then roll back all accounts to the current password.
@@ -406,6 +413,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("SetPassword")),
 			connect.WithClientOptions(opts...),
 		),
+		renameKey: connect.NewClient[_go.RenameKeyRequest, _go.RenameKeyResponse](
+			httpClient,
+			baseURL+GnoNativeServiceRenameKeyProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("RenameKey")),
+			connect.WithClientOptions(opts...),
+		),
 		rotatePassword: connect.NewClient[_go.RotatePasswordRequest, _go.RotatePasswordResponse](
 			httpClient,
 			baseURL+GnoNativeServiceRotatePasswordProcedure,
@@ -571,6 +584,7 @@ type gnoNativeServiceClient struct {
 	createLedger              *connect.Client[_go.CreateLedgerRequest, _go.CreateLedgerResponse]
 	activateAccount           *connect.Client[_go.ActivateAccountRequest, _go.ActivateAccountResponse]
 	setPassword               *connect.Client[_go.SetPasswordRequest, _go.SetPasswordResponse]
+	renameKey                 *connect.Client[_go.RenameKeyRequest, _go.RenameKeyResponse]
 	rotatePassword            *connect.Client[_go.RotatePasswordRequest, _go.RotatePasswordResponse]
 	getActivatedAccount       *connect.Client[_go.GetActivatedAccountRequest, _go.GetActivatedAccountResponse]
 	queryAccount              *connect.Client[_go.QueryAccountRequest, _go.QueryAccountResponse]
@@ -675,6 +689,11 @@ func (c *gnoNativeServiceClient) ActivateAccount(ctx context.Context, req *conne
 // SetPassword calls land.gno.gnonative.v1.GnoNativeService.SetPassword.
 func (c *gnoNativeServiceClient) SetPassword(ctx context.Context, req *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
 	return c.setPassword.CallUnary(ctx, req)
+}
+
+// RenameKey calls land.gno.gnonative.v1.GnoNativeService.RenameKey.
+func (c *gnoNativeServiceClient) RenameKey(ctx context.Context, req *connect.Request[_go.RenameKeyRequest]) (*connect.Response[_go.RenameKeyResponse], error) {
+	return c.renameKey.CallUnary(ctx, req)
 }
 
 // RotatePassword calls land.gno.gnonative.v1.GnoNativeService.RotatePassword.
@@ -859,6 +878,10 @@ type GnoNativeServiceHandler interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error)
+	// Rename an existing key from old_name to new_name.
+	// If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+	// If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+	RenameKey(context.Context, *connect.Request[_go.RenameKeyRequest]) (*connect.Response[_go.RenameKeyResponse], error)
 	// Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
 	// Before calling this, you must call SetPassword with the current password for each account.
 	// If there is an error, then roll back all accounts to the current password.
@@ -1053,6 +1076,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("SetPassword")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceRenameKeyHandler := connect.NewUnaryHandler(
+		GnoNativeServiceRenameKeyProcedure,
+		svc.RenameKey,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("RenameKey")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceRotatePasswordHandler := connect.NewUnaryHandler(
 		GnoNativeServiceRotatePasswordProcedure,
 		svc.RotatePassword,
@@ -1231,6 +1260,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceActivateAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSetPasswordProcedure:
 			gnoNativeServiceSetPasswordHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRenameKeyProcedure:
+			gnoNativeServiceRenameKeyHandler.ServeHTTP(w, r)
 		case GnoNativeServiceRotatePasswordProcedure:
 			gnoNativeServiceRotatePasswordHandler.ServeHTTP(w, r)
 		case GnoNativeServiceGetActivatedAccountProcedure:
@@ -1350,6 +1381,10 @@ func (UnimplementedGnoNativeServiceHandler) ActivateAccount(context.Context, *co
 
 func (UnimplementedGnoNativeServiceHandler) SetPassword(context.Context, *connect.Request[_go.SetPasswordRequest]) (*connect.Response[_go.SetPasswordResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SetPassword is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) RenameKey(context.Context, *connect.Request[_go.RenameKeyRequest]) (*connect.Response[_go.RenameKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.RenameKey is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error) {

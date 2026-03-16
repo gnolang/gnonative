@@ -32,6 +32,13 @@ type SetPasswordRequest struct {
 
 type SetPasswordResponse struct{}
 
+type RenameKeyRequest struct {
+	OldName string `json:"old_name" yaml:"old_name"`
+	NewName string `json:"new_name" yaml:"new_name"`
+}
+
+type RenameKeyResponse struct{}
+
 type RotatePasswordRequest struct {
 	NewPassword string `json:"new_password" yaml:"new_password"`
 	// The addresses of the account to rotate the password

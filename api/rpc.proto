@@ -84,6 +84,11 @@ service GnoNativeService {
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc SetPassword(SetPasswordRequest) returns (SetPasswordResponse);
 
+  // Rename an existing key from old_name to new_name.
+  // If the key with old_name doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCryptoKeyNotFound.
+  // If a key with new_name already exists, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrCode_ErrKeyNameExists.
+  rpc RenameKey(RenameKeyRequest) returns (RenameKeyResponse);
+
   // Rotate the password of a key to a new password for the accounts in the keybase with the given addresses.
   // Before calling this, you must call SetPassword with the current password for each account.
   // If there is an error, then roll back all accounts to the current password.
@@ -227,6 +232,7 @@ enum ErrCode {
   ErrDeserialization = 104;
   ErrInitService = 105;
   ErrSetRemote = 106;
+  ErrKeyNameExists = 107;
   ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 151;
