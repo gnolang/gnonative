@@ -13,6 +13,7 @@ import (
 	"connectrpc.com/grpchealth"
 	"connectrpc.com/grpcreflect"
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
+	"github.com/gnolang/gno/tm2/pkg/bech32"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys"
@@ -145,8 +146,11 @@ func (s *gnoNativeService) getSigner(addr []byte) (*gnoclient.SignerFromKeybase,
 	s.lock.RLock()
 	defer s.lock.RUnlock()
 
-	bech32 := crypto.AddressToBech32(crypto.AddressFromBytes(addr))
-	account, ok := s.userAccounts[bech32]
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), addr)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	account, ok := s.userAccounts[b32]
 	if !ok {
 		return nil, api_gen.ErrCode_ErrNoActiveAccount
 	}
