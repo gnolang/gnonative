@@ -14,6 +14,7 @@ import (
 	"github.com/gnolang/gno/gno.land/pkg/gnoland/ugnot"
 	"github.com/gnolang/gno/gno.land/pkg/keyscli"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gno/tm2/pkg/bech32"
 	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/crypto/bip39"
@@ -228,16 +229,19 @@ func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Req
 		return nil, err
 	}
 
-	bech32 := crypto.AddressToBech32(key.GetAddress())
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), key.GetAddress().Bytes())
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	s.lock.Lock()
-	account, ok := s.userAccounts[bech32]
+	account, ok := s.userAccounts[b32]
 	if !ok {
 		account = &userAccount{}
 		account.signer = &gnoclient.SignerFromKeybase{
 			Keybase: s.keybase,
 			ChainID: s.chainID,
 		}
-		s.userAccounts[bech32] = account
+		s.userAccounts[b32] = account
 	}
 	account.keyInfo = key
 	s.lock.Unlock()
@@ -283,9 +287,13 @@ func (s *gnoNativeService) RenameKey(ctx context.Context, req *connect.Request[a
 		return nil, getGrpcError(err)
 	}
 
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), key.GetAddress().Bytes())
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	s.lock.Lock()
 	defer s.lock.Unlock()
-	if account, ok := s.userAccounts[crypto.AddressToBech32(crypto.AddressFromBytes(key.GetAddress().Bytes()))]; ok {
+	if account, ok := s.userAccounts[b32]; ok {
 		// Get the key info and update the account with the new name
 		newKeyInfo, err := s.keybase.GetByAddress(key.GetAddress())
 		if err != nil {
@@ -337,8 +345,12 @@ func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect
 		return nil, api_gen.ErrCode_ErrInvalidAddress
 	}
 
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Msg.Address)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	s.lock.Lock()
-	account, ok := s.userAccounts[crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))]
+	account, ok := s.userAccounts[b32]
 	s.lock.Unlock()
 	if !ok {
 		return nil, api_gen.ErrCode_ErrNoActiveAccount
@@ -400,9 +412,12 @@ func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Reque
 		return nil, getGrpcError(err)
 	}
 
-	bech32 := crypto.AddressToBech32(key.GetAddress())
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), key.GetAddress().Bytes())
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	s.lock.Lock()
-	delete(s.userAccounts, bech32)
+	delete(s.userAccounts, b32)
 	s.lock.Unlock()
 	return connect.NewResponse(&api_gen.DeleteAccountResponse{}), nil
 }
@@ -518,8 +533,10 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
 	for _, msg := range req.Msg.Msgs {
 		for _, coin := range msg.Amount {
-			s.logger.Debug("Send", zap.String("toAddress", crypto.AddressToBech32(crypto.AddressFromBytes(msg.ToAddress))), zap.String("denom", coin.Denom),
-				zap.Int64("amount", coin.Amount))
+			if b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), msg.ToAddress); err == nil {
+				s.logger.Debug("Send", zap.String("toAddress", b32), zap.String("denom", coin.Denom),
+					zap.Int64("amount", coin.Amount))
+			}
 		}
 	}
 
@@ -899,7 +916,10 @@ func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.R
 
 func (s *gnoNativeService) AddressToBech32(ctx context.Context, req *connect.Request[api_gen.AddressToBech32Request]) (*connect.Response[api_gen.AddressToBech32Response], error) {
 	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
-	bech32Address := crypto.AddressToBech32(crypto.AddressFromBytes(req.Msg.Address))
+	bech32Address, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Msg.Address)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
 	return connect.NewResponse(&api_gen.AddressToBech32Response{Bech32Address: bech32Address}), nil
 }
 
