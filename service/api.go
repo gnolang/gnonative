@@ -116,7 +116,11 @@ func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Reques
 func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
 	s.logger.Debug("HasKeyByAddress called")
 
-	has, err := s.keybase.HasByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	has, err := s.keybase.HasByAddress(addr)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -154,7 +158,11 @@ func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	key, err := s.keybase.GetByAddress(crypto.AddressFromBytes(req.Msg.Address))
+	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	key, err := s.keybase.GetByAddress(addr)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -375,7 +383,11 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 		return nil, getGrpcError(err)
 	}
 	// gnoclient wants the bech32 address.
-	account, _, err := c.QueryAccount(crypto.AddressFromBytes(req.Msg.Address))
+	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	account, _, err := c.QueryAccount(addr)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -517,13 +529,25 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 	msgs := make([]vm.MsgCall, 0)
 
 	for _, msg := range req.Msgs {
+		addr, err := crypto.AddressFromBytes(req.CallerAddress)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+		sendCoins, err := convertCoins(msg.Send)
+		if err != nil {
+			return nil, nil, err
+		}
+		maxDepositCoins, err := convertCoins(msg.MaxDeposit)
+		if err != nil {
+			return nil, nil, err
+		}
 		msgs = append(msgs, vm.MsgCall{
-			Caller:     crypto.AddressFromBytes(req.CallerAddress),
+			Caller:     addr,
 			PkgPath:    msg.PackagePath,
 			Func:       msg.Fnc,
 			Args:       msg.Args,
-			Send:       convertCoins(msg.Send),
-			MaxDeposit: convertCoins(msg.MaxDeposit),
+			Send:       sendCoins,
+			MaxDeposit: maxDepositCoins,
 		})
 	}
 
@@ -580,10 +604,22 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 	msgs := make([]bank.MsgSend, 0)
 
 	for _, msg := range req.Msgs {
+		fromAddr, err := crypto.AddressFromBytes(req.CallerAddress)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+		toAddr, err := crypto.AddressFromBytes(msg.ToAddress)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+		amountCoins, err := convertCoins(msg.Amount)
+		if err != nil {
+			return nil, nil, err
+		}
 		msgs = append(msgs, bank.MsgSend{
-			FromAddress: crypto.AddressFromBytes(req.CallerAddress),
-			ToAddress:   crypto.AddressFromBytes(msg.ToAddress),
-			Amount:      convertCoins(msg.Amount),
+			FromAddress: fromAddr,
+			ToAddress:   toAddr,
+			Amount:      amountCoins,
 		})
 	}
 
@@ -642,11 +678,23 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 				},
 			},
 		}
+		addr, err := crypto.AddressFromBytes(req.CallerAddress)
+		if err != nil {
+			return nil, nil, getGrpcError(err)
+		}
+		sendCoins, err := convertCoins(msg.Send)
+		if err != nil {
+			return nil, nil, err
+		}
+		maxDepositCoins, err := convertCoins(msg.MaxDeposit)
+		if err != nil {
+			return nil, nil, err
+		}
 		msgs = append(msgs, vm.MsgRun{
-			Caller:     crypto.AddressFromBytes(req.CallerAddress),
+			Caller:     addr,
 			Package:    memPkg,
-			Send:       convertCoins(msg.Send),
-			MaxDeposit: convertCoins(msg.MaxDeposit),
+			Send:       sendCoins,
+			MaxDeposit: maxDepositCoins,
 		})
 	}
 
@@ -654,12 +702,17 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 }
 
 // convertCoins converts an array of api_gen.Coin to an array of std.Coin
-func convertCoins(apiGenCoins []*api_gen.Coin) []std.Coin {
+// If the values are invalid, return a gRPC error
+func convertCoins(apiGenCoins []*api_gen.Coin) ([]std.Coin, error) {
 	coins := make([]std.Coin, 0)
 	for _, coin := range apiGenCoins {
-		coins = append(coins, std.NewCoin(coin.Denom, coin.Amount))
+		stdCoin, err := std.NewCoinSafe(coin.Denom, coin.Amount)
+		if err != nil {
+			return nil, getGrpcError(err)
+		}
+		coins = append(coins, stdCoin)
 	}
-	return coins
+	return coins, nil
 }
 
 func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.CallRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
