@@ -520,6 +520,11 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 }
 
 func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []vm.MsgCall, error) {
+	addr, err := crypto.AddressFromBytes(req.CallerAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -529,10 +534,6 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 	msgs := make([]vm.MsgCall, 0)
 
 	for _, msg := range req.Msgs {
-		addr, err := crypto.AddressFromBytes(req.CallerAddress)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
-		}
 		sendCoins, err := convertCoins(msg.Send)
 		if err != nil {
 			return nil, nil, err
@@ -595,6 +596,11 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 }
 
 func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []bank.MsgSend, error) {
+	fromAddr, err := crypto.AddressFromBytes(req.CallerAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -604,10 +610,6 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 	msgs := make([]bank.MsgSend, 0)
 
 	for _, msg := range req.Msgs {
-		fromAddr, err := crypto.AddressFromBytes(req.CallerAddress)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
-		}
 		toAddr, err := crypto.AddressFromBytes(msg.ToAddress)
 		if err != nil {
 			return nil, nil, getGrpcError(err)
@@ -659,6 +661,11 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 }
 
 func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []vm.MsgRun, error) {
+	addr, err := crypto.AddressFromBytes(req.CallerAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
 	cfg := &gnoclient.BaseTxCfg{
 		GasFee:    req.GasFee,
 		GasWanted: req.GasWanted,
@@ -677,10 +684,6 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 					Body: msg.Package,
 				},
 			},
-		}
-		addr, err := crypto.AddressFromBytes(req.CallerAddress)
-		if err != nil {
-			return nil, nil, getGrpcError(err)
 		}
 		sendCoins, err := convertCoins(msg.Send)
 		if err != nil {
