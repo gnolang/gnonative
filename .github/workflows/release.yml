@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
+      issues: write
+      pull-requests: write
       id-token: write
     steps:
       - name: Checkout
@@ -73,9 +75,8 @@ jobs:
         run: npm install
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
+        uses: cycjimmy/semantic-release-action@v6
         with:
           working_directory: ./expo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: "true"
