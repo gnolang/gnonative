@@ -1,0 +1,42 @@
+diff --git a/hid_disabled.go b/hid_disabled.go
+index 0f266ba..4e17865 100644
+--- a/hid_disabled.go
++++ b/hid_disabled.go
+@@ -4,7 +4,8 @@
+ // This file is released under the 3-clause BSD license. Note however that Linux
+ // support depends on libusb, released under GNU LGPL 2.1 or later.
+ 
+-// +build !linux,!darwin,!windows ios !cgo
++//go:build (!linux && !darwin && !windows) || ios || !cgo || android
++// +build !linux,!darwin,!windows ios !cgo android
+ 
+ package hid
+ 
+diff --git a/hid_enabled.go b/hid_enabled.go
+index 92dea43..7436fab 100644
+--- a/hid_enabled.go
++++ b/hid_enabled.go
+@@ -4,7 +4,8 @@
+ // This file is released under the 3-clause BSD license. Note however that Linux
+ // support depends on libusb, released under LGNU GPL 2.1 or later.
+ 
+-// +build linux,cgo darwin,!ios,cgo windows,cgo
++//go:build (linux && cgo && !android) || (darwin && !ios && cgo) || (windows && cgo)
++// +build linux,cgo,!android darwin,!ios,cgo windows,cgo
+ 
+ package hid
+ 
+diff --git a/wchar.go b/wchar.go
+index d103bef..00b2297 100644
+--- a/wchar.go
++++ b/wchar.go
+@@ -6,7 +6,9 @@
+ // The vendored file is licensed under the 3-clause BSD license, according to:
+ // https://github.com/orofarne/gowchar/blob/master/LICENSE
+ 
++//go:build !ios && !android && (linux || darwin || windows)
+ // +build !ios
++// +build !android
+ // +build linux darwin windows
+ 
+ package hid

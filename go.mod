@@ -104,3 +104,5 @@ require (
 )
 
 replace golang.org/x/mobile => github.com/berty/mobile v0.0.11 // temporary, see https://github.com/golang/mobile/pull/58 and https://github.com/golang/mobile/pull/82
+
+replace github.com/zondax/hid => ./third_party/github.com/zondax/hid
