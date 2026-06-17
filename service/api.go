@@ -21,6 +21,7 @@ import (
 	crypto_keys "github.com/gnolang/gno/tm2/pkg/crypto/keys"
 	"github.com/gnolang/gno/tm2/pkg/crypto/keys/keyerror"
 	"github.com/gnolang/gno/tm2/pkg/overflow"
+	"github.com/gnolang/gno/tm2/pkg/sdk/auth"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"go.uber.org/zap"
@@ -255,6 +256,13 @@ func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Req
 	s.lock.Unlock()
 
 	account.signer.Account = req.Msg.NameOrBech32
+	if req.Msg.Master != nil {
+		masterAddr, err := crypto.AddressFromBytes(req.Msg.Master)
+		if err != nil {
+			return nil, getGrpcError(err)
+		}
+		account.signer.Master = masterAddr
+	}
 	return connect.NewResponse(&api_gen.ActivateAccountResponse{
 		Key:         info,
 		HasPassword: account.signer.Password != "",
@@ -369,8 +377,14 @@ func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect
 		return nil, err
 	}
 
+	var master []byte
+	if !account.signer.Master.IsZero() {
+		master = account.signer.Master.Bytes()
+	}
+
 	return connect.NewResponse(&api_gen.GetActivatedAccountResponse{
 		Key:         info,
+		Master:      master,
 		HasPassword: account.signer.Password != "",
 	}), nil
 }
@@ -382,7 +396,7 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// gnoclient wants the bech32 address.
+	// gnoclient wants the crypto.Address.
 	addr, err := crypto.AddressFromBytes(req.Msg.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
@@ -392,6 +406,36 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 		return nil, getGrpcError(err)
 	}
 
+	res := connect.NewResponse(&api_gen.QueryAccountResponse{AccountInfo: convertBaseAccount(account)})
+	return res, nil
+}
+
+func (s *gnoNativeService) QuerySessionAccount(ctx context.Context, req *connect.Request[api_gen.QuerySessionAccountRequest]) (*connect.Response[api_gen.QuerySessionAccountResponse], error) {
+	s.logger.Debug("QuerySessionAccount", zap.ByteString("master-address", req.Msg.MasterAddress), zap.ByteString("session-address", req.Msg.SessionAddress))
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	// gnoclient wants the crypto.Address.
+	masterAddr, err := crypto.AddressFromBytes(req.Msg.MasterAddress)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	sessionAddr, err := crypto.AddressFromBytes(req.Msg.SessionAddress)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	account, _, err := c.QuerySessionAccount(masterAddr, sessionAddr)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	res := connect.NewResponse(&api_gen.QuerySessionAccountResponse{AccountInfo: convertBaseAccount(account)})
+	return res, nil
+}
+
+func convertBaseAccount(account *std.BaseAccount) *api_gen.BaseAccount {
 	formattedCoins := make([]*api_gen.Coin, 0)
 	for _, coin := range account.Coins {
 		formattedCoins = append(formattedCoins, &api_gen.Coin{
@@ -404,14 +448,14 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 	if account.PubKey != nil {
 		pubKeyBytes = account.PubKey.Bytes()
 	}
-	res := connect.NewResponse(&api_gen.QueryAccountResponse{AccountInfo: &api_gen.BaseAccount{
+
+	return &api_gen.BaseAccount{
 		Address:       account.Address.Bytes(),
 		Coins:         formattedCoins,
 		PubKey:        pubKeyBytes,
 		AccountNumber: account.AccountNumber,
 		Sequence:      account.Sequence,
-	}})
-	return res, nil
+	}
 }
 
 func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
@@ -489,12 +533,24 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
-	cfg, msgs, err := s.convertCallRequest(req.Msg)
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+
+	signer, err := s.getSigner(req.Msg.SignerAddress)
 	if err != nil {
 		return err
 	}
 
-	signer, err := s.getSigner(req.Msg.CallerAddress)
+	var callerAddress []byte
+	if !signer.Master.IsZero() {
+		callerAddress = signer.Master.Bytes()
+	} else {
+		callerAddress = req.Msg.SignerAddress
+	}
+	msgs, err := convertCallMsgs(callerAddress, req.Msg.Msgs)
 	if err != nil {
 		return err
 	}
@@ -519,28 +575,23 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
-func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnoclient.BaseTxCfg, []vm.MsgCall, error) {
-	addr, err := crypto.AddressFromBytes(req.CallerAddress)
+// convertCallMsgs converts to use vm.MsgCall. Ignore req.SignerAddress and use callerAddress.
+func convertCallMsgs(callerAddress []byte, callMsgs []*api_gen.MsgCall) ([]vm.MsgCall, error) {
+	addr, err := crypto.AddressFromBytes(callerAddress)
 	if err != nil {
-		return nil, nil, getGrpcError(err)
-	}
-
-	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.GasFee,
-		GasWanted: req.GasWanted,
-		Memo:      req.Memo,
+		return nil, getGrpcError(err)
 	}
 
 	msgs := make([]vm.MsgCall, 0)
 
-	for _, msg := range req.Msgs {
+	for _, msg := range callMsgs {
 		sendCoins, err := convertCoins(msg.Send)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		maxDepositCoins, err := convertCoins(msg.MaxDeposit)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		msgs = append(msgs, vm.MsgCall{
 			Caller:     addr,
@@ -552,7 +603,7 @@ func (s *gnoNativeService) convertCallRequest(req *api_gen.CallRequest) (*gnocli
 		})
 	}
 
-	return cfg, msgs, nil
+	return msgs, nil
 }
 
 func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
@@ -565,12 +616,24 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 		}
 	}
 
-	signer, err := s.getSigner(req.Msg.CallerAddress)
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+
+	signer, err := s.getSigner(req.Msg.SignerAddress)
 	if err != nil {
 		return err
 	}
 
-	cfg, msgs, err := s.convertSendRequest(req.Msg)
+	var callerAddress []byte
+	if !signer.Master.IsZero() {
+		callerAddress = signer.Master.Bytes()
+	} else {
+		callerAddress = req.Msg.SignerAddress
+	}
+	msgs, err := convertSendMsgs(callerAddress, req.Msg.Msgs)
 	if err != nil {
 		return err
 	}
@@ -595,28 +658,23 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	return nil
 }
 
-func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnoclient.BaseTxCfg, []bank.MsgSend, error) {
-	fromAddr, err := crypto.AddressFromBytes(req.CallerAddress)
+// convertSendMsgs converts to use bank.MsgSend. Ignore req.SignerAddress and use callerAddress.
+func convertSendMsgs(callerAddress []byte, sendMsgs []*api_gen.MsgSend) ([]bank.MsgSend, error) {
+	fromAddr, err := crypto.AddressFromBytes(callerAddress)
 	if err != nil {
-		return nil, nil, getGrpcError(err)
-	}
-
-	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.GasFee,
-		GasWanted: req.GasWanted,
-		Memo:      req.Memo,
+		return nil, getGrpcError(err)
 	}
 
 	msgs := make([]bank.MsgSend, 0)
 
-	for _, msg := range req.Msgs {
+	for _, msg := range sendMsgs {
 		toAddr, err := crypto.AddressFromBytes(msg.ToAddress)
 		if err != nil {
-			return nil, nil, getGrpcError(err)
+			return nil, getGrpcError(err)
 		}
 		amountCoins, err := convertCoins(msg.Amount)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		msgs = append(msgs, bank.MsgSend{
 			FromAddress: fromAddr,
@@ -625,16 +683,28 @@ func (s *gnoNativeService) convertSendRequest(req *api_gen.SendRequest) (*gnocli
 		})
 	}
 
-	return cfg, msgs, nil
+	return msgs, nil
 }
 
 func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
-	signer, err := s.getSigner(req.Msg.CallerAddress)
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+
+	signer, err := s.getSigner(req.Msg.SignerAddress)
 	if err != nil {
 		return err
 	}
 
-	cfg, msgs, err := s.convertRunRequest(req.Msg)
+	var callerAddress []byte
+	if !signer.Master.IsZero() {
+		callerAddress = signer.Master.Bytes()
+	} else {
+		callerAddress = req.Msg.SignerAddress
+	}
+	msgs, err := convertRunMsgs(callerAddress, req.Msg.Msgs)
 	if err != nil {
 		return err
 	}
@@ -660,21 +730,16 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	return nil
 }
 
-func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclient.BaseTxCfg, []vm.MsgRun, error) {
-	addr, err := crypto.AddressFromBytes(req.CallerAddress)
+// convertRunMsgs converts to use vm.MsgRun. Ignore req.SignerAddress and use callerAddress.
+func convertRunMsgs(callerAddress []byte, reqMsgs []*api_gen.MsgRun) ([]vm.MsgRun, error) {
+	addr, err := crypto.AddressFromBytes(callerAddress)
 	if err != nil {
-		return nil, nil, getGrpcError(err)
-	}
-
-	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.GasFee,
-		GasWanted: req.GasWanted,
-		Memo:      req.Memo,
+		return nil, getGrpcError(err)
 	}
 
 	msgs := make([]vm.MsgRun, 0)
 
-	for _, msg := range req.Msgs {
+	for _, msg := range reqMsgs {
 		memPkg := &std.MemPackage{
 			Name: "main",
 			// Path will be automatically set by handler.
@@ -687,11 +752,11 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 		}
 		sendCoins, err := convertCoins(msg.Send)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		maxDepositCoins, err := convertCoins(msg.MaxDeposit)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		msgs = append(msgs, vm.MsgRun{
 			Caller:     addr,
@@ -701,7 +766,7 @@ func (s *gnoNativeService) convertRunRequest(req *api_gen.RunRequest) (*gnoclien
 		})
 	}
 
-	return cfg, msgs, nil
+	return msgs, nil
 }
 
 // convertCoins converts an array of api_gen.Coin to an array of std.Coin
@@ -718,12 +783,17 @@ func convertCoins(apiGenCoins []*api_gen.Coin) ([]std.Coin, error) {
 	return coins, nil
 }
 
-func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.CallRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.MakeCallTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
 	for _, msg := range req.Msg.Msgs {
 		s.logger.Debug("MakeCallTx", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
-	cfg, msgs, err := s.convertCallRequest(req.Msg)
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+	msgs, err := convertCallMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -739,8 +809,13 @@ func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[
 	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
 }
 
-func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[api_gen.SendRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	cfg, msgs, err := s.convertSendRequest(req.Msg)
+func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[api_gen.MakeSendTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+	msgs, err := convertSendMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -756,8 +831,13 @@ func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[
 	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
 }
 
-func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[api_gen.RunRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	cfg, msgs, err := s.convertRunRequest(req.Msg)
+func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[api_gen.MakeRunTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.Msg.GasFee,
+		GasWanted: req.Msg.GasWanted,
+		Memo:      req.Msg.Memo,
+	}
+	msgs, err := convertRunMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -771,6 +851,250 @@ func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[a
 		return nil, err
 	}
 	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) CreateSession(ctx context.Context, req *connect.Request[api_gen.CreateSessionRequest], stream *connect.ServerStream[api_gen.CreateSessionResponse]) error {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("CreateSession", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+	}
+
+	cfg, msgs, err := s.convertCreateSessionRequest(req.Msg)
+	if err != nil {
+		return err
+	}
+
+	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	if err != nil {
+		return err
+	}
+
+	c, err := s.getClient(creator)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.CreateSession(*cfg, msgs...)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.CreateSessionResponse{
+		Result: bres.DeliverTx.Data,
+		Hash:   bres.Hash,
+		Height: bres.Height,
+	}); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *gnoNativeService) MakeCreateSessionTx(ctx context.Context, req *connect.Request[api_gen.CreateSessionRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("MakeCreateSessionTx", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+	}
+
+	cfg, msgs, err := s.convertCreateSessionRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewCreateSessionTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) convertCreateSessionRequest(req *api_gen.CreateSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgCreateSession, error) {
+	creator, err := crypto.AddressFromBytes(req.CreatorAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
+	}
+
+	msgs := make([]auth.MsgCreateSession, 0)
+
+	for _, msg := range req.Msgs {
+		sessionKey, err := crypto.PubKeyFromBytes(msg.SessionKey)
+		if err != nil {
+			return nil, nil, err
+		}
+		spendLimitCoins, err := convertCoins(msg.SpendLimit)
+		if err != nil {
+			return nil, nil, err
+		}
+		msgs = append(msgs, auth.MsgCreateSession{
+			Creator:     creator,
+			SessionKey:  sessionKey,
+			ExpiresAt:   msg.ExpiresAt,
+			AllowPaths:  msg.AllowPaths,
+			SpendLimit:  spendLimitCoins,
+			SpendPeriod: msg.SpendPeriod,
+		})
+	}
+
+	return cfg, msgs, nil
+}
+
+func (s *gnoNativeService) RevokeSession(ctx context.Context, req *connect.Request[api_gen.RevokeSessionRequest], stream *connect.ServerStream[api_gen.RevokeSessionResponse]) error {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("RevokeSession", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+	}
+
+	cfg, msgs, err := s.convertRevokeSessionRequest(req.Msg)
+	if err != nil {
+		return err
+	}
+
+	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	if err != nil {
+		return err
+	}
+
+	c, err := s.getClient(creator)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.RevokeSession(*cfg, msgs...)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.RevokeSessionResponse{
+		Result: bres.DeliverTx.Data,
+		Hash:   bres.Hash,
+		Height: bres.Height,
+	}); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *gnoNativeService) MakeRevokeSessionTx(ctx context.Context, req *connect.Request[api_gen.RevokeSessionRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	for _, msg := range req.Msg.Msgs {
+		s.logger.Debug("MakeRevokeSessionTx", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+	}
+
+	cfg, msgs, err := s.convertRevokeSessionRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewRevokeSessionTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) convertRevokeSessionRequest(req *api_gen.RevokeSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeSession, error) {
+	creator, err := crypto.AddressFromBytes(req.CreatorAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
+	}
+
+	msgs := make([]auth.MsgRevokeSession, 0)
+
+	for _, msg := range req.Msgs {
+		sessionKey, err := crypto.PubKeyFromBytes(msg.SessionKey)
+		if err != nil {
+			return nil, nil, err
+		}
+		msgs = append(msgs, auth.MsgRevokeSession{
+			Creator:    creator,
+			SessionKey: sessionKey,
+		})
+	}
+
+	return cfg, msgs, nil
+}
+
+func (s *gnoNativeService) RevokeAllSessions(ctx context.Context, req *connect.Request[api_gen.RevokeAllSessionsRequest], stream *connect.ServerStream[api_gen.RevokeAllSessionsResponse]) error {
+	s.logger.Debug("RevokeAllSessions", zap.ByteString("creator", req.Msg.CreatorAddress))
+
+	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req.Msg)
+	if err != nil {
+		return err
+	}
+
+	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	if err != nil {
+		return err
+	}
+
+	c, err := s.getClient(creator)
+	if err != nil {
+		return getGrpcError(err)
+	}
+	bres, err := c.RevokeAllSessions(*cfg, msgs...)
+	if err != nil {
+		return getGrpcError(err)
+	}
+
+	if err := stream.Send(&api_gen.RevokeAllSessionsResponse{
+		Result: bres.DeliverTx.Data,
+		Hash:   bres.Hash,
+		Height: bres.Height,
+	}); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *gnoNativeService) MakeRevokeAllSessionsTx(ctx context.Context, req *connect.Request[api_gen.RevokeAllSessionsRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+	s.logger.Debug("MakeRevokeAllSessionsTx", zap.ByteString("creator", req.Msg.CreatorAddress))
+
+	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req.Msg)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := gnoclient.NewRevokeAllSessionsTx(*cfg, msgs...)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	txJSON, err := amino.MarshalJSON(tx)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+}
+
+func (s *gnoNativeService) convertRevokeAllSessionsRequest(req *api_gen.RevokeAllSessionsRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeAllSessions, error) {
+	creator, err := crypto.AddressFromBytes(req.CreatorAddress)
+	if err != nil {
+		return nil, nil, getGrpcError(err)
+	}
+
+	cfg := &gnoclient.BaseTxCfg{
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
+	}
+
+	msgs := []auth.MsgRevokeAllSessions{{Creator: creator}}
+	return cfg, msgs, nil
 }
 
 func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_gen.SignTxRequest]) (*connect.Response[api_gen.SignTxResponse], error) {
@@ -1006,6 +1330,15 @@ func (s *gnoNativeService) ValidateMnemonicWord(ctx context.Context, req *connec
 func (s *gnoNativeService) ValidateMnemonicPhrase(ctx context.Context, req *connect.Request[api_gen.ValidateMnemonicPhraseRequest]) (*connect.Response[api_gen.ValidateMnemonicPhraseResponse], error) {
 	_, err := bip39.MnemonicToByteArray(req.Msg.Phrase)
 	return connect.NewResponse(&api_gen.ValidateMnemonicPhraseResponse{Valid: err == nil}), nil
+}
+
+func (s *gnoNativeService) PubKeyBytesFromBech32(ctx context.Context, req *connect.Request[api_gen.PubKeyBytesFromBech32Request]) (*connect.Response[api_gen.PubKeyBytesFromBech32Response], error) {
+	pubKey, err := crypto.PubKeyFromBech32(req.Msg.Bech32PubKey)
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(&api_gen.PubKeyBytesFromBech32Response{PubKeyBytes: pubKey.Bytes()}), nil
 }
 
 func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {

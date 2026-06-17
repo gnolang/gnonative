@@ -173,6 +173,8 @@ message CreateLedgerResponse {
 
 message ActivateAccountRequest {
 	string name_or_bech32 = 1;
+	// (Optional) The address of the master account if this is a session account.
+	bytes master = 2;
 }
 
 message ActivateAccountResponse {
@@ -187,8 +189,10 @@ message GetActivatedAccountRequest {
 
 message GetActivatedAccountResponse {
 	KeyInfo key = 1 [json_name = "key_info"];
+	// The Master which was given to ActivateAccount.
+	bytes master = 2;
 	// True if the password has been set. If false, then call SetPassword.
-	bool has_password = 2;
+	bool has_password = 3;
 }
 
 message QueryAccountRequest {
@@ -196,6 +200,15 @@ message QueryAccountRequest {
 }
 
 message QueryAccountResponse {
+	BaseAccount account_info = 1;
+}
+
+message QuerySessionAccountRequest {
+	bytes master_address = 1;
+	bytes session_address = 2;
+}
+
+message QuerySessionAccountResponse {
 	BaseAccount account_info = 1;
 }
 
@@ -262,7 +275,7 @@ message CallRequest {
 	sint64 gas_wanted = 2;
 	string memo = 3;
 	// The address of the account to sign the transaction
-	bytes caller_address = 4;
+	bytes signer_address = 4;
 	// list of calls to make in one transaction
 	repeated MsgCall msgs = 5 [json_name = "Msgs"];
 }
@@ -289,7 +302,7 @@ message SendRequest {
 	// Memo is optional
 	string memo = 3;
 	// The address of the account to sign the transaction
-	bytes caller_address = 4;
+	bytes signer_address = 4;
 	// list of send operations to make in one transaction
 	repeated MsgSend msgs = 5 [json_name = "Msgs"];
 }
@@ -317,7 +330,7 @@ message RunRequest {
 	// Memo is optional
 	string memo = 3;
 	// The address of the account to sign the transaction
-	bytes caller_address = 4;
+	bytes signer_address = 4;
 	// list of run operations to make in one transaction
 	repeated MsgRun msgs = 5 [json_name = "Msgs"];
 }
@@ -329,6 +342,38 @@ message RunResponse {
 	bytes hash = 2;
 	// The transaction height
 	sint64 height = 3;
+}
+
+message MakeCallTxRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	string memo = 3;
+	// The address of the caller. If signing with a session account, this is the master account address
+	bytes caller_address = 4;
+	// list of calls to make in one transaction
+	repeated MsgCall msgs = 5 [json_name = "Msgs"];
+}
+
+message MakeSendTxRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	// Memo is optional
+	string memo = 3;
+	// The address of the caller. If signing with a session account, this is the master account address
+	bytes caller_address = 4;
+	// list of send operations to make in one transaction
+	repeated MsgSend msgs = 5 [json_name = "Msgs"];
+}
+
+message MakeRunTxRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	// Memo is optional
+	string memo = 3;
+	// The address of the caller. If signing with a session account, this is the master account address
+	bytes caller_address = 4;
+	// list of run operations to make in one transaction
+	repeated MsgRun msgs = 5 [json_name = "Msgs"];
 }
 
 message MakeTxResponse {
@@ -350,6 +395,76 @@ message SignTxRequest {
 message SignTxResponse {
 	// The JSON encoding of the signed transaction (to use in BroadcastTx)
 	string signed_tx_json = 1 [json_name = "tx_json"];
+}
+
+message MsgCreateSession {
+	// Full session public key
+	bytes session_key = 1;
+	// unix timestamp; 0 = no expiry
+	sint64 expires_at = 2;
+	// Typed entries: "*" or <route>/<type>[:<path>]; required (gno.land-specific grammar)
+	repeated string allow_paths = 3;
+	// Max spend per period; empty = no spending
+	repeated Coin spend_limit = 4;
+	// Seconds; 0 = lifetime cap
+	sint64 spend_period = 5;
+}
+
+message CreateSessionRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	string memo = 3;
+	// The address of the creator (master) account to sign the transaction
+	bytes creator_address = 4;
+	// list of calls to make in one transaction
+	repeated MsgCreateSession msgs = 5 [json_name = "Msgs"];
+}
+
+message CreateSessionResponse {
+	bytes result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
+}
+
+message MsgRevokeSession {
+	// Full session public key
+	bytes session_key = 1;
+}
+
+message RevokeSessionRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	string memo = 3;
+	// The address of the creator (master) account to sign the transaction
+	bytes creator_address = 4;
+	// list of calls to make in one transaction
+	repeated MsgRevokeSession msgs = 5 [json_name = "Msgs"];
+}
+
+message RevokeSessionResponse {
+	bytes result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
+}
+
+message RevokeAllSessionsRequest {
+	string gas_fee = 1;
+	sint64 gas_wanted = 2;
+	string memo = 3;
+	// The address of the creator (master) account to sign the transaction
+	bytes creator_address = 4;
+}
+
+message RevokeAllSessionsResponse {
+	bytes result = 1;
+	// The transaction hash
+	bytes hash = 2;
+	// The transaction height
+	sint64 height = 3;
 }
 
 message EstimateGasRequest {
@@ -455,6 +570,14 @@ message ValidateMnemonicPhraseRequest {
 
 message ValidateMnemonicPhraseResponse {
 	bool valid = 1;
+}
+
+message PubKeyBytesFromBech32Request {
+	string bech32_pub_key = 1;
+}
+
+message PubKeyBytesFromBech32Response {
+	bytes pub_key_bytes = 1;
 }
 
 message HelloRequest {

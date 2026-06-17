@@ -11,10 +11,14 @@ import {
   MakeTxResponse,
   Coin,
   QueryAccountResponse,
+  QuerySessionAccountResponse,
   QueryResponse,
   ActivateAccountResponse,
   SendResponse,
   RunResponse,
+  CreateSessionResponse,
+  RevokeSessionResponse,
+  RevokeAllSessionsResponse,
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
@@ -371,6 +375,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return reponse;
   }
 
+  async querySessionAccount(masterAddress: Uint8Array, sessionAddress: Uint8Array): Promise<QuerySessionAccountResponse> {
+    const client = this.#getClient();
+    const reponse = client.querySessionAccount({ masterAddress, sessionAddress });
+    return reponse;
+  }
+
   async deleteAccount(
     nameOrBech32: string,
     password: string | undefined,
@@ -405,7 +415,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     args: string[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     send?: Coin[],
     maxDeposit?: Coin[],
     memo?: string,
@@ -415,7 +425,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
       gasFee,
       gasWanted,
       memo,
-      callerAddress,
+      signerAddress,
       msgs: [
         {
           packagePath,
@@ -434,7 +444,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     memo?: string,
   ): Promise<AsyncIterable<SendResponse>> {
     const client = this.#getClient();
@@ -442,7 +452,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
       gasFee,
       gasWanted,
       memo,
-      callerAddress,
+      signerAddress,
       msgs: [
         {
           toAddress,
@@ -457,7 +467,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     pkg: string,
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     send?: Coin[],
     maxDeposit?: Coin[],
     memo?: string,
@@ -466,7 +476,7 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const reponse = client.run({
       gasFee,
       gasWanted,
-      callerAddress,
+      signerAddress,
       memo,
       msgs: [
         {
@@ -475,6 +485,142 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
           maxDeposit,
         },
       ],
+    });
+    return reponse;
+  }
+
+  async createSession(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    expiresAt: bigint,
+    allowPaths: string[],
+    spendLimit: Coin[],
+    spendPeriod: bigint,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<AsyncIterable<CreateSessionResponse>> {
+    const client = this.#getClient();
+    const reponse = client.createSession({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
+      msgs: [
+        {
+          sessionKey,
+          expiresAt,
+          allowPaths,
+          spendLimit,
+          spendPeriod,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async makeCreateSessionTx(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    expiresAt: bigint,
+    allowPaths: string[],
+    spendLimit: Coin[],
+    spendPeriod: bigint,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeCreateSessionTx({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
+      msgs: [
+        {
+          sessionKey,
+          expiresAt,
+          allowPaths,
+          spendLimit,
+          spendPeriod,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async revokeSession(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<AsyncIterable<RevokeSessionResponse>> {
+    const client = this.#getClient();
+    const reponse = client.revokeSession({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
+      msgs: [
+        {
+          sessionKey,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async makeRevokeSessionTx(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeRevokeSessionTx({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
+      msgs: [
+        {
+          sessionKey,
+        },
+      ],
+    });
+    return reponse;
+  }
+
+  async revokeAllSessions(
+    creatorAddress: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<AsyncIterable<RevokeAllSessionsResponse>> {
+    const client = this.#getClient();
+    const reponse = client.revokeAllSessions({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
+    });
+    return reponse;
+  }
+
+  async makeRevokeAllSessionsTx(
+    creatorAddress: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse> {
+    const client = this.#getClient();
+    const reponse = client.makeRevokeAllSessionsTx({
+      gasFee,
+      gasWanted,
+      memo,
+      creatorAddress,
     });
     return reponse;
   }

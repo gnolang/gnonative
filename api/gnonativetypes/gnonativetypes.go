@@ -160,6 +160,8 @@ type CreateLedgerResponse struct {
 
 type ActivateAccountRequest struct {
 	NameOrBech32 string `json:"name_or_bech32" yaml:"name_or_bech32"`
+	// (Optional) The address of the master account if this is a session account.
+	Master []byte `json:"master" yaml:"master"`
 }
 
 type ActivateAccountResponse struct {
@@ -174,6 +176,8 @@ type GetActivatedAccountRequest struct {
 
 type GetActivatedAccountResponse struct {
 	Key *KeyInfo `json:"key_info" yaml:"key_info"`
+	// The Master which was given to ActivateAccount.
+	Master []byte `json:"master" yaml:"master"`
 	// True if the password has been set. If false, then call SetPassword.
 	HasPassword bool `json:"has_password" yaml:"has_password"`
 }
@@ -183,6 +187,15 @@ type QueryAccountRequest struct {
 }
 
 type QueryAccountResponse struct {
+	AccountInfo *BaseAccount `json:"account_info" yaml:"account_info"`
+}
+
+type QuerySessionAccountRequest struct {
+	MasterAddress  []byte `json:"master_address" yaml:"master_address"`
+	SessionAddress []byte `json:"session_address" yaml:"session_address"`
+}
+
+type QuerySessionAccountResponse struct {
 	AccountInfo *BaseAccount `json:"account_info" yaml:"account_info"`
 }
 
@@ -248,7 +261,7 @@ type CallRequest struct {
 	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
 	Memo      string `json:"memo" yaml:"memo"`
 	// The address of the account to sign the transaction
-	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	SignerAddress []byte `json:"signer_address" yaml:"signer_address"`
 	// list of calls to make in one transaction
 	Msgs []MsgCall
 }
@@ -275,7 +288,7 @@ type SendRequest struct {
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
 	// The address of the account to sign the transaction
-	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	SignerAddress []byte `json:"signer_address" yaml:"signer_address"`
 	// list of send operations to make in one transaction
 	Msgs []MsgSend
 }
@@ -303,7 +316,7 @@ type RunRequest struct {
 	// Memo is optional
 	Memo string `json:"memo" yaml:"memo"`
 	// The address of the account to sign the transaction
-	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	SignerAddress []byte `json:"signer_address" yaml:"signer_address"`
 	// list of run operations to make in one transaction
 	Msgs []MsgRun
 }
@@ -315,6 +328,38 @@ type RunResponse struct {
 	Hash []byte `json:"hash" yaml:"hash"`
 	// The transaction height
 	Height int64 `json:"height" yaml:"height"`
+}
+
+type MakeCallTxRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	Memo      string `json:"memo" yaml:"memo"`
+	// The address of the caller. If signing with a session account, this is the master account address
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	// list of calls to make in one transaction
+	Msgs []MsgCall
+}
+
+type MakeSendTxRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	// Memo is optional
+	Memo string `json:"memo" yaml:"memo"`
+	// The address of the caller. If signing with a session account, this is the master account address
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	// list of send operations to make in one transaction
+	Msgs []MsgSend
+}
+
+type MakeRunTxRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	// Memo is optional
+	Memo string `json:"memo" yaml:"memo"`
+	// The address of the caller. If signing with a session account, this is the master account address
+	CallerAddress []byte `json:"caller_address" yaml:"caller_address"`
+	// list of run operations to make in one transaction
+	Msgs []MsgRun
 }
 
 type MakeTxResponse struct {
@@ -336,6 +381,76 @@ type SignTxRequest struct {
 type SignTxResponse struct {
 	// The JSON encoding of the signed transaction (to use in BroadcastTx)
 	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
+}
+
+type MsgCreateSession struct {
+	// Full session public key
+	SessionKey []byte `json:"session_key" yaml:"session_key"`
+	// unix timestamp; 0 = no expiry
+	ExpiresAt int64 `json:"expires_at" yaml:"expires_at"`
+	// Typed entries: "*" or <route>/<type>[:<path>]; required (gno.land-specific grammar)
+	AllowPaths []string `json:"allow_paths,omitempty" yaml:"allow_paths"`
+	// Max spend per period; empty = no spending
+	SpendLimit []Coin `json:"spend_limit,omitempty" yaml:"spend_limit"`
+	// Seconds; 0 = lifetime cap
+	SpendPeriod int64 `json:"spend_period,omitempty" yaml:"spend_period"`
+}
+
+type CreateSessionRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	Memo      string `json:"memo" yaml:"memo"`
+	// The address of the creator (master) account to sign the transaction
+	CreatorAddress []byte `json:"creator_address" yaml:"creator_address"`
+	// list of calls to make in one transaction
+	Msgs []MsgCreateSession
+}
+
+type CreateSessionResponse struct {
+	Result []byte `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
+}
+
+type MsgRevokeSession struct {
+	// Full session public key
+	SessionKey []byte `json:"session_key" yaml:"session_key"`
+}
+
+type RevokeSessionRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	Memo      string `json:"memo" yaml:"memo"`
+	// The address of the creator (master) account to sign the transaction
+	CreatorAddress []byte `json:"creator_address" yaml:"creator_address"`
+	// list of calls to make in one transaction
+	Msgs []MsgRevokeSession
+}
+
+type RevokeSessionResponse struct {
+	Result []byte `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
+}
+
+type RevokeAllSessionsRequest struct {
+	GasFee    string `json:"gas_fee" yaml:"gas_fee"`
+	GasWanted int64  `json:"gas_wanted" yaml:"gas_wanted"`
+	Memo      string `json:"memo" yaml:"memo"`
+	// The address of the creator (master) account to sign the transaction
+	CreatorAddress []byte `json:"creator_address" yaml:"creator_address"`
+}
+
+type RevokeAllSessionsResponse struct {
+	Result []byte `json:"result" yaml:"result"`
+	// The transaction hash
+	Hash []byte `json:"hash" yaml:"hash"`
+	// The transaction height
+	Height int64 `json:"height" yaml:"height"`
 }
 
 type EstimateGasRequest struct {
@@ -441,6 +556,14 @@ type ValidateMnemonicPhraseRequest struct {
 
 type ValidateMnemonicPhraseResponse struct {
 	Valid bool `json:"valid" yaml:"valid"`
+}
+
+type PubKeyBytesFromBech32Request struct {
+	Bech32PubKey string `json:"bech32_pub_key" yaml:"bech32_pub_key"`
+}
+
+type PubKeyBytesFromBech32Response struct {
+	PubKeyBytes []byte `json:"pub_key_bytes" yaml:"pub_key_bytes"`
 }
 
 type HelloRequest struct {

@@ -96,13 +96,17 @@ service GnoNativeService {
   rpc RotatePassword(RotatePasswordRequest) returns (RotatePasswordResponse);
 
   // GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
-  // If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+  // If the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
   // If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   rpc GetActivatedAccount(GetActivatedAccountRequest) returns (GetActivatedAccountResponse);
 
   // QueryAccount retrieves account information from the blockchain for a given
   // address.
   rpc QueryAccount(QueryAccountRequest) returns (QueryAccountResponse);
+
+  // QuerySessionAccount retrieves session account information from the blockchain for a given
+  // master address and session address.
+  rpc QuerySessionAccount(QuerySessionAccountRequest) returns (QuerySessionAccountResponse);
 
   // DeleteAccount deletes the account with the given name, using the password
   // to ensure access. However, if skip_password is true, then ignore the
@@ -131,31 +135,55 @@ service GnoNativeService {
   // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
-  // Call a specific realm function. Sign the transaction with the given caller_address.
-  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Call one or more specific realm functions. Sign the transaction with the given signer_address.
+  // If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   // If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
   rpc Call(CallRequest) returns (stream CallResponse);
 
-  // Send currency from the account with the given caller_address to an account on the blockchain.
-  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // Send currency from the account with the given signer_address to one or more accounts on the blockchain.
+  // If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
   rpc Send(SendRequest) returns (stream SendResponse);
 
   // Temporarily load the code in package on the blockchain and run main() which can
-  // call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
+  // call realm functions and use println() to output to the "console". Sign the transaction with the given signer_address.
   // This returns the "console" output.
-  // If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   rpc Run(RunRequest) returns (stream RunResponse);
 
-  // Make an unsigned transaction to call a specific realm function.
-  rpc MakeCallTx(CallRequest) returns (MakeTxResponse);
+  // Create one or more session accounts where the master is the given creator_address.
+  // If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  rpc CreateSession(CreateSessionRequest) returns (stream CreateSessionResponse);
 
-  // Make an unsigned transaction to send currency to an account on the blockchain.
-  rpc MakeSendTx(SendRequest) returns (MakeTxResponse);
+  // Revoke one or more session accounts where the master is the given creator_address.
+  // If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  rpc RevokeSession(RevokeSessionRequest) returns (stream RevokeSessionResponse);
+
+  // Revoke all session accounts where the master is the given creator_address.
+  // If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+  // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+  rpc RevokeAllSessions(RevokeAllSessionsRequest) returns (stream RevokeAllSessionsResponse);
+
+  // Make an unsigned transaction to call one or more specific realm functions.
+  rpc MakeCallTx(MakeCallTxRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to send currency to one or more accounts on the blockchain.
+  rpc MakeSendTx(MakeSendTxRequest) returns (MakeTxResponse);
 
   // Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
-  rpc MakeRunTx(RunRequest) returns (MakeTxResponse);
+  rpc MakeRunTx(MakeRunTxRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to create one or more session accounts where the master is the given creator_address.
+  rpc MakeCreateSessionTx(CreateSessionRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to revoke one or more session accounts where the master is the given creator_address.
+  rpc MakeRevokeSessionTx(RevokeSessionRequest) returns (MakeTxResponse);
+
+  // Make an unsigned transaction to revoke all session accounts where the master is the given creator_address.
+  rpc MakeRevokeAllSessionsTx(RevokeAllSessionsRequest) returns (MakeTxResponse);
 
   // EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
   // If UpdateTx is true, then update the transaction with the GasWanted amount.
@@ -195,6 +223,9 @@ service GnoNativeService {
   // Validate a mnemonic phrase (for example, as in CreateAccount).
   // In the response, set valid true if the mnemonic phrase is valid.
   rpc ValidateMnemonicPhrase(ValidateMnemonicPhraseRequest) returns (ValidateMnemonicPhraseResponse);
+
+  // Convert a bech32 public key to a byte array.
+  rpc PubKeyBytesFromBech32(PubKeyBytesFromBech32Request) returns (PubKeyBytesFromBech32Response);
 
   // Hello is for debug purposes
   rpc Hello(HelloRequest) returns (HelloResponse);

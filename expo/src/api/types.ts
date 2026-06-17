@@ -4,10 +4,14 @@ import {
   GetActivatedAccountResponse,
   HelloStreamResponse,
   QueryAccountResponse,
+  QuerySessionAccountResponse,
   QueryResponse,
   ActivateAccountResponse,
   SendResponse,
   RunResponse,
+  CreateSessionResponse,
+  RevokeSessionResponse,
+  RevokeAllSessionsResponse,
   SetChainIDResponse,
   SetPasswordResponse,
   SetRemoteResponse,
@@ -67,6 +71,7 @@ export interface GnoKeyApi {
   rotatePassword: (password: string, addresses: Uint8Array[]) => Promise<RotatePasswordResponse>;
   getActivatedAccount: () => Promise<GetActivatedAccountResponse>;
   queryAccount: (address: Uint8Array) => Promise<QueryAccountResponse>;
+  querySessionAccount: (masterAddress: Uint8Array, sessionAddress: Uint8Array) => Promise<QuerySessionAccountResponse>;
   deleteAccount: (
     nameOrBech32: string,
     password: string | undefined,
@@ -81,7 +86,7 @@ export interface GnoKeyApi {
     args: string[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     send?: Coin[],
     maxDeposit?: Coin[],
     memo?: string,
@@ -91,14 +96,14 @@ export interface GnoKeyApi {
     amount: Coin[],
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     memo?: string,
   ) => Promise<AsyncIterable<SendResponse>>;
   run: (
     pkg: string,
     gasFee: string,
     gasWanted: bigint,
-    callerAddress: Uint8Array,
+    signerAddress: Uint8Array,
     send?: Coin[],
     maxDeposit?: Coin[],
     memo?: string,
@@ -155,6 +160,54 @@ export interface GnoKeyApi {
     maxDeposit?: Coin[],
     memo?: string,
   ) => Promise<MakeTxResponse>;
+  createSession: (
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    expiresAt: bigint,
+    allowPaths: string[],
+    spendLimit: Coin[],
+    spendPeriod: bigint,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ) => Promise<AsyncIterable<CreateSessionResponse>>;
+  makeCreateSessionTx(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    expiresAt: bigint,
+    allowPaths: string[],
+    spendLimit: Coin[],
+    spendPeriod: bigint,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
+  revokeSession: (
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ) => Promise<AsyncIterable<RevokeSessionResponse>>;
+  makeRevokeSessionTx(
+    creatorAddress: Uint8Array,
+    sessionKey: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
+  revokeAllSessions: (
+    creatorAddress: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ) => Promise<AsyncIterable<RevokeAllSessionsResponse>>;
+  makeRevokeAllSessionsTx(
+    creatorAddress: Uint8Array,
+    gasFee: string,
+    gasWanted: bigint,
+    memo?: string,
+  ): Promise<MakeTxResponse>;
   broadcastTxCommit(signedTxJson: string): Promise<AsyncIterable<BroadcastTxCommitResponse>>;
   // debug
   hello: (name: string) => Promise<string>;
