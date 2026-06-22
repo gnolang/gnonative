@@ -135,6 +135,11 @@ framework.android: $(gnocore_aar) $(gnocore_jar)
 $(gnocore_aar): $(bind_init_files) $(go_deps)
 	$(MAKE) generate
 	@mkdir -p $(dir $@) .cache/bind/android
+	# Android's bionic libc has no robust POSIX mutexes (pthread_mutexattr_setrobust,
+	# PTHREAD_MUTEX_ROBUST, pthread_mutex_consistent) at any API level, but LMDB's
+	# mdb.c only skips them when the bare ANDROID macro is defined (the NDK defines
+	# __ANDROID__). Disable robust mutexes explicitly so the cgo build links.
+	CGO_CFLAGS="$$CGO_CFLAGS -DMDB_USE_ROBUST=0" \
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gnonative \
 		-javapkg=gnolang.gno \
