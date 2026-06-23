@@ -731,7 +731,7 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 }
 
 // convertRunMsgs converts to use vm.MsgRun. Ignore req.SignerAddress and use callerAddress.
-func convertRunMsgs(callerAddress []byte, reqMsgs []*api_gen.MsgRun) ([]vm.MsgRun, error) {
+func convertRunMsgs(callerAddress []byte, runMsgs []*api_gen.MsgRun) ([]vm.MsgRun, error) {
 	addr, err := crypto.AddressFromBytes(callerAddress)
 	if err != nil {
 		return nil, getGrpcError(err)
@@ -739,7 +739,7 @@ func convertRunMsgs(callerAddress []byte, reqMsgs []*api_gen.MsgRun) ([]vm.MsgRu
 
 	msgs := make([]vm.MsgRun, 0)
 
-	for _, msg := range reqMsgs {
+	for _, msg := range runMsgs {
 		memPkg := &std.MemPackage{
 			Name: "main",
 			// Path will be automatically set by handler.
