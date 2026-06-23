@@ -92,10 +92,15 @@ message BaseAccount {
 message SessionAccount {
 	BaseAccount base_account = 1;
 	bytes master_address = 2;
+	// Unix timestamp; 0 = no expiry
 	sint64 expires_at = 3;
+	// Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
 	repeated Coin spend_limit = 4;
+	// Seconds; 0 = lifetime cap (no reset)
 	sint64 spend_period = 5;
+	// Nil/empty = 0 spent
 	repeated Coin spend_used = 6;
+	// Unix timestamp; start of current period
 	sint64 spend_reset = 7;
 	repeated string allow_paths = 8;
 }

@@ -80,12 +80,17 @@ type BaseAccount struct {
 type SessionAccount struct {
 	BaseAccount   *BaseAccount `json:"base_account" yaml:"base_account"`
 	MasterAddress []byte       `json:"master_address" yaml:"master_address"`
-	ExpiresAt     int64        `json:"expires_at" yaml:"expires_at"`     // unix ts; 0 = no expiry
-	SpendLimit    []Coin       `json:"spend_limit" yaml:"spend_limit"`   // nil/empty = no spending allowed (fail-closed, NOT unrestricted)
-	SpendPeriod   int64        `json:"spend_period" yaml:"spend_period"` // seconds; 0 = lifetime cap (no reset)
-	SpendUsed     []Coin       `json:"spend_used" yaml:"spend_used"`     // nil/empty = 0 spent
-	SpendReset    int64        `json:"spend_reset" yaml:"spend_reset"`   // unix ts; start of current period
-	AllowPaths    []string     `json:"allow_paths" yaml:"allow_paths"`
+	// Unix timestamp; 0 = no expiry
+	ExpiresAt int64 `json:"expires_at" yaml:"expires_at"`
+	// Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+	SpendLimit []Coin `json:"spend_limit" yaml:"spend_limit"`
+	// Seconds; 0 = lifetime cap (no reset)
+	SpendPeriod int64 `json:"spend_period" yaml:"spend_period"`
+	// Nil/empty = 0 spent
+	SpendUsed []Coin `json:"spend_used" yaml:"spend_used"`
+	// Unix timestamp; start of current period
+	SpendReset int64    `json:"spend_reset" yaml:"spend_reset"`
+	AllowPaths []string `json:"allow_paths" yaml:"allow_paths"`
 }
 
 type ListKeyInfoRequest struct{}

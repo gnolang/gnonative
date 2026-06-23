@@ -1,5 +1,5 @@
-14b322399c633e0326d15c2a92d08db12f146dc8  api/gnonativetypes.proto
-d04874d7322ab210b1e532193e19e3923cd069dc  api/gnonativetypes/gnonativetypes.go
+d75fd66e9adb03e76f9e1bcebefe5e4752b63f7a  api/gnonativetypes.proto
+67166163b9def2b47559169e99883602af4252ae  api/gnonativetypes/gnonativetypes.go
 757b727f8670224672018581de7fbc4f6800dd88  api/gnonativetypes/package.go
 cc1c391fbadb61eb3b4ba861405fbc0c41066c2e  api/rpc.proto
 426b4aee8f1f2b045062c7c745b4d3559d59daf9  buf.gen.yaml

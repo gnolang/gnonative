@@ -4283,6 +4283,9 @@ namespace Land.Gno.Gnonative.V1 {
     /// <summary>Field number for the "expires_at" field.</summary>
     public const int ExpiresAtFieldNumber = 3;
     private long expiresAt_;
+    /// <summary>
+    /// Unix timestamp; 0 = no expiry
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long ExpiresAt {
@@ -4297,6 +4300,9 @@ namespace Land.Gno.Gnonative.V1 {
     private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.Coin> _repeated_spendLimit_codec
         = pb::FieldCodec.ForMessage(34, global::Land.Gno.Gnonative.V1.Coin.Parser);
     private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> spendLimit_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin>();
+    /// <summary>
+    /// Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> SpendLimit {
@@ -4306,6 +4312,9 @@ namespace Land.Gno.Gnonative.V1 {
     /// <summary>Field number for the "spend_period" field.</summary>
     public const int SpendPeriodFieldNumber = 5;
     private long spendPeriod_;
+    /// <summary>
+    /// Seconds; 0 = lifetime cap (no reset)
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long SpendPeriod {
@@ -4320,6 +4329,9 @@ namespace Land.Gno.Gnonative.V1 {
     private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.Coin> _repeated_spendUsed_codec
         = pb::FieldCodec.ForMessage(50, global::Land.Gno.Gnonative.V1.Coin.Parser);
     private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> spendUsed_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin>();
+    /// <summary>
+    /// Nil/empty = 0 spent
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.Coin> SpendUsed {
@@ -4329,6 +4341,9 @@ namespace Land.Gno.Gnonative.V1 {
     /// <summary>Field number for the "spend_reset" field.</summary>
     public const int SpendResetFieldNumber = 7;
     private long spendReset_;
+    /// <summary>
+    /// Unix timestamp; start of current period
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long SpendReset {

@@ -892,12 +892,17 @@ type SessionAccount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BaseAccount   *BaseAccount           `protobuf:"bytes,1,opt,name=base_account,json=baseAccount,proto3" json:"base_account,omitempty"`
 	MasterAddress []byte                 `protobuf:"bytes,2,opt,name=master_address,json=masterAddress,proto3" json:"master_address,omitempty"`
-	ExpiresAt     int64                  `protobuf:"zigzag64,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	SpendLimit    []*Coin                `protobuf:"bytes,4,rep,name=spend_limit,json=spendLimit,proto3" json:"spend_limit,omitempty"`
-	SpendPeriod   int64                  `protobuf:"zigzag64,5,opt,name=spend_period,json=spendPeriod,proto3" json:"spend_period,omitempty"`
-	SpendUsed     []*Coin                `protobuf:"bytes,6,rep,name=spend_used,json=spendUsed,proto3" json:"spend_used,omitempty"`
-	SpendReset    int64                  `protobuf:"zigzag64,7,opt,name=spend_reset,json=spendReset,proto3" json:"spend_reset,omitempty"`
-	AllowPaths    []string               `protobuf:"bytes,8,rep,name=allow_paths,json=allowPaths,proto3" json:"allow_paths,omitempty"`
+	// Unix timestamp; 0 = no expiry
+	ExpiresAt int64 `protobuf:"zigzag64,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+	SpendLimit []*Coin `protobuf:"bytes,4,rep,name=spend_limit,json=spendLimit,proto3" json:"spend_limit,omitempty"`
+	// Seconds; 0 = lifetime cap (no reset)
+	SpendPeriod int64 `protobuf:"zigzag64,5,opt,name=spend_period,json=spendPeriod,proto3" json:"spend_period,omitempty"`
+	// Nil/empty = 0 spent
+	SpendUsed []*Coin `protobuf:"bytes,6,rep,name=spend_used,json=spendUsed,proto3" json:"spend_used,omitempty"`
+	// Unix timestamp; start of current period
+	SpendReset    int64    `protobuf:"zigzag64,7,opt,name=spend_reset,json=spendReset,proto3" json:"spend_reset,omitempty"`
+	AllowPaths    []string `protobuf:"bytes,8,rep,name=allow_paths,json=allowPaths,proto3" json:"allow_paths,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

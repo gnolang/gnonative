@@ -386,26 +386,36 @@ export type SessionAccount = Message<"land.gno.gnonative.v1.SessionAccount"> & {
   masterAddress: Uint8Array;
 
   /**
+   * Unix timestamp; 0 = no expiry
+   *
    * @generated from field: sint64 expires_at = 3;
    */
   expiresAt: bigint;
 
   /**
+   * Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+   *
    * @generated from field: repeated land.gno.gnonative.v1.Coin spend_limit = 4;
    */
   spendLimit: Coin[];
 
   /**
+   * Seconds; 0 = lifetime cap (no reset)
+   *
    * @generated from field: sint64 spend_period = 5;
    */
   spendPeriod: bigint;
 
   /**
+   * Nil/empty = 0 spent
+   *
    * @generated from field: repeated land.gno.gnonative.v1.Coin spend_used = 6;
    */
   spendUsed: Coin[];
 
   /**
+   * Unix timestamp; start of current period
+   *
    * @generated from field: sint64 spend_reset = 7;
    */
   spendReset: bigint;
