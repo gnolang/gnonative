@@ -6,7 +6,7 @@ require (
 	connectrpc.com/connect v1.16.2
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/gnolang/gno v0.0.0-20260622074300-b8ee3297f6ea
+	github.com/gnolang/gno v0.0.0-20260623134700-0c17a9a5852a
 	github.com/oklog/run v1.1.0
 	github.com/peterbourgon/ff/v3 v3.4.0
 	github.com/peterbourgon/unixtransport v0.0.3

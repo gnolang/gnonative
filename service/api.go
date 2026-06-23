@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
+	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/gnoland/ugnot"
 	"github.com/gnolang/gno/gno.land/pkg/keyscli"
 	"github.com/gnolang/gno/tm2/pkg/amino"
@@ -431,19 +432,11 @@ func (s *gnoNativeService) QuerySessionAccount(ctx context.Context, req *connect
 		return nil, getGrpcError(err)
 	}
 
-	res := connect.NewResponse(&api_gen.QuerySessionAccountResponse{AccountInfo: convertBaseAccount(account)})
+	res := connect.NewResponse(&api_gen.QuerySessionAccountResponse{AccountInfo: convertSessionAccount(account)})
 	return res, nil
 }
 
 func convertBaseAccount(account *std.BaseAccount) *api_gen.BaseAccount {
-	formattedCoins := make([]*api_gen.Coin, 0)
-	for _, coin := range account.Coins {
-		formattedCoins = append(formattedCoins, &api_gen.Coin{
-			Denom:  coin.Denom,
-			Amount: coin.Amount,
-		})
-	}
-
 	var pubKeyBytes []byte
 	if account.PubKey != nil {
 		pubKeyBytes = account.PubKey.Bytes()
@@ -451,10 +444,23 @@ func convertBaseAccount(account *std.BaseAccount) *api_gen.BaseAccount {
 
 	return &api_gen.BaseAccount{
 		Address:       account.Address.Bytes(),
-		Coins:         formattedCoins,
+		Coins:         convertStdCoins(account.Coins),
 		PubKey:        pubKeyBytes,
 		AccountNumber: account.AccountNumber,
 		Sequence:      account.Sequence,
+	}
+}
+
+func convertSessionAccount(account *gnoland.GnoSessionAccount) *api_gen.SessionAccount {
+	return &api_gen.SessionAccount{
+		BaseAccount:   convertBaseAccount(&account.BaseAccount),
+		MasterAddress: account.MasterAddress.Bytes(),
+		ExpiresAt:     account.ExpiresAt,
+		SpendLimit:    convertStdCoins(account.SpendLimit),
+		SpendPeriod:   account.SpendPeriod,
+		SpendUsed:     convertStdCoins(account.SpendUsed),
+		SpendReset:    account.SpendReset,
+		AllowPaths:    account.AllowPaths[:],
 	}
 }
 
@@ -781,6 +787,20 @@ func convertCoins(apiGenCoins []*api_gen.Coin) ([]std.Coin, error) {
 		coins = append(coins, stdCoin)
 	}
 	return coins, nil
+}
+
+// convertStdCoins converts an array of std.Coin to an array of api_gen.Coin.
+// This is the reverse of convertCoins.
+func convertStdCoins(stdCoins []std.Coin) []*api_gen.Coin {
+	coins := make([]*api_gen.Coin, 0)
+	for _, coin := range stdCoins {
+		coins = append(coins, &api_gen.Coin{
+			Denom:  coin.Denom,
+			Amount: coin.Amount,
+		})
+	}
+
+	return coins
 }
 
 func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.MakeCallTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {

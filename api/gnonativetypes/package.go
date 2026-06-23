@@ -31,6 +31,7 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	KeyInfo{},
 	Coin{},
 	BaseAccount{},
+	SessionAccount{},
 	ListKeyInfoRequest{},
 	ListKeyInfoResponse{},
 	HasKeyByNameRequest{},

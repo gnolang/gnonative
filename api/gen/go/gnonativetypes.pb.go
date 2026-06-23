@@ -888,6 +888,106 @@ func (x *BaseAccount) GetSequence() uint64 {
 	return 0
 }
 
+type SessionAccount struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BaseAccount   *BaseAccount           `protobuf:"bytes,1,opt,name=base_account,json=baseAccount,proto3" json:"base_account,omitempty"`
+	MasterAddress []byte                 `protobuf:"bytes,2,opt,name=master_address,json=masterAddress,proto3" json:"master_address,omitempty"`
+	ExpiresAt     int64                  `protobuf:"zigzag64,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	SpendLimit    []*Coin                `protobuf:"bytes,4,rep,name=spend_limit,json=spendLimit,proto3" json:"spend_limit,omitempty"`
+	SpendPeriod   int64                  `protobuf:"zigzag64,5,opt,name=spend_period,json=spendPeriod,proto3" json:"spend_period,omitempty"`
+	SpendUsed     []*Coin                `protobuf:"bytes,6,rep,name=spend_used,json=spendUsed,proto3" json:"spend_used,omitempty"`
+	SpendReset    int64                  `protobuf:"zigzag64,7,opt,name=spend_reset,json=spendReset,proto3" json:"spend_reset,omitempty"`
+	AllowPaths    []string               `protobuf:"bytes,8,rep,name=allow_paths,json=allowPaths,proto3" json:"allow_paths,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SessionAccount) Reset() {
+	*x = SessionAccount{}
+	mi := &file_gnonativetypes_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SessionAccount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SessionAccount) ProtoMessage() {}
+
+func (x *SessionAccount) ProtoReflect() protoreflect.Message {
+	mi := &file_gnonativetypes_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SessionAccount.ProtoReflect.Descriptor instead.
+func (*SessionAccount) Descriptor() ([]byte, []int) {
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *SessionAccount) GetBaseAccount() *BaseAccount {
+	if x != nil {
+		return x.BaseAccount
+	}
+	return nil
+}
+
+func (x *SessionAccount) GetMasterAddress() []byte {
+	if x != nil {
+		return x.MasterAddress
+	}
+	return nil
+}
+
+func (x *SessionAccount) GetExpiresAt() int64 {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return 0
+}
+
+func (x *SessionAccount) GetSpendLimit() []*Coin {
+	if x != nil {
+		return x.SpendLimit
+	}
+	return nil
+}
+
+func (x *SessionAccount) GetSpendPeriod() int64 {
+	if x != nil {
+		return x.SpendPeriod
+	}
+	return 0
+}
+
+func (x *SessionAccount) GetSpendUsed() []*Coin {
+	if x != nil {
+		return x.SpendUsed
+	}
+	return nil
+}
+
+func (x *SessionAccount) GetSpendReset() int64 {
+	if x != nil {
+		return x.SpendReset
+	}
+	return 0
+}
+
+func (x *SessionAccount) GetAllowPaths() []string {
+	if x != nil {
+		return x.AllowPaths
+	}
+	return nil
+}
+
 type ListKeyInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -896,7 +996,7 @@ type ListKeyInfoRequest struct {
 
 func (x *ListKeyInfoRequest) Reset() {
 	*x = ListKeyInfoRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[19]
+	mi := &file_gnonativetypes_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -908,7 +1008,7 @@ func (x *ListKeyInfoRequest) String() string {
 func (*ListKeyInfoRequest) ProtoMessage() {}
 
 func (x *ListKeyInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[19]
+	mi := &file_gnonativetypes_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -921,7 +1021,7 @@ func (x *ListKeyInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKeyInfoRequest.ProtoReflect.Descriptor instead.
 func (*ListKeyInfoRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{19}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{20}
 }
 
 type ListKeyInfoResponse struct {
@@ -933,7 +1033,7 @@ type ListKeyInfoResponse struct {
 
 func (x *ListKeyInfoResponse) Reset() {
 	*x = ListKeyInfoResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[20]
+	mi := &file_gnonativetypes_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -945,7 +1045,7 @@ func (x *ListKeyInfoResponse) String() string {
 func (*ListKeyInfoResponse) ProtoMessage() {}
 
 func (x *ListKeyInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[20]
+	mi := &file_gnonativetypes_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,7 +1058,7 @@ func (x *ListKeyInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKeyInfoResponse.ProtoReflect.Descriptor instead.
 func (*ListKeyInfoResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{20}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListKeyInfoResponse) GetKeys() []*KeyInfo {
@@ -977,7 +1077,7 @@ type HasKeyByNameRequest struct {
 
 func (x *HasKeyByNameRequest) Reset() {
 	*x = HasKeyByNameRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[21]
+	mi := &file_gnonativetypes_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -989,7 +1089,7 @@ func (x *HasKeyByNameRequest) String() string {
 func (*HasKeyByNameRequest) ProtoMessage() {}
 
 func (x *HasKeyByNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[21]
+	mi := &file_gnonativetypes_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +1102,7 @@ func (x *HasKeyByNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByNameRequest.ProtoReflect.Descriptor instead.
 func (*HasKeyByNameRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{21}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *HasKeyByNameRequest) GetName() string {
@@ -1021,7 +1121,7 @@ type HasKeyByNameResponse struct {
 
 func (x *HasKeyByNameResponse) Reset() {
 	*x = HasKeyByNameResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[22]
+	mi := &file_gnonativetypes_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1033,7 +1133,7 @@ func (x *HasKeyByNameResponse) String() string {
 func (*HasKeyByNameResponse) ProtoMessage() {}
 
 func (x *HasKeyByNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[22]
+	mi := &file_gnonativetypes_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1046,7 +1146,7 @@ func (x *HasKeyByNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByNameResponse.ProtoReflect.Descriptor instead.
 func (*HasKeyByNameResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{22}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *HasKeyByNameResponse) GetHas() bool {
@@ -1065,7 +1165,7 @@ type HasKeyByAddressRequest struct {
 
 func (x *HasKeyByAddressRequest) Reset() {
 	*x = HasKeyByAddressRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[23]
+	mi := &file_gnonativetypes_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1077,7 +1177,7 @@ func (x *HasKeyByAddressRequest) String() string {
 func (*HasKeyByAddressRequest) ProtoMessage() {}
 
 func (x *HasKeyByAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[23]
+	mi := &file_gnonativetypes_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1190,7 @@ func (x *HasKeyByAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByAddressRequest.ProtoReflect.Descriptor instead.
 func (*HasKeyByAddressRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{23}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *HasKeyByAddressRequest) GetAddress() []byte {
@@ -1109,7 +1209,7 @@ type HasKeyByAddressResponse struct {
 
 func (x *HasKeyByAddressResponse) Reset() {
 	*x = HasKeyByAddressResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[24]
+	mi := &file_gnonativetypes_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1121,7 +1221,7 @@ func (x *HasKeyByAddressResponse) String() string {
 func (*HasKeyByAddressResponse) ProtoMessage() {}
 
 func (x *HasKeyByAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[24]
+	mi := &file_gnonativetypes_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1134,7 +1234,7 @@ func (x *HasKeyByAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByAddressResponse.ProtoReflect.Descriptor instead.
 func (*HasKeyByAddressResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{24}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *HasKeyByAddressResponse) GetHas() bool {
@@ -1153,7 +1253,7 @@ type HasKeyByNameOrAddressRequest struct {
 
 func (x *HasKeyByNameOrAddressRequest) Reset() {
 	*x = HasKeyByNameOrAddressRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[25]
+	mi := &file_gnonativetypes_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1165,7 +1265,7 @@ func (x *HasKeyByNameOrAddressRequest) String() string {
 func (*HasKeyByNameOrAddressRequest) ProtoMessage() {}
 
 func (x *HasKeyByNameOrAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[25]
+	mi := &file_gnonativetypes_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1178,7 +1278,7 @@ func (x *HasKeyByNameOrAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByNameOrAddressRequest.ProtoReflect.Descriptor instead.
 func (*HasKeyByNameOrAddressRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{25}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *HasKeyByNameOrAddressRequest) GetNameOrBech32() string {
@@ -1197,7 +1297,7 @@ type HasKeyByNameOrAddressResponse struct {
 
 func (x *HasKeyByNameOrAddressResponse) Reset() {
 	*x = HasKeyByNameOrAddressResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[26]
+	mi := &file_gnonativetypes_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1209,7 +1309,7 @@ func (x *HasKeyByNameOrAddressResponse) String() string {
 func (*HasKeyByNameOrAddressResponse) ProtoMessage() {}
 
 func (x *HasKeyByNameOrAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[26]
+	mi := &file_gnonativetypes_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1222,7 +1322,7 @@ func (x *HasKeyByNameOrAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasKeyByNameOrAddressResponse.ProtoReflect.Descriptor instead.
 func (*HasKeyByNameOrAddressResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{26}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *HasKeyByNameOrAddressResponse) GetHas() bool {
@@ -1241,7 +1341,7 @@ type GetKeyInfoByNameRequest struct {
 
 func (x *GetKeyInfoByNameRequest) Reset() {
 	*x = GetKeyInfoByNameRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[27]
+	mi := &file_gnonativetypes_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1253,7 +1353,7 @@ func (x *GetKeyInfoByNameRequest) String() string {
 func (*GetKeyInfoByNameRequest) ProtoMessage() {}
 
 func (x *GetKeyInfoByNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[27]
+	mi := &file_gnonativetypes_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1266,7 +1366,7 @@ func (x *GetKeyInfoByNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyInfoByNameRequest.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByNameRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{27}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetKeyInfoByNameRequest) GetName() string {
@@ -1285,7 +1385,7 @@ type GetKeyInfoByNameResponse struct {
 
 func (x *GetKeyInfoByNameResponse) Reset() {
 	*x = GetKeyInfoByNameResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[28]
+	mi := &file_gnonativetypes_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1297,7 +1397,7 @@ func (x *GetKeyInfoByNameResponse) String() string {
 func (*GetKeyInfoByNameResponse) ProtoMessage() {}
 
 func (x *GetKeyInfoByNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[28]
+	mi := &file_gnonativetypes_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1310,7 +1410,7 @@ func (x *GetKeyInfoByNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyInfoByNameResponse.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByNameResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{28}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetKeyInfoByNameResponse) GetKey() *KeyInfo {
@@ -1329,7 +1429,7 @@ type GetKeyInfoByAddressRequest struct {
 
 func (x *GetKeyInfoByAddressRequest) Reset() {
 	*x = GetKeyInfoByAddressRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[29]
+	mi := &file_gnonativetypes_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1341,7 +1441,7 @@ func (x *GetKeyInfoByAddressRequest) String() string {
 func (*GetKeyInfoByAddressRequest) ProtoMessage() {}
 
 func (x *GetKeyInfoByAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[29]
+	mi := &file_gnonativetypes_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1354,7 +1454,7 @@ func (x *GetKeyInfoByAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyInfoByAddressRequest.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByAddressRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{29}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetKeyInfoByAddressRequest) GetAddress() []byte {
@@ -1373,7 +1473,7 @@ type GetKeyInfoByAddressResponse struct {
 
 func (x *GetKeyInfoByAddressResponse) Reset() {
 	*x = GetKeyInfoByAddressResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[30]
+	mi := &file_gnonativetypes_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1385,7 +1485,7 @@ func (x *GetKeyInfoByAddressResponse) String() string {
 func (*GetKeyInfoByAddressResponse) ProtoMessage() {}
 
 func (x *GetKeyInfoByAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[30]
+	mi := &file_gnonativetypes_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +1498,7 @@ func (x *GetKeyInfoByAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyInfoByAddressResponse.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByAddressResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{30}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetKeyInfoByAddressResponse) GetKey() *KeyInfo {
@@ -1417,7 +1517,7 @@ type GetKeyInfoByNameOrAddressRequest struct {
 
 func (x *GetKeyInfoByNameOrAddressRequest) Reset() {
 	*x = GetKeyInfoByNameOrAddressRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[31]
+	mi := &file_gnonativetypes_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1429,7 +1529,7 @@ func (x *GetKeyInfoByNameOrAddressRequest) String() string {
 func (*GetKeyInfoByNameOrAddressRequest) ProtoMessage() {}
 
 func (x *GetKeyInfoByNameOrAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[31]
+	mi := &file_gnonativetypes_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1442,7 +1542,7 @@ func (x *GetKeyInfoByNameOrAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKeyInfoByNameOrAddressRequest.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByNameOrAddressRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{31}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetKeyInfoByNameOrAddressRequest) GetNameOrBech32() string {
@@ -1461,7 +1561,7 @@ type GetKeyInfoByNameOrAddressResponse struct {
 
 func (x *GetKeyInfoByNameOrAddressResponse) Reset() {
 	*x = GetKeyInfoByNameOrAddressResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[32]
+	mi := &file_gnonativetypes_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1473,7 +1573,7 @@ func (x *GetKeyInfoByNameOrAddressResponse) String() string {
 func (*GetKeyInfoByNameOrAddressResponse) ProtoMessage() {}
 
 func (x *GetKeyInfoByNameOrAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[32]
+	mi := &file_gnonativetypes_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1486,7 +1586,7 @@ func (x *GetKeyInfoByNameOrAddressResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetKeyInfoByNameOrAddressResponse.ProtoReflect.Descriptor instead.
 func (*GetKeyInfoByNameOrAddressResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{32}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetKeyInfoByNameOrAddressResponse) GetKey() *KeyInfo {
@@ -1510,7 +1610,7 @@ type CreateAccountRequest struct {
 
 func (x *CreateAccountRequest) Reset() {
 	*x = CreateAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[33]
+	mi := &file_gnonativetypes_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1522,7 +1622,7 @@ func (x *CreateAccountRequest) String() string {
 func (*CreateAccountRequest) ProtoMessage() {}
 
 func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[33]
+	mi := &file_gnonativetypes_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1535,7 +1635,7 @@ func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountRequest.ProtoReflect.Descriptor instead.
 func (*CreateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{33}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CreateAccountRequest) GetNameOrBech32() string {
@@ -1589,7 +1689,7 @@ type CreateAccountResponse struct {
 
 func (x *CreateAccountResponse) Reset() {
 	*x = CreateAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[34]
+	mi := &file_gnonativetypes_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1601,7 +1701,7 @@ func (x *CreateAccountResponse) String() string {
 func (*CreateAccountResponse) ProtoMessage() {}
 
 func (x *CreateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[34]
+	mi := &file_gnonativetypes_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1614,7 +1714,7 @@ func (x *CreateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountResponse.ProtoReflect.Descriptor instead.
 func (*CreateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{34}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CreateAccountResponse) GetKey() *KeyInfo {
@@ -1639,7 +1739,7 @@ type CreateLedgerRequest struct {
 
 func (x *CreateLedgerRequest) Reset() {
 	*x = CreateLedgerRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[35]
+	mi := &file_gnonativetypes_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1651,7 +1751,7 @@ func (x *CreateLedgerRequest) String() string {
 func (*CreateLedgerRequest) ProtoMessage() {}
 
 func (x *CreateLedgerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[35]
+	mi := &file_gnonativetypes_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1664,7 +1764,7 @@ func (x *CreateLedgerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLedgerRequest.ProtoReflect.Descriptor instead.
 func (*CreateLedgerRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{35}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CreateLedgerRequest) GetName() string {
@@ -1711,7 +1811,7 @@ type CreateLedgerResponse struct {
 
 func (x *CreateLedgerResponse) Reset() {
 	*x = CreateLedgerResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[36]
+	mi := &file_gnonativetypes_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1723,7 +1823,7 @@ func (x *CreateLedgerResponse) String() string {
 func (*CreateLedgerResponse) ProtoMessage() {}
 
 func (x *CreateLedgerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[36]
+	mi := &file_gnonativetypes_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1736,7 +1836,7 @@ func (x *CreateLedgerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLedgerResponse.ProtoReflect.Descriptor instead.
 func (*CreateLedgerResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{36}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *CreateLedgerResponse) GetKey() *KeyInfo {
@@ -1757,7 +1857,7 @@ type ActivateAccountRequest struct {
 
 func (x *ActivateAccountRequest) Reset() {
 	*x = ActivateAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[37]
+	mi := &file_gnonativetypes_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1769,7 +1869,7 @@ func (x *ActivateAccountRequest) String() string {
 func (*ActivateAccountRequest) ProtoMessage() {}
 
 func (x *ActivateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[37]
+	mi := &file_gnonativetypes_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1782,7 +1882,7 @@ func (x *ActivateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActivateAccountRequest.ProtoReflect.Descriptor instead.
 func (*ActivateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{37}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ActivateAccountRequest) GetNameOrBech32() string {
@@ -1810,7 +1910,7 @@ type ActivateAccountResponse struct {
 
 func (x *ActivateAccountResponse) Reset() {
 	*x = ActivateAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[38]
+	mi := &file_gnonativetypes_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1822,7 +1922,7 @@ func (x *ActivateAccountResponse) String() string {
 func (*ActivateAccountResponse) ProtoMessage() {}
 
 func (x *ActivateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[38]
+	mi := &file_gnonativetypes_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1835,7 +1935,7 @@ func (x *ActivateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActivateAccountResponse.ProtoReflect.Descriptor instead.
 func (*ActivateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{38}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ActivateAccountResponse) GetKey() *KeyInfo {
@@ -1861,7 +1961,7 @@ type GetActivatedAccountRequest struct {
 
 func (x *GetActivatedAccountRequest) Reset() {
 	*x = GetActivatedAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[39]
+	mi := &file_gnonativetypes_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1873,7 +1973,7 @@ func (x *GetActivatedAccountRequest) String() string {
 func (*GetActivatedAccountRequest) ProtoMessage() {}
 
 func (x *GetActivatedAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[39]
+	mi := &file_gnonativetypes_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1886,7 +1986,7 @@ func (x *GetActivatedAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActivatedAccountRequest.ProtoReflect.Descriptor instead.
 func (*GetActivatedAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{39}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetActivatedAccountRequest) GetAddress() []byte {
@@ -1909,7 +2009,7 @@ type GetActivatedAccountResponse struct {
 
 func (x *GetActivatedAccountResponse) Reset() {
 	*x = GetActivatedAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[40]
+	mi := &file_gnonativetypes_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1921,7 +2021,7 @@ func (x *GetActivatedAccountResponse) String() string {
 func (*GetActivatedAccountResponse) ProtoMessage() {}
 
 func (x *GetActivatedAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[40]
+	mi := &file_gnonativetypes_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1934,7 +2034,7 @@ func (x *GetActivatedAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActivatedAccountResponse.ProtoReflect.Descriptor instead.
 func (*GetActivatedAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{40}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetActivatedAccountResponse) GetKey() *KeyInfo {
@@ -1967,7 +2067,7 @@ type QueryAccountRequest struct {
 
 func (x *QueryAccountRequest) Reset() {
 	*x = QueryAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[41]
+	mi := &file_gnonativetypes_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1979,7 +2079,7 @@ func (x *QueryAccountRequest) String() string {
 func (*QueryAccountRequest) ProtoMessage() {}
 
 func (x *QueryAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[41]
+	mi := &file_gnonativetypes_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1992,7 +2092,7 @@ func (x *QueryAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAccountRequest.ProtoReflect.Descriptor instead.
 func (*QueryAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{41}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *QueryAccountRequest) GetAddress() []byte {
@@ -2011,7 +2111,7 @@ type QueryAccountResponse struct {
 
 func (x *QueryAccountResponse) Reset() {
 	*x = QueryAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[42]
+	mi := &file_gnonativetypes_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2023,7 +2123,7 @@ func (x *QueryAccountResponse) String() string {
 func (*QueryAccountResponse) ProtoMessage() {}
 
 func (x *QueryAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[42]
+	mi := &file_gnonativetypes_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2036,7 +2136,7 @@ func (x *QueryAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAccountResponse.ProtoReflect.Descriptor instead.
 func (*QueryAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{42}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *QueryAccountResponse) GetAccountInfo() *BaseAccount {
@@ -2056,7 +2156,7 @@ type QuerySessionAccountRequest struct {
 
 func (x *QuerySessionAccountRequest) Reset() {
 	*x = QuerySessionAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[43]
+	mi := &file_gnonativetypes_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2068,7 +2168,7 @@ func (x *QuerySessionAccountRequest) String() string {
 func (*QuerySessionAccountRequest) ProtoMessage() {}
 
 func (x *QuerySessionAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[43]
+	mi := &file_gnonativetypes_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2081,7 +2181,7 @@ func (x *QuerySessionAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySessionAccountRequest.ProtoReflect.Descriptor instead.
 func (*QuerySessionAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{43}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *QuerySessionAccountRequest) GetMasterAddress() []byte {
@@ -2100,14 +2200,14 @@ func (x *QuerySessionAccountRequest) GetSessionAddress() []byte {
 
 type QuerySessionAccountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccountInfo   *BaseAccount           `protobuf:"bytes,1,opt,name=account_info,json=accountInfo,proto3" json:"account_info,omitempty"`
+	AccountInfo   *SessionAccount        `protobuf:"bytes,1,opt,name=account_info,json=accountInfo,proto3" json:"account_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *QuerySessionAccountResponse) Reset() {
 	*x = QuerySessionAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[44]
+	mi := &file_gnonativetypes_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2119,7 +2219,7 @@ func (x *QuerySessionAccountResponse) String() string {
 func (*QuerySessionAccountResponse) ProtoMessage() {}
 
 func (x *QuerySessionAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[44]
+	mi := &file_gnonativetypes_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2132,10 +2232,10 @@ func (x *QuerySessionAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySessionAccountResponse.ProtoReflect.Descriptor instead.
 func (*QuerySessionAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{44}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{45}
 }
 
-func (x *QuerySessionAccountResponse) GetAccountInfo() *BaseAccount {
+func (x *QuerySessionAccountResponse) GetAccountInfo() *SessionAccount {
 	if x != nil {
 		return x.AccountInfo
 	}
@@ -2153,7 +2253,7 @@ type DeleteAccountRequest struct {
 
 func (x *DeleteAccountRequest) Reset() {
 	*x = DeleteAccountRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[45]
+	mi := &file_gnonativetypes_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2165,7 +2265,7 @@ func (x *DeleteAccountRequest) String() string {
 func (*DeleteAccountRequest) ProtoMessage() {}
 
 func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[45]
+	mi := &file_gnonativetypes_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2178,7 +2278,7 @@ func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAccountRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{45}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *DeleteAccountRequest) GetNameOrBech32() string {
@@ -2210,7 +2310,7 @@ type DeleteAccountResponse struct {
 
 func (x *DeleteAccountResponse) Reset() {
 	*x = DeleteAccountResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[46]
+	mi := &file_gnonativetypes_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2222,7 +2322,7 @@ func (x *DeleteAccountResponse) String() string {
 func (*DeleteAccountResponse) ProtoMessage() {}
 
 func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[46]
+	mi := &file_gnonativetypes_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2235,7 +2335,7 @@ func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAccountResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{46}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{47}
 }
 
 type QueryRequest struct {
@@ -2250,7 +2350,7 @@ type QueryRequest struct {
 
 func (x *QueryRequest) Reset() {
 	*x = QueryRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[47]
+	mi := &file_gnonativetypes_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2262,7 +2362,7 @@ func (x *QueryRequest) String() string {
 func (*QueryRequest) ProtoMessage() {}
 
 func (x *QueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[47]
+	mi := &file_gnonativetypes_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2275,7 +2375,7 @@ func (x *QueryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryRequest.ProtoReflect.Descriptor instead.
 func (*QueryRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{47}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *QueryRequest) GetPath() string {
@@ -2301,7 +2401,7 @@ type QueryResponse struct {
 
 func (x *QueryResponse) Reset() {
 	*x = QueryResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[48]
+	mi := &file_gnonativetypes_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2313,7 +2413,7 @@ func (x *QueryResponse) String() string {
 func (*QueryResponse) ProtoMessage() {}
 
 func (x *QueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[48]
+	mi := &file_gnonativetypes_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2326,7 +2426,7 @@ func (x *QueryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryResponse.ProtoReflect.Descriptor instead.
 func (*QueryResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{48}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *QueryResponse) GetResult() []byte {
@@ -2348,7 +2448,7 @@ type RenderRequest struct {
 
 func (x *RenderRequest) Reset() {
 	*x = RenderRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[49]
+	mi := &file_gnonativetypes_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2360,7 +2460,7 @@ func (x *RenderRequest) String() string {
 func (*RenderRequest) ProtoMessage() {}
 
 func (x *RenderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[49]
+	mi := &file_gnonativetypes_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2373,7 +2473,7 @@ func (x *RenderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenderRequest.ProtoReflect.Descriptor instead.
 func (*RenderRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{49}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *RenderRequest) GetPackagePath() string {
@@ -2400,7 +2500,7 @@ type RenderResponse struct {
 
 func (x *RenderResponse) Reset() {
 	*x = RenderResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[50]
+	mi := &file_gnonativetypes_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2412,7 +2512,7 @@ func (x *RenderResponse) String() string {
 func (*RenderResponse) ProtoMessage() {}
 
 func (x *RenderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[50]
+	mi := &file_gnonativetypes_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2425,7 +2525,7 @@ func (x *RenderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenderResponse.ProtoReflect.Descriptor instead.
 func (*RenderResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{50}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *RenderResponse) GetResult() string {
@@ -2447,7 +2547,7 @@ type QEvalRequest struct {
 
 func (x *QEvalRequest) Reset() {
 	*x = QEvalRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[51]
+	mi := &file_gnonativetypes_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2459,7 +2559,7 @@ func (x *QEvalRequest) String() string {
 func (*QEvalRequest) ProtoMessage() {}
 
 func (x *QEvalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[51]
+	mi := &file_gnonativetypes_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2472,7 +2572,7 @@ func (x *QEvalRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QEvalRequest.ProtoReflect.Descriptor instead.
 func (*QEvalRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{51}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *QEvalRequest) GetPackagePath() string {
@@ -2499,7 +2599,7 @@ type QEvalResponse struct {
 
 func (x *QEvalResponse) Reset() {
 	*x = QEvalResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[52]
+	mi := &file_gnonativetypes_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2511,7 +2611,7 @@ func (x *QEvalResponse) String() string {
 func (*QEvalResponse) ProtoMessage() {}
 
 func (x *QEvalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[52]
+	mi := &file_gnonativetypes_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2524,7 +2624,7 @@ func (x *QEvalResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QEvalResponse.ProtoReflect.Descriptor instead.
 func (*QEvalResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{52}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *QEvalResponse) GetResult() string {
@@ -2553,7 +2653,7 @@ type MsgCall struct {
 
 func (x *MsgCall) Reset() {
 	*x = MsgCall{}
-	mi := &file_gnonativetypes_proto_msgTypes[53]
+	mi := &file_gnonativetypes_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2565,7 +2665,7 @@ func (x *MsgCall) String() string {
 func (*MsgCall) ProtoMessage() {}
 
 func (x *MsgCall) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[53]
+	mi := &file_gnonativetypes_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2578,7 +2678,7 @@ func (x *MsgCall) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MsgCall.ProtoReflect.Descriptor instead.
 func (*MsgCall) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{53}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *MsgCall) GetPackagePath() string {
@@ -2631,7 +2731,7 @@ type CallRequest struct {
 
 func (x *CallRequest) Reset() {
 	*x = CallRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[54]
+	mi := &file_gnonativetypes_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2643,7 +2743,7 @@ func (x *CallRequest) String() string {
 func (*CallRequest) ProtoMessage() {}
 
 func (x *CallRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[54]
+	mi := &file_gnonativetypes_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2656,7 +2756,7 @@ func (x *CallRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallRequest.ProtoReflect.Descriptor instead.
 func (*CallRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{54}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *CallRequest) GetGasFee() string {
@@ -2707,7 +2807,7 @@ type CallResponse struct {
 
 func (x *CallResponse) Reset() {
 	*x = CallResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[55]
+	mi := &file_gnonativetypes_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2719,7 +2819,7 @@ func (x *CallResponse) String() string {
 func (*CallResponse) ProtoMessage() {}
 
 func (x *CallResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[55]
+	mi := &file_gnonativetypes_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +2832,7 @@ func (x *CallResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallResponse.ProtoReflect.Descriptor instead.
 func (*CallResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{55}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *CallResponse) GetResult() []byte {
@@ -2769,7 +2869,7 @@ type MsgSend struct {
 
 func (x *MsgSend) Reset() {
 	*x = MsgSend{}
-	mi := &file_gnonativetypes_proto_msgTypes[56]
+	mi := &file_gnonativetypes_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2781,7 +2881,7 @@ func (x *MsgSend) String() string {
 func (*MsgSend) ProtoMessage() {}
 
 func (x *MsgSend) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[56]
+	mi := &file_gnonativetypes_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2794,7 +2894,7 @@ func (x *MsgSend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MsgSend.ProtoReflect.Descriptor instead.
 func (*MsgSend) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{56}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *MsgSend) GetToAddress() []byte {
@@ -2827,7 +2927,7 @@ type SendRequest struct {
 
 func (x *SendRequest) Reset() {
 	*x = SendRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[57]
+	mi := &file_gnonativetypes_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2839,7 +2939,7 @@ func (x *SendRequest) String() string {
 func (*SendRequest) ProtoMessage() {}
 
 func (x *SendRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[57]
+	mi := &file_gnonativetypes_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2852,7 +2952,7 @@ func (x *SendRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendRequest.ProtoReflect.Descriptor instead.
 func (*SendRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{57}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *SendRequest) GetGasFee() string {
@@ -2902,7 +3002,7 @@ type SendResponse struct {
 
 func (x *SendResponse) Reset() {
 	*x = SendResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[58]
+	mi := &file_gnonativetypes_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2914,7 +3014,7 @@ func (x *SendResponse) String() string {
 func (*SendResponse) ProtoMessage() {}
 
 func (x *SendResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[58]
+	mi := &file_gnonativetypes_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2927,7 +3027,7 @@ func (x *SendResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendResponse.ProtoReflect.Descriptor instead.
 func (*SendResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{58}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *SendResponse) GetHash() []byte {
@@ -2959,7 +3059,7 @@ type MsgRun struct {
 
 func (x *MsgRun) Reset() {
 	*x = MsgRun{}
-	mi := &file_gnonativetypes_proto_msgTypes[59]
+	mi := &file_gnonativetypes_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2971,7 +3071,7 @@ func (x *MsgRun) String() string {
 func (*MsgRun) ProtoMessage() {}
 
 func (x *MsgRun) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[59]
+	mi := &file_gnonativetypes_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2984,7 +3084,7 @@ func (x *MsgRun) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MsgRun.ProtoReflect.Descriptor instead.
 func (*MsgRun) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{59}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *MsgRun) GetPackage() string {
@@ -3024,7 +3124,7 @@ type RunRequest struct {
 
 func (x *RunRequest) Reset() {
 	*x = RunRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[60]
+	mi := &file_gnonativetypes_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3036,7 +3136,7 @@ func (x *RunRequest) String() string {
 func (*RunRequest) ProtoMessage() {}
 
 func (x *RunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[60]
+	mi := &file_gnonativetypes_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3049,7 +3149,7 @@ func (x *RunRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunRequest.ProtoReflect.Descriptor instead.
 func (*RunRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{60}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *RunRequest) GetGasFee() string {
@@ -3101,7 +3201,7 @@ type RunResponse struct {
 
 func (x *RunResponse) Reset() {
 	*x = RunResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[61]
+	mi := &file_gnonativetypes_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3113,7 +3213,7 @@ func (x *RunResponse) String() string {
 func (*RunResponse) ProtoMessage() {}
 
 func (x *RunResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[61]
+	mi := &file_gnonativetypes_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3126,7 +3226,7 @@ func (x *RunResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunResponse.ProtoReflect.Descriptor instead.
 func (*RunResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{61}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *RunResponse) GetResult() string {
@@ -3165,7 +3265,7 @@ type MakeCallTxRequest struct {
 
 func (x *MakeCallTxRequest) Reset() {
 	*x = MakeCallTxRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[62]
+	mi := &file_gnonativetypes_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3177,7 +3277,7 @@ func (x *MakeCallTxRequest) String() string {
 func (*MakeCallTxRequest) ProtoMessage() {}
 
 func (x *MakeCallTxRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[62]
+	mi := &file_gnonativetypes_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3190,7 +3290,7 @@ func (x *MakeCallTxRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MakeCallTxRequest.ProtoReflect.Descriptor instead.
 func (*MakeCallTxRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{62}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *MakeCallTxRequest) GetGasFee() string {
@@ -3244,7 +3344,7 @@ type MakeSendTxRequest struct {
 
 func (x *MakeSendTxRequest) Reset() {
 	*x = MakeSendTxRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[63]
+	mi := &file_gnonativetypes_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3256,7 +3356,7 @@ func (x *MakeSendTxRequest) String() string {
 func (*MakeSendTxRequest) ProtoMessage() {}
 
 func (x *MakeSendTxRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[63]
+	mi := &file_gnonativetypes_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3269,7 +3369,7 @@ func (x *MakeSendTxRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MakeSendTxRequest.ProtoReflect.Descriptor instead.
 func (*MakeSendTxRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{63}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *MakeSendTxRequest) GetGasFee() string {
@@ -3323,7 +3423,7 @@ type MakeRunTxRequest struct {
 
 func (x *MakeRunTxRequest) Reset() {
 	*x = MakeRunTxRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[64]
+	mi := &file_gnonativetypes_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3335,7 +3435,7 @@ func (x *MakeRunTxRequest) String() string {
 func (*MakeRunTxRequest) ProtoMessage() {}
 
 func (x *MakeRunTxRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[64]
+	mi := &file_gnonativetypes_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3348,7 +3448,7 @@ func (x *MakeRunTxRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MakeRunTxRequest.ProtoReflect.Descriptor instead.
 func (*MakeRunTxRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{64}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *MakeRunTxRequest) GetGasFee() string {
@@ -3396,7 +3496,7 @@ type MakeTxResponse struct {
 
 func (x *MakeTxResponse) Reset() {
 	*x = MakeTxResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[65]
+	mi := &file_gnonativetypes_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3408,7 +3508,7 @@ func (x *MakeTxResponse) String() string {
 func (*MakeTxResponse) ProtoMessage() {}
 
 func (x *MakeTxResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[65]
+	mi := &file_gnonativetypes_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3421,7 +3521,7 @@ func (x *MakeTxResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MakeTxResponse.ProtoReflect.Descriptor instead.
 func (*MakeTxResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{65}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *MakeTxResponse) GetTxJson() string {
@@ -3447,7 +3547,7 @@ type SignTxRequest struct {
 
 func (x *SignTxRequest) Reset() {
 	*x = SignTxRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[66]
+	mi := &file_gnonativetypes_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3459,7 +3559,7 @@ func (x *SignTxRequest) String() string {
 func (*SignTxRequest) ProtoMessage() {}
 
 func (x *SignTxRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[66]
+	mi := &file_gnonativetypes_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3472,7 +3572,7 @@ func (x *SignTxRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignTxRequest.ProtoReflect.Descriptor instead.
 func (*SignTxRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{66}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *SignTxRequest) GetTxJson() string {
@@ -3513,7 +3613,7 @@ type SignTxResponse struct {
 
 func (x *SignTxResponse) Reset() {
 	*x = SignTxResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[67]
+	mi := &file_gnonativetypes_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3525,7 +3625,7 @@ func (x *SignTxResponse) String() string {
 func (*SignTxResponse) ProtoMessage() {}
 
 func (x *SignTxResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[67]
+	mi := &file_gnonativetypes_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3538,7 +3638,7 @@ func (x *SignTxResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignTxResponse.ProtoReflect.Descriptor instead.
 func (*SignTxResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{67}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *SignTxResponse) GetSignedTxJson() string {
@@ -3566,7 +3666,7 @@ type MsgCreateSession struct {
 
 func (x *MsgCreateSession) Reset() {
 	*x = MsgCreateSession{}
-	mi := &file_gnonativetypes_proto_msgTypes[68]
+	mi := &file_gnonativetypes_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3578,7 +3678,7 @@ func (x *MsgCreateSession) String() string {
 func (*MsgCreateSession) ProtoMessage() {}
 
 func (x *MsgCreateSession) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[68]
+	mi := &file_gnonativetypes_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3591,7 +3691,7 @@ func (x *MsgCreateSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MsgCreateSession.ProtoReflect.Descriptor instead.
 func (*MsgCreateSession) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{68}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *MsgCreateSession) GetSessionKey() []byte {
@@ -3644,7 +3744,7 @@ type CreateSessionRequest struct {
 
 func (x *CreateSessionRequest) Reset() {
 	*x = CreateSessionRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[69]
+	mi := &file_gnonativetypes_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3656,7 +3756,7 @@ func (x *CreateSessionRequest) String() string {
 func (*CreateSessionRequest) ProtoMessage() {}
 
 func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[69]
+	mi := &file_gnonativetypes_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3669,7 +3769,7 @@ func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSessionRequest.ProtoReflect.Descriptor instead.
 func (*CreateSessionRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{69}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *CreateSessionRequest) GetGasFee() string {
@@ -3720,7 +3820,7 @@ type CreateSessionResponse struct {
 
 func (x *CreateSessionResponse) Reset() {
 	*x = CreateSessionResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[70]
+	mi := &file_gnonativetypes_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3732,7 +3832,7 @@ func (x *CreateSessionResponse) String() string {
 func (*CreateSessionResponse) ProtoMessage() {}
 
 func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[70]
+	mi := &file_gnonativetypes_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3745,7 +3845,7 @@ func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSessionResponse.ProtoReflect.Descriptor instead.
 func (*CreateSessionResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{70}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *CreateSessionResponse) GetResult() []byte {
@@ -3779,7 +3879,7 @@ type MsgRevokeSession struct {
 
 func (x *MsgRevokeSession) Reset() {
 	*x = MsgRevokeSession{}
-	mi := &file_gnonativetypes_proto_msgTypes[71]
+	mi := &file_gnonativetypes_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3791,7 +3891,7 @@ func (x *MsgRevokeSession) String() string {
 func (*MsgRevokeSession) ProtoMessage() {}
 
 func (x *MsgRevokeSession) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[71]
+	mi := &file_gnonativetypes_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3804,7 +3904,7 @@ func (x *MsgRevokeSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MsgRevokeSession.ProtoReflect.Descriptor instead.
 func (*MsgRevokeSession) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{71}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *MsgRevokeSession) GetSessionKey() []byte {
@@ -3829,7 +3929,7 @@ type RevokeSessionRequest struct {
 
 func (x *RevokeSessionRequest) Reset() {
 	*x = RevokeSessionRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[72]
+	mi := &file_gnonativetypes_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3841,7 +3941,7 @@ func (x *RevokeSessionRequest) String() string {
 func (*RevokeSessionRequest) ProtoMessage() {}
 
 func (x *RevokeSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[72]
+	mi := &file_gnonativetypes_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3854,7 +3954,7 @@ func (x *RevokeSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeSessionRequest.ProtoReflect.Descriptor instead.
 func (*RevokeSessionRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{72}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *RevokeSessionRequest) GetGasFee() string {
@@ -3905,7 +4005,7 @@ type RevokeSessionResponse struct {
 
 func (x *RevokeSessionResponse) Reset() {
 	*x = RevokeSessionResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[73]
+	mi := &file_gnonativetypes_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3917,7 +4017,7 @@ func (x *RevokeSessionResponse) String() string {
 func (*RevokeSessionResponse) ProtoMessage() {}
 
 func (x *RevokeSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[73]
+	mi := &file_gnonativetypes_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3930,7 +4030,7 @@ func (x *RevokeSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeSessionResponse.ProtoReflect.Descriptor instead.
 func (*RevokeSessionResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{73}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *RevokeSessionResponse) GetResult() []byte {
@@ -3967,7 +4067,7 @@ type RevokeAllSessionsRequest struct {
 
 func (x *RevokeAllSessionsRequest) Reset() {
 	*x = RevokeAllSessionsRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[74]
+	mi := &file_gnonativetypes_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3979,7 +4079,7 @@ func (x *RevokeAllSessionsRequest) String() string {
 func (*RevokeAllSessionsRequest) ProtoMessage() {}
 
 func (x *RevokeAllSessionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[74]
+	mi := &file_gnonativetypes_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3992,7 +4092,7 @@ func (x *RevokeAllSessionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAllSessionsRequest.ProtoReflect.Descriptor instead.
 func (*RevokeAllSessionsRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{74}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *RevokeAllSessionsRequest) GetGasFee() string {
@@ -4036,7 +4136,7 @@ type RevokeAllSessionsResponse struct {
 
 func (x *RevokeAllSessionsResponse) Reset() {
 	*x = RevokeAllSessionsResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[75]
+	mi := &file_gnonativetypes_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4048,7 +4148,7 @@ func (x *RevokeAllSessionsResponse) String() string {
 func (*RevokeAllSessionsResponse) ProtoMessage() {}
 
 func (x *RevokeAllSessionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[75]
+	mi := &file_gnonativetypes_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4061,7 +4161,7 @@ func (x *RevokeAllSessionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAllSessionsResponse.ProtoReflect.Descriptor instead.
 func (*RevokeAllSessionsResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{75}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *RevokeAllSessionsResponse) GetResult() []byte {
@@ -4103,7 +4203,7 @@ type EstimateGasRequest struct {
 
 func (x *EstimateGasRequest) Reset() {
 	*x = EstimateGasRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[76]
+	mi := &file_gnonativetypes_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4115,7 +4215,7 @@ func (x *EstimateGasRequest) String() string {
 func (*EstimateGasRequest) ProtoMessage() {}
 
 func (x *EstimateGasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[76]
+	mi := &file_gnonativetypes_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4128,7 +4228,7 @@ func (x *EstimateGasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateGasRequest.ProtoReflect.Descriptor instead.
 func (*EstimateGasRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{76}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *EstimateGasRequest) GetTxJson() string {
@@ -4171,7 +4271,7 @@ type EstimateGasResponse struct {
 
 func (x *EstimateGasResponse) Reset() {
 	*x = EstimateGasResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[77]
+	mi := &file_gnonativetypes_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4183,7 +4283,7 @@ func (x *EstimateGasResponse) String() string {
 func (*EstimateGasResponse) ProtoMessage() {}
 
 func (x *EstimateGasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[77]
+	mi := &file_gnonativetypes_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4196,7 +4296,7 @@ func (x *EstimateGasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateGasResponse.ProtoReflect.Descriptor instead.
 func (*EstimateGasResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{77}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *EstimateGasResponse) GetTxJson() string {
@@ -4235,7 +4335,7 @@ type EstimateTxFeesRequest struct {
 
 func (x *EstimateTxFeesRequest) Reset() {
 	*x = EstimateTxFeesRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[78]
+	mi := &file_gnonativetypes_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4247,7 +4347,7 @@ func (x *EstimateTxFeesRequest) String() string {
 func (*EstimateTxFeesRequest) ProtoMessage() {}
 
 func (x *EstimateTxFeesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[78]
+	mi := &file_gnonativetypes_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4260,7 +4360,7 @@ func (x *EstimateTxFeesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateTxFeesRequest.ProtoReflect.Descriptor instead.
 func (*EstimateTxFeesRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{78}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *EstimateTxFeesRequest) GetTxJson() string {
@@ -4318,7 +4418,7 @@ type EstimateTxFeesResponse struct {
 
 func (x *EstimateTxFeesResponse) Reset() {
 	*x = EstimateTxFeesResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[79]
+	mi := &file_gnonativetypes_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4330,7 +4430,7 @@ func (x *EstimateTxFeesResponse) String() string {
 func (*EstimateTxFeesResponse) ProtoMessage() {}
 
 func (x *EstimateTxFeesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[79]
+	mi := &file_gnonativetypes_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4343,7 +4443,7 @@ func (x *EstimateTxFeesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateTxFeesResponse.ProtoReflect.Descriptor instead.
 func (*EstimateTxFeesResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{79}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *EstimateTxFeesResponse) GetTxJson() string {
@@ -4398,7 +4498,7 @@ type BroadcastTxCommitRequest struct {
 
 func (x *BroadcastTxCommitRequest) Reset() {
 	*x = BroadcastTxCommitRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[80]
+	mi := &file_gnonativetypes_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4410,7 +4510,7 @@ func (x *BroadcastTxCommitRequest) String() string {
 func (*BroadcastTxCommitRequest) ProtoMessage() {}
 
 func (x *BroadcastTxCommitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[80]
+	mi := &file_gnonativetypes_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4423,7 +4523,7 @@ func (x *BroadcastTxCommitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BroadcastTxCommitRequest.ProtoReflect.Descriptor instead.
 func (*BroadcastTxCommitRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{80}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *BroadcastTxCommitRequest) GetSignedTxJson() string {
@@ -4446,7 +4546,7 @@ type BroadcastTxCommitResponse struct {
 
 func (x *BroadcastTxCommitResponse) Reset() {
 	*x = BroadcastTxCommitResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[81]
+	mi := &file_gnonativetypes_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4458,7 +4558,7 @@ func (x *BroadcastTxCommitResponse) String() string {
 func (*BroadcastTxCommitResponse) ProtoMessage() {}
 
 func (x *BroadcastTxCommitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[81]
+	mi := &file_gnonativetypes_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4471,7 +4571,7 @@ func (x *BroadcastTxCommitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BroadcastTxCommitResponse.ProtoReflect.Descriptor instead.
 func (*BroadcastTxCommitResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{81}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *BroadcastTxCommitResponse) GetResult() []byte {
@@ -4504,7 +4604,7 @@ type AddressToBech32Request struct {
 
 func (x *AddressToBech32Request) Reset() {
 	*x = AddressToBech32Request{}
-	mi := &file_gnonativetypes_proto_msgTypes[82]
+	mi := &file_gnonativetypes_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4516,7 +4616,7 @@ func (x *AddressToBech32Request) String() string {
 func (*AddressToBech32Request) ProtoMessage() {}
 
 func (x *AddressToBech32Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[82]
+	mi := &file_gnonativetypes_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4529,7 +4629,7 @@ func (x *AddressToBech32Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressToBech32Request.ProtoReflect.Descriptor instead.
 func (*AddressToBech32Request) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{82}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *AddressToBech32Request) GetAddress() []byte {
@@ -4548,7 +4648,7 @@ type AddressToBech32Response struct {
 
 func (x *AddressToBech32Response) Reset() {
 	*x = AddressToBech32Response{}
-	mi := &file_gnonativetypes_proto_msgTypes[83]
+	mi := &file_gnonativetypes_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4560,7 +4660,7 @@ func (x *AddressToBech32Response) String() string {
 func (*AddressToBech32Response) ProtoMessage() {}
 
 func (x *AddressToBech32Response) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[83]
+	mi := &file_gnonativetypes_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4573,7 +4673,7 @@ func (x *AddressToBech32Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressToBech32Response.ProtoReflect.Descriptor instead.
 func (*AddressToBech32Response) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{83}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *AddressToBech32Response) GetBech32Address() string {
@@ -4592,7 +4692,7 @@ type AddressFromBech32Request struct {
 
 func (x *AddressFromBech32Request) Reset() {
 	*x = AddressFromBech32Request{}
-	mi := &file_gnonativetypes_proto_msgTypes[84]
+	mi := &file_gnonativetypes_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4604,7 +4704,7 @@ func (x *AddressFromBech32Request) String() string {
 func (*AddressFromBech32Request) ProtoMessage() {}
 
 func (x *AddressFromBech32Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[84]
+	mi := &file_gnonativetypes_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4617,7 +4717,7 @@ func (x *AddressFromBech32Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromBech32Request.ProtoReflect.Descriptor instead.
 func (*AddressFromBech32Request) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{84}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *AddressFromBech32Request) GetBech32Address() string {
@@ -4636,7 +4736,7 @@ type AddressFromBech32Response struct {
 
 func (x *AddressFromBech32Response) Reset() {
 	*x = AddressFromBech32Response{}
-	mi := &file_gnonativetypes_proto_msgTypes[85]
+	mi := &file_gnonativetypes_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4648,7 +4748,7 @@ func (x *AddressFromBech32Response) String() string {
 func (*AddressFromBech32Response) ProtoMessage() {}
 
 func (x *AddressFromBech32Response) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[85]
+	mi := &file_gnonativetypes_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4661,7 +4761,7 @@ func (x *AddressFromBech32Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromBech32Response.ProtoReflect.Descriptor instead.
 func (*AddressFromBech32Response) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{85}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *AddressFromBech32Response) GetAddress() []byte {
@@ -4680,7 +4780,7 @@ type AddressFromMnemonicRequest struct {
 
 func (x *AddressFromMnemonicRequest) Reset() {
 	*x = AddressFromMnemonicRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[86]
+	mi := &file_gnonativetypes_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4692,7 +4792,7 @@ func (x *AddressFromMnemonicRequest) String() string {
 func (*AddressFromMnemonicRequest) ProtoMessage() {}
 
 func (x *AddressFromMnemonicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[86]
+	mi := &file_gnonativetypes_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4705,7 +4805,7 @@ func (x *AddressFromMnemonicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromMnemonicRequest.ProtoReflect.Descriptor instead.
 func (*AddressFromMnemonicRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{86}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *AddressFromMnemonicRequest) GetMnemonic() string {
@@ -4724,7 +4824,7 @@ type AddressFromMnemonicResponse struct {
 
 func (x *AddressFromMnemonicResponse) Reset() {
 	*x = AddressFromMnemonicResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[87]
+	mi := &file_gnonativetypes_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4736,7 +4836,7 @@ func (x *AddressFromMnemonicResponse) String() string {
 func (*AddressFromMnemonicResponse) ProtoMessage() {}
 
 func (x *AddressFromMnemonicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[87]
+	mi := &file_gnonativetypes_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4749,7 +4849,7 @@ func (x *AddressFromMnemonicResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressFromMnemonicResponse.ProtoReflect.Descriptor instead.
 func (*AddressFromMnemonicResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{87}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *AddressFromMnemonicResponse) GetAddress() []byte {
@@ -4768,7 +4868,7 @@ type ValidateMnemonicWordRequest struct {
 
 func (x *ValidateMnemonicWordRequest) Reset() {
 	*x = ValidateMnemonicWordRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[88]
+	mi := &file_gnonativetypes_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4780,7 +4880,7 @@ func (x *ValidateMnemonicWordRequest) String() string {
 func (*ValidateMnemonicWordRequest) ProtoMessage() {}
 
 func (x *ValidateMnemonicWordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[88]
+	mi := &file_gnonativetypes_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4793,7 +4893,7 @@ func (x *ValidateMnemonicWordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateMnemonicWordRequest.ProtoReflect.Descriptor instead.
 func (*ValidateMnemonicWordRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{88}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *ValidateMnemonicWordRequest) GetWord() string {
@@ -4812,7 +4912,7 @@ type ValidateMnemonicWordResponse struct {
 
 func (x *ValidateMnemonicWordResponse) Reset() {
 	*x = ValidateMnemonicWordResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[89]
+	mi := &file_gnonativetypes_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4824,7 +4924,7 @@ func (x *ValidateMnemonicWordResponse) String() string {
 func (*ValidateMnemonicWordResponse) ProtoMessage() {}
 
 func (x *ValidateMnemonicWordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[89]
+	mi := &file_gnonativetypes_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4837,7 +4937,7 @@ func (x *ValidateMnemonicWordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateMnemonicWordResponse.ProtoReflect.Descriptor instead.
 func (*ValidateMnemonicWordResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{89}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *ValidateMnemonicWordResponse) GetValid() bool {
@@ -4856,7 +4956,7 @@ type ValidateMnemonicPhraseRequest struct {
 
 func (x *ValidateMnemonicPhraseRequest) Reset() {
 	*x = ValidateMnemonicPhraseRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[90]
+	mi := &file_gnonativetypes_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4868,7 +4968,7 @@ func (x *ValidateMnemonicPhraseRequest) String() string {
 func (*ValidateMnemonicPhraseRequest) ProtoMessage() {}
 
 func (x *ValidateMnemonicPhraseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[90]
+	mi := &file_gnonativetypes_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4881,7 +4981,7 @@ func (x *ValidateMnemonicPhraseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateMnemonicPhraseRequest.ProtoReflect.Descriptor instead.
 func (*ValidateMnemonicPhraseRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{90}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *ValidateMnemonicPhraseRequest) GetPhrase() string {
@@ -4900,7 +5000,7 @@ type ValidateMnemonicPhraseResponse struct {
 
 func (x *ValidateMnemonicPhraseResponse) Reset() {
 	*x = ValidateMnemonicPhraseResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[91]
+	mi := &file_gnonativetypes_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4912,7 +5012,7 @@ func (x *ValidateMnemonicPhraseResponse) String() string {
 func (*ValidateMnemonicPhraseResponse) ProtoMessage() {}
 
 func (x *ValidateMnemonicPhraseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[91]
+	mi := &file_gnonativetypes_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4925,7 +5025,7 @@ func (x *ValidateMnemonicPhraseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateMnemonicPhraseResponse.ProtoReflect.Descriptor instead.
 func (*ValidateMnemonicPhraseResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{91}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *ValidateMnemonicPhraseResponse) GetValid() bool {
@@ -4944,7 +5044,7 @@ type PubKeyBytesFromBech32Request struct {
 
 func (x *PubKeyBytesFromBech32Request) Reset() {
 	*x = PubKeyBytesFromBech32Request{}
-	mi := &file_gnonativetypes_proto_msgTypes[92]
+	mi := &file_gnonativetypes_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4956,7 +5056,7 @@ func (x *PubKeyBytesFromBech32Request) String() string {
 func (*PubKeyBytesFromBech32Request) ProtoMessage() {}
 
 func (x *PubKeyBytesFromBech32Request) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[92]
+	mi := &file_gnonativetypes_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4969,7 +5069,7 @@ func (x *PubKeyBytesFromBech32Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PubKeyBytesFromBech32Request.ProtoReflect.Descriptor instead.
 func (*PubKeyBytesFromBech32Request) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{92}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *PubKeyBytesFromBech32Request) GetBech32PubKey() string {
@@ -4988,7 +5088,7 @@ type PubKeyBytesFromBech32Response struct {
 
 func (x *PubKeyBytesFromBech32Response) Reset() {
 	*x = PubKeyBytesFromBech32Response{}
-	mi := &file_gnonativetypes_proto_msgTypes[93]
+	mi := &file_gnonativetypes_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5000,7 +5100,7 @@ func (x *PubKeyBytesFromBech32Response) String() string {
 func (*PubKeyBytesFromBech32Response) ProtoMessage() {}
 
 func (x *PubKeyBytesFromBech32Response) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[93]
+	mi := &file_gnonativetypes_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5013,7 +5113,7 @@ func (x *PubKeyBytesFromBech32Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PubKeyBytesFromBech32Response.ProtoReflect.Descriptor instead.
 func (*PubKeyBytesFromBech32Response) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{93}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *PubKeyBytesFromBech32Response) GetPubKeyBytes() []byte {
@@ -5032,7 +5132,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[94]
+	mi := &file_gnonativetypes_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5044,7 +5144,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[94]
+	mi := &file_gnonativetypes_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5057,7 +5157,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{94}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -5076,7 +5176,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[95]
+	mi := &file_gnonativetypes_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5088,7 +5188,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[95]
+	mi := &file_gnonativetypes_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5101,7 +5201,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{95}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *HelloResponse) GetGreeting() string {
@@ -5120,7 +5220,7 @@ type HelloStreamRequest struct {
 
 func (x *HelloStreamRequest) Reset() {
 	*x = HelloStreamRequest{}
-	mi := &file_gnonativetypes_proto_msgTypes[96]
+	mi := &file_gnonativetypes_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5132,7 +5232,7 @@ func (x *HelloStreamRequest) String() string {
 func (*HelloStreamRequest) ProtoMessage() {}
 
 func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[96]
+	mi := &file_gnonativetypes_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5145,7 +5245,7 @@ func (x *HelloStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamRequest.ProtoReflect.Descriptor instead.
 func (*HelloStreamRequest) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{96}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *HelloStreamRequest) GetName() string {
@@ -5164,7 +5264,7 @@ type HelloStreamResponse struct {
 
 func (x *HelloStreamResponse) Reset() {
 	*x = HelloStreamResponse{}
-	mi := &file_gnonativetypes_proto_msgTypes[97]
+	mi := &file_gnonativetypes_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5176,7 +5276,7 @@ func (x *HelloStreamResponse) String() string {
 func (*HelloStreamResponse) ProtoMessage() {}
 
 func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[97]
+	mi := &file_gnonativetypes_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5189,7 +5289,7 @@ func (x *HelloStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloStreamResponse.ProtoReflect.Descriptor instead.
 func (*HelloStreamResponse) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{97}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *HelloStreamResponse) GetGreeting() string {
@@ -5208,7 +5308,7 @@ type GNONATIVETYPES_BytesList struct {
 
 func (x *GNONATIVETYPES_BytesList) Reset() {
 	*x = GNONATIVETYPES_BytesList{}
-	mi := &file_gnonativetypes_proto_msgTypes[98]
+	mi := &file_gnonativetypes_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5220,7 +5320,7 @@ func (x *GNONATIVETYPES_BytesList) String() string {
 func (*GNONATIVETYPES_BytesList) ProtoMessage() {}
 
 func (x *GNONATIVETYPES_BytesList) ProtoReflect() protoreflect.Message {
-	mi := &file_gnonativetypes_proto_msgTypes[98]
+	mi := &file_gnonativetypes_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5233,7 +5333,7 @@ func (x *GNONATIVETYPES_BytesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GNONATIVETYPES_BytesList.ProtoReflect.Descriptor instead.
 func (*GNONATIVETYPES_BytesList) Descriptor() ([]byte, []int) {
-	return file_gnonativetypes_proto_rawDescGZIP(), []int{98}
+	return file_gnonativetypes_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *GNONATIVETYPES_BytesList) GetValue() [][]byte {
@@ -5288,7 +5388,21 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\x05coins\x18\x02 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\x05coins\x12\x17\n" +
 	"\apub_key\x18\x03 \x01(\fR\x06pubKey\x12%\n" +
 	"\x0eaccount_number\x18\x04 \x01(\x04R\raccountNumber\x12\x1a\n" +
-	"\bsequence\x18\x05 \x01(\x04R\bsequence\"\x14\n" +
+	"\bsequence\x18\x05 \x01(\x04R\bsequence\"\xfc\x02\n" +
+	"\x0eSessionAccount\x12E\n" +
+	"\fbase_account\x18\x01 \x01(\v2\".land.gno.gnonative.v1.BaseAccountR\vbaseAccount\x12%\n" +
+	"\x0emaster_address\x18\x02 \x01(\fR\rmasterAddress\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x03 \x01(\x12R\texpiresAt\x12<\n" +
+	"\vspend_limit\x18\x04 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\n" +
+	"spendLimit\x12!\n" +
+	"\fspend_period\x18\x05 \x01(\x12R\vspendPeriod\x12:\n" +
+	"\n" +
+	"spend_used\x18\x06 \x03(\v2\x1b.land.gno.gnonative.v1.CoinR\tspendUsed\x12\x1f\n" +
+	"\vspend_reset\x18\a \x01(\x12R\n" +
+	"spendReset\x12\x1f\n" +
+	"\vallow_paths\x18\b \x03(\tR\n" +
+	"allowPaths\"\x14\n" +
 	"\x12ListKeyInfoRequest\"M\n" +
 	"\x13ListKeyInfoResponse\x126\n" +
 	"\x04keys\x18\x01 \x03(\v2\x1e.land.gno.gnonative.v1.KeyInfoR\bkey_info\")\n" +
@@ -5351,9 +5465,9 @@ const file_gnonativetypes_proto_rawDesc = "" +
 	"\faccount_info\x18\x01 \x01(\v2\".land.gno.gnonative.v1.BaseAccountR\vaccountInfo\"l\n" +
 	"\x1aQuerySessionAccountRequest\x12%\n" +
 	"\x0emaster_address\x18\x01 \x01(\fR\rmasterAddress\x12'\n" +
-	"\x0fsession_address\x18\x02 \x01(\fR\x0esessionAddress\"d\n" +
-	"\x1bQuerySessionAccountResponse\x12E\n" +
-	"\faccount_info\x18\x01 \x01(\v2\".land.gno.gnonative.v1.BaseAccountR\vaccountInfo\"}\n" +
+	"\x0fsession_address\x18\x02 \x01(\fR\x0esessionAddress\"g\n" +
+	"\x1bQuerySessionAccountResponse\x12H\n" +
+	"\faccount_info\x18\x01 \x01(\v2%.land.gno.gnonative.v1.SessionAccountR\vaccountInfo\"}\n" +
 	"\x14DeleteAccountRequest\x12$\n" +
 	"\x0ename_or_bech32\x18\x01 \x01(\tR\fnameOrBech32\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12#\n" +
@@ -5577,7 +5691,7 @@ func file_gnonativetypes_proto_rawDescGZIP() []byte {
 	return file_gnonativetypes_proto_rawDescData
 }
 
-var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 99)
+var file_gnonativetypes_proto_msgTypes = make([]protoimpl.MessageInfo, 100)
 var file_gnonativetypes_proto_goTypes = []any{
 	(*SetRemoteRequest)(nil),                  // 0: land.gno.gnonative.v1.SetRemoteRequest
 	(*SetRemoteResponse)(nil),                 // 1: land.gno.gnonative.v1.SetRemoteResponse
@@ -5598,121 +5712,125 @@ var file_gnonativetypes_proto_goTypes = []any{
 	(*KeyInfo)(nil),                           // 16: land.gno.gnonative.v1.KeyInfo
 	(*Coin)(nil),                              // 17: land.gno.gnonative.v1.Coin
 	(*BaseAccount)(nil),                       // 18: land.gno.gnonative.v1.BaseAccount
-	(*ListKeyInfoRequest)(nil),                // 19: land.gno.gnonative.v1.ListKeyInfoRequest
-	(*ListKeyInfoResponse)(nil),               // 20: land.gno.gnonative.v1.ListKeyInfoResponse
-	(*HasKeyByNameRequest)(nil),               // 21: land.gno.gnonative.v1.HasKeyByNameRequest
-	(*HasKeyByNameResponse)(nil),              // 22: land.gno.gnonative.v1.HasKeyByNameResponse
-	(*HasKeyByAddressRequest)(nil),            // 23: land.gno.gnonative.v1.HasKeyByAddressRequest
-	(*HasKeyByAddressResponse)(nil),           // 24: land.gno.gnonative.v1.HasKeyByAddressResponse
-	(*HasKeyByNameOrAddressRequest)(nil),      // 25: land.gno.gnonative.v1.HasKeyByNameOrAddressRequest
-	(*HasKeyByNameOrAddressResponse)(nil),     // 26: land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
-	(*GetKeyInfoByNameRequest)(nil),           // 27: land.gno.gnonative.v1.GetKeyInfoByNameRequest
-	(*GetKeyInfoByNameResponse)(nil),          // 28: land.gno.gnonative.v1.GetKeyInfoByNameResponse
-	(*GetKeyInfoByAddressRequest)(nil),        // 29: land.gno.gnonative.v1.GetKeyInfoByAddressRequest
-	(*GetKeyInfoByAddressResponse)(nil),       // 30: land.gno.gnonative.v1.GetKeyInfoByAddressResponse
-	(*GetKeyInfoByNameOrAddressRequest)(nil),  // 31: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressRequest
-	(*GetKeyInfoByNameOrAddressResponse)(nil), // 32: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
-	(*CreateAccountRequest)(nil),              // 33: land.gno.gnonative.v1.CreateAccountRequest
-	(*CreateAccountResponse)(nil),             // 34: land.gno.gnonative.v1.CreateAccountResponse
-	(*CreateLedgerRequest)(nil),               // 35: land.gno.gnonative.v1.CreateLedgerRequest
-	(*CreateLedgerResponse)(nil),              // 36: land.gno.gnonative.v1.CreateLedgerResponse
-	(*ActivateAccountRequest)(nil),            // 37: land.gno.gnonative.v1.ActivateAccountRequest
-	(*ActivateAccountResponse)(nil),           // 38: land.gno.gnonative.v1.ActivateAccountResponse
-	(*GetActivatedAccountRequest)(nil),        // 39: land.gno.gnonative.v1.GetActivatedAccountRequest
-	(*GetActivatedAccountResponse)(nil),       // 40: land.gno.gnonative.v1.GetActivatedAccountResponse
-	(*QueryAccountRequest)(nil),               // 41: land.gno.gnonative.v1.QueryAccountRequest
-	(*QueryAccountResponse)(nil),              // 42: land.gno.gnonative.v1.QueryAccountResponse
-	(*QuerySessionAccountRequest)(nil),        // 43: land.gno.gnonative.v1.QuerySessionAccountRequest
-	(*QuerySessionAccountResponse)(nil),       // 44: land.gno.gnonative.v1.QuerySessionAccountResponse
-	(*DeleteAccountRequest)(nil),              // 45: land.gno.gnonative.v1.DeleteAccountRequest
-	(*DeleteAccountResponse)(nil),             // 46: land.gno.gnonative.v1.DeleteAccountResponse
-	(*QueryRequest)(nil),                      // 47: land.gno.gnonative.v1.QueryRequest
-	(*QueryResponse)(nil),                     // 48: land.gno.gnonative.v1.QueryResponse
-	(*RenderRequest)(nil),                     // 49: land.gno.gnonative.v1.RenderRequest
-	(*RenderResponse)(nil),                    // 50: land.gno.gnonative.v1.RenderResponse
-	(*QEvalRequest)(nil),                      // 51: land.gno.gnonative.v1.QEvalRequest
-	(*QEvalResponse)(nil),                     // 52: land.gno.gnonative.v1.QEvalResponse
-	(*MsgCall)(nil),                           // 53: land.gno.gnonative.v1.MsgCall
-	(*CallRequest)(nil),                       // 54: land.gno.gnonative.v1.CallRequest
-	(*CallResponse)(nil),                      // 55: land.gno.gnonative.v1.CallResponse
-	(*MsgSend)(nil),                           // 56: land.gno.gnonative.v1.MsgSend
-	(*SendRequest)(nil),                       // 57: land.gno.gnonative.v1.SendRequest
-	(*SendResponse)(nil),                      // 58: land.gno.gnonative.v1.SendResponse
-	(*MsgRun)(nil),                            // 59: land.gno.gnonative.v1.MsgRun
-	(*RunRequest)(nil),                        // 60: land.gno.gnonative.v1.RunRequest
-	(*RunResponse)(nil),                       // 61: land.gno.gnonative.v1.RunResponse
-	(*MakeCallTxRequest)(nil),                 // 62: land.gno.gnonative.v1.MakeCallTxRequest
-	(*MakeSendTxRequest)(nil),                 // 63: land.gno.gnonative.v1.MakeSendTxRequest
-	(*MakeRunTxRequest)(nil),                  // 64: land.gno.gnonative.v1.MakeRunTxRequest
-	(*MakeTxResponse)(nil),                    // 65: land.gno.gnonative.v1.MakeTxResponse
-	(*SignTxRequest)(nil),                     // 66: land.gno.gnonative.v1.SignTxRequest
-	(*SignTxResponse)(nil),                    // 67: land.gno.gnonative.v1.SignTxResponse
-	(*MsgCreateSession)(nil),                  // 68: land.gno.gnonative.v1.MsgCreateSession
-	(*CreateSessionRequest)(nil),              // 69: land.gno.gnonative.v1.CreateSessionRequest
-	(*CreateSessionResponse)(nil),             // 70: land.gno.gnonative.v1.CreateSessionResponse
-	(*MsgRevokeSession)(nil),                  // 71: land.gno.gnonative.v1.MsgRevokeSession
-	(*RevokeSessionRequest)(nil),              // 72: land.gno.gnonative.v1.RevokeSessionRequest
-	(*RevokeSessionResponse)(nil),             // 73: land.gno.gnonative.v1.RevokeSessionResponse
-	(*RevokeAllSessionsRequest)(nil),          // 74: land.gno.gnonative.v1.RevokeAllSessionsRequest
-	(*RevokeAllSessionsResponse)(nil),         // 75: land.gno.gnonative.v1.RevokeAllSessionsResponse
-	(*EstimateGasRequest)(nil),                // 76: land.gno.gnonative.v1.EstimateGasRequest
-	(*EstimateGasResponse)(nil),               // 77: land.gno.gnonative.v1.EstimateGasResponse
-	(*EstimateTxFeesRequest)(nil),             // 78: land.gno.gnonative.v1.EstimateTxFeesRequest
-	(*EstimateTxFeesResponse)(nil),            // 79: land.gno.gnonative.v1.EstimateTxFeesResponse
-	(*BroadcastTxCommitRequest)(nil),          // 80: land.gno.gnonative.v1.BroadcastTxCommitRequest
-	(*BroadcastTxCommitResponse)(nil),         // 81: land.gno.gnonative.v1.BroadcastTxCommitResponse
-	(*AddressToBech32Request)(nil),            // 82: land.gno.gnonative.v1.AddressToBech32Request
-	(*AddressToBech32Response)(nil),           // 83: land.gno.gnonative.v1.AddressToBech32Response
-	(*AddressFromBech32Request)(nil),          // 84: land.gno.gnonative.v1.AddressFromBech32Request
-	(*AddressFromBech32Response)(nil),         // 85: land.gno.gnonative.v1.AddressFromBech32Response
-	(*AddressFromMnemonicRequest)(nil),        // 86: land.gno.gnonative.v1.AddressFromMnemonicRequest
-	(*AddressFromMnemonicResponse)(nil),       // 87: land.gno.gnonative.v1.AddressFromMnemonicResponse
-	(*ValidateMnemonicWordRequest)(nil),       // 88: land.gno.gnonative.v1.ValidateMnemonicWordRequest
-	(*ValidateMnemonicWordResponse)(nil),      // 89: land.gno.gnonative.v1.ValidateMnemonicWordResponse
-	(*ValidateMnemonicPhraseRequest)(nil),     // 90: land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
-	(*ValidateMnemonicPhraseResponse)(nil),    // 91: land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
-	(*PubKeyBytesFromBech32Request)(nil),      // 92: land.gno.gnonative.v1.PubKeyBytesFromBech32Request
-	(*PubKeyBytesFromBech32Response)(nil),     // 93: land.gno.gnonative.v1.PubKeyBytesFromBech32Response
-	(*HelloRequest)(nil),                      // 94: land.gno.gnonative.v1.HelloRequest
-	(*HelloResponse)(nil),                     // 95: land.gno.gnonative.v1.HelloResponse
-	(*HelloStreamRequest)(nil),                // 96: land.gno.gnonative.v1.HelloStreamRequest
-	(*HelloStreamResponse)(nil),               // 97: land.gno.gnonative.v1.HelloStreamResponse
-	(*GNONATIVETYPES_BytesList)(nil),          // 98: land.gno.gnonative.v1.GNONATIVETYPES_BytesList
+	(*SessionAccount)(nil),                    // 19: land.gno.gnonative.v1.SessionAccount
+	(*ListKeyInfoRequest)(nil),                // 20: land.gno.gnonative.v1.ListKeyInfoRequest
+	(*ListKeyInfoResponse)(nil),               // 21: land.gno.gnonative.v1.ListKeyInfoResponse
+	(*HasKeyByNameRequest)(nil),               // 22: land.gno.gnonative.v1.HasKeyByNameRequest
+	(*HasKeyByNameResponse)(nil),              // 23: land.gno.gnonative.v1.HasKeyByNameResponse
+	(*HasKeyByAddressRequest)(nil),            // 24: land.gno.gnonative.v1.HasKeyByAddressRequest
+	(*HasKeyByAddressResponse)(nil),           // 25: land.gno.gnonative.v1.HasKeyByAddressResponse
+	(*HasKeyByNameOrAddressRequest)(nil),      // 26: land.gno.gnonative.v1.HasKeyByNameOrAddressRequest
+	(*HasKeyByNameOrAddressResponse)(nil),     // 27: land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
+	(*GetKeyInfoByNameRequest)(nil),           // 28: land.gno.gnonative.v1.GetKeyInfoByNameRequest
+	(*GetKeyInfoByNameResponse)(nil),          // 29: land.gno.gnonative.v1.GetKeyInfoByNameResponse
+	(*GetKeyInfoByAddressRequest)(nil),        // 30: land.gno.gnonative.v1.GetKeyInfoByAddressRequest
+	(*GetKeyInfoByAddressResponse)(nil),       // 31: land.gno.gnonative.v1.GetKeyInfoByAddressResponse
+	(*GetKeyInfoByNameOrAddressRequest)(nil),  // 32: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressRequest
+	(*GetKeyInfoByNameOrAddressResponse)(nil), // 33: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
+	(*CreateAccountRequest)(nil),              // 34: land.gno.gnonative.v1.CreateAccountRequest
+	(*CreateAccountResponse)(nil),             // 35: land.gno.gnonative.v1.CreateAccountResponse
+	(*CreateLedgerRequest)(nil),               // 36: land.gno.gnonative.v1.CreateLedgerRequest
+	(*CreateLedgerResponse)(nil),              // 37: land.gno.gnonative.v1.CreateLedgerResponse
+	(*ActivateAccountRequest)(nil),            // 38: land.gno.gnonative.v1.ActivateAccountRequest
+	(*ActivateAccountResponse)(nil),           // 39: land.gno.gnonative.v1.ActivateAccountResponse
+	(*GetActivatedAccountRequest)(nil),        // 40: land.gno.gnonative.v1.GetActivatedAccountRequest
+	(*GetActivatedAccountResponse)(nil),       // 41: land.gno.gnonative.v1.GetActivatedAccountResponse
+	(*QueryAccountRequest)(nil),               // 42: land.gno.gnonative.v1.QueryAccountRequest
+	(*QueryAccountResponse)(nil),              // 43: land.gno.gnonative.v1.QueryAccountResponse
+	(*QuerySessionAccountRequest)(nil),        // 44: land.gno.gnonative.v1.QuerySessionAccountRequest
+	(*QuerySessionAccountResponse)(nil),       // 45: land.gno.gnonative.v1.QuerySessionAccountResponse
+	(*DeleteAccountRequest)(nil),              // 46: land.gno.gnonative.v1.DeleteAccountRequest
+	(*DeleteAccountResponse)(nil),             // 47: land.gno.gnonative.v1.DeleteAccountResponse
+	(*QueryRequest)(nil),                      // 48: land.gno.gnonative.v1.QueryRequest
+	(*QueryResponse)(nil),                     // 49: land.gno.gnonative.v1.QueryResponse
+	(*RenderRequest)(nil),                     // 50: land.gno.gnonative.v1.RenderRequest
+	(*RenderResponse)(nil),                    // 51: land.gno.gnonative.v1.RenderResponse
+	(*QEvalRequest)(nil),                      // 52: land.gno.gnonative.v1.QEvalRequest
+	(*QEvalResponse)(nil),                     // 53: land.gno.gnonative.v1.QEvalResponse
+	(*MsgCall)(nil),                           // 54: land.gno.gnonative.v1.MsgCall
+	(*CallRequest)(nil),                       // 55: land.gno.gnonative.v1.CallRequest
+	(*CallResponse)(nil),                      // 56: land.gno.gnonative.v1.CallResponse
+	(*MsgSend)(nil),                           // 57: land.gno.gnonative.v1.MsgSend
+	(*SendRequest)(nil),                       // 58: land.gno.gnonative.v1.SendRequest
+	(*SendResponse)(nil),                      // 59: land.gno.gnonative.v1.SendResponse
+	(*MsgRun)(nil),                            // 60: land.gno.gnonative.v1.MsgRun
+	(*RunRequest)(nil),                        // 61: land.gno.gnonative.v1.RunRequest
+	(*RunResponse)(nil),                       // 62: land.gno.gnonative.v1.RunResponse
+	(*MakeCallTxRequest)(nil),                 // 63: land.gno.gnonative.v1.MakeCallTxRequest
+	(*MakeSendTxRequest)(nil),                 // 64: land.gno.gnonative.v1.MakeSendTxRequest
+	(*MakeRunTxRequest)(nil),                  // 65: land.gno.gnonative.v1.MakeRunTxRequest
+	(*MakeTxResponse)(nil),                    // 66: land.gno.gnonative.v1.MakeTxResponse
+	(*SignTxRequest)(nil),                     // 67: land.gno.gnonative.v1.SignTxRequest
+	(*SignTxResponse)(nil),                    // 68: land.gno.gnonative.v1.SignTxResponse
+	(*MsgCreateSession)(nil),                  // 69: land.gno.gnonative.v1.MsgCreateSession
+	(*CreateSessionRequest)(nil),              // 70: land.gno.gnonative.v1.CreateSessionRequest
+	(*CreateSessionResponse)(nil),             // 71: land.gno.gnonative.v1.CreateSessionResponse
+	(*MsgRevokeSession)(nil),                  // 72: land.gno.gnonative.v1.MsgRevokeSession
+	(*RevokeSessionRequest)(nil),              // 73: land.gno.gnonative.v1.RevokeSessionRequest
+	(*RevokeSessionResponse)(nil),             // 74: land.gno.gnonative.v1.RevokeSessionResponse
+	(*RevokeAllSessionsRequest)(nil),          // 75: land.gno.gnonative.v1.RevokeAllSessionsRequest
+	(*RevokeAllSessionsResponse)(nil),         // 76: land.gno.gnonative.v1.RevokeAllSessionsResponse
+	(*EstimateGasRequest)(nil),                // 77: land.gno.gnonative.v1.EstimateGasRequest
+	(*EstimateGasResponse)(nil),               // 78: land.gno.gnonative.v1.EstimateGasResponse
+	(*EstimateTxFeesRequest)(nil),             // 79: land.gno.gnonative.v1.EstimateTxFeesRequest
+	(*EstimateTxFeesResponse)(nil),            // 80: land.gno.gnonative.v1.EstimateTxFeesResponse
+	(*BroadcastTxCommitRequest)(nil),          // 81: land.gno.gnonative.v1.BroadcastTxCommitRequest
+	(*BroadcastTxCommitResponse)(nil),         // 82: land.gno.gnonative.v1.BroadcastTxCommitResponse
+	(*AddressToBech32Request)(nil),            // 83: land.gno.gnonative.v1.AddressToBech32Request
+	(*AddressToBech32Response)(nil),           // 84: land.gno.gnonative.v1.AddressToBech32Response
+	(*AddressFromBech32Request)(nil),          // 85: land.gno.gnonative.v1.AddressFromBech32Request
+	(*AddressFromBech32Response)(nil),         // 86: land.gno.gnonative.v1.AddressFromBech32Response
+	(*AddressFromMnemonicRequest)(nil),        // 87: land.gno.gnonative.v1.AddressFromMnemonicRequest
+	(*AddressFromMnemonicResponse)(nil),       // 88: land.gno.gnonative.v1.AddressFromMnemonicResponse
+	(*ValidateMnemonicWordRequest)(nil),       // 89: land.gno.gnonative.v1.ValidateMnemonicWordRequest
+	(*ValidateMnemonicWordResponse)(nil),      // 90: land.gno.gnonative.v1.ValidateMnemonicWordResponse
+	(*ValidateMnemonicPhraseRequest)(nil),     // 91: land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
+	(*ValidateMnemonicPhraseResponse)(nil),    // 92: land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
+	(*PubKeyBytesFromBech32Request)(nil),      // 93: land.gno.gnonative.v1.PubKeyBytesFromBech32Request
+	(*PubKeyBytesFromBech32Response)(nil),     // 94: land.gno.gnonative.v1.PubKeyBytesFromBech32Response
+	(*HelloRequest)(nil),                      // 95: land.gno.gnonative.v1.HelloRequest
+	(*HelloResponse)(nil),                     // 96: land.gno.gnonative.v1.HelloResponse
+	(*HelloStreamRequest)(nil),                // 97: land.gno.gnonative.v1.HelloStreamRequest
+	(*HelloStreamResponse)(nil),               // 98: land.gno.gnonative.v1.HelloStreamResponse
+	(*GNONATIVETYPES_BytesList)(nil),          // 99: land.gno.gnonative.v1.GNONATIVETYPES_BytesList
 }
 var file_gnonativetypes_proto_depIdxs = []int32{
 	17, // 0: land.gno.gnonative.v1.BaseAccount.coins:type_name -> land.gno.gnonative.v1.Coin
-	16, // 1: land.gno.gnonative.v1.ListKeyInfoResponse.keys:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 2: land.gno.gnonative.v1.GetKeyInfoByNameResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 3: land.gno.gnonative.v1.GetKeyInfoByAddressResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 4: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 5: land.gno.gnonative.v1.CreateAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 6: land.gno.gnonative.v1.CreateLedgerResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 7: land.gno.gnonative.v1.ActivateAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	16, // 8: land.gno.gnonative.v1.GetActivatedAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
-	18, // 9: land.gno.gnonative.v1.QueryAccountResponse.account_info:type_name -> land.gno.gnonative.v1.BaseAccount
-	18, // 10: land.gno.gnonative.v1.QuerySessionAccountResponse.account_info:type_name -> land.gno.gnonative.v1.BaseAccount
-	17, // 11: land.gno.gnonative.v1.MsgCall.send:type_name -> land.gno.gnonative.v1.Coin
-	17, // 12: land.gno.gnonative.v1.MsgCall.max_deposit:type_name -> land.gno.gnonative.v1.Coin
-	53, // 13: land.gno.gnonative.v1.CallRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
-	17, // 14: land.gno.gnonative.v1.MsgSend.amount:type_name -> land.gno.gnonative.v1.Coin
-	56, // 15: land.gno.gnonative.v1.SendRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
-	17, // 16: land.gno.gnonative.v1.MsgRun.send:type_name -> land.gno.gnonative.v1.Coin
-	17, // 17: land.gno.gnonative.v1.MsgRun.max_deposit:type_name -> land.gno.gnonative.v1.Coin
-	59, // 18: land.gno.gnonative.v1.RunRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
-	53, // 19: land.gno.gnonative.v1.MakeCallTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
-	56, // 20: land.gno.gnonative.v1.MakeSendTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
-	59, // 21: land.gno.gnonative.v1.MakeRunTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
-	17, // 22: land.gno.gnonative.v1.MsgCreateSession.spend_limit:type_name -> land.gno.gnonative.v1.Coin
-	68, // 23: land.gno.gnonative.v1.CreateSessionRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCreateSession
-	71, // 24: land.gno.gnonative.v1.RevokeSessionRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRevokeSession
-	17, // 25: land.gno.gnonative.v1.EstimateTxFeesResponse.gas_fee:type_name -> land.gno.gnonative.v1.Coin
-	17, // 26: land.gno.gnonative.v1.EstimateTxFeesResponse.storage_fee:type_name -> land.gno.gnonative.v1.Coin
-	17, // 27: land.gno.gnonative.v1.EstimateTxFeesResponse.total_fee:type_name -> land.gno.gnonative.v1.Coin
-	28, // [28:28] is the sub-list for method output_type
-	28, // [28:28] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	18, // 1: land.gno.gnonative.v1.SessionAccount.base_account:type_name -> land.gno.gnonative.v1.BaseAccount
+	17, // 2: land.gno.gnonative.v1.SessionAccount.spend_limit:type_name -> land.gno.gnonative.v1.Coin
+	17, // 3: land.gno.gnonative.v1.SessionAccount.spend_used:type_name -> land.gno.gnonative.v1.Coin
+	16, // 4: land.gno.gnonative.v1.ListKeyInfoResponse.keys:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 5: land.gno.gnonative.v1.GetKeyInfoByNameResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 6: land.gno.gnonative.v1.GetKeyInfoByAddressResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 7: land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 8: land.gno.gnonative.v1.CreateAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 9: land.gno.gnonative.v1.CreateLedgerResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 10: land.gno.gnonative.v1.ActivateAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	16, // 11: land.gno.gnonative.v1.GetActivatedAccountResponse.key:type_name -> land.gno.gnonative.v1.KeyInfo
+	18, // 12: land.gno.gnonative.v1.QueryAccountResponse.account_info:type_name -> land.gno.gnonative.v1.BaseAccount
+	19, // 13: land.gno.gnonative.v1.QuerySessionAccountResponse.account_info:type_name -> land.gno.gnonative.v1.SessionAccount
+	17, // 14: land.gno.gnonative.v1.MsgCall.send:type_name -> land.gno.gnonative.v1.Coin
+	17, // 15: land.gno.gnonative.v1.MsgCall.max_deposit:type_name -> land.gno.gnonative.v1.Coin
+	54, // 16: land.gno.gnonative.v1.CallRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
+	17, // 17: land.gno.gnonative.v1.MsgSend.amount:type_name -> land.gno.gnonative.v1.Coin
+	57, // 18: land.gno.gnonative.v1.SendRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
+	17, // 19: land.gno.gnonative.v1.MsgRun.send:type_name -> land.gno.gnonative.v1.Coin
+	17, // 20: land.gno.gnonative.v1.MsgRun.max_deposit:type_name -> land.gno.gnonative.v1.Coin
+	60, // 21: land.gno.gnonative.v1.RunRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
+	54, // 22: land.gno.gnonative.v1.MakeCallTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCall
+	57, // 23: land.gno.gnonative.v1.MakeSendTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgSend
+	60, // 24: land.gno.gnonative.v1.MakeRunTxRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRun
+	17, // 25: land.gno.gnonative.v1.MsgCreateSession.spend_limit:type_name -> land.gno.gnonative.v1.Coin
+	69, // 26: land.gno.gnonative.v1.CreateSessionRequest.msgs:type_name -> land.gno.gnonative.v1.MsgCreateSession
+	72, // 27: land.gno.gnonative.v1.RevokeSessionRequest.msgs:type_name -> land.gno.gnonative.v1.MsgRevokeSession
+	17, // 28: land.gno.gnonative.v1.EstimateTxFeesResponse.gas_fee:type_name -> land.gno.gnonative.v1.Coin
+	17, // 29: land.gno.gnonative.v1.EstimateTxFeesResponse.storage_fee:type_name -> land.gno.gnonative.v1.Coin
+	17, // 30: land.gno.gnonative.v1.EstimateTxFeesResponse.total_fee:type_name -> land.gno.gnonative.v1.Coin
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_gnonativetypes_proto_init() }
@@ -5726,7 +5844,7 @@ func file_gnonativetypes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gnonativetypes_proto_rawDesc), len(file_gnonativetypes_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   99,
+			NumMessages:   100,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -89,6 +89,17 @@ message BaseAccount {
 	uint64 sequence = 5;
 }
 
+message SessionAccount {
+	BaseAccount base_account = 1;
+	bytes master_address = 2;
+	sint64 expires_at = 3;
+	repeated Coin spend_limit = 4;
+	sint64 spend_period = 5;
+	repeated Coin spend_used = 6;
+	sint64 spend_reset = 7;
+	repeated string allow_paths = 8;
+}
+
 message ListKeyInfoRequest {
 }
 
@@ -209,7 +220,7 @@ message QuerySessionAccountRequest {
 }
 
 message QuerySessionAccountResponse {
-	BaseAccount account_info = 1;
+	SessionAccount account_info = 1;
 }
 
 message DeleteAccountRequest {

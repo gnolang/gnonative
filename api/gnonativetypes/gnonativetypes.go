@@ -77,6 +77,17 @@ type BaseAccount struct {
 	Sequence      uint64 `json:"sequence" yaml:"sequence"`
 }
 
+type SessionAccount struct {
+	BaseAccount   *BaseAccount `json:"base_account" yaml:"base_account"`
+	MasterAddress []byte       `json:"master_address" yaml:"master_address"`
+	ExpiresAt     int64        `json:"expires_at" yaml:"expires_at"`     // unix ts; 0 = no expiry
+	SpendLimit    []Coin       `json:"spend_limit" yaml:"spend_limit"`   // nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+	SpendPeriod   int64        `json:"spend_period" yaml:"spend_period"` // seconds; 0 = lifetime cap (no reset)
+	SpendUsed     []Coin       `json:"spend_used" yaml:"spend_used"`     // nil/empty = 0 spent
+	SpendReset    int64        `json:"spend_reset" yaml:"spend_reset"`   // unix ts; start of current period
+	AllowPaths    []string     `json:"allow_paths" yaml:"allow_paths"`
+}
+
 type ListKeyInfoRequest struct{}
 
 type ListKeyInfoResponse struct {
@@ -196,7 +207,7 @@ type QuerySessionAccountRequest struct {
 }
 
 type QuerySessionAccountResponse struct {
-	AccountInfo *BaseAccount `json:"account_info" yaml:"account_info"`
+	AccountInfo *SessionAccount `json:"account_info" yaml:"account_info"`
 }
 
 type DeleteAccountRequest struct {
@@ -389,11 +400,11 @@ type MsgCreateSession struct {
 	// unix timestamp; 0 = no expiry
 	ExpiresAt int64 `json:"expires_at" yaml:"expires_at"`
 	// Typed entries: "*" or <route>/<type>[:<path>]; required (gno.land-specific grammar)
-	AllowPaths []string `json:"allow_paths,omitempty" yaml:"allow_paths"`
+	AllowPaths []string `json:"allow_paths" yaml:"allow_paths"`
 	// Max spend per period; empty = no spending
-	SpendLimit []Coin `json:"spend_limit,omitempty" yaml:"spend_limit"`
+	SpendLimit []Coin `json:"spend_limit" yaml:"spend_limit"`
 	// Seconds; 0 = lifetime cap
-	SpendPeriod int64 `json:"spend_period,omitempty" yaml:"spend_period"`
+	SpendPeriod int64 `json:"spend_period" yaml:"spend_period"`
 }
 
 type CreateSessionRequest struct {
