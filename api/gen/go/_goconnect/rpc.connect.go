@@ -93,6 +93,9 @@ const (
 	// GnoNativeServiceQueryAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// QueryAccount RPC.
 	GnoNativeServiceQueryAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/QueryAccount"
+	// GnoNativeServiceQuerySessionAccountProcedure is the fully-qualified name of the
+	// GnoNativeService's QuerySessionAccount RPC.
+	GnoNativeServiceQuerySessionAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/QuerySessionAccount"
 	// GnoNativeServiceDeleteAccountProcedure is the fully-qualified name of the GnoNativeService's
 	// DeleteAccount RPC.
 	GnoNativeServiceDeleteAccountProcedure = "/land.gno.gnonative.v1.GnoNativeService/DeleteAccount"
@@ -108,6 +111,15 @@ const (
 	GnoNativeServiceSendProcedure = "/land.gno.gnonative.v1.GnoNativeService/Send"
 	// GnoNativeServiceRunProcedure is the fully-qualified name of the GnoNativeService's Run RPC.
 	GnoNativeServiceRunProcedure = "/land.gno.gnonative.v1.GnoNativeService/Run"
+	// GnoNativeServiceCreateSessionProcedure is the fully-qualified name of the GnoNativeService's
+	// CreateSession RPC.
+	GnoNativeServiceCreateSessionProcedure = "/land.gno.gnonative.v1.GnoNativeService/CreateSession"
+	// GnoNativeServiceRevokeSessionProcedure is the fully-qualified name of the GnoNativeService's
+	// RevokeSession RPC.
+	GnoNativeServiceRevokeSessionProcedure = "/land.gno.gnonative.v1.GnoNativeService/RevokeSession"
+	// GnoNativeServiceRevokeAllSessionsProcedure is the fully-qualified name of the GnoNativeService's
+	// RevokeAllSessions RPC.
+	GnoNativeServiceRevokeAllSessionsProcedure = "/land.gno.gnonative.v1.GnoNativeService/RevokeAllSessions"
 	// GnoNativeServiceMakeCallTxProcedure is the fully-qualified name of the GnoNativeService's
 	// MakeCallTx RPC.
 	GnoNativeServiceMakeCallTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeCallTx"
@@ -117,6 +129,15 @@ const (
 	// GnoNativeServiceMakeRunTxProcedure is the fully-qualified name of the GnoNativeService's
 	// MakeRunTx RPC.
 	GnoNativeServiceMakeRunTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeRunTx"
+	// GnoNativeServiceMakeCreateSessionTxProcedure is the fully-qualified name of the
+	// GnoNativeService's MakeCreateSessionTx RPC.
+	GnoNativeServiceMakeCreateSessionTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeCreateSessionTx"
+	// GnoNativeServiceMakeRevokeSessionTxProcedure is the fully-qualified name of the
+	// GnoNativeService's MakeRevokeSessionTx RPC.
+	GnoNativeServiceMakeRevokeSessionTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeRevokeSessionTx"
+	// GnoNativeServiceMakeRevokeAllSessionsTxProcedure is the fully-qualified name of the
+	// GnoNativeService's MakeRevokeAllSessionsTx RPC.
+	GnoNativeServiceMakeRevokeAllSessionsTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/MakeRevokeAllSessionsTx"
 	// GnoNativeServiceEstimateGasProcedure is the fully-qualified name of the GnoNativeService's
 	// EstimateGas RPC.
 	GnoNativeServiceEstimateGasProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateGas"
@@ -143,6 +164,9 @@ const (
 	// GnoNativeServiceValidateMnemonicPhraseProcedure is the fully-qualified name of the
 	// GnoNativeService's ValidateMnemonicPhrase RPC.
 	GnoNativeServiceValidateMnemonicPhraseProcedure = "/land.gno.gnonative.v1.GnoNativeService/ValidateMnemonicPhrase"
+	// GnoNativeServicePubKeyBytesFromBech32Procedure is the fully-qualified name of the
+	// GnoNativeService's PubKeyBytesFromBech32 RPC.
+	GnoNativeServicePubKeyBytesFromBech32Procedure = "/land.gno.gnonative.v1.GnoNativeService/PubKeyBytesFromBech32"
 	// GnoNativeServiceHelloProcedure is the fully-qualified name of the GnoNativeService's Hello RPC.
 	GnoNativeServiceHelloProcedure = "/land.gno.gnonative.v1.GnoNativeService/Hello"
 	// GnoNativeServiceHelloStreamProcedure is the fully-qualified name of the GnoNativeService's
@@ -221,12 +245,15 @@ type GnoNativeServiceClient interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error)
 	// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
-	// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+	// If the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	GetActivatedAccount(context.Context, *connect.Request[_go.GetActivatedAccountRequest]) (*connect.Response[_go.GetActivatedAccountResponse], error)
 	// QueryAccount retrieves account information from the blockchain for a given
 	// address.
 	QueryAccount(context.Context, *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error)
+	// QuerySessionAccount retrieves session account information from the blockchain for a given
+	// master address and session address.
+	QuerySessionAccount(context.Context, *connect.Request[_go.QuerySessionAccountRequest]) (*connect.Response[_go.QuerySessionAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
 	// password.
@@ -250,26 +277,44 @@ type GnoNativeServiceClient interface {
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
 	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
-	// Call a specific realm function. Sign the transaction with the given caller_address.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// Call one or more specific realm functions. Sign the transaction with the given signer_address.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error)
-	// Send currency from the account with the given caller_address to an account on the blockchain.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	Send(context.Context, *connect.Request[_go.SendRequest]) (*connect.ServerStreamForClient[_go.SendResponse], error)
 	// Temporarily load the code in package on the blockchain and run main() which can
-	// call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
+	// call realm functions and use println() to output to the "console". Sign the transaction with the given signer_address.
 	// This returns the "console" output.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	Run(context.Context, *connect.Request[_go.RunRequest]) (*connect.ServerStreamForClient[_go.RunResponse], error)
-	// Make an unsigned transaction to call a specific realm function.
-	MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// Make an unsigned transaction to send currency to an account on the blockchain.
-	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Create one or more session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	CreateSession(context.Context, *connect.Request[_go.CreateSessionRequest]) (*connect.ServerStreamForClient[_go.CreateSessionResponse], error)
+	// Revoke one or more session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	RevokeSession(context.Context, *connect.Request[_go.RevokeSessionRequest]) (*connect.ServerStreamForClient[_go.RevokeSessionResponse], error)
+	// Revoke all session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	RevokeAllSessions(context.Context, *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.ServerStreamForClient[_go.RevokeAllSessionsResponse], error)
+	// Make an unsigned transaction to call one or more specific realm functions.
+	MakeCallTx(context.Context, *connect.Request[_go.MakeCallTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to send currency to one or more accounts on the blockchain.
+	MakeSendTx(context.Context, *connect.Request[_go.MakeSendTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
-	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	MakeRunTx(context.Context, *connect.Request[_go.MakeRunTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to create one or more session accounts where the master is the given creator_address.
+	MakeCreateSessionTx(context.Context, *connect.Request[_go.CreateSessionRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to revoke one or more session accounts where the master is the given creator_address.
+	MakeRevokeSessionTx(context.Context, *connect.Request[_go.RevokeSessionRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to revoke all session accounts where the master is the given creator_address.
+	MakeRevokeAllSessionsTx(context.Context, *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
 	// If UpdateTx is true, then update the transaction with the GasWanted amount.
 	// This uses the remote node determined by SetRemote.
@@ -300,6 +345,8 @@ type GnoNativeServiceClient interface {
 	// Validate a mnemonic phrase (for example, as in CreateAccount).
 	// In the response, set valid true if the mnemonic phrase is valid.
 	ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error)
+	// Convert a bech32 public key to a byte array.
+	PubKeyBytesFromBech32(context.Context, *connect.Request[_go.PubKeyBytesFromBech32Request]) (*connect.Response[_go.PubKeyBytesFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -437,6 +484,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("QueryAccount")),
 			connect.WithClientOptions(opts...),
 		),
+		querySessionAccount: connect.NewClient[_go.QuerySessionAccountRequest, _go.QuerySessionAccountResponse](
+			httpClient,
+			baseURL+GnoNativeServiceQuerySessionAccountProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QuerySessionAccount")),
+			connect.WithClientOptions(opts...),
+		),
 		deleteAccount: connect.NewClient[_go.DeleteAccountRequest, _go.DeleteAccountResponse](
 			httpClient,
 			baseURL+GnoNativeServiceDeleteAccountProcedure,
@@ -479,22 +532,58 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("Run")),
 			connect.WithClientOptions(opts...),
 		),
-		makeCallTx: connect.NewClient[_go.CallRequest, _go.MakeTxResponse](
+		createSession: connect.NewClient[_go.CreateSessionRequest, _go.CreateSessionResponse](
+			httpClient,
+			baseURL+GnoNativeServiceCreateSessionProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("CreateSession")),
+			connect.WithClientOptions(opts...),
+		),
+		revokeSession: connect.NewClient[_go.RevokeSessionRequest, _go.RevokeSessionResponse](
+			httpClient,
+			baseURL+GnoNativeServiceRevokeSessionProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("RevokeSession")),
+			connect.WithClientOptions(opts...),
+		),
+		revokeAllSessions: connect.NewClient[_go.RevokeAllSessionsRequest, _go.RevokeAllSessionsResponse](
+			httpClient,
+			baseURL+GnoNativeServiceRevokeAllSessionsProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("RevokeAllSessions")),
+			connect.WithClientOptions(opts...),
+		),
+		makeCallTx: connect.NewClient[_go.MakeCallTxRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeCallTxProcedure,
 			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeCallTx")),
 			connect.WithClientOptions(opts...),
 		),
-		makeSendTx: connect.NewClient[_go.SendRequest, _go.MakeTxResponse](
+		makeSendTx: connect.NewClient[_go.MakeSendTxRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeSendTxProcedure,
 			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeSendTx")),
 			connect.WithClientOptions(opts...),
 		),
-		makeRunTx: connect.NewClient[_go.RunRequest, _go.MakeTxResponse](
+		makeRunTx: connect.NewClient[_go.MakeRunTxRequest, _go.MakeTxResponse](
 			httpClient,
 			baseURL+GnoNativeServiceMakeRunTxProcedure,
 			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRunTx")),
+			connect.WithClientOptions(opts...),
+		),
+		makeCreateSessionTx: connect.NewClient[_go.CreateSessionRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeCreateSessionTxProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeCreateSessionTx")),
+			connect.WithClientOptions(opts...),
+		),
+		makeRevokeSessionTx: connect.NewClient[_go.RevokeSessionRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeRevokeSessionTxProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRevokeSessionTx")),
+			connect.WithClientOptions(opts...),
+		),
+		makeRevokeAllSessionsTx: connect.NewClient[_go.RevokeAllSessionsRequest, _go.MakeTxResponse](
+			httpClient,
+			baseURL+GnoNativeServiceMakeRevokeAllSessionsTxProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRevokeAllSessionsTx")),
 			connect.WithClientOptions(opts...),
 		),
 		estimateGas: connect.NewClient[_go.EstimateGasRequest, _go.EstimateGasResponse](
@@ -551,6 +640,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicPhrase")),
 			connect.WithClientOptions(opts...),
 		),
+		pubKeyBytesFromBech32: connect.NewClient[_go.PubKeyBytesFromBech32Request, _go.PubKeyBytesFromBech32Response](
+			httpClient,
+			baseURL+GnoNativeServicePubKeyBytesFromBech32Procedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("PubKeyBytesFromBech32")),
+			connect.WithClientOptions(opts...),
+		),
 		hello: connect.NewClient[_go.HelloRequest, _go.HelloResponse](
 			httpClient,
 			baseURL+GnoNativeServiceHelloProcedure,
@@ -588,6 +683,7 @@ type gnoNativeServiceClient struct {
 	rotatePassword            *connect.Client[_go.RotatePasswordRequest, _go.RotatePasswordResponse]
 	getActivatedAccount       *connect.Client[_go.GetActivatedAccountRequest, _go.GetActivatedAccountResponse]
 	queryAccount              *connect.Client[_go.QueryAccountRequest, _go.QueryAccountResponse]
+	querySessionAccount       *connect.Client[_go.QuerySessionAccountRequest, _go.QuerySessionAccountResponse]
 	deleteAccount             *connect.Client[_go.DeleteAccountRequest, _go.DeleteAccountResponse]
 	query                     *connect.Client[_go.QueryRequest, _go.QueryResponse]
 	render                    *connect.Client[_go.RenderRequest, _go.RenderResponse]
@@ -595,9 +691,15 @@ type gnoNativeServiceClient struct {
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
 	send                      *connect.Client[_go.SendRequest, _go.SendResponse]
 	run                       *connect.Client[_go.RunRequest, _go.RunResponse]
-	makeCallTx                *connect.Client[_go.CallRequest, _go.MakeTxResponse]
-	makeSendTx                *connect.Client[_go.SendRequest, _go.MakeTxResponse]
-	makeRunTx                 *connect.Client[_go.RunRequest, _go.MakeTxResponse]
+	createSession             *connect.Client[_go.CreateSessionRequest, _go.CreateSessionResponse]
+	revokeSession             *connect.Client[_go.RevokeSessionRequest, _go.RevokeSessionResponse]
+	revokeAllSessions         *connect.Client[_go.RevokeAllSessionsRequest, _go.RevokeAllSessionsResponse]
+	makeCallTx                *connect.Client[_go.MakeCallTxRequest, _go.MakeTxResponse]
+	makeSendTx                *connect.Client[_go.MakeSendTxRequest, _go.MakeTxResponse]
+	makeRunTx                 *connect.Client[_go.MakeRunTxRequest, _go.MakeTxResponse]
+	makeCreateSessionTx       *connect.Client[_go.CreateSessionRequest, _go.MakeTxResponse]
+	makeRevokeSessionTx       *connect.Client[_go.RevokeSessionRequest, _go.MakeTxResponse]
+	makeRevokeAllSessionsTx   *connect.Client[_go.RevokeAllSessionsRequest, _go.MakeTxResponse]
 	estimateGas               *connect.Client[_go.EstimateGasRequest, _go.EstimateGasResponse]
 	estimateTxFees            *connect.Client[_go.EstimateTxFeesRequest, _go.EstimateTxFeesResponse]
 	signTx                    *connect.Client[_go.SignTxRequest, _go.SignTxResponse]
@@ -607,6 +709,7 @@ type gnoNativeServiceClient struct {
 	addressFromMnemonic       *connect.Client[_go.AddressFromMnemonicRequest, _go.AddressFromMnemonicResponse]
 	validateMnemonicWord      *connect.Client[_go.ValidateMnemonicWordRequest, _go.ValidateMnemonicWordResponse]
 	validateMnemonicPhrase    *connect.Client[_go.ValidateMnemonicPhraseRequest, _go.ValidateMnemonicPhraseResponse]
+	pubKeyBytesFromBech32     *connect.Client[_go.PubKeyBytesFromBech32Request, _go.PubKeyBytesFromBech32Response]
 	hello                     *connect.Client[_go.HelloRequest, _go.HelloResponse]
 	helloStream               *connect.Client[_go.HelloStreamRequest, _go.HelloStreamResponse]
 }
@@ -711,6 +814,11 @@ func (c *gnoNativeServiceClient) QueryAccount(ctx context.Context, req *connect.
 	return c.queryAccount.CallUnary(ctx, req)
 }
 
+// QuerySessionAccount calls land.gno.gnonative.v1.GnoNativeService.QuerySessionAccount.
+func (c *gnoNativeServiceClient) QuerySessionAccount(ctx context.Context, req *connect.Request[_go.QuerySessionAccountRequest]) (*connect.Response[_go.QuerySessionAccountResponse], error) {
+	return c.querySessionAccount.CallUnary(ctx, req)
+}
+
 // DeleteAccount calls land.gno.gnonative.v1.GnoNativeService.DeleteAccount.
 func (c *gnoNativeServiceClient) DeleteAccount(ctx context.Context, req *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
 	return c.deleteAccount.CallUnary(ctx, req)
@@ -746,19 +854,49 @@ func (c *gnoNativeServiceClient) Run(ctx context.Context, req *connect.Request[_
 	return c.run.CallServerStream(ctx, req)
 }
 
+// CreateSession calls land.gno.gnonative.v1.GnoNativeService.CreateSession.
+func (c *gnoNativeServiceClient) CreateSession(ctx context.Context, req *connect.Request[_go.CreateSessionRequest]) (*connect.ServerStreamForClient[_go.CreateSessionResponse], error) {
+	return c.createSession.CallServerStream(ctx, req)
+}
+
+// RevokeSession calls land.gno.gnonative.v1.GnoNativeService.RevokeSession.
+func (c *gnoNativeServiceClient) RevokeSession(ctx context.Context, req *connect.Request[_go.RevokeSessionRequest]) (*connect.ServerStreamForClient[_go.RevokeSessionResponse], error) {
+	return c.revokeSession.CallServerStream(ctx, req)
+}
+
+// RevokeAllSessions calls land.gno.gnonative.v1.GnoNativeService.RevokeAllSessions.
+func (c *gnoNativeServiceClient) RevokeAllSessions(ctx context.Context, req *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.ServerStreamForClient[_go.RevokeAllSessionsResponse], error) {
+	return c.revokeAllSessions.CallServerStream(ctx, req)
+}
+
 // MakeCallTx calls land.gno.gnonative.v1.GnoNativeService.MakeCallTx.
-func (c *gnoNativeServiceClient) MakeCallTx(ctx context.Context, req *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (c *gnoNativeServiceClient) MakeCallTx(ctx context.Context, req *connect.Request[_go.MakeCallTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return c.makeCallTx.CallUnary(ctx, req)
 }
 
 // MakeSendTx calls land.gno.gnonative.v1.GnoNativeService.MakeSendTx.
-func (c *gnoNativeServiceClient) MakeSendTx(ctx context.Context, req *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (c *gnoNativeServiceClient) MakeSendTx(ctx context.Context, req *connect.Request[_go.MakeSendTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return c.makeSendTx.CallUnary(ctx, req)
 }
 
 // MakeRunTx calls land.gno.gnonative.v1.GnoNativeService.MakeRunTx.
-func (c *gnoNativeServiceClient) MakeRunTx(ctx context.Context, req *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (c *gnoNativeServiceClient) MakeRunTx(ctx context.Context, req *connect.Request[_go.MakeRunTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return c.makeRunTx.CallUnary(ctx, req)
+}
+
+// MakeCreateSessionTx calls land.gno.gnonative.v1.GnoNativeService.MakeCreateSessionTx.
+func (c *gnoNativeServiceClient) MakeCreateSessionTx(ctx context.Context, req *connect.Request[_go.CreateSessionRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeCreateSessionTx.CallUnary(ctx, req)
+}
+
+// MakeRevokeSessionTx calls land.gno.gnonative.v1.GnoNativeService.MakeRevokeSessionTx.
+func (c *gnoNativeServiceClient) MakeRevokeSessionTx(ctx context.Context, req *connect.Request[_go.RevokeSessionRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeRevokeSessionTx.CallUnary(ctx, req)
+}
+
+// MakeRevokeAllSessionsTx calls land.gno.gnonative.v1.GnoNativeService.MakeRevokeAllSessionsTx.
+func (c *gnoNativeServiceClient) MakeRevokeAllSessionsTx(ctx context.Context, req *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return c.makeRevokeAllSessionsTx.CallUnary(ctx, req)
 }
 
 // EstimateGas calls land.gno.gnonative.v1.GnoNativeService.EstimateGas.
@@ -804,6 +942,11 @@ func (c *gnoNativeServiceClient) ValidateMnemonicWord(ctx context.Context, req *
 // ValidateMnemonicPhrase calls land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicPhrase.
 func (c *gnoNativeServiceClient) ValidateMnemonicPhrase(ctx context.Context, req *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error) {
 	return c.validateMnemonicPhrase.CallUnary(ctx, req)
+}
+
+// PubKeyBytesFromBech32 calls land.gno.gnonative.v1.GnoNativeService.PubKeyBytesFromBech32.
+func (c *gnoNativeServiceClient) PubKeyBytesFromBech32(ctx context.Context, req *connect.Request[_go.PubKeyBytesFromBech32Request]) (*connect.Response[_go.PubKeyBytesFromBech32Response], error) {
+	return c.pubKeyBytesFromBech32.CallUnary(ctx, req)
 }
 
 // Hello calls land.gno.gnonative.v1.GnoNativeService.Hello.
@@ -888,12 +1031,15 @@ type GnoNativeServiceHandler interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	RotatePassword(context.Context, *connect.Request[_go.RotatePasswordRequest]) (*connect.Response[_go.RotatePasswordResponse], error)
 	// GetActivatedAccount gets the info of the account by address which has been activated by ActivateAccount.
-	// If there the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
+	// If the given address is not specified, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidAddress.
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	GetActivatedAccount(context.Context, *connect.Request[_go.GetActivatedAccountRequest]) (*connect.Response[_go.GetActivatedAccountResponse], error)
 	// QueryAccount retrieves account information from the blockchain for a given
 	// address.
 	QueryAccount(context.Context, *connect.Request[_go.QueryAccountRequest]) (*connect.Response[_go.QueryAccountResponse], error)
+	// QuerySessionAccount retrieves session account information from the blockchain for a given
+	// master address and session address.
+	QuerySessionAccount(context.Context, *connect.Request[_go.QuerySessionAccountRequest]) (*connect.Response[_go.QuerySessionAccountResponse], error)
 	// DeleteAccount deletes the account with the given name, using the password
 	// to ensure access. However, if skip_password is true, then ignore the
 	// password.
@@ -917,26 +1063,44 @@ type GnoNativeServiceHandler interface {
 	// "(1 gno.land/r/demo/boards.BoardID)\n(true bool)".
 	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEval(context.Context, *connect.Request[_go.QEvalRequest]) (*connect.Response[_go.QEvalResponse], error)
-	// Call a specific realm function. Sign the transaction with the given caller_address.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// Call one or more specific realm functions. Sign the transaction with the given signer_address.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error
-	// Send currency from the account with the given caller_address to an account on the blockchain.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	Send(context.Context, *connect.Request[_go.SendRequest], *connect.ServerStream[_go.SendResponse]) error
 	// Temporarily load the code in package on the blockchain and run main() which can
-	// call realm functions and use println() to output to the "console". Sign the transaction with the given caller_address.
+	// call realm functions and use println() to output to the "console". Sign the transaction with the given signer_address.
 	// This returns the "console" output.
-	// If there is no activated account with the given caller_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	Run(context.Context, *connect.Request[_go.RunRequest], *connect.ServerStream[_go.RunResponse]) error
-	// Make an unsigned transaction to call a specific realm function.
-	MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error)
-	// Make an unsigned transaction to send currency to an account on the blockchain.
-	MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Create one or more session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	CreateSession(context.Context, *connect.Request[_go.CreateSessionRequest], *connect.ServerStream[_go.CreateSessionResponse]) error
+	// Revoke one or more session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	RevokeSession(context.Context, *connect.Request[_go.RevokeSessionRequest], *connect.ServerStream[_go.RevokeSessionResponse]) error
+	// Revoke all session accounts where the master is the given creator_address.
+	// If there is no activated account with the given creator_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	RevokeAllSessions(context.Context, *connect.Request[_go.RevokeAllSessionsRequest], *connect.ServerStream[_go.RevokeAllSessionsResponse]) error
+	// Make an unsigned transaction to call one or more specific realm functions.
+	MakeCallTx(context.Context, *connect.Request[_go.MakeCallTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to send currency to one or more accounts on the blockchain.
+	MakeSendTx(context.Context, *connect.Request[_go.MakeSendTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// Make an unsigned transaction to temporarily load the code in package on the blockchain and run main().
-	MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	MakeRunTx(context.Context, *connect.Request[_go.MakeRunTxRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to create one or more session accounts where the master is the given creator_address.
+	MakeCreateSessionTx(context.Context, *connect.Request[_go.CreateSessionRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to revoke one or more session accounts where the master is the given creator_address.
+	MakeRevokeSessionTx(context.Context, *connect.Request[_go.RevokeSessionRequest]) (*connect.Response[_go.MakeTxResponse], error)
+	// Make an unsigned transaction to revoke all session accounts where the master is the given creator_address.
+	MakeRevokeAllSessionsTx(context.Context, *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.Response[_go.MakeTxResponse], error)
 	// EstimateGas estimates the least amount of gas required for the transaction to go through on the chain (minimum gas wanted), with a security margin.
 	// If UpdateTx is true, then update the transaction with the GasWanted amount.
 	// This uses the remote node determined by SetRemote.
@@ -967,6 +1131,8 @@ type GnoNativeServiceHandler interface {
 	// Validate a mnemonic phrase (for example, as in CreateAccount).
 	// In the response, set valid true if the mnemonic phrase is valid.
 	ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error)
+	// Convert a bech32 public key to a byte array.
+	PubKeyBytesFromBech32(context.Context, *connect.Request[_go.PubKeyBytesFromBech32Request]) (*connect.Response[_go.PubKeyBytesFromBech32Response], error)
 	// Hello is for debug purposes
 	Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error)
 	// HelloStream is for debug purposes
@@ -1100,6 +1266,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("QueryAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceQuerySessionAccountHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQuerySessionAccountProcedure,
+		svc.QuerySessionAccount,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QuerySessionAccount")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceDeleteAccountHandler := connect.NewUnaryHandler(
 		GnoNativeServiceDeleteAccountProcedure,
 		svc.DeleteAccount,
@@ -1142,6 +1314,24 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("Run")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceCreateSessionHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceCreateSessionProcedure,
+		svc.CreateSession,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("CreateSession")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceRevokeSessionHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceRevokeSessionProcedure,
+		svc.RevokeSession,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("RevokeSession")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceRevokeAllSessionsHandler := connect.NewServerStreamHandler(
+		GnoNativeServiceRevokeAllSessionsProcedure,
+		svc.RevokeAllSessions,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("RevokeAllSessions")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceMakeCallTxHandler := connect.NewUnaryHandler(
 		GnoNativeServiceMakeCallTxProcedure,
 		svc.MakeCallTx,
@@ -1158,6 +1348,24 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		GnoNativeServiceMakeRunTxProcedure,
 		svc.MakeRunTx,
 		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRunTx")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceMakeCreateSessionTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeCreateSessionTxProcedure,
+		svc.MakeCreateSessionTx,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeCreateSessionTx")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceMakeRevokeSessionTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeRevokeSessionTxProcedure,
+		svc.MakeRevokeSessionTx,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRevokeSessionTx")),
+		connect.WithHandlerOptions(opts...),
+	)
+	gnoNativeServiceMakeRevokeAllSessionsTxHandler := connect.NewUnaryHandler(
+		GnoNativeServiceMakeRevokeAllSessionsTxProcedure,
+		svc.MakeRevokeAllSessionsTx,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("MakeRevokeAllSessionsTx")),
 		connect.WithHandlerOptions(opts...),
 	)
 	gnoNativeServiceEstimateGasHandler := connect.NewUnaryHandler(
@@ -1214,6 +1422,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("ValidateMnemonicPhrase")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServicePubKeyBytesFromBech32Handler := connect.NewUnaryHandler(
+		GnoNativeServicePubKeyBytesFromBech32Procedure,
+		svc.PubKeyBytesFromBech32,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("PubKeyBytesFromBech32")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceHelloHandler := connect.NewUnaryHandler(
 		GnoNativeServiceHelloProcedure,
 		svc.Hello,
@@ -1268,6 +1482,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceGetActivatedAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQueryAccountProcedure:
 			gnoNativeServiceQueryAccountHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQuerySessionAccountProcedure:
+			gnoNativeServiceQuerySessionAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceDeleteAccountProcedure:
 			gnoNativeServiceDeleteAccountHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQueryProcedure:
@@ -1282,12 +1498,24 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceSendHandler.ServeHTTP(w, r)
 		case GnoNativeServiceRunProcedure:
 			gnoNativeServiceRunHandler.ServeHTTP(w, r)
+		case GnoNativeServiceCreateSessionProcedure:
+			gnoNativeServiceCreateSessionHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRevokeSessionProcedure:
+			gnoNativeServiceRevokeSessionHandler.ServeHTTP(w, r)
+		case GnoNativeServiceRevokeAllSessionsProcedure:
+			gnoNativeServiceRevokeAllSessionsHandler.ServeHTTP(w, r)
 		case GnoNativeServiceMakeCallTxProcedure:
 			gnoNativeServiceMakeCallTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceMakeSendTxProcedure:
 			gnoNativeServiceMakeSendTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceMakeRunTxProcedure:
 			gnoNativeServiceMakeRunTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeCreateSessionTxProcedure:
+			gnoNativeServiceMakeCreateSessionTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeRevokeSessionTxProcedure:
+			gnoNativeServiceMakeRevokeSessionTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceMakeRevokeAllSessionsTxProcedure:
+			gnoNativeServiceMakeRevokeAllSessionsTxHandler.ServeHTTP(w, r)
 		case GnoNativeServiceEstimateGasProcedure:
 			gnoNativeServiceEstimateGasHandler.ServeHTTP(w, r)
 		case GnoNativeServiceEstimateTxFeesProcedure:
@@ -1306,6 +1534,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceValidateMnemonicWordHandler.ServeHTTP(w, r)
 		case GnoNativeServiceValidateMnemonicPhraseProcedure:
 			gnoNativeServiceValidateMnemonicPhraseHandler.ServeHTTP(w, r)
+		case GnoNativeServicePubKeyBytesFromBech32Procedure:
+			gnoNativeServicePubKeyBytesFromBech32Handler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloProcedure:
 			gnoNativeServiceHelloHandler.ServeHTTP(w, r)
 		case GnoNativeServiceHelloStreamProcedure:
@@ -1399,6 +1629,10 @@ func (UnimplementedGnoNativeServiceHandler) QueryAccount(context.Context, *conne
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QueryAccount is not implemented"))
 }
 
+func (UnimplementedGnoNativeServiceHandler) QuerySessionAccount(context.Context, *connect.Request[_go.QuerySessionAccountRequest]) (*connect.Response[_go.QuerySessionAccountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QuerySessionAccount is not implemented"))
+}
+
 func (UnimplementedGnoNativeServiceHandler) DeleteAccount(context.Context, *connect.Request[_go.DeleteAccountRequest]) (*connect.Response[_go.DeleteAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.DeleteAccount is not implemented"))
 }
@@ -1427,16 +1661,40 @@ func (UnimplementedGnoNativeServiceHandler) Run(context.Context, *connect.Reques
 	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.Run is not implemented"))
 }
 
-func (UnimplementedGnoNativeServiceHandler) MakeCallTx(context.Context, *connect.Request[_go.CallRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (UnimplementedGnoNativeServiceHandler) CreateSession(context.Context, *connect.Request[_go.CreateSessionRequest], *connect.ServerStream[_go.CreateSessionResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.CreateSession is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) RevokeSession(context.Context, *connect.Request[_go.RevokeSessionRequest], *connect.ServerStream[_go.RevokeSessionResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.RevokeSession is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) RevokeAllSessions(context.Context, *connect.Request[_go.RevokeAllSessionsRequest], *connect.ServerStream[_go.RevokeAllSessionsResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.RevokeAllSessions is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeCallTx(context.Context, *connect.Request[_go.MakeCallTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeCallTx is not implemented"))
 }
 
-func (UnimplementedGnoNativeServiceHandler) MakeSendTx(context.Context, *connect.Request[_go.SendRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (UnimplementedGnoNativeServiceHandler) MakeSendTx(context.Context, *connect.Request[_go.MakeSendTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeSendTx is not implemented"))
 }
 
-func (UnimplementedGnoNativeServiceHandler) MakeRunTx(context.Context, *connect.Request[_go.RunRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+func (UnimplementedGnoNativeServiceHandler) MakeRunTx(context.Context, *connect.Request[_go.MakeRunTxRequest]) (*connect.Response[_go.MakeTxResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeRunTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeCreateSessionTx(context.Context, *connect.Request[_go.CreateSessionRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeCreateSessionTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeRevokeSessionTx(context.Context, *connect.Request[_go.RevokeSessionRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeRevokeSessionTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) MakeRevokeAllSessionsTx(context.Context, *connect.Request[_go.RevokeAllSessionsRequest]) (*connect.Response[_go.MakeTxResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.MakeRevokeAllSessionsTx is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) EstimateGas(context.Context, *connect.Request[_go.EstimateGasRequest]) (*connect.Response[_go.EstimateGasResponse], error) {
@@ -1473,6 +1731,10 @@ func (UnimplementedGnoNativeServiceHandler) ValidateMnemonicWord(context.Context
 
 func (UnimplementedGnoNativeServiceHandler) ValidateMnemonicPhrase(context.Context, *connect.Request[_go.ValidateMnemonicPhraseRequest]) (*connect.Response[_go.ValidateMnemonicPhraseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.ValidateMnemonicPhrase is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) PubKeyBytesFromBech32(context.Context, *connect.Request[_go.PubKeyBytesFromBech32Request]) (*connect.Response[_go.PubKeyBytesFromBech32Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.PubKeyBytesFromBech32 is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) Hello(context.Context, *connect.Request[_go.HelloRequest]) (*connect.Response[_go.HelloResponse], error) {
