@@ -463,7 +463,7 @@ func convertSessionAccount(account *gnoland.GnoSessionAccount) *api_gen.SessionA
 		SpendPeriod:   account.SpendPeriod,
 		SpendUsed:     convertStdCoins(account.SpendUsed),
 		SpendReset:    account.SpendReset,
-		AllowPaths:    account.AllowPaths[:],
+		AllowPaths:    account.AllowPaths,
 	}
 }
 
