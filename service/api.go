@@ -263,6 +263,9 @@ func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Req
 			return nil, getGrpcError(err)
 		}
 		account.signer.Master = masterAddr
+	} else {
+		// Clear any stale master from a previous activation as a session account.
+		account.signer.Master = crypto.Address{}
 	}
 	return connect.NewResponse(&api_gen.ActivateAccountResponse{
 		Key:         info,
