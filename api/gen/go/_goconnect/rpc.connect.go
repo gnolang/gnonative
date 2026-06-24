@@ -283,7 +283,7 @@ type GnoNativeServiceClient interface {
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest]) (*connect.ServerStreamForClient[_go.CallResponse], error)
 	// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-	// If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	Send(context.Context, *connect.Request[_go.SendRequest]) (*connect.ServerStreamForClient[_go.SendResponse], error)
 	// Temporarily load the code in package on the blockchain and run main() which can
@@ -1069,7 +1069,7 @@ type GnoNativeServiceHandler interface {
 	// If the path of a realm function call is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrUnknownRequest.
 	Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error
 	// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-	// If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	Send(context.Context, *connect.Request[_go.SendRequest], *connect.ServerStream[_go.SendResponse]) error
 	// Temporarily load the code in package on the blockchain and run main() which can

@@ -601,7 +601,7 @@ export const GnoNativeService: GenService<{
   },
   /**
    * Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-   * If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+   * If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
    * If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
    *
    * @generated from rpc land.gno.gnonative.v1.GnoNativeService.Send

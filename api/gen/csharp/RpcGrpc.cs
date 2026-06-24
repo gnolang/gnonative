@@ -1000,7 +1000,7 @@ namespace Land.Gno.Gnonative.V1 {
 
       /// <summary>
       /// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-      /// If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -2769,7 +2769,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-      /// If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -2784,7 +2784,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
       /// <summary>
       /// Send currency from the account with the given signer_address to one or more accounts on the blockchain.
-      /// If there is no activated account with the given caller_asigner_addressddress, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
