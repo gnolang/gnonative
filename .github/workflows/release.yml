@@ -31,7 +31,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
       - name: Setup asdf
-        uses: asdf-vm/actions/setup@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
+        uses: asdf-vm/actions/setup@v4.0.1
         with:
           asdf_version: 0.16.7
 
