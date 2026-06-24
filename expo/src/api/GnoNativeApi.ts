@@ -643,6 +643,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return response.address;
   }
 
+  async pubKeyBytesFromBech32(bech32PubKey: string) {
+    const client = this.#getClient();
+    const response = await client.pubKeyBytesFromBech32({ bech32PubKey });
+    return response.pubKeyBytes;
+  }
+
   async validateMnemonicWord(word: string) {
     const client = this.#getClient();
     const response = await client.validateMnemonicWord({ word });

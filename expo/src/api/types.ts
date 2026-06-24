@@ -111,6 +111,7 @@ export interface GnoKeyApi {
   addressToBech32: (address: Uint8Array) => Promise<string>;
   addressFromMnemonic: (mnemonic: string) => Promise<Uint8Array>;
   addressFromBech32: (bech32Address: string) => Promise<Uint8Array>;
+  pubKeyBytesFromBech32: (bech32PubKey: string) => Promise<Uint8Array>;
   validateMnemonicWord: (word: string) => Promise<boolean>;
   validateMnemonicPhrase: (phrase: string) => Promise<boolean>;
   signTx(
