@@ -31,9 +31,9 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
       - name: Setup asdf
-        uses: ynab/asdf-action@v1.2
+        uses: asdf-vm/actions/setup@9cd779f40fe38688dd19505ccbc4eaaf018b44e7
         with:
-          version: 0.16.7
+          asdf_version: 0.16.7
 
       - name: Setup Go version
         run: |
