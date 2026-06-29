@@ -10,3 +10,4 @@ __tests__
 /android/build/
 /example/
 /ios/Frameworks/GnoCore.xcframework/ios-arm64_x86_64-simulator/GnoCore.framework/Versions
+/ios/Frameworks/GnoCore.xcframework/ios-arm64/GnoCore.framework/Versions
