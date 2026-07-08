@@ -2,45 +2,37 @@ package gnonative
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/pkg/errors"
-	"google.golang.org/protobuf/encoding/protojson"
-	"google.golang.org/protobuf/proto"
 
-	"github.com/gnolang/gnonative/v4/service"
+	"github.com/gnolang/gnonative/v5/service"
 )
 
 // The dispatcher provides a connect/gRPC-free path from the mobile bridge to the plain-Go
-// service.GnoNativeApi. Requests and responses are encoded with protojson in BOTH directions
-// (camelCase, int64 as string, bytes as base64 string, zero values omitted). This differs from
-// the legacy connect path in service_client.go, which decodes requests with protojson but
-// encodes responses with encoding/json (snake_case). Never mix the two decoders on one payload.
+// service.GnoNativeApi. Requests and responses are encoded with encoding/json in BOTH directions.
+// The api package's wire types reproduce the protojson dialect (camelCase, int64 as string, bytes
+// as base64 string, zero values omitted), which is what the @gnolang/gnonative TS layer expects.
 
-// unaryHandler decodes a protojson request, calls the plain method, and returns the protojson response bytes.
+// unaryHandler decodes a JSON request, calls the plain method, and returns the JSON response bytes.
 type unaryHandler func(ctx context.Context, jsonMessage string) ([]byte, error)
 
-// streamHandler decodes a protojson request and drives the plain streaming method, delivering each
-// response as protojson bytes through send. It returns when the method returns (nil or error).
+// streamHandler decodes a JSON request and drives the plain streaming method, delivering each
+// response as JSON bytes through send. It returns when the method returns (nil or error).
 type streamHandler func(ctx context.Context, jsonMessage string, send func([]byte) error) error
 
 // unary wraps a plain unary method into a unaryHandler.
-func unary[Req any, PReq interface {
-	*Req
-	proto.Message
-}, Res any, PRes interface {
-	*Res
-	proto.Message
-}](fn func(context.Context, PReq) (PRes, error)) unaryHandler {
+func unary[Req any, Res any](fn func(context.Context, *Req) (*Res, error)) unaryHandler {
 	return func(ctx context.Context, jsonMessage string) ([]byte, error) {
-		req := PReq(new(Req))
-		if err := protojson.Unmarshal([]byte(jsonMessage), req); err != nil {
+		req := new(Req)
+		if err := json.Unmarshal([]byte(jsonMessage), req); err != nil {
 			return nil, errors.Wrap(err, "unable to unmarshal request")
 		}
 		res, err := fn(ctx, req)
 		if err != nil {
 			return nil, err
 		}
-		out, err := protojson.Marshal(res)
+		out, err := json.Marshal(res)
 		if err != nil {
 			return nil, errors.Wrap(err, "unable to marshal response")
 		}
@@ -49,20 +41,14 @@ func unary[Req any, PReq interface {
 }
 
 // streaming wraps a plain server-streaming method into a streamHandler.
-func streaming[Req any, PReq interface {
-	*Req
-	proto.Message
-}, Res any, PRes interface {
-	*Res
-	proto.Message
-}](fn func(context.Context, PReq, func(PRes) error) error) streamHandler {
+func streaming[Req any, Res any](fn func(context.Context, *Req, func(*Res) error) error) streamHandler {
 	return func(ctx context.Context, jsonMessage string, send func([]byte) error) error {
-		req := PReq(new(Req))
-		if err := protojson.Unmarshal([]byte(jsonMessage), req); err != nil {
+		req := new(Req)
+		if err := json.Unmarshal([]byte(jsonMessage), req); err != nil {
 			return errors.Wrap(err, "unable to unmarshal request")
 		}
-		return fn(ctx, req, func(res PRes) error {
-			out, err := protojson.Marshal(res)
+		return fn(ctx, req, func(res *Res) error {
+			out, err := json.Marshal(res)
 			if err != nil {
 				return errors.Wrap(err, "unable to marshal response")
 			}

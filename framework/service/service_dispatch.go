@@ -11,14 +11,20 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/gnolang/gnonative/v4/service"
+	"github.com/gnolang/gnonative/v5/service"
 )
 
-// ServiceDispatcher is the gomobile-facing promise API for the connect/gRPC-free path. It mirrors
-// ServiceClient but calls the plain service.GnoNativeApi directly (no in-process HTTP round-trip).
-// Resolved payloads are base64(protojson) exactly like ServiceClient, so the native modules and the
-// PromiseBlock plumbing are reused unchanged. On stream end, StreamReceive rejects with the literal
-// "EOF" message (from io.EOF), which the JS side matches to terminate the AsyncIterable.
+// PromiseBlock is the gomobile-facing promise passed by the native modules. The dispatcher resolves
+// it with a base64(JSON) payload or rejects it with an error.
+type PromiseBlock interface {
+	CallResolve(reply string)
+	CallReject(error error)
+}
+
+// ServiceDispatcher is the gomobile-facing promise API. It calls the plain service.GnoNativeApi
+// directly (no in-process HTTP round-trip). Resolved payloads are base64(JSON). On stream end,
+// StreamReceive rejects with the literal "EOF" message (from io.EOF), which the JS side matches to
+// terminate the AsyncIterable.
 type ServiceDispatcher interface {
 	InvokeMethodWithPromiseBlock(promise PromiseBlock, method string, jsonMessage string)
 	CreateStreamWithPromiseBlock(promise PromiseBlock, method string, jsonMessage string)
@@ -27,7 +33,7 @@ type ServiceDispatcher interface {
 }
 
 // dispatchStream adapts a push-based streaming method to the pull-based JS boundary. The method
-// goroutine pushes protojson bytes into ch (cap 1, providing backpressure); Receive pulls them.
+// goroutine pushes JSON bytes into ch (cap 1, providing backpressure); Receive pulls them.
 // When the method returns, its error (nil on clean end) is stored and finished is closed.
 type dispatchStream struct {
 	ch       chan []byte
@@ -209,28 +215,4 @@ func (s *serviceDispatcher) getStream(id string) (*dispatchStream, error) {
 		return st, nil
 	}
 	return nil, fmt.Errorf("invalid stream id")
-}
-
-// disabledServiceClient is the ServiceClient used when the gRPC servers are disabled. All its
-// methods reject: callers must use the ServiceDispatcher (InvokeMethod/CreateStream/...) instead.
-type disabledServiceClient struct{}
-
-func newDisabledServiceClient() ServiceClient { return &disabledServiceClient{} }
-
-var errGrpcDisabled = errors.New("grpc servers disabled; use InvokeMethod")
-
-func (*disabledServiceClient) InvokeGrpcMethodWithPromiseBlock(promise PromiseBlock, method string, jsonMessage string) {
-	promise.CallReject(errGrpcDisabled)
-}
-
-func (*disabledServiceClient) CreateStreamClientWithPromiseBlock(promise PromiseBlock, method string, jsonMessage string) {
-	promise.CallReject(errGrpcDisabled)
-}
-
-func (*disabledServiceClient) StreamClientReceiveWithPromiseBlock(promise PromiseBlock, id string) {
-	promise.CallReject(errGrpcDisabled)
-}
-
-func (*disabledServiceClient) CloseStreamClientWithPromiseBlock(promise PromiseBlock, id string) {
-	promise.CallReject(errGrpcDisabled)
 }

@@ -1,7 +1,7 @@
-// Buf-free error wrapper for the /native path. Mirrors src/grpc/error.ts (same Name(#123) regex
-// parsing) but without ConnectError: on this path the native module rejects with a plain Error
-// whose message is the Go error string (e.g. "ErrInvalidAddress(#205)").
-import { ErrCode } from './types.gen';
+// Error wrapper for the GnoNative client. The native module rejects with a plain Error whose message
+// is the Go error string (e.g. "ErrInvalidAddress(#205)"); this parses the Name(#code) format into
+// an ErrCode.
+import { ErrCode } from './apitypes';
 
 export class GnoNativeError extends Error {
   constructor(message: string) {

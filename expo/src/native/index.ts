@@ -1,8 +1,5 @@
-// @gnolang/gnonative/native — the buf/connect-free entry point.
-//
-// This barrel must not import from ../grpc/*, ../api/vendor/*, or ../index so that Metro never pulls
-// the buf/connect runtime into an app that only uses /native. It uses only GoBridge (which is
-// buf-free) and the generated plain-JSON types.
+// The @gnolang/gnonative client surface. The root export (../index) re-exports this module, and the
+// `./native` subpath is kept as an alias. It uses only GoBridge and the plain-JSON apitypes.
 import 'fast-text-encoding';
 
 // Ensure Symbol.asyncIterator exists for `for await` over streams (RN/Hermes older runtimes).
@@ -16,4 +13,4 @@ export { GnoNativeError } from './error';
 export { bytesToBase64, base64ToBytes, base64ToString } from './encoding';
 export { BridgeStatus } from './types';
 export type { Config, GnoNativeClientApi } from './types';
-export * from './types.gen';
+export * from './apitypes';

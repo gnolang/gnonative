@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
+	api_gen "github.com/gnolang/gnonative/v5/api"
 )
 
 // GnoNativeApi is the plain-Go (connect/gRPC-free) surface of the GnoNative service.

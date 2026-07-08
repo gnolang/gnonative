@@ -33,7 +33,7 @@ import (
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
-	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
+	api_gen "github.com/gnolang/gnonative/v5/api"
 )
 
 func (s *gnoNativeService) SetRemote(ctx context.Context, req *api_gen.SetRemoteRequest) (*api_gen.SetRemoteResponse, error) {
@@ -52,13 +52,13 @@ func (s *gnoNativeService) GetRemote(ctx context.Context, req *api_gen.GetRemote
 
 func (s *gnoNativeService) SetChainID(ctx context.Context, req *api_gen.SetChainIDRequest) (*api_gen.SetChainIDResponse, error) {
 	s.lock.Lock()
-	s.chainID = req.ChainId
+	s.chainID = req.ChainID
 	s.lock.Unlock()
 	return &api_gen.SetChainIDResponse{}, nil
 }
 
 func (s *gnoNativeService) GetChainID(ctx context.Context, req *api_gen.GetChainIDRequest) (*api_gen.GetChainIDResponse, error) {
-	return &api_gen.GetChainIDResponse{ChainId: s.chainID}, nil
+	return &api_gen.GetChainIDResponse{ChainID: s.chainID}, nil
 }
 
 func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *api_gen.GenerateRecoveryPhraseRequest) (*api_gen.GenerateRecoveryPhraseResponse, error) {
@@ -215,7 +215,7 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *api_gen.Creat
 func (s *gnoNativeService) CreateLedger(ctx context.Context, req *api_gen.CreateLedgerRequest) (*api_gen.CreateLedgerResponse, error) {
 	s.logger.Debug("CreateLedger called", zap.String("Name", req.Name))
 
-	key, err := s.keybase.CreateLedger(req.Name, crypto_keys.SigningAlgo(req.Algorithm), req.Hrp, req.Account, req.Index)
+	key, err := s.keybase.CreateLedger(req.Name, crypto_keys.SigningAlgo(req.Algorithm), req.HRP, req.Account, req.Index)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -830,7 +830,7 @@ func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *api_gen.MakeCall
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *api_gen.MakeSendTxRequest) (*api_gen.MakeTxResponse, error) {
@@ -852,7 +852,7 @@ func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *api_gen.MakeSend
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *api_gen.MakeRunTxRequest) (*api_gen.MakeTxResponse, error) {
@@ -874,7 +874,7 @@ func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *api_gen.MakeRunTx
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) CreateSession(ctx context.Context, req *api_gen.CreateSessionRequest, send func(*api_gen.CreateSessionResponse) error) error {
@@ -930,7 +930,7 @@ func (s *gnoNativeService) MakeCreateSessionTx(ctx context.Context, req *api_gen
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertCreateSessionRequest(req *api_gen.CreateSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgCreateSession, error) {
@@ -1022,7 +1022,7 @@ func (s *gnoNativeService) MakeRevokeSessionTx(ctx context.Context, req *api_gen
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertRevokeSessionRequest(req *api_gen.RevokeSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeSession, error) {
@@ -1102,7 +1102,7 @@ func (s *gnoNativeService) MakeRevokeAllSessionsTx(ctx context.Context, req *api
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
+	return &api_gen.MakeTxResponse{TxJSON: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertRevokeAllSessionsRequest(req *api_gen.RevokeAllSessionsRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeAllSessions, error) {
@@ -1123,7 +1123,7 @@ func (s *gnoNativeService) convertRevokeAllSessionsRequest(req *api_gen.RevokeAl
 
 func (s *gnoNativeService) SignTx(ctx context.Context, req *api_gen.SignTxRequest) (*api_gen.SignTxResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJSON), &tx); err != nil {
 		return nil, err
 	}
 
@@ -1136,7 +1136,7 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *api_gen.SignTxReques
 	if err != nil {
 		return nil, err
 	}
-	return &api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}, nil
+	return &api_gen.SignTxResponse{SignedTxJSON: string(signedTxJSON)}, nil
 }
 
 func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
@@ -1153,7 +1153,7 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 
 func (s *gnoNativeService) EstimateGas(ctx context.Context, req *api_gen.EstimateGasRequest) (*api_gen.EstimateGasResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJSON), &tx); err != nil {
 		return nil, err
 	}
 
@@ -1167,12 +1167,12 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *api_gen.Estimat
 		return nil, err
 	}
 
-	return &api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}, nil
+	return &api_gen.EstimateGasResponse{TxJSON: string(txJSON), GasWanted: gasWanted}, nil
 }
 
 func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *api_gen.EstimateTxFeesRequest) (*api_gen.EstimateTxFeesResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJSON), &tx); err != nil {
 		return nil, err
 	}
 
@@ -1220,7 +1220,7 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *api_gen.Esti
 	}
 
 	response := &api_gen.EstimateTxFeesResponse{
-		TxJson:    string(txJSON),
+		TxJSON:    string(txJSON),
 		GasWanted: gasWanted,
 		GasFee: &api_gen.Coin{
 			Denom:  gp.Price.Denom,
@@ -1291,7 +1291,7 @@ func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securit
 
 func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *api_gen.BroadcastTxCommitRequest, send func(*api_gen.BroadcastTxCommitResponse) error) error {
 	signedTx := &std.Tx{}
-	if err := amino.UnmarshalJSON([]byte(req.SignedTxJson), signedTx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.SignedTxJSON), signedTx); err != nil {
 		return err
 	}
 

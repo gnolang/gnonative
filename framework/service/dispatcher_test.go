@@ -2,21 +2,21 @@ package gnonative
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"io"
+	"reflect"
 	"strings"
 	"testing"
 
-	"google.golang.org/protobuf/encoding/protojson"
-
-	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
-	"github.com/gnolang/gnonative/v4/service"
+	api_gen "github.com/gnolang/gnonative/v5/api"
+	"github.com/gnolang/gnonative/v5/service"
 )
 
 func newTestService(t *testing.T) service.GnoNativeService {
 	t.Helper()
-	// No sockets: disable the UDS listener and don't use TCP.
-	svc, err := service.NewGnoNativeService(service.WithDisableUdsListener())
+	// There is no server; the service methods are called directly.
+	svc, err := service.NewGnoNativeService()
 	if err != nil {
 		t.Fatalf("NewGnoNativeService: %v", err)
 	}
@@ -24,40 +24,45 @@ func newTestService(t *testing.T) service.GnoNativeService {
 	return svc
 }
 
-// TestDispatcherCompleteness is the drift guard between the two paths: every proto method must
-// appear in exactly one dispatch map with matching streaming-ness.
+// TestDispatcherCompleteness is the drift guard for the dispatch maps: every method of
+// service.GnoNativeApi must appear in exactly one map, matching its signature shape. Unary methods
+// are func(ctx, *Req) (*Res, error) (2 in, 2 out); streaming methods are
+// func(ctx, *Req, func(*Res) error) error (3 in, 1 out).
 func TestDispatcherCompleteness(t *testing.T) {
 	svc := newTestService(t)
 	unary := newUnaryHandlers(svc)
 	streams := newStreamHandlers(svc)
 
-	methods := api_gen.File_rpc_proto.Services().Get(0).Methods()
-	for i := 0; i < methods.Len(); i++ {
-		m := methods.Get(i)
-		name := string(m.Name())
+	apiType := reflect.TypeOf((*service.GnoNativeApi)(nil)).Elem()
+	for i := 0; i < apiType.NumMethod(); i++ {
+		m := apiType.Method(i)
+		name := m.Name
+		ft := m.Type
 		_, inUnary := unary[name]
 		_, inStream := streams[name]
 
-		if inUnary && inStream {
-			t.Errorf("method %s appears in both unary and stream maps", name)
-			continue
-		}
-		if !inUnary && !inStream {
-			t.Errorf("method %s is missing from both dispatch maps", name)
-			continue
-		}
-		if m.IsStreamingServer() && !inStream {
-			t.Errorf("streaming method %s is in the unary map", name)
-		}
-		if !m.IsStreamingServer() && !inUnary {
-			t.Errorf("unary method %s is in the stream map", name)
+		switch {
+		case ft.NumIn() == 2 && ft.NumOut() == 2:
+			if !inUnary {
+				t.Errorf("unary method %s is missing from the unary map", name)
+			}
+			if inStream {
+				t.Errorf("unary method %s also appears in the stream map", name)
+			}
+		case ft.NumIn() == 3 && ft.NumOut() == 1:
+			if !inStream {
+				t.Errorf("streaming method %s is missing from the stream map", name)
+			}
+			if inUnary {
+				t.Errorf("streaming method %s also appears in the unary map", name)
+			}
+		default:
+			t.Errorf("method %s has an unexpected signature (in=%d out=%d)", name, ft.NumIn(), ft.NumOut())
 		}
 	}
 
-	// Also assert the maps have no extra entries beyond the proto methods.
-	total := methods.Len()
-	if got := len(unary) + len(streams); got != total {
-		t.Errorf("dispatch maps have %d entries, proto has %d methods", got, total)
+	if got, want := len(unary)+len(streams), apiType.NumMethod(); got != want {
+		t.Errorf("dispatch maps have %d entries, GnoNativeApi has %d methods", got, want)
 	}
 }
 
@@ -65,7 +70,7 @@ func TestDispatcherHelloUnary(t *testing.T) {
 	svc := newTestService(t)
 	d := newServiceDispatcher(svc).(*serviceDispatcher)
 
-	out, err := d.invokeMethod("Hello", `{"name":"world"}`)
+	out, err := d.invokeMethod("Hello", `{"Name":"world"}`)
 	if err != nil {
 		t.Fatalf("invokeMethod Hello: %v", err)
 	}
@@ -74,15 +79,15 @@ func TestDispatcherHelloUnary(t *testing.T) {
 		t.Fatalf("decode base64: %v", err)
 	}
 	var res api_gen.HelloResponse
-	if err := protojson.Unmarshal(raw, &res); err != nil {
+	if err := json.Unmarshal(raw, &res); err != nil {
 		t.Fatalf("unmarshal response: %v", err)
 	}
 	if res.Greeting != "Hello world" {
 		t.Errorf("unexpected greeting: %q", res.Greeting)
 	}
-	// protojson uses the proto JSON field name (here "Greeting"), not the Go snake_case tag.
+	// The wire field uses the proto json_name "Greeting", not a lowerCamel default.
 	if !strings.Contains(string(raw), `"Greeting"`) {
-		t.Errorf("expected protojson field name in output, got %q", string(raw))
+		t.Errorf("expected \"Greeting\" field name in output, got %q", string(raw))
 	}
 }
 
@@ -90,7 +95,7 @@ func TestDispatcherHelloStream(t *testing.T) {
 	svc := newTestService(t)
 	d := newServiceDispatcher(svc).(*serviceDispatcher)
 
-	id, err := d.createStream("HelloStream", `{"name":"world"}`)
+	id, err := d.createStream("HelloStream", `{"Name":"world"}`)
 	if err != nil {
 		t.Fatalf("createStream HelloStream: %v", err)
 	}
@@ -110,7 +115,7 @@ func TestDispatcherHelloStream(t *testing.T) {
 			t.Fatalf("decode base64: %v", decErr)
 		}
 		var res api_gen.HelloStreamResponse
-		if decErr := protojson.Unmarshal(raw, &res); decErr != nil {
+		if decErr := json.Unmarshal(raw, &res); decErr != nil {
 			t.Fatalf("unmarshal: %v", decErr)
 		}
 		if res.Greeting != "Hello world" {
@@ -121,7 +126,7 @@ func TestDispatcherHelloStream(t *testing.T) {
 	if got != 4 {
 		t.Errorf("expected 4 stream messages, got %d", got)
 	}
-	// After EOF the stream is still registered (matching the legacy path); closing succeeds once.
+	// After EOF the stream is still registered; closing succeeds once.
 	if err := d.closeStream(id); err != nil {
 		t.Errorf("closeStream after EOF: %v", err)
 	}

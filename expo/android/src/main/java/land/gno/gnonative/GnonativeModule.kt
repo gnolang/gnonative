@@ -6,8 +6,6 @@ import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.CodedException
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
-import expo.modules.kotlin.records.Field
-import expo.modules.kotlin.records.Record
 import gnolang.gno.gnonative.Bridge
 import gnolang.gno.gnonative.BridgeConfig
 import gnolang.gno.gnonative.Gnonative
@@ -17,7 +15,6 @@ import java.io.File
 class GnonativeModule : Module() {
   private var context: Context? = null
   private var rootDir: File? = null
-  private var socketPort = 0
   private var bridgeGnoNative: Bridge? = null
   private var nativeDBManager: NativeDBManager? = null
 
@@ -65,92 +62,12 @@ class GnonativeModule : Module() {
       }
     }
 
-    AsyncFunction("initBridgeWithOptions") { options: InitBridgeOptions, promise: Promise ->
-      try {
-        val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
-        config.rootDir = rootDir!!.absolutePath
-        config.nativeDB = nativeDBManager
-        // useGrpcServers defaults to true (today's behavior). When false, the bridge serves JS
-        // only through the connect-free dispatcher and starts no in-process gRPC servers.
-        config.disableGrpcServers = !options.useGrpcServers
-        bridgeGnoNative = Gnonative.newBridge(config)
-        promise.resolve(true)
-      } catch (err: CodedException) {
-        promise.reject(err)
-      }
-    }
-
     AsyncFunction("closeBridge") { promise: Promise ->
       try {
         bridgeGnoNative?.let {
           bridgeGnoNative!!.close()
           bridgeGnoNative = null
           promise.resolve(true)
-        } ?: run {
-          throw GoBridgeNotStartedError()
-        }
-      } catch (err: CodedException) {
-        promise.reject(err)
-      }
-    }
-
-    AsyncFunction("getTcpPort") { promise: Promise ->
-    try {
-      bridgeGnoNative?.let {
-        socketPort = bridgeGnoNative!!.tcpPort.toInt()
-        promise.resolve(socketPort)
-      } ?: run {
-        throw GoBridgeNotStartedError()
-      }
-    } catch (err: CodedException) {
-      promise.reject(err)
-      }
-    }
-
-    AsyncFunction("invokeGrpcMethod") { method: String, jsonMessage: String, promise: Promise ->
-      try {
-        bridgeGnoNative?.let {
-          val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.invokeGrpcMethodWithPromiseBlock(promiseBlock, method, jsonMessage)
-        } ?: run {
-          throw GoBridgeNotStartedError()
-        }
-      } catch (err: CodedException) {
-        promise.reject(err)
-      }
-    }
-
-    AsyncFunction("createStreamClient") { method: String, jsonMessage: String, promise: Promise ->
-      try {
-        bridgeGnoNative?.let {
-          val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.createStreamClientWithPromiseBlock(promiseBlock, method, jsonMessage)
-        } ?: run {
-          throw GoBridgeNotStartedError()
-        }
-      } catch (err: CodedException) {
-        promise.reject(err)
-      }
-    }
-
-    AsyncFunction("streamClientReceive") { id: String, promise: Promise ->
-      try {
-        bridgeGnoNative?.let {
-          val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.streamClientReceiveWithPromiseBlock(promiseBlock, id)
-        } ?: run {
-          throw GoBridgeNotStartedError()
-        }
-      } catch (err: CodedException) {
-        promise.reject(err)
-      }
-    }
-
-    AsyncFunction("closeStreamClient") { id: String, promise: Promise ->
-      try {
-        bridgeGnoNative?.let {
-          val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.closeStreamClientWithPromiseBlock(promiseBlock, id)
         } ?: run {
           throw GoBridgeNotStartedError()
         }
@@ -229,10 +146,4 @@ class GnonativeModule : Module() {
       }
     }
   }
-}
-
-// Options for initBridgeWithOptions. useGrpcServers defaults to true (today's behavior).
-class InitBridgeOptions : Record {
-  @Field
-  var useGrpcServers: Boolean = true
 }

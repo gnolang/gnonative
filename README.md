@@ -4,8 +4,8 @@ Gno Native Kit is a framework that allows developers to build and port gno.land 
 
 Current Gno (d)apps run on desktop/laptop computers which have Go installed. To run on mobile, the (d)app would need to bundle the Go runtime, which is complicated for most developers.
 
-However, Gno Native Kit helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
-These API calls are a programming language-independent wrapper on top of the core supported APIs like [gnoclient](https://github.com/gnolang/gno/tree/master/gno.land/pkg/gnoclient) and [crypto/keys](https://github.com/gnolang/gno/tree/master/tm2/pkg/crypto/keys).
+However, Gno Native Kit helps bypass this complexity by building the Gno core into your app as a native framework (gomobile) and exposing it through a small in-process bridge. Your app calls the Gno core API and accesses the blockchain's realm functions on a remote Gno.land node by exchanging plain JSON — no gRPC or protobuf involved.
+These API calls are a programming language-independent wrapper on top of the core supported APIs like [gnoclient](https://github.com/gnolang/gno/tree/master/gno.land/pkg/gnoclient) and [crypto/keys](https://github.com/gnolang/gno/tree/master/tm2/pkg/crypto/keys). See [`docs/architecture.md`](docs/architecture.md) for how the pieces fit together.
 
 Watch [this Gno Native Kit tutorial](https://www.youtube.com/watch?v=N1HLyQDHGQ0) to easily get started on building and bringing your (d)apps to mobile and desktop.
 
@@ -15,11 +15,7 @@ To use Gno Native Kit, we advise you to use the Expo module in your Expo React-N
 
 In the `expo/example` folder, you can find a minimal app using the Expo module.
 
-Other examples are available in the `example/js/expo` folder.
-
-## Bare React-Native project
-
-If you are interested in using Gno Native Kit in a bare React-Native project, please check the `hello` example app in the `example/js/react-native/hello` folder.
+Other examples are available in the `examples/js/expo` folder — start with `hello` for a minimal end-to-end example, or `gnoboard` for a fuller app.
 
 ## Prerequisites for building Gno Native Kit or example apps
 

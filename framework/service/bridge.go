@@ -2,32 +2,21 @@ package gnonative
 
 import (
 	"context"
-	"fmt"
-	"net"
-	"net/http"
 	"sync"
 	"time"
 
 	"github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/oklog/run"
-	"github.com/peterbourgon/unixtransport"
 	"go.uber.org/multierr"
 
-	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
-	"github.com/gnolang/gnonative/v4/api/gen/go/_goconnect"
-	"github.com/gnolang/gnonative/v4/service"
+	api_gen "github.com/gnolang/gnonative/v5/api"
+	"github.com/gnolang/gnonative/v5/service"
 )
 
 type BridgeConfig struct {
-	NativeDB           NativeDB
-	RootDir            string
-	TmpDir             string
-	UseTcpListener     bool
-	DisableUdsListener bool
-	// DisableGrpcServers disables the in-process connect/gRPC servers (UDS/TCP) and the loopback
-	// connect client entirely. The bridge then serves JS calls only through ServiceDispatcher,
-	// which calls the plain service API directly. Zero value keeps today's gRPC behavior.
-	DisableGrpcServers bool
+	NativeDB NativeDB
+	RootDir  string
+	TmpDir   string
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -43,7 +32,6 @@ type Bridge struct {
 
 	serviceServer service.GnoNativeService
 
-	ServiceClient
 	ServiceDispatcher
 }
 
@@ -67,7 +55,7 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		})
 	}
 
-	// start gRPC service
+	// start service
 	{
 		if config.NativeDB != nil {
 			// use provided NativeDB
@@ -81,20 +69,6 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			service.WithTmpDir(config.TmpDir),
 		)
 
-		// When the gRPC servers are disabled, run the service with no listeners at all.
-		if config.DisableGrpcServers {
-			svcOpts = append(svcOpts, service.WithDisableUdsListener())
-		} else {
-			if config.UseTcpListener {
-				svcOpts = append(svcOpts, service.WithUseTcpListener())
-				svcOpts = append(svcOpts, service.WithTcpAddr("localhost:0"))
-			}
-
-			if config.DisableUdsListener {
-				svcOpts = append(svcOpts, service.WithDisableUdsListener())
-			}
-		}
-
 		serviceServer, err := service.NewGnoNativeService(svcOpts...)
 		if err != nil {
 			return nil, errors.Wrap(err, "unable to create bridge service")
@@ -102,47 +76,8 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		b.serviceServer = serviceServer
 	}
 
-	// The dispatcher provides the connect-free path and works in both modes.
+	// The dispatcher serves JS calls by calling the plain service API directly.
 	b.ServiceDispatcher = newServiceDispatcher(b.serviceServer)
-
-	// create native bridge client
-	if config.DisableGrpcServers {
-		// No in-process HTTP server/client: reject legacy grpc calls; use the dispatcher instead.
-		b.ServiceClient = newDisabledServiceClient()
-	} else {
-		var httpClient *http.Client
-		var address string
-
-		// prefer a TCP connection if available
-		// because iOS simulator devices cannot use UDS connections
-		if config.UseTcpListener {
-			httpClient = http.DefaultClient
-			port := b.serviceServer.GetTcpPort()
-			address = fmt.Sprintf("http://localhost:%d", port)
-		} else {
-			path := b.serviceServer.GetUDSPath()
-			address = fmt.Sprintf("http+unix://%s:", path)
-
-			t := &http.Transport{
-				Dial: func(network, addr string) (net.Conn, error) {
-					conn, err := net.DialTimeout(network, addr, time.Second*2)
-					if err != nil {
-						return nil, err
-					}
-					conn.SetDeadline(time.Now().Add(time.Second * 2))
-					return conn, nil
-				},
-			}
-			unixtransport.Register(t)
-			httpClient = &http.Client{Transport: t}
-		}
-
-		client := _goconnect.NewGnoNativeServiceClient(
-			httpClient,
-			address,
-		)
-		b.ServiceClient = NewServiceClient(client)
-	}
 
 	// start Bridge
 	go func() {
@@ -152,34 +87,10 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 	return b, nil
 }
 
-func (b *Bridge) GetUDSPath() string {
-	if b.serviceServer == nil {
-		return ""
-	}
-
-	return b.serviceServer.GetUDSPath()
-}
-
-func (b *Bridge) GetTcpPort() int {
-	if b.serviceServer == nil {
-		return 0
-	}
-
-	return b.serviceServer.GetTcpPort()
-}
-
-func (b *Bridge) GetTcpAddr() string {
-	if b.serviceServer == nil {
-		return ""
-	}
-
-	return b.serviceServer.GetTcpAddr()
-}
-
 func (b *Bridge) Close() error {
 	var errs error
 
-	// close gRPC bridge
+	// close bridge
 	if !b.isClosed() {
 		// send close signal
 		b.onceCloser.Do(func() { close(b.closec) })

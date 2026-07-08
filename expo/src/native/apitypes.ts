@@ -1,0 +1,2007 @@
+// Plain-JSON type aliases for the @gnolang/gnonative wire API. These mirror the JSON encoding used
+// over the mobile bridge (the protojson dialect):
+//   - int64/uint64 are strings;
+//   - bytes are base64 strings;
+//   - field names use the proto json_name (lowerCamelCase, with the PascalCase / snake_case
+//     overrides noted inline: `key_info`, `Msgs`, `tx_json`, `TotalFee`, `Name`, `Greeting`);
+//   - every field is optional (zero values are omitted on the wire).
+//
+// Hand-maintained. Keep in sync with the Go wire types in api/types.go (guarded by
+// api/types_test.go). This file is the authoritative TS view of the wire contract.
+/* eslint-disable */
+
+/**
+ * messages
+ *
+ * @generated from message land.gno.gnonative.v1.SetRemoteRequest
+ */
+export type SetRemoteRequestJson = {
+  /**
+   * @generated from field: string remote = 1;
+   */
+  remote?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SetRemoteResponse
+ */
+export type SetRemoteResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetRemoteRequest
+ */
+export type GetRemoteRequestJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetRemoteResponse
+ */
+export type GetRemoteResponseJson = {
+  /**
+   * @generated from field: string remote = 1;
+   */
+  remote?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SetChainIDRequest
+ */
+export type SetChainIDRequestJson = {
+  /**
+   * @generated from field: string chain_id = 1;
+   */
+  chainId?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SetChainIDResponse
+ */
+export type SetChainIDResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetChainIDRequest
+ */
+export type GetChainIDRequestJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetChainIDResponse
+ */
+export type GetChainIDResponseJson = {
+  /**
+   * @generated from field: string chain_id = 1;
+   */
+  chainId?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SetPasswordRequest
+ */
+export type SetPasswordRequestJson = {
+  /**
+   * @generated from field: string password = 1;
+   */
+  password?: string;
+
+  /**
+   * The address of the account to set the password
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SetPasswordResponse
+ */
+export type SetPasswordResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RenameKeyRequest
+ */
+export type RenameKeyRequestJson = {
+  /**
+   * @generated from field: string old_name = 1;
+   */
+  oldName?: string;
+
+  /**
+   * @generated from field: string new_name = 2;
+   */
+  newName?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RenameKeyResponse
+ */
+export type RenameKeyResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RotatePasswordRequest
+ */
+export type RotatePasswordRequestJson = {
+  /**
+   * @generated from field: string new_password = 1;
+   */
+  newPassword?: string;
+
+  /**
+   * The addresses of the account to rotate the password
+   *
+   * @generated from field: repeated bytes addresses = 2;
+   */
+  addresses?: string[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RotatePasswordResponse
+ */
+export type RotatePasswordResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GenerateRecoveryPhraseRequest
+ */
+export type GenerateRecoveryPhraseRequestJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GenerateRecoveryPhraseResponse
+ */
+export type GenerateRecoveryPhraseResponseJson = {
+  /**
+   * @generated from field: string phrase = 1;
+   */
+  phrase?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.KeyInfo
+ */
+export type KeyInfoJson = {
+  /**
+   * 0: local, 1: ledger, 2: offline, 3: multi
+   *
+   * @generated from field: uint32 type = 1;
+   */
+  type?: number;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: bytes pub_key = 3;
+   */
+  pubKey?: string;
+
+  /**
+   * @generated from field: bytes address = 4;
+   */
+  address?: string;
+};
+
+/**
+ * Coin holds some amount of one currency.
+ * A negative amount is invalid.
+ *
+ * @generated from message land.gno.gnonative.v1.Coin
+ */
+export type CoinJson = {
+  /**
+   * Example: "ugnot"
+   *
+   * @generated from field: string denom = 1;
+   */
+  denom?: string;
+
+  /**
+   * @generated from field: sint64 amount = 2;
+   */
+  amount?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.BaseAccount
+ */
+export type BaseAccountJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+
+  /**
+   * @generated from field: repeated land.gno.gnonative.v1.Coin coins = 2;
+   */
+  coins?: CoinJson[];
+
+  /**
+   * @generated from field: bytes pub_key = 3;
+   */
+  pubKey?: string;
+
+  /**
+   * @generated from field: uint64 account_number = 4;
+   */
+  accountNumber?: string;
+
+  /**
+   * @generated from field: uint64 sequence = 5;
+   */
+  sequence?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SessionAccount
+ */
+export type SessionAccountJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.BaseAccount base_account = 1;
+   */
+  baseAccount?: BaseAccountJson;
+
+  /**
+   * @generated from field: bytes master_address = 2;
+   */
+  masterAddress?: string;
+
+  /**
+   * Unix timestamp; 0 = no expiry
+   *
+   * @generated from field: sint64 expires_at = 3;
+   */
+  expiresAt?: string;
+
+  /**
+   * Nil/empty = no spending allowed (fail-closed, NOT unrestricted)
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin spend_limit = 4;
+   */
+  spendLimit?: CoinJson[];
+
+  /**
+   * Seconds; 0 = lifetime cap (no reset)
+   *
+   * @generated from field: sint64 spend_period = 5;
+   */
+  spendPeriod?: string;
+
+  /**
+   * Nil/empty = 0 spent
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin spend_used = 6;
+   */
+  spendUsed?: CoinJson[];
+
+  /**
+   * Unix timestamp; start of current period
+   *
+   * @generated from field: sint64 spend_reset = 7;
+   */
+  spendReset?: string;
+
+  /**
+   * @generated from field: repeated string allow_paths = 8;
+   */
+  allowPaths?: string[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ListKeyInfoRequest
+ */
+export type ListKeyInfoRequestJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ListKeyInfoResponse
+ */
+export type ListKeyInfoResponseJson = {
+  /**
+   * @generated from field: repeated land.gno.gnonative.v1.KeyInfo keys = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByNameRequest
+ */
+export type HasKeyByNameRequestJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByNameResponse
+ */
+export type HasKeyByNameResponseJson = {
+  /**
+   * @generated from field: bool has = 1;
+   */
+  has?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByAddressRequest
+ */
+export type HasKeyByAddressRequestJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByAddressResponse
+ */
+export type HasKeyByAddressResponseJson = {
+  /**
+   * @generated from field: bool has = 1;
+   */
+  has?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByNameOrAddressRequest
+ */
+export type HasKeyByNameOrAddressRequestJson = {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HasKeyByNameOrAddressResponse
+ */
+export type HasKeyByNameOrAddressResponseJson = {
+  /**
+   * @generated from field: bool has = 1;
+   */
+  has?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByNameRequest
+ */
+export type GetKeyInfoByNameRequestJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByNameResponse
+ */
+export type GetKeyInfoByNameResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByAddressRequest
+ */
+export type GetKeyInfoByAddressRequestJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByAddressResponse
+ */
+export type GetKeyInfoByAddressResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByNameOrAddressRequest
+ */
+export type GetKeyInfoByNameOrAddressRequestJson = {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetKeyInfoByNameOrAddressResponse
+ */
+export type GetKeyInfoByNameOrAddressResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateAccountRequest
+ */
+export type CreateAccountRequestJson = {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32?: string;
+
+  /**
+   * @generated from field: string mnemonic = 2;
+   */
+  mnemonic?: string;
+
+  /**
+   * @generated from field: string bip39_passwd = 3;
+   */
+  bip39Passwd?: string;
+
+  /**
+   * @generated from field: string password = 4;
+   */
+  password?: string;
+
+  /**
+   * @generated from field: uint32 account = 5;
+   */
+  account?: number;
+
+  /**
+   * @generated from field: uint32 index = 6;
+   */
+  index?: number;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateAccountResponse
+ */
+export type CreateAccountResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateLedgerRequest
+ */
+export type CreateLedgerRequestJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * Supported algorithm is "secp256k1"
+   *
+   * @generated from field: string algorithm = 2;
+   */
+  algorithm?: string;
+
+  /**
+   * The human readable part of the address. Example: "g"
+   *
+   * @generated from field: string hrp = 3;
+   */
+  hrp?: string;
+
+  /**
+   * @generated from field: uint32 account = 4;
+   */
+  account?: number;
+
+  /**
+   * @generated from field: uint32 index = 5;
+   */
+  index?: number;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateLedgerResponse
+ */
+export type CreateLedgerResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ActivateAccountRequest
+ */
+export type ActivateAccountRequestJson = {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32?: string;
+
+  /**
+   * (Optional) The address of the master account if this is a session account.
+   *
+   * @generated from field: bytes master = 2;
+   */
+  master?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ActivateAccountResponse
+ */
+export type ActivateAccountResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+
+  /**
+   * True if the password has been set. If false, then call SetPassword.
+   *
+   * @generated from field: bool has_password = 2;
+   */
+  hasPassword?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetActivatedAccountRequest
+ */
+export type GetActivatedAccountRequestJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GetActivatedAccountResponse
+ */
+export type GetActivatedAccountResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.KeyInfo key = 1 [json_name = "key_info"];
+   */
+  key_info?: KeyInfoJson;
+
+  /**
+   * The Master which was given to ActivateAccount.
+   *
+   * @generated from field: bytes master = 2;
+   */
+  master?: string;
+
+  /**
+   * True if the password has been set. If false, then call SetPassword.
+   *
+   * @generated from field: bool has_password = 3;
+   */
+  hasPassword?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QueryAccountRequest
+ */
+export type QueryAccountRequestJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QueryAccountResponse
+ */
+export type QueryAccountResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.BaseAccount account_info = 1;
+   */
+  accountInfo?: BaseAccountJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QuerySessionAccountRequest
+ */
+export type QuerySessionAccountRequestJson = {
+  /**
+   * @generated from field: bytes master_address = 1;
+   */
+  masterAddress?: string;
+
+  /**
+   * @generated from field: bytes session_address = 2;
+   */
+  sessionAddress?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QuerySessionAccountResponse
+ */
+export type QuerySessionAccountResponseJson = {
+  /**
+   * @generated from field: land.gno.gnonative.v1.SessionAccount account_info = 1;
+   */
+  accountInfo?: SessionAccountJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.DeleteAccountRequest
+ */
+export type DeleteAccountRequestJson = {
+  /**
+   * @generated from field: string name_or_bech32 = 1;
+   */
+  nameOrBech32?: string;
+
+  /**
+   * @generated from field: string password = 2;
+   */
+  password?: string;
+
+  /**
+   * @generated from field: bool skip_password = 3;
+   */
+  skipPassword?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.DeleteAccountResponse
+ */
+export type DeleteAccountResponseJson = {
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QueryRequest
+ */
+export type QueryRequestJson = {
+  /**
+   * Example: "vm/qrender"
+   *
+   * @generated from field: string path = 1;
+   */
+  path?: string;
+
+  /**
+   * Example: "gno.land/r/demo/boards\ntestboard"
+   *
+   * @generated from field: bytes data = 2;
+   */
+  data?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QueryResponse
+ */
+export type QueryResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RenderRequest
+ */
+export type RenderRequestJson = {
+  /**
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath?: string;
+
+  /**
+   * Example: "testboard/1"
+   *
+   * @generated from field: string args = 2;
+   */
+  args?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RenderResponse
+ */
+export type RenderResponseJson = {
+  /**
+   * The Render function result (typically markdown)
+   *
+   * @generated from field: string result = 1;
+   */
+  result?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QEvalRequest
+ */
+export type QEvalRequestJson = {
+  /**
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath?: string;
+
+  /**
+   * Example: "GetBoardIDFromName(\"testboard\")"
+   *
+   * @generated from field: string expression = 2;
+   */
+  expression?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.QEvalResponse
+ */
+export type QEvalResponseJson = {
+  /**
+   * A typed expression like "(1 gno.land/r/demo/boards.BoardID)\n(true bool)"
+   *
+   * @generated from field: string result = 1;
+   */
+  result?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MsgCall
+ */
+export type MsgCallJson = {
+  /**
+   * Example: "gno.land/r/demo/boards"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath?: string;
+
+  /**
+   * Example: "CreateReply"
+   *
+   * @generated from field: string fnc = 2;
+   */
+  fnc?: string;
+
+  /**
+   * list of arguments specific to the function
+   * Example: ["1", "1", "2", "my reply"]
+   *
+   * @generated from field: repeated string args = 3;
+   */
+  args?: string[];
+
+  /**
+   * Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin send = 4;
+   */
+  send?: CoinJson[];
+
+  /**
+   * Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin max_deposit = 5;
+   */
+  maxDeposit?: CoinJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CallRequest
+ */
+export type CallRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes signer_address = 4;
+   */
+  signerAddress?: string;
+
+  /**
+   * list of calls to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgCall msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgCallJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CallResponse
+ */
+export type CallResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MsgSend
+ */
+export type MsgSendJson = {
+  /**
+   * Example: The response of calling AddressFromBech32 with
+   * "g1juz2yxmdsa6audkp6ep9vfv80c8p5u76e03vvh"
+   *
+   * @generated from field: bytes to_address = 1;
+   */
+  toAddress?: string;
+
+  /**
+   * Example: [ {Denom: "ugnot", Amount: 1000} ]
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin amount = 2;
+   */
+  amount?: CoinJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendRequest
+ */
+export type SendRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * Memo is optional
+   *
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes signer_address = 4;
+   */
+  signerAddress?: string;
+
+  /**
+   * list of send operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgSend msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgSendJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SendResponse
+ */
+export type SendResponseJson = {
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 1;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 2;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MsgRun
+ */
+export type MsgRunJson = {
+  /**
+   * The code for the script package. Must have main().
+   * Example: "package main\nfunc main() {\n  println(\"Hello\")\n}"
+   *
+   * @generated from field: string package = 1;
+   */
+  package?: string;
+
+  /**
+   * Optional. Example: [ {Denom: "ugnot", Amount: 1000} ]
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin send = 2;
+   */
+  send?: CoinJson[];
+
+  /**
+   * Optional max storage deposit. Example: [ {Denom: "ugnot", Amount: 500000} ]
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin max_deposit = 3;
+   */
+  maxDeposit?: CoinJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RunRequest
+ */
+export type RunRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * Memo is optional
+   *
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes signer_address = 4;
+   */
+  signerAddress?: string;
+
+  /**
+   * list of run operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgRun msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgRunJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RunResponse
+ */
+export type RunResponseJson = {
+  /**
+   * The "console" output from the run
+   *
+   * @generated from field: string result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MakeCallTxRequest
+ */
+export type MakeCallTxRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the caller. If signing with a session account, this is the master account address
+   *
+   * @generated from field: bytes caller_address = 4;
+   */
+  callerAddress?: string;
+
+  /**
+   * list of calls to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgCall msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgCallJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MakeSendTxRequest
+ */
+export type MakeSendTxRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * Memo is optional
+   *
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the caller. If signing with a session account, this is the master account address
+   *
+   * @generated from field: bytes caller_address = 4;
+   */
+  callerAddress?: string;
+
+  /**
+   * list of send operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgSend msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgSendJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MakeRunTxRequest
+ */
+export type MakeRunTxRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * Memo is optional
+   *
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the caller. If signing with a session account, this is the master account address
+   *
+   * @generated from field: bytes caller_address = 4;
+   */
+  callerAddress?: string;
+
+  /**
+   * list of run operations to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgRun msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgRunJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MakeTxResponse
+ */
+export type MakeTxResponseJson = {
+  /**
+   * The JSON encoding of the unsigned transaction
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SignTxRequest
+ */
+export type SignTxRequestJson = {
+  /**
+   * The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+
+  /**
+   * The address of the account to sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address?: string;
+
+  /**
+   * The signer's account number on the blockchain. If 0 then query the blockchain for the value.
+   *
+   * @generated from field: uint64 account_number = 3;
+   */
+  accountNumber?: string;
+
+  /**
+   * The sequence number of the signer's transactions on the blockchain. If 0 then query the blockchain for the value.
+   *
+   * @generated from field: uint64 sequence_number = 4;
+   */
+  sequenceNumber?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.SignTxResponse
+ */
+export type SignTxResponseJson = {
+  /**
+   * The JSON encoding of the signed transaction (to use in BroadcastTx)
+   *
+   * @generated from field: string signed_tx_json = 1 [json_name = "tx_json"];
+   */
+  tx_json?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MsgCreateSession
+ */
+export type MsgCreateSessionJson = {
+  /**
+   * Full session public key
+   *
+   * @generated from field: bytes session_key = 1;
+   */
+  sessionKey?: string;
+
+  /**
+   * unix timestamp; 0 = no expiry
+   *
+   * @generated from field: sint64 expires_at = 2;
+   */
+  expiresAt?: string;
+
+  /**
+   * Typed entries: "*" or <route>/<type>[:<path>]; required (gno.land-specific grammar)
+   *
+   * @generated from field: repeated string allow_paths = 3;
+   */
+  allowPaths?: string[];
+
+  /**
+   * Max spend per period; empty = no spending
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin spend_limit = 4;
+   */
+  spendLimit?: CoinJson[];
+
+  /**
+   * Seconds; 0 = lifetime cap
+   *
+   * @generated from field: sint64 spend_period = 5;
+   */
+  spendPeriod?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateSessionRequest
+ */
+export type CreateSessionRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the creator (master) account to sign the transaction
+   *
+   * @generated from field: bytes creator_address = 4;
+   */
+  creatorAddress?: string;
+
+  /**
+   * list of calls to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgCreateSession msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgCreateSessionJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.CreateSessionResponse
+ */
+export type CreateSessionResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.MsgRevokeSession
+ */
+export type MsgRevokeSessionJson = {
+  /**
+   * Full session public key
+   *
+   * @generated from field: bytes session_key = 1;
+   */
+  sessionKey?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RevokeSessionRequest
+ */
+export type RevokeSessionRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the creator (master) account to sign the transaction
+   *
+   * @generated from field: bytes creator_address = 4;
+   */
+  creatorAddress?: string;
+
+  /**
+   * list of calls to make in one transaction
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.MsgRevokeSession msgs = 5 [json_name = "Msgs"];
+   */
+  Msgs?: MsgRevokeSessionJson[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RevokeSessionResponse
+ */
+export type RevokeSessionResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RevokeAllSessionsRequest
+ */
+export type RevokeAllSessionsRequestJson = {
+  /**
+   * @generated from field: string gas_fee = 1;
+   */
+  gasFee?: string;
+
+  /**
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * @generated from field: string memo = 3;
+   */
+  memo?: string;
+
+  /**
+   * The address of the creator (master) account to sign the transaction
+   *
+   * @generated from field: bytes creator_address = 4;
+   */
+  creatorAddress?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.RevokeAllSessionsResponse
+ */
+export type RevokeAllSessionsResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateGasRequest
+ */
+export type EstimateGasRequestJson = {
+  /**
+   * The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+
+  /**
+   * The address of the account that will sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address?: string;
+
+  /**
+   * The security margin to apply to the estimated gas amount.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the estimated gas amount.
+   *
+   * @generated from field: uint32 security_margin = 3;
+   */
+  securityMargin?: number;
+
+  /**
+   * The update boolean to update the gas wanted field in the transaction if true.
+   *
+   * @generated from field: bool update_tx = 4;
+   */
+  updateTx?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateGasResponse
+ */
+export type EstimateGasResponseJson = {
+  /**
+   * The JSON encoding of the unsigned transaction
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+
+  /**
+   * The estimated gas wanted for the transaction
+   *
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateTxFeesRequest
+ */
+export type EstimateTxFeesRequestJson = {
+  /**
+   * The JSON encoding of the unsigned transaction (from MakeCallTx, etc.)
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+
+  /**
+   * The address of the account that will sign the transaction
+   *
+   * @generated from field: bytes address = 2;
+   */
+  address?: string;
+
+  /**
+   * The security margin to apply to the estimated gas amount.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the estimated gas amount.
+   *
+   * @generated from field: uint32 gas_security_margin = 3;
+   */
+  gasSecurityMargin?: number;
+
+  /**
+   * The security margin to apply to the gas price.
+   * This number represents a decimal numeral value with two decimals precision, without the decimal separator. E.g. 1 means 0.01 and 10000 means 100.00.
+   * It will be multiplied by the fetched gas price.
+   *
+   * @generated from field: uint32 gas_price_security_margin = 4;
+   */
+  gasPriceSecurityMargin?: number;
+
+  /**
+   * The update boolean to update the gas wanted field in the transaction if true.
+   *
+   * @generated from field: bool update_tx = 5;
+   */
+  updateTx?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.EstimateTxFeesResponse
+ */
+export type EstimateTxFeesResponseJson = {
+  /**
+   * The JSON encoding of the unsigned transaction
+   *
+   * @generated from field: string tx_json = 1;
+   */
+  txJson?: string;
+
+  /**
+   * The estimated gas wanted for the transaction
+   *
+   * @generated from field: sint64 gas_wanted = 2;
+   */
+  gasWanted?: string;
+
+  /**
+   * The estimated fee for the transaction
+   *
+   * @generated from field: land.gno.gnonative.v1.Coin gas_fee = 3;
+   */
+  gasFee?: CoinJson;
+
+  /**
+   * The estimated storage delta for the transaction. Can be negative for "unlock"
+   *
+   * @generated from field: sint64 storage_delta = 4;
+   */
+  storageDelta?: string;
+
+  /**
+   * The estimated storage fee for the transaction. Does not include RefundWithheld. Can be negative for "unlock"
+   *
+   * @generated from field: repeated land.gno.gnonative.v1.Coin storage_fee = 5;
+   */
+  storageFee?: CoinJson[];
+
+  /**
+   * The total transaction fee. Only includes fees in ugnot. Does not include RefundWithheld.
+   *
+   * @generated from field: land.gno.gnonative.v1.Coin total_fee = 6 [json_name = "TotalFee"];
+   */
+  TotalFee?: CoinJson;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.BroadcastTxCommitRequest
+ */
+export type BroadcastTxCommitRequestJson = {
+  /**
+   * The JSON encoding of the signed transaction (from SignTx)
+   *
+   * @generated from field: string signed_tx_json = 1 [json_name = "tx_json"];
+   */
+  tx_json?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.BroadcastTxCommitResponse
+ */
+export type BroadcastTxCommitResponseJson = {
+  /**
+   * @generated from field: bytes result = 1;
+   */
+  result?: string;
+
+  /**
+   * The transaction hash
+   *
+   * @generated from field: bytes hash = 2;
+   */
+  hash?: string;
+
+  /**
+   * The transaction height
+   *
+   * @generated from field: sint64 height = 3;
+   */
+  height?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressToBech32Request
+ */
+export type AddressToBech32RequestJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressToBech32Response
+ */
+export type AddressToBech32ResponseJson = {
+  /**
+   * @generated from field: string bech32_address = 1;
+   */
+  bech32Address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromBech32Request
+ */
+export type AddressFromBech32RequestJson = {
+  /**
+   * @generated from field: string bech32_address = 1;
+   */
+  bech32Address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromBech32Response
+ */
+export type AddressFromBech32ResponseJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicRequest
+ */
+export type AddressFromMnemonicRequestJson = {
+  /**
+   * @generated from field: string mnemonic = 1;
+   */
+  mnemonic?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.AddressFromMnemonicResponse
+ */
+export type AddressFromMnemonicResponseJson = {
+  /**
+   * @generated from field: bytes address = 1;
+   */
+  address?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordRequest
+ */
+export type ValidateMnemonicWordRequestJson = {
+  /**
+   * @generated from field: string word = 1;
+   */
+  word?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordResponse
+ */
+export type ValidateMnemonicWordResponseJson = {
+  /**
+   * @generated from field: bool valid = 1;
+   */
+  valid?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
+ */
+export type ValidateMnemonicPhraseRequestJson = {
+  /**
+   * @generated from field: string phrase = 1;
+   */
+  phrase?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
+ */
+export type ValidateMnemonicPhraseResponseJson = {
+  /**
+   * @generated from field: bool valid = 1;
+   */
+  valid?: boolean;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.PubKeyBytesFromBech32Request
+ */
+export type PubKeyBytesFromBech32RequestJson = {
+  /**
+   * @generated from field: string bech32_pub_key = 1;
+   */
+  bech32PubKey?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.PubKeyBytesFromBech32Response
+ */
+export type PubKeyBytesFromBech32ResponseJson = {
+  /**
+   * @generated from field: bytes pub_key_bytes = 1;
+   */
+  pubKeyBytes?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HelloRequest
+ */
+export type HelloRequestJson = {
+  /**
+   * @generated from field: string name = 1 [json_name = "Name"];
+   */
+  Name?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HelloResponse
+ */
+export type HelloResponseJson = {
+  /**
+   * @generated from field: string greeting = 1 [json_name = "Greeting"];
+   */
+  Greeting?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HelloStreamRequest
+ */
+export type HelloStreamRequestJson = {
+  /**
+   * @generated from field: string name = 1 [json_name = "Name"];
+   */
+  Name?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.HelloStreamResponse
+ */
+export type HelloStreamResponseJson = {
+  /**
+   * @generated from field: string greeting = 1 [json_name = "Greeting"];
+   */
+  Greeting?: string;
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.GNONATIVETYPES_BytesList
+ */
+export type GNONATIVETYPES_BytesListJson = {
+  /**
+   * @generated from field: repeated bytes Value = 1;
+   */
+  Value?: string[];
+};
+
+/**
+ * @generated from message land.gno.gnonative.v1.ErrDetails
+ */
+export type ErrDetailsJson = {
+  /**
+   * @generated from field: repeated land.gno.gnonative.v1.ErrCode codes = 1;
+   */
+  codes?: ErrCodeJson[];
+};
+
+/**
+ * The ErrCode enum defines errors for gRPC API functions. These are converted
+ * from the Go error types returned by gnoclient.
+ *
+ * ----------------
+ * Special errors
+ * ----------------
+ *
+ * @generated from enum land.gno.gnonative.v1.ErrCode
+ */
+export enum ErrCode {
+  /**
+   * Undefined is the default value. It should never be set manually
+   *
+   * @generated from enum value: Undefined = 0;
+   */
+  Undefined = 0,
+
+  /**
+   * TODO indicates that you plan to create an error later
+   *
+   * @generated from enum value: TODO = 1;
+   */
+  TODO = 1,
+
+  /**
+   * ErrNotImplemented indicates that a method is not implemented yet
+   *
+   * @generated from enum value: ErrNotImplemented = 2;
+   */
+  ErrNotImplemented = 2,
+
+  /**
+   * ErrInternal indicates an unknown error (without Code), i.e. in gRPC
+   *
+   * @generated from enum value: ErrInternal = 3;
+   */
+  ErrInternal = 3,
+
+  /**
+   * @generated from enum value: ErrInvalidInput = 100;
+   */
+  ErrInvalidInput = 100,
+
+  /**
+   * @generated from enum value: ErrBridgeInterrupted = 101;
+   */
+  ErrBridgeInterrupted = 101,
+
+  /**
+   * @generated from enum value: ErrMissingInput = 102;
+   */
+  ErrMissingInput = 102,
+
+  /**
+   * @generated from enum value: ErrSerialization = 103;
+   */
+  ErrSerialization = 103,
+
+  /**
+   * @generated from enum value: ErrDeserialization = 104;
+   */
+  ErrDeserialization = 104,
+
+  /**
+   * @generated from enum value: ErrInitService = 105;
+   */
+  ErrInitService = 105,
+
+  /**
+   * @generated from enum value: ErrSetRemote = 106;
+   */
+  ErrSetRemote = 106,
+
+  /**
+   * @generated from enum value: ErrKeyNameExists = 107;
+   */
+  ErrKeyNameExists = 107,
+
+  /**
+   * @generated from enum value: ErrCryptoKeyTypeUnknown = 150;
+   */
+  ErrCryptoKeyTypeUnknown = 150,
+
+  /**
+   * ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
+   *
+   * @generated from enum value: ErrCryptoKeyNotFound = 151;
+   */
+  ErrCryptoKeyNotFound = 151,
+
+  /**
+   * ErrNoActiveAccount indicates that no account with the given address has been activated with ActivateAccount
+   *
+   * @generated from enum value: ErrNoActiveAccount = 152;
+   */
+  ErrNoActiveAccount = 152,
+
+  /**
+   * @generated from enum value: ErrRunGRPCServer = 153;
+   */
+  ErrRunGRPCServer = 153,
+
+  /**
+   * ErrDecryptionFailed indicates a decryption failure including a wrong password
+   *
+   * @generated from enum value: ErrDecryptionFailed = 154;
+   */
+  ErrDecryptionFailed = 154,
+
+  /**
+   * @generated from enum value: ErrTxDecode = 200;
+   */
+  ErrTxDecode = 200,
+
+  /**
+   * @generated from enum value: ErrInvalidSequence = 201;
+   */
+  ErrInvalidSequence = 201,
+
+  /**
+   * @generated from enum value: ErrUnauthorized = 202;
+   */
+  ErrUnauthorized = 202,
+
+  /**
+   * ErrInsufficientFunds indicates that there are insufficient funds to pay for fees
+   *
+   * @generated from enum value: ErrInsufficientFunds = 203;
+   */
+  ErrInsufficientFunds = 203,
+
+  /**
+   * ErrUnknownRequest indicates that the path of a realm function call is unrecognized
+   *
+   * @generated from enum value: ErrUnknownRequest = 204;
+   */
+  ErrUnknownRequest = 204,
+
+  /**
+   * ErrInvalidAddress indicates that an account address is blank or the bech32 can't be decoded
+   *
+   * @generated from enum value: ErrInvalidAddress = 205;
+   */
+  ErrInvalidAddress = 205,
+
+  /**
+   * ErrUnknownAddress indicates that the address is unknown on the blockchain
+   *
+   * @generated from enum value: ErrUnknownAddress = 206;
+   */
+  ErrUnknownAddress = 206,
+
+  /**
+   * ErrInvalidPubKey indicates that the public key was not found or has an invalid algorithm or format
+   *
+   * @generated from enum value: ErrInvalidPubKey = 207;
+   */
+  ErrInvalidPubKey = 207,
+
+  /**
+   * ErrInsufficientCoins indicates that the transaction has insufficient account funds to send
+   *
+   * @generated from enum value: ErrInsufficientCoins = 208;
+   */
+  ErrInsufficientCoins = 208,
+
+  /**
+   * ErrInvalidCoins indicates that the transaction Coins are not sorted, or don't have a
+   * positive amount, or the coin Denom contains upper case characters
+   *
+   * @generated from enum value: ErrInvalidCoins = 209;
+   */
+  ErrInvalidCoins = 209,
+
+  /**
+   * ErrInvalidGasWanted indicates that the transaction gas wanted is too large or otherwise invalid
+   *
+   * @generated from enum value: ErrInvalidGasWanted = 210;
+   */
+  ErrInvalidGasWanted = 210,
+
+  /**
+   * ErrOutOfGas indicates that the transaction doesn't have enough gas
+   *
+   * @generated from enum value: ErrOutOfGas = 211;
+   */
+  ErrOutOfGas = 211,
+
+  /**
+   * ErrMemoTooLarge indicates that the transaction memo is too large
+   *
+   * @generated from enum value: ErrMemoTooLarge = 212;
+   */
+  ErrMemoTooLarge = 212,
+
+  /**
+   * ErrInsufficientFee indicates that the gas fee is insufficient
+   *
+   * @generated from enum value: ErrInsufficientFee = 213;
+   */
+  ErrInsufficientFee = 213,
+
+  /**
+   * ErrTooManySignatures indicates that the transaction has too many signatures
+   *
+   * @generated from enum value: ErrTooManySignatures = 214;
+   */
+  ErrTooManySignatures = 214,
+
+  /**
+   * ErrNoSignatures indicates that the transaction has no signatures
+   *
+   * @generated from enum value: ErrNoSignatures = 215;
+   */
+  ErrNoSignatures = 215,
+
+  /**
+   * ErrGasOverflow indicates that an action results in a gas consumption unsigned integer overflow
+   *
+   * @generated from enum value: ErrGasOverflow = 216;
+   */
+  ErrGasOverflow = 216,
+
+  /**
+   * ErrInvalidPkgPath indicates that the package path is not recognized.
+   *
+   * @generated from enum value: ErrInvalidPkgPath = 217;
+   */
+  ErrInvalidPkgPath = 217,
+
+  /**
+   * @generated from enum value: ErrInvalidStmt = 218;
+   */
+  ErrInvalidStmt = 218,
+
+  /**
+   * @generated from enum value: ErrInvalidExpr = 219;
+   */
+  ErrInvalidExpr = 219,
+}
+
+/**
+ * The ErrCode enum defines errors for gRPC API functions. These are converted
+ * from the Go error types returned by gnoclient.
+ *
+ * ----------------
+ * Special errors
+ * ----------------
+ *
+ * @generated from enum land.gno.gnonative.v1.ErrCode
+ */
+export type ErrCodeJson = "Undefined" | "TODO" | "ErrNotImplemented" | "ErrInternal" | "ErrInvalidInput" | "ErrBridgeInterrupted" | "ErrMissingInput" | "ErrSerialization" | "ErrDeserialization" | "ErrInitService" | "ErrSetRemote" | "ErrKeyNameExists" | "ErrCryptoKeyTypeUnknown" | "ErrCryptoKeyNotFound" | "ErrNoActiveAccount" | "ErrRunGRPCServer" | "ErrDecryptionFailed" | "ErrTxDecode" | "ErrInvalidSequence" | "ErrUnauthorized" | "ErrInsufficientFunds" | "ErrUnknownRequest" | "ErrInvalidAddress" | "ErrUnknownAddress" | "ErrInvalidPubKey" | "ErrInsufficientCoins" | "ErrInvalidCoins" | "ErrInvalidGasWanted" | "ErrOutOfGas" | "ErrMemoTooLarge" | "ErrInsufficientFee" | "ErrTooManySignatures" | "ErrNoSignatures" | "ErrGasOverflow" | "ErrInvalidPkgPath" | "ErrInvalidStmt" | "ErrInvalidExpr";

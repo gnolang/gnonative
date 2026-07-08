@@ -1,3 +1,4 @@
+// No polyfills, no @bufbuild/@connectrpc: the client speaks plain JSON over the bridge.
 import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -27,9 +28,10 @@ const InnerApp = () => {
 
         const remote = await gnonative.getRemote();
         const chainId = await gnonative.getChainID();
-        console.log('Remote %s ChainId %s', remote, chainId);
+        console.log(`Remote ${remote} ChainId ${chainId}`);
 
         const phrase = await gnonative.generateRecoveryPhrase();
+        // Addresses are base64 strings on the wire (not Uint8Array).
         const address = await gnonative.addressFromMnemonic(phrase);
         const addressStr = await gnonative.addressToBech32(address);
 
@@ -38,8 +40,9 @@ const InnerApp = () => {
 
         setGreeting(await gnonative.hello('Gno'));
 
+        // Streaming works with no polyfills. The field is `Greeting` (proto json_name override).
         for await (const res of await gnonative.helloStream('Gno')) {
-          console.log(res.greeting);
+          console.log(res.Greeting);
         }
       } catch (error) {
         console.log(error);
@@ -49,7 +52,7 @@ const InnerApp = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Gnonative App</Text>
+      <Text>Gnonative Native App</Text>
       <Text>{greeting}</Text>
     </View>
   );

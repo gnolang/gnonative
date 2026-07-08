@@ -16,9 +16,6 @@ export function addChangeListener(listener: (event: ChangeEventPayload) => void)
 }
 
 export { ChangeEventPayload, GnonativeView, GnonativeViewProps };
-export * from './provider/gnonative-provider';
-export * from './api/vendor/gnonativetypes_pb';
-export * from './api/vendor/rpc_pb';
-export { GRPCError } from './grpc/error';
 
-export * from './api/GnoNativeApi';
+// The client API. The root export and the `./native` subpath expose the same surface.
+export * from './native';

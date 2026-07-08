@@ -1,5 +1,5 @@
 // React provider for the /native client. Clone of src/provider/gnonative-provider.tsx typed to
-// GnoNativeClient (the connect-free client).
+// GnoNativeClient.
 import { createContext, useContext, useEffect, useState } from 'react';
 
 import { GnoNativeClient } from './client';

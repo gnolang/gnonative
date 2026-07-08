@@ -4,67 +4,55 @@
 
 ## Overview
 
-`@gnolang/gnonative` simplifies the process of access the Gno.land (d)apps to mobile by using gRPC to connect with core blockchain functions.
-
-It helps bypass this complexity by using gRPC to make [calls to the Gno core API](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1) and access the blockchain's realm functions on a remote Gno.land node.
-
-## Two entry points
-
-There are two entry points; pick one.
-
-### `@gnolang/gnonative` (default, gRPC path)
-
-The original API. Uses `@connectrpc/connect(-web)` + `@bufbuild/protobuf` for
-serialization/dispatch over an in-process connect server. Requests/responses are protobuf message
-objects (`Uint8Array` for bytes, `bigint` for int64).
+`@gnolang/gnonative` lets React Native / Expo apps talk to the Gno.land blockchain through the Gno
+core, built into your app as a native framework (gomobile). The JS client calls the core over a
+small in-process bridge and exchanges plain JSON — no gRPC, no protobuf, no polyfills.
 
 ```ts
 import { GnoNativeProvider, useGnoNativeContext } from '@gnolang/gnonative';
 ```
 
-### `@gnolang/gnonative/native` (buf/connect-free path)
+The root export and the `./native` subpath expose the same surface (`./native` is kept as an alias).
 
-A drop-in-shaped client that **never touches buf/connect**. It talks to the same Go core through a
-direct dispatcher (`GoBridge.invokeMethod` / `createStream`), so an app using only `/native` bundles
-no `@bufbuild/*`/`@connectrpc/*` and needs **no streaming polyfills**. Plain JSON on the wire; values
-are strings.
+## Wire dialect
 
-```ts
-import { GnoNativeProvider, useGnoNativeContext, GnoNativeClient } from '@gnolang/gnonative/native';
-```
+Requests and responses are encoded as JSON in both directions, following the protobuf JSON
+(protojson) dialect. The `*Json` type aliases in `src/native/apitypes.ts` are the source of truth for
+every request/response shape.
 
-The API is method-for-method parallel to the gRPC path, so migrating is mostly an import swap plus
-adapting argument types (see the type mapping below). See `examples/js/expo/hello-native` for a full
-example.
+| Value            | Encoding                          |
+| ---------------- | --------------------------------- |
+| `string`         | `string`                          |
+| `bytes`          | base64 `string`                   |
+| `int64`/`uint64` | `string`                          |
+| `uint32`         | `number`                          |
+| field names      | proto `json_name`                 |
+| zero values      | omitted                           |
 
-> Note: `@bufbuild/*`/`@connectrpc/*` remain in `dependencies` so the default path keeps working.
-> Metro simply never bundles them for a `/native`-only app.
+Field names follow the proto `json_name`: usually lowerCamelCase (`gasFee`, `signerAddress`),
+sometimes PascalCase (`Msgs`, `Name`, `Greeting`) or snake_case (`key_info`, `tx_json`).
+`GnoNativeClient` builds these for you; if you hand-craft a request, use the `*Json` types. Use
+`bytesToBase64` / `base64ToBytes` / `base64ToString` (exported from the package) to convert addresses,
+keys, and query results.
 
-#### JSON type mapping (`/native`)
+Errors are `GnoNativeError` (message like `ErrInvalidAddress(#205)`); call `.errCode()` to get the
+`ErrCode`.
 
-The `/native` path uses **protobuf JSON (protojson) in both directions**. The generated types live
-in `src/native/types.gen.ts` (the `*Json` aliases). The encoding differs from the message objects on
-the gRPC path:
+## Migrating from v4 (the gRPC path) to v5
 
-| Proto type       | gRPC path (message object) | `/native` path (`*Json`) |
-| ---------------- | -------------------------- | ------------------------ |
-| `string`         | `string`                   | `string`                 |
-| `bytes`          | `Uint8Array`               | base64 `string`          |
-| `int64`/`sint64` | `bigint`                   | `string`                 |
-| field names      | camelCase                  | proto `json_name`        |
-| default values   | present                    | omitted                  |
+v5 removes the buf/connect/protobuf gRPC path entirely. If you were on v4:
 
-Field names follow the proto `json_name`: usually camelCase (`gasFee`, `signerAddress`), sometimes
-PascalCase (`Msgs`, `Name`, `Greeting`) or snake_case (`key_info`, `tx_json`). `GnoNativeClient`
-builds these for you; if you hand-craft a request, use the `*Json` types — they are the source of
-truth. Never decode a `/native` payload with a gRPC-path decoder or vice versa. Use `bytesToBase64` /
-`base64ToBytes` (exported from `/native`) to convert addresses and keys.
+- Import from `@gnolang/gnonative` (the client is the former `/native` client; `./native` still works).
+- Remove `@bufbuild/*` / `@connectrpc/*` and all connect/streaming polyfills
+  (`react-native-polyfill-globals`, `web-streams-polyfill`, `text-encoding`, …) from your app.
+- Types are the `*Json` aliases: `KeyInfo` → `KeyInfoJson`, `BaseAccount` → `BaseAccountJson`, etc.
+- `GRPCError` → `GnoNativeError` (same `errCode()` API).
+- Addresses/keys are base64 **strings**, not `Uint8Array`. int64 arguments are **strings**, not
+  `bigint`. `bytes` results are base64 strings — decode with `base64ToBytes`/`base64ToString`.
+- Fields use the proto `json_name` (e.g. `res.Greeting`, not `res.greeting`).
+- `,string` 64-bit fields are strict: pass a JSON string, not a bare number.
 
-# API documentation
-
-The RPC API documentation is available in the Buf registry:
-
-- [Documentation](https://buf.build/gnolang/gnonative/docs/main:land.gno.gnonative.v1)
+See `examples/js/expo/hello` for a complete, minimal example.
 
 # Installation in Expo projects
 
@@ -75,7 +63,6 @@ Please follow the general `Build instructions` in the main
 
 ```console
 make asdf.install_tools
-npm config set @buf:registry  https://buf.build/gen/npm/v1/
 ```
 
 ## Create new Expo app
@@ -132,7 +119,8 @@ const InnerApp = () => {
         setGreeting(await gnonative.hello('Gno'));
 
         for await (const res of await gnonative.helloStream('Gno')) {
-          console.log(res.greeting);
+          // The field is `Greeting` (proto json_name override).
+          console.log(res.Greeting);
         }
       } catch (error) {
         console.log(error);

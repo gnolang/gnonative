@@ -1,7 +1,5 @@
-// Public types for the @gnolang/gnonative/native entry point. Mirrors src/api/types.ts (GnoKeyApi)
-// but Json-typed: bytes are base64 strings, int64 values accept/return strings, and responses are the
-// plain-JSON `*Json` shapes from types.gen.ts. Migrating from the gRPC path is an import swap plus
-// adapting Uint8Array/bigint to string.
+// Public types for the @gnolang/gnonative client. Json-typed: bytes are base64 strings, int64 values
+// accept/return strings, and responses are the plain-JSON `*Json` shapes from apitypes.ts.
 import type {
   ActivateAccountResponseJson,
   BroadcastTxCommitResponseJson,
@@ -28,7 +26,7 @@ import type {
   SetPasswordResponseJson,
   SetRemoteResponseJson,
   SignTxResponseJson,
-} from './types.gen';
+} from './apitypes';
 
 export enum BridgeStatus {
   Stopped,
@@ -41,7 +39,7 @@ export interface Config {
   chain_id: string;
 }
 
-// GnoNativeClientApi is the connect-free client surface. Addresses/keys are base64 strings, int64
+// GnoNativeClientApi is the client surface. Addresses/keys are base64 strings, int64
 // amounts (gasWanted, expiresAt, spendPeriod, ...) are strings, and responses are `*Json` shapes.
 export interface GnoNativeClientApi {
   setRemote: (remote: string) => Promise<SetRemoteResponseJson>;

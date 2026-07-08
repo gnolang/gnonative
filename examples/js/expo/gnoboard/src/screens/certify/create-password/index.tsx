@@ -54,7 +54,7 @@ const CreatePassword: React.FC<Props> = ({ route }) => {
       console.log('createAccount response: ' + response);
       await gnonative.activateAccount(name);
       setAccount(response);
-      await gnonative.setPassword(password, response!.address);
+      await gnonative.setPassword(password, response!.address ?? '');
       navigation.navigate(RoutePath.Home);
     } catch (error) {
       setError(JSON.stringify(error));

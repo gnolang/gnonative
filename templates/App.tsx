@@ -1,26 +1,30 @@
+import { GnoNativeProvider, useGnoNativeContext } from "@gnolang/gnonative";
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-
-// order matters here
-import "react-native-polyfill-globals/auto";
-
 import { StatusBar } from "expo-status-bar";
-import { useGno } from "@gno/hooks/use-gno";
 
-// Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
-// Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
-(Symbol as any).asyncIterator =
-  Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator");
+const config = {
+  remote: "https://gno.berty.io",
+  chain_id: "dev",
+};
 
 export default function App() {
-  const gno = useGno();
+  return (
+    <GnoNativeProvider config={config}>
+      <InnerApp />
+    </GnoNativeProvider>
+  );
+}
+
+function InnerApp() {
+  const { gnonative } = useGnoNativeContext();
   const [board, setBoard] = React.useState("");
 
   React.useEffect(() => {
-    gno
+    gnonative
       .render("gno.land/r/demo/boards", "testboard/1")
       .then((res) => setBoard(res))
-      .catch((err) => setBoard(err));
+      .catch((err) => setBoard(String(err)));
   }, []);
 
   return (

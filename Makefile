@@ -45,48 +45,11 @@ PATH := $(GO_BIND_BIN_DIR):$(PATH)
 # `all` and `build` command build the Go Framework
 all build: framework
 
-# Generate API from protofiles
-generate: api.generate
-
-# Clean and generate
-regenerate: api.clean api.generate
-
 # Clean all generated files
 clean: framework.clean
 	rm -rf $(cache_dir)
 
-.PHONY: generate regenerate clean
-
-# - API : Handle API generation and cleaning
-
-api.generate: _api.generate.protocol
-api.clean: _api.clean.protocol
-
-# - API - rpc
-
-protos_src := $(wildcard api/*.proto)
-gen_src := $(protos_src) Makefile buf.gen.yaml $(wildcard api/gnonativetypes/*.go)
-gen_sum := gen.sum
-
-_api.generate.protocol: $(gen_sum)
-_api.clean.protocol:
-	rm -f api/gen/go/*.pb.go
-	rm -f api/gen/go/_goconnect/*.connect.go
-	rm -f api/gen/es/*.{ts,js}
-	rm -f $(gen_sum)
-
-$(gen_sum): $(gen_src)
-	$(call check-program, shasum buf)
-	@shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp
-	@diff -q $(gen_sum).tmp $(gen_sum) || ( \
-		cd misc/genproto && go run . && cd ../.. ; \
-		buf generate api; \
-		shasum $(gen_src) | sort -k 2 > $(gen_sum).tmp; \
-		mv $(gen_sum).tmp $(gen_sum); \
-		go mod tidy \
-	)
-
-.PHONY: api.generate _api.generate.protocol _api.clean.protocol
+.PHONY: clean
 
 # - Bind : Handle gomobile bind
 
@@ -115,7 +78,6 @@ framework.ios: $(gnocore_xcframework)
 .PHONY: framework.ios
 
 $(gnocore_xcframework): $(bind_init_files) $(go_deps)
-	$(MAKE) generate
 ifeq ($(OS),Darwin)
 	@mkdir -p $(dir $@)
 	# need to use `nowatchdog` tags, see https://github.com/libp2p/go-libp2p-connmgr/issues/98
@@ -133,7 +95,6 @@ framework.android: $(gnocore_aar) $(gnocore_jar)
 .PHONY: framework.android
 
 $(gnocore_aar): $(bind_init_files) $(go_deps)
-	$(MAKE) generate
 	@mkdir -p $(dir $@) .cache/bind/android
 	# Android's bionic libc has no robust POSIX mutexes (pthread_mutexattr_setrobust,
 	# PTHREAD_MUTEX_ROBUST, pthread_mutex_consistent) at any API level, but LMDB's
@@ -180,7 +141,6 @@ ifndef APP_NAME
 	$(error APP_NAME is undefined. Please set APP_NAME to the name of your app)
 endif
 	$(call check-program, npm)
-	npm config set @buf:registry https://buf.build/gen/npm/v1/
 	$(MAKE) new-expo-app OUTPUT_DIR=$(make_dir)/examples/js/expo
 	$(MAKE) copy-js-files OUTPUT_DIR=$(make_dir)/examples/js/expo APP_NAME=$(APP_NAME)
 
@@ -201,4 +161,4 @@ copy-js-files:
 	@echo "Copying js files"
 	@cp $(expo_dir)/example/App.tsx $(OUTPUT_DIR)/$(APP_NAME)/App.tsx
 
-.PHONY: new-app configure-npm new-expo-app copy-js-files
+.PHONY: new-app new-expo-app copy-js-files

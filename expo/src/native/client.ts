@@ -1,12 +1,11 @@
-// GnoNativeClient: the connect/gRPC-free client. It builds camelCase protojson request objects,
-// sends them through GoBridge.invokeMethod/createStream, and parses the base64(protojson) responses.
-// Method-for-method parity with the gRPC-path GnoNativeApi (src/api/GnoNativeApi.ts), so migration is
-// an import swap plus adapting Uint8Array/bigint arguments to base64/string.
+// GnoNativeClient: the GnoNative client. It builds camelCase JSON request objects, sends them through
+// GoBridge.invokeMethod/createStream, and parses the base64(JSON) responses. Uint8Array addresses are
+// passed as base64 strings and int64 values as strings (see apitypes.ts for the wire dialect).
 import { GoBridge } from '../GoBridge';
 import { base64ToString } from './encoding';
 import { GnoNativeError } from './error';
 import { streamAsyncIterable } from './stream';
-import type * as pb from './types.gen';
+import type * as pb from './apitypes';
 import { BridgeStatus, Config, GnoNativeClientApi } from './types';
 
 export class GnoNativeClient implements GnoNativeClientApi {
@@ -20,7 +19,7 @@ export class GnoNativeClient implements GnoNativeClientApi {
   async initClient(): Promise<boolean> {
     if (this.bridgeStatus === BridgeStatus.Stopped) {
       this.bridgeStatus = BridgeStatus.Starting;
-      await GoBridge.initBridgeWithOptions({ useGrpcServers: false });
+      await GoBridge.initBridge();
       this.bridgeStatus = BridgeStatus.Started;
     }
 
@@ -35,7 +34,7 @@ export class GnoNativeClient implements GnoNativeClientApi {
     this.bridgeStatus = BridgeStatus.Stopped;
   }
 
-  // #invoke sends a unary request and parses the protojson response.
+  // #invoke sends a unary request and parses the JSON response.
   async #invoke<TRes>(method: string, req: object): Promise<TRes> {
     try {
       const res = await GoBridge.invokeMethod(method, JSON.stringify(req));
