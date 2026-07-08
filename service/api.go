@@ -1,5 +1,9 @@
-// This file implements the gRPC API methods defined in api/rpc.proto . For documentation,
+// This file implements the GnoNative API methods defined in api/rpc.proto . For documentation,
 // see that file and related request/response fields in the generated api/gnonativetypes.proto .
+//
+// These are plain Go functions with no dependency on connect/gRPC. The connect handlers in
+// api_connect.go are thin wrappers over these functions, and the mobile bridge dispatcher in
+// framework/service/ calls them directly.
 
 package service
 
@@ -10,7 +14,6 @@ import (
 	"strings"
 	"time"
 
-	"connectrpc.com/connect"
 	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/gnoland/ugnot"
 	"github.com/gnolang/gno/gno.land/pkg/keyscli"
@@ -33,32 +36,32 @@ import (
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 )
 
-func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
+func (s *gnoNativeService) SetRemote(ctx context.Context, req *api_gen.SetRemoteRequest) (*api_gen.SetRemoteResponse, error) {
 	var err error
-	s.rpcClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
+	s.rpcClient, err = rpcclient.NewHTTPClient(req.Remote)
 	if err != nil {
 		return nil, api_gen.ErrCode_ErrSetRemote.Wrap(err)
 	}
-	s.remote = req.Msg.Remote
-	return connect.NewResponse(&api_gen.SetRemoteResponse{}), nil
+	s.remote = req.Remote
+	return &api_gen.SetRemoteResponse{}, nil
 }
 
-func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
-	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.remote}), nil
+func (s *gnoNativeService) GetRemote(ctx context.Context, req *api_gen.GetRemoteRequest) (*api_gen.GetRemoteResponse, error) {
+	return &api_gen.GetRemoteResponse{Remote: s.remote}, nil
 }
 
-func (s *gnoNativeService) SetChainID(ctx context.Context, req *connect.Request[api_gen.SetChainIDRequest]) (*connect.Response[api_gen.SetChainIDResponse], error) {
+func (s *gnoNativeService) SetChainID(ctx context.Context, req *api_gen.SetChainIDRequest) (*api_gen.SetChainIDResponse, error) {
 	s.lock.Lock()
-	s.chainID = req.Msg.ChainId
+	s.chainID = req.ChainId
 	s.lock.Unlock()
-	return connect.NewResponse(&api_gen.SetChainIDResponse{}), nil
+	return &api_gen.SetChainIDResponse{}, nil
 }
 
-func (s *gnoNativeService) GetChainID(ctx context.Context, req *connect.Request[api_gen.GetChainIDRequest]) (*connect.Response[api_gen.GetChainIDResponse], error) {
-	return connect.NewResponse(&api_gen.GetChainIDResponse{ChainId: s.chainID}), nil
+func (s *gnoNativeService) GetChainID(ctx context.Context, req *api_gen.GetChainIDRequest) (*api_gen.GetChainIDResponse, error) {
+	return &api_gen.GetChainIDResponse{ChainId: s.chainID}, nil
 }
 
-func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *connect.Request[api_gen.GenerateRecoveryPhraseRequest]) (*connect.Response[api_gen.GenerateRecoveryPhraseResponse], error) {
+func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *api_gen.GenerateRecoveryPhraseRequest) (*api_gen.GenerateRecoveryPhraseResponse, error) {
 	const mnemonicEntropySize = 256
 	entropySeed, err := bip39.NewEntropy(mnemonicEntropySize)
 	if err != nil {
@@ -70,7 +73,7 @@ func (s *gnoNativeService) GenerateRecoveryPhrase(ctx context.Context, req *conn
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.GenerateRecoveryPhraseResponse{Phrase: phrase}), nil
+	return &api_gen.GenerateRecoveryPhraseResponse{Phrase: phrase}, nil
 }
 
 func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
@@ -82,7 +85,7 @@ func ConvertKeyInfo(key crypto_keys.Info) (*api_gen.KeyInfo, error) {
 	}, nil
 }
 
-func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request[api_gen.ListKeyInfoRequest]) (*connect.Response[api_gen.ListKeyInfoResponse], error) {
+func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *api_gen.ListKeyInfoRequest) (*api_gen.ListKeyInfoResponse, error) {
 	s.logger.Debug("ListKeyInfo called")
 
 	keys, err := s.keybase.List()
@@ -101,24 +104,24 @@ func (s *gnoNativeService) ListKeyInfo(ctx context.Context, req *connect.Request
 		formatedKeys = append(formatedKeys, info)
 	}
 
-	return connect.NewResponse(&api_gen.ListKeyInfoResponse{Keys: formatedKeys}), nil
+	return &api_gen.ListKeyInfoResponse{Keys: formatedKeys}, nil
 }
 
-func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameRequest]) (*connect.Response[api_gen.HasKeyByNameResponse], error) {
+func (s *gnoNativeService) HasKeyByName(ctx context.Context, req *api_gen.HasKeyByNameRequest) (*api_gen.HasKeyByNameResponse, error) {
 	s.logger.Debug("HasKeyByName called")
 
-	has, err := s.keybase.HasByName(req.Msg.Name)
+	has, err := s.keybase.HasByName(req.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.HasKeyByNameResponse{Has: has}), nil
+	return &api_gen.HasKeyByNameResponse{Has: has}, nil
 }
 
-func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByAddressRequest]) (*connect.Response[api_gen.HasKeyByAddressResponse], error) {
+func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *api_gen.HasKeyByAddressRequest) (*api_gen.HasKeyByAddressResponse, error) {
 	s.logger.Debug("HasKeyByAddress called")
 
-	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	addr, err := crypto.AddressFromBytes(req.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -127,24 +130,24 @@ func (s *gnoNativeService) HasKeyByAddress(ctx context.Context, req *connect.Req
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.HasKeyByAddressResponse{Has: has}), nil
+	return &api_gen.HasKeyByAddressResponse{Has: has}, nil
 }
 
-func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.HasKeyByNameOrAddressRequest]) (*connect.Response[api_gen.HasKeyByNameOrAddressResponse], error) {
+func (s *gnoNativeService) HasKeyByNameOrAddress(ctx context.Context, req *api_gen.HasKeyByNameOrAddressRequest) (*api_gen.HasKeyByNameOrAddressResponse, error) {
 	s.logger.Debug("HasKeyByNameOrAddress called")
 
-	has, err := s.keybase.HasByNameOrAddress(req.Msg.NameOrBech32)
+	has, err := s.keybase.HasByNameOrAddress(req.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.HasKeyByNameOrAddressResponse{Has: has}), nil
+	return &api_gen.HasKeyByNameOrAddressResponse{Has: has}, nil
 }
 
-func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameRequest]) (*connect.Response[api_gen.GetKeyInfoByNameResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *api_gen.GetKeyInfoByNameRequest) (*api_gen.GetKeyInfoByNameResponse, error) {
 	s.logger.Debug("GetKeyInfoByName called")
 
-	key, err := s.keybase.GetByName(req.Msg.Name)
+	key, err := s.keybase.GetByName(req.Name)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -154,13 +157,13 @@ func (s *gnoNativeService) GetKeyInfoByName(ctx context.Context, req *connect.Re
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.GetKeyInfoByNameResponse{Key: info}), nil
+	return &api_gen.GetKeyInfoByNameResponse{Key: info}, nil
 }
 
-func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByAddressResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *api_gen.GetKeyInfoByAddressRequest) (*api_gen.GetKeyInfoByAddressResponse, error) {
 	s.logger.Debug("GetKeyInfoByAddress called")
 
-	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	addr, err := crypto.AddressFromBytes(req.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -174,13 +177,13 @@ func (s *gnoNativeService) GetKeyInfoByAddress(ctx context.Context, req *connect
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.GetKeyInfoByAddressResponse{Key: info}), nil
+	return &api_gen.GetKeyInfoByAddressResponse{Key: info}, nil
 }
 
-func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *connect.Request[api_gen.GetKeyInfoByNameOrAddressRequest]) (*connect.Response[api_gen.GetKeyInfoByNameOrAddressResponse], error) {
+func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *api_gen.GetKeyInfoByNameOrAddressRequest) (*api_gen.GetKeyInfoByNameOrAddressResponse, error) {
 	s.logger.Debug("GetKeyInfoByNameOrAddress called")
 
-	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -190,13 +193,13 @@ func (s *gnoNativeService) GetKeyInfoByNameOrAddress(ctx context.Context, req *c
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.GetKeyInfoByNameOrAddressResponse{Key: info}), nil
+	return &api_gen.GetKeyInfoByNameOrAddressResponse{Key: info}, nil
 }
 
-func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Request[api_gen.CreateAccountRequest]) (*connect.Response[api_gen.CreateAccountResponse], error) {
-	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
+func (s *gnoNativeService) CreateAccount(ctx context.Context, req *api_gen.CreateAccountRequest) (*api_gen.CreateAccountResponse, error) {
+	s.logger.Debug("CreateAccount called", zap.String("NameOrBech32", req.NameOrBech32))
 
-	key, err := s.keybase.CreateAccount(req.Msg.NameOrBech32, req.Msg.Mnemonic, req.Msg.Bip39Passwd, req.Msg.Password, req.Msg.Account, req.Msg.Index)
+	key, err := s.keybase.CreateAccount(req.NameOrBech32, req.Mnemonic, req.Bip39Passwd, req.Password, req.Account, req.Index)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -206,13 +209,13 @@ func (s *gnoNativeService) CreateAccount(ctx context.Context, req *connect.Reque
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.CreateAccountResponse{Key: info}), nil
+	return &api_gen.CreateAccountResponse{Key: info}, nil
 }
 
-func (s *gnoNativeService) CreateLedger(ctx context.Context, req *connect.Request[api_gen.CreateLedgerRequest]) (*connect.Response[api_gen.CreateLedgerResponse], error) {
-	s.logger.Debug("CreateLedger called", zap.String("Name", req.Msg.Name))
+func (s *gnoNativeService) CreateLedger(ctx context.Context, req *api_gen.CreateLedgerRequest) (*api_gen.CreateLedgerResponse, error) {
+	s.logger.Debug("CreateLedger called", zap.String("Name", req.Name))
 
-	key, err := s.keybase.CreateLedger(req.Msg.Name, crypto_keys.SigningAlgo(req.Msg.Algorithm), req.Msg.Hrp, req.Msg.Account, req.Msg.Index)
+	key, err := s.keybase.CreateLedger(req.Name, crypto_keys.SigningAlgo(req.Algorithm), req.Hrp, req.Account, req.Index)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -222,14 +225,14 @@ func (s *gnoNativeService) CreateLedger(ctx context.Context, req *connect.Reques
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.CreateLedgerResponse{Key: info}), nil
+	return &api_gen.CreateLedgerResponse{Key: info}, nil
 }
 
-func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Request[api_gen.ActivateAccountRequest]) (*connect.Response[api_gen.ActivateAccountResponse], error) {
-	s.logger.Debug("ActivateAccount called", zap.String("NameOrBech32", req.Msg.NameOrBech32))
+func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *api_gen.ActivateAccountRequest) (*api_gen.ActivateAccountResponse, error) {
+	s.logger.Debug("ActivateAccount called", zap.String("NameOrBech32", req.NameOrBech32))
 
 	// The key may already be in s.userAccounts, but the info may have changed on disk. So always get from disk.
-	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -256,9 +259,9 @@ func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Req
 	account.keyInfo = key
 	s.lock.Unlock()
 
-	account.signer.Account = req.Msg.NameOrBech32
-	if req.Msg.Master != nil {
-		masterAddr, err := crypto.AddressFromBytes(req.Msg.Master)
+	account.signer.Account = req.NameOrBech32
+	if req.Master != nil {
+		masterAddr, err := crypto.AddressFromBytes(req.Master)
 		if err != nil {
 			return nil, getGrpcError(err)
 		}
@@ -267,18 +270,18 @@ func (s *gnoNativeService) ActivateAccount(ctx context.Context, req *connect.Req
 		// Clear any stale master from a previous activation as a session account.
 		account.signer.Master = crypto.Address{}
 	}
-	return connect.NewResponse(&api_gen.ActivateAccountResponse{
+	return &api_gen.ActivateAccountResponse{
 		Key:         info,
 		HasPassword: account.signer.Password != "",
-	}), nil
+	}, nil
 }
 
-func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request[api_gen.SetPasswordRequest]) (*connect.Response[api_gen.SetPasswordResponse], error) {
-	signer, err := s.getSigner(req.Msg.Address)
+func (s *gnoNativeService) SetPassword(ctx context.Context, req *api_gen.SetPasswordRequest) (*api_gen.SetPasswordResponse, error) {
+	signer, err := s.getSigner(req.Address)
 	if err != nil {
 		return nil, err
 	}
-	signer.Password = req.Msg.Password
+	signer.Password = req.Password
 
 	// Check the password.
 	if err := signer.Validate(); err != nil {
@@ -289,17 +292,17 @@ func (s *gnoNativeService) SetPassword(ctx context.Context, req *connect.Request
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.SetPasswordResponse{}), nil
+	return &api_gen.SetPasswordResponse{}, nil
 }
 
-func (s *gnoNativeService) RenameKey(ctx context.Context, req *connect.Request[api_gen.RenameKeyRequest]) (*connect.Response[api_gen.RenameKeyResponse], error) {
+func (s *gnoNativeService) RenameKey(ctx context.Context, req *api_gen.RenameKeyRequest) (*api_gen.RenameKeyResponse, error) {
 	// We may need to change the key name in s.userAccounts, but we don't know the address. So get from disk.
-	key, err := s.keybase.GetByName(req.Msg.OldName)
+	key, err := s.keybase.GetByName(req.OldName)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	err = s.keybase.Rename(req.Msg.OldName, req.Msg.NewName)
+	err = s.keybase.Rename(req.OldName, req.NewName)
 	if err != nil {
 		if strings.Contains(err.Error(), "already exists") {
 			return nil, api_gen.ErrCode_ErrKeyNameExists.Wrap(err)
@@ -323,49 +326,49 @@ func (s *gnoNativeService) RenameKey(ctx context.Context, req *connect.Request[a
 		account.keyInfo = newKeyInfo
 	}
 
-	return connect.NewResponse(&api_gen.RenameKeyResponse{}), nil
+	return &api_gen.RenameKeyResponse{}, nil
 }
 
-func (s *gnoNativeService) RotatePassword(ctx context.Context, req *connect.Request[api_gen.RotatePasswordRequest]) (*connect.Response[api_gen.RotatePasswordResponse], error) {
+func (s *gnoNativeService) RotatePassword(ctx context.Context, req *api_gen.RotatePasswordRequest) (*api_gen.RotatePasswordResponse, error) {
 	// Get all the signers, before trying to update the password.
-	signers := make([]*gnoclient.SignerFromKeybase, len(req.Msg.Addresses))
-	for i := range len(req.Msg.Addresses) {
+	signers := make([]*gnoclient.SignerFromKeybase, len(req.Addresses))
+	for i := range len(req.Addresses) {
 		var err error
-		if signers[i], err = s.getSigner(req.Msg.Addresses[i]); err != nil {
+		if signers[i], err = s.getSigner(req.Addresses[i]); err != nil {
 			return nil, err
 		}
 	}
 
 	s.lock.Lock()
 	defer s.lock.Unlock()
-	getNewPassword := func() (string, error) { return req.Msg.NewPassword, nil }
-	for i := range len(req.Msg.Addresses) {
+	getNewPassword := func() (string, error) { return req.NewPassword, nil }
+	for i := range len(req.Addresses) {
 		if err := s.keybase.Rotate(signers[i].Account, signers[i].Password, getNewPassword); err != nil {
 			// Roll back the passwords. Don't check the error from Rotate.
 			for j := range i {
 				getOldPassword := func() (string, error) { return signers[j].Password, nil }
-				s.keybase.Rotate(signers[j].Account, req.Msg.NewPassword, getOldPassword)
+				s.keybase.Rotate(signers[j].Account, req.NewPassword, getOldPassword)
 			}
 			return nil, getGrpcError(err)
 		}
 	}
 
 	// Success. Update the Password in all the signers.
-	for i := range len(req.Msg.Addresses) {
-		signers[i].Password = req.Msg.NewPassword
+	for i := range len(req.Addresses) {
+		signers[i].Password = req.NewPassword
 	}
 
-	return connect.NewResponse(&api_gen.RotatePasswordResponse{}), nil
+	return &api_gen.RotatePasswordResponse{}, nil
 }
 
-func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect.Request[api_gen.GetActivatedAccountRequest]) (*connect.Response[api_gen.GetActivatedAccountResponse], error) {
+func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *api_gen.GetActivatedAccountRequest) (*api_gen.GetActivatedAccountResponse, error) {
 	s.logger.Debug("GetActivatedAccount called")
 
-	if req.Msg.Address == nil {
+	if req.Address == nil {
 		return nil, api_gen.ErrCode_ErrInvalidAddress
 	}
 
-	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Msg.Address)
+	b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -386,22 +389,22 @@ func (s *gnoNativeService) GetActivatedAccount(ctx context.Context, req *connect
 		master = account.signer.Master.Bytes()
 	}
 
-	return connect.NewResponse(&api_gen.GetActivatedAccountResponse{
+	return &api_gen.GetActivatedAccountResponse{
 		Key:         info,
 		Master:      master,
 		HasPassword: account.signer.Password != "",
-	}), nil
+	}, nil
 }
 
-func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Request[api_gen.QueryAccountRequest]) (*connect.Response[api_gen.QueryAccountResponse], error) {
-	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Msg.Address))
+func (s *gnoNativeService) QueryAccount(ctx context.Context, req *api_gen.QueryAccountRequest) (*api_gen.QueryAccountResponse, error) {
+	s.logger.Debug("QueryAccount", zap.ByteString("address", req.Address))
 
 	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 	// gnoclient wants the crypto.Address.
-	addr, err := crypto.AddressFromBytes(req.Msg.Address)
+	addr, err := crypto.AddressFromBytes(req.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -410,23 +413,22 @@ func (s *gnoNativeService) QueryAccount(ctx context.Context, req *connect.Reques
 		return nil, getGrpcError(err)
 	}
 
-	res := connect.NewResponse(&api_gen.QueryAccountResponse{AccountInfo: convertBaseAccount(account)})
-	return res, nil
+	return &api_gen.QueryAccountResponse{AccountInfo: convertBaseAccount(account)}, nil
 }
 
-func (s *gnoNativeService) QuerySessionAccount(ctx context.Context, req *connect.Request[api_gen.QuerySessionAccountRequest]) (*connect.Response[api_gen.QuerySessionAccountResponse], error) {
-	s.logger.Debug("QuerySessionAccount", zap.ByteString("master-address", req.Msg.MasterAddress), zap.ByteString("session-address", req.Msg.SessionAddress))
+func (s *gnoNativeService) QuerySessionAccount(ctx context.Context, req *api_gen.QuerySessionAccountRequest) (*api_gen.QuerySessionAccountResponse, error) {
+	s.logger.Debug("QuerySessionAccount", zap.ByteString("master-address", req.MasterAddress), zap.ByteString("session-address", req.SessionAddress))
 
 	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 	// gnoclient wants the crypto.Address.
-	masterAddr, err := crypto.AddressFromBytes(req.Msg.MasterAddress)
+	masterAddr, err := crypto.AddressFromBytes(req.MasterAddress)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	sessionAddr, err := crypto.AddressFromBytes(req.Msg.SessionAddress)
+	sessionAddr, err := crypto.AddressFromBytes(req.SessionAddress)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -435,8 +437,7 @@ func (s *gnoNativeService) QuerySessionAccount(ctx context.Context, req *connect
 		return nil, getGrpcError(err)
 	}
 
-	res := connect.NewResponse(&api_gen.QuerySessionAccountResponse{AccountInfo: convertSessionAccount(account)})
-	return res, nil
+	return &api_gen.QuerySessionAccountResponse{AccountInfo: convertSessionAccount(account)}, nil
 }
 
 func convertBaseAccount(account *std.BaseAccount) *api_gen.BaseAccount {
@@ -467,13 +468,13 @@ func convertSessionAccount(account *gnoland.GnoSessionAccount) *api_gen.SessionA
 	}
 }
 
-func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Request[api_gen.DeleteAccountRequest]) (*connect.Response[api_gen.DeleteAccountResponse], error) {
+func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *api_gen.DeleteAccountRequest) (*api_gen.DeleteAccountResponse, error) {
 	// Get the key from the Keybase so that we know its address
-	key, err := s.keybase.GetByNameOrAddress(req.Msg.NameOrBech32)
+	key, err := s.keybase.GetByNameOrAddress(req.NameOrBech32)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	if err := s.keybase.Delete(req.Msg.NameOrBech32, req.Msg.Password, req.Msg.SkipPassword); err != nil {
+	if err := s.keybase.Delete(req.NameOrBech32, req.Password, req.SkipPassword); err != nil {
 		return nil, getGrpcError(err)
 	}
 
@@ -484,15 +485,15 @@ func (s *gnoNativeService) DeleteAccount(ctx context.Context, req *connect.Reque
 	s.lock.Lock()
 	delete(s.userAccounts, b32)
 	s.lock.Unlock()
-	return connect.NewResponse(&api_gen.DeleteAccountResponse{}), nil
+	return &api_gen.DeleteAccountResponse{}, nil
 }
 
-func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_gen.QueryRequest]) (*connect.Response[api_gen.QueryResponse], error) {
-	s.logger.Debug("Query", zap.String("path", req.Msg.Path), zap.ByteString("data", req.Msg.Data))
+func (s *gnoNativeService) Query(ctx context.Context, req *api_gen.QueryRequest) (*api_gen.QueryResponse, error) {
+	s.logger.Debug("Query", zap.String("path", req.Path), zap.ByteString("data", req.Data))
 
 	cfg := gnoclient.QueryCfg{
-		Path: req.Msg.Path,
-		Data: req.Msg.Data,
+		Path: req.Path,
+		Data: req.Data,
 	}
 
 	c, err := s.getClient(nil)
@@ -504,51 +505,51 @@ func (s *gnoNativeService) Query(ctx context.Context, req *connect.Request[api_g
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.QueryResponse{Result: bres.Response.Data}), nil
+	return &api_gen.QueryResponse{Result: bres.Response.Data}, nil
 }
 
-func (s *gnoNativeService) Render(ctx context.Context, req *connect.Request[api_gen.RenderRequest]) (*connect.Response[api_gen.RenderResponse], error) {
-	s.logger.Debug("Render", zap.String("packagePath", req.Msg.PackagePath), zap.String("args", req.Msg.Args))
+func (s *gnoNativeService) Render(ctx context.Context, req *api_gen.RenderRequest) (*api_gen.RenderResponse, error) {
+	s.logger.Debug("Render", zap.String("packagePath", req.PackagePath), zap.String("args", req.Args))
 
 	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result, _, err := c.Render(req.Msg.PackagePath, req.Msg.Args)
+	result, _, err := c.Render(req.PackagePath, req.Args)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.RenderResponse{Result: result}), nil
+	return &api_gen.RenderResponse{Result: result}, nil
 }
 
-func (s *gnoNativeService) QEval(ctx context.Context, req *connect.Request[api_gen.QEvalRequest]) (*connect.Response[api_gen.QEvalResponse], error) {
-	s.logger.Debug("QEval", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
+func (s *gnoNativeService) QEval(ctx context.Context, req *api_gen.QEvalRequest) (*api_gen.QEvalResponse, error) {
+	s.logger.Debug("QEval", zap.String("packagePath", req.PackagePath), zap.String("expression", req.Expression))
 
 	c, err := s.getClient(nil)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result, _, err := c.QEval(req.Msg.PackagePath, req.Msg.Expression)
+	result, _, err := c.QEval(req.PackagePath, req.Expression)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	return connect.NewResponse(&api_gen.QEvalResponse{Result: result}), nil
+	return &api_gen.QEvalResponse{Result: result}, nil
 }
 
-func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
-	for _, msg := range req.Msg.Msgs {
+func (s *gnoNativeService) Call(ctx context.Context, req *api_gen.CallRequest, send func(*api_gen.CallResponse) error) error {
+	for _, msg := range req.Msgs {
 		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	signer, err := s.getSigner(req.Msg.SignerAddress)
+	signer, err := s.getSigner(req.SignerAddress)
 	if err != nil {
 		return err
 	}
@@ -557,9 +558,9 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 	if !signer.Master.IsZero() {
 		callerAddress = signer.Master.Bytes()
 	} else {
-		callerAddress = req.Msg.SignerAddress
+		callerAddress = req.SignerAddress
 	}
-	msgs, err := convertCallMsgs(callerAddress, req.Msg.Msgs)
+	msgs, err := convertCallMsgs(callerAddress, req.Msgs)
 	if err != nil {
 		return err
 	}
@@ -573,7 +574,7 @@ func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_ge
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.CallResponse{
+	if err := send(&api_gen.CallResponse{
 		Result: bres.DeliverTx.Data,
 		Hash:   bres.Hash,
 		Height: bres.Height,
@@ -615,8 +616,8 @@ func convertCallMsgs(callerAddress []byte, callMsgs []*api_gen.MsgCall) ([]vm.Ms
 	return msgs, nil
 }
 
-func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_gen.SendRequest], stream *connect.ServerStream[api_gen.SendResponse]) error {
-	for _, msg := range req.Msg.Msgs {
+func (s *gnoNativeService) Send(ctx context.Context, req *api_gen.SendRequest, send func(*api_gen.SendResponse) error) error {
+	for _, msg := range req.Msgs {
 		for _, coin := range msg.Amount {
 			if b32, err := bech32.Encode(crypto.Bech32AddrPrefix(), msg.ToAddress); err == nil {
 				s.logger.Debug("Send", zap.String("toAddress", b32), zap.String("denom", coin.Denom),
@@ -626,12 +627,12 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	}
 
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	signer, err := s.getSigner(req.Msg.SignerAddress)
+	signer, err := s.getSigner(req.SignerAddress)
 	if err != nil {
 		return err
 	}
@@ -640,9 +641,9 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 	if !signer.Master.IsZero() {
 		callerAddress = signer.Master.Bytes()
 	} else {
-		callerAddress = req.Msg.SignerAddress
+		callerAddress = req.SignerAddress
 	}
-	msgs, err := convertSendMsgs(callerAddress, req.Msg.Msgs)
+	msgs, err := convertSendMsgs(callerAddress, req.Msgs)
 	if err != nil {
 		return err
 	}
@@ -656,11 +657,11 @@ func (s *gnoNativeService) Send(ctx context.Context, req *connect.Request[api_ge
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.SendResponse{
+	if err := send(&api_gen.SendResponse{
 		Hash:   bres.Hash,
 		Height: bres.Height,
 	}); err != nil {
-		s.logger.Error("Send stream.Send returned error", zap.Error(err))
+		s.logger.Error("Send send returned error", zap.Error(err))
 		return err
 	}
 
@@ -695,14 +696,14 @@ func convertSendMsgs(callerAddress []byte, sendMsgs []*api_gen.MsgSend) ([]bank.
 	return msgs, nil
 }
 
-func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen.RunRequest], stream *connect.ServerStream[api_gen.RunResponse]) error {
+func (s *gnoNativeService) Run(ctx context.Context, req *api_gen.RunRequest, send func(*api_gen.RunResponse) error) error {
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
 
-	signer, err := s.getSigner(req.Msg.SignerAddress)
+	signer, err := s.getSigner(req.SignerAddress)
 	if err != nil {
 		return err
 	}
@@ -711,9 +712,9 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 	if !signer.Master.IsZero() {
 		callerAddress = signer.Master.Bytes()
 	} else {
-		callerAddress = req.Msg.SignerAddress
+		callerAddress = req.SignerAddress
 	}
-	msgs, err := convertRunMsgs(callerAddress, req.Msg.Msgs)
+	msgs, err := convertRunMsgs(callerAddress, req.Msgs)
 	if err != nil {
 		return err
 	}
@@ -727,12 +728,12 @@ func (s *gnoNativeService) Run(ctx context.Context, req *connect.Request[api_gen
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.RunResponse{
+	if err := send(&api_gen.RunResponse{
 		Result: string(bres.DeliverTx.Data),
 		Hash:   bres.Hash,
 		Height: bres.Height,
 	}); err != nil {
-		s.logger.Error("Run stream.Send returned error", zap.Error(err))
+		s.logger.Error("Run send returned error", zap.Error(err))
 		return err
 	}
 
@@ -806,17 +807,17 @@ func convertStdCoins(stdCoins []std.Coin) []*api_gen.Coin {
 	return coins
 }
 
-func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[api_gen.MakeCallTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	for _, msg := range req.Msg.Msgs {
+func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *api_gen.MakeCallTxRequest) (*api_gen.MakeTxResponse, error) {
+	for _, msg := range req.Msgs {
 		s.logger.Debug("MakeCallTx", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))
 	}
 
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
-	msgs, err := convertCallMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
+	msgs, err := convertCallMsgs(req.CallerAddress, req.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -829,16 +830,16 @@ func (s *gnoNativeService) MakeCallTx(ctx context.Context, req *connect.Request[
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
-func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[api_gen.MakeSendTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *api_gen.MakeSendTxRequest) (*api_gen.MakeTxResponse, error) {
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
-	msgs, err := convertSendMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
+	msgs, err := convertSendMsgs(req.CallerAddress, req.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -851,16 +852,16 @@ func (s *gnoNativeService) MakeSendTx(ctx context.Context, req *connect.Request[
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
-func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[api_gen.MakeRunTxRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
+func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *api_gen.MakeRunTxRequest) (*api_gen.MakeTxResponse, error) {
 	cfg := &gnoclient.BaseTxCfg{
-		GasFee:    req.Msg.GasFee,
-		GasWanted: req.Msg.GasWanted,
-		Memo:      req.Msg.Memo,
+		GasFee:    req.GasFee,
+		GasWanted: req.GasWanted,
+		Memo:      req.Memo,
 	}
-	msgs, err := convertRunMsgs(req.Msg.CallerAddress, req.Msg.Msgs)
+	msgs, err := convertRunMsgs(req.CallerAddress, req.Msgs)
 	if err != nil {
 		return nil, err
 	}
@@ -873,20 +874,20 @@ func (s *gnoNativeService) MakeRunTx(ctx context.Context, req *connect.Request[a
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
-func (s *gnoNativeService) CreateSession(ctx context.Context, req *connect.Request[api_gen.CreateSessionRequest], stream *connect.ServerStream[api_gen.CreateSessionResponse]) error {
-	for _, msg := range req.Msg.Msgs {
-		s.logger.Debug("CreateSession", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+func (s *gnoNativeService) CreateSession(ctx context.Context, req *api_gen.CreateSessionRequest, send func(*api_gen.CreateSessionResponse) error) error {
+	for _, msg := range req.Msgs {
+		s.logger.Debug("CreateSession", zap.ByteString("creator", req.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
 	}
 
-	cfg, msgs, err := s.convertCreateSessionRequest(req.Msg)
+	cfg, msgs, err := s.convertCreateSessionRequest(req)
 	if err != nil {
 		return err
 	}
 
-	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	creator, err := s.getSigner(req.CreatorAddress)
 	if err != nil {
 		return err
 	}
@@ -900,7 +901,7 @@ func (s *gnoNativeService) CreateSession(ctx context.Context, req *connect.Reque
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.CreateSessionResponse{
+	if err := send(&api_gen.CreateSessionResponse{
 		Result: bres.DeliverTx.Data,
 		Hash:   bres.Hash,
 		Height: bres.Height,
@@ -911,12 +912,12 @@ func (s *gnoNativeService) CreateSession(ctx context.Context, req *connect.Reque
 	return nil
 }
 
-func (s *gnoNativeService) MakeCreateSessionTx(ctx context.Context, req *connect.Request[api_gen.CreateSessionRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	for _, msg := range req.Msg.Msgs {
-		s.logger.Debug("MakeCreateSessionTx", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+func (s *gnoNativeService) MakeCreateSessionTx(ctx context.Context, req *api_gen.CreateSessionRequest) (*api_gen.MakeTxResponse, error) {
+	for _, msg := range req.Msgs {
+		s.logger.Debug("MakeCreateSessionTx", zap.ByteString("creator", req.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
 	}
 
-	cfg, msgs, err := s.convertCreateSessionRequest(req.Msg)
+	cfg, msgs, err := s.convertCreateSessionRequest(req)
 	if err != nil {
 		return nil, err
 	}
@@ -929,7 +930,7 @@ func (s *gnoNativeService) MakeCreateSessionTx(ctx context.Context, req *connect
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertCreateSessionRequest(req *api_gen.CreateSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgCreateSession, error) {
@@ -968,17 +969,17 @@ func (s *gnoNativeService) convertCreateSessionRequest(req *api_gen.CreateSessio
 	return cfg, msgs, nil
 }
 
-func (s *gnoNativeService) RevokeSession(ctx context.Context, req *connect.Request[api_gen.RevokeSessionRequest], stream *connect.ServerStream[api_gen.RevokeSessionResponse]) error {
-	for _, msg := range req.Msg.Msgs {
-		s.logger.Debug("RevokeSession", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+func (s *gnoNativeService) RevokeSession(ctx context.Context, req *api_gen.RevokeSessionRequest, send func(*api_gen.RevokeSessionResponse) error) error {
+	for _, msg := range req.Msgs {
+		s.logger.Debug("RevokeSession", zap.ByteString("creator", req.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
 	}
 
-	cfg, msgs, err := s.convertRevokeSessionRequest(req.Msg)
+	cfg, msgs, err := s.convertRevokeSessionRequest(req)
 	if err != nil {
 		return err
 	}
 
-	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	creator, err := s.getSigner(req.CreatorAddress)
 	if err != nil {
 		return err
 	}
@@ -992,7 +993,7 @@ func (s *gnoNativeService) RevokeSession(ctx context.Context, req *connect.Reque
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.RevokeSessionResponse{
+	if err := send(&api_gen.RevokeSessionResponse{
 		Result: bres.DeliverTx.Data,
 		Hash:   bres.Hash,
 		Height: bres.Height,
@@ -1003,12 +1004,12 @@ func (s *gnoNativeService) RevokeSession(ctx context.Context, req *connect.Reque
 	return nil
 }
 
-func (s *gnoNativeService) MakeRevokeSessionTx(ctx context.Context, req *connect.Request[api_gen.RevokeSessionRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	for _, msg := range req.Msg.Msgs {
-		s.logger.Debug("MakeRevokeSessionTx", zap.ByteString("creator", req.Msg.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
+func (s *gnoNativeService) MakeRevokeSessionTx(ctx context.Context, req *api_gen.RevokeSessionRequest) (*api_gen.MakeTxResponse, error) {
+	for _, msg := range req.Msgs {
+		s.logger.Debug("MakeRevokeSessionTx", zap.ByteString("creator", req.CreatorAddress), zap.ByteString("sessionKey", msg.SessionKey))
 	}
 
-	cfg, msgs, err := s.convertRevokeSessionRequest(req.Msg)
+	cfg, msgs, err := s.convertRevokeSessionRequest(req)
 	if err != nil {
 		return nil, err
 	}
@@ -1021,7 +1022,7 @@ func (s *gnoNativeService) MakeRevokeSessionTx(ctx context.Context, req *connect
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertRevokeSessionRequest(req *api_gen.RevokeSessionRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeSession, error) {
@@ -1052,15 +1053,15 @@ func (s *gnoNativeService) convertRevokeSessionRequest(req *api_gen.RevokeSessio
 	return cfg, msgs, nil
 }
 
-func (s *gnoNativeService) RevokeAllSessions(ctx context.Context, req *connect.Request[api_gen.RevokeAllSessionsRequest], stream *connect.ServerStream[api_gen.RevokeAllSessionsResponse]) error {
-	s.logger.Debug("RevokeAllSessions", zap.ByteString("creator", req.Msg.CreatorAddress))
+func (s *gnoNativeService) RevokeAllSessions(ctx context.Context, req *api_gen.RevokeAllSessionsRequest, send func(*api_gen.RevokeAllSessionsResponse) error) error {
+	s.logger.Debug("RevokeAllSessions", zap.ByteString("creator", req.CreatorAddress))
 
-	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req.Msg)
+	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req)
 	if err != nil {
 		return err
 	}
 
-	creator, err := s.getSigner(req.Msg.CreatorAddress)
+	creator, err := s.getSigner(req.CreatorAddress)
 	if err != nil {
 		return err
 	}
@@ -1074,7 +1075,7 @@ func (s *gnoNativeService) RevokeAllSessions(ctx context.Context, req *connect.R
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.RevokeAllSessionsResponse{
+	if err := send(&api_gen.RevokeAllSessionsResponse{
 		Result: bres.DeliverTx.Data,
 		Hash:   bres.Hash,
 		Height: bres.Height,
@@ -1085,10 +1086,10 @@ func (s *gnoNativeService) RevokeAllSessions(ctx context.Context, req *connect.R
 	return nil
 }
 
-func (s *gnoNativeService) MakeRevokeAllSessionsTx(ctx context.Context, req *connect.Request[api_gen.RevokeAllSessionsRequest]) (*connect.Response[api_gen.MakeTxResponse], error) {
-	s.logger.Debug("MakeRevokeAllSessionsTx", zap.ByteString("creator", req.Msg.CreatorAddress))
+func (s *gnoNativeService) MakeRevokeAllSessionsTx(ctx context.Context, req *api_gen.RevokeAllSessionsRequest) (*api_gen.MakeTxResponse, error) {
+	s.logger.Debug("MakeRevokeAllSessionsTx", zap.ByteString("creator", req.CreatorAddress))
 
-	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req.Msg)
+	cfg, msgs, err := s.convertRevokeAllSessionsRequest(req)
 	if err != nil {
 		return nil, err
 	}
@@ -1101,7 +1102,7 @@ func (s *gnoNativeService) MakeRevokeAllSessionsTx(ctx context.Context, req *con
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.MakeTxResponse{TxJson: string(txJSON)}), nil
+	return &api_gen.MakeTxResponse{TxJson: string(txJSON)}, nil
 }
 
 func (s *gnoNativeService) convertRevokeAllSessionsRequest(req *api_gen.RevokeAllSessionsRequest) (*gnoclient.BaseTxCfg, []auth.MsgRevokeAllSessions, error) {
@@ -1120,13 +1121,13 @@ func (s *gnoNativeService) convertRevokeAllSessionsRequest(req *api_gen.RevokeAl
 	return cfg, msgs, nil
 }
 
-func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_gen.SignTxRequest]) (*connect.Response[api_gen.SignTxResponse], error) {
+func (s *gnoNativeService) SignTx(ctx context.Context, req *api_gen.SignTxRequest) (*api_gen.SignTxResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
 		return nil, err
 	}
 
-	signedTx, err := s.ClientSignTx(tx, req.Msg.Address, req.Msg.AccountNumber, req.Msg.SequenceNumber)
+	signedTx, err := s.ClientSignTx(tx, req.Address, req.AccountNumber, req.SequenceNumber)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -1135,7 +1136,7 @@ func (s *gnoNativeService) SignTx(ctx context.Context, req *connect.Request[api_
 	if err != nil {
 		return nil, err
 	}
-	return connect.NewResponse(&api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}), nil
+	return &api_gen.SignTxResponse{SignedTxJson: string(signedTxJSON)}, nil
 }
 
 func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, sequenceNumber uint64) (*std.Tx, error) {
@@ -1150,13 +1151,13 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
-func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest]) (*connect.Response[api_gen.EstimateGasResponse], error) {
+func (s *gnoNativeService) EstimateGas(ctx context.Context, req *api_gen.EstimateGasRequest) (*api_gen.EstimateGasResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
 		return nil, err
 	}
 
-	gasWanted, _, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.SecurityMargin, req.Msg.UpdateTx)
+	gasWanted, _, err := s.estimateGasWanted(&tx, req.Address, req.SecurityMargin, req.UpdateTx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -1166,16 +1167,16 @@ func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}), nil
+	return &api_gen.EstimateGasResponse{TxJson: string(txJSON), GasWanted: gasWanted}, nil
 }
 
-func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Request[api_gen.EstimateTxFeesRequest]) (*connect.Response[api_gen.EstimateTxFeesResponse], error) {
+func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *api_gen.EstimateTxFeesRequest) (*api_gen.EstimateTxFeesResponse, error) {
 	var tx std.Tx
-	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.TxJson), &tx); err != nil {
 		return nil, err
 	}
 
-	gasWanted, deliverTx, err := s.estimateGasWanted(&tx, req.Msg.Address, req.Msg.GasSecurityMargin, req.Msg.UpdateTx)
+	gasWanted, deliverTx, err := s.estimateGasWanted(&tx, req.Address, req.GasSecurityMargin, req.UpdateTx)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -1205,11 +1206,11 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 	fee := gasWanted/gp.Gas + 1
 	fee = overflow.Mulp(fee, gp.Price.Amount)
 	// fee buffer to cover the sudden change of gas price
-	feeBuffer := float64(req.Msg.GasPriceSecurityMargin) / 100
+	feeBuffer := float64(req.GasPriceSecurityMargin) / 100
 	fee = int64(float64(fee) * feeBuffer)
 
 	totalFee := fee
-	if req.Msg.UpdateTx {
+	if req.UpdateTx {
 		tx.Fee.GasFee = std.NewCoin(gp.Price.Denom, fee)
 	}
 
@@ -1246,7 +1247,7 @@ func (s *gnoNativeService) EstimateTxFees(ctx context.Context, req *connect.Requ
 		Denom:  ugnot.Denom,
 		Amount: totalFee,
 	}
-	return connect.NewResponse(response), nil
+	return response, nil
 }
 
 // estimateGasWanted is a helper for EstimateGas, etc. Use the tx and address to call gnoclient.Simulate, then
@@ -1288,11 +1289,9 @@ func (s *gnoNativeService) estimateGasWanted(tx *std.Tx, address []byte, securit
 	return gasWanted, deliverTx, nil
 }
 
-func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.Request[api_gen.BroadcastTxCommitRequest],
-	stream *connect.ServerStream[api_gen.BroadcastTxCommitResponse],
-) error {
+func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *api_gen.BroadcastTxCommitRequest, send func(*api_gen.BroadcastTxCommitResponse) error) error {
 	signedTx := &std.Tx{}
-	if err := amino.UnmarshalJSON([]byte(req.Msg.SignedTxJson), signedTx); err != nil {
+	if err := amino.UnmarshalJSON([]byte(req.SignedTxJson), signedTx); err != nil {
 		return err
 	}
 
@@ -1305,84 +1304,89 @@ func (s *gnoNativeService) BroadcastTxCommit(ctx context.Context, req *connect.R
 		return getGrpcError(err)
 	}
 
-	if err := stream.Send(&api_gen.BroadcastTxCommitResponse{
+	if err := send(&api_gen.BroadcastTxCommitResponse{
 		Result: bres.DeliverTx.Data,
 		Hash:   bres.Hash,
 		Height: bres.Height,
 	}); err != nil {
-		s.logger.Error("BroadcastTxCommit stream.Send returned error", zap.Error(err))
+		s.logger.Error("BroadcastTxCommit send returned error", zap.Error(err))
 		return err
 	}
 
 	return nil
 }
 
-func (s *gnoNativeService) AddressToBech32(ctx context.Context, req *connect.Request[api_gen.AddressToBech32Request]) (*connect.Response[api_gen.AddressToBech32Response], error) {
-	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Msg.Address))
-	bech32Address, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Msg.Address)
+func (s *gnoNativeService) AddressToBech32(ctx context.Context, req *api_gen.AddressToBech32Request) (*api_gen.AddressToBech32Response, error) {
+	s.logger.Debug("AddressToBech32", zap.ByteString("address", req.Address))
+	bech32Address, err := bech32.Encode(crypto.Bech32AddrPrefix(), req.Address)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	return connect.NewResponse(&api_gen.AddressToBech32Response{Bech32Address: bech32Address}), nil
+	return &api_gen.AddressToBech32Response{Bech32Address: bech32Address}, nil
 }
 
-func (s *gnoNativeService) AddressFromBech32(ctx context.Context, req *connect.Request[api_gen.AddressFromBech32Request]) (*connect.Response[api_gen.AddressFromBech32Response], error) {
-	address, err := crypto.AddressFromBech32(req.Msg.Bech32Address)
+func (s *gnoNativeService) AddressFromBech32(ctx context.Context, req *api_gen.AddressFromBech32Request) (*api_gen.AddressFromBech32Response, error) {
+	address, err := crypto.AddressFromBech32(req.Bech32Address)
 	if err != nil {
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.AddressFromBech32Response{Address: address.Bytes()}), nil
+	return &api_gen.AddressFromBech32Response{Address: address.Bytes()}, nil
 }
 
-func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *connect.Request[api_gen.AddressFromMnemonicRequest]) (*connect.Response[api_gen.AddressFromMnemonicResponse], error) {
+func (s *gnoNativeService) AddressFromMnemonic(ctx context.Context, req *api_gen.AddressFromMnemonicRequest) (*api_gen.AddressFromMnemonicResponse, error) {
 	kb := crypto_keys.NewInMemory()
-	info, err := kb.CreateAccount("temporary", req.Msg.Mnemonic, "", "", uint32(0), uint32(0))
+	info, err := kb.CreateAccount("temporary", req.Mnemonic, "", "", uint32(0), uint32(0))
 	if err != nil {
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}), nil
+	return &api_gen.AddressFromMnemonicResponse{Address: info.GetAddress().Bytes()}, nil
 }
 
-func (s *gnoNativeService) ValidateMnemonicWord(ctx context.Context, req *connect.Request[api_gen.ValidateMnemonicWordRequest]) (*connect.Response[api_gen.ValidateMnemonicWordResponse], error) {
-	valid := slices.Contains(bip39.EnglishWordList, req.Msg.Word)
-	return connect.NewResponse(&api_gen.ValidateMnemonicWordResponse{Valid: valid}), nil
+func (s *gnoNativeService) ValidateMnemonicWord(ctx context.Context, req *api_gen.ValidateMnemonicWordRequest) (*api_gen.ValidateMnemonicWordResponse, error) {
+	valid := slices.Contains(bip39.EnglishWordList, req.Word)
+	return &api_gen.ValidateMnemonicWordResponse{Valid: valid}, nil
 }
 
-func (s *gnoNativeService) ValidateMnemonicPhrase(ctx context.Context, req *connect.Request[api_gen.ValidateMnemonicPhraseRequest]) (*connect.Response[api_gen.ValidateMnemonicPhraseResponse], error) {
-	_, err := bip39.MnemonicToByteArray(req.Msg.Phrase)
-	return connect.NewResponse(&api_gen.ValidateMnemonicPhraseResponse{Valid: err == nil}), nil
+func (s *gnoNativeService) ValidateMnemonicPhrase(ctx context.Context, req *api_gen.ValidateMnemonicPhraseRequest) (*api_gen.ValidateMnemonicPhraseResponse, error) {
+	_, err := bip39.MnemonicToByteArray(req.Phrase)
+	return &api_gen.ValidateMnemonicPhraseResponse{Valid: err == nil}, nil
 }
 
-func (s *gnoNativeService) PubKeyBytesFromBech32(ctx context.Context, req *connect.Request[api_gen.PubKeyBytesFromBech32Request]) (*connect.Response[api_gen.PubKeyBytesFromBech32Response], error) {
-	pubKey, err := crypto.PubKeyFromBech32(req.Msg.Bech32PubKey)
+func (s *gnoNativeService) PubKeyBytesFromBech32(ctx context.Context, req *api_gen.PubKeyBytesFromBech32Request) (*api_gen.PubKeyBytesFromBech32Response, error) {
+	pubKey, err := crypto.PubKeyFromBech32(req.Bech32PubKey)
 	if err != nil {
 		return nil, err
 	}
 
-	return connect.NewResponse(&api_gen.PubKeyBytesFromBech32Response{PubKeyBytes: pubKey.Bytes()}), nil
+	return &api_gen.PubKeyBytesFromBech32Response{PubKeyBytes: pubKey.Bytes()}, nil
 }
 
-func (s *gnoNativeService) Hello(ctx context.Context, req *connect.Request[api_gen.HelloRequest]) (*connect.Response[api_gen.HelloResponse], error) {
+func (s *gnoNativeService) Hello(ctx context.Context, req *api_gen.HelloRequest) (*api_gen.HelloResponse, error) {
 	s.logger.Debug("Hello called")
 	defer s.logger.Debug("Hello returned ok")
-	return connect.NewResponse(&api_gen.HelloResponse{
-		Greeting: "Hello " + req.Msg.Name,
-	}), nil
+	return &api_gen.HelloResponse{
+		Greeting: "Hello " + req.Name,
+	}, nil
 }
 
 // HelloStream is for debug purposes
-func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request[api_gen.HelloStreamRequest], stream *connect.ServerStream[api_gen.HelloStreamResponse]) error {
+func (s *gnoNativeService) HelloStream(ctx context.Context, req *api_gen.HelloStreamRequest, send func(*api_gen.HelloStreamResponse) error) error {
 	s.logger.Debug("HelloStream called")
 	for i := 0; i < 4; i++ {
-		if err := stream.Send(&api_gen.HelloStreamResponse{
-			Greeting: "Hello " + req.Msg.Name,
+		if err := send(&api_gen.HelloStreamResponse{
+			Greeting: "Hello " + req.Name,
 		}); err != nil {
 			s.logger.Error("HelloStream returned error", zap.Error(err))
 			return err
 		}
-		time.Sleep(2 * time.Second)
+		// Respect ctx cancellation so a closed direct stream doesn't leak this goroutine.
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-time.After(2 * time.Second):
+		}
 	}
 
 	s.logger.Debug("HelloStream returned ok")

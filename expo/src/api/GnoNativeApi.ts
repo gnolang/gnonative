@@ -684,6 +684,9 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   initBridge(): Promise<void> {
     return GoBridge.initBridge();
   }
+  initBridgeWithOptions(options: import('../GoBridge').InitBridgeOptions): Promise<void> {
+    return GoBridge.initBridgeWithOptions(options);
+  }
   closeBridge(): Promise<void> {
     return GoBridge.closeBridge();
   }
@@ -701,5 +704,17 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   }
   closeStreamClient(id: string): Promise<void> {
     return GoBridge.closeStreamClient(id);
+  }
+  invokeMethod(method: string, jsonMessage: string): Promise<string> {
+    return GoBridge.invokeMethod(method, jsonMessage);
+  }
+  createStream(method: string, jsonMessage: string): Promise<string> {
+    return GoBridge.createStream(method, jsonMessage);
+  }
+  streamReceive(id: string): Promise<string> {
+    return GoBridge.streamReceive(id);
+  }
+  closeStream(id: string): Promise<void> {
+    return GoBridge.closeStream(id);
   }
 }

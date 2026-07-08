@@ -29,6 +29,11 @@ import (
 )
 
 type GnoNativeService interface {
+	// GnoNativeApi is the plain-Go (connect/gRPC-free) service API. Pure-Go consumers can
+	// call these methods directly when both listeners are disabled (WithDisableUdsListener()
+	// and no WithUseTcpListener()), which yields a service with no server.
+	GnoNativeApi
+
 	GetUDSPath() string
 	GetTcpAddr() string
 	GetTcpPort() int
@@ -273,7 +278,7 @@ func (s *gnoNativeService) runGRPCServer(listener net.Listener) error {
 
 	compress1KB := connect.WithCompressMinBytes(1024)
 	mux.Handle(_goconnect.NewGnoNativeServiceHandler(
-		s,
+		&connectHandler{svc: s},
 		compress1KB,
 	))
 	mux.Handle(grpchealth.NewHandler(

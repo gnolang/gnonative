@@ -80,6 +80,47 @@ public class GnonativeModule: Module {
       }
     }
     
+    AsyncFunction("initBridgeWithOptions") { (options: InitBridgeOptions, promise: Promise) in
+      var err: NSError?
+
+      do {
+        if self.bridge != nil {
+          throw GnoError(.alreadyStarted)
+        }
+
+        // init the bridge service
+
+        guard let config = GnoGnonativeBridgeConfig() else {
+          throw GnoError(.createConfig)
+        }
+        config.rootDir = self.appRootDir!
+        config.tmpDir = self.tmpDir!
+        config.nativeDB = NativeDBManager.shared
+
+        let useGrpcServers = options.useGrpcServers
+        config.disableGrpcServers = !useGrpcServers
+
+        // On simulator we can't create an UDS, so force TCP. This is only needed when the
+        // gRPC servers are enabled; the connect-free dispatcher path needs no sockets at all.
+#if targetEnvironment(simulator)
+        if useGrpcServers {
+          config.useTcpListener = true
+          config.disableUdsListener = true
+        }
+#endif
+
+        let bridge = GnoGnonativeNewBridge(config, &err);
+        if err != nil {
+          throw err!
+        }
+        self.bridge = bridge
+
+        promise.resolve(true)
+      } catch let error {
+        promise.reject(error)
+      }
+    }
+
     AsyncFunction("getTcpPort") { (promise: Promise) in
       do {
         guard let service = self.bridge else {
@@ -158,6 +199,58 @@ public class GnonativeModule: Module {
       }
     }
 
+    AsyncFunction("invokeMethod") { (method: String, jsonMessage: String, promise: Promise) in
+      do {
+        guard let service = self.bridge else {
+          throw GnoError(.notStarted)
+        }
+
+        let block = PromiseBlock(promise: promise)
+        service.invokeMethod(with: block, method: method as String, jsonMessage: jsonMessage as String)
+      } catch let err {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("createStream") { (method: String, jsonMessage: String, promise: Promise) in
+      do {
+        guard let service = self.bridge else {
+          throw GnoError(.notStarted)
+        }
+
+        let block = PromiseBlock(promise: promise)
+        service.createStream(with: block, method: method as String, jsonMessage: jsonMessage as String)
+      } catch let err {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("streamReceive") { (id: String, promise: Promise) in
+      do {
+        guard let service = self.bridge else {
+          throw GnoError(.notStarted)
+        }
+
+        let block = PromiseBlock(promise: promise)
+        service.streamReceive(with: block, id_: id as String)
+      } catch let err {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("closeStream") { (id: String, promise: Promise) in
+      do {
+        guard let service = self.bridge else {
+          throw GnoError(.notStarted)
+        }
+
+        let block = PromiseBlock(promise: promise)
+        service.closeStream(with: block, id_: id as String)
+      } catch let err {
+        promise.reject(err)
+      }
+    }
+
     // Enables the module to be used as a native view. Definition components that are accepted as part of the
     // view definition: Prop, Events.
     View(GnonativeView.self) {
@@ -167,6 +260,11 @@ public class GnonativeModule: Module {
       }
     }
   }
+}
+
+// Options for initBridgeWithOptions. useGrpcServers defaults to true (today's behavior).
+struct InitBridgeOptions: Record {
+  @Field var useGrpcServers: Bool = true
 }
 
 extension FileManager {

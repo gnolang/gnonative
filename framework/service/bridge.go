@@ -24,6 +24,10 @@ type BridgeConfig struct {
 	TmpDir             string
 	UseTcpListener     bool
 	DisableUdsListener bool
+	// DisableGrpcServers disables the in-process connect/gRPC servers (UDS/TCP) and the loopback
+	// connect client entirely. The bridge then serves JS calls only through ServiceDispatcher,
+	// which calls the plain service API directly. Zero value keeps today's gRPC behavior.
+	DisableGrpcServers bool
 }
 
 func NewBridgeConfig() *BridgeConfig {
@@ -40,6 +44,7 @@ type Bridge struct {
 	serviceServer service.GnoNativeService
 
 	ServiceClient
+	ServiceDispatcher
 }
 
 func NewBridge(config *BridgeConfig) (*Bridge, error) {
@@ -76,13 +81,18 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 			service.WithTmpDir(config.TmpDir),
 		)
 
-		if config.UseTcpListener {
-			svcOpts = append(svcOpts, service.WithUseTcpListener())
-			svcOpts = append(svcOpts, service.WithTcpAddr("localhost:0"))
-		}
-
-		if config.DisableUdsListener {
+		// When the gRPC servers are disabled, run the service with no listeners at all.
+		if config.DisableGrpcServers {
 			svcOpts = append(svcOpts, service.WithDisableUdsListener())
+		} else {
+			if config.UseTcpListener {
+				svcOpts = append(svcOpts, service.WithUseTcpListener())
+				svcOpts = append(svcOpts, service.WithTcpAddr("localhost:0"))
+			}
+
+			if config.DisableUdsListener {
+				svcOpts = append(svcOpts, service.WithDisableUdsListener())
+			}
 		}
 
 		serviceServer, err := service.NewGnoNativeService(svcOpts...)
@@ -92,8 +102,14 @@ func NewBridge(config *BridgeConfig) (*Bridge, error) {
 		b.serviceServer = serviceServer
 	}
 
+	// The dispatcher provides the connect-free path and works in both modes.
+	b.ServiceDispatcher = newServiceDispatcher(b.serviceServer)
+
 	// create native bridge client
-	{
+	if config.DisableGrpcServers {
+		// No in-process HTTP server/client: reject legacy grpc calls; use the dispatcher instead.
+		b.ServiceClient = newDisabledServiceClient()
+	} else {
 		var httpClient *http.Client
 		var address string
 
