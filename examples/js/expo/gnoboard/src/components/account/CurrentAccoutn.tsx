@@ -1,9 +1,9 @@
 import Text from '../texts';
-import { KeyInfo } from '@gnolang/gnonative';
+import { KeyInfoJson } from '@gnolang/gnonative';
 import styled from 'styled-components/native';
 
 export type Props = {
-  account: KeyInfo | undefined;
+  account: KeyInfoJson | undefined;
 };
 
 const CurrentAccount = ({ account }: Props) => {

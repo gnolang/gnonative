@@ -15,7 +15,6 @@ import java.io.File
 class GnonativeModule : Module() {
   private var context: Context? = null
   private var rootDir: File? = null
-  private var socketPort = 0
   private var bridgeGnoNative: Bridge? = null
   private var nativeDBManager: NativeDBManager? = null
 
@@ -77,24 +76,11 @@ class GnonativeModule : Module() {
       }
     }
 
-    AsyncFunction("getTcpPort") { promise: Promise ->
-    try {
-      bridgeGnoNative?.let {
-        socketPort = bridgeGnoNative!!.tcpPort.toInt()
-        promise.resolve(socketPort)
-      } ?: run {
-        throw GoBridgeNotStartedError()
-      }
-    } catch (err: CodedException) {
-      promise.reject(err)
-      }
-    }
-
-    AsyncFunction("invokeGrpcMethod") { method: String, jsonMessage: String, promise: Promise ->
+    AsyncFunction("invokeMethod") { method: String, jsonMessage: String, promise: Promise ->
       try {
         bridgeGnoNative?.let {
           val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.invokeGrpcMethodWithPromiseBlock(promiseBlock, method, jsonMessage)
+          bridgeGnoNative!!.invokeMethodWithPromiseBlock(promiseBlock, method, jsonMessage)
         } ?: run {
           throw GoBridgeNotStartedError()
         }
@@ -103,11 +89,11 @@ class GnonativeModule : Module() {
       }
     }
 
-    AsyncFunction("createStreamClient") { method: String, jsonMessage: String, promise: Promise ->
+    AsyncFunction("createStream") { method: String, jsonMessage: String, promise: Promise ->
       try {
         bridgeGnoNative?.let {
           val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.createStreamClientWithPromiseBlock(promiseBlock, method, jsonMessage)
+          bridgeGnoNative!!.createStreamWithPromiseBlock(promiseBlock, method, jsonMessage)
         } ?: run {
           throw GoBridgeNotStartedError()
         }
@@ -116,11 +102,11 @@ class GnonativeModule : Module() {
       }
     }
 
-    AsyncFunction("streamClientReceive") { id: String, promise: Promise ->
+    AsyncFunction("streamReceive") { id: String, promise: Promise ->
       try {
         bridgeGnoNative?.let {
           val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.streamClientReceiveWithPromiseBlock(promiseBlock, id)
+          bridgeGnoNative!!.streamReceiveWithPromiseBlock(promiseBlock, id)
         } ?: run {
           throw GoBridgeNotStartedError()
         }
@@ -129,11 +115,11 @@ class GnonativeModule : Module() {
       }
     }
 
-    AsyncFunction("closeStreamClient") { id: String, promise: Promise ->
+    AsyncFunction("closeStream") { id: String, promise: Promise ->
       try {
         bridgeGnoNative?.let {
           val promiseBlock: PromiseBlock = PromiseBlock(promise)
-          bridgeGnoNative!!.closeStreamClientWithPromiseBlock(promiseBlock, id)
+          bridgeGnoNative!!.closeStreamWithPromiseBlock(promiseBlock, id)
         } ?: run {
           throw GoBridgeNotStartedError()
         }

@@ -1,6 +1,6 @@
 import Layout from '@gno/components/pages';
 import Text from '@gno/components/texts';
-import { KeyInfo, useGnoNativeContext } from '@gnolang/gnonative';
+import { KeyInfoJson, useGnoNativeContext } from '@gnolang/gnonative';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ const RemoveAccount = () => {
   const { gnonative } = useGnoNativeContext();
   const navigation = useNavigation<RouterWelcomeStackProp>();
   const [loading, setLoading] = useState<string | undefined>(undefined);
-  const [accounts, setAccounts] = useState<KeyInfo[]>([]);
+  const [accounts, setAccounts] = useState<KeyInfoJson[]>([]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
@@ -30,7 +30,7 @@ const RemoveAccount = () => {
     return unsubscribe;
   }, [navigation]);
 
-  const onChangeAccountHandler = async (account: KeyInfo) => {
+  const onChangeAccountHandler = async (account: KeyInfoJson) => {
     navigation.navigate(RoutePath.RemoveConfirm, { accountName: account.name });
   };
 

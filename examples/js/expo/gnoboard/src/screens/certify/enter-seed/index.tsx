@@ -50,7 +50,7 @@ const EnterSeedPhrase = () => {
 
       const response = await gnonative.createAccount(name, recoveryPhrase, password);
       await gnonative.activateAccount(name);
-      await gnonative.setPassword(password, response!.address);
+      await gnonative.setPassword(password, response!.address ?? '');
       setAccount(response);
       console.log('createAccount response: ' + response);
       navigation.navigate(RoutePath.Home);

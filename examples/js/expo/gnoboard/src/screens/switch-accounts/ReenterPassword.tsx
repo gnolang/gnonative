@@ -4,15 +4,14 @@ import { Modal } from '@gno/components/modal';
 import { Spacer } from '@gno/components/row';
 import TextInput from '@gno/components/textinput';
 import Text from '@gno/components/texts';
-import { ErrCode, GRPCError, useGnoNativeContext } from '@gnolang/gnonative';
+import { ErrCode, GnoNativeError, useGnoNativeContext } from '@gnolang/gnonative';
 import { useState } from 'react';
 import { Modal as NativeModal } from 'react-native';
-import { ConnectError } from '@connectrpc/connect';
 
 export type Props = {
   visible: boolean;
   accountName: string;
-  accountAddress: Uint8Array;
+  accountAddress: string;
   onClose: (sucess: boolean) => void;
 };
 
@@ -29,12 +28,10 @@ const ReenterPassword = ({ visible, accountName, accountAddress, onClose }: Prop
       await gnonative.setPassword(password, accountAddress);
       onClose(true);
     } catch (error) {
-      if (error instanceof ConnectError) {
-        const err = new GRPCError(error);
-        if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-          setError('Wrong password, please try again.');
-          return;
-        }
+      const err = new GnoNativeError((error as Error)?.message ?? String(error));
+      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+        setError('Wrong password, please try again.');
+        return;
       }
       setError(JSON.stringify(error));
     }

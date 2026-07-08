@@ -2,32 +2,20 @@ package service
 
 import (
 	"os"
-	"path/filepath"
 
 	"github.com/gnolang/gno/tm2/pkg/db"
-	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
-const (
-	DEFAULT_TCP_ADDR      = ":26658"
-	DEFAULT_SOCKET_SUBDIR = "s"
-	DEFAULT_SOCKET_FILE   = "gno"
-)
-
 // Config describes a set of settings for a GnoNativeService
 type Config struct {
-	Logger             *zap.Logger
-	Remote             string
-	ChainID            string
-	NativeDB           db.DB
-	RootDir            string
-	TmpDir             string
-	TcpAddr            string
-	UdsPath            string
-	UseTcpListener     bool
-	DisableUdsListener bool
+	Logger   *zap.Logger
+	Remote   string
+	ChainID  string
+	NativeDB db.DB
+	RootDir  string
+	TmpDir   string
 }
 
 type GnoNativeOption func(cfg *Config) error
@@ -244,103 +232,6 @@ var WithFallbackTmpDir GnoNativeOption = func(cfg *Config) error {
 	return nil
 }
 
-// --- tcpAddr options ---
-
-// WithTcpAddr sets the given TCP address to serve the gRPC server.
-// If no TCP address is defined, a default will be used.
-// If the TCP port is set to 0, a random port number will be chosen.
-var WithTcpAddr = func(addr string) GnoNativeOption {
-	return func(cfg *Config) error {
-		cfg.TcpAddr = addr
-		return nil
-	}
-}
-
-// WithDefaultTcpAddr sets a default TCP addr to listen to.
-var WithDefaultTcpAddr GnoNativeOption = func(cfg *Config) error {
-	cfg.TcpAddr = DEFAULT_TCP_ADDR
-
-	return nil
-}
-
-var fallbackTcpAddr = FallBackOption{
-	fallback: func(cfg *Config) bool { return cfg.TcpAddr == "" },
-	opt:      WithDefaultTcpAddr,
-}
-
-// WithDefaultTcpAddr sets a default TCP addr to listen to if no address is set.
-var WithFallbackTcpAddr GnoNativeOption = func(cfg *Config) error {
-	if fallbackTcpAddr.fallback(cfg) {
-		return fallbackTcpAddr.opt(cfg)
-	}
-	return nil
-}
-
-// --- udsPath options ---
-
-// WithUdsPath sets the given Unix Domain Socket path to serve the gRPC server.
-// If no UDS socket is defined, a default will be used.
-var WithUdsPath = func(path string) GnoNativeOption {
-	return func(cfg *Config) error {
-		absPath, err := filepath.Abs(path)
-		if err != nil {
-			return err
-		}
-
-		cfg.UdsPath = absPath
-		return nil
-	}
-}
-
-// WithDefaultUdsPath sets a default UDS path to listen to.
-var WithDefaultUdsPath GnoNativeOption = func(cfg *Config) error {
-	// dependency
-	if err := WithFallbackTmpDir(cfg); err != nil {
-		return err
-	}
-
-	// create a socket subdirectory
-	sockDir := filepath.Join(cfg.TmpDir, DEFAULT_SOCKET_SUBDIR)
-	if err := os.MkdirAll(sockDir, 0700); err != nil {
-		return api_gen.ErrCode_ErrInitService.Wrap(err)
-	}
-
-	cfg.UdsPath = filepath.Join(sockDir, DEFAULT_SOCKET_FILE)
-
-	return nil
-}
-
-var fallbackUdsPath = FallBackOption{
-	fallback: func(cfg *Config) bool { return cfg.UdsPath == "" },
-	opt:      WithDefaultUdsPath,
-}
-
-// WithDefaultUdsPath sets a default UDS path to listen to if no path is set.
-var WithFallbackUdsPath GnoNativeOption = func(cfg *Config) error {
-	if fallbackUdsPath.fallback(cfg) {
-		return fallbackUdsPath.opt(cfg)
-	}
-	return nil
-}
-
-// --- listener options ---
-
-// WithUseTcpListener sets the gRPC server to serve on a TCP listener.
-var WithUseTcpListener = func() GnoNativeOption {
-	return func(cfg *Config) error {
-		cfg.UseTcpListener = true
-		return nil
-	}
-}
-
-// WithDisableUdsListener sets the gRPC server to serve on a TCP listener.
-var WithDisableUdsListener = func() GnoNativeOption {
-	return func(cfg *Config) error {
-		cfg.DisableUdsListener = true
-		return nil
-	}
-}
-
 // --- Fallback options ---
 
 var defaults = []FallBackOption{
@@ -349,8 +240,6 @@ var defaults = []FallBackOption{
 	fallbackChainID,
 	fallbackRootDir,
 	fallbackTmpDir,
-	fallbackTcpAddr,
-	fallbackUdsPath,
 }
 
 // WithFallbackDefaults sets the default options if no option is set.

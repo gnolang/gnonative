@@ -1,11 +1,11 @@
 import Text from '../texts';
 import styled from 'styled-components/native';
 import { colors } from '@gno/styles';
-import { BaseAccount } from '@gnolang/gnonative';
+import { BaseAccountJson } from '@gnolang/gnonative';
 import Row from '../row';
 
 export type Props = {
-  accountInfo: BaseAccount | undefined;
+  accountInfo: BaseAccountJson | undefined;
   unknownAddress: boolean;
 };
 
@@ -24,22 +24,23 @@ const AccountBalance = (props: Props) => {
     return null;
   }
 
-  const coins = props.accountInfo.coins;
+  const coins = props.accountInfo.coins ?? [];
 
   return (
     <CenterView>
       {coins.map((coin, index) => (
-        <Coin key={index} amount={coin.amount} denom={coin.denom} />
+        <Coin key={index} amount={coin.amount ?? '0'} denom={coin.denom ?? ''} />
       ))}
     </CenterView>
   );
 };
 
-const Coin = (props: { amount: bigint; denom: string }) => {
+// amount and denom are the plain-JSON wire values: int64 amount is a string.
+const Coin = (props: { amount: string; denom: string }) => {
   return (
     <Row>
       <Text.Body style={{ paddingRight: 4 }}>{props.denom}</Text.Body>
-      <Text.Body>{props.amount.toString()}</Text.Body>
+      <Text.Body>{props.amount}</Text.Body>
     </Row>
   );
 };

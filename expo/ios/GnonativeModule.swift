@@ -9,19 +9,18 @@ public class GnonativeModule: Module {
   var appRootDir: String?
   var tmpDir: String?
   var bridge: GnoGnonativeBridge?
-  var socketPort: Int = 0
-  
+
   public func definition() -> ModuleDefinition {
     // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
     // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
     // The module will be accessible from `requireNativeModule('Gnonative')` in JavaScript.
     Name("Gnonative")
-    
+
     // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
     Constants([
       "PI": Double.pi
     ])
-    
+
     OnCreate {
       do {
         self.appRootDir = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).path
@@ -30,7 +29,7 @@ public class GnonativeModule: Module {
       }
       self.tmpDir = FileManager.default.compatTemporaryDirectory.path
     }
-    
+
     OnDestroy {
       do {
         if self.bridge != nil {
@@ -41,118 +40,99 @@ public class GnonativeModule: Module {
         self.logger.error("\(String(describing: error.code))")
       }
     }
-    
+
     // Defines event names that the module can send to JavaScript.
     Events("onChange")
-    
+
     AsyncFunction("initBridge") { (promise: Promise) in
       var err: NSError?
-      
+
       do {
         if self.bridge != nil {
           throw GnoError(.alreadyStarted)
         }
-        
+
         // init the bridge service
-        
+
         guard let config = GnoGnonativeBridgeConfig() else {
           throw GnoError(.createConfig)
         }
         config.rootDir = self.appRootDir!
         config.tmpDir = self.tmpDir!
         config.nativeDB = NativeDBManager.shared
-        
-        // On simulator we can't create an UDS, see comment below
-#if targetEnvironment(simulator)
-        config.useTcpListener = true
-        config.disableUdsListener = true
-#endif
-        
+
         let bridge = GnoGnonativeNewBridge(config, &err);
         if err != nil {
           throw err!
         }
         self.bridge = bridge
-        
+
         promise.resolve(true)
       } catch let error {
         promise.reject(error)
       }
     }
-    
-    AsyncFunction("getTcpPort") { (promise: Promise) in
-      do {
-        guard let service = self.bridge else {
-          throw GnoError(.notStarted)
-        }
-        self.socketPort = service.getTcpPort()
-        self.logger.info("gRPC server port: \(self.socketPort)")
-        promise.resolve(self.socketPort)
-      } catch let error {
-        promise.reject(error)
-      }
-    }
-    
+
     AsyncFunction("closeBridge") { (promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
         }
-        
+
         try service.close()
         self.bridge = nil
       } catch let error {
         promise.reject(error)
       }
     }
-    
-    AsyncFunction("invokeGrpcMethod") { (method: String, jsonMessage: String, promise: Promise) in
+
+    AsyncFunction("invokeMethod") { (method: String, jsonMessage: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
         }
-        
+
         let block = PromiseBlock(promise: promise)
-        service.invokeGrpcMethod(with: block, method: method as String, jsonMessage: jsonMessage as String)
+        service.invokeMethod(with: block, method: method as String, jsonMessage: jsonMessage as String)
       } catch let err {
         promise.reject(err)
       }
     }
-    
-    AsyncFunction("createStreamClient") { (method: String, jsonMessage: String, promise: Promise) in
+
+    AsyncFunction("createStream") { (method: String, jsonMessage: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
         }
-        
+
         let block = PromiseBlock(promise: promise)
-        service.createStreamClient(with: block, method: method as String, jsonMessage: jsonMessage as String)
+        service.createStream(with: block, method: method as String, jsonMessage: jsonMessage as String)
       } catch let err {
         promise.reject(err)
       }
     }
-    
-    AsyncFunction("streamClientReceive") { (id: String, promise: Promise) in
+
+    AsyncFunction("streamReceive") { (id: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
         }
-        
+
         let block = PromiseBlock(promise: promise)
-        service.streamClientReceive(with: block, id_: id as String)
+        service.streamReceive(with: block, id_: id as String)
       } catch let err {
         promise.reject(err)
       }
     }
-    
-    AsyncFunction("closeStreamClient") { (id: String, promise: Promise) in
+
+    AsyncFunction("closeStream") { (id: String, promise: Promise) in
       do {
         guard let service = self.bridge else {
           throw GnoError(.notStarted)
         }
-        
+
         let block = PromiseBlock(promise: promise)
-        service.closeStreamClient(with: block, id_: id as String)
+        service.closeStream(with: block, id_: id as String)
       } catch let err {
         promise.reject(err)
       }

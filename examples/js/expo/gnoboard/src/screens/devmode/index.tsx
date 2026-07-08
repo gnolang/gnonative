@@ -5,12 +5,10 @@ import { useState } from 'react';
 import { Linking, ScrollView, StyleSheet, View } from 'react-native';
 import Button from '@gno/components/buttons';
 import Layout from '@gno/components/pages';
-import { GRPCError, useGnoNativeContext, ErrCode } from '@gnolang/gnonative';
-import { Buffer } from 'buffer';
+import { GnoNativeError, useGnoNativeContext, ErrCode, base64ToString } from '@gnolang/gnonative';
 import ReenterPassword from '../switch-accounts/ReenterPassword';
 import { Spacer } from '@gno/components/row';
 import Text from '@gno/components/texts';
-import { ConnectError } from '@connectrpc/connect';
 import { useNavigation } from '@react-navigation/native';
 import { RouterWelcomeStackProp } from '@gno/router/custom-router';
 import { RoutePath } from '@gno/router/path';
@@ -21,7 +19,7 @@ function DevMode() {
   const [appConsole, setAppConsole] = useState<string>('');
   const [loading, setLoading] = useState<string | undefined>(undefined);
   const [reenterPassword, setReenterPassword] = useState<string | undefined>(undefined);
-  const [reenterPasswordAddress, setReenterPasswordAddress] = useState<Uint8Array | undefined>(undefined);
+  const [reenterPasswordAddress, setReenterPasswordAddress] = useState<string | undefined>(undefined);
   const navigate = useNavigation<RouterWelcomeStackProp>();
 
   const { gnonative } = useGnoNativeContext();
@@ -35,21 +33,20 @@ function DevMode() {
     setLoading('Replying to a post...');
     setAppConsole('replying to a post...');
     const gasFee = '1000000ugnot';
-    const gasWanted = BigInt(2000000);
+    const gasWanted = '2000000';
     const args: Array<string> = ['1', '1', '1', postContent];
     try {
-      for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted, account.address)) {
+      for await (const response of await gnonative.call('gno.land/r/demo/boards', 'CreateReply', args, gasFee, gasWanted, account.address ?? '')) {
         console.log('response: ', response);
-        setAppConsole(Buffer.from(response.result).toString());
+        // response.result is a base64 string on the wire.
+        setAppConsole(response.result ? base64ToString(response.result) : '');
       }
     } catch (error) {
-      if (error instanceof ConnectError) {
-        const err = new GRPCError(error);
-        if (err.errCode() === ErrCode.ErrDecryptionFailed) {
-          setReenterPassword(account.name);
-          setReenterPasswordAddress(account.address);
-          return;
-        }
+      const err = new GnoNativeError((error as Error)?.message ?? String(error));
+      if (err.errCode() === ErrCode.ErrDecryptionFailed) {
+        setReenterPassword(account.name);
+        setReenterPasswordAddress(account.address);
+        return;
       }
       console.log(error);
       setAppConsole('error' + JSON.stringify(error));

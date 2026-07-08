@@ -1,9 +1,5 @@
 PROJECT_DIR := $(shell go list -m -f '{{.Dir}}')
 
-API_SRC := $(PROJECT_DIR)/api/gen/es
-API_SRC_FILES := $(shell find $(PROJECT_DIR)/api/gen/es -iname '*.js' -o -iname '*.ts')
-API_VENDOR := src/api/vendor
-
 ANDROID_FRAMEWORK_SRC_DIR := $(PROJECT_DIR)/framework/android
 ANDROID_FRAMEWORK_OUTPUT_DIR := android/libs
 ANDROID_FRAMEWORK_FILES := gnocore.aar gnocore-sources.jar
@@ -24,26 +20,13 @@ go_deps := $(PROJECT_DIR)/go.mod $(PROJECT_DIR)/go.sum $(go_files)
 
 build: build.android build.ios
 
-clean: clean.android clean.ios clean.api
+clean: clean.android clean.ios
 	cd $(PROJECT_DIR); $(MAKE) clean
 .PHONY: clean
 
-######### API #########
-
-build.api: $(API_VENDOR)
-.PHONY: build.api
-
-$(API_VENDOR): $(API_SRC_FILES)
-	mkdir -p $(API_VENDOR)
-	cp -r $^ $(API_VENDOR)
-	touch $@
-
-clean.api:
-	rm -fr $(API_VENDOR)
-
 ######### ANDROID #########
 
-build.android: $(ANDROID_FRAMEWORK_DST) build.api
+build.android: $(ANDROID_FRAMEWORK_DST)
 .PHONY: build.android
 
 $(ANDROID_FRAMEWORK_SRC): $(go_deps)
@@ -59,7 +42,7 @@ clean.android:
 
 ######### IOS #########
 
-build.ios: $(IOS_FRAMEWORK_DST) build.api
+build.ios: $(IOS_FRAMEWORK_DST)
 .PHONY: build.ios
 
 $(IOS_FRAMEWORK_SRC): $(go_deps)

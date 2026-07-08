@@ -1,6 +1,3 @@
-// order of imports is important
-import 'react-native-polyfill-globals/auto';
-
 import { GnoNativeProvider } from '@gnolang/gnonative';
 import { GnoboardProvider } from '@gno/provider/gnoboard-provider';
 import CustomRouter from '@gno/router/custom-router';

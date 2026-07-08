@@ -39,7 +39,7 @@ const InnerApp = () => {
         setGreeting(await gnonative.hello('Gno'));
 
         for await (const res of await gnonative.helloStream('Gno')) {
-          console.log(res.greeting);
+          console.log(res.Greeting);
         }
       } catch (error) {
         console.log(error);

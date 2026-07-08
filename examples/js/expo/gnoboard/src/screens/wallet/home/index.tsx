@@ -10,8 +10,7 @@ import CurrentAccount from '@gno/components/account/CurrentAccoutn';
 import Loading from '@gno/screens/loading';
 import { AccountBalance } from '@gno/components/account';
 import { Spacer } from '@gno/components/row';
-import { ConnectError } from '@connectrpc/connect';
-import { ErrCode, GRPCError, useGnoNativeContext, KeyInfo, QueryAccountResponse } from '@gnolang/gnonative';
+import { ErrCode, GnoNativeError, useGnoNativeContext, QueryAccountResponseJson } from '@gnolang/gnonative';
 import { useGnoboardContext } from '@gno/provider/gnoboard-provider';
 
 export const Home: React.FC = () => {
@@ -20,7 +19,7 @@ export const Home: React.FC = () => {
 
   const { account } = useGnoboardContext();
   const [loading, setLoading] = React.useState<string | undefined>(undefined);
-  const [balance, setBalance] = React.useState<QueryAccountResponse | undefined>(undefined);
+  const [balance, setBalance] = React.useState<QueryAccountResponseJson | undefined>(undefined);
   const [unknownAddress, setUnknownAddress] = React.useState<boolean>(false);
 
   useEffect(() => {
@@ -29,16 +28,14 @@ export const Home: React.FC = () => {
       setBalance(undefined);
 
       try {
-        if (account) {
+        if (account?.address) {
           const balance = await gnonative.queryAccount(account.address);
           setBalance(balance);
         }
       } catch (error) {
-        if (error instanceof ConnectError) {
-          const err = new GRPCError(error);
-          if (err.errCode() === ErrCode.ErrNoActiveAccount) {
-            setUnknownAddress(true);
-          }
+        const err = new GnoNativeError((error as Error)?.message ?? String(error));
+        if (err.errCode() === ErrCode.ErrNoActiveAccount) {
+          setUnknownAddress(true);
         }
       } finally {
         setLoading(undefined);

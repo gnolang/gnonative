@@ -3,11 +3,11 @@ import GnonativeModule from './GnonativeModule';
 export interface GoBridgeInterface {
   initBridge(): Promise<void>;
   closeBridge(): Promise<void>;
-  getTcpPort(): Promise<number>;
-  invokeGrpcMethod(method: string, jsonMessage: string): Promise<string>;
-  createStreamClient(method: string, jsonMessage: string): Promise<string>;
-  streamClientReceive(id: string): Promise<string>;
-  closeStreamClient(id: string): Promise<void>;
+  // Dispatcher API: unary calls and server-streaming. Payloads are base64(JSON).
+  invokeMethod(method: string, jsonMessage: string): Promise<string>;
+  createStream(method: string, jsonMessage: string): Promise<string>;
+  streamReceive(id: string): Promise<string>;
+  closeStream(id: string): Promise<void>;
 }
 
 class GoBridge implements GoBridgeInterface {
@@ -19,24 +19,20 @@ class GoBridge implements GoBridgeInterface {
     return GnonativeModule.closeBridge();
   }
 
-  getTcpPort(): Promise<number> {
-    return GnonativeModule.getTcpPort();
+  invokeMethod(method: string, jsonMessage: string): Promise<string> {
+    return GnonativeModule.invokeMethod(method, jsonMessage);
   }
 
-  invokeGrpcMethod(method: string, jsonMessage: string): Promise<string> {
-    return GnonativeModule.invokeGrpcMethod(method, jsonMessage);
+  createStream(method: string, jsonMessage: string): Promise<string> {
+    return GnonativeModule.createStream(method, jsonMessage);
   }
 
-  createStreamClient(method: string, jsonMessage: string): Promise<string> {
-    return GnonativeModule.createStreamClient(method, jsonMessage);
+  streamReceive(id: string): Promise<string> {
+    return GnonativeModule.streamReceive(id);
   }
 
-  streamClientReceive(id: string): Promise<string> {
-    return GnonativeModule.streamClientReceive(id);
-  }
-
-  closeStreamClient(id: string): Promise<void> {
-    return GnonativeModule.closeStreamClient(id);
+  closeStream(id: string): Promise<void> {
+    return GnonativeModule.closeStream(id);
   }
 }
 
