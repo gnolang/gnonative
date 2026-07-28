@@ -62,3 +62,6 @@ ios/Frameworks/*
 
 # api vendor
 src/api/vendor/
+
+# npm pack output (make npm.pack)
+*.tgz

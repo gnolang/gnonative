@@ -91,7 +91,7 @@ func (s *serviceClient) InvokeGrpcMethod(method string, jsonMessage string) (str
 
 	errValue := outRaw[1].Interface()
 	if errValue != nil {
-		return "", errors.Wrap(errValue.(error), "invoke bridge method error")
+		return "", bridgeError(errValue.(error), "invoke bridge method error")
 	}
 
 	msg := outRaw[0].Elem().FieldByName("Msg").Interface()
@@ -149,7 +149,7 @@ func (s *serviceClient) CreateStreamClient(method string, jsonMessage string) (s
 
 	errValue := outRaw[1].Interface()
 	if errValue != nil {
-		return "", errors.Wrap(errValue.(error), "stream bridge method error")
+		return "", bridgeError(errValue.(error), "stream bridge method error")
 	}
 
 	streamId := strconv.FormatUint(atomic.AddUint64(&s.streamIds, 1), 16)
@@ -182,7 +182,7 @@ func (s *serviceClient) StreamClientReceive(id string) (string, error) {
 		refErr := stream.MethodByName("Err").Call([]reflect.Value{})
 		if refErr[0].Interface() != nil {
 			err := refErr[0].Interface().(error)
-			return "", errors.Wrap(err, "stream's reveived method error")
+			return "", bridgeError(err, "stream receive error")
 		}
 		return "", io.EOF
 	}

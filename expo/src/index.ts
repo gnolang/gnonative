@@ -20,5 +20,7 @@ export * from './provider/gnonative-provider';
 export * from './api/vendor/gnonativetypes_pb';
 export * from './api/vendor/rpc_pb';
 export { GRPCError } from './grpc/error';
+export { bridgeErrorToConnectError, errDetailOf } from './grpc/bridge_error';
+export type { ErrDetail } from './grpc/bridge_error';
 
 export * from './api/GnoNativeApi';
