@@ -6,8 +6,10 @@ package service
 import (
 	"context"
 	"errors"
+	"net"
 	"slices"
 	"strings"
+	"syscall"
 	"time"
 
 	"connectrpc.com/connect"
@@ -1389,9 +1391,53 @@ func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request
 	return nil
 }
 
+// isRemoteUnreachable reports whether err is a transport failure reaching the
+// remote node, rather than an answer from it.
+//
+// The RPC client returns these wrapped in *url.Error, so the concrete cause has
+// to be unwrapped: a *net.OpError for a refused or reset connection, a
+// *net.DNSError for a host that does not resolve, and anything satisfying
+// net.Error reporting Timeout for a request that got no reply. Matching the
+// message text instead would break on any Go or platform change to the wording.
+func isRemoteUnreachable(err error) bool {
+	if err == nil {
+		return false
+	}
+
+	var opErr *net.OpError
+	if errors.As(err, &opErr) {
+		return true
+	}
+
+	var dnsErr *net.DNSError
+	if errors.As(err, &dnsErr) {
+		return true
+	}
+
+	// Covers a deadline exceeded before any reply, including one the http client
+	// applied itself rather than the socket.
+	var netErr net.Error
+	if errors.As(err, &netErr) && netErr.Timeout() {
+		return true
+	}
+
+	return errors.Is(err, context.DeadlineExceeded) || errors.Is(err, syscall.ECONNREFUSED)
+}
+
 // If err is a recognized Go error, return the equivalent Grpc error.
 // Otherwise, just return err.
 func getGrpcError(err error) error {
+	// Check transport failures first. They are not about the request — it never
+	// reached the node — and an unwrapped one would otherwise fall through to the
+	// final `return err`, crossing the bridge as a flattened Go string with
+	// nothing machine-readable in it. Callers are then left matching prose such
+	// as "dial tcp ...: connect: connection refused" to tell "the node is
+	// unreachable" from "the chain rejected this", which is the one distinction
+	// they most need to make: only the former is worth a retry.
+	if isRemoteUnreachable(err) {
+		return api_gen.ErrCode_ErrRemoteUnreachable.Wrap(err)
+	}
+
 	if keyerror.IsErrKeyNotFound(err) {
 		return api_gen.ErrCode_ErrCryptoKeyNotFound
 	} else if keyerror.IsErrWrongPassword(err) {
