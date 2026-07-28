@@ -143,7 +143,7 @@ func (e ErrCode) Grpc() error {
 		e,
 	)
 	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
-		Codes: Codes(e),
+		Code: Code(e),
 	}); detailErr == nil {
 		err.AddDetail(detail)
 	}
@@ -176,7 +176,7 @@ func (e wrappedError) Grpc() error {
 	)
 
 	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
-		Codes: Codes(e),
+		Code: Code(e),
 	}); detailErr == nil {
 		err.AddDetail(detail)
 	}

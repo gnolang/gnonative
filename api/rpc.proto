@@ -320,6 +320,22 @@ enum ErrCode {
   ErrInvalidExpr = 219;
 }
 
+// ErrDetails is attached to a failing call so that a client can tell what went
+// wrong without reading the error text.
+//
+// It carries one code, not a list: no call site wraps one ErrCode in another, so
+// a list would be an array that never holds more than one entry and a client
+// asking which of them is authoritative. If a cause chain is ever needed, a
+// repeated field can be added alongside without disturbing this one.
 message ErrDetails {
-  repeated ErrCode codes = 1;
+  ErrCode code = 1;
+
+  // Default English text for the code, describing what happened at the chain or
+  // transport level.
+  //
+  // A client may show this as it is, or ignore it and map `code` to its own
+  // wording; it never has to invent text for a code it does not recognise. It
+  // deliberately stops at what happened and does not say what to do about it,
+  // because the remedy names screens only the application knows exist.
+  string message = 2;
 }

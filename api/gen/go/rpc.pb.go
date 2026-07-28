@@ -203,9 +203,24 @@ func (ErrCode) EnumDescriptor() ([]byte, []int) {
 	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
+// ErrDetails is attached to a failing call so that a client can tell what went
+// wrong without reading the error text.
+//
+// It carries one code, not a list: no call site wraps one ErrCode in another, so
+// a list would be an array that never holds more than one entry and a client
+// asking which of them is authoritative. If a cause chain is ever needed, a
+// repeated field can be added alongside without disturbing this one.
 type ErrDetails struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Codes         []ErrCode              `protobuf:"varint,1,rep,packed,name=codes,proto3,enum=land.gno.gnonative.v1.ErrCode" json:"codes,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Code  ErrCode                `protobuf:"varint,1,opt,name=code,proto3,enum=land.gno.gnonative.v1.ErrCode" json:"code,omitempty"`
+	// Default English text for the code, describing what happened at the chain or
+	// transport level.
+	//
+	// A client may show this as it is, or ignore it and map `code` to its own
+	// wording; it never has to invent text for a code it does not recognise. It
+	// deliberately stops at what happened and does not say what to do about it,
+	// because the remedy names screens only the application knows exist.
+	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -240,21 +255,29 @@ func (*ErrDetails) Descriptor() ([]byte, []int) {
 	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ErrDetails) GetCodes() []ErrCode {
+func (x *ErrDetails) GetCode() ErrCode {
 	if x != nil {
-		return x.Codes
+		return x.Code
 	}
-	return nil
+	return ErrCode_Undefined
+}
+
+func (x *ErrDetails) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 var File_rpc_proto protoreflect.FileDescriptor
 
 const file_rpc_proto_rawDesc = "" +
 	"\n" +
-	"\trpc.proto\x12\x15land.gno.gnonative.v1\x1a\x14gnonativetypes.proto\"B\n" +
+	"\trpc.proto\x12\x15land.gno.gnonative.v1\x1a\x14gnonativetypes.proto\"Z\n" +
 	"\n" +
-	"ErrDetails\x124\n" +
-	"\x05codes\x18\x01 \x03(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x05codes*\xe4\x06\n" +
+	"ErrDetails\x122\n" +
+	"\x04code\x18\x01 \x01(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage*\xe4\x06\n" +
 	"\aErrCode\x12\r\n" +
 	"\tUndefined\x10\x00\x12\b\n" +
 	"\x04TODO\x10\x01\x12\x15\n" +
@@ -458,7 +481,7 @@ var file_rpc_proto_goTypes = []any{
 	(*HelloStreamResponse)(nil),               // 91: land.gno.gnonative.v1.HelloStreamResponse
 }
 var file_rpc_proto_depIdxs = []int32{
-	0,  // 0: land.gno.gnonative.v1.ErrDetails.codes:type_name -> land.gno.gnonative.v1.ErrCode
+	0,  // 0: land.gno.gnonative.v1.ErrDetails.code:type_name -> land.gno.gnonative.v1.ErrCode
 	2,  // 1: land.gno.gnonative.v1.GnoNativeService.SetRemote:input_type -> land.gno.gnonative.v1.SetRemoteRequest
 	3,  // 2: land.gno.gnonative.v1.GnoNativeService.GetRemote:input_type -> land.gno.gnonative.v1.GetRemoteRequest
 	4,  // 3: land.gno.gnonative.v1.GnoNativeService.SetChainID:input_type -> land.gno.gnonative.v1.SetChainIDRequest
