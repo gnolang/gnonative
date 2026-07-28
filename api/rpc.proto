@@ -264,6 +264,10 @@ enum ErrCode {
   ErrInitService = 105;
   ErrSetRemote = 106;
   ErrKeyNameExists = 107;
+  // ErrRemoteUnreachable indicates that the remote node could not be reached at
+  // all: the connection was refused, the host did not resolve, or the request
+  // timed out. It says nothing about the request itself, which never arrived.
+  ErrRemoteUnreachable = 108;
   ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 151;

@@ -33,15 +33,19 @@ const (
 	// ErrNotImplemented indicates that a method is not implemented yet
 	ErrCode_ErrNotImplemented ErrCode = 2
 	// ErrInternal indicates an unknown error (without Code), i.e. in gRPC
-	ErrCode_ErrInternal             ErrCode = 3
-	ErrCode_ErrInvalidInput         ErrCode = 100
-	ErrCode_ErrBridgeInterrupted    ErrCode = 101
-	ErrCode_ErrMissingInput         ErrCode = 102
-	ErrCode_ErrSerialization        ErrCode = 103
-	ErrCode_ErrDeserialization      ErrCode = 104
-	ErrCode_ErrInitService          ErrCode = 105
-	ErrCode_ErrSetRemote            ErrCode = 106
-	ErrCode_ErrKeyNameExists        ErrCode = 107
+	ErrCode_ErrInternal          ErrCode = 3
+	ErrCode_ErrInvalidInput      ErrCode = 100
+	ErrCode_ErrBridgeInterrupted ErrCode = 101
+	ErrCode_ErrMissingInput      ErrCode = 102
+	ErrCode_ErrSerialization     ErrCode = 103
+	ErrCode_ErrDeserialization   ErrCode = 104
+	ErrCode_ErrInitService       ErrCode = 105
+	ErrCode_ErrSetRemote         ErrCode = 106
+	ErrCode_ErrKeyNameExists     ErrCode = 107
+	// ErrRemoteUnreachable indicates that the remote node could not be reached at
+	// all: the connection was refused, the host did not resolve, or the request
+	// timed out. It says nothing about the request itself, which never arrived.
+	ErrCode_ErrRemoteUnreachable    ErrCode = 108
 	ErrCode_ErrCryptoKeyTypeUnknown ErrCode = 150
 	// ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
 	ErrCode_ErrCryptoKeyNotFound ErrCode = 151
@@ -103,6 +107,7 @@ var (
 		105: "ErrInitService",
 		106: "ErrSetRemote",
 		107: "ErrKeyNameExists",
+		108: "ErrRemoteUnreachable",
 		150: "ErrCryptoKeyTypeUnknown",
 		151: "ErrCryptoKeyNotFound",
 		152: "ErrNoActiveAccount",
@@ -142,6 +147,7 @@ var (
 		"ErrInitService":          105,
 		"ErrSetRemote":            106,
 		"ErrKeyNameExists":        107,
+		"ErrRemoteUnreachable":    108,
 		"ErrCryptoKeyTypeUnknown": 150,
 		"ErrCryptoKeyNotFound":    151,
 		"ErrNoActiveAccount":      152,
@@ -248,7 +254,7 @@ const file_rpc_proto_rawDesc = "" +
 	"\trpc.proto\x12\x15land.gno.gnonative.v1\x1a\x14gnonativetypes.proto\"B\n" +
 	"\n" +
 	"ErrDetails\x124\n" +
-	"\x05codes\x18\x01 \x03(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x05codes*\xca\x06\n" +
+	"\x05codes\x18\x01 \x03(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x05codes*\xe4\x06\n" +
 	"\aErrCode\x12\r\n" +
 	"\tUndefined\x10\x00\x12\b\n" +
 	"\x04TODO\x10\x01\x12\x15\n" +
@@ -261,7 +267,8 @@ const file_rpc_proto_rawDesc = "" +
 	"\x12ErrDeserialization\x10h\x12\x12\n" +
 	"\x0eErrInitService\x10i\x12\x10\n" +
 	"\fErrSetRemote\x10j\x12\x14\n" +
-	"\x10ErrKeyNameExists\x10k\x12\x1c\n" +
+	"\x10ErrKeyNameExists\x10k\x12\x18\n" +
+	"\x14ErrRemoteUnreachable\x10l\x12\x1c\n" +
 	"\x17ErrCryptoKeyTypeUnknown\x10\x96\x01\x12\x19\n" +
 	"\x14ErrCryptoKeyNotFound\x10\x97\x01\x12\x17\n" +
 	"\x12ErrNoActiveAccount\x10\x98\x01\x12\x15\n" +
