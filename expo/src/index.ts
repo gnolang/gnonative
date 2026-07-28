@@ -20,5 +20,6 @@ export * from './provider/gnonative-provider';
 export * from './api/vendor/gnonativetypes_pb';
 export * from './api/vendor/rpc_pb';
 export { GRPCError } from './grpc/error';
+export { DEFAULT_ERR_CODE_MESSAGES, describeErrCode, errCodeFromMessage } from './grpc/messages';
 
 export * from './api/GnoNativeApi';
