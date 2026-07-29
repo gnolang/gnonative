@@ -300,7 +300,8 @@ namespace Land.Gno.Gnonative.V1 {
     /// unclassified failure of a message or a query.
     ///
     /// Its ErrDetails carry that reason as the message: the wording differs per
-    /// failure and belongs to the realm, not to this library.
+    /// failure and belongs to the realm, not to this library — which also makes it
+    /// untrusted, see ErrDetails.message.
     /// </summary>
     [pbr::OriginalName("ErrChainRejected")] ErrChainRejected = 220,
   }
@@ -381,6 +382,11 @@ namespace Land.Gno.Gnonative.V1 {
     /// `code` to its own wording, but never has to invent text for a code it does
     /// not recognise. It says what happened, not what to do about it: the remedy
     /// names screens only the application knows exist.
+    ///
+    /// For ErrChainRejected, and only for it, the text is written by whoever
+    /// deployed the realm, so treat it as untrusted: render it as plain text,
+    /// attribute it ("the chain replied: …") instead of speaking it as the
+    /// application's own words, and truncate — it is unbounded.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

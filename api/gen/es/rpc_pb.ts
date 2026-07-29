@@ -35,6 +35,11 @@ export type ErrDetails = Message<"land.gno.gnonative.v1.ErrDetails"> & {
    * not recognise. It says what happened, not what to do about it: the remedy
    * names screens only the application knows exist.
    *
+   * For ErrChainRejected, and only for it, the text is written by whoever
+   * deployed the realm, so treat it as untrusted: render it as plain text,
+   * attribute it ("the chain replied: …") instead of speaking it as the
+   * application's own words, and truncate — it is unbounded.
+   *
    * @generated from field: string message = 2;
    */
   message: string;
@@ -305,7 +310,8 @@ export enum ErrCode {
    * unclassified failure of a message or a query.
    *
    * Its ErrDetails carry that reason as the message: the wording differs per
-   * failure and belongs to the realm, not to this library.
+   * failure and belongs to the realm, not to this library — which also makes it
+   * untrusted, see ErrDetails.message.
    *
    * @generated from enum value: ErrChainRejected = 220;
    */
