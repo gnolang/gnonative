@@ -79,8 +79,8 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
               trailer,
             };
           } catch (e) {
-            // The bridge flattens a connect error to a string; put the details
-            // back so callers read ErrCodes instead of matching the message.
+            // The bridge flattened the connect error to a string; put its
+            // details back so callers read ErrCodes, not the message.
             const err = bridgeErrorToConnectError(e);
             console.log('next: unary call error:', err);
             throw err;
@@ -167,9 +167,7 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
                   }
 
                   if (!(e instanceof CodedError && e.message === 'EOF')) {
-                    // Same as the unary path: a streaming call carries the
-                    // result of a broadcast, so these are the failures a user
-                    // is most likely to meet.
+                    // As above, and this is the path a broadcast result takes.
                     const err = bridgeErrorToConnectError(e);
                     console.log('streamClientReceive error:', err);
                     throw err;

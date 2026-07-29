@@ -42,9 +42,9 @@ const (
 	ErrCode_ErrInitService       ErrCode = 105
 	ErrCode_ErrSetRemote         ErrCode = 106
 	ErrCode_ErrKeyNameExists     ErrCode = 107
-	// ErrRemoteUnreachable indicates that the remote node could not be reached at
-	// all: the connection was refused, the host did not resolve, or the request
-	// timed out. It says nothing about the request itself, which never arrived.
+	// ErrRemoteUnreachable indicates that the node could not be reached at all:
+	// connection refused, host not resolved, or no reply. The request never
+	// arrived, so this says nothing about the request itself.
 	ErrCode_ErrRemoteUnreachable    ErrCode = 108
 	ErrCode_ErrCryptoKeyTypeUnknown ErrCode = 150
 	// ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
@@ -90,19 +90,14 @@ const (
 	ErrCode_ErrInvalidPkgPath ErrCode = 217
 	ErrCode_ErrInvalidStmt    ErrCode = 218
 	ErrCode_ErrInvalidExpr    ErrCode = 219
-	// ErrChainRejected indicates that the request reached the chain, the chain
-	// refused it, and the reason it gave is not one the chain classified: it
-	// arrives as free text rather than as one of the typed errors above.
+	// ErrChainRejected indicates that the chain refused the request for a reason
+	// it did not classify: free text rather than one of the typed errors above,
+	// typically a realm panic the VM recovered and the ABCI layer degraded to a
+	// string. It does not claim the VM raised it — the same catch-all covers any
+	// unclassified failure of a message or a query.
 	//
-	// A realm aborting is the common case — a panic in a realm function is
-	// recovered by the VM and degraded to a string by the ABCI layer, so
-	// "thread body is required" is all that is left of it. The same happens to any
-	// other unclassified failure of a message or a query, which is why this code
-	// does not claim the VM raised it.
-	//
-	// Its ErrDetails carry that reason as the message, because unlike every other
-	// code here the useful wording differs per failure and belongs to the realm,
-	// not to this library.
+	// Its ErrDetails carry that reason as the message: the wording differs per
+	// failure and belongs to the realm, not to this library.
 	ErrCode_ErrChainRejected ErrCode = 220
 )
 
@@ -222,20 +217,15 @@ func (ErrCode) EnumDescriptor() ([]byte, []int) {
 // ErrDetails is attached to a failing call so that a client can tell what went
 // wrong without reading the error text.
 //
-// It carries one code, not a list: no call site wraps one ErrCode in another, so
-// a list would be an array that never holds more than one entry and a client
-// asking which of them is authoritative. If a cause chain is ever needed, a
-// repeated field can be added alongside without disturbing this one.
+// One code, not a list: no call site wraps one ErrCode in another. A cause chain
+// can be added later as a separate repeated field.
 type ErrDetails struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Code  ErrCode                `protobuf:"varint,1,opt,name=code,proto3,enum=land.gno.gnonative.v1.ErrCode" json:"code,omitempty"`
-	// Default English text for the code, describing what happened at the chain or
-	// transport level.
-	//
-	// A client may show this as it is, or ignore it and map `code` to its own
-	// wording; it never has to invent text for a code it does not recognise. It
-	// deliberately stops at what happened and does not say what to do about it,
-	// because the remedy names screens only the application knows exist.
+	// Default English text for the code. A client may show it as it stands or map
+	// `code` to its own wording, but never has to invent text for a code it does
+	// not recognise. It says what happened, not what to do about it: the remedy
+	// names screens only the application knows exist.
 	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

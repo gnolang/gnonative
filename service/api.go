@@ -1392,13 +1392,11 @@ func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request
 }
 
 // isRemoteUnreachable reports whether err is a transport failure reaching the
-// remote node, rather than an answer from it.
+// node, rather than an answer from it.
 //
-// The RPC client returns these wrapped in *url.Error, so the concrete cause has
-// to be unwrapped: a *net.OpError for a refused or reset connection, a
-// *net.DNSError for a host that does not resolve, and anything satisfying
-// net.Error reporting Timeout for a request that got no reply. Matching the
-// message text instead would break on any Go or platform change to the wording.
+// The RPC client wraps these in *url.Error, so the cause is unwrapped rather
+// than matched in the message text, which any Go or platform change could
+// reword.
 func isRemoteUnreachable(err error) bool {
 	if err == nil {
 		return false
@@ -1414,8 +1412,8 @@ func isRemoteUnreachable(err error) bool {
 		return true
 	}
 
-	// Covers a deadline exceeded before any reply, including one the http client
-	// applied itself rather than the socket.
+	// A deadline exceeded before any reply, the http client's as well as the
+	// socket's.
 	var netErr net.Error
 	if errors.As(err, &netErr) && netErr.Timeout() {
 		return true
@@ -1427,13 +1425,10 @@ func isRemoteUnreachable(err error) bool {
 // If err is a recognized Go error, return the equivalent Grpc error.
 // Otherwise, just return err.
 func getGrpcError(err error) error {
-	// Check transport failures first. They are not about the request — it never
-	// reached the node — and an unwrapped one would otherwise fall through to the
-	// final `return err`, crossing the bridge as a flattened Go string with
-	// nothing machine-readable in it. Callers are then left matching prose such
-	// as "dial tcp ...: connect: connection refused" to tell "the node is
-	// unreachable" from "the chain rejected this", which is the one distinction
-	// they most need to make: only the former is worth a retry.
+	// Transport failures first: the request never reached the node, and only this
+	// one is worth a retry. Left unclassified it would fall through to the final
+	// `return err` and cross the bridge as "dial tcp ...: connection refused",
+	// for callers to tell apart from a refusal by reading prose.
 	if isRemoteUnreachable(err) {
 		return api_gen.ErrCode_ErrRemoteUnreachable.Wrap(err)
 	}
@@ -1492,21 +1487,15 @@ func getGrpcError(err error) error {
 	}
 
 	// Everything the chain refused without classifying arrives as an
-	// abci.StringError: ABCIErrorOrStringError degrades any error that does not
-	// implement AssertABCIError to its text, which is what happens to a realm
-	// panic — the VM recovers it, and "thread body is required" is all that
-	// survives (the "VM panic" wrapping and the stacktrace go to the response
-	// Log, which no user sees). Both a message and a query end up here.
+	// abci.StringError, ABCIErrorOrStringError having degraded it to its text —
+	// a realm panic most often, leaving "thread body is required" once the VM
+	// wrapping and stacktrace have gone to the response Log. Not called a VM
+	// error: the type says the chain could not classify the failure, not where it
+	// arose, and messages and queries both end up here.
 	//
-	// This is deliberately not called a VM error. The type says the chain could
-	// not classify the failure, not where it arose, and the same catch-all covers
-	// any other unclassified handler failure; naming it for the common case would
-	// be a guess made in the client's name.
-	//
-	// It must wrap rather than return the code alone, unlike the branches above:
-	// the reason is only in the error, and withErrDetails reads it back from
-	// there to send as the message. Returning a bare code would classify the
-	// failure and lose the only part of it worth showing.
+	// Wraps rather than returning the code alone, unlike the branches above: the
+	// reason lives only in the error, and withErrDetails reads it back from there
+	// to send as the message.
 	var rejected abci.StringError
 	if errors.As(err, &rejected) {
 		return api_gen.ErrCode_ErrChainRejected.Wrap(err)

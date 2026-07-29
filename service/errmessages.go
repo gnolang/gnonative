@@ -10,33 +10,25 @@ import (
 // errCodeMessages is the default text sent with each code a client may need to
 // show someone.
 //
-// It lives here, in the service, so that every language gets it: the code and
-// its wording travel together in ErrDetails, over the schema published to the
-// buf registry. A client that wants different wording maps the code itself, but
-// no client has to invent text for a code it does not recognise, and none has to
-// re-derive what the code means.
+// It lives in the service so every language gets it: code and wording travel
+// together in ErrDetails. A client may map the code to its own wording, but none
+// has to invent text for a code it does not recognise.
 //
-// Each entry is written from the code that raises it — in this repo, in
-// tm2/pkg/std and in gno.land/pkg/sdk/vm — not from the code's name, because
-// naming alone produces confidently wrong text. Where one code covers several
-// situations the wording stays at the level they share.
+// Each entry is written from the code that raises it — here, in tm2/pkg/std and
+// in gno.land/pkg/sdk/vm — not from the code's name, which produces confidently
+// wrong text (see the comments below). The text says what happened and stops
+// there: the remedy names screens only an application knows exist.
 //
-// The text says what happened and stops there. What to do about it names screens
-// only an application knows exist, so it belongs to that application.
-//
-// Codes only a developer can act on (ErrNotImplemented, ErrSerialization,
-// ErrRunGRPCServer, …) are deliberately absent: inventing user-facing text for
-// them puts a reassuring sentence in front of what is really a bug. An absent
-// code yields an empty message, which a client can tell apart from a real one.
-//
-// ErrChainRejected is absent for the opposite reason — it has text, but not text
-// that can be written here, since it is whatever the chain refused the request
-// with. messageForError supplies it from the failure itself.
+// Codes only a developer can act on (ErrNotImplemented, ErrSerialization, …) are
+// deliberately absent — a reassuring sentence in front of a bug is worse than
+// none — and an absent code yields an empty message a client can tell apart from
+// a real one. ErrChainRejected is absent for the opposite reason: its text
+// exists but differs per failure, so messageForError supplies it.
 var errCodeMessages = map[api_gen.ErrCode]string{
 	// Transport: the request never reached the node.
 	api_gen.ErrCode_ErrRemoteUnreachable: "The node could not be reached.",
-	// Reached only when constructing the RPC client fails, so the address itself
-	// is unusable — this is not a reachability failure.
+	// Only when constructing the RPC client fails: the address itself is unusable,
+	// which is not a reachability failure.
 	api_gen.ErrCode_ErrSetRemote: "That node address could not be used.",
 
 	// Keys and accounts.
@@ -48,18 +40,16 @@ var errCodeMessages = map[api_gen.ErrCode]string{
 	// Raised for a blank address as well as one whose bech32 cannot be decoded.
 	api_gen.ErrCode_ErrInvalidAddress: "The account address is missing or not valid.",
 	api_gen.ErrCode_ErrUnknownAddress: "That account does not exist on this chain.",
-	// Covers a missing key as well as an unrecognised key type, so this does not
-	// claim the key is merely wrong for this chain.
+	// Covers a missing key as well as an unrecognised type.
 	api_gen.ErrCode_ErrInvalidPubKey: "The public key is missing or of an unsupported type.",
 
 	// Transactions.
-	// Deliberately no "raise the gas limit": tm2 also raises this when the block
-	// has no gas left ("no block gas left to run tx"), where that advice is wrong.
+	// No "raise the gas limit": tm2 also raises this for "no block gas left to run
+	// tx", where that advice is wrong.
 	api_gen.ErrCode_ErrOutOfGas: "The transaction ran out of gas.",
 	// An overflow while summing gas, not an out-of-range limit.
 	api_gen.ErrCode_ErrGasOverflow: "The transaction gas amounts are too large to add up.",
-	// "invalid gas-wanted; got: N block-max-gas: M" — over the block maximum, or
-	// otherwise unusable.
+	// "invalid gas-wanted; got: N block-max-gas: M" — over the block maximum.
 	api_gen.ErrCode_ErrInvalidGasWanted: "The gas limit is not valid for this chain.",
 	// Specifically the fee, per "insufficient funds to pay for fees".
 	api_gen.ErrCode_ErrInsufficientFunds: "There are not enough funds to cover the transaction fee.",
@@ -67,17 +57,14 @@ var errCodeMessages = map[api_gen.ErrCode]string{
 	api_gen.ErrCode_ErrInsufficientFee: "The transaction fee is not valid or is too low.",
 	// "insufficient account funds; X < Y", but also "send amount must be positive".
 	api_gen.ErrCode_ErrInsufficientCoins: "The amount is not positive, or the account does not hold enough.",
-	// Coins.IsValid() covers ordering and denomination as well as amount, so this
-	// must not be described as an amount problem alone.
+	// Coins.IsValid() covers ordering and denomination, not only the amount.
 	api_gen.ErrCode_ErrInvalidCoins: "The coin amount, denomination or ordering is not valid.",
-	// Raised for signature and session-authority problems. Says nothing about
-	// whether anything was broadcast, so it must not claim the chain rejected it.
+	// Signature and session-authority problems. Says nothing about what was
+	// broadcast, so it must not claim the chain rejected anything.
 	api_gen.ErrCode_ErrUnauthorized: "The transaction is not authorised.",
-	// Usually a stale sequence because another transaction landed first, but tm2
-	// also raises it for a malformed counter — so state the fact, not the cause.
+	// Usually a stale sequence, but also a malformed counter — state the fact.
 	api_gen.ErrCode_ErrInvalidSequence: "The account sequence is not valid.",
-	// Raised by the app router for any unrecognised message or query path, not
-	// only for a realm function that does not exist.
+	// The app router, for any unrecognised message or query path.
 	api_gen.ErrCode_ErrUnknownRequest:    "The chain did not recognise the request.",
 	api_gen.ErrCode_ErrTxDecode:          "The transaction could not be decoded.",
 	api_gen.ErrCode_ErrMemoTooLarge:      "The transaction memo is too large.",
@@ -91,24 +78,20 @@ var errCodeMessages = map[api_gen.ErrCode]string{
 	api_gen.ErrCode_ErrInvalidExpr:    "The expression is not valid.",
 }
 
-// messageForError returns the default text to send with a classified failure,
-// or "" when there is none to give.
+// messageForError returns the text to send with a classified failure, or "" when
+// there is none to give.
 //
-// ErrChainRejected is the one code whose wording cannot come from the table
-// above: it means the chain refused the request for a reason of its own — a
-// realm's panic message, most often — and that reason differs per failure. The
-// text is read back out of the error, where getGrpcError left it, rather than
-// invented here: no wording this library could write ("The chain rejected the
-// request.") would be worth as much to someone as "thread body is required".
+// ErrChainRejected is the one code whose wording is not in the table: the reason
+// the chain refused a request differs per failure, so it is read back out of the
+// error where getGrpcError left it. No sentence this library could write is
+// worth as much to someone as "thread body is required".
 func messageForError(err error, code api_gen.ErrCode) string {
 	if code == api_gen.ErrCode_ErrChainRejected {
 		var rejected abci.StringError
 		if errors.As(err, &rejected) {
 			return rejected.Error()
 		}
-		// The code is only ever set where that error was found, so this is
-		// unreachable; an empty message degrades to the error text rather than
-		// asserting something untrue if it ever is reached.
+		// Unreachable: the code is only set where that error was found.
 		return ""
 	}
 
