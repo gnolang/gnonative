@@ -27,9 +27,13 @@ const BridgeErrorPrefix = "gnonative-error:"
 // bridgeErrorEnvelope is the payload following BridgeErrorPrefix. It mirrors the
 // published ErrDetails, so a reader decodes it into its own generated types, and
 // keeps the underlying error text alongside for logs.
+//
+// ConnectCode is the status the handler chose, which the bridge would otherwise
+// lose; connect numbers its codes as gRPC does, so the integer travels as is.
 type bridgeErrorEnvelope struct {
-	Detail bridgeErrorDetail `json:"detail"`
-	Error  string            `json:"error"`
+	Detail      bridgeErrorDetail `json:"detail"`
+	Error       string            `json:"error"`
+	ConnectCode int               `json:"connectCode"`
 }
 
 type bridgeErrorDetail struct {
@@ -48,14 +52,20 @@ type bridgeErrorDetail struct {
 func bridgeError(err error, context string) error {
 	wrapped := errors.Wrap(err, context)
 
-	detail := errDetailOf(err)
+	var connectErr *connect.Error
+	if !stderrors.As(err, &connectErr) {
+		return wrapped
+	}
+
+	detail := errDetailOf(connectErr)
 	if detail == nil {
 		return wrapped
 	}
 
 	payload, marshalErr := json.Marshal(bridgeErrorEnvelope{
-		Detail: bridgeErrorDetail{Code: detail.Code, Message: detail.Message},
-		Error:  wrapped.Error(),
+		Detail:      bridgeErrorDetail{Code: detail.Code, Message: detail.Message},
+		Error:       wrapped.Error(),
+		ConnectCode: int(connectErr.Code()),
 	})
 	if marshalErr != nil {
 		// Losing the detail degrades the message; dropping the error would hide it.
@@ -68,12 +78,7 @@ func bridgeError(err error, context string) error {
 // errDetailOf reads the ErrDetails a connect error carries, or nil. It has to
 // come from the details: the error crossed connect from the in-process server,
 // so the typed chain api_gen.Codes walks is gone by now.
-func errDetailOf(err error) *api_gen.ErrDetails {
-	var connectErr *connect.Error
-	if !stderrors.As(err, &connectErr) {
-		return nil
-	}
-
+func errDetailOf(connectErr *connect.Error) *api_gen.ErrDetails {
 	for _, detail := range connectErr.Details() {
 		value, valueErr := detail.Value()
 		if valueErr != nil {

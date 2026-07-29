@@ -12,15 +12,25 @@ const BRIDGE_ERROR_PREFIX = 'gnonative-error:';
 type BridgeErrorEnvelope = {
   detail?: { code?: number; message?: string };
   error?: string;
+  connectCode?: number;
 };
 
 /** The ErrCode a failure carries, with the text sent alongside it. */
 export type ErrDetail = {
+  /**
+   * Typed as ErrCode, but a service newer than this package can send a number
+   * the enum has no member for. It then matches nothing, and `message` covers it.
+   */
   code: ErrCode;
   /**
    * English text to show for this failure, with no framing to strip. Empty when
    * there is none to give. Usually the library's default wording for the code;
    * for ErrChainRejected, the reason the chain itself gave.
+   *
+   * That reason is written by whoever deployed the realm, so treat it as
+   * untrusted: render it as plain text, attribute it ("the chain replied: …")
+   * instead of speaking it as the app's own words, and truncate — it is
+   * unbounded.
    */
   message: string;
 };
@@ -47,17 +57,27 @@ export function bridgeErrorToConnectError(error: unknown): unknown {
   }
 
   const code = envelope.detail?.code;
-  const hasCode = typeof code === 'number' && code in ErrCode;
+  // Unrecognised codes cross too: dropping one would drop its wording with it.
+  const hasCode = typeof code === 'number';
 
   return new ConnectError(
     envelope.error ?? message,
-    Code.Unknown,
+    connectCodeOf(envelope),
     undefined,
     hasCode
       ? [{ desc: ErrDetailsSchema, value: { code, message: envelope.detail?.message ?? '' } }]
       : undefined,
     error,
   );
+}
+
+/**
+ * The status the handler chose, so a bridge client sees what a networked one
+ * would. Unknown when it is missing or unrecognised, as before.
+ */
+function connectCodeOf(envelope: BridgeErrorEnvelope): Code {
+  const code = envelope.connectCode;
+  return typeof code === 'number' && code in Code ? code : Code.Unknown;
 }
 
 /**
@@ -69,17 +89,16 @@ export function bridgeErrorToConnectError(error: unknown): unknown {
  *
  * Show `message`, or branch on `code` and use your own — an app knows which of
  * its screens fixes the problem, the library does not. Except for
- * ErrChainRejected, whose reason comes from the chain and cannot be bettered.
+ * ErrChainRejected, whose reason cannot be bettered but is untrusted: see
+ * `message`.
  */
 export function errDetailOf(error: unknown): ErrDetail | undefined {
   if (!(error instanceof ConnectError)) return undefined;
 
-  for (const details of error.findDetails(ErrDetailsSchema)) {
-    if (details.code in ErrCode) {
-      return { code: details.code as ErrCode, message: details.message };
-    }
-  }
-  return undefined;
+  const [details] = error.findDetails(ErrDetailsSchema);
+  if (!details) return undefined;
+
+  return { code: details.code as ErrCode, message: details.message };
 }
 
 function messageOf(error: unknown): string | undefined {

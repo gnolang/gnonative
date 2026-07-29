@@ -7,6 +7,7 @@ import { requestHeader as webRequestHeader } from '@connectrpc/connect/protocol-
 import { GrpcWebTransportOptions } from '@connectrpc/connect-web';
 import { Message, MethodKind } from '@bufbuild/protobuf';
 import { GoBridge } from '../GoBridge';
+import { bridgeErrorToConnectError } from './bridge_error';
 
 function base64ToBytes(base64: string): Uint8Array {
   const binString = atob(base64);
@@ -58,8 +59,10 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
               trailer,
             };
           } catch (e) {
-            console.log('next: unary call error:', e);
-            throw e;
+            // The bridge flattened the error to a string; unwrap the envelope.
+            const err = bridgeErrorToConnectError(e);
+            console.log('next: unary call error:', err);
+            throw err;
           }
         },
       });
@@ -115,8 +118,9 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
           try {
             streamId = await GoBridge.createStreamClient(req.method.name, body);
           } catch (e) {
-            console.log('createStreamClient error:', e);
-            throw e;
+            const err = bridgeErrorToConnectError(e);
+            console.log('createStreamClient error:', err);
+            throw err;
           }
 
           const generator = {
@@ -136,8 +140,10 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
                   }
 
                   if (!(e instanceof Error && e.message === 'EOF')) {
-                    console.log('streamClientReceive error:', e);
-                    throw e;
+                    // As above, and this is the path a broadcast result takes.
+                    const err = bridgeErrorToConnectError(e);
+                    console.log('streamClientReceive error:', err);
+                    throw err;
                   }
                   break;
                 }
