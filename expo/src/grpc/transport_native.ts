@@ -26,6 +26,7 @@ import { toByteArray } from 'base64-js';
 import { CodedError } from 'expo-modules-core';
 
 import { GoBridge } from '../GoBridge';
+import { bridgeErrorToConnectError } from './bridge_error';
 
 export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Transport {
   const useBinaryFormat = options.useBinaryFormat ?? true;
@@ -78,8 +79,11 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
               trailer,
             };
           } catch (e) {
-            console.log('next: unary call error:', e);
-            throw e;
+            // The bridge flattened the connect error to a string; put its
+            // details back so callers read ErrCodes, not the message.
+            const err = bridgeErrorToConnectError(e);
+            console.log('next: unary call error:', err);
+            throw err;
           }
         },
       });
@@ -141,8 +145,9 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
           try {
             streamId = await GoBridge.createStreamClient(req.method.name, body);
           } catch (e) {
-            console.log('createStreamClient error:', e);
-            throw e;
+            const err = bridgeErrorToConnectError(e);
+            console.log('createStreamClient error:', err);
+            throw err;
           }
 
           const generator = {
@@ -162,8 +167,10 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
                   }
 
                   if (!(e instanceof CodedError && e.message === 'EOF')) {
-                    console.log('streamClientReceive error:', e);
-                    throw e;
+                    // As above, and this is the path a broadcast result takes.
+                    const err = bridgeErrorToConnectError(e);
+                    console.log('streamClientReceive error:', err);
+                    throw err;
                   }
                   break;
                 }

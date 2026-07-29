@@ -264,6 +264,10 @@ enum ErrCode {
   ErrInitService = 105;
   ErrSetRemote = 106;
   ErrKeyNameExists = 107;
+  // ErrRemoteUnreachable indicates that the node could not be reached at all:
+  // connection refused, host not resolved, or no reply. The request never
+  // arrived, so this says nothing about the request itself.
+  ErrRemoteUnreachable = 108;
   ErrCryptoKeyTypeUnknown = 150;
   // ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
   ErrCryptoKeyNotFound = 151;
@@ -314,8 +318,35 @@ enum ErrCode {
   ErrInvalidPkgPath = 217;
   ErrInvalidStmt = 218;
   ErrInvalidExpr = 219;
+
+  // ErrChainRejected indicates that the chain refused the request for a reason
+  // it did not classify: free text rather than one of the typed errors above,
+  // typically a realm panic the VM recovered and the ABCI layer degraded to a
+  // string. It does not claim the VM raised it — the same catch-all covers any
+  // unclassified failure of a message or a query.
+  //
+  // Its ErrDetails carry that reason as the message: the wording differs per
+  // failure and belongs to the realm, not to this library — which also makes it
+  // untrusted, see ErrDetails.message.
+  ErrChainRejected = 220;
 }
 
+// ErrDetails is attached to a failing call so that a client can tell what went
+// wrong without reading the error text.
+//
+// One code, not a list: no call site wraps one ErrCode in another. A cause chain
+// can be added later as a separate repeated field.
 message ErrDetails {
-  repeated ErrCode codes = 1;
+  ErrCode code = 1;
+
+  // Default English text for the code. A client may show it as it stands or map
+  // `code` to its own wording, but never has to invent text for a code it does
+  // not recognise. It says what happened, not what to do about it: the remedy
+  // names screens only the application knows exist.
+  //
+  // For ErrChainRejected, and only for it, the text is written by whoever
+  // deployed the realm, so treat it as untrusted: render it as plain text,
+  // attribute it ("the chain replied: …") instead of speaking it as the
+  // application's own words, and truncate — it is unbounded.
+  string message = 2;
 }

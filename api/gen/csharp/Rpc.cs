@@ -25,150 +25,152 @@ namespace Land.Gno.Gnonative.V1 {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CglycGMucHJvdG8SFWxhbmQuZ25vLmdub25hdGl2ZS52MRoUZ25vbmF0aXZl",
-            "dHlwZXMucHJvdG8iQgoKRXJyRGV0YWlscxI0CgVjb2RlcxgBIAMoDjIeLmxh",
-            "bmQuZ25vLmdub25hdGl2ZS52MS5FcnJDb2RlUgVjb2RlcyrKBgoHRXJyQ29k",
-            "ZRINCglVbmRlZmluZWQQABIICgRUT0RPEAESFQoRRXJyTm90SW1wbGVtZW50",
-            "ZWQQAhIPCgtFcnJJbnRlcm5hbBADEhMKD0VyckludmFsaWRJbnB1dBBkEhgK",
-            "FEVyckJyaWRnZUludGVycnVwdGVkEGUSEwoPRXJyTWlzc2luZ0lucHV0EGYS",
-            "FAoQRXJyU2VyaWFsaXphdGlvbhBnEhYKEkVyckRlc2VyaWFsaXphdGlvbhBo",
-            "EhIKDkVyckluaXRTZXJ2aWNlEGkSEAoMRXJyU2V0UmVtb3RlEGoSFAoQRXJy",
-            "S2V5TmFtZUV4aXN0cxBrEhwKF0VyckNyeXB0b0tleVR5cGVVbmtub3duEJYB",
-            "EhkKFEVyckNyeXB0b0tleU5vdEZvdW5kEJcBEhcKEkVyck5vQWN0aXZlQWNj",
-            "b3VudBCYARIVChBFcnJSdW5HUlBDU2VydmVyEJkBEhgKE0VyckRlY3J5cHRp",
-            "b25GYWlsZWQQmgESEAoLRXJyVHhEZWNvZGUQyAESFwoSRXJySW52YWxpZFNl",
-            "cXVlbmNlEMkBEhQKD0VyclVuYXV0aG9yaXplZBDKARIZChRFcnJJbnN1ZmZp",
-            "Y2llbnRGdW5kcxDLARIWChFFcnJVbmtub3duUmVxdWVzdBDMARIWChFFcnJJ",
-            "bnZhbGlkQWRkcmVzcxDNARIWChFFcnJVbmtub3duQWRkcmVzcxDOARIVChBF",
-            "cnJJbnZhbGlkUHViS2V5EM8BEhkKFEVyckluc3VmZmljaWVudENvaW5zENAB",
-            "EhQKD0VyckludmFsaWRDb2lucxDRARIYChNFcnJJbnZhbGlkR2FzV2FudGVk",
-            "ENIBEhAKC0Vyck91dE9mR2FzENMBEhQKD0Vyck1lbW9Ub29MYXJnZRDUARIX",
-            "ChJFcnJJbnN1ZmZpY2llbnRGZWUQ1QESGQoURXJyVG9vTWFueVNpZ25hdHVy",
-            "ZXMQ1gESFAoPRXJyTm9TaWduYXR1cmVzENcBEhMKDkVyckdhc092ZXJmbG93",
-            "ENgBEhYKEUVyckludmFsaWRQa2dQYXRoENkBEhMKDkVyckludmFsaWRTdG10",
-            "ENoBEhMKDkVyckludmFsaWRFeHByENsBMr4pChBHbm9OYXRpdmVTZXJ2aWNl",
-            "El4KCVNldFJlbW90ZRInLmxhbmQuZ25vLmdub25hdGl2ZS52MS5TZXRSZW1v",
-            "dGVSZXF1ZXN0GigubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlNldFJlbW90ZVJl",
-            "c3BvbnNlEl4KCUdldFJlbW90ZRInLmxhbmQuZ25vLmdub25hdGl2ZS52MS5H",
-            "ZXRSZW1vdGVSZXF1ZXN0GigubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkdldFJl",
-            "bW90ZVJlc3BvbnNlEmEKClNldENoYWluSUQSKC5sYW5kLmduby5nbm9uYXRp",
-            "dmUudjEuU2V0Q2hhaW5JRFJlcXVlc3QaKS5sYW5kLmduby5nbm9uYXRpdmUu",
-            "djEuU2V0Q2hhaW5JRFJlc3BvbnNlEmEKCkdldENoYWluSUQSKC5sYW5kLmdu",
-            "by5nbm9uYXRpdmUudjEuR2V0Q2hhaW5JRFJlcXVlc3QaKS5sYW5kLmduby5n",
-            "bm9uYXRpdmUudjEuR2V0Q2hhaW5JRFJlc3BvbnNlEoUBChZHZW5lcmF0ZVJl",
-            "Y292ZXJ5UGhyYXNlEjQubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkdlbmVyYXRl",
-            "UmVjb3ZlcnlQaHJhc2VSZXF1ZXN0GjUubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
-            "LkdlbmVyYXRlUmVjb3ZlcnlQaHJhc2VSZXNwb25zZRJkCgtMaXN0S2V5SW5m",
-            "bxIpLmxhbmQuZ25vLmdub25hdGl2ZS52MS5MaXN0S2V5SW5mb1JlcXVlc3Qa",
-            "Ki5sYW5kLmduby5nbm9uYXRpdmUudjEuTGlzdEtleUluZm9SZXNwb25zZRJn",
-            "CgxIYXNLZXlCeU5hbWUSKi5sYW5kLmduby5nbm9uYXRpdmUudjEuSGFzS2V5",
-            "QnlOYW1lUmVxdWVzdBorLmxhbmQuZ25vLmdub25hdGl2ZS52MS5IYXNLZXlC",
-            "eU5hbWVSZXNwb25zZRJwCg9IYXNLZXlCeUFkZHJlc3MSLS5sYW5kLmduby5n",
-            "bm9uYXRpdmUudjEuSGFzS2V5QnlBZGRyZXNzUmVxdWVzdBouLmxhbmQuZ25v",
-            "Lmdub25hdGl2ZS52MS5IYXNLZXlCeUFkZHJlc3NSZXNwb25zZRKCAQoVSGFz",
-            "S2V5QnlOYW1lT3JBZGRyZXNzEjMubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhh",
-            "c0tleUJ5TmFtZU9yQWRkcmVzc1JlcXVlc3QaNC5sYW5kLmduby5nbm9uYXRp",
-            "dmUudjEuSGFzS2V5QnlOYW1lT3JBZGRyZXNzUmVzcG9uc2UScwoQR2V0S2V5",
-            "SW5mb0J5TmFtZRIuLmxhbmQuZ25vLmdub25hdGl2ZS52MS5HZXRLZXlJbmZv",
-            "QnlOYW1lUmVxdWVzdBovLmxhbmQuZ25vLmdub25hdGl2ZS52MS5HZXRLZXlJ",
-            "bmZvQnlOYW1lUmVzcG9uc2USfAoTR2V0S2V5SW5mb0J5QWRkcmVzcxIxLmxh",
-            "bmQuZ25vLmdub25hdGl2ZS52MS5HZXRLZXlJbmZvQnlBZGRyZXNzUmVxdWVz",
-            "dBoyLmxhbmQuZ25vLmdub25hdGl2ZS52MS5HZXRLZXlJbmZvQnlBZGRyZXNz",
-            "UmVzcG9uc2USjgEKGUdldEtleUluZm9CeU5hbWVPckFkZHJlc3MSNy5sYW5k",
-            "Lmduby5nbm9uYXRpdmUudjEuR2V0S2V5SW5mb0J5TmFtZU9yQWRkcmVzc1Jl",
-            "cXVlc3QaOC5sYW5kLmduby5nbm9uYXRpdmUudjEuR2V0S2V5SW5mb0J5TmFt",
-            "ZU9yQWRkcmVzc1Jlc3BvbnNlEmoKDUNyZWF0ZUFjY291bnQSKy5sYW5kLmdu",
-            "by5nbm9uYXRpdmUudjEuQ3JlYXRlQWNjb3VudFJlcXVlc3QaLC5sYW5kLmdu",
-            "by5nbm9uYXRpdmUudjEuQ3JlYXRlQWNjb3VudFJlc3BvbnNlEmcKDENyZWF0",
-            "ZUxlZGdlchIqLmxhbmQuZ25vLmdub25hdGl2ZS52MS5DcmVhdGVMZWRnZXJS",
-            "ZXF1ZXN0GisubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNyZWF0ZUxlZGdlclJl",
-            "c3BvbnNlEnAKD0FjdGl2YXRlQWNjb3VudBItLmxhbmQuZ25vLmdub25hdGl2",
-            "ZS52MS5BY3RpdmF0ZUFjY291bnRSZXF1ZXN0Gi4ubGFuZC5nbm8uZ25vbmF0",
-            "aXZlLnYxLkFjdGl2YXRlQWNjb3VudFJlc3BvbnNlEmQKC1NldFBhc3N3b3Jk",
-            "EikubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlNldFBhc3N3b3JkUmVxdWVzdBoq",
-            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5TZXRQYXNzd29yZFJlc3BvbnNlEl4K",
-            "CVJlbmFtZUtleRInLmxhbmQuZ25vLmdub25hdGl2ZS52MS5SZW5hbWVLZXlS",
-            "ZXF1ZXN0GigubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlJlbmFtZUtleVJlc3Bv",
-            "bnNlEm0KDlJvdGF0ZVBhc3N3b3JkEiwubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
-            "LlJvdGF0ZVBhc3N3b3JkUmVxdWVzdBotLmxhbmQuZ25vLmdub25hdGl2ZS52",
-            "MS5Sb3RhdGVQYXNzd29yZFJlc3BvbnNlEnwKE0dldEFjdGl2YXRlZEFjY291",
-            "bnQSMS5sYW5kLmduby5nbm9uYXRpdmUudjEuR2V0QWN0aXZhdGVkQWNjb3Vu",
-            "dFJlcXVlc3QaMi5sYW5kLmduby5nbm9uYXRpdmUudjEuR2V0QWN0aXZhdGVk",
-            "QWNjb3VudFJlc3BvbnNlEmcKDFF1ZXJ5QWNjb3VudBIqLmxhbmQuZ25vLmdu",
-            "b25hdGl2ZS52MS5RdWVyeUFjY291bnRSZXF1ZXN0GisubGFuZC5nbm8uZ25v",
-            "bmF0aXZlLnYxLlF1ZXJ5QWNjb3VudFJlc3BvbnNlEnwKE1F1ZXJ5U2Vzc2lv",
-            "bkFjY291bnQSMS5sYW5kLmduby5nbm9uYXRpdmUudjEuUXVlcnlTZXNzaW9u",
-            "QWNjb3VudFJlcXVlc3QaMi5sYW5kLmduby5nbm9uYXRpdmUudjEuUXVlcnlT",
-            "ZXNzaW9uQWNjb3VudFJlc3BvbnNlEmoKDURlbGV0ZUFjY291bnQSKy5sYW5k",
-            "Lmduby5nbm9uYXRpdmUudjEuRGVsZXRlQWNjb3VudFJlcXVlc3QaLC5sYW5k",
-            "Lmduby5nbm9uYXRpdmUudjEuRGVsZXRlQWNjb3VudFJlc3BvbnNlElIKBVF1",
-            "ZXJ5EiMubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlF1ZXJ5UmVxdWVzdBokLmxh",
-            "bmQuZ25vLmdub25hdGl2ZS52MS5RdWVyeVJlc3BvbnNlElUKBlJlbmRlchIk",
-            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5SZW5kZXJSZXF1ZXN0GiUubGFuZC5n",
-            "bm8uZ25vbmF0aXZlLnYxLlJlbmRlclJlc3BvbnNlElIKBVFFdmFsEiMubGFu",
-            "ZC5nbm8uZ25vbmF0aXZlLnYxLlFFdmFsUmVxdWVzdBokLmxhbmQuZ25vLmdu",
-            "b25hdGl2ZS52MS5RRXZhbFJlc3BvbnNlElEKBENhbGwSIi5sYW5kLmduby5n",
-            "bm9uYXRpdmUudjEuQ2FsbFJlcXVlc3QaIy5sYW5kLmduby5nbm9uYXRpdmUu",
-            "djEuQ2FsbFJlc3BvbnNlMAESUQoEU2VuZBIiLmxhbmQuZ25vLmdub25hdGl2",
-            "ZS52MS5TZW5kUmVxdWVzdBojLmxhbmQuZ25vLmdub25hdGl2ZS52MS5TZW5k",
-            "UmVzcG9uc2UwARJOCgNSdW4SIS5sYW5kLmduby5nbm9uYXRpdmUudjEuUnVu",
-            "UmVxdWVzdBoiLmxhbmQuZ25vLmdub25hdGl2ZS52MS5SdW5SZXNwb25zZTAB",
-            "EmwKDUNyZWF0ZVNlc3Npb24SKy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ3Jl",
-            "YXRlU2Vzc2lvblJlcXVlc3QaLC5sYW5kLmduby5nbm9uYXRpdmUudjEuQ3Jl",
-            "YXRlU2Vzc2lvblJlc3BvbnNlMAESbAoNUmV2b2tlU2Vzc2lvbhIrLmxhbmQu",
-            "Z25vLmdub25hdGl2ZS52MS5SZXZva2VTZXNzaW9uUmVxdWVzdBosLmxhbmQu",
-            "Z25vLmdub25hdGl2ZS52MS5SZXZva2VTZXNzaW9uUmVzcG9uc2UwARJ4ChFS",
-            "ZXZva2VBbGxTZXNzaW9ucxIvLmxhbmQuZ25vLmdub25hdGl2ZS52MS5SZXZv",
-            "a2VBbGxTZXNzaW9uc1JlcXVlc3QaMC5sYW5kLmduby5nbm9uYXRpdmUudjEu",
-            "UmV2b2tlQWxsU2Vzc2lvbnNSZXNwb25zZTABEl0KCk1ha2VDYWxsVHgSKC5s",
-            "YW5kLmduby5nbm9uYXRpdmUudjEuTWFrZUNhbGxUeFJlcXVlc3QaJS5sYW5k",
-            "Lmduby5nbm9uYXRpdmUudjEuTWFrZVR4UmVzcG9uc2USXQoKTWFrZVNlbmRU",
-            "eBIoLmxhbmQuZ25vLmdub25hdGl2ZS52MS5NYWtlU2VuZFR4UmVxdWVzdBol",
-            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5NYWtlVHhSZXNwb25zZRJbCglNYWtl",
-            "UnVuVHgSJy5sYW5kLmduby5nbm9uYXRpdmUudjEuTWFrZVJ1blR4UmVxdWVz",
+            "dHlwZXMucHJvdG8iWgoKRXJyRGV0YWlscxIyCgRjb2RlGAEgASgOMh4ubGFu",
+            "ZC5nbm8uZ25vbmF0aXZlLnYxLkVyckNvZGVSBGNvZGUSGAoHbWVzc2FnZRgC",
+            "IAEoCVIHbWVzc2FnZSr7BgoHRXJyQ29kZRINCglVbmRlZmluZWQQABIICgRU",
+            "T0RPEAESFQoRRXJyTm90SW1wbGVtZW50ZWQQAhIPCgtFcnJJbnRlcm5hbBAD",
+            "EhMKD0VyckludmFsaWRJbnB1dBBkEhgKFEVyckJyaWRnZUludGVycnVwdGVk",
+            "EGUSEwoPRXJyTWlzc2luZ0lucHV0EGYSFAoQRXJyU2VyaWFsaXphdGlvbhBn",
+            "EhYKEkVyckRlc2VyaWFsaXphdGlvbhBoEhIKDkVyckluaXRTZXJ2aWNlEGkS",
+            "EAoMRXJyU2V0UmVtb3RlEGoSFAoQRXJyS2V5TmFtZUV4aXN0cxBrEhgKFEVy",
+            "clJlbW90ZVVucmVhY2hhYmxlEGwSHAoXRXJyQ3J5cHRvS2V5VHlwZVVua25v",
+            "d24QlgESGQoURXJyQ3J5cHRvS2V5Tm90Rm91bmQQlwESFwoSRXJyTm9BY3Rp",
+            "dmVBY2NvdW50EJgBEhUKEEVyclJ1bkdSUENTZXJ2ZXIQmQESGAoTRXJyRGVj",
+            "cnlwdGlvbkZhaWxlZBCaARIQCgtFcnJUeERlY29kZRDIARIXChJFcnJJbnZh",
+            "bGlkU2VxdWVuY2UQyQESFAoPRXJyVW5hdXRob3JpemVkEMoBEhkKFEVycklu",
+            "c3VmZmljaWVudEZ1bmRzEMsBEhYKEUVyclVua25vd25SZXF1ZXN0EMwBEhYK",
+            "EUVyckludmFsaWRBZGRyZXNzEM0BEhYKEUVyclVua25vd25BZGRyZXNzEM4B",
+            "EhUKEEVyckludmFsaWRQdWJLZXkQzwESGQoURXJySW5zdWZmaWNpZW50Q29p",
+            "bnMQ0AESFAoPRXJySW52YWxpZENvaW5zENEBEhgKE0VyckludmFsaWRHYXNX",
+            "YW50ZWQQ0gESEAoLRXJyT3V0T2ZHYXMQ0wESFAoPRXJyTWVtb1Rvb0xhcmdl",
+            "ENQBEhcKEkVyckluc3VmZmljaWVudEZlZRDVARIZChRFcnJUb29NYW55U2ln",
+            "bmF0dXJlcxDWARIUCg9FcnJOb1NpZ25hdHVyZXMQ1wESEwoORXJyR2FzT3Zl",
+            "cmZsb3cQ2AESFgoRRXJySW52YWxpZFBrZ1BhdGgQ2QESEwoORXJySW52YWxp",
+            "ZFN0bXQQ2gESEwoORXJySW52YWxpZEV4cHIQ2wESFQoQRXJyQ2hhaW5SZWpl",
+            "Y3RlZBDcATK+KQoQR25vTmF0aXZlU2VydmljZRJeCglTZXRSZW1vdGUSJy5s",
+            "YW5kLmduby5nbm9uYXRpdmUudjEuU2V0UmVtb3RlUmVxdWVzdBooLmxhbmQu",
+            "Z25vLmdub25hdGl2ZS52MS5TZXRSZW1vdGVSZXNwb25zZRJeCglHZXRSZW1v",
+            "dGUSJy5sYW5kLmduby5nbm9uYXRpdmUudjEuR2V0UmVtb3RlUmVxdWVzdBoo",
+            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5HZXRSZW1vdGVSZXNwb25zZRJhCgpT",
+            "ZXRDaGFpbklEEigubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlNldENoYWluSURS",
+            "ZXF1ZXN0GikubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlNldENoYWluSURSZXNw",
+            "b25zZRJhCgpHZXRDaGFpbklEEigubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkdl",
+            "dENoYWluSURSZXF1ZXN0GikubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkdldENo",
+            "YWluSURSZXNwb25zZRKFAQoWR2VuZXJhdGVSZWNvdmVyeVBocmFzZRI0Lmxh",
+            "bmQuZ25vLmdub25hdGl2ZS52MS5HZW5lcmF0ZVJlY292ZXJ5UGhyYXNlUmVx",
+            "dWVzdBo1LmxhbmQuZ25vLmdub25hdGl2ZS52MS5HZW5lcmF0ZVJlY292ZXJ5",
+            "UGhyYXNlUmVzcG9uc2USZAoLTGlzdEtleUluZm8SKS5sYW5kLmduby5nbm9u",
+            "YXRpdmUudjEuTGlzdEtleUluZm9SZXF1ZXN0GioubGFuZC5nbm8uZ25vbmF0",
+            "aXZlLnYxLkxpc3RLZXlJbmZvUmVzcG9uc2USZwoMSGFzS2V5QnlOYW1lEiou",
+            "bGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhhc0tleUJ5TmFtZVJlcXVlc3QaKy5s",
+            "YW5kLmduby5nbm9uYXRpdmUudjEuSGFzS2V5QnlOYW1lUmVzcG9uc2UScAoP",
+            "SGFzS2V5QnlBZGRyZXNzEi0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhhc0tl",
+            "eUJ5QWRkcmVzc1JlcXVlc3QaLi5sYW5kLmduby5nbm9uYXRpdmUudjEuSGFz",
+            "S2V5QnlBZGRyZXNzUmVzcG9uc2USggEKFUhhc0tleUJ5TmFtZU9yQWRkcmVz",
+            "cxIzLmxhbmQuZ25vLmdub25hdGl2ZS52MS5IYXNLZXlCeU5hbWVPckFkZHJl",
+            "c3NSZXF1ZXN0GjQubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhhc0tleUJ5TmFt",
+            "ZU9yQWRkcmVzc1Jlc3BvbnNlEnMKEEdldEtleUluZm9CeU5hbWUSLi5sYW5k",
+            "Lmduby5nbm9uYXRpdmUudjEuR2V0S2V5SW5mb0J5TmFtZVJlcXVlc3QaLy5s",
+            "YW5kLmduby5nbm9uYXRpdmUudjEuR2V0S2V5SW5mb0J5TmFtZVJlc3BvbnNl",
+            "EnwKE0dldEtleUluZm9CeUFkZHJlc3MSMS5sYW5kLmduby5nbm9uYXRpdmUu",
+            "djEuR2V0S2V5SW5mb0J5QWRkcmVzc1JlcXVlc3QaMi5sYW5kLmduby5nbm9u",
+            "YXRpdmUudjEuR2V0S2V5SW5mb0J5QWRkcmVzc1Jlc3BvbnNlEo4BChlHZXRL",
+            "ZXlJbmZvQnlOYW1lT3JBZGRyZXNzEjcubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
+            "LkdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXF1ZXN0GjgubGFuZC5nbm8u",
+            "Z25vbmF0aXZlLnYxLkdldEtleUluZm9CeU5hbWVPckFkZHJlc3NSZXNwb25z",
+            "ZRJqCg1DcmVhdGVBY2NvdW50EisubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNy",
+            "ZWF0ZUFjY291bnRSZXF1ZXN0GiwubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNy",
+            "ZWF0ZUFjY291bnRSZXNwb25zZRJnCgxDcmVhdGVMZWRnZXISKi5sYW5kLmdu",
+            "by5nbm9uYXRpdmUudjEuQ3JlYXRlTGVkZ2VyUmVxdWVzdBorLmxhbmQuZ25v",
+            "Lmdub25hdGl2ZS52MS5DcmVhdGVMZWRnZXJSZXNwb25zZRJwCg9BY3RpdmF0",
+            "ZUFjY291bnQSLS5sYW5kLmduby5nbm9uYXRpdmUudjEuQWN0aXZhdGVBY2Nv",
+            "dW50UmVxdWVzdBouLmxhbmQuZ25vLmdub25hdGl2ZS52MS5BY3RpdmF0ZUFj",
+            "Y291bnRSZXNwb25zZRJkCgtTZXRQYXNzd29yZBIpLmxhbmQuZ25vLmdub25h",
+            "dGl2ZS52MS5TZXRQYXNzd29yZFJlcXVlc3QaKi5sYW5kLmduby5nbm9uYXRp",
+            "dmUudjEuU2V0UGFzc3dvcmRSZXNwb25zZRJeCglSZW5hbWVLZXkSJy5sYW5k",
+            "Lmduby5nbm9uYXRpdmUudjEuUmVuYW1lS2V5UmVxdWVzdBooLmxhbmQuZ25v",
+            "Lmdub25hdGl2ZS52MS5SZW5hbWVLZXlSZXNwb25zZRJtCg5Sb3RhdGVQYXNz",
+            "d29yZBIsLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Sb3RhdGVQYXNzd29yZFJl",
+            "cXVlc3QaLS5sYW5kLmduby5nbm9uYXRpdmUudjEuUm90YXRlUGFzc3dvcmRS",
+            "ZXNwb25zZRJ8ChNHZXRBY3RpdmF0ZWRBY2NvdW50EjEubGFuZC5nbm8uZ25v",
+            "bmF0aXZlLnYxLkdldEFjdGl2YXRlZEFjY291bnRSZXF1ZXN0GjIubGFuZC5n",
+            "bm8uZ25vbmF0aXZlLnYxLkdldEFjdGl2YXRlZEFjY291bnRSZXNwb25zZRJn",
+            "CgxRdWVyeUFjY291bnQSKi5sYW5kLmduby5nbm9uYXRpdmUudjEuUXVlcnlB",
+            "Y2NvdW50UmVxdWVzdBorLmxhbmQuZ25vLmdub25hdGl2ZS52MS5RdWVyeUFj",
+            "Y291bnRSZXNwb25zZRJ8ChNRdWVyeVNlc3Npb25BY2NvdW50EjEubGFuZC5n",
+            "bm8uZ25vbmF0aXZlLnYxLlF1ZXJ5U2Vzc2lvbkFjY291bnRSZXF1ZXN0GjIu",
+            "bGFuZC5nbm8uZ25vbmF0aXZlLnYxLlF1ZXJ5U2Vzc2lvbkFjY291bnRSZXNw",
+            "b25zZRJqCg1EZWxldGVBY2NvdW50EisubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
+            "LkRlbGV0ZUFjY291bnRSZXF1ZXN0GiwubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
+            "LkRlbGV0ZUFjY291bnRSZXNwb25zZRJSCgVRdWVyeRIjLmxhbmQuZ25vLmdu",
+            "b25hdGl2ZS52MS5RdWVyeVJlcXVlc3QaJC5sYW5kLmduby5nbm9uYXRpdmUu",
+            "djEuUXVlcnlSZXNwb25zZRJVCgZSZW5kZXISJC5sYW5kLmduby5nbm9uYXRp",
+            "dmUudjEuUmVuZGVyUmVxdWVzdBolLmxhbmQuZ25vLmdub25hdGl2ZS52MS5S",
+            "ZW5kZXJSZXNwb25zZRJSCgVRRXZhbBIjLmxhbmQuZ25vLmdub25hdGl2ZS52",
+            "MS5RRXZhbFJlcXVlc3QaJC5sYW5kLmduby5nbm9uYXRpdmUudjEuUUV2YWxS",
+            "ZXNwb25zZRJRCgRDYWxsEiIubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNhbGxS",
+            "ZXF1ZXN0GiMubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNhbGxSZXNwb25zZTAB",
+            "ElEKBFNlbmQSIi5sYW5kLmduby5nbm9uYXRpdmUudjEuU2VuZFJlcXVlc3Qa",
+            "Iy5sYW5kLmduby5nbm9uYXRpdmUudjEuU2VuZFJlc3BvbnNlMAESTgoDUnVu",
+            "EiEubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlJ1blJlcXVlc3QaIi5sYW5kLmdu",
+            "by5nbm9uYXRpdmUudjEuUnVuUmVzcG9uc2UwARJsCg1DcmVhdGVTZXNzaW9u",
+            "EisubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNyZWF0ZVNlc3Npb25SZXF1ZXN0",
+            "GiwubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNyZWF0ZVNlc3Npb25SZXNwb25z",
+            "ZTABEmwKDVJldm9rZVNlc3Npb24SKy5sYW5kLmduby5nbm9uYXRpdmUudjEu",
+            "UmV2b2tlU2Vzc2lvblJlcXVlc3QaLC5sYW5kLmduby5nbm9uYXRpdmUudjEu",
+            "UmV2b2tlU2Vzc2lvblJlc3BvbnNlMAESeAoRUmV2b2tlQWxsU2Vzc2lvbnMS",
+            "Ly5sYW5kLmduby5nbm9uYXRpdmUudjEuUmV2b2tlQWxsU2Vzc2lvbnNSZXF1",
+            "ZXN0GjAubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlJldm9rZUFsbFNlc3Npb25z",
+            "UmVzcG9uc2UwARJdCgpNYWtlQ2FsbFR4EigubGFuZC5nbm8uZ25vbmF0aXZl",
+            "LnYxLk1ha2VDYWxsVHhSZXF1ZXN0GiUubGFuZC5nbm8uZ25vbmF0aXZlLnYx",
+            "Lk1ha2VUeFJlc3BvbnNlEl0KCk1ha2VTZW5kVHgSKC5sYW5kLmduby5nbm9u",
+            "YXRpdmUudjEuTWFrZVNlbmRUeFJlcXVlc3QaJS5sYW5kLmduby5nbm9uYXRp",
+            "dmUudjEuTWFrZVR4UmVzcG9uc2USWwoJTWFrZVJ1blR4EicubGFuZC5nbm8u",
+            "Z25vbmF0aXZlLnYxLk1ha2VSdW5UeFJlcXVlc3QaJS5sYW5kLmduby5nbm9u",
+            "YXRpdmUudjEuTWFrZVR4UmVzcG9uc2USaQoTTWFrZUNyZWF0ZVNlc3Npb25U",
+            "eBIrLmxhbmQuZ25vLmdub25hdGl2ZS52MS5DcmVhdGVTZXNzaW9uUmVxdWVz",
             "dBolLmxhbmQuZ25vLmdub25hdGl2ZS52MS5NYWtlVHhSZXNwb25zZRJpChNN",
-            "YWtlQ3JlYXRlU2Vzc2lvblR4EisubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNy",
-            "ZWF0ZVNlc3Npb25SZXF1ZXN0GiUubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1h",
-            "a2VUeFJlc3BvbnNlEmkKE01ha2VSZXZva2VTZXNzaW9uVHgSKy5sYW5kLmdu",
-            "by5nbm9uYXRpdmUudjEuUmV2b2tlU2Vzc2lvblJlcXVlc3QaJS5sYW5kLmdu",
-            "by5nbm9uYXRpdmUudjEuTWFrZVR4UmVzcG9uc2UScQoXTWFrZVJldm9rZUFs",
-            "bFNlc3Npb25zVHgSLy5sYW5kLmduby5nbm9uYXRpdmUudjEuUmV2b2tlQWxs",
-            "U2Vzc2lvbnNSZXF1ZXN0GiUubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1ha2VU",
-            "eFJlc3BvbnNlEmQKC0VzdGltYXRlR2FzEikubGFuZC5nbm8uZ25vbmF0aXZl",
-            "LnYxLkVzdGltYXRlR2FzUmVxdWVzdBoqLmxhbmQuZ25vLmdub25hdGl2ZS52",
-            "MS5Fc3RpbWF0ZUdhc1Jlc3BvbnNlEm0KDkVzdGltYXRlVHhGZWVzEiwubGFu",
-            "ZC5nbm8uZ25vbmF0aXZlLnYxLkVzdGltYXRlVHhGZWVzUmVxdWVzdBotLmxh",
-            "bmQuZ25vLmdub25hdGl2ZS52MS5Fc3RpbWF0ZVR4RmVlc1Jlc3BvbnNlElUK",
-            "BlNpZ25UeBIkLmxhbmQuZ25vLmdub25hdGl2ZS52MS5TaWduVHhSZXF1ZXN0",
-            "GiUubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlNpZ25UeFJlc3BvbnNlEngKEUJy",
-            "b2FkY2FzdFR4Q29tbWl0Ei8ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkJyb2Fk",
-            "Y2FzdFR4Q29tbWl0UmVxdWVzdBowLmxhbmQuZ25vLmdub25hdGl2ZS52MS5C",
-            "cm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlMAEScAoPQWRkcmVzc1RvQmVjaDMy",
-            "Ei0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkFkZHJlc3NUb0JlY2gzMlJlcXVl",
-            "c3QaLi5sYW5kLmduby5nbm9uYXRpdmUudjEuQWRkcmVzc1RvQmVjaDMyUmVz",
-            "cG9uc2USdgoRQWRkcmVzc0Zyb21CZWNoMzISLy5sYW5kLmduby5nbm9uYXRp",
-            "dmUudjEuQWRkcmVzc0Zyb21CZWNoMzJSZXF1ZXN0GjAubGFuZC5nbm8uZ25v",
-            "bmF0aXZlLnYxLkFkZHJlc3NGcm9tQmVjaDMyUmVzcG9uc2USfAoTQWRkcmVz",
-            "c0Zyb21NbmVtb25pYxIxLmxhbmQuZ25vLmdub25hdGl2ZS52MS5BZGRyZXNz",
-            "RnJvbU1uZW1vbmljUmVxdWVzdBoyLmxhbmQuZ25vLmdub25hdGl2ZS52MS5B",
-            "ZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USfwoUVmFsaWRhdGVNbmVtb25p",
-            "Y1dvcmQSMi5sYW5kLmduby5nbm9uYXRpdmUudjEuVmFsaWRhdGVNbmVtb25p",
-            "Y1dvcmRSZXF1ZXN0GjMubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlZhbGlkYXRl",
-            "TW5lbW9uaWNXb3JkUmVzcG9uc2UShQEKFlZhbGlkYXRlTW5lbW9uaWNQaHJh",
-            "c2USNC5sYW5kLmduby5nbm9uYXRpdmUudjEuVmFsaWRhdGVNbmVtb25pY1Bo",
-            "cmFzZVJlcXVlc3QaNS5sYW5kLmduby5nbm9uYXRpdmUudjEuVmFsaWRhdGVN",
-            "bmVtb25pY1BocmFzZVJlc3BvbnNlEoIBChVQdWJLZXlCeXRlc0Zyb21CZWNo",
-            "MzISMy5sYW5kLmduby5nbm9uYXRpdmUudjEuUHViS2V5Qnl0ZXNGcm9tQmVj",
-            "aDMyUmVxdWVzdBo0LmxhbmQuZ25vLmdub25hdGl2ZS52MS5QdWJLZXlCeXRl",
-            "c0Zyb21CZWNoMzJSZXNwb25zZRJSCgVIZWxsbxIjLmxhbmQuZ25vLmdub25h",
-            "dGl2ZS52MS5IZWxsb1JlcXVlc3QaJC5sYW5kLmduby5nbm9uYXRpdmUudjEu",
-            "SGVsbG9SZXNwb25zZRJmCgtIZWxsb1N0cmVhbRIpLmxhbmQuZ25vLmdub25h",
-            "dGl2ZS52MS5IZWxsb1N0cmVhbVJlcXVlc3QaKi5sYW5kLmduby5nbm9uYXRp",
-            "dmUudjEuSGVsbG9TdHJlYW1SZXNwb25zZTABQjJaKmdpdGh1Yi5jb20vZ25v",
-            "bGFuZy9nbm9uYXRpdmUvdjQvYXBpL2dlbi9nb6ICA1JUR2IGcHJvdG8z"));
+            "YWtlUmV2b2tlU2Vzc2lvblR4EisubGFuZC5nbm8uZ25vbmF0aXZlLnYxLlJl",
+            "dm9rZVNlc3Npb25SZXF1ZXN0GiUubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1h",
+            "a2VUeFJlc3BvbnNlEnEKF01ha2VSZXZva2VBbGxTZXNzaW9uc1R4Ei8ubGFu",
+            "ZC5nbm8uZ25vbmF0aXZlLnYxLlJldm9rZUFsbFNlc3Npb25zUmVxdWVzdBol",
+            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5NYWtlVHhSZXNwb25zZRJkCgtFc3Rp",
+            "bWF0ZUdhcxIpLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Fc3RpbWF0ZUdhc1Jl",
+            "cXVlc3QaKi5sYW5kLmduby5nbm9uYXRpdmUudjEuRXN0aW1hdGVHYXNSZXNw",
+            "b25zZRJtCg5Fc3RpbWF0ZVR4RmVlcxIsLmxhbmQuZ25vLmdub25hdGl2ZS52",
+            "MS5Fc3RpbWF0ZVR4RmVlc1JlcXVlc3QaLS5sYW5kLmduby5nbm9uYXRpdmUu",
+            "djEuRXN0aW1hdGVUeEZlZXNSZXNwb25zZRJVCgZTaWduVHgSJC5sYW5kLmdu",
+            "by5nbm9uYXRpdmUudjEuU2lnblR4UmVxdWVzdBolLmxhbmQuZ25vLmdub25h",
+            "dGl2ZS52MS5TaWduVHhSZXNwb25zZRJ4ChFCcm9hZGNhc3RUeENvbW1pdBIv",
+            "LmxhbmQuZ25vLmdub25hdGl2ZS52MS5Ccm9hZGNhc3RUeENvbW1pdFJlcXVl",
+            "c3QaMC5sYW5kLmduby5nbm9uYXRpdmUudjEuQnJvYWRjYXN0VHhDb21taXRS",
+            "ZXNwb25zZTABEnAKD0FkZHJlc3NUb0JlY2gzMhItLmxhbmQuZ25vLmdub25h",
+            "dGl2ZS52MS5BZGRyZXNzVG9CZWNoMzJSZXF1ZXN0Gi4ubGFuZC5nbm8uZ25v",
+            "bmF0aXZlLnYxLkFkZHJlc3NUb0JlY2gzMlJlc3BvbnNlEnYKEUFkZHJlc3NG",
+            "cm9tQmVjaDMyEi8ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkFkZHJlc3NGcm9t",
+            "QmVjaDMyUmVxdWVzdBowLmxhbmQuZ25vLmdub25hdGl2ZS52MS5BZGRyZXNz",
+            "RnJvbUJlY2gzMlJlc3BvbnNlEnwKE0FkZHJlc3NGcm9tTW5lbW9uaWMSMS5s",
+            "YW5kLmduby5nbm9uYXRpdmUudjEuQWRkcmVzc0Zyb21NbmVtb25pY1JlcXVl",
+            "c3QaMi5sYW5kLmduby5nbm9uYXRpdmUudjEuQWRkcmVzc0Zyb21NbmVtb25p",
+            "Y1Jlc3BvbnNlEn8KFFZhbGlkYXRlTW5lbW9uaWNXb3JkEjIubGFuZC5nbm8u",
+            "Z25vbmF0aXZlLnYxLlZhbGlkYXRlTW5lbW9uaWNXb3JkUmVxdWVzdBozLmxh",
+            "bmQuZ25vLmdub25hdGl2ZS52MS5WYWxpZGF0ZU1uZW1vbmljV29yZFJlc3Bv",
+            "bnNlEoUBChZWYWxpZGF0ZU1uZW1vbmljUGhyYXNlEjQubGFuZC5nbm8uZ25v",
+            "bmF0aXZlLnYxLlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXF1ZXN0GjUubGFu",
+            "ZC5nbm8uZ25vbmF0aXZlLnYxLlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNw",
+            "b25zZRKCAQoVUHViS2V5Qnl0ZXNGcm9tQmVjaDMyEjMubGFuZC5nbm8uZ25v",
+            "bmF0aXZlLnYxLlB1YktleUJ5dGVzRnJvbUJlY2gzMlJlcXVlc3QaNC5sYW5k",
+            "Lmduby5nbm9uYXRpdmUudjEuUHViS2V5Qnl0ZXNGcm9tQmVjaDMyUmVzcG9u",
+            "c2USUgoFSGVsbG8SIy5sYW5kLmduby5nbm9uYXRpdmUudjEuSGVsbG9SZXF1",
+            "ZXN0GiQubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhlbGxvUmVzcG9uc2USZgoL",
+            "SGVsbG9TdHJlYW0SKS5sYW5kLmduby5nbm9uYXRpdmUudjEuSGVsbG9TdHJl",
+            "YW1SZXF1ZXN0GioubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkhlbGxvU3RyZWFt",
+            "UmVzcG9uc2UwAUIyWipnaXRodWIuY29tL2dub2xhbmcvZ25vbmF0aXZlL3Y0",
+            "L2FwaS9nZW4vZ2+iAgNSVEdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Land.Gno.Gnonative.V1.GnonativetypesReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Land.Gno.Gnonative.V1.ErrCode), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.ErrDetails), global::Land.Gno.Gnonative.V1.ErrDetails.Parser, new[]{ "Codes" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Land.Gno.Gnonative.V1.ErrDetails), global::Land.Gno.Gnonative.V1.ErrDetails.Parser, new[]{ "Code", "Message" }, null, null, null, null)
           }));
     }
     #endregion
@@ -204,6 +206,12 @@ namespace Land.Gno.Gnonative.V1 {
     [pbr::OriginalName("ErrInitService")] ErrInitService = 105,
     [pbr::OriginalName("ErrSetRemote")] ErrSetRemote = 106,
     [pbr::OriginalName("ErrKeyNameExists")] ErrKeyNameExists = 107,
+    /// <summary>
+    /// ErrRemoteUnreachable indicates that the node could not be reached at all:
+    /// connection refused, host not resolved, or no reply. The request never
+    /// arrived, so this says nothing about the request itself.
+    /// </summary>
+    [pbr::OriginalName("ErrRemoteUnreachable")] ErrRemoteUnreachable = 108,
     [pbr::OriginalName("ErrCryptoKeyTypeUnknown")] ErrCryptoKeyTypeUnknown = 150,
     /// <summary>
     /// ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
@@ -284,11 +292,30 @@ namespace Land.Gno.Gnonative.V1 {
     [pbr::OriginalName("ErrInvalidPkgPath")] ErrInvalidPkgPath = 217,
     [pbr::OriginalName("ErrInvalidStmt")] ErrInvalidStmt = 218,
     [pbr::OriginalName("ErrInvalidExpr")] ErrInvalidExpr = 219,
+    /// <summary>
+    /// ErrChainRejected indicates that the chain refused the request for a reason
+    /// it did not classify: free text rather than one of the typed errors above,
+    /// typically a realm panic the VM recovered and the ABCI layer degraded to a
+    /// string. It does not claim the VM raised it — the same catch-all covers any
+    /// unclassified failure of a message or a query.
+    ///
+    /// Its ErrDetails carry that reason as the message: the wording differs per
+    /// failure and belongs to the realm, not to this library — which also makes it
+    /// untrusted, see ErrDetails.message.
+    /// </summary>
+    [pbr::OriginalName("ErrChainRejected")] ErrChainRejected = 220,
   }
 
   #endregion
 
   #region Messages
+  /// <summary>
+  /// ErrDetails is attached to a failing call so that a client can tell what went
+  /// wrong without reading the error text.
+  ///
+  /// One code, not a list: no call site wraps one ErrCode in another. A cause chain
+  /// can be added later as a separate repeated field.
+  /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class ErrDetails : pb::IMessage<ErrDetails>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -324,7 +351,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ErrDetails(ErrDetails other) : this() {
-      codes_ = other.codes_.Clone();
+      code_ = other.code_;
+      message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -334,15 +362,39 @@ namespace Land.Gno.Gnonative.V1 {
       return new ErrDetails(this);
     }
 
-    /// <summary>Field number for the "codes" field.</summary>
-    public const int CodesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Land.Gno.Gnonative.V1.ErrCode> _repeated_codes_codec
-        = pb::FieldCodec.ForEnum(10, x => (int) x, x => (global::Land.Gno.Gnonative.V1.ErrCode) x);
-    private readonly pbc::RepeatedField<global::Land.Gno.Gnonative.V1.ErrCode> codes_ = new pbc::RepeatedField<global::Land.Gno.Gnonative.V1.ErrCode>();
+    /// <summary>Field number for the "code" field.</summary>
+    public const int CodeFieldNumber = 1;
+    private global::Land.Gno.Gnonative.V1.ErrCode code_ = global::Land.Gno.Gnonative.V1.ErrCode.Undefined;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Land.Gno.Gnonative.V1.ErrCode> Codes {
-      get { return codes_; }
+    public global::Land.Gno.Gnonative.V1.ErrCode Code {
+      get { return code_; }
+      set {
+        code_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private string message_ = "";
+    /// <summary>
+    /// Default English text for the code. A client may show it as it stands or map
+    /// `code` to its own wording, but never has to invent text for a code it does
+    /// not recognise. It says what happened, not what to do about it: the remedy
+    /// names screens only the application knows exist.
+    ///
+    /// For ErrChainRejected, and only for it, the text is written by whoever
+    /// deployed the realm, so treat it as untrusted: render it as plain text,
+    /// attribute it ("the chain replied: …") instead of speaking it as the
+    /// application's own words, and truncate — it is unbounded.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -360,7 +412,8 @@ namespace Land.Gno.Gnonative.V1 {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!codes_.Equals(other.codes_)) return false;
+      if (Code != other.Code) return false;
+      if (Message != other.Message) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -368,7 +421,8 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= codes_.GetHashCode();
+      if (Code != global::Land.Gno.Gnonative.V1.ErrCode.Undefined) hash ^= Code.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -387,7 +441,14 @@ namespace Land.Gno.Gnonative.V1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      codes_.WriteTo(output, _repeated_codes_codec);
+      if (Code != global::Land.Gno.Gnonative.V1.ErrCode.Undefined) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Code);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -398,7 +459,14 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      codes_.WriteTo(ref output, _repeated_codes_codec);
+      if (Code != global::Land.Gno.Gnonative.V1.ErrCode.Undefined) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Code);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -409,7 +477,12 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      size += codes_.CalculateSize(_repeated_codes_codec);
+      if (Code != global::Land.Gno.Gnonative.V1.ErrCode.Undefined) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Code);
+      }
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -422,7 +495,12 @@ namespace Land.Gno.Gnonative.V1 {
       if (other == null) {
         return;
       }
-      codes_.Add(other.codes_);
+      if (other.Code != global::Land.Gno.Gnonative.V1.ErrCode.Undefined) {
+        Code = other.Code;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -442,9 +520,12 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10:
           case 8: {
-            codes_.AddEntriesFrom(input, _repeated_codes_codec);
+            Code = (global::Land.Gno.Gnonative.V1.ErrCode) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
             break;
           }
         }
@@ -466,9 +547,12 @@ namespace Land.Gno.Gnonative.V1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10:
           case 8: {
-            codes_.AddEntriesFrom(ref input, _repeated_codes_codec);
+            Code = (global::Land.Gno.Gnonative.V1.ErrCode) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
             break;
           }
         }

@@ -275,6 +275,7 @@ func (s *gnoNativeService) runGRPCServer(listener net.Listener) error {
 	mux.Handle(_goconnect.NewGnoNativeServiceHandler(
 		s,
 		compress1KB,
+		connect.WithInterceptors(errDetailsInterceptor()),
 	))
 	mux.Handle(grpchealth.NewHandler(
 		grpchealth.NewStaticChecker(_goconnect.GnoNativeServiceName),

@@ -33,15 +33,19 @@ const (
 	// ErrNotImplemented indicates that a method is not implemented yet
 	ErrCode_ErrNotImplemented ErrCode = 2
 	// ErrInternal indicates an unknown error (without Code), i.e. in gRPC
-	ErrCode_ErrInternal             ErrCode = 3
-	ErrCode_ErrInvalidInput         ErrCode = 100
-	ErrCode_ErrBridgeInterrupted    ErrCode = 101
-	ErrCode_ErrMissingInput         ErrCode = 102
-	ErrCode_ErrSerialization        ErrCode = 103
-	ErrCode_ErrDeserialization      ErrCode = 104
-	ErrCode_ErrInitService          ErrCode = 105
-	ErrCode_ErrSetRemote            ErrCode = 106
-	ErrCode_ErrKeyNameExists        ErrCode = 107
+	ErrCode_ErrInternal          ErrCode = 3
+	ErrCode_ErrInvalidInput      ErrCode = 100
+	ErrCode_ErrBridgeInterrupted ErrCode = 101
+	ErrCode_ErrMissingInput      ErrCode = 102
+	ErrCode_ErrSerialization     ErrCode = 103
+	ErrCode_ErrDeserialization   ErrCode = 104
+	ErrCode_ErrInitService       ErrCode = 105
+	ErrCode_ErrSetRemote         ErrCode = 106
+	ErrCode_ErrKeyNameExists     ErrCode = 107
+	// ErrRemoteUnreachable indicates that the node could not be reached at all:
+	// connection refused, host not resolved, or no reply. The request never
+	// arrived, so this says nothing about the request itself.
+	ErrCode_ErrRemoteUnreachable    ErrCode = 108
 	ErrCode_ErrCryptoKeyTypeUnknown ErrCode = 150
 	// ErrCryptoKeyNotFound indicates that the doesn't exist in the keybase
 	ErrCode_ErrCryptoKeyNotFound ErrCode = 151
@@ -86,6 +90,16 @@ const (
 	ErrCode_ErrInvalidPkgPath ErrCode = 217
 	ErrCode_ErrInvalidStmt    ErrCode = 218
 	ErrCode_ErrInvalidExpr    ErrCode = 219
+	// ErrChainRejected indicates that the chain refused the request for a reason
+	// it did not classify: free text rather than one of the typed errors above,
+	// typically a realm panic the VM recovered and the ABCI layer degraded to a
+	// string. It does not claim the VM raised it — the same catch-all covers any
+	// unclassified failure of a message or a query.
+	//
+	// Its ErrDetails carry that reason as the message: the wording differs per
+	// failure and belongs to the realm, not to this library — which also makes it
+	// untrusted, see ErrDetails.message.
+	ErrCode_ErrChainRejected ErrCode = 220
 )
 
 // Enum value maps for ErrCode.
@@ -103,6 +117,7 @@ var (
 		105: "ErrInitService",
 		106: "ErrSetRemote",
 		107: "ErrKeyNameExists",
+		108: "ErrRemoteUnreachable",
 		150: "ErrCryptoKeyTypeUnknown",
 		151: "ErrCryptoKeyNotFound",
 		152: "ErrNoActiveAccount",
@@ -128,6 +143,7 @@ var (
 		217: "ErrInvalidPkgPath",
 		218: "ErrInvalidStmt",
 		219: "ErrInvalidExpr",
+		220: "ErrChainRejected",
 	}
 	ErrCode_value = map[string]int32{
 		"Undefined":               0,
@@ -142,6 +158,7 @@ var (
 		"ErrInitService":          105,
 		"ErrSetRemote":            106,
 		"ErrKeyNameExists":        107,
+		"ErrRemoteUnreachable":    108,
 		"ErrCryptoKeyTypeUnknown": 150,
 		"ErrCryptoKeyNotFound":    151,
 		"ErrNoActiveAccount":      152,
@@ -167,6 +184,7 @@ var (
 		"ErrInvalidPkgPath":       217,
 		"ErrInvalidStmt":          218,
 		"ErrInvalidExpr":          219,
+		"ErrChainRejected":        220,
 	}
 )
 
@@ -197,9 +215,24 @@ func (ErrCode) EnumDescriptor() ([]byte, []int) {
 	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
+// ErrDetails is attached to a failing call so that a client can tell what went
+// wrong without reading the error text.
+//
+// One code, not a list: no call site wraps one ErrCode in another. A cause chain
+// can be added later as a separate repeated field.
 type ErrDetails struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Codes         []ErrCode              `protobuf:"varint,1,rep,packed,name=codes,proto3,enum=land.gno.gnonative.v1.ErrCode" json:"codes,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Code  ErrCode                `protobuf:"varint,1,opt,name=code,proto3,enum=land.gno.gnonative.v1.ErrCode" json:"code,omitempty"`
+	// Default English text for the code. A client may show it as it stands or map
+	// `code` to its own wording, but never has to invent text for a code it does
+	// not recognise. It says what happened, not what to do about it: the remedy
+	// names screens only the application knows exist.
+	//
+	// For ErrChainRejected, and only for it, the text is written by whoever
+	// deployed the realm, so treat it as untrusted: render it as plain text,
+	// attribute it ("the chain replied: …") instead of speaking it as the
+	// application's own words, and truncate — it is unbounded.
+	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -234,21 +267,29 @@ func (*ErrDetails) Descriptor() ([]byte, []int) {
 	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ErrDetails) GetCodes() []ErrCode {
+func (x *ErrDetails) GetCode() ErrCode {
 	if x != nil {
-		return x.Codes
+		return x.Code
 	}
-	return nil
+	return ErrCode_Undefined
+}
+
+func (x *ErrDetails) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 var File_rpc_proto protoreflect.FileDescriptor
 
 const file_rpc_proto_rawDesc = "" +
 	"\n" +
-	"\trpc.proto\x12\x15land.gno.gnonative.v1\x1a\x14gnonativetypes.proto\"B\n" +
+	"\trpc.proto\x12\x15land.gno.gnonative.v1\x1a\x14gnonativetypes.proto\"Z\n" +
 	"\n" +
-	"ErrDetails\x124\n" +
-	"\x05codes\x18\x01 \x03(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x05codes*\xca\x06\n" +
+	"ErrDetails\x122\n" +
+	"\x04code\x18\x01 \x01(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage*\xfb\x06\n" +
 	"\aErrCode\x12\r\n" +
 	"\tUndefined\x10\x00\x12\b\n" +
 	"\x04TODO\x10\x01\x12\x15\n" +
@@ -261,7 +302,8 @@ const file_rpc_proto_rawDesc = "" +
 	"\x12ErrDeserialization\x10h\x12\x12\n" +
 	"\x0eErrInitService\x10i\x12\x10\n" +
 	"\fErrSetRemote\x10j\x12\x14\n" +
-	"\x10ErrKeyNameExists\x10k\x12\x1c\n" +
+	"\x10ErrKeyNameExists\x10k\x12\x18\n" +
+	"\x14ErrRemoteUnreachable\x10l\x12\x1c\n" +
 	"\x17ErrCryptoKeyTypeUnknown\x10\x96\x01\x12\x19\n" +
 	"\x14ErrCryptoKeyNotFound\x10\x97\x01\x12\x17\n" +
 	"\x12ErrNoActiveAccount\x10\x98\x01\x12\x15\n" +
@@ -286,7 +328,8 @@ const file_rpc_proto_rawDesc = "" +
 	"\x0eErrGasOverflow\x10\xd8\x01\x12\x16\n" +
 	"\x11ErrInvalidPkgPath\x10\xd9\x01\x12\x13\n" +
 	"\x0eErrInvalidStmt\x10\xda\x01\x12\x13\n" +
-	"\x0eErrInvalidExpr\x10\xdb\x012\xbe)\n" +
+	"\x0eErrInvalidExpr\x10\xdb\x01\x12\x15\n" +
+	"\x10ErrChainRejected\x10\xdc\x012\xbe)\n" +
 	"\x10GnoNativeService\x12^\n" +
 	"\tSetRemote\x12'.land.gno.gnonative.v1.SetRemoteRequest\x1a(.land.gno.gnonative.v1.SetRemoteResponse\x12^\n" +
 	"\tGetRemote\x12'.land.gno.gnonative.v1.GetRemoteRequest\x1a(.land.gno.gnonative.v1.GetRemoteResponse\x12a\n" +
@@ -451,7 +494,7 @@ var file_rpc_proto_goTypes = []any{
 	(*HelloStreamResponse)(nil),               // 91: land.gno.gnonative.v1.HelloStreamResponse
 }
 var file_rpc_proto_depIdxs = []int32{
-	0,  // 0: land.gno.gnonative.v1.ErrDetails.codes:type_name -> land.gno.gnonative.v1.ErrCode
+	0,  // 0: land.gno.gnonative.v1.ErrDetails.code:type_name -> land.gno.gnonative.v1.ErrCode
 	2,  // 1: land.gno.gnonative.v1.GnoNativeService.SetRemote:input_type -> land.gno.gnonative.v1.SetRemoteRequest
 	3,  // 2: land.gno.gnonative.v1.GnoNativeService.GetRemote:input_type -> land.gno.gnonative.v1.GetRemoteRequest
 	4,  // 3: land.gno.gnonative.v1.GnoNativeService.SetChainID:input_type -> land.gno.gnonative.v1.SetChainIDRequest

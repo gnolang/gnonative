@@ -6,8 +6,11 @@ package service
 import (
 	"context"
 	"errors"
+	"net"
+	"net/url"
 	"slices"
 	"strings"
+	"syscall"
 	"time"
 
 	"connectrpc.com/connect"
@@ -1389,9 +1392,53 @@ func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request
 	return nil
 }
 
+// isRemoteUnreachable reports whether err is a transport failure reaching the
+// node, rather than an answer from it.
+//
+// The RPC client wraps these in *url.Error, so the cause is unwrapped rather
+// than matched in the message text, which any Go or platform change could
+// reword.
+//
+// Every branch names a type a network operation produces, and none matches a
+// timeout on its own: context.DeadlineExceeded satisfies net.Error, so that
+// would also catch a deadline in a keybase call — every handler comes through
+// here — which says nothing about the node.
+func isRemoteUnreachable(err error) bool {
+	if err == nil {
+		return false
+	}
+
+	// The http client never came back with a response: dial, DNS, TLS, or a
+	// deadline reached before the reply.
+	var urlErr *url.Error
+	if errors.As(err, &urlErr) {
+		return true
+	}
+
+	var opErr *net.OpError
+	if errors.As(err, &opErr) {
+		return true
+	}
+
+	var dnsErr *net.DNSError
+	if errors.As(err, &dnsErr) {
+		return true
+	}
+
+	return errors.Is(err, syscall.ECONNREFUSED)
+}
+
 // If err is a recognized Go error, return the equivalent Grpc error.
 // Otherwise, just return err.
 func getGrpcError(err error) error {
+	// Transport failures first: the request never reached the node, and only this
+	// one is worth a retry. Left unclassified it would fall through to the final
+	// `return err` and cross the bridge as "dial tcp ...: connection refused",
+	// for callers to tell apart from a refusal by reading prose.
+	if isRemoteUnreachable(err) {
+		return api_gen.ErrCode_ErrRemoteUnreachable.Wrap(err)
+	}
+
 	if keyerror.IsErrKeyNotFound(err) {
 		return api_gen.ErrCode_ErrCryptoKeyNotFound
 	} else if keyerror.IsErrWrongPassword(err) {
@@ -1443,9 +1490,24 @@ func getGrpcError(err error) error {
 		return api_gen.ErrCode_ErrInvalidStmt
 	} else if errors.As(err, &vm.InvalidExprError{}) {
 		return api_gen.ErrCode_ErrInvalidExpr
-	} else {
-		return err
 	}
+
+	// Everything the chain refused without classifying arrives as an
+	// abci.StringError, ABCIErrorOrStringError having degraded it to its text —
+	// a realm panic most often, leaving "thread body is required" once the VM
+	// wrapping and stacktrace have gone to the response Log. Not called a VM
+	// error: the type says the chain could not classify the failure, not where it
+	// arose, and messages and queries both end up here.
+	//
+	// Wraps rather than returning the code alone, unlike the branches above: the
+	// reason lives only in the error, and withErrDetails reads it back from there
+	// to send as the message.
+	var rejected abci.StringError
+	if errors.As(err, &rejected) {
+		return api_gen.ErrCode_ErrChainRejected.Wrap(err)
+	}
+
+	return err
 }
 
 // Temporary: Remove after merging https://github.com/gnolang/gno/pull/4630

@@ -30,6 +30,7 @@ import {
 } from './vendor/gnonativetypes_pb';
 import { GnoNativeService } from './vendor/rpc_pb';
 import { GoBridge, GoBridgeInterface } from '../GoBridge';
+import { bridgeErrorToConnectError } from '../grpc/bridge_error';
 import * as Grpc from '../grpc/client';
 
 export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
@@ -690,16 +691,25 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
   getTcpPort(): Promise<number> {
     return GoBridge.getTcpPort();
   }
+  // These three skip the transport, so they unwrap the envelope themselves:
+  // otherwise a caller of the raw bridge reads JSON where it read a message.
   invokeGrpcMethod(method: string, jsonMessage: string): Promise<string> {
-    return GoBridge.invokeGrpcMethod(method, jsonMessage);
+    return rejectWithConnectError(GoBridge.invokeGrpcMethod(method, jsonMessage));
   }
   createStreamClient(method: string, jsonMessage: string): Promise<string> {
-    return GoBridge.createStreamClient(method, jsonMessage);
+    return rejectWithConnectError(GoBridge.createStreamClient(method, jsonMessage));
   }
   streamClientReceive(id: string): Promise<string> {
-    return GoBridge.streamClientReceive(id);
+    return rejectWithConnectError(GoBridge.streamClientReceive(id));
   }
   closeStreamClient(id: string): Promise<void> {
     return GoBridge.closeStreamClient(id);
   }
+}
+
+/** Rejects with the ConnectError a bridge rejection describes, when it is one. */
+function rejectWithConnectError<T>(call: Promise<T>): Promise<T> {
+  return call.catch(e => {
+    throw bridgeErrorToConnectError(e);
+  });
 }
