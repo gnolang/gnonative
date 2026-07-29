@@ -51,12 +51,11 @@ func withErrDetails(err error) error {
 		return nil
 	}
 
-	codes := api_gen.Codes(err)
-	if len(codes) == 0 {
+	code := api_gen.FirstCode(err)
+	if code == -1 {
 		// Untouched, so connect's own errors (deadline, cancellation) survive.
 		return err
 	}
-	code := codes[0]
 
 	// A handler that built its own connect error keeps it, status code included.
 	var connectErr *connect.Error
@@ -64,8 +63,9 @@ func withErrDetails(err error) error {
 		connectErr = connect.NewError(connect.CodeUnknown, err)
 	}
 
+	errDetailsName := string((&api_gen.ErrDetails{}).ProtoReflect().Descriptor().FullName())
 	for _, existing := range connectErr.Details() {
-		if existing.Type() == string((&api_gen.ErrDetails{}).ProtoReflect().Descriptor().FullName()) {
+		if existing.Type() == errDetailsName {
 			// Already carried — a second would make the client choose.
 			return connectErr
 		}

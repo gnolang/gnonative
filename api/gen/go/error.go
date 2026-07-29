@@ -4,15 +4,16 @@ import (
 	"fmt"
 	"io"
 
-	"connectrpc.com/connect"
 	"golang.org/x/xerrors"
 )
 
 // WithCode defines an error that can be used by helpers of this package.
+//
+// No Grpc(): the service's errDetails interceptor attaches the ErrDetails, and
+// it is what knows the wording to send with the code.
 type WithCode interface {
 	error
 	Code() ErrCode
-	Grpc() error
 }
 
 // Codes returns a list of wrapped codes
@@ -136,20 +137,6 @@ func (e ErrCode) Wrap(inner error) WithCode {
 	}
 }
 
-// craft an connectRPC error with the rpc code error in the error details
-func (e ErrCode) Grpc() error {
-	err := connect.NewError(
-		connect.CodeUnknown,
-		e,
-	)
-	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
-		Code: Code(e),
-	}); detailErr == nil {
-		err.AddDetail(detail)
-	}
-	return err
-}
-
 //
 // ConfigurableError
 //
@@ -166,21 +153,6 @@ func (e wrappedError) Error() string {
 
 func (e wrappedError) Code() ErrCode {
 	return e.code
-}
-
-// craft an connectRPC error with the rpc code error in the error details
-func (e wrappedError) Grpc() error {
-	err := connect.NewError(
-		connect.CodeUnknown,
-		e,
-	)
-
-	if detail, detailErr := connect.NewErrorDetail(&ErrDetails{
-		Code: Code(e),
-	}); detailErr == nil {
-		err.AddDetail(detail)
-	}
-	return err
 }
 
 // Cause returns the inner error (github.com/pkg/errors)
