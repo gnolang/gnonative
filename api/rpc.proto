@@ -318,6 +318,21 @@ enum ErrCode {
   ErrInvalidPkgPath = 217;
   ErrInvalidStmt = 218;
   ErrInvalidExpr = 219;
+
+  // ErrChainRejected indicates that the request reached the chain, the chain
+  // refused it, and the reason it gave is not one the chain classified: it
+  // arrives as free text rather than as one of the typed errors above.
+  //
+  // A realm aborting is the common case — a panic in a realm function is
+  // recovered by the VM and degraded to a string by the ABCI layer, so
+  // "thread body is required" is all that is left of it. The same happens to any
+  // other unclassified failure of a message or a query, which is why this code
+  // does not claim the VM raised it.
+  //
+  // Its ErrDetails carry that reason as the message, because unlike every other
+  // code here the useful wording differs per failure and belongs to the realm,
+  // not to this library.
+  ErrChainRejected = 220;
 }
 
 // ErrDetails is attached to a failing call so that a client can tell what went

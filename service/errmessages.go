@@ -1,6 +1,9 @@
 package service
 
 import (
+	"errors"
+
+	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 )
 
@@ -25,6 +28,10 @@ import (
 // ErrRunGRPCServer, …) are deliberately absent: inventing user-facing text for
 // them puts a reassuring sentence in front of what is really a bug. An absent
 // code yields an empty message, which a client can tell apart from a real one.
+//
+// ErrChainRejected is absent for the opposite reason — it has text, but not text
+// that can be written here, since it is whatever the chain refused the request
+// with. messageForError supplies it from the failure itself.
 var errCodeMessages = map[api_gen.ErrCode]string{
 	// Transport: the request never reached the node.
 	api_gen.ErrCode_ErrRemoteUnreachable: "The node could not be reached.",
@@ -84,8 +91,26 @@ var errCodeMessages = map[api_gen.ErrCode]string{
 	api_gen.ErrCode_ErrInvalidExpr:    "The expression is not valid.",
 }
 
-// messageForErrCode returns the default text for a code, or "" when there is
-// none to give.
-func messageForErrCode(code api_gen.ErrCode) string {
+// messageForError returns the default text to send with a classified failure,
+// or "" when there is none to give.
+//
+// ErrChainRejected is the one code whose wording cannot come from the table
+// above: it means the chain refused the request for a reason of its own — a
+// realm's panic message, most often — and that reason differs per failure. The
+// text is read back out of the error, where getGrpcError left it, rather than
+// invented here: no wording this library could write ("The chain rejected the
+// request.") would be worth as much to someone as "thread body is required".
+func messageForError(err error, code api_gen.ErrCode) string {
+	if code == api_gen.ErrCode_ErrChainRejected {
+		var rejected abci.StringError
+		if errors.As(err, &rejected) {
+			return rejected.Error()
+		}
+		// The code is only ever set where that error was found, so this is
+		// unreachable; an empty message degrades to the error text rather than
+		// asserting something untrue if it ever is reached.
+		return ""
+	}
+
 	return errCodeMessages[code]
 }

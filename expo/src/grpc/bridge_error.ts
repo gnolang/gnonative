@@ -16,10 +16,17 @@ type BridgeErrorEnvelope = {
   error?: string;
 };
 
-/** The ErrCode a failure carries, with the default text sent alongside it. */
+/** The ErrCode a failure carries, with the text sent alongside it. */
 export type ErrDetail = {
   code: ErrCode;
-  /** Default English text from the library. Empty when it has none to give. */
+  /**
+   * English text to show for this failure. Empty when there is none to give.
+   *
+   * Usually the library's default wording for the code. For ErrChainRejected it
+   * is instead the reason the chain itself gave — a realm's panic message, say —
+   * because that is what differs per failure and no constant could replace it.
+   * Either way it is meant to be shown as it arrives, with no framing to strip.
+   */
   message: string;
 };
 
@@ -68,9 +75,11 @@ export function bridgeErrorToConnectError(error: unknown): unknown {
  * bridge client gets it from bridgeErrorToConnectError. Neither has to look at
  * the message text.
  *
- * `message` is the library's default wording. Show it, or branch on `code` and
- * use your own — an app that knows which of its screens fixes the problem can
- * say so, which the library cannot.
+ * `message` is wording meant to be shown. Show it, or branch on `code` and use
+ * your own — an app that knows which of its screens fixes the problem can say
+ * so, which the library cannot. One code resists that: ErrChainRejected carries
+ * the chain's own reason, which no client can improve on and none should try to
+ * replace with a constant.
  */
 export function errDetailOf(error: unknown): ErrDetail | undefined {
   if (!(error instanceof ConnectError)) return undefined;

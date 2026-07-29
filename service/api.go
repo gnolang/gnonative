@@ -1489,9 +1489,30 @@ func getGrpcError(err error) error {
 		return api_gen.ErrCode_ErrInvalidStmt
 	} else if errors.As(err, &vm.InvalidExprError{}) {
 		return api_gen.ErrCode_ErrInvalidExpr
-	} else {
-		return err
 	}
+
+	// Everything the chain refused without classifying arrives as an
+	// abci.StringError: ABCIErrorOrStringError degrades any error that does not
+	// implement AssertABCIError to its text, which is what happens to a realm
+	// panic — the VM recovers it, and "thread body is required" is all that
+	// survives (the "VM panic" wrapping and the stacktrace go to the response
+	// Log, which no user sees). Both a message and a query end up here.
+	//
+	// This is deliberately not called a VM error. The type says the chain could
+	// not classify the failure, not where it arose, and the same catch-all covers
+	// any other unclassified handler failure; naming it for the common case would
+	// be a guess made in the client's name.
+	//
+	// It must wrap rather than return the code alone, unlike the branches above:
+	// the reason is only in the error, and withErrDetails reads it back from
+	// there to send as the message. Returning a bare code would classify the
+	// failure and lose the only part of it worth showing.
+	var rejected abci.StringError
+	if errors.As(err, &rejected) {
+		return api_gen.ErrCode_ErrChainRejected.Wrap(err)
+	}
+
+	return err
 }
 
 // Temporary: Remove after merging https://github.com/gnolang/gno/pull/4630

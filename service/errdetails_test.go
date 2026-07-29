@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 
 	"connectrpc.com/connect"
@@ -54,6 +55,34 @@ func TestWithErrDetailsLeavesDeveloperCodesUnworded(t *testing.T) {
 	}
 	if got.Message != "" {
 		t.Errorf("message = %q, want empty", got.Message)
+	}
+}
+
+// The one code whose wording is not a constant: what the chain refused a request
+// for is only known per failure, and a sentence this library could write instead
+// ("The chain rejected the request.") would tell someone nothing they could act
+// on. The realm's own message is the message.
+func TestWithErrDetailsCarriesTheChainsOwnReason(t *testing.T) {
+	got := detailOf(t, withErrDetails(getGrpcError(realmRejection("thread body is required"))))
+
+	if got.Code != api_gen.ErrCode_ErrChainRejected {
+		t.Errorf("code = %v, want ErrChainRejected", got.Code)
+	}
+	if got.Message != "thread body is required" {
+		t.Errorf("message = %q, want the reason the chain gave", got.Message)
+	}
+}
+
+// The reason travels alone, without the wrapping each layer added to name itself
+// — a client showing the message must not have to strip "deliver transaction
+// failed", a stacktrace, or the name of an RPC method out of it first.
+func TestWithErrDetailsReasonCarriesNoFraming(t *testing.T) {
+	got := detailOf(t, withErrDetails(getGrpcError(realmRejection("thread body is required"))))
+
+	for _, framing := range []string{"deliver transaction failed", "VM panic", "Stacktrace", "log:"} {
+		if strings.Contains(got.Message, framing) {
+			t.Errorf("message = %q, want it free of %q", got.Message, framing)
+		}
 	}
 }
 

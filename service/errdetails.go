@@ -85,7 +85,7 @@ func withErrDetails(err error) error {
 
 	detail, detailErr := connect.NewErrorDetail(&api_gen.ErrDetails{
 		Code:    code,
-		Message: messageForErrCode(code),
+		Message: messageForError(err, code),
 	})
 	if detailErr != nil {
 		// The error itself still has to reach the client; losing the detail is

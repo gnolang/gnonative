@@ -90,6 +90,20 @@ const (
 	ErrCode_ErrInvalidPkgPath ErrCode = 217
 	ErrCode_ErrInvalidStmt    ErrCode = 218
 	ErrCode_ErrInvalidExpr    ErrCode = 219
+	// ErrChainRejected indicates that the request reached the chain, the chain
+	// refused it, and the reason it gave is not one the chain classified: it
+	// arrives as free text rather than as one of the typed errors above.
+	//
+	// A realm aborting is the common case — a panic in a realm function is
+	// recovered by the VM and degraded to a string by the ABCI layer, so
+	// "thread body is required" is all that is left of it. The same happens to any
+	// other unclassified failure of a message or a query, which is why this code
+	// does not claim the VM raised it.
+	//
+	// Its ErrDetails carry that reason as the message, because unlike every other
+	// code here the useful wording differs per failure and belongs to the realm,
+	// not to this library.
+	ErrCode_ErrChainRejected ErrCode = 220
 )
 
 // Enum value maps for ErrCode.
@@ -133,6 +147,7 @@ var (
 		217: "ErrInvalidPkgPath",
 		218: "ErrInvalidStmt",
 		219: "ErrInvalidExpr",
+		220: "ErrChainRejected",
 	}
 	ErrCode_value = map[string]int32{
 		"Undefined":               0,
@@ -173,6 +188,7 @@ var (
 		"ErrInvalidPkgPath":       217,
 		"ErrInvalidStmt":          218,
 		"ErrInvalidExpr":          219,
+		"ErrChainRejected":        220,
 	}
 )
 
@@ -277,7 +293,7 @@ const file_rpc_proto_rawDesc = "" +
 	"\n" +
 	"ErrDetails\x122\n" +
 	"\x04code\x18\x01 \x01(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage*\xe4\x06\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage*\xfb\x06\n" +
 	"\aErrCode\x12\r\n" +
 	"\tUndefined\x10\x00\x12\b\n" +
 	"\x04TODO\x10\x01\x12\x15\n" +
@@ -316,7 +332,8 @@ const file_rpc_proto_rawDesc = "" +
 	"\x0eErrGasOverflow\x10\xd8\x01\x12\x16\n" +
 	"\x11ErrInvalidPkgPath\x10\xd9\x01\x12\x13\n" +
 	"\x0eErrInvalidStmt\x10\xda\x01\x12\x13\n" +
-	"\x0eErrInvalidExpr\x10\xdb\x012\xbe)\n" +
+	"\x0eErrInvalidExpr\x10\xdb\x01\x12\x15\n" +
+	"\x10ErrChainRejected\x10\xdc\x012\xbe)\n" +
 	"\x10GnoNativeService\x12^\n" +
 	"\tSetRemote\x12'.land.gno.gnonative.v1.SetRemoteRequest\x1a(.land.gno.gnonative.v1.SetRemoteResponse\x12^\n" +
 	"\tGetRemote\x12'.land.gno.gnonative.v1.GetRemoteRequest\x1a(.land.gno.gnonative.v1.GetRemoteResponse\x12a\n" +
