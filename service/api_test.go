@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net"
@@ -55,6 +56,15 @@ func TestIsRemoteUnreachable(t *testing.T) {
 		Err: &net.OpError{Op: "dial", Net: "tcp", Err: timeoutError{}},
 	}
 
+	// A request cut short by its context's deadline. Recognised because the http
+	// client hands it back as *url.Error, not because the deadline was matched —
+	// see the bare case below.
+	deadlineExceeded := &url.Error{
+		Op:  "Post",
+		URL: "http://10.0.2.2:26657",
+		Err: context.DeadlineExceeded,
+	}
+
 	for _, tc := range []struct {
 		name string
 		err  error
@@ -64,7 +74,13 @@ func TestIsRemoteUnreachable(t *testing.T) {
 		{"connection refused", connRefused, true},
 		{"no such host", noSuchHost, true},
 		{"timeout", timedOut, true},
+		{"request deadline exceeded", deadlineExceeded, true},
 		{"bare ECONNREFUSED", syscall.ECONNREFUSED, true},
+		// context.DeadlineExceeded satisfies net.Error with Timeout() true, so
+		// this is the case a `net.Error` test would wrongly call unreachable:
+		// every handler goes through getGrpcError, keybase ones included, and a
+		// deadline that was not a request's says nothing about the node.
+		{"bare deadline exceeded", context.DeadlineExceeded, false},
 		// A reply from the node is not a transport failure, however it reads.
 		{"realm rejection", errors.New("unknown request: no such function"), false},
 		{"wrapped realm rejection", fmt.Errorf("call failed: %w", errors.New("out of gas")), false},

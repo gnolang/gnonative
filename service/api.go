@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"net"
+	"net/url"
 	"slices"
 	"strings"
 	"syscall"
@@ -1397,9 +1398,21 @@ func (s *gnoNativeService) HelloStream(ctx context.Context, req *connect.Request
 // The RPC client wraps these in *url.Error, so the cause is unwrapped rather
 // than matched in the message text, which any Go or platform change could
 // reword.
+//
+// Every branch names a type a network operation produces, and none matches a
+// timeout on its own: context.DeadlineExceeded satisfies net.Error, so that
+// would also catch a deadline in a keybase call — every handler comes through
+// here — which says nothing about the node.
 func isRemoteUnreachable(err error) bool {
 	if err == nil {
 		return false
+	}
+
+	// The http client never came back with a response: dial, DNS, TLS, or a
+	// deadline reached before the reply.
+	var urlErr *url.Error
+	if errors.As(err, &urlErr) {
+		return true
 	}
 
 	var opErr *net.OpError
@@ -1412,14 +1425,7 @@ func isRemoteUnreachable(err error) bool {
 		return true
 	}
 
-	// A deadline exceeded before any reply, the http client's as well as the
-	// socket's.
-	var netErr net.Error
-	if errors.As(err, &netErr) && netErr.Timeout() {
-		return true
-	}
-
-	return errors.Is(err, context.DeadlineExceeded) || errors.Is(err, syscall.ECONNREFUSED)
+	return errors.Is(err, syscall.ECONNREFUSED)
 }
 
 // If err is a recognized Go error, return the equivalent Grpc error.
