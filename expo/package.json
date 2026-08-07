@@ -4,6 +4,18 @@
   "description": "Develop for Gno using your app's native language ",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    },
+    "./native": {
+      "types": "./build/native/index.d.ts",
+      "default": "./build/native/index.js"
+    },
+    "./package.json": "./package.json",
+    "./build/*": "./build/*"
+  },
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",

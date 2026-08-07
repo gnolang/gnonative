@@ -3,6 +3,8 @@ PROJECT_DIR := $(shell go list -m -f '{{.Dir}}')
 API_SRC := $(PROJECT_DIR)/api/gen/es
 API_SRC_FILES := $(shell find $(PROJECT_DIR)/api/gen/es -iname '*.js' -o -iname '*.ts')
 API_VENDOR := src/api/vendor
+# Buf-free JSON types for the @gnolang/gnonative/native entry point.
+NATIVE_TYPES := src/native/types.gen.ts
 
 ANDROID_FRAMEWORK_SRC_DIR := $(PROJECT_DIR)/framework/android
 ANDROID_FRAMEWORK_OUTPUT_DIR := android/libs
@@ -30,13 +32,16 @@ clean: clean.android clean.ios clean.api
 
 ######### API #########
 
-build.api: $(API_VENDOR)
+build.api: $(API_VENDOR) $(NATIVE_TYPES)
 .PHONY: build.api
 
 $(API_VENDOR): $(API_SRC_FILES)
 	mkdir -p $(API_VENDOR)
 	cp -r $^ $(API_VENDOR)
 	touch $@
+
+$(NATIVE_TYPES): $(API_SRC_FILES) scripts/extract-json-types.mjs
+	node scripts/extract-json-types.mjs $(API_SRC) $(NATIVE_TYPES)
 
 clean.api:
 	rm -fr $(API_VENDOR)

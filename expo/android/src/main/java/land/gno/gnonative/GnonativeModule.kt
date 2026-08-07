@@ -6,6 +6,8 @@ import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.CodedException
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import expo.modules.kotlin.records.Field
+import expo.modules.kotlin.records.Record
 import gnolang.gno.gnonative.Bridge
 import gnolang.gno.gnonative.BridgeConfig
 import gnolang.gno.gnonative.Gnonative
@@ -56,6 +58,21 @@ class GnonativeModule : Module() {
         val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
         config.rootDir = rootDir!!.absolutePath
         config.nativeDB = nativeDBManager
+        bridgeGnoNative = Gnonative.newBridge(config)
+        promise.resolve(true)
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("initBridgeWithOptions") { options: InitBridgeOptions, promise: Promise ->
+      try {
+        val config: BridgeConfig = Gnonative.newBridgeConfig() ?: throw Exception("")
+        config.rootDir = rootDir!!.absolutePath
+        config.nativeDB = nativeDBManager
+        // useGrpcServers defaults to true (today's behavior). When false, the bridge serves JS
+        // only through the connect-free dispatcher and starts no in-process gRPC servers.
+        config.disableGrpcServers = !options.useGrpcServers
         bridgeGnoNative = Gnonative.newBridge(config)
         promise.resolve(true)
       } catch (err: CodedException) {
@@ -142,6 +159,58 @@ class GnonativeModule : Module() {
       }
     }
 
+    AsyncFunction("invokeMethod") { method: String, jsonMessage: String, promise: Promise ->
+      try {
+        bridgeGnoNative?.let {
+          val promiseBlock: PromiseBlock = PromiseBlock(promise)
+          bridgeGnoNative!!.invokeMethodWithPromiseBlock(promiseBlock, method, jsonMessage)
+        } ?: run {
+          throw GoBridgeNotStartedError()
+        }
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("createStream") { method: String, jsonMessage: String, promise: Promise ->
+      try {
+        bridgeGnoNative?.let {
+          val promiseBlock: PromiseBlock = PromiseBlock(promise)
+          bridgeGnoNative!!.createStreamWithPromiseBlock(promiseBlock, method, jsonMessage)
+        } ?: run {
+          throw GoBridgeNotStartedError()
+        }
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("streamReceive") { id: String, promise: Promise ->
+      try {
+        bridgeGnoNative?.let {
+          val promiseBlock: PromiseBlock = PromiseBlock(promise)
+          bridgeGnoNative!!.streamReceiveWithPromiseBlock(promiseBlock, id)
+        } ?: run {
+          throw GoBridgeNotStartedError()
+        }
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
+    AsyncFunction("closeStream") { id: String, promise: Promise ->
+      try {
+        bridgeGnoNative?.let {
+          val promiseBlock: PromiseBlock = PromiseBlock(promise)
+          bridgeGnoNative!!.closeStreamWithPromiseBlock(promiseBlock, id)
+        } ?: run {
+          throw GoBridgeNotStartedError()
+        }
+      } catch (err: CodedException) {
+        promise.reject(err)
+      }
+    }
+
     // Defines a JavaScript function that always returns a Promise and whose native code
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
     AsyncFunction("setValueAsync") { value: String ->
@@ -160,4 +229,10 @@ class GnonativeModule : Module() {
       }
     }
   }
+}
+
+// Options for initBridgeWithOptions. useGrpcServers defaults to true (today's behavior).
+class InitBridgeOptions : Record {
+  @Field
+  var useGrpcServers: Boolean = true
 }
