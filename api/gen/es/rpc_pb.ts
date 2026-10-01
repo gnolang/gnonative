@@ -810,6 +810,9 @@ export const GnoNativeService: GenService<{
    * The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
    * If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
    * If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+   * The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+   * document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+   * and never sign bytes chosen by a third party unmodified.
    *
    * @generated from rpc land.gno.gnonative.v1.GnoNativeService.SignBytes
    */

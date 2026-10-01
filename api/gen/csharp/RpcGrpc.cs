@@ -1209,6 +1209,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+      /// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+      /// and never sign bytes chosen by a third party unmodified.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -3413,6 +3416,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+      /// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+      /// and never sign bytes chosen by a third party unmodified.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3429,6 +3435,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+      /// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+      /// and never sign bytes chosen by a third party unmodified.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -3443,6 +3452,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+      /// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+      /// and never sign bytes chosen by a third party unmodified.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3459,6 +3471,9 @@ namespace Land.Gno.Gnonative.V1 {
       /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
       /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+      /// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+      /// and never sign bytes chosen by a third party unmodified.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
