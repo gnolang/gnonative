@@ -12,6 +12,7 @@ require (
 	github.com/peterbourgon/unixtransport v0.0.3
 	github.com/pkg/errors v0.9.1
 	github.com/rs/cors v1.11.1
+	github.com/stretchr/testify v1.11.1
 	go.uber.org/multierr v1.11.0
 	go.uber.org/zap v1.28.0
 	golang.org/x/mobile v0.0.0-20230531173138-3c911d8e3eda
@@ -77,7 +78,6 @@ require (
 	github.com/rogpeppe/go-internal v1.15.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/sig-0/insertion-queue v0.0.0-20241004125609-6b3ca841346b // indirect
-	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/zondax/golem v0.27.0 // indirect

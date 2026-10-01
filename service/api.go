@@ -1153,6 +1153,27 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
 
+func (s *gnoNativeService) SignBytes(ctx context.Context, req *connect.Request[api_gen.SignBytesRequest]) (*connect.Response[api_gen.SignBytesResponse], error) {
+	signer, err := s.getSigner(req.Msg.Address)
+	if err != nil {
+		return nil, err
+	}
+
+	data := req.Msg.Data
+	if data == nil {
+		data = []byte{}
+	}
+	sig, pub, err := signer.Keybase.Sign(signer.Account, signer.Password, data)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	return connect.NewResponse(&api_gen.SignBytesResponse{
+		Signature: sig,
+		PubKey:    pub.Bytes(),
+	}), nil
+}
+
 func (s *gnoNativeService) EstimateGas(ctx context.Context, req *connect.Request[api_gen.EstimateGasRequest]) (*connect.Response[api_gen.EstimateGasResponse], error) {
 	var tx std.Tx
 	if err := amino.UnmarshalJSON([]byte(req.Msg.TxJson), &tx); err != nil {

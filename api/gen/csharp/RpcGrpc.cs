@@ -193,6 +193,10 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SignTxResponse> __Marshaller_land_gno_gnonative_v1_SignTxResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SignTxResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SignBytesRequest> __Marshaller_land_gno_gnonative_v1_SignBytesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SignBytesRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.SignBytesResponse> __Marshaller_land_gno_gnonative_v1_SignBytesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.SignBytesResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest> __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> __Marshaller_land_gno_gnonative_v1_BroadcastTxCommitResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse.Parser));
@@ -548,6 +552,14 @@ namespace Land.Gno.Gnonative.V1 {
         "SignTx",
         __Marshaller_land_gno_gnonative_v1_SignTxRequest,
         __Marshaller_land_gno_gnonative_v1_SignTxResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.SignBytesRequest, global::Land.Gno.Gnonative.V1.SignBytesResponse> __Method_SignBytes = new grpc::Method<global::Land.Gno.Gnonative.V1.SignBytesRequest, global::Land.Gno.Gnonative.V1.SignBytesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SignBytes",
+        __Marshaller_land_gno_gnonative_v1_SignBytesRequest,
+        __Marshaller_land_gno_gnonative_v1_SignBytesResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse> __Method_BroadcastTxCommit = new grpc::Method<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse>(
@@ -1188,6 +1200,21 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.SignTxResponse> SignTx(global::Land.Gno.Gnonative.V1.SignTxRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Sign arbitrary bytes with the key of the activated account with the given address.
+      /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.SignBytesResponse> SignBytes(global::Land.Gno.Gnonative.V1.SignBytesRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -3382,6 +3409,66 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_SignTx, null, options, request);
       }
       /// <summary>
+      /// Sign arbitrary bytes with the key of the activated account with the given address.
+      /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.SignBytesResponse SignBytes(global::Land.Gno.Gnonative.V1.SignBytesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SignBytes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Sign arbitrary bytes with the key of the activated account with the given address.
+      /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.SignBytesResponse SignBytes(global::Land.Gno.Gnonative.V1.SignBytesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SignBytes, null, options, request);
+      }
+      /// <summary>
+      /// Sign arbitrary bytes with the key of the activated account with the given address.
+      /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.SignBytesResponse> SignBytesAsync(global::Land.Gno.Gnonative.V1.SignBytesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SignBytesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Sign arbitrary bytes with the key of the activated account with the given address.
+      /// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+      /// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+      /// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.SignBytesResponse> SignBytesAsync(global::Land.Gno.Gnonative.V1.SignBytesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SignBytes, null, options, request);
+      }
+      /// <summary>
       /// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -3827,6 +3914,7 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_EstimateGas, serviceImpl.EstimateGas)
           .AddMethod(__Method_EstimateTxFees, serviceImpl.EstimateTxFees)
           .AddMethod(__Method_SignTx, serviceImpl.SignTx)
+          .AddMethod(__Method_SignBytes, serviceImpl.SignBytes)
           .AddMethod(__Method_BroadcastTxCommit, serviceImpl.BroadcastTxCommit)
           .AddMethod(__Method_AddressToBech32, serviceImpl.AddressToBech32)
           .AddMethod(__Method_AddressFromBech32, serviceImpl.AddressFromBech32)
@@ -3885,6 +3973,7 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_EstimateGas, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.EstimateGasRequest, global::Land.Gno.Gnonative.V1.EstimateGasResponse>(serviceImpl.EstimateGas));
       serviceBinder.AddMethod(__Method_EstimateTxFees, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.EstimateTxFeesRequest, global::Land.Gno.Gnonative.V1.EstimateTxFeesResponse>(serviceImpl.EstimateTxFees));
       serviceBinder.AddMethod(__Method_SignTx, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SignTxRequest, global::Land.Gno.Gnonative.V1.SignTxResponse>(serviceImpl.SignTx));
+      serviceBinder.AddMethod(__Method_SignBytes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.SignBytesRequest, global::Land.Gno.Gnonative.V1.SignBytesResponse>(serviceImpl.SignBytes));
       serviceBinder.AddMethod(__Method_BroadcastTxCommit, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.BroadcastTxCommitRequest, global::Land.Gno.Gnonative.V1.BroadcastTxCommitResponse>(serviceImpl.BroadcastTxCommit));
       serviceBinder.AddMethod(__Method_AddressToBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressToBech32Request, global::Land.Gno.Gnonative.V1.AddressToBech32Response>(serviceImpl.AddressToBech32));
       serviceBinder.AddMethod(__Method_AddressFromBech32, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.AddressFromBech32Request, global::Land.Gno.Gnonative.V1.AddressFromBech32Response>(serviceImpl.AddressFromBech32));

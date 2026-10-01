@@ -81,6 +81,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	MakeTxResponse{},
 	SignTxRequest{},
 	SignTxResponse{},
+	SignBytesRequest{},
+	SignBytesResponse{},
 	MsgCreateSession{},
 	CreateSessionRequest{},
 	CreateSessionResponse{},
