@@ -23,6 +23,7 @@ import {
   SetPasswordResponse,
   SetRemoteResponse,
   SignTxResponse,
+  SignBytesResponse,
   RenameKeyResponse,
   RotatePasswordResponse,
   EstimateGasResponse,
@@ -109,6 +110,11 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const client = this.#getClient();
     const response = client.signTx({ txJson, address, accountNumber, sequenceNumber });
     return response;
+  }
+
+  async signBytes(address: Uint8Array, data: Uint8Array): Promise<SignBytesResponse> {
+    const client = this.#getClient();
+    return client.signBytes({ address, data });
   }
 
   async estimateGas(
@@ -323,9 +329,10 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return reponse;
   }
 
-  async activateAccount(nameOrBech32: string): Promise<ActivateAccountResponse> {
+  async activateAccount(nameOrBech32: string, master?: Uint8Array): Promise<ActivateAccountResponse> {
     const client = this.#getClient();
-    const response = client.activateAccount({ nameOrBech32 });
+    // An absent master activates the key as an ordinary account (the service clears any previous master).
+    const response = client.activateAccount(master ? { nameOrBech32, master } : { nameOrBech32 });
     return response;
   }
 
