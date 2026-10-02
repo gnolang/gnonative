@@ -23,7 +23,6 @@ import {
 import { requestHeader } from '@connectrpc/connect/protocol-connect';
 import { GrpcWebTransportOptions } from '@connectrpc/connect-web';
 import { toByteArray } from 'base64-js';
-import { CodedError } from 'expo-modules-core';
 
 import { GoBridge } from '../GoBridge';
 import { bridgeErrorToConnectError } from './bridge_error';
@@ -166,7 +165,10 @@ export function createNativeGrpcTransport(options: GrpcWebTransportOptions): Tra
                     console.log('closeStreamClient error:', e);
                   }
 
-                  if (!(e instanceof CodedError && e.message === 'EOF')) {
+                  // The end of the stream. Native errors carry their code but are not instances of the JS CodedError
+                  // class, and iOS decorates the message ("EOF: EOF (at …)"): match the code, or the bare message.
+                  const code = (e as { code?: unknown } | null)?.code;
+                  if (!(code === 'EOF' || (e instanceof Error && e.message === 'EOF'))) {
                     // As above, and this is the path a broadcast result takes.
                     const err = bridgeErrorToConnectError(e);
                     console.log('streamClientReceive error:', err);
