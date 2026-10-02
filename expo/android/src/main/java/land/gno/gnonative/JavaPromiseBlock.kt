@@ -10,7 +10,8 @@ class PromiseBlock(val promise: Promise): IPromiseBlock {
   // gnolang.gno.gnonative.PromiseBlock aims to keep reference over promise object so go can play with
   // until the promise is resolved
   companion object {
-    private var promises = mutableSetOf<PromiseBlock>()
+    // Go resolves and rejects promises from its own threads while JS creates them: a concurrent set.
+    private val promises: MutableSet<PromiseBlock> = java.util.concurrent.ConcurrentHashMap.newKeySet()
   }
 
   init {

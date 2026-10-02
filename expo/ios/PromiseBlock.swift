@@ -8,7 +8,9 @@
 import ExpoModulesCore
 import GnoCore
 
-var promises = Set<PromiseBlock>()
+// Go resolves and rejects promises from its own threads while JS creates them: every access goes through the lock.
+private var promises = Set<PromiseBlock>()
+private let promisesLock = NSLock()
 
 // PromiseBlock aim to keep reference over promise object so go can play with
 // until the promise is resolved
@@ -36,10 +38,14 @@ class PromiseBlock: NSObject, GnoGnonativePromiseBlockProtocol {
     }
     
     func store() {
+        promisesLock.lock()
+        defer { promisesLock.unlock() }
         promises.insert(self)
     }
     
     func remove() {
+        promisesLock.lock()
+        defer { promisesLock.unlock() }
         promises.remove(self)
     }
 }
