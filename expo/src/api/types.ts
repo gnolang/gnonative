@@ -19,6 +19,7 @@ import {
   RotatePasswordResponse,
   KeyInfo,
   SignTxResponse,
+  SignBytesResponse,
   EstimateGasResponse,
   EstimateTxFeesResponse,
   MakeTxResponse,
@@ -65,7 +66,7 @@ export interface GnoKeyApi {
   getKeyInfoByName: (name: string) => Promise<KeyInfo | undefined>;
   getKeyInfoByAddress: (address: Uint8Array) => Promise<KeyInfo | undefined>;
   getKeyInfoByNameOrAddress: (nameOrBech32: string) => Promise<KeyInfo | undefined>;
-  activateAccount: (nameOrBech32: string) => Promise<ActivateAccountResponse>;
+  activateAccount: (nameOrBech32: string, master?: Uint8Array) => Promise<ActivateAccountResponse>;
   setPassword: (password: string, address: Uint8Array) => Promise<SetPasswordResponse>;
   renameKey: (oldName: string, newName: string) => Promise<RenameKeyResponse>;
   rotatePassword: (password: string, addresses: Uint8Array[]) => Promise<RotatePasswordResponse>;
@@ -120,6 +121,13 @@ export interface GnoKeyApi {
     accountNumber?: bigint,
     sequenceNumber?: bigint,
   ): Promise<SignTxResponse>;
+  /**
+   * Sign `data` as given with the key of the activated account `address`.
+   * The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+   * document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+   * and never sign bytes chosen by a third party unmodified.
+   */
+  signBytes(address: Uint8Array, data: Uint8Array): Promise<SignBytesResponse>;
   estimateGas(
     txJson: string,
     address: Uint8Array,

@@ -413,6 +413,20 @@ message SignTxResponse {
 	string signed_tx_json = 1 [json_name = "tx_json"];
 }
 
+message SignBytesRequest {
+	// The address of the activated account whose key signs
+	bytes address = 1;
+	// The bytes to sign, as given (the key's scheme hashes them, e.g. SHA-256 for secp256k1)
+	bytes data = 2;
+}
+
+message SignBytesResponse {
+	// The signature, in the key's scheme (64 bytes R||S for secp256k1)
+	bytes signature = 1;
+	// The signing key's public key, amino-encoded like KeyInfo.pub_key
+	bytes pub_key = 2;
+}
+
 message MsgCreateSession {
 	// Full session public key
 	bytes session_key = 1;

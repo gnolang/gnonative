@@ -399,6 +399,20 @@ type SignTxResponse struct {
 	SignedTxJSON string `json:"tx_json" yaml:"tx_json"`
 }
 
+type SignBytesRequest struct {
+	// The address of the activated account whose key signs
+	Address []byte `json:"address" yaml:"address"`
+	// The bytes to sign, as given (the key's scheme hashes them, e.g. SHA-256 for secp256k1)
+	Data []byte `json:"data" yaml:"data"`
+}
+
+type SignBytesResponse struct {
+	// The signature, in the key's scheme (64 bytes R||S for secp256k1)
+	Signature []byte `json:"signature" yaml:"signature"`
+	// The signing key's public key, amino-encoded like KeyInfo.pub_key
+	PubKey []byte `json:"pub_key" yaml:"pub_key"`
+}
+
 type MsgCreateSession struct {
 	// Full session public key
 	SessionKey []byte `json:"session_key" yaml:"session_key"`

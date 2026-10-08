@@ -110,6 +110,11 @@ func (d *db) Stats() map[string]string {
 	}
 }
 
+// NewSnapshot is not supported by the native layer, as in goleveldb and boltdb.
+func (d *db) NewSnapshot() (mdb.Snapshot, error) {
+	return nil, errors.New("snapshots not supported")
+}
+
 func (d *db) NewBatch() mdb.Batch {
 	if err := d.ensureOpen(); err != nil {
 		return &batch{err: err}

@@ -146,6 +146,9 @@ const (
 	GnoNativeServiceEstimateTxFeesProcedure = "/land.gno.gnonative.v1.GnoNativeService/EstimateTxFees"
 	// GnoNativeServiceSignTxProcedure is the fully-qualified name of the GnoNativeService's SignTx RPC.
 	GnoNativeServiceSignTxProcedure = "/land.gno.gnonative.v1.GnoNativeService/SignTx"
+	// GnoNativeServiceSignBytesProcedure is the fully-qualified name of the GnoNativeService's
+	// SignBytes RPC.
+	GnoNativeServiceSignBytesProcedure = "/land.gno.gnonative.v1.GnoNativeService/SignBytes"
 	// GnoNativeServiceBroadcastTxCommitProcedure is the fully-qualified name of the GnoNativeService's
 	// BroadcastTxCommit RPC.
 	GnoNativeServiceBroadcastTxCommitProcedure = "/land.gno.gnonative.v1.GnoNativeService/BroadcastTxCommit"
@@ -331,6 +334,14 @@ type GnoNativeServiceClient interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error)
+	// Sign arbitrary bytes with the key of the activated account with the given address.
+	// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+	// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+	// and never sign bytes chosen by a third party unmodified.
+	SignBytes(context.Context, *connect.Request[_go.SignBytesRequest]) (*connect.Response[_go.SignBytesResponse], error)
 	// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
 	BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest]) (*connect.ServerStreamForClient[_go.BroadcastTxCommitResponse], error)
 	// Convert a byte array address to a bech32 string address.
@@ -604,6 +615,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("SignTx")),
 			connect.WithClientOptions(opts...),
 		),
+		signBytes: connect.NewClient[_go.SignBytesRequest, _go.SignBytesResponse](
+			httpClient,
+			baseURL+GnoNativeServiceSignBytesProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("SignBytes")),
+			connect.WithClientOptions(opts...),
+		),
 		broadcastTxCommit: connect.NewClient[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse](
 			httpClient,
 			baseURL+GnoNativeServiceBroadcastTxCommitProcedure,
@@ -703,6 +720,7 @@ type gnoNativeServiceClient struct {
 	estimateGas               *connect.Client[_go.EstimateGasRequest, _go.EstimateGasResponse]
 	estimateTxFees            *connect.Client[_go.EstimateTxFeesRequest, _go.EstimateTxFeesResponse]
 	signTx                    *connect.Client[_go.SignTxRequest, _go.SignTxResponse]
+	signBytes                 *connect.Client[_go.SignBytesRequest, _go.SignBytesResponse]
 	broadcastTxCommit         *connect.Client[_go.BroadcastTxCommitRequest, _go.BroadcastTxCommitResponse]
 	addressToBech32           *connect.Client[_go.AddressToBech32Request, _go.AddressToBech32Response]
 	addressFromBech32         *connect.Client[_go.AddressFromBech32Request, _go.AddressFromBech32Response]
@@ -914,6 +932,11 @@ func (c *gnoNativeServiceClient) SignTx(ctx context.Context, req *connect.Reques
 	return c.signTx.CallUnary(ctx, req)
 }
 
+// SignBytes calls land.gno.gnonative.v1.GnoNativeService.SignBytes.
+func (c *gnoNativeServiceClient) SignBytes(ctx context.Context, req *connect.Request[_go.SignBytesRequest]) (*connect.Response[_go.SignBytesResponse], error) {
+	return c.signBytes.CallUnary(ctx, req)
+}
+
 // BroadcastTxCommit calls land.gno.gnonative.v1.GnoNativeService.BroadcastTxCommit.
 func (c *gnoNativeServiceClient) BroadcastTxCommit(ctx context.Context, req *connect.Request[_go.BroadcastTxCommitRequest]) (*connect.ServerStreamForClient[_go.BroadcastTxCommitResponse], error) {
 	return c.broadcastTxCommit.CallServerStream(ctx, req)
@@ -1117,6 +1140,14 @@ type GnoNativeServiceHandler interface {
 	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
 	SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error)
+	// Sign arbitrary bytes with the key of the activated account with the given address.
+	// The bytes are signed as given, in the key's scheme (secp256k1: ECDSA over SHA-256, 64 bytes R||S).
+	// If there is no activated account with the given address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
+	// If the password is wrong or unset, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
+	// The caller is responsible for domain separation: a signature over bytes that parse as a transaction sign
+	// document is a valid transaction signature. Prefix the payload with a protocol tag (e.g. "gnoconnect-session-v1\n")
+	// and never sign bytes chosen by a third party unmodified.
+	SignBytes(context.Context, *connect.Request[_go.SignBytesRequest]) (*connect.Response[_go.SignBytesResponse], error)
 	// Broadcast the signed transaction to the blockchain configured in GetRemote and return a stream result.
 	BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest], *connect.ServerStream[_go.BroadcastTxCommitResponse]) error
 	// Convert a byte array address to a bech32 string address.
@@ -1386,6 +1417,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("SignTx")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceSignBytesHandler := connect.NewUnaryHandler(
+		GnoNativeServiceSignBytesProcedure,
+		svc.SignBytes,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("SignBytes")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceBroadcastTxCommitHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceBroadcastTxCommitProcedure,
 		svc.BroadcastTxCommit,
@@ -1522,6 +1559,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceEstimateTxFeesHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSignTxProcedure:
 			gnoNativeServiceSignTxHandler.ServeHTTP(w, r)
+		case GnoNativeServiceSignBytesProcedure:
+			gnoNativeServiceSignBytesHandler.ServeHTTP(w, r)
 		case GnoNativeServiceBroadcastTxCommitProcedure:
 			gnoNativeServiceBroadcastTxCommitHandler.ServeHTTP(w, r)
 		case GnoNativeServiceAddressToBech32Procedure:
@@ -1707,6 +1746,10 @@ func (UnimplementedGnoNativeServiceHandler) EstimateTxFees(context.Context, *con
 
 func (UnimplementedGnoNativeServiceHandler) SignTx(context.Context, *connect.Request[_go.SignTxRequest]) (*connect.Response[_go.SignTxResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SignTx is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) SignBytes(context.Context, *connect.Request[_go.SignBytesRequest]) (*connect.Response[_go.SignBytesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.SignBytes is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) BroadcastTxCommit(context.Context, *connect.Request[_go.BroadcastTxCommitRequest], *connect.ServerStream[_go.BroadcastTxCommitResponse]) error {

@@ -8,7 +8,9 @@
 import ExpoModulesCore
 import GnoCore
 
-var promises = Set<PromiseBlock>()
+// Go resolves and rejects promises from its own threads while JS creates them: every access goes through the lock.
+private var promises = Set<PromiseBlock>()
+private let promisesLock = NSLock()
 
 // PromiseBlock aim to keep reference over promise object so go can play with
 // until the promise is resolved
@@ -31,15 +33,24 @@ class PromiseBlock: NSObject, GnoGnonativePromiseBlockProtocol {
     }
     
     func callReject(_ error: Error?) {
-        self.promise.reject(error ?? Exception(name: "Unknown Error", description: "unknown reject error"))
+        if let error = error, (error as NSError).localizedDescription == "EOF" {
+            // End of a stream, not a failure: the JS transport expects a CodedError "EOF", as Android sends.
+            self.promise.reject("EOF", "EOF")
+        } else {
+            self.promise.reject(error ?? Exception(name: "Unknown Error", description: "unknown reject error"))
+        }
         self.remove() // cleanup the promise
     }
     
     func store() {
+        promisesLock.lock()
+        defer { promisesLock.unlock() }
         promises.insert(self)
     }
     
     func remove() {
+        promisesLock.lock()
+        defer { promisesLock.unlock() }
         promises.remove(self)
     }
 }
