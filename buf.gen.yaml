@@ -1,15 +1,15 @@
 version: v2
 plugins:
-  - remote: buf.build/protocolbuffers/go
+  - remote: buf.build/protocolbuffers/go:v1.36.12
     out: ./api/gen/go
     opt: module=github.com/gnolang/gnonative/v4/api/gen/go
-  - remote: buf.build/connectrpc/go
+  - remote: buf.build/connectrpc/go:v1.19.1
     out: ./api/gen/go
     opt: module=github.com/gnolang/gnonative/v4/api/gen/go
   - remote: buf.build/bufbuild/es:v2.6.2
     opt: target=ts
     out: ./api/gen/es
-  - remote: buf.build/protocolbuffers/csharp
+  - remote: buf.build/protocolbuffers/csharp:v36.2
     out: ./api/gen/csharp
-  - remote: buf.build/grpc/csharp
+  - remote: buf.build/grpc/csharp:v1.84.0
     out: ./api/gen/csharp
