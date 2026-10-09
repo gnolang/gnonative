@@ -135,6 +135,26 @@ service GnoNativeService {
   // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
+  // QEvalJSON evaluates the given expression with the realm code at package_path.
+  // The package path should include the prefix like "gno.land/". The expression
+  // is usually a function call like "IsBoardFrozen(1)". The
+  // return value is an Amino JSON string like
+  // "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+  rpc QEvalJSON(QEvalJSONRequest) returns (QEvalJSONResponse);
+
+  // QObjectJSON retrieves the persisted object with the given object_id, like
+  // "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+  // The return value is an Amino JSON string like
+  // "{\"objectid\":\"...\",\"value\":{...}}".
+  rpc QObjectJSON(QObjectJSONRequest) returns (QObjectJSONResponse);
+
+  // QTypeJSON retrieves the type definition with the given type_id, like
+  // "gno.land/r/sys/users.UserData".
+  // The return value is an Amino JSON string like
+  // "{\"typeid\":\"...\",\"type\":{...}}".
+  rpc QTypeJSON(QTypeJSONRequest) returns (QTypeJSONResponse);
+
   // Call one or more specific realm functions. Sign the transaction with the given signer_address.
   // If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file gnonativetypes.proto.
  */
 export const file_gnonativetypes: GenFile = /*@__PURE__*/
-  fileDesc("ChRnbm9uYXRpdmV0eXBlcy5wcm90bxIVbGFuZC5nbm8uZ25vbmF0aXZlLnYxIiIKEFNldFJlbW90ZVJlcXVlc3QSDgoGcmVtb3RlGAEgASgJIhMKEVNldFJlbW90ZVJlc3BvbnNlIhIKEEdldFJlbW90ZVJlcXVlc3QiIwoRR2V0UmVtb3RlUmVzcG9uc2USDgoGcmVtb3RlGAEgASgJIiUKEVNldENoYWluSURSZXF1ZXN0EhAKCGNoYWluX2lkGAEgASgJIhQKElNldENoYWluSURSZXNwb25zZSITChFHZXRDaGFpbklEUmVxdWVzdCImChJHZXRDaGFpbklEUmVzcG9uc2USEAoIY2hhaW5faWQYASABKAkiNwoSU2V0UGFzc3dvcmRSZXF1ZXN0EhAKCHBhc3N3b3JkGAEgASgJEg8KB2FkZHJlc3MYAiABKAwiFQoTU2V0UGFzc3dvcmRSZXNwb25zZSI2ChBSZW5hbWVLZXlSZXF1ZXN0EhAKCG9sZF9uYW1lGAEgASgJEhAKCG5ld19uYW1lGAIgASgJIhMKEVJlbmFtZUtleVJlc3BvbnNlIkAKFVJvdGF0ZVBhc3N3b3JkUmVxdWVzdBIUCgxuZXdfcGFzc3dvcmQYASABKAkSEQoJYWRkcmVzc2VzGAIgAygMIhgKFlJvdGF0ZVBhc3N3b3JkUmVzcG9uc2UiHwodR2VuZXJhdGVSZWNvdmVyeVBocmFzZVJlcXVlc3QiMAoeR2VuZXJhdGVSZWNvdmVyeVBocmFzZVJlc3BvbnNlEg4KBnBocmFzZRgBIAEoCSJHCgdLZXlJbmZvEgwKBHR5cGUYASABKA0SDAoEbmFtZRgCIAEoCRIPCgdwdWJfa2V5GAMgASgMEg8KB2FkZHJlc3MYBCABKAwiJQoEQ29pbhINCgVkZW5vbRgBIAEoCRIOCgZhbW91bnQYAiABKBIihQEKC0Jhc2VBY2NvdW50Eg8KB2FkZHJlc3MYASABKAwSKgoFY29pbnMYAiADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIPCgdwdWJfa2V5GAMgASgMEhYKDmFjY291bnRfbnVtYmVyGAQgASgEEhAKCHNlcXVlbmNlGAUgASgEIpkCCg5TZXNzaW9uQWNjb3VudBI4CgxiYXNlX2FjY291bnQYASABKAsyIi5sYW5kLmduby5nbm9uYXRpdmUudjEuQmFzZUFjY291bnQSFgoObWFzdGVyX2FkZHJlc3MYAiABKAwSEgoKZXhwaXJlc19hdBgDIAEoEhIwCgtzcGVuZF9saW1pdBgEIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEhQKDHNwZW5kX3BlcmlvZBgFIAEoEhIvCgpzcGVuZF91c2VkGAYgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SEwoLc3BlbmRfcmVzZXQYByABKBISEwoLYWxsb3dfcGF0aHMYCCADKAkiFAoSTGlzdEtleUluZm9SZXF1ZXN0Ik0KE0xpc3RLZXlJbmZvUmVzcG9uc2USNgoEa2V5cxgBIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbyIjChNIYXNLZXlCeU5hbWVSZXF1ZXN0EgwKBG5hbWUYASABKAkiIwoUSGFzS2V5QnlOYW1lUmVzcG9uc2USCwoDaGFzGAEgASgIIikKFkhhc0tleUJ5QWRkcmVzc1JlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCImChdIYXNLZXlCeUFkZHJlc3NSZXNwb25zZRILCgNoYXMYASABKAgiNgocSGFzS2V5QnlOYW1lT3JBZGRyZXNzUmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSIsCh1IYXNLZXlCeU5hbWVPckFkZHJlc3NSZXNwb25zZRILCgNoYXMYASABKAgiJwoXR2V0S2V5SW5mb0J5TmFtZVJlcXVlc3QSDAoEbmFtZRgBIAEoCSJRChhHZXRLZXlJbmZvQnlOYW1lUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIi0KGkdldEtleUluZm9CeUFkZHJlc3NSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwiVAobR2V0S2V5SW5mb0J5QWRkcmVzc1Jlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbyI6CiBHZXRLZXlJbmZvQnlOYW1lT3JBZGRyZXNzUmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSJaCiFHZXRLZXlJbmZvQnlOYW1lT3JBZGRyZXNzUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIogBChRDcmVhdGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghtbmVtb25pYxgCIAEoCRIUCgxiaXAzOV9wYXNzd2QYAyABKAkSEAoIcGFzc3dvcmQYBCABKAkSDwoHYWNjb3VudBgFIAEoDRINCgVpbmRleBgGIAEoDSJOChVDcmVhdGVBY2NvdW50UmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvImMKE0NyZWF0ZUxlZGdlclJlcXVlc3QSDAoEbmFtZRgBIAEoCRIRCglhbGdvcml0aG0YAiABKAkSCwoDaHJwGAMgASgJEg8KB2FjY291bnQYBCABKA0SDQoFaW5kZXgYBSABKA0iTQoUQ3JlYXRlTGVkZ2VyUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIkAKFkFjdGl2YXRlQWNjb3VudFJlcXVlc3QSFgoObmFtZV9vcl9iZWNoMzIYASABKAkSDgoGbWFzdGVyGAIgASgMImYKF0FjdGl2YXRlQWNjb3VudFJlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbxIUCgxoYXNfcGFzc3dvcmQYAiABKAgiLQoaR2V0QWN0aXZhdGVkQWNjb3VudFJlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCJ6ChtHZXRBY3RpdmF0ZWRBY2NvdW50UmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvEg4KBm1hc3RlchgCIAEoDBIUCgxoYXNfcGFzc3dvcmQYAyABKAgiJgoTUXVlcnlBY2NvdW50UmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIlAKFFF1ZXJ5QWNjb3VudFJlc3BvbnNlEjgKDGFjY291bnRfaW5mbxgBIAEoCzIiLmxhbmQuZ25vLmdub25hdGl2ZS52MS5CYXNlQWNjb3VudCJNChpRdWVyeVNlc3Npb25BY2NvdW50UmVxdWVzdBIWCg5tYXN0ZXJfYWRkcmVzcxgBIAEoDBIXCg9zZXNzaW9uX2FkZHJlc3MYAiABKAwiWgobUXVlcnlTZXNzaW9uQWNjb3VudFJlc3BvbnNlEjsKDGFjY291bnRfaW5mbxgBIAEoCzIlLmxhbmQuZ25vLmdub25hdGl2ZS52MS5TZXNzaW9uQWNjb3VudCJXChREZWxldGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIVCg1za2lwX3Bhc3N3b3JkGAMgASgIIhcKFURlbGV0ZUFjY291bnRSZXNwb25zZSIqCgxRdWVyeVJlcXVlc3QSDAoEcGF0aBgBIAEoCRIMCgRkYXRhGAIgASgMIh8KDVF1ZXJ5UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMIjMKDVJlbmRlclJlcXVlc3QSFAoMcGFja2FnZV9wYXRoGAEgASgJEgwKBGFyZ3MYAiABKAkiIAoOUmVuZGVyUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJIjgKDFFFdmFsUmVxdWVzdBIUCgxwYWNrYWdlX3BhdGgYASABKAkSEgoKZXhwcmVzc2lvbhgCIAEoCSIfCg1RRXZhbFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSKXAQoHTXNnQ2FsbBIUCgxwYWNrYWdlX3BhdGgYASABKAkSCwoDZm5jGAIgASgJEgwKBGFyZ3MYAyADKAkSKQoEc2VuZBgEIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEjAKC21heF9kZXBvc2l0GAUgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4ijAEKC0NhbGxSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDnNpZ25lcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnQ2FsbFIETXNncyI8CgxDYWxsUmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIkoKB01zZ1NlbmQSEgoKdG9fYWRkcmVzcxgBIAEoDBIrCgZhbW91bnQYAiADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKMAQoLU2VuZFJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFgoOc2lnbmVyX2FkZHJlc3MYBCABKAwSMgoEbXNncxgFIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dTZW5kUgRNc2dzIiwKDFNlbmRSZXNwb25zZRIMCgRoYXNoGAEgASgMEg4KBmhlaWdodBgCIAEoEiJ2CgZNc2dSdW4SDwoHcGFja2FnZRgBIAEoCRIpCgRzZW5kGAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SMAoLbWF4X2RlcG9zaXQYAyADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbiKKAQoKUnVuUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5zaWduZXJfYWRkcmVzcxgEIAEoDBIxCgRtc2dzGAUgAygLMh0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1J1blIETXNncyI7CgtSdW5SZXNwb25zZRIOCgZyZXN1bHQYASABKAkSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIikgEKEU1ha2VDYWxsVHhSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDmNhbGxlcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnQ2FsbFIETXNncyKSAQoRTWFrZVNlbmRUeFJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFgoOY2FsbGVyX2FkZHJlc3MYBCABKAwSMgoEbXNncxgFIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dTZW5kUgRNc2dzIpABChBNYWtlUnVuVHhSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDmNhbGxlcl9hZGRyZXNzGAQgASgMEjEKBG1zZ3MYBSADKAsyHS5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnUnVuUgRNc2dzIiEKDk1ha2VUeFJlc3BvbnNlEg8KB3R4X2pzb24YASABKAkiYgoNU2lnblR4UmVxdWVzdBIPCgd0eF9qc29uGAEgASgJEg8KB2FkZHJlc3MYAiABKAwSFgoOYWNjb3VudF9udW1iZXIYAyABKAQSFwoPc2VxdWVuY2VfbnVtYmVyGAQgASgEIjEKDlNpZ25UeFJlc3BvbnNlEh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIjEKEFNpZ25CeXRlc1JlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDBIMCgRkYXRhGAIgASgMIjcKEVNpZ25CeXRlc1Jlc3BvbnNlEhEKCXNpZ25hdHVyZRgBIAEoDBIPCgdwdWJfa2V5GAIgASgMIpgBChBNc2dDcmVhdGVTZXNzaW9uEhMKC3Nlc3Npb25fa2V5GAEgASgMEhIKCmV4cGlyZXNfYXQYAiABKBISEwoLYWxsb3dfcGF0aHMYAyADKAkSMAoLc3BlbmRfbGltaXQYBCADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIUCgxzcGVuZF9wZXJpb2QYBSABKBIinwEKFENyZWF0ZVNlc3Npb25SZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhcKD2NyZWF0b3JfYWRkcmVzcxgEIAEoDBI7CgRtc2dzGAUgAygLMicubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ0NyZWF0ZVNlc3Npb25SBE1zZ3MiRQoVQ3JlYXRlU2Vzc2lvblJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoDBIMCgRoYXNoGAIgASgMEg4KBmhlaWdodBgDIAEoEiInChBNc2dSZXZva2VTZXNzaW9uEhMKC3Nlc3Npb25fa2V5GAEgASgMIp8BChRSZXZva2VTZXNzaW9uUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIXCg9jcmVhdG9yX2FkZHJlc3MYBCABKAwSOwoEbXNncxgFIAMoCzInLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dSZXZva2VTZXNzaW9uUgRNc2dzIkUKFVJldm9rZVNlc3Npb25SZXNwb25zZRIOCgZyZXN1bHQYASABKAwSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIiZgoYUmV2b2tlQWxsU2Vzc2lvbnNSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhcKD2NyZWF0b3JfYWRkcmVzcxgEIAEoDCJJChlSZXZva2VBbGxTZXNzaW9uc1Jlc3BvbnNlEg4KBnJlc3VsdBgBIAEoDBIMCgRoYXNoGAIgASgMEg4KBmhlaWdodBgDIAEoEiJiChJFc3RpbWF0ZUdhc1JlcXVlc3QSDwoHdHhfanNvbhgBIAEoCRIPCgdhZGRyZXNzGAIgASgMEhcKD3NlY3VyaXR5X21hcmdpbhgDIAEoDRIRCgl1cGRhdGVfdHgYBCABKAgiOgoTRXN0aW1hdGVHYXNSZXNwb25zZRIPCgd0eF9qc29uGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBIijAEKFUVzdGltYXRlVHhGZWVzUmVxdWVzdBIPCgd0eF9qc29uGAEgASgJEg8KB2FkZHJlc3MYAiABKAwSGwoTZ2FzX3NlY3VyaXR5X21hcmdpbhgDIAEoDRIhChlnYXNfcHJpY2Vfc2VjdXJpdHlfbWFyZ2luGAQgASgNEhEKCXVwZGF0ZV90eBgFIAEoCCLuAQoWRXN0aW1hdGVUeEZlZXNSZXNwb25zZRIPCgd0eF9qc29uGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISLAoHZ2FzX2ZlZRgDIAEoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEhUKDXN0b3JhZ2VfZGVsdGEYBCABKBISMAoLc3RvcmFnZV9mZWUYBSADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhI4Cgl0b3RhbF9mZWUYBiABKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pblIIVG90YWxGZWUiOwoYQnJvYWRjYXN0VHhDb21taXRSZXF1ZXN0Eh8KDnNpZ25lZF90eF9qc29uGAEgASgJUgd0eF9qc29uIkkKGUJyb2FkY2FzdFR4Q29tbWl0UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIikKFkFkZHJlc3NUb0JlY2gzMlJlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCIxChdBZGRyZXNzVG9CZWNoMzJSZXNwb25zZRIWCg5iZWNoMzJfYWRkcmVzcxgBIAEoCSIyChhBZGRyZXNzRnJvbUJlY2gzMlJlcXVlc3QSFgoOYmVjaDMyX2FkZHJlc3MYASABKAkiLAoZQWRkcmVzc0Zyb21CZWNoMzJSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIi4KGkFkZHJlc3NGcm9tTW5lbW9uaWNSZXF1ZXN0EhAKCG1uZW1vbmljGAEgASgJIi4KG0FkZHJlc3NGcm9tTW5lbW9uaWNSZXNwb25zZRIPCgdhZGRyZXNzGAEgASgMIisKG1ZhbGlkYXRlTW5lbW9uaWNXb3JkUmVxdWVzdBIMCgR3b3JkGAEgASgJIi0KHFZhbGlkYXRlTW5lbW9uaWNXb3JkUmVzcG9uc2USDQoFdmFsaWQYASABKAgiLwodVmFsaWRhdGVNbmVtb25pY1BocmFzZVJlcXVlc3QSDgoGcGhyYXNlGAEgASgJIi8KHlZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXNwb25zZRINCgV2YWxpZBgBIAEoCCI2ChxQdWJLZXlCeXRlc0Zyb21CZWNoMzJSZXF1ZXN0EhYKDmJlY2gzMl9wdWJfa2V5GAEgASgJIjYKHVB1YktleUJ5dGVzRnJvbUJlY2gzMlJlc3BvbnNlEhUKDXB1Yl9rZXlfYnl0ZXMYASABKAwiIgoMSGVsbG9SZXF1ZXN0EhIKBG5hbWUYASABKAlSBE5hbWUiKwoNSGVsbG9SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVIIR3JlZXRpbmciKAoSSGVsbG9TdHJlYW1SZXF1ZXN0EhIKBG5hbWUYASABKAlSBE5hbWUiMQoTSGVsbG9TdHJlYW1SZXNwb25zZRIaCghncmVldGluZxgBIAEoCVIIR3JlZXRpbmciKQoYR05PTkFUSVZFVFlQRVNfQnl0ZXNMaXN0Eg0KBVZhbHVlGAEgAygMQixaKmdpdGh1Yi5jb20vZ25vbGFuZy9nbm9uYXRpdmUvdjQvYXBpL2dlbi9nb2IGcHJvdG8z");
+  fileDesc("ChRnbm9uYXRpdmV0eXBlcy5wcm90bxIVbGFuZC5nbm8uZ25vbmF0aXZlLnYxIiIKEFNldFJlbW90ZVJlcXVlc3QSDgoGcmVtb3RlGAEgASgJIhMKEVNldFJlbW90ZVJlc3BvbnNlIhIKEEdldFJlbW90ZVJlcXVlc3QiIwoRR2V0UmVtb3RlUmVzcG9uc2USDgoGcmVtb3RlGAEgASgJIiUKEVNldENoYWluSURSZXF1ZXN0EhAKCGNoYWluX2lkGAEgASgJIhQKElNldENoYWluSURSZXNwb25zZSITChFHZXRDaGFpbklEUmVxdWVzdCImChJHZXRDaGFpbklEUmVzcG9uc2USEAoIY2hhaW5faWQYASABKAkiNwoSU2V0UGFzc3dvcmRSZXF1ZXN0EhAKCHBhc3N3b3JkGAEgASgJEg8KB2FkZHJlc3MYAiABKAwiFQoTU2V0UGFzc3dvcmRSZXNwb25zZSI2ChBSZW5hbWVLZXlSZXF1ZXN0EhAKCG9sZF9uYW1lGAEgASgJEhAKCG5ld19uYW1lGAIgASgJIhMKEVJlbmFtZUtleVJlc3BvbnNlIkAKFVJvdGF0ZVBhc3N3b3JkUmVxdWVzdBIUCgxuZXdfcGFzc3dvcmQYASABKAkSEQoJYWRkcmVzc2VzGAIgAygMIhgKFlJvdGF0ZVBhc3N3b3JkUmVzcG9uc2UiHwodR2VuZXJhdGVSZWNvdmVyeVBocmFzZVJlcXVlc3QiMAoeR2VuZXJhdGVSZWNvdmVyeVBocmFzZVJlc3BvbnNlEg4KBnBocmFzZRgBIAEoCSJHCgdLZXlJbmZvEgwKBHR5cGUYASABKA0SDAoEbmFtZRgCIAEoCRIPCgdwdWJfa2V5GAMgASgMEg8KB2FkZHJlc3MYBCABKAwiJQoEQ29pbhINCgVkZW5vbRgBIAEoCRIOCgZhbW91bnQYAiABKBIihQEKC0Jhc2VBY2NvdW50Eg8KB2FkZHJlc3MYASABKAwSKgoFY29pbnMYAiADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIPCgdwdWJfa2V5GAMgASgMEhYKDmFjY291bnRfbnVtYmVyGAQgASgEEhAKCHNlcXVlbmNlGAUgASgEIpkCCg5TZXNzaW9uQWNjb3VudBI4CgxiYXNlX2FjY291bnQYASABKAsyIi5sYW5kLmduby5nbm9uYXRpdmUudjEuQmFzZUFjY291bnQSFgoObWFzdGVyX2FkZHJlc3MYAiABKAwSEgoKZXhwaXJlc19hdBgDIAEoEhIwCgtzcGVuZF9saW1pdBgEIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEhQKDHNwZW5kX3BlcmlvZBgFIAEoEhIvCgpzcGVuZF91c2VkGAYgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SEwoLc3BlbmRfcmVzZXQYByABKBISEwoLYWxsb3dfcGF0aHMYCCADKAkiFAoSTGlzdEtleUluZm9SZXF1ZXN0Ik0KE0xpc3RLZXlJbmZvUmVzcG9uc2USNgoEa2V5cxgBIAMoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbyIjChNIYXNLZXlCeU5hbWVSZXF1ZXN0EgwKBG5hbWUYASABKAkiIwoUSGFzS2V5QnlOYW1lUmVzcG9uc2USCwoDaGFzGAEgASgIIikKFkhhc0tleUJ5QWRkcmVzc1JlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCImChdIYXNLZXlCeUFkZHJlc3NSZXNwb25zZRILCgNoYXMYASABKAgiNgocSGFzS2V5QnlOYW1lT3JBZGRyZXNzUmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSIsCh1IYXNLZXlCeU5hbWVPckFkZHJlc3NSZXNwb25zZRILCgNoYXMYASABKAgiJwoXR2V0S2V5SW5mb0J5TmFtZVJlcXVlc3QSDAoEbmFtZRgBIAEoCSJRChhHZXRLZXlJbmZvQnlOYW1lUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIi0KGkdldEtleUluZm9CeUFkZHJlc3NSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwiVAobR2V0S2V5SW5mb0J5QWRkcmVzc1Jlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbyI6CiBHZXRLZXlJbmZvQnlOYW1lT3JBZGRyZXNzUmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCSJaCiFHZXRLZXlJbmZvQnlOYW1lT3JBZGRyZXNzUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIogBChRDcmVhdGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghtbmVtb25pYxgCIAEoCRIUCgxiaXAzOV9wYXNzd2QYAyABKAkSEAoIcGFzc3dvcmQYBCABKAkSDwoHYWNjb3VudBgFIAEoDRINCgVpbmRleBgGIAEoDSJOChVDcmVhdGVBY2NvdW50UmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvImMKE0NyZWF0ZUxlZGdlclJlcXVlc3QSDAoEbmFtZRgBIAEoCRIRCglhbGdvcml0aG0YAiABKAkSCwoDaHJwGAMgASgJEg8KB2FjY291bnQYBCABKA0SDQoFaW5kZXgYBSABKA0iTQoUQ3JlYXRlTGVkZ2VyUmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvIkAKFkFjdGl2YXRlQWNjb3VudFJlcXVlc3QSFgoObmFtZV9vcl9iZWNoMzIYASABKAkSDgoGbWFzdGVyGAIgASgMImYKF0FjdGl2YXRlQWNjb3VudFJlc3BvbnNlEjUKA2tleRgBIAEoCzIeLmxhbmQuZ25vLmdub25hdGl2ZS52MS5LZXlJbmZvUghrZXlfaW5mbxIUCgxoYXNfcGFzc3dvcmQYAiABKAgiLQoaR2V0QWN0aXZhdGVkQWNjb3VudFJlcXVlc3QSDwoHYWRkcmVzcxgBIAEoDCJ6ChtHZXRBY3RpdmF0ZWRBY2NvdW50UmVzcG9uc2USNQoDa2V5GAEgASgLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLktleUluZm9SCGtleV9pbmZvEg4KBm1hc3RlchgCIAEoDBIUCgxoYXNfcGFzc3dvcmQYAyABKAgiJgoTUXVlcnlBY2NvdW50UmVxdWVzdBIPCgdhZGRyZXNzGAEgASgMIlAKFFF1ZXJ5QWNjb3VudFJlc3BvbnNlEjgKDGFjY291bnRfaW5mbxgBIAEoCzIiLmxhbmQuZ25vLmdub25hdGl2ZS52MS5CYXNlQWNjb3VudCJNChpRdWVyeVNlc3Npb25BY2NvdW50UmVxdWVzdBIWCg5tYXN0ZXJfYWRkcmVzcxgBIAEoDBIXCg9zZXNzaW9uX2FkZHJlc3MYAiABKAwiWgobUXVlcnlTZXNzaW9uQWNjb3VudFJlc3BvbnNlEjsKDGFjY291bnRfaW5mbxgBIAEoCzIlLmxhbmQuZ25vLmdub25hdGl2ZS52MS5TZXNzaW9uQWNjb3VudCJXChREZWxldGVBY2NvdW50UmVxdWVzdBIWCg5uYW1lX29yX2JlY2gzMhgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIVCg1za2lwX3Bhc3N3b3JkGAMgASgIIhcKFURlbGV0ZUFjY291bnRSZXNwb25zZSIqCgxRdWVyeVJlcXVlc3QSDAoEcGF0aBgBIAEoCRIMCgRkYXRhGAIgASgMIh8KDVF1ZXJ5UmVzcG9uc2USDgoGcmVzdWx0GAEgASgMIjMKDVJlbmRlclJlcXVlc3QSFAoMcGFja2FnZV9wYXRoGAEgASgJEgwKBGFyZ3MYAiABKAkiIAoOUmVuZGVyUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJIjgKDFFFdmFsUmVxdWVzdBIUCgxwYWNrYWdlX3BhdGgYASABKAkSEgoKZXhwcmVzc2lvbhgCIAEoCSIfCg1RRXZhbFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSI8ChBRRXZhbEpTT05SZXF1ZXN0EhQKDHBhY2thZ2VfcGF0aBgBIAEoCRISCgpleHByZXNzaW9uGAIgASgJIiMKEVFFdmFsSlNPTlJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoCSInChJRT2JqZWN0SlNPTlJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJIiUKE1FPYmplY3RKU09OUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJIiMKEFFUeXBlSlNPTlJlcXVlc3QSDwoHdHlwZV9pZBgBIAEoCSIjChFRVHlwZUpTT05SZXNwb25zZRIOCgZyZXN1bHQYASABKAkilwEKB01zZ0NhbGwSFAoMcGFja2FnZV9wYXRoGAEgASgJEgsKA2ZuYxgCIAEoCRIMCgRhcmdzGAMgAygJEikKBHNlbmQYBCADKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIwCgttYXhfZGVwb3NpdBgFIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luIowBCgtDYWxsUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5zaWduZXJfYWRkcmVzcxgEIAEoDBIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ0NhbGxSBE1zZ3MiPAoMQ2FsbFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoDBIMCgRoYXNoGAIgASgMEg4KBmhlaWdodBgDIAEoEiJKCgdNc2dTZW5kEhIKCnRvX2FkZHJlc3MYASABKAwSKwoGYW1vdW50GAIgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4ijAEKC1NlbmRSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDnNpZ25lcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnU2VuZFIETXNncyIsCgxTZW5kUmVzcG9uc2USDAoEaGFzaBgBIAEoDBIOCgZoZWlnaHQYAiABKBIidgoGTXNnUnVuEg8KB3BhY2thZ2UYASABKAkSKQoEc2VuZBgCIAMoCzIbLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Db2luEjAKC21heF9kZXBvc2l0GAMgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4iigEKClJ1blJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFgoOc2lnbmVyX2FkZHJlc3MYBCABKAwSMQoEbXNncxgFIAMoCzIdLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dSdW5SBE1zZ3MiOwoLUnVuUmVzcG9uc2USDgoGcmVzdWx0GAEgASgJEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSIpIBChFNYWtlQ2FsbFR4UmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5jYWxsZXJfYWRkcmVzcxgEIAEoDBIyCgRtc2dzGAUgAygLMh4ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ0NhbGxSBE1zZ3MikgEKEU1ha2VTZW5kVHhSZXF1ZXN0Eg8KB2dhc19mZWUYASABKAkSEgoKZ2FzX3dhbnRlZBgCIAEoEhIMCgRtZW1vGAMgASgJEhYKDmNhbGxlcl9hZGRyZXNzGAQgASgMEjIKBG1zZ3MYBSADKAsyHi5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnU2VuZFIETXNncyKQAQoQTWFrZVJ1blR4UmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIWCg5jYWxsZXJfYWRkcmVzcxgEIAEoDBIxCgRtc2dzGAUgAygLMh0ubGFuZC5nbm8uZ25vbmF0aXZlLnYxLk1zZ1J1blIETXNncyIhCg5NYWtlVHhSZXNwb25zZRIPCgd0eF9qc29uGAEgASgJImIKDVNpZ25UeFJlcXVlc3QSDwoHdHhfanNvbhgBIAEoCRIPCgdhZGRyZXNzGAIgASgMEhYKDmFjY291bnRfbnVtYmVyGAMgASgEEhcKD3NlcXVlbmNlX251bWJlchgEIAEoBCIxCg5TaWduVHhSZXNwb25zZRIfCg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNvbiIxChBTaWduQnl0ZXNSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwSDAoEZGF0YRgCIAEoDCI3ChFTaWduQnl0ZXNSZXNwb25zZRIRCglzaWduYXR1cmUYASABKAwSDwoHcHViX2tleRgCIAEoDCKYAQoQTXNnQ3JlYXRlU2Vzc2lvbhITCgtzZXNzaW9uX2tleRgBIAEoDBISCgpleHBpcmVzX2F0GAIgASgSEhMKC2FsbG93X3BhdGhzGAMgAygJEjAKC3NwZW5kX2xpbWl0GAQgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SFAoMc3BlbmRfcGVyaW9kGAUgASgSIp8BChRDcmVhdGVTZXNzaW9uUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIXCg9jcmVhdG9yX2FkZHJlc3MYBCABKAwSOwoEbXNncxgFIAMoCzInLmxhbmQuZ25vLmdub25hdGl2ZS52MS5Nc2dDcmVhdGVTZXNzaW9uUgRNc2dzIkUKFUNyZWF0ZVNlc3Npb25SZXNwb25zZRIOCgZyZXN1bHQYASABKAwSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIiJwoQTXNnUmV2b2tlU2Vzc2lvbhITCgtzZXNzaW9uX2tleRgBIAEoDCKfAQoUUmV2b2tlU2Vzc2lvblJlcXVlc3QSDwoHZ2FzX2ZlZRgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEgwKBG1lbW8YAyABKAkSFwoPY3JlYXRvcl9hZGRyZXNzGAQgASgMEjsKBG1zZ3MYBSADKAsyJy5sYW5kLmduby5nbm9uYXRpdmUudjEuTXNnUmV2b2tlU2Vzc2lvblIETXNncyJFChVSZXZva2VTZXNzaW9uUmVzcG9uc2USDgoGcmVzdWx0GAEgASgMEgwKBGhhc2gYAiABKAwSDgoGaGVpZ2h0GAMgASgSImYKGFJldm9rZUFsbFNlc3Npb25zUmVxdWVzdBIPCgdnYXNfZmVlGAEgASgJEhIKCmdhc193YW50ZWQYAiABKBISDAoEbWVtbxgDIAEoCRIXCg9jcmVhdG9yX2FkZHJlc3MYBCABKAwiSQoZUmV2b2tlQWxsU2Vzc2lvbnNSZXNwb25zZRIOCgZyZXN1bHQYASABKAwSDAoEaGFzaBgCIAEoDBIOCgZoZWlnaHQYAyABKBIiYgoSRXN0aW1hdGVHYXNSZXF1ZXN0Eg8KB3R4X2pzb24YASABKAkSDwoHYWRkcmVzcxgCIAEoDBIXCg9zZWN1cml0eV9tYXJnaW4YAyABKA0SEQoJdXBkYXRlX3R4GAQgASgIIjoKE0VzdGltYXRlR2FzUmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSIowBChVFc3RpbWF0ZVR4RmVlc1JlcXVlc3QSDwoHdHhfanNvbhgBIAEoCRIPCgdhZGRyZXNzGAIgASgMEhsKE2dhc19zZWN1cml0eV9tYXJnaW4YAyABKA0SIQoZZ2FzX3ByaWNlX3NlY3VyaXR5X21hcmdpbhgEIAEoDRIRCgl1cGRhdGVfdHgYBSABKAgi7gEKFkVzdGltYXRlVHhGZWVzUmVzcG9uc2USDwoHdHhfanNvbhgBIAEoCRISCgpnYXNfd2FudGVkGAIgASgSEiwKB2dhc19mZWUYAyABKAsyGy5sYW5kLmduby5nbm9uYXRpdmUudjEuQ29pbhIVCg1zdG9yYWdlX2RlbHRhGAQgASgSEjAKC3N0b3JhZ2VfZmVlGAUgAygLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW4SOAoJdG90YWxfZmVlGAYgASgLMhsubGFuZC5nbm8uZ25vbmF0aXZlLnYxLkNvaW5SCFRvdGFsRmVlIjsKGEJyb2FkY2FzdFR4Q29tbWl0UmVxdWVzdBIfCg5zaWduZWRfdHhfanNvbhgBIAEoCVIHdHhfanNvbiJJChlCcm9hZGNhc3RUeENvbW1pdFJlc3BvbnNlEg4KBnJlc3VsdBgBIAEoDBIMCgRoYXNoGAIgASgMEg4KBmhlaWdodBgDIAEoEiIpChZBZGRyZXNzVG9CZWNoMzJSZXF1ZXN0Eg8KB2FkZHJlc3MYASABKAwiMQoXQWRkcmVzc1RvQmVjaDMyUmVzcG9uc2USFgoOYmVjaDMyX2FkZHJlc3MYASABKAkiMgoYQWRkcmVzc0Zyb21CZWNoMzJSZXF1ZXN0EhYKDmJlY2gzMl9hZGRyZXNzGAEgASgJIiwKGUFkZHJlc3NGcm9tQmVjaDMyUmVzcG9uc2USDwoHYWRkcmVzcxgBIAEoDCIuChpBZGRyZXNzRnJvbU1uZW1vbmljUmVxdWVzdBIQCghtbmVtb25pYxgBIAEoCSIuChtBZGRyZXNzRnJvbU1uZW1vbmljUmVzcG9uc2USDwoHYWRkcmVzcxgBIAEoDCIrChtWYWxpZGF0ZU1uZW1vbmljV29yZFJlcXVlc3QSDAoEd29yZBgBIAEoCSItChxWYWxpZGF0ZU1uZW1vbmljV29yZFJlc3BvbnNlEg0KBXZhbGlkGAEgASgIIi8KHVZhbGlkYXRlTW5lbW9uaWNQaHJhc2VSZXF1ZXN0Eg4KBnBocmFzZRgBIAEoCSIvCh5WYWxpZGF0ZU1uZW1vbmljUGhyYXNlUmVzcG9uc2USDQoFdmFsaWQYASABKAgiNgocUHViS2V5Qnl0ZXNGcm9tQmVjaDMyUmVxdWVzdBIWCg5iZWNoMzJfcHViX2tleRgBIAEoCSI2Ch1QdWJLZXlCeXRlc0Zyb21CZWNoMzJSZXNwb25zZRIVCg1wdWJfa2V5X2J5dGVzGAEgASgMIiIKDEhlbGxvUmVxdWVzdBISCgRuYW1lGAEgASgJUgROYW1lIisKDUhlbGxvUmVzcG9uc2USGgoIZ3JlZXRpbmcYASABKAlSCEdyZWV0aW5nIigKEkhlbGxvU3RyZWFtUmVxdWVzdBISCgRuYW1lGAEgASgJUgROYW1lIjEKE0hlbGxvU3RyZWFtUmVzcG9uc2USGgoIZ3JlZXRpbmcYASABKAlSCEdyZWV0aW5nIikKGEdOT05BVElWRVRZUEVTX0J5dGVzTGlzdBINCgVWYWx1ZRgBIAMoDEIsWipnaXRodWIuY29tL2dub2xhbmcvZ25vbmF0aXZlL3Y0L2FwaS9nZW4vZ29iBnByb3RvMw");
 
 /**
  * messages
@@ -1127,6 +1127,127 @@ export const QEvalResponseSchema: GenMessage<QEvalResponse> = /*@__PURE__*/
   messageDesc(file_gnonativetypes, 53);
 
 /**
+ * @generated from message land.gno.gnonative.v1.QEvalJSONRequest
+ */
+export type QEvalJSONRequest = Message<"land.gno.gnonative.v1.QEvalJSONRequest"> & {
+  /**
+   * Example: "gno.land/r/gnoland/boards2/v0"
+   *
+   * @generated from field: string package_path = 1;
+   */
+  packagePath: string;
+
+  /**
+   * Example: "IsBoardFrozen(1)"
+   *
+   * @generated from field: string expression = 2;
+   */
+  expression: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QEvalJSONRequest.
+ * Use `create(QEvalJSONRequestSchema)` to create a new message.
+ */
+export const QEvalJSONRequestSchema: GenMessage<QEvalJSONRequest> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 54);
+
+/**
+ * @generated from message land.gno.gnonative.v1.QEvalJSONResponse
+ */
+export type QEvalJSONResponse = Message<"land.gno.gnonative.v1.QEvalJSONResponse"> & {
+  /**
+   * An Amino JSON string like "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}"
+   *
+   * @generated from field: string result = 1;
+   */
+  result: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QEvalJSONResponse.
+ * Use `create(QEvalJSONResponseSchema)` to create a new message.
+ */
+export const QEvalJSONResponseSchema: GenMessage<QEvalJSONResponse> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 55);
+
+/**
+ * @generated from message land.gno.gnonative.v1.QObjectJSONRequest
+ */
+export type QObjectJSONRequest = Message<"land.gno.gnonative.v1.QObjectJSONRequest"> & {
+  /**
+   * Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+   *
+   * @generated from field: string object_id = 1;
+   */
+  objectId: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QObjectJSONRequest.
+ * Use `create(QObjectJSONRequestSchema)` to create a new message.
+ */
+export const QObjectJSONRequestSchema: GenMessage<QObjectJSONRequest> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 56);
+
+/**
+ * @generated from message land.gno.gnonative.v1.QObjectJSONResponse
+ */
+export type QObjectJSONResponse = Message<"land.gno.gnonative.v1.QObjectJSONResponse"> & {
+  /**
+   * An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
+   *
+   * @generated from field: string result = 1;
+   */
+  result: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QObjectJSONResponse.
+ * Use `create(QObjectJSONResponseSchema)` to create a new message.
+ */
+export const QObjectJSONResponseSchema: GenMessage<QObjectJSONResponse> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 57);
+
+/**
+ * @generated from message land.gno.gnonative.v1.QTypeJSONRequest
+ */
+export type QTypeJSONRequest = Message<"land.gno.gnonative.v1.QTypeJSONRequest"> & {
+  /**
+   * Example: "gno.land/r/sys/users.UserData"
+   *
+   * @generated from field: string type_id = 1;
+   */
+  typeId: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QTypeJSONRequest.
+ * Use `create(QTypeJSONRequestSchema)` to create a new message.
+ */
+export const QTypeJSONRequestSchema: GenMessage<QTypeJSONRequest> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 58);
+
+/**
+ * @generated from message land.gno.gnonative.v1.QTypeJSONResponse
+ */
+export type QTypeJSONResponse = Message<"land.gno.gnonative.v1.QTypeJSONResponse"> & {
+  /**
+   * An Amino JSON string like "{\"typeid\":\"...\",\"type\":{...}}"
+   *
+   * @generated from field: string result = 1;
+   */
+  result: string;
+};
+
+/**
+ * Describes the message land.gno.gnonative.v1.QTypeJSONResponse.
+ * Use `create(QTypeJSONResponseSchema)` to create a new message.
+ */
+export const QTypeJSONResponseSchema: GenMessage<QTypeJSONResponse> = /*@__PURE__*/
+  messageDesc(file_gnonativetypes, 59);
+
+/**
  * @generated from message land.gno.gnonative.v1.MsgCall
  */
 export type MsgCall = Message<"land.gno.gnonative.v1.MsgCall"> & {
@@ -1172,7 +1293,7 @@ export type MsgCall = Message<"land.gno.gnonative.v1.MsgCall"> & {
  * Use `create(MsgCallSchema)` to create a new message.
  */
 export const MsgCallSchema: GenMessage<MsgCall> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 54);
+  messageDesc(file_gnonativetypes, 60);
 
 /**
  * @generated from message land.gno.gnonative.v1.CallRequest
@@ -1213,7 +1334,7 @@ export type CallRequest = Message<"land.gno.gnonative.v1.CallRequest"> & {
  * Use `create(CallRequestSchema)` to create a new message.
  */
 export const CallRequestSchema: GenMessage<CallRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 55);
+  messageDesc(file_gnonativetypes, 61);
 
 /**
  * @generated from message land.gno.gnonative.v1.CallResponse
@@ -1244,7 +1365,7 @@ export type CallResponse = Message<"land.gno.gnonative.v1.CallResponse"> & {
  * Use `create(CallResponseSchema)` to create a new message.
  */
 export const CallResponseSchema: GenMessage<CallResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 56);
+  messageDesc(file_gnonativetypes, 62);
 
 /**
  * @generated from message land.gno.gnonative.v1.MsgSend
@@ -1271,7 +1392,7 @@ export type MsgSend = Message<"land.gno.gnonative.v1.MsgSend"> & {
  * Use `create(MsgSendSchema)` to create a new message.
  */
 export const MsgSendSchema: GenMessage<MsgSend> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 57);
+  messageDesc(file_gnonativetypes, 63);
 
 /**
  * @generated from message land.gno.gnonative.v1.SendRequest
@@ -1314,7 +1435,7 @@ export type SendRequest = Message<"land.gno.gnonative.v1.SendRequest"> & {
  * Use `create(SendRequestSchema)` to create a new message.
  */
 export const SendRequestSchema: GenMessage<SendRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 58);
+  messageDesc(file_gnonativetypes, 64);
 
 /**
  * @generated from message land.gno.gnonative.v1.SendResponse
@@ -1340,7 +1461,7 @@ export type SendResponse = Message<"land.gno.gnonative.v1.SendResponse"> & {
  * Use `create(SendResponseSchema)` to create a new message.
  */
 export const SendResponseSchema: GenMessage<SendResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 59);
+  messageDesc(file_gnonativetypes, 65);
 
 /**
  * @generated from message land.gno.gnonative.v1.MsgRun
@@ -1374,7 +1495,7 @@ export type MsgRun = Message<"land.gno.gnonative.v1.MsgRun"> & {
  * Use `create(MsgRunSchema)` to create a new message.
  */
 export const MsgRunSchema: GenMessage<MsgRun> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 60);
+  messageDesc(file_gnonativetypes, 66);
 
 /**
  * @generated from message land.gno.gnonative.v1.RunRequest
@@ -1417,7 +1538,7 @@ export type RunRequest = Message<"land.gno.gnonative.v1.RunRequest"> & {
  * Use `create(RunRequestSchema)` to create a new message.
  */
 export const RunRequestSchema: GenMessage<RunRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 61);
+  messageDesc(file_gnonativetypes, 67);
 
 /**
  * @generated from message land.gno.gnonative.v1.RunResponse
@@ -1450,7 +1571,7 @@ export type RunResponse = Message<"land.gno.gnonative.v1.RunResponse"> & {
  * Use `create(RunResponseSchema)` to create a new message.
  */
 export const RunResponseSchema: GenMessage<RunResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 62);
+  messageDesc(file_gnonativetypes, 68);
 
 /**
  * @generated from message land.gno.gnonative.v1.MakeCallTxRequest
@@ -1491,7 +1612,7 @@ export type MakeCallTxRequest = Message<"land.gno.gnonative.v1.MakeCallTxRequest
  * Use `create(MakeCallTxRequestSchema)` to create a new message.
  */
 export const MakeCallTxRequestSchema: GenMessage<MakeCallTxRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 63);
+  messageDesc(file_gnonativetypes, 69);
 
 /**
  * @generated from message land.gno.gnonative.v1.MakeSendTxRequest
@@ -1534,7 +1655,7 @@ export type MakeSendTxRequest = Message<"land.gno.gnonative.v1.MakeSendTxRequest
  * Use `create(MakeSendTxRequestSchema)` to create a new message.
  */
 export const MakeSendTxRequestSchema: GenMessage<MakeSendTxRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 64);
+  messageDesc(file_gnonativetypes, 70);
 
 /**
  * @generated from message land.gno.gnonative.v1.MakeRunTxRequest
@@ -1577,7 +1698,7 @@ export type MakeRunTxRequest = Message<"land.gno.gnonative.v1.MakeRunTxRequest">
  * Use `create(MakeRunTxRequestSchema)` to create a new message.
  */
 export const MakeRunTxRequestSchema: GenMessage<MakeRunTxRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 65);
+  messageDesc(file_gnonativetypes, 71);
 
 /**
  * @generated from message land.gno.gnonative.v1.MakeTxResponse
@@ -1596,7 +1717,7 @@ export type MakeTxResponse = Message<"land.gno.gnonative.v1.MakeTxResponse"> & {
  * Use `create(MakeTxResponseSchema)` to create a new message.
  */
 export const MakeTxResponseSchema: GenMessage<MakeTxResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 66);
+  messageDesc(file_gnonativetypes, 72);
 
 /**
  * @generated from message land.gno.gnonative.v1.SignTxRequest
@@ -1636,7 +1757,7 @@ export type SignTxRequest = Message<"land.gno.gnonative.v1.SignTxRequest"> & {
  * Use `create(SignTxRequestSchema)` to create a new message.
  */
 export const SignTxRequestSchema: GenMessage<SignTxRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 67);
+  messageDesc(file_gnonativetypes, 73);
 
 /**
  * @generated from message land.gno.gnonative.v1.SignTxResponse
@@ -1655,7 +1776,7 @@ export type SignTxResponse = Message<"land.gno.gnonative.v1.SignTxResponse"> & {
  * Use `create(SignTxResponseSchema)` to create a new message.
  */
 export const SignTxResponseSchema: GenMessage<SignTxResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 68);
+  messageDesc(file_gnonativetypes, 74);
 
 /**
  * @generated from message land.gno.gnonative.v1.SignBytesRequest
@@ -1681,7 +1802,7 @@ export type SignBytesRequest = Message<"land.gno.gnonative.v1.SignBytesRequest">
  * Use `create(SignBytesRequestSchema)` to create a new message.
  */
 export const SignBytesRequestSchema: GenMessage<SignBytesRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 69);
+  messageDesc(file_gnonativetypes, 75);
 
 /**
  * @generated from message land.gno.gnonative.v1.SignBytesResponse
@@ -1707,7 +1828,7 @@ export type SignBytesResponse = Message<"land.gno.gnonative.v1.SignBytesResponse
  * Use `create(SignBytesResponseSchema)` to create a new message.
  */
 export const SignBytesResponseSchema: GenMessage<SignBytesResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 70);
+  messageDesc(file_gnonativetypes, 76);
 
 /**
  * @generated from message land.gno.gnonative.v1.MsgCreateSession
@@ -1754,7 +1875,7 @@ export type MsgCreateSession = Message<"land.gno.gnonative.v1.MsgCreateSession">
  * Use `create(MsgCreateSessionSchema)` to create a new message.
  */
 export const MsgCreateSessionSchema: GenMessage<MsgCreateSession> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 71);
+  messageDesc(file_gnonativetypes, 77);
 
 /**
  * @generated from message land.gno.gnonative.v1.CreateSessionRequest
@@ -1795,7 +1916,7 @@ export type CreateSessionRequest = Message<"land.gno.gnonative.v1.CreateSessionR
  * Use `create(CreateSessionRequestSchema)` to create a new message.
  */
 export const CreateSessionRequestSchema: GenMessage<CreateSessionRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 72);
+  messageDesc(file_gnonativetypes, 78);
 
 /**
  * @generated from message land.gno.gnonative.v1.CreateSessionResponse
@@ -1826,7 +1947,7 @@ export type CreateSessionResponse = Message<"land.gno.gnonative.v1.CreateSession
  * Use `create(CreateSessionResponseSchema)` to create a new message.
  */
 export const CreateSessionResponseSchema: GenMessage<CreateSessionResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 73);
+  messageDesc(file_gnonativetypes, 79);
 
 /**
  * @generated from message land.gno.gnonative.v1.MsgRevokeSession
@@ -1845,7 +1966,7 @@ export type MsgRevokeSession = Message<"land.gno.gnonative.v1.MsgRevokeSession">
  * Use `create(MsgRevokeSessionSchema)` to create a new message.
  */
 export const MsgRevokeSessionSchema: GenMessage<MsgRevokeSession> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 74);
+  messageDesc(file_gnonativetypes, 80);
 
 /**
  * @generated from message land.gno.gnonative.v1.RevokeSessionRequest
@@ -1886,7 +2007,7 @@ export type RevokeSessionRequest = Message<"land.gno.gnonative.v1.RevokeSessionR
  * Use `create(RevokeSessionRequestSchema)` to create a new message.
  */
 export const RevokeSessionRequestSchema: GenMessage<RevokeSessionRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 75);
+  messageDesc(file_gnonativetypes, 81);
 
 /**
  * @generated from message land.gno.gnonative.v1.RevokeSessionResponse
@@ -1917,7 +2038,7 @@ export type RevokeSessionResponse = Message<"land.gno.gnonative.v1.RevokeSession
  * Use `create(RevokeSessionResponseSchema)` to create a new message.
  */
 export const RevokeSessionResponseSchema: GenMessage<RevokeSessionResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 76);
+  messageDesc(file_gnonativetypes, 82);
 
 /**
  * @generated from message land.gno.gnonative.v1.RevokeAllSessionsRequest
@@ -1951,7 +2072,7 @@ export type RevokeAllSessionsRequest = Message<"land.gno.gnonative.v1.RevokeAllS
  * Use `create(RevokeAllSessionsRequestSchema)` to create a new message.
  */
 export const RevokeAllSessionsRequestSchema: GenMessage<RevokeAllSessionsRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 77);
+  messageDesc(file_gnonativetypes, 83);
 
 /**
  * @generated from message land.gno.gnonative.v1.RevokeAllSessionsResponse
@@ -1982,7 +2103,7 @@ export type RevokeAllSessionsResponse = Message<"land.gno.gnonative.v1.RevokeAll
  * Use `create(RevokeAllSessionsResponseSchema)` to create a new message.
  */
 export const RevokeAllSessionsResponseSchema: GenMessage<RevokeAllSessionsResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 78);
+  messageDesc(file_gnonativetypes, 84);
 
 /**
  * @generated from message land.gno.gnonative.v1.EstimateGasRequest
@@ -2024,7 +2145,7 @@ export type EstimateGasRequest = Message<"land.gno.gnonative.v1.EstimateGasReque
  * Use `create(EstimateGasRequestSchema)` to create a new message.
  */
 export const EstimateGasRequestSchema: GenMessage<EstimateGasRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 79);
+  messageDesc(file_gnonativetypes, 85);
 
 /**
  * @generated from message land.gno.gnonative.v1.EstimateGasResponse
@@ -2050,7 +2171,7 @@ export type EstimateGasResponse = Message<"land.gno.gnonative.v1.EstimateGasResp
  * Use `create(EstimateGasResponseSchema)` to create a new message.
  */
 export const EstimateGasResponseSchema: GenMessage<EstimateGasResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 80);
+  messageDesc(file_gnonativetypes, 86);
 
 /**
  * @generated from message land.gno.gnonative.v1.EstimateTxFeesRequest
@@ -2101,7 +2222,7 @@ export type EstimateTxFeesRequest = Message<"land.gno.gnonative.v1.EstimateTxFee
  * Use `create(EstimateTxFeesRequestSchema)` to create a new message.
  */
 export const EstimateTxFeesRequestSchema: GenMessage<EstimateTxFeesRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 81);
+  messageDesc(file_gnonativetypes, 87);
 
 /**
  * @generated from message land.gno.gnonative.v1.EstimateTxFeesResponse
@@ -2155,7 +2276,7 @@ export type EstimateTxFeesResponse = Message<"land.gno.gnonative.v1.EstimateTxFe
  * Use `create(EstimateTxFeesResponseSchema)` to create a new message.
  */
 export const EstimateTxFeesResponseSchema: GenMessage<EstimateTxFeesResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 82);
+  messageDesc(file_gnonativetypes, 88);
 
 /**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitRequest
@@ -2174,7 +2295,7 @@ export type BroadcastTxCommitRequest = Message<"land.gno.gnonative.v1.BroadcastT
  * Use `create(BroadcastTxCommitRequestSchema)` to create a new message.
  */
 export const BroadcastTxCommitRequestSchema: GenMessage<BroadcastTxCommitRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 83);
+  messageDesc(file_gnonativetypes, 89);
 
 /**
  * @generated from message land.gno.gnonative.v1.BroadcastTxCommitResponse
@@ -2205,7 +2326,7 @@ export type BroadcastTxCommitResponse = Message<"land.gno.gnonative.v1.Broadcast
  * Use `create(BroadcastTxCommitResponseSchema)` to create a new message.
  */
 export const BroadcastTxCommitResponseSchema: GenMessage<BroadcastTxCommitResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 84);
+  messageDesc(file_gnonativetypes, 90);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressToBech32Request
@@ -2222,7 +2343,7 @@ export type AddressToBech32Request = Message<"land.gno.gnonative.v1.AddressToBec
  * Use `create(AddressToBech32RequestSchema)` to create a new message.
  */
 export const AddressToBech32RequestSchema: GenMessage<AddressToBech32Request> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 85);
+  messageDesc(file_gnonativetypes, 91);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressToBech32Response
@@ -2239,7 +2360,7 @@ export type AddressToBech32Response = Message<"land.gno.gnonative.v1.AddressToBe
  * Use `create(AddressToBech32ResponseSchema)` to create a new message.
  */
 export const AddressToBech32ResponseSchema: GenMessage<AddressToBech32Response> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 86);
+  messageDesc(file_gnonativetypes, 92);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromBech32Request
@@ -2256,7 +2377,7 @@ export type AddressFromBech32Request = Message<"land.gno.gnonative.v1.AddressFro
  * Use `create(AddressFromBech32RequestSchema)` to create a new message.
  */
 export const AddressFromBech32RequestSchema: GenMessage<AddressFromBech32Request> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 87);
+  messageDesc(file_gnonativetypes, 93);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromBech32Response
@@ -2273,7 +2394,7 @@ export type AddressFromBech32Response = Message<"land.gno.gnonative.v1.AddressFr
  * Use `create(AddressFromBech32ResponseSchema)` to create a new message.
  */
 export const AddressFromBech32ResponseSchema: GenMessage<AddressFromBech32Response> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 88);
+  messageDesc(file_gnonativetypes, 94);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromMnemonicRequest
@@ -2290,7 +2411,7 @@ export type AddressFromMnemonicRequest = Message<"land.gno.gnonative.v1.AddressF
  * Use `create(AddressFromMnemonicRequestSchema)` to create a new message.
  */
 export const AddressFromMnemonicRequestSchema: GenMessage<AddressFromMnemonicRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 89);
+  messageDesc(file_gnonativetypes, 95);
 
 /**
  * @generated from message land.gno.gnonative.v1.AddressFromMnemonicResponse
@@ -2307,7 +2428,7 @@ export type AddressFromMnemonicResponse = Message<"land.gno.gnonative.v1.Address
  * Use `create(AddressFromMnemonicResponseSchema)` to create a new message.
  */
 export const AddressFromMnemonicResponseSchema: GenMessage<AddressFromMnemonicResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 90);
+  messageDesc(file_gnonativetypes, 96);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordRequest
@@ -2324,7 +2445,7 @@ export type ValidateMnemonicWordRequest = Message<"land.gno.gnonative.v1.Validat
  * Use `create(ValidateMnemonicWordRequestSchema)` to create a new message.
  */
 export const ValidateMnemonicWordRequestSchema: GenMessage<ValidateMnemonicWordRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 91);
+  messageDesc(file_gnonativetypes, 97);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicWordResponse
@@ -2341,7 +2462,7 @@ export type ValidateMnemonicWordResponse = Message<"land.gno.gnonative.v1.Valida
  * Use `create(ValidateMnemonicWordResponseSchema)` to create a new message.
  */
 export const ValidateMnemonicWordResponseSchema: GenMessage<ValidateMnemonicWordResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 92);
+  messageDesc(file_gnonativetypes, 98);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseRequest
@@ -2358,7 +2479,7 @@ export type ValidateMnemonicPhraseRequest = Message<"land.gno.gnonative.v1.Valid
  * Use `create(ValidateMnemonicPhraseRequestSchema)` to create a new message.
  */
 export const ValidateMnemonicPhraseRequestSchema: GenMessage<ValidateMnemonicPhraseRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 93);
+  messageDesc(file_gnonativetypes, 99);
 
 /**
  * @generated from message land.gno.gnonative.v1.ValidateMnemonicPhraseResponse
@@ -2375,7 +2496,7 @@ export type ValidateMnemonicPhraseResponse = Message<"land.gno.gnonative.v1.Vali
  * Use `create(ValidateMnemonicPhraseResponseSchema)` to create a new message.
  */
 export const ValidateMnemonicPhraseResponseSchema: GenMessage<ValidateMnemonicPhraseResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 94);
+  messageDesc(file_gnonativetypes, 100);
 
 /**
  * @generated from message land.gno.gnonative.v1.PubKeyBytesFromBech32Request
@@ -2392,7 +2513,7 @@ export type PubKeyBytesFromBech32Request = Message<"land.gno.gnonative.v1.PubKey
  * Use `create(PubKeyBytesFromBech32RequestSchema)` to create a new message.
  */
 export const PubKeyBytesFromBech32RequestSchema: GenMessage<PubKeyBytesFromBech32Request> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 95);
+  messageDesc(file_gnonativetypes, 101);
 
 /**
  * @generated from message land.gno.gnonative.v1.PubKeyBytesFromBech32Response
@@ -2409,7 +2530,7 @@ export type PubKeyBytesFromBech32Response = Message<"land.gno.gnonative.v1.PubKe
  * Use `create(PubKeyBytesFromBech32ResponseSchema)` to create a new message.
  */
 export const PubKeyBytesFromBech32ResponseSchema: GenMessage<PubKeyBytesFromBech32Response> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 96);
+  messageDesc(file_gnonativetypes, 102);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloRequest
@@ -2426,7 +2547,7 @@ export type HelloRequest = Message<"land.gno.gnonative.v1.HelloRequest"> & {
  * Use `create(HelloRequestSchema)` to create a new message.
  */
 export const HelloRequestSchema: GenMessage<HelloRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 97);
+  messageDesc(file_gnonativetypes, 103);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloResponse
@@ -2443,7 +2564,7 @@ export type HelloResponse = Message<"land.gno.gnonative.v1.HelloResponse"> & {
  * Use `create(HelloResponseSchema)` to create a new message.
  */
 export const HelloResponseSchema: GenMessage<HelloResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 98);
+  messageDesc(file_gnonativetypes, 104);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloStreamRequest
@@ -2460,7 +2581,7 @@ export type HelloStreamRequest = Message<"land.gno.gnonative.v1.HelloStreamReque
  * Use `create(HelloStreamRequestSchema)` to create a new message.
  */
 export const HelloStreamRequestSchema: GenMessage<HelloStreamRequest> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 99);
+  messageDesc(file_gnonativetypes, 105);
 
 /**
  * @generated from message land.gno.gnonative.v1.HelloStreamResponse
@@ -2477,7 +2598,7 @@ export type HelloStreamResponse = Message<"land.gno.gnonative.v1.HelloStreamResp
  * Use `create(HelloStreamResponseSchema)` to create a new message.
  */
 export const HelloStreamResponseSchema: GenMessage<HelloStreamResponse> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 100);
+  messageDesc(file_gnonativetypes, 106);
 
 /**
  * @generated from message land.gno.gnonative.v1.GNONATIVETYPES_BytesList
@@ -2494,5 +2615,5 @@ export type GNONATIVETYPES_BytesList = Message<"land.gno.gnonative.v1.GNONATIVET
  * Use `create(GNONATIVETYPES_BytesListSchema)` to create a new message.
  */
 export const GNONATIVETYPES_BytesListSchema: GenMessage<GNONATIVETYPES_BytesList> = /*@__PURE__*/
-  messageDesc(file_gnonativetypes, 101);
+  messageDesc(file_gnonativetypes, 107);
 

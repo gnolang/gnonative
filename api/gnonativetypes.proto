@@ -272,6 +272,38 @@ message QEvalResponse {
 	string result = 1;
 }
 
+message QEvalJSONRequest {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	string package_path = 1;
+	// Example: "IsBoardFrozen(1)"
+	string expression = 2;
+}
+
+message QEvalJSONResponse {
+	// An Amino JSON string like "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}"
+	string result = 1;
+}
+
+message QObjectJSONRequest {
+	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	string object_id = 1;
+}
+
+message QObjectJSONResponse {
+	// An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
+	string result = 1;
+}
+
+message QTypeJSONRequest {
+	// Example: "gno.land/r/sys/users.UserData"
+	string type_id = 1;
+}
+
+message QTypeJSONResponse {
+	// An Amino JSON string like "{\"typeid\":\"...\",\"type\":{...}}"
+	string result = 1;
+}
+
 message MsgCall {
 	// Example: "gno.land/r/demo/boards"
 	string package_path = 1;

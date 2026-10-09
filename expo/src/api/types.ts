@@ -81,6 +81,9 @@ export interface GnoKeyApi {
   query: (path: string, data: Uint8Array) => Promise<QueryResponse>;
   render: (packagePath: string, args: string) => Promise<string>;
   qEval: (packagePath: string, expression: string) => Promise<string>;
+  qEvalJSON: (packagePath: string, expression: string) => Promise<any>;
+  qObjectJSON: (objectId: string) => Promise<any>;
+  qTypeJSON: (typeId: string) => Promise<any>;
   call: (
     packagePath: string,
     fnc: string,

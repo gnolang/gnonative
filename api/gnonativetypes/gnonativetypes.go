@@ -258,6 +258,38 @@ type QEvalResponse struct {
 	Result string `json:"result" yaml:"result"`
 }
 
+type QEvalJSONRequest struct {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "IsBoardFrozen(1)"
+	Expression string `json:"expression" yaml:"expression"`
+}
+
+type QEvalJSONResponse struct {
+	// An Amino JSON string like "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}"
+	Result string `json:"result" yaml:"result"`
+}
+
+type QObjectJSONRequest struct {
+	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	ObjectID string `json:"object_id" yaml:"object_id"`
+}
+
+type QObjectJSONResponse struct {
+	// An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
+	Result string `json:"result" yaml:"result"`
+}
+
+type QTypeJSONRequest struct {
+	// Example: "gno.land/r/sys/users.UserData"
+	TypeID string `json:"type_id" yaml:"type_id"`
+}
+
+type QTypeJSONResponse struct {
+	// An Amino JSON string like "{\"typeid\":\"...\",\"type\":{...}}"
+	Result string `json:"result" yaml:"result"`
+}
+
 type MsgCall struct {
 	// Example: "gno.land/r/demo/boards"
 	PackagePath string `json:"package_path" yaml:"package_path"`
