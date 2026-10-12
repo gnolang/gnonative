@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -215,21 +214,4 @@ func TestConvertQEvalJSONRefs(t *testing.T) {
 	assert.Equal(t, gnoKindRef, res.Results[1].Kind)
 	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", res.Results[1].ObjectId)
 	assert.Equal(t, "gno.land/p/gnoland/boards/exts/hub/v0.Board", res.Results[1].TypeId)
-}
-
-func TestClampRange(t *testing.T) {
-	for _, tc := range []struct{ offset, length, size, start, end int }{
-		{0, 2, 2, 0, 2},
-		{1, 1, 3, 1, 2},
-		{1, 9, 3, 1, 3},
-		{5, 1, 3, 3, 3},
-		{-1, 2, 3, 0, 2},
-		{1, -1, 3, 1, 1},
-		// offset + length overflows
-		{2, math.MaxInt, 3, 2, 3},
-	} {
-		start, end := clampRange(tc.offset, tc.length, tc.size)
-		assert.Equal(t, tc.start, start, "%+v", tc)
-		assert.Equal(t, tc.end, end, "%+v", tc)
-	}
 }

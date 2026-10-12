@@ -4,10 +4,9 @@ package service
 
 import (
 	"fmt"
-	"math"
-	"strconv"
 	"strings"
 
+	"github.com/gnolang/gno/gno.land/pkg/sdk/vm/utils"
 	gno "github.com/gnolang/gno/gnovm/pkg/gnolang"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 
@@ -30,18 +29,6 @@ const (
 	gnoKindNil     = "nil"
 	gnoKindUnknown = "unknown"
 )
-
-// qevalJSONResults is the response of the "vm/qeval_json" query.
-type qevalJSONResults struct {
-	Results []gno.TypedValue `json:"results"`
-	Error   *string          `json:"@error,omitempty"`
-}
-
-// qtypeJSONResult is the response of the "vm/qtype_json" query.
-type qtypeJSONResult struct {
-	TypeID string   `json:"typeid"`
-	Type   gno.Type `json:"type"`
-}
 
 // gnoValueConverter converts a gno.TypedValue to an api_gen.GnoValue. A value only has the ID of its
 // declared type, so use queryType to get the type definition, which has the struct field names.
@@ -66,7 +53,7 @@ func (c *gnoValueConverter) convertQEvalJSON(data []byte) (res *api_gen.QEvalJSO
 		}
 	}()
 
-	var qres qevalJSONResults
+	var qres utils.EvalResponse
 	if err := amino.UnmarshalJSON(data, &qres); err != nil {
 		return nil, fmt.Errorf("can't decode the qeval_json result: %w", err)
 	}
@@ -97,7 +84,7 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	if err != nil {
 		return nil
 	}
-	var qres qtypeJSONResult
+	var qres utils.TypeResponse
 	if err := amino.UnmarshalJSON(data, &qres); err != nil {
 		return nil
 	}
@@ -113,7 +100,7 @@ func (c *gnoValueConverter) baseType(t gno.Type) gno.Type {
 		case gno.RefType:
 			t = c.resolveType(string(ct.ID))
 		case *gno.DeclaredType:
-			t = ct.Base
+			t = gno.BaseOf(ct)
 		default:
 			return t
 		}
@@ -126,6 +113,8 @@ func gnoTypeString(t gno.Type) string {
 	switch ct := t.(type) {
 	case nil:
 		return ""
+	case gno.PrimitiveType:
+		return utils.PrimitiveTypeName(ct)
 	case gno.RefType:
 		// Example: ".uverse.address"
 		return strings.TrimPrefix(string(ct.ID), ".uverse.")
@@ -144,21 +133,6 @@ func gnoTypeString(t gno.Type) string {
 		return "map[" + gnoTypeString(ct.Key) + "]" + gnoTypeString(ct.Value)
 	default:
 		return t.String()
-	}
-}
-
-// gnoTypeID returns the type ID of a declared type for the "vm/qtype_json" query, or the type ID of the
-// declared type which a pointer points to. Return "" for another type.
-func gnoTypeID(t gno.Type) string {
-	switch ct := t.(type) {
-	case gno.RefType:
-		return string(ct.ID)
-	case *gno.DeclaredType:
-		return ct.PkgPath + "." + string(ct.Name)
-	case *gno.PointerType:
-		return gnoTypeID(ct.Elt)
-	default:
-		return ""
 	}
 }
 
@@ -229,10 +203,10 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 			}
 		case gno.RefValue:
 			res.ObjectId = base.ObjectID.String()
-			res.TypeId = gnoTypeID(tv.T)
+			res.TypeId = utils.GetTypeIDQueryString(tv.T)
 		case gno.ExportRefValue:
 			res.ObjectId = base.ObjectID
-			res.TypeId = gnoTypeID(tv.T)
+			res.TypeId = utils.GetTypeIDQueryString(tv.T)
 		}
 	case *gno.FuncValue:
 		res.Kind = gnoKindFunc
@@ -248,11 +222,11 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 	case gno.RefValue:
 		res.Kind = gnoKindRef
 		res.ObjectId = cv.ObjectID.String()
-		res.TypeId = gnoTypeID(tv.T)
+		res.TypeId = utils.GetTypeIDQueryString(tv.T)
 	case gno.ExportRefValue:
 		res.Kind = gnoKindRef
 		res.ObjectId = cv.ObjectID
-		res.TypeId = gnoTypeID(tv.T)
+		res.TypeId = utils.GetTypeIDQueryString(tv.T)
 	default:
 		res.Kind = gnoKindUnknown
 	}
@@ -264,13 +238,13 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 func (c *gnoValueConverter) convertArray(res *api_gen.GnoValue, av *gno.ArrayValue, offset int, length int) {
 	if av.Data != nil {
 		res.Kind = gnoKindBytes
-		offset, end := clampRange(offset, length, len(av.Data))
+		offset, end := utils.ClampSliceWindow(offset, length, len(av.Data))
 		res.Data = av.Data[offset:end]
 		return
 	}
 
 	res.Kind = gnoKindList
-	offset, end := clampRange(offset, length, len(av.List))
+	offset, end := utils.ClampSliceWindow(offset, length, len(av.List))
 	res.Elems = make([]*api_gen.GnoValue, end-offset)
 	for i, elem := range av.List[offset:end] {
 		res.Elems[i] = c.convert(elem)
@@ -283,13 +257,6 @@ func gnoListKind(elt gno.Type) string {
 		return gnoKindBytes
 	}
 	return gnoKindList
-}
-
-// clampRange returns the start and end of the range which are within the size.
-func clampRange(offset int, length int, size int) (int, int) {
-	offset = min(max(offset, 0), size)
-	// Compare to the remaining size instead of adding to offset, which can overflow.
-	return offset, offset + min(max(length, 0), size-offset)
 }
 
 // convertNoValue sets res for tv.V nil. This is a primitive value in tv.N, or else the nil value of the type.
@@ -308,45 +275,14 @@ func (c *gnoValueConverter) convertNoValue(res *api_gen.GnoValue, tv gno.TypedVa
 		switch bt.Kind() {
 		case gno.BoolKind:
 			res.Kind = gnoKindBool
-			res.Scalar = strconv.FormatBool(tv.GetBool())
+			res.Scalar = utils.PrimitiveString(bt, tv)
 		case gno.StringKind:
 			res.Kind = gnoKindString
-		case gno.IntKind:
+		case gno.IntKind, gno.Int8Kind, gno.Int16Kind, gno.Int32Kind, gno.Int64Kind,
+			gno.UintKind, gno.Uint8Kind, gno.Uint16Kind, gno.Uint32Kind, gno.Uint64Kind,
+			gno.Float32Kind, gno.Float64Kind:
 			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatInt(tv.GetInt(), 10)
-		case gno.Int8Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatInt(int64(tv.GetInt8()), 10)
-		case gno.Int16Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatInt(int64(tv.GetInt16()), 10)
-		case gno.Int32Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatInt(int64(tv.GetInt32()), 10)
-		case gno.Int64Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatInt(tv.GetInt64(), 10)
-		case gno.UintKind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatUint(tv.GetUint(), 10)
-		case gno.Uint8Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatUint(uint64(tv.GetUint8()), 10)
-		case gno.Uint16Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatUint(uint64(tv.GetUint16()), 10)
-		case gno.Uint32Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatUint(uint64(tv.GetUint32()), 10)
-		case gno.Uint64Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatUint(tv.GetUint64(), 10)
-		case gno.Float32Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatFloat(float64(math.Float32frombits(tv.GetFloat32())), 'g', -1, 32)
-		case gno.Float64Kind:
-			res.Kind = gnoKindNumber
-			res.Scalar = strconv.FormatFloat(math.Float64frombits(tv.GetFloat64()), 'g', -1, 64)
+			res.Scalar = utils.PrimitiveString(bt, tv)
 		case gno.BigintKind, gno.BigdecKind:
 			res.Kind = gnoKindNumber
 			res.Scalar = "0"
