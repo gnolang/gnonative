@@ -558,6 +558,36 @@ func (s *gnoNativeService) QEvalJSON(ctx context.Context, req *connect.Request[a
 	return connect.NewResponse(&api_gen.QEvalJSONResponse{Result: result}), nil
 }
 
+func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Request[api_gen.QEvalJSONValuesRequest]) (*connect.Response[api_gen.QEvalJSONValuesResponse], error) {
+	s.logger.Debug("QEvalJSONValues", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	// TODO: Use gnoclient QEvalJSON
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qeval_json", Data: fmt.Appendf(nil, "%s.%s", req.Msg.PackagePath, req.Msg.Expression)})
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	// A value only has the ID of its declared type, so query for the type to get the struct field names.
+	converter := newGnoValueConverter(func(typeID string) ([]byte, error) {
+		// TODO: Use gnoclient QTypeJSON
+		qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: []byte(typeID)})
+		if err != nil {
+			return nil, err
+		}
+		return qres.Response.Data, nil
+	})
+	res, err := converter.convertQEvalJSON(qres.Response.Data)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	return connect.NewResponse(res), nil
+}
+
 func (s *gnoNativeService) QObjectJSON(ctx context.Context, req *connect.Request[api_gen.QObjectJSONRequest]) (*connect.Response[api_gen.QObjectJSONResponse], error) {
 	s.logger.Debug("QObjectJSON", zap.String("objectId", req.Msg.ObjectId))
 

@@ -270,6 +270,56 @@ type QEvalJSONResponse struct {
 	Result string `json:"result" yaml:"result"`
 }
 
+// A Gno value with its type and, for a struct, its field names.
+type GnoValue struct {
+	// If this value is a field of a struct, the field name (or "" if the struct type can't be resolved)
+	Name string `json:"name" yaml:"name"`
+	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
+	Type string `json:"type" yaml:"type"`
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
+	// or "unknown". The kind says which of the following fields is used.
+	Kind string `json:"kind" yaml:"kind"`
+	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
+	// (A number is text so that a 64-bit integer keeps its precision.)
+	// For kind "func", the function name. For kind "type", the type.
+	Scalar string `json:"scalar" yaml:"scalar"`
+	// For kind "bytes", the bytes of a []byte or [N]byte
+	Data []byte `json:"data" yaml:"data"`
+	// For kind "struct", the fields in declaration order, where each has its name
+	Fields []GnoValue `json:"fields" yaml:"fields"`
+	// For kind "list", the elements of the slice or array.
+	// For kind "map", the value of each entry in insertion order, where the key is the same index in keys.
+	// For kind "pointer", the one value which is pointed to (if object_id is not used).
+	Elems []GnoValue `json:"elems" yaml:"elems"`
+	// For kind "map", the key of each entry in insertion order, where the value is the same index in elems
+	Keys []GnoValue `json:"keys" yaml:"keys"`
+	// For kind "ref" or "pointer", the ID of the persisted object which is not expanded. Fetch it with QObjectJSON.
+	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	ObjectID string `json:"object_id" yaml:"object_id"`
+	// If object_id is used and the persisted object has a declared type, this is its type ID. (For kind "pointer",
+	// this is the type which is pointed to.) The object from QObjectJSON doesn't have its type, so fetch it
+	// with QTypeJSON to get the struct field names. Example: "gno.land/p/gnoland/boards/v0.storage"
+	TypeID string `json:"type_id" yaml:"type_id"`
+	// For kind "ref" where the type is a slice, object_id is the persisted array and the slice is the
+	// length elements of the array starting at offset.
+	Offset uint64 `json:"offset" yaml:"offset"`
+	Length uint64 `json:"length" yaml:"length"`
+}
+
+type QEvalJSONValuesRequest struct {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "IsBoardFrozen(1)"
+	Expression string `json:"expression" yaml:"expression"`
+}
+
+type QEvalJSONValuesResponse struct {
+	// The return values of the expression, one for each
+	Results []GnoValue `json:"results" yaml:"results"`
+	// If the last return value is an error, this is its Error() string
+	Error string `json:"error" yaml:"error"`
+}
+
 type QObjectJSONRequest struct {
 	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
 	ObjectID string `json:"object_id" yaml:"object_id"`

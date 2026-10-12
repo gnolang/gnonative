@@ -143,6 +143,14 @@ service GnoNativeService {
   // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEvalJSON(QEvalJSONRequest) returns (QEvalJSONResponse);
 
+  // QEvalJSONValues evaluates the given expression with the realm code at package_path.
+  // The package path should include the prefix like "gno.land/". The expression
+  // is usually a function call like "IsBoardFrozen(1)". The
+  // return values are decoded from the Amino JSON into a GnoValue for each,
+  // where a struct has its field names.
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+  rpc QEvalJSONValues(QEvalJSONValuesRequest) returns (QEvalJSONValuesResponse);
+
   // QObjectJSON retrieves the persisted object with the given object_id, like
   // "0ed754d80e40da2645666583e74d4ab093970a6a:534".
   // The return value is an Amino JSON string like

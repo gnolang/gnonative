@@ -108,6 +108,9 @@ const (
 	// GnoNativeServiceQEvalJSONProcedure is the fully-qualified name of the GnoNativeService's
 	// QEvalJSON RPC.
 	GnoNativeServiceQEvalJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QEvalJSON"
+	// GnoNativeServiceQEvalJSONValuesProcedure is the fully-qualified name of the GnoNativeService's
+	// QEvalJSONValues RPC.
+	GnoNativeServiceQEvalJSONValuesProcedure = "/land.gno.gnonative.v1.GnoNativeService/QEvalJSONValues"
 	// GnoNativeServiceQObjectJSONProcedure is the fully-qualified name of the GnoNativeService's
 	// QObjectJSON RPC.
 	GnoNativeServiceQObjectJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QObjectJSON"
@@ -296,6 +299,13 @@ type GnoNativeServiceClient interface {
 	// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
 	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEvalJSON(context.Context, *connect.Request[_go.QEvalJSONRequest]) (*connect.Response[_go.QEvalJSONResponse], error)
+	// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+	// The package path should include the prefix like "gno.land/". The expression
+	// is usually a function call like "IsBoardFrozen(1)". The
+	// return values are decoded from the Amino JSON into a GnoValue for each,
+	// where a struct has its field names.
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+	QEvalJSONValues(context.Context, *connect.Request[_go.QEvalJSONValuesRequest]) (*connect.Response[_go.QEvalJSONValuesResponse], error)
 	// QObjectJSON retrieves the persisted object with the given object_id, like
 	// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
 	// The return value is an Amino JSON string like
@@ -557,6 +567,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("QEvalJSON")),
 			connect.WithClientOptions(opts...),
 		),
+		qEvalJSONValues: connect.NewClient[_go.QEvalJSONValuesRequest, _go.QEvalJSONValuesResponse](
+			httpClient,
+			baseURL+GnoNativeServiceQEvalJSONValuesProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QEvalJSONValues")),
+			connect.WithClientOptions(opts...),
+		),
 		qObjectJSON: connect.NewClient[_go.QObjectJSONRequest, _go.QObjectJSONResponse](
 			httpClient,
 			baseURL+GnoNativeServiceQObjectJSONProcedure,
@@ -750,6 +766,7 @@ type gnoNativeServiceClient struct {
 	render                    *connect.Client[_go.RenderRequest, _go.RenderResponse]
 	qEval                     *connect.Client[_go.QEvalRequest, _go.QEvalResponse]
 	qEvalJSON                 *connect.Client[_go.QEvalJSONRequest, _go.QEvalJSONResponse]
+	qEvalJSONValues           *connect.Client[_go.QEvalJSONValuesRequest, _go.QEvalJSONValuesResponse]
 	qObjectJSON               *connect.Client[_go.QObjectJSONRequest, _go.QObjectJSONResponse]
 	qTypeJSON                 *connect.Client[_go.QTypeJSONRequest, _go.QTypeJSONResponse]
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
@@ -907,6 +924,11 @@ func (c *gnoNativeServiceClient) QEval(ctx context.Context, req *connect.Request
 // QEvalJSON calls land.gno.gnonative.v1.GnoNativeService.QEvalJSON.
 func (c *gnoNativeServiceClient) QEvalJSON(ctx context.Context, req *connect.Request[_go.QEvalJSONRequest]) (*connect.Response[_go.QEvalJSONResponse], error) {
 	return c.qEvalJSON.CallUnary(ctx, req)
+}
+
+// QEvalJSONValues calls land.gno.gnonative.v1.GnoNativeService.QEvalJSONValues.
+func (c *gnoNativeServiceClient) QEvalJSONValues(ctx context.Context, req *connect.Request[_go.QEvalJSONValuesRequest]) (*connect.Response[_go.QEvalJSONValuesResponse], error) {
+	return c.qEvalJSONValues.CallUnary(ctx, req)
 }
 
 // QObjectJSON calls land.gno.gnonative.v1.GnoNativeService.QObjectJSON.
@@ -1155,6 +1177,13 @@ type GnoNativeServiceHandler interface {
 	// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
 	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
 	QEvalJSON(context.Context, *connect.Request[_go.QEvalJSONRequest]) (*connect.Response[_go.QEvalJSONResponse], error)
+	// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+	// The package path should include the prefix like "gno.land/". The expression
+	// is usually a function call like "IsBoardFrozen(1)". The
+	// return values are decoded from the Amino JSON into a GnoValue for each,
+	// where a struct has its field names.
+	// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+	QEvalJSONValues(context.Context, *connect.Request[_go.QEvalJSONValuesRequest]) (*connect.Response[_go.QEvalJSONValuesResponse], error)
 	// QObjectJSON retrieves the persisted object with the given object_id, like
 	// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
 	// The return value is an Amino JSON string like
@@ -1412,6 +1441,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("QEvalJSON")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceQEvalJSONValuesHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQEvalJSONValuesProcedure,
+		svc.QEvalJSONValues,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QEvalJSONValues")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceQObjectJSONHandler := connect.NewUnaryHandler(
 		GnoNativeServiceQObjectJSONProcedure,
 		svc.QObjectJSON,
@@ -1628,6 +1663,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceQEvalHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQEvalJSONProcedure:
 			gnoNativeServiceQEvalJSONHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQEvalJSONValuesProcedure:
+			gnoNativeServiceQEvalJSONValuesHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQObjectJSONProcedure:
 			gnoNativeServiceQObjectJSONHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQTypeJSONProcedure:
@@ -1793,6 +1830,10 @@ func (UnimplementedGnoNativeServiceHandler) QEval(context.Context, *connect.Requ
 
 func (UnimplementedGnoNativeServiceHandler) QEvalJSON(context.Context, *connect.Request[_go.QEvalJSONRequest]) (*connect.Response[_go.QEvalJSONResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QEvalJSON is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) QEvalJSONValues(context.Context, *connect.Request[_go.QEvalJSONValuesRequest]) (*connect.Response[_go.QEvalJSONValuesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QEvalJSONValues is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error) {
