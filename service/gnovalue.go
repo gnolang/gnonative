@@ -69,6 +69,11 @@ func (c *gnoValueConverter) convertQEvalJSON(data []byte) (res *api_gen.QEvalJSO
 }
 
 // resolveType returns the type definition for the type ID, or nil if it can't be resolved.
+// The result (including nil) is cached in c.types, so each type ID is queried at most once.
+// The cache only lasts as long as the converter, which is made for each request, so it doesn't
+// need to be invalidated. (Between requests, a realm can be redeployed, or SetRemote can change
+// the node, so the definition for a type ID may change. And a failure may be a network error
+// which should be retried in the next request.)
 func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	if t, ok := c.types[typeID]; ok {
 		return t
