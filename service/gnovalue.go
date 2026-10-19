@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gnolang/gno/gno.land/pkg/sdk/vm/utils"
 	gno "github.com/gnolang/gno/gnovm/pkg/gnolang"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gnonative/v4/service/utils"
 
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 )
