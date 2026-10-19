@@ -117,6 +117,9 @@ const (
 	// GnoNativeServiceQTypeJSONProcedure is the fully-qualified name of the GnoNativeService's
 	// QTypeJSON RPC.
 	GnoNativeServiceQTypeJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QTypeJSON"
+	// GnoNativeServiceQPkgJSONProcedure is the fully-qualified name of the GnoNativeService's QPkgJSON
+	// RPC.
+	GnoNativeServiceQPkgJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QPkgJSON"
 	// GnoNativeServiceCallProcedure is the fully-qualified name of the GnoNativeService's Call RPC.
 	GnoNativeServiceCallProcedure = "/land.gno.gnonative.v1.GnoNativeService/Call"
 	// GnoNativeServiceSendProcedure is the fully-qualified name of the GnoNativeService's Send RPC.
@@ -316,6 +319,11 @@ type GnoNativeServiceClient interface {
 	// The return value is an Amino JSON string like
 	// "{\"typeid\":\"...\",\"type\":{...}}".
 	QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error)
+	// QPkgJSON the package-level variables of the package at pkg_path, like
+	// "gno.land/r/sys/users".
+	// The return value is an Amino JSON string like
+	// "{\"names\":[...],\"values\":[...]}".
+	QPkgJSON(context.Context, *connect.Request[_go.QPkgJSONRequest]) (*connect.Response[_go.QPkgJSONResponse], error)
 	// Call one or more specific realm functions. Sign the transaction with the given signer_address.
 	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -585,6 +593,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("QTypeJSON")),
 			connect.WithClientOptions(opts...),
 		),
+		qPkgJSON: connect.NewClient[_go.QPkgJSONRequest, _go.QPkgJSONResponse](
+			httpClient,
+			baseURL+GnoNativeServiceQPkgJSONProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QPkgJSON")),
+			connect.WithClientOptions(opts...),
+		),
 		call: connect.NewClient[_go.CallRequest, _go.CallResponse](
 			httpClient,
 			baseURL+GnoNativeServiceCallProcedure,
@@ -769,6 +783,7 @@ type gnoNativeServiceClient struct {
 	qEvalJSONValues           *connect.Client[_go.QEvalJSONValuesRequest, _go.QEvalJSONValuesResponse]
 	qObjectJSON               *connect.Client[_go.QObjectJSONRequest, _go.QObjectJSONResponse]
 	qTypeJSON                 *connect.Client[_go.QTypeJSONRequest, _go.QTypeJSONResponse]
+	qPkgJSON                  *connect.Client[_go.QPkgJSONRequest, _go.QPkgJSONResponse]
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
 	send                      *connect.Client[_go.SendRequest, _go.SendResponse]
 	run                       *connect.Client[_go.RunRequest, _go.RunResponse]
@@ -939,6 +954,11 @@ func (c *gnoNativeServiceClient) QObjectJSON(ctx context.Context, req *connect.R
 // QTypeJSON calls land.gno.gnonative.v1.GnoNativeService.QTypeJSON.
 func (c *gnoNativeServiceClient) QTypeJSON(ctx context.Context, req *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error) {
 	return c.qTypeJSON.CallUnary(ctx, req)
+}
+
+// QPkgJSON calls land.gno.gnonative.v1.GnoNativeService.QPkgJSON.
+func (c *gnoNativeServiceClient) QPkgJSON(ctx context.Context, req *connect.Request[_go.QPkgJSONRequest]) (*connect.Response[_go.QPkgJSONResponse], error) {
+	return c.qPkgJSON.CallUnary(ctx, req)
 }
 
 // Call calls land.gno.gnonative.v1.GnoNativeService.Call.
@@ -1194,6 +1214,11 @@ type GnoNativeServiceHandler interface {
 	// The return value is an Amino JSON string like
 	// "{\"typeid\":\"...\",\"type\":{...}}".
 	QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error)
+	// QPkgJSON the package-level variables of the package at pkg_path, like
+	// "gno.land/r/sys/users".
+	// The return value is an Amino JSON string like
+	// "{\"names\":[...],\"values\":[...]}".
+	QPkgJSON(context.Context, *connect.Request[_go.QPkgJSONRequest]) (*connect.Response[_go.QPkgJSONResponse], error)
 	// Call one or more specific realm functions. Sign the transaction with the given signer_address.
 	// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
 	// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -1459,6 +1484,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("QTypeJSON")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceQPkgJSONHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQPkgJSONProcedure,
+		svc.QPkgJSON,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QPkgJSON")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceCallHandler := connect.NewServerStreamHandler(
 		GnoNativeServiceCallProcedure,
 		svc.Call,
@@ -1669,6 +1700,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceQObjectJSONHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQTypeJSONProcedure:
 			gnoNativeServiceQTypeJSONHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQPkgJSONProcedure:
+			gnoNativeServiceQPkgJSONHandler.ServeHTTP(w, r)
 		case GnoNativeServiceCallProcedure:
 			gnoNativeServiceCallHandler.ServeHTTP(w, r)
 		case GnoNativeServiceSendProcedure:
@@ -1842,6 +1875,10 @@ func (UnimplementedGnoNativeServiceHandler) QObjectJSON(context.Context, *connec
 
 func (UnimplementedGnoNativeServiceHandler) QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QTypeJSON is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) QPkgJSON(context.Context, *connect.Request[_go.QPkgJSONRequest]) (*connect.Response[_go.QPkgJSONResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QPkgJSON is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) Call(context.Context, *connect.Request[_go.CallRequest], *connect.ServerStream[_go.CallResponse]) error {

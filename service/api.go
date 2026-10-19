@@ -622,6 +622,23 @@ func (s *gnoNativeService) QTypeJSON(ctx context.Context, req *connect.Request[a
 	return connect.NewResponse(&api_gen.QTypeJSONResponse{Result: result}), nil
 }
 
+func (s *gnoNativeService) QPkgJSON(ctx context.Context, req *connect.Request[api_gen.QPkgJSONRequest]) (*connect.Response[api_gen.QPkgJSONResponse], error) {
+	s.logger.Debug("QPkgJSON", zap.String("pkgPath", req.Msg.PkgPath))
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	// TODO: Use gnoclient QPkgJSON
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qpkg_json", Data: fmt.Appendf(nil, "%s", req.Msg.PkgPath)})
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	result := string(qres.Response.Data)
+
+	return connect.NewResponse(&api_gen.QPkgJSONResponse{Result: result}), nil
+}
+
 func (s *gnoNativeService) Call(ctx context.Context, req *connect.Request[api_gen.CallRequest], stream *connect.ServerStream[api_gen.CallResponse]) error {
 	for _, msg := range req.Msg.Msgs {
 		s.logger.Debug("Call", zap.String("package", msg.PackagePath), zap.String("function", msg.Fnc), zap.Any("args", msg.Args))

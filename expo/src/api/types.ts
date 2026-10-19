@@ -86,6 +86,7 @@ export interface GnoKeyApi {
   qEvalJSONValues: (packagePath: string, expression: string) => Promise<QEvalJSONValuesResponse>;
   qObjectJSON: (objectId: string) => Promise<any>;
   qTypeJSON: (typeId: string) => Promise<any>;
+  qPkgJSON: (pkgPath: string) => Promise<any>;
   call: (
     packagePath: string,
     fnc: string,

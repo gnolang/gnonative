@@ -340,6 +340,16 @@ type QTypeJSONResponse struct {
 	Result string `json:"result" yaml:"result"`
 }
 
+type QPkgJSONRequest struct {
+	// Example: "gno.land/r/sys/users"
+	PkgPath string `json:"pkg_path" yaml:"pkg_path"`
+}
+
+type QPkgJSONResponse struct {
+	// An Amino JSON string like "{\"names\":[...],\"values\":[...]}"
+	Result string `json:"result" yaml:"result"`
+}
+
 type MsgCall struct {
 	// Example: "gno.land/r/demo/boards"
 	PackagePath string `json:"package_path" yaml:"package_path"`

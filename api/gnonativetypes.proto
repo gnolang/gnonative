@@ -354,6 +354,16 @@ message QTypeJSONResponse {
 	string result = 1;
 }
 
+message QPkgJSONRequest {
+	// Example: "gno.land/r/sys/users"
+	string pkg_path = 1;
+}
+
+message QPkgJSONResponse {
+	// An Amino JSON string like "{\"names\":[...],\"values\":[...]}"
+	string result = 1;
+}
+
 message MsgCall {
 	// Example: "gno.land/r/demo/boards"
 	string package_path = 1;

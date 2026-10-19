@@ -442,6 +442,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     return JSON.parse(reponse.result);
   }
 
+  async qPkgJSON(pkgPath: string) {
+    const client = this.#getClient();
+    const reponse = await client.qPkgJSON({ pkgPath });
+    return JSON.parse(reponse.result);
+  }
+
   async call(
     packagePath: string,
     fnc: string,

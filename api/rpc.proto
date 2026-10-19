@@ -163,6 +163,12 @@ service GnoNativeService {
   // "{\"typeid\":\"...\",\"type\":{...}}".
   rpc QTypeJSON(QTypeJSONRequest) returns (QTypeJSONResponse);
 
+  // QPkgJSON the package-level variables of the package at pkg_path, like
+  // "gno.land/r/sys/users".
+  // The return value is an Amino JSON string like
+  // "{\"names\":[...],\"values\":[...]}".
+  rpc QPkgJSON(QPkgJSONRequest) returns (QPkgJSONResponse);
+
   // Call one or more specific realm functions. Sign the transaction with the given signer_address.
   // If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.

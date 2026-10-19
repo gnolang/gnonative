@@ -75,6 +75,8 @@ var Package = amino.RegisterPackage(amino.NewPackage(
 	QObjectJSONResponse{},
 	QTypeJSONRequest{},
 	QTypeJSONResponse{},
+	QPkgJSONRequest{},
+	QPkgJSONResponse{},
 	MsgCall{},
 	CallRequest{},
 	CallResponse{},
