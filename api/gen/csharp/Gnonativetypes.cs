@@ -12706,8 +12706,10 @@ namespace Land.Gno.Gnonative.V1 {
     public const int KindFieldNumber = 3;
     private string kind_ = "";
     /// <summary>
-    /// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
-    /// or "unknown". The kind says which of the following fields is used.
+    /// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+    /// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+    /// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+    /// be fetched with QObjectJSONValue.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

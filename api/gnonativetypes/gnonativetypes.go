@@ -276,8 +276,10 @@ type GnoValue struct {
 	Name string `json:"name" yaml:"name"`
 	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
 	Type string `json:"type" yaml:"type"`
-	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
-	// or "unknown". The kind says which of the following fields is used.
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+	// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+	// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+	// be fetched with QObjectJSONValue.
 	Kind string `json:"kind" yaml:"kind"`
 	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
 	// (A number is text so that a 64-bit integer keeps its precision.)

@@ -2745,8 +2745,10 @@ type GnoValue struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
-	// or "unknown". The kind says which of the following fields is used.
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+	// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+	// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+	// be fetched with QObjectJSONValue.
 	Kind string `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
 	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
 	// (A number is text so that a 64-bit integer keeps its precision.)

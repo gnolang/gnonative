@@ -290,8 +290,10 @@ message GnoValue {
 	string name = 1;
 	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
 	string type = 2;
-	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
-	// or "unknown". The kind says which of the following fields is used.
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+	// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+	// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+	// be fetched with QObjectJSONValue.
 	string kind = 3;
 	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
 	// (A number is text so that a 64-bit integer keeps its precision.)

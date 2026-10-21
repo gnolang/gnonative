@@ -31,6 +31,7 @@ const (
 	gnoKindFunc    = "func"
 	gnoKindType    = "type"
 	gnoKindRef     = "ref"
+	gnoKindBackref = "backref"
 	gnoKindNil     = "nil"
 	gnoKindUnknown = "unknown"
 )
@@ -276,7 +277,7 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 		case gno.RefValue:
 			c.convertSliceRef(res, tv.T, base.ObjectID.String(), cv.Offset, cv.Length)
 		case gno.ExportRefValue:
-			c.convertSliceRef(res, tv.T, base.ObjectID, cv.Offset, cv.Length)
+			res.Kind = gnoKindBackref
 		default:
 			res.Kind = gnoKindList
 		}
@@ -312,9 +313,7 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 			res.TypeId = utils.GetTypeIDQueryString(tv.T)
 			res.Index = uint64(cv.Index)
 		case gno.ExportRefValue:
-			res.ObjectId = base.ObjectID
-			res.TypeId = utils.GetTypeIDQueryString(tv.T)
-			res.Index = uint64(cv.Index)
+			res.Kind = gnoKindBackref
 		}
 	case *gno.FuncValue:
 		res.Kind = gnoKindFunc
@@ -335,9 +334,10 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 		res.ObjectId = cv.ObjectID.String()
 		res.TypeId = utils.GetTypeIDQueryString(tv.T)
 	case gno.ExportRefValue:
-		res.Kind = gnoKindRef
-		res.ObjectId = cv.ObjectID
-		res.TypeId = utils.GetTypeIDQueryString(tv.T)
+		// Not a persisted object, but an object which is not repeated because it is in a cycle or is shared with
+		// another value in the result. (The ":N" ID is from the order of the export, so it can't be fetched.)
+		// This is also the case above for the base of a slice or pointer.
+		res.Kind = gnoKindBackref
 	default:
 		res.Kind = gnoKindUnknown
 	}

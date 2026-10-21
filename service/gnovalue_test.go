@@ -266,6 +266,46 @@ func TestConvertQEvalJSONRefs(t *testing.T) {
 	assert.Equal(t, "gno.land/p/gnoland/boards/exts/hub/v0.Board", res.Results[1].TypeId)
 }
 
+func TestConvertQEvalJSONBackrefs(t *testing.T) {
+	// Objects which are not persisted are numbered by the export in the order they are first expanded. An object
+	// which is visited again is an ExportRefValue with the synthetic ID ":N".
+	const objectInfo = `"ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:0","ModTime":"0","RefCount":"0","LastObjectSize":"0"}`
+	const intType = `{"@type":"/gno.PrimitiveType","value":"32"}`
+	const mapType = `{"@type":"/gno.MapType","Key":{"@type":"/gno.PrimitiveType","value":"16"},"Value":` + intType + `}`
+	const sliceType = `{"@type":"/gno.SliceType","Elt":` + intType + `,"Vrd":false}`
+	const nodeType = `{"@type":"/gno.RefType","ID":"gno.land/r/demo/foo.Node"}`
+	const nodePointerType = `{"@type":"/gno.PointerType","Elt":` + nodeType + `}`
+	res := testConvertQEvalJSON(t, `{"results":[`+
+		// m := map[string]int{"a": 1}; return m, m (:1 is the map)
+		`{"T":`+mapType+`,"V":{"@type":"/gno.MapValue",`+objectInfo+`,"List":{"List":[{"Key":{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"a"}},"Value":{"T":`+intType+`,"N":"AQAAAAAAAAA="}}]}}},`+
+		`{"T":`+mapType+`,"V":{"@type":"/gno.ExportRefValue","ObjectID":":1"}},`+
+		// s := []int{1, 2}; return s, s[1:] (:2 is the array)
+		`{"T":`+sliceType+`,"V":{"@type":"/gno.SliceValue","Base":{"@type":"/gno.ArrayValue",`+objectInfo+`,"List":[{"T":`+intType+`,"N":"AQAAAAAAAAA="},{"T":`+intType+`,"N":"AgAAAAAAAAA="}],"Data":null},"Offset":"0","Length":"2","Maxcap":"2"}},`+
+		`{"T":`+sliceType+`,"V":{"@type":"/gno.SliceValue","Base":{"@type":"/gno.ExportRefValue","ObjectID":":2"},"Offset":"1","Length":"1","Maxcap":"1"}},`+
+		// n := &Node{}; n.Next = n; return n (:3 is the heap item, :4 is the struct)
+		`{"T":`+nodePointerType+`,"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.HeapItemValue",`+objectInfo+`,"Value":{"T":`+nodeType+`,"V":{"@type":"/gno.StructValue",`+objectInfo+`,"Fields":[`+
+		`{"T":`+nodePointerType+`,"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.ExportRefValue","ObjectID":":3"},"Index":"0"}}]}}},"Index":"0"}}]}`, nil)
+
+	require.Len(t, res.Results, 5)
+	assert.Equal(t, gnoKindMap, res.Results[0].Kind)
+	assert.Equal(t, gnoKindList, res.Results[2].Kind)
+	assert.Equal(t, gnoKindPointer, res.Results[4].Kind)
+	require.Len(t, res.Results[4].Elems, 1)
+	node := res.Results[4].Elems[0]
+	assert.Equal(t, gnoKindStruct, node.Kind)
+	require.Len(t, node.Fields, 1)
+
+	// The map, the slice of the array and the pointer to the heap item are backrefs, which can't be fetched.
+	for _, v := range []*api_gen.GnoValue{res.Results[1], res.Results[3], node.Fields[0]} {
+		assert.Equal(t, gnoKindBackref, v.Kind)
+		assert.Empty(t, v.ObjectId)
+		assert.Empty(t, v.TypeId)
+	}
+	assert.Equal(t, "map[string]int", res.Results[1].Type)
+	assert.Equal(t, "[]int", res.Results[3].Type)
+	assert.Equal(t, "*gno.land/r/demo/foo.Node", node.Fields[0].Type)
+}
+
 func TestConvertQEvalJSONEmptySliceRef(t *testing.T) {
 	const refValue = `{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}`
 	// An empty slice of a persisted array doesn't need the array, so it is not a ref.

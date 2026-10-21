@@ -1192,8 +1192,10 @@ export type GnoValue = Message<"land.gno.gnonative.v1.GnoValue"> & {
   type: string;
 
   /**
-   * One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref", "nil"
-   * or "unknown". The kind says which of the following fields is used.
+   * One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+   * "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+   * value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+   * be fetched with QObjectJSONValue.
    *
    * @generated from field: string kind = 3;
    */
