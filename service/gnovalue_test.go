@@ -388,11 +388,12 @@ func TestConvertQObjectJSONSlice(t *testing.T) {
 func TestConvertQObjectJSONPointer(t *testing.T) {
 	const objectInfo = `"ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","ModTime":"0","RefCount":"1","LastObjectSize":"0"}`
 	const intType = `{"@type":"/gno.PrimitiveType","value":"32"}`
-	ref := &api_gen.GnoValue{Type: "*int", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7"}
+	ref := &api_gen.GnoValue{Name: "count", Type: "*int", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7"}
 
-	// A pointer to a heap item
+	// A pointer to a heap item. The result replaces the pointer, so it has the same name.
 	value, err := testConvertQObjectJSON(t, `{"@type":"/gno.HeapItemValue",`+objectInfo+`,"Value":{"T":`+intType+`,"N":"BwAAAAAAAAA="}}`, ref)
 	require.NoError(t, err)
+	assert.Equal(t, "count", value.Name)
 	assertGnoScalar(t, value, "int", gnoKindNumber, "7")
 
 	// A pointer to a field of a struct
@@ -401,6 +402,7 @@ func TestConvertQObjectJSONPointer(t *testing.T) {
 	ref.Index = 1
 	value, err = testConvertQObjectJSON(t, structValue, ref)
 	require.NoError(t, err)
+	assert.Equal(t, "count", value.Name)
 	assertGnoScalar(t, value, "int", gnoKindNumber, "2")
 
 	// A pointer to an element of a byte array
@@ -453,11 +455,13 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 	converter := newGnoValueConverter(testQuery(t, &queried), zap.NewNop())
 	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`),
 		&api_gen.GnoValue{
-			Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
+			Name: "user", Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
 			ObjectId: "0ed754d80e40da2645666583e74d4ab093970a6a:534", TypeId: "gno.land/r/sys/users.UserData",
 		})
 	require.NoError(t, err)
 
+	// The name of the pointer is kept after following the ref.
+	assert.Equal(t, "user", value.Name)
 	assert.Equal(t, "gno.land/r/sys/users.UserData", value.Type)
 	assert.Equal(t, gnoKindStruct, value.Kind)
 	require.Len(t, value.Fields, 3)

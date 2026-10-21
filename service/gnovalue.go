@@ -112,7 +112,13 @@ func (c *gnoValueConverter) convertObject(data []byte, value *api_gen.GnoValue) 
 	}
 
 	if value.Kind == gnoKindPointer {
-		return c.convertPointedTo(qres.Value, value.Index)
+		res, err = c.convertPointedTo(qres.Value, value.Index)
+		if err != nil {
+			return nil, err
+		}
+		// The result replaces the pointer, so it has the same name. Its type is the type which is pointed to.
+		res.Name = value.Name
+		return res, nil
 	}
 
 	if av, ok := qres.Value.(*gno.ArrayValue); ok && value.Length > 0 {
