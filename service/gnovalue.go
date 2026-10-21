@@ -13,6 +13,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
 	"github.com/gnolang/gnonative/v4/service/utils"
+	"go.uber.org/zap"
 
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 )
@@ -42,10 +43,12 @@ type gnoValueConverter struct {
 	query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error)
 	// types caches the result of the "vm/qtype_json" query by type ID. The value is nil if the type can't be resolved.
 	types map[string]gno.Type
+	// logger is used for a debug message when a type can't be resolved.
+	logger *zap.Logger
 }
 
-func newGnoValueConverter(query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error)) *gnoValueConverter {
-	return &gnoValueConverter{query: query, types: map[string]gno.Type{}}
+func newGnoValueConverter(query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error), logger *zap.Logger) *gnoValueConverter {
+	return &gnoValueConverter{query: query, types: map[string]gno.Type{}, logger: logger}
 }
 
 // convertQEvalJSON decodes the response data of the "vm/qeval_json" query and converts each result.
@@ -168,6 +171,7 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	}
 	defer func() {
 		if r := recover(); r != nil {
+			c.logger.Debug("resolveType: can't convert the qtype_json result", zap.String("typeId", typeID), zap.Any("panic", r))
 			t = nil
 		}
 		c.types[typeID] = t
@@ -176,10 +180,13 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	// TODO: Use gnoclient QTypeJSON
 	qres, err := c.query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: []byte(typeID)})
 	if err != nil {
+		// This may be a network error, which is cached the same as a type which doesn't exist, so log it.
+		c.logger.Debug("resolveType: qtype_json query error", zap.String("typeId", typeID), zap.Error(err))
 		return nil
 	}
 	var tres utils.TypeResponse
 	if err := amino.UnmarshalJSON(qres.Response.Data, &tres); err != nil {
+		c.logger.Debug("resolveType: can't decode the qtype_json result", zap.String("typeId", typeID), zap.Error(err))
 		return nil
 	}
 	return tres.Type

@@ -572,7 +572,7 @@ func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Req
 	}
 
 	// A value only has the ID of its declared type, so query for the type to get the struct field names.
-	res, err := newGnoValueConverter(c.Query).convertQEvalJSON(qres.Response.Data)
+	res, err := newGnoValueConverter(c.Query, s.logger).convertQEvalJSON(qres.Response.Data)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -614,7 +614,7 @@ func (s *gnoNativeService) QObjectJSONValue(ctx context.Context, req *connect.Re
 		return nil, getGrpcError(err)
 	}
 
-	res, err := newGnoValueConverter(c.Query).convertQObjectJSON(qres.Response.Data, value)
+	res, err := newGnoValueConverter(c.Query, s.logger).convertQObjectJSON(qres.Response.Data, value)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}

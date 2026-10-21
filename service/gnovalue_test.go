@@ -9,6 +9,8 @@ import (
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zaptest/observer"
 
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
 )
@@ -61,7 +63,7 @@ func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*c
 // testConvertQEvalJSON converts data, using testQTypeJSON for the type queries. Add each queried type ID to queried.
 func testConvertQEvalJSON(t *testing.T, data string, queried *[]string) *api_gen.QEvalJSONValuesResponse {
 	t.Helper()
-	converter := newGnoValueConverter(testQuery(t, queried))
+	converter := newGnoValueConverter(testQuery(t, queried), zap.NewNop())
 	res, err := converter.convertQEvalJSON([]byte(data))
 	require.NoError(t, err)
 	return res
@@ -209,10 +211,29 @@ func TestConvertQEvalJSONError(t *testing.T) {
 	assert.Equal(t, []byte{3, 0, 0, 0, 0, 0, 0, 0}, res.Results[1].Data)
 }
 
+func TestResolveTypeLogsQueryError(t *testing.T) {
+	// The type is not in testQTypeJSON, so the query returns an error, which is logged.
+	core, logs := observer.New(zap.DebugLevel)
+	var queried []string
+	converter := newGnoValueConverter(testQuery(t, &queried), zap.New(core))
+	assert.Nil(t, converter.resolveType("gno.land/r/foo.Unknown"))
+
+	require.Equal(t, 1, logs.Len())
+	entry := logs.All()[0]
+	assert.Equal(t, zap.DebugLevel, entry.Level)
+	assert.Equal(t, "gno.land/r/foo.Unknown", entry.ContextMap()["typeId"])
+	assert.Equal(t, "not found: gno.land/r/foo.Unknown", entry.ContextMap()["error"])
+
+	// The failure is cached, so there is no other query or log.
+	assert.Nil(t, converter.resolveType("gno.land/r/foo.Unknown"))
+	assert.Equal(t, []string{"gno.land/r/foo.Unknown"}, queried)
+	assert.Equal(t, 1, logs.Len())
+}
+
 func TestConvertQEvalJSONMalformed(t *testing.T) {
 	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
-	})
+	}, zap.NewNop())
 
 	_, err := converter.convertQEvalJSON([]byte(`not JSON`))
 	assert.Error(t, err)
@@ -274,7 +295,7 @@ func TestConvertQEvalJSONPointerIndex(t *testing.T) {
 // testConvertQObjectJSON converts the object in data for the ref, using testQTypeJSON for the type queries.
 func testConvertQObjectJSON(t *testing.T, value string, ref *api_gen.GnoValue) (*api_gen.GnoValue, error) {
 	t.Helper()
-	converter := newGnoValueConverter(testQuery(t, nil))
+	converter := newGnoValueConverter(testQuery(t, nil), zap.NewNop())
 	return converter.convertQObjectJSON([]byte(`{"objectid":"`+ref.ObjectId+`","value":`+value+`}`), ref)
 }
 
@@ -384,7 +405,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 	// The heap item which a *UserData points to. The UserData is persisted separately, so the heap item only has
 	// a ref to it, which is followed.
 	var queried []string
-	converter := newGnoValueConverter(testQuery(t, &queried))
+	converter := newGnoValueConverter(testQuery(t, &queried), zap.NewNop())
 	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`),
 		&api_gen.GnoValue{
 			Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
@@ -418,7 +439,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 	// The heap item has a ref to another heap item which has a ref. Only the first ref is followed.
 	var queried []string
-	converter := newGnoValueConverter(testQuery(t, &queried))
+	converter := newGnoValueConverter(testQuery(t, &queried), zap.NewNop())
 	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
 		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
 	require.NoError(t, err)
@@ -436,7 +457,7 @@ func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 func TestConvertQObjectJSONMalformed(t *testing.T) {
 	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
-	})
+	}, zap.NewNop())
 	_, err := converter.convertQObjectJSON([]byte(`not JSON`), &api_gen.GnoValue{Kind: gnoKindRef, ObjectId: "x:1"})
 	assert.Error(t, err)
 }
