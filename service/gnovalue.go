@@ -98,7 +98,7 @@ func (c *gnoValueConverter) convertQObjectJSON(data []byte, value *api_gen.GnoVa
 	// TODO: Use gnoclient QObjectJSON
 	qres, err := c.query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(res.ObjectId)})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("can't follow the ref to object %s: %w", res.ObjectId, err)
 	}
 	return c.convertObject(qres.Response.Data, res)
 }

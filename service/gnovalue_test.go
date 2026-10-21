@@ -505,10 +505,12 @@ func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:24", value.ObjectId)
 	assert.Equal(t, []string{"0dc5eff18974d66f6720bc387fc7e5c63514d961:23"}, queried)
 
-	// The object of the followed ref is not found.
+	// The object of the followed ref is not found. The error has the object ID, and wraps the error of the query.
 	_, err = converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:99","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
 		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
-	assert.Error(t, err)
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "can't follow the ref to object 0dc5eff18974d66f6720bc387fc7e5c63514d961:99")
+	assert.EqualError(t, errors.Unwrap(err), "not found: 0dc5eff18974d66f6720bc387fc7e5c63514d961:99")
 }
 
 func TestConvertQObjectJSONMalformed(t *testing.T) {
