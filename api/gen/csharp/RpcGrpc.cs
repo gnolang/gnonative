@@ -1151,7 +1151,7 @@ namespace Land.Gno.Gnonative.V1 {
       }
 
       /// <summary>
-      /// QPkgJSON the package-level variables of the package at pkg_path, like
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
       /// "gno.land/r/sys/users".
       /// The return value is an Amino JSON string like
       /// "{\"names\":[...],\"values\":[...]}".
@@ -3275,7 +3275,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_QTypeJSON, null, options, request);
       }
       /// <summary>
-      /// QPkgJSON the package-level variables of the package at pkg_path, like
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
       /// "gno.land/r/sys/users".
       /// The return value is an Amino JSON string like
       /// "{\"names\":[...],\"values\":[...]}".
@@ -3291,7 +3291,7 @@ namespace Land.Gno.Gnonative.V1 {
         return QPkgJSON(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// QPkgJSON the package-level variables of the package at pkg_path, like
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
       /// "gno.land/r/sys/users".
       /// The return value is an Amino JSON string like
       /// "{\"names\":[...],\"values\":[...]}".
@@ -3305,7 +3305,7 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.BlockingUnaryCall(__Method_QPkgJSON, null, options, request);
       }
       /// <summary>
-      /// QPkgJSON the package-level variables of the package at pkg_path, like
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
       /// "gno.land/r/sys/users".
       /// The return value is an Amino JSON string like
       /// "{\"names\":[...],\"values\":[...]}".
@@ -3321,7 +3321,7 @@ namespace Land.Gno.Gnonative.V1 {
         return QPkgJSONAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// QPkgJSON the package-level variables of the package at pkg_path, like
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
       /// "gno.land/r/sys/users".
       /// The return value is an Amino JSON string like
       /// "{\"names\":[...],\"values\":[...]}".

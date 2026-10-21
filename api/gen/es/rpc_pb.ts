@@ -706,7 +706,7 @@ export const GnoNativeService: GenService<{
     output: typeof QTypeJSONResponseSchema;
   },
   /**
-   * QPkgJSON the package-level variables of the package at pkg_path, like
+   * QPkgJSON retrieves the package-level variables of the package at pkg_path, like
    * "gno.land/r/sys/users".
    * The return value is an Amino JSON string like
    * "{\"names\":[...],\"values\":[...]}".

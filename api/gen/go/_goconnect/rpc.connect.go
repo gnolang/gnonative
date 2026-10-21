@@ -332,7 +332,7 @@ type GnoNativeServiceClient interface {
 	// The return value is an Amino JSON string like
 	// "{\"typeid\":\"...\",\"type\":{...}}".
 	QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error)
-	// QPkgJSON the package-level variables of the package at pkg_path, like
+	// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
 	// "gno.land/r/sys/users".
 	// The return value is an Amino JSON string like
 	// "{\"names\":[...],\"values\":[...]}".
@@ -1249,7 +1249,7 @@ type GnoNativeServiceHandler interface {
 	// The return value is an Amino JSON string like
 	// "{\"typeid\":\"...\",\"type\":{...}}".
 	QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error)
-	// QPkgJSON the package-level variables of the package at pkg_path, like
+	// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
 	// "gno.land/r/sys/users".
 	// The return value is an Amino JSON string like
 	// "{\"names\":[...],\"values\":[...]}".
