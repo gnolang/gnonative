@@ -284,6 +284,12 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 			}
 		}
 	case gno.PointerValue:
+		if cv.Index < 0 {
+			// A special index like PointerIndexMap, where the value which is pointed to is not a field or
+			// element of the base, so we can't get it.
+			res.Kind = gnoKindUnknown
+			break
+		}
 		res.Kind = gnoKindPointer
 		switch base := cv.Base.(type) {
 		case *gno.HeapItemValue:
@@ -299,11 +305,11 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 		case gno.RefValue:
 			res.ObjectId = base.ObjectID.String()
 			res.TypeId = utils.GetTypeIDQueryString(tv.T)
-			res.Index = uint64(max(cv.Index, 0))
+			res.Index = uint64(cv.Index)
 		case gno.ExportRefValue:
 			res.ObjectId = base.ObjectID
 			res.TypeId = utils.GetTypeIDQueryString(tv.T)
-			res.Index = uint64(max(cv.Index, 0))
+			res.Index = uint64(cv.Index)
 		}
 	case *gno.FuncValue:
 		res.Kind = gnoKindFunc
