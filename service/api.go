@@ -588,7 +588,7 @@ func (s *gnoNativeService) QObjectJSON(ctx context.Context, req *connect.Request
 		return nil, getGrpcError(err)
 	}
 	// TODO: Use gnoclient QObjectJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: fmt.Appendf(nil, "%s", req.Msg.ObjectId)})
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(req.Msg.ObjectId)})
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -630,7 +630,7 @@ func (s *gnoNativeService) QTypeJSON(ctx context.Context, req *connect.Request[a
 		return nil, getGrpcError(err)
 	}
 	// TODO: Use gnoclient QTypeJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: fmt.Appendf(nil, "%s", req.Msg.TypeId)})
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: []byte(req.Msg.TypeId)})
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -647,7 +647,7 @@ func (s *gnoNativeService) QPkgJSON(ctx context.Context, req *connect.Request[ap
 		return nil, getGrpcError(err)
 	}
 	// TODO: Use gnoclient QPkgJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qpkg_json", Data: fmt.Appendf(nil, "%s", req.Msg.PkgPath)})
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qpkg_json", Data: []byte(req.Msg.PkgPath)})
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
