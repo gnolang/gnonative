@@ -2775,8 +2775,8 @@ type GnoValue struct {
 	// length elements of the array starting at offset. (length is not 0.)
 	Offset uint64 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
 	Length uint64 `protobuf:"varint,12,opt,name=length,proto3" json:"length,omitempty"`
-	// For kind "pointer" where object_id is a persisted struct or array, the index of the field or
-	// element which is pointed to
+	// For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+	// element or variable which is pointed to
 	Index         uint64 `protobuf:"varint,13,opt,name=index,proto3" json:"index,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

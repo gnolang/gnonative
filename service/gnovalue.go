@@ -134,7 +134,7 @@ func (c *gnoValueConverter) convertObject(data []byte, value *api_gen.GnoValue) 
 }
 
 // convertPointedTo converts the value in the persisted object which a pointer points to. If the object is a
-// struct or array, index is the field or element.
+// struct, array or block, index is the field, element or variable.
 func (c *gnoValueConverter) convertPointedTo(object gno.Value, index uint64) (*api_gen.GnoValue, error) {
 	switch cv := object.(type) {
 	case *gno.HeapItemValue:
@@ -142,6 +142,11 @@ func (c *gnoValueConverter) convertPointedTo(object gno.Value, index uint64) (*a
 	case *gno.StructValue:
 		if index < uint64(len(cv.Fields)) {
 			return c.convert(cv.Fields[index]), nil
+		}
+	case *gno.Block:
+		// A variable in the block which is not a heap item
+		if index < uint64(len(cv.Values)) {
+			return c.convert(cv.Values[index]), nil
 		}
 	case *gno.ArrayValue:
 		if cv.Data != nil {

@@ -12861,8 +12861,8 @@ namespace Land.Gno.Gnonative.V1 {
     public const int IndexFieldNumber = 13;
     private ulong index_;
     /// <summary>
-    /// For kind "pointer" where object_id is a persisted struct or array, the index of the field or
-    /// element which is pointed to
+    /// For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+    /// element or variable which is pointed to
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

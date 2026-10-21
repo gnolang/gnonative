@@ -1271,8 +1271,8 @@ export type GnoValue = Message<"land.gno.gnonative.v1.GnoValue"> & {
   length: bigint;
 
   /**
-   * For kind "pointer" where object_id is a persisted struct or array, the index of the field or
-   * element which is pointed to
+   * For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+   * element or variable which is pointed to
    *
    * @generated from field: uint64 index = 13;
    */

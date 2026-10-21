@@ -306,8 +306,8 @@ type GnoValue struct {
 	// length elements of the array starting at offset. (length is not 0.)
 	Offset uint64 `json:"offset" yaml:"offset"`
 	Length uint64 `json:"length" yaml:"length"`
-	// For kind "pointer" where object_id is a persisted struct or array, the index of the field or
-	// element which is pointed to
+	// For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+	// element or variable which is pointed to
 	Index uint64 `json:"index" yaml:"index"`
 }
 

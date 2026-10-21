@@ -415,6 +415,37 @@ func TestConvertQObjectJSONPointer(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestConvertQObjectJSONPointerToBlock(t *testing.T) {
+	// A package block, like the one of gno.land/r/sys/users. A pointer to a variable in the block which is not a
+	// heap item has the block as its base.
+	const block = `{"@type":"/gno.Block","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:2","Hash":"b61a008de48cadda4e58a55465f03947fa4f2b52","ModTime":"541","RefCount":"8","IsEscaped":true,"LastObjectSize":"10607"},"Source":{"@type":"/gno.RefNode","Location":{"PkgPath":"gno.land/r/sys/users","File":"","Span":{"Pos":{"Line":"0","Column":"0"},"End":{"Line":"0","Column":"0"},"Num":"0"}},"BlockNode":null},"Values":[` +
+		`{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"hello"}},` +
+		`{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}],"Parent":null,"Blank":{}}`
+	ref := &api_gen.GnoValue{Type: "*string", Kind: gnoKindPointer, ObjectId: "0ed754d80e40da2645666583e74d4ab093970a6a:2"}
+
+	// A string variable
+	value, err := testConvertQObjectJSON(t, block, ref)
+	require.NoError(t, err)
+	assertGnoScalar(t, value, "string", gnoKindString, "hello")
+
+	// A struct variable, where the struct is persisted separately, so the ref is followed.
+	ref.Type = "*gno.land/r/sys/users.UserData"
+	ref.TypeId = "gno.land/r/sys/users.UserData"
+	ref.Index = 1
+	value, err = testConvertQObjectJSON(t, block, ref)
+	require.NoError(t, err)
+	assert.Equal(t, "gno.land/r/sys/users.UserData", value.Type)
+	assert.Equal(t, gnoKindStruct, value.Kind)
+	require.Len(t, value.Fields, 3)
+	assert.Equal(t, "username", value.Fields[1].Name)
+	assertGnoScalar(t, value.Fields[1], "string", gnoKindString, "test1")
+
+	// The index is out of range.
+	ref.Index = 2
+	_, err = testConvertQObjectJSON(t, block, ref)
+	assert.Error(t, err)
+}
+
 func TestConvertQObjectJSONFollowRef(t *testing.T) {
 	// The heap item which a *UserData points to. The UserData is persisted separately, so the heap item only has
 	// a ref to it, which is followed.
