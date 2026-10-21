@@ -155,6 +155,7 @@ service GnoNativeService {
   // "0ed754d80e40da2645666583e74d4ab093970a6a:534".
   // The return value is an Amino JSON string like
   // "{\"objectid\":\"...\",\"value\":{...}}".
+  // If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
   rpc QObjectJSON(QObjectJSONRequest) returns (QObjectJSONResponse);
 
   // QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
@@ -166,6 +167,8 @@ service GnoNativeService {
   // inside the result can still be a ref.
   // If the GnoValue is not a type which can be used to fetch an object, return
   // [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+  // If the object (or the object of a followed ref) doesn't exist, return
+  // [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
   rpc QObjectJSONValue(QObjectJSONValueRequest) returns (QObjectJSONValueResponse);
 
   // QTypeJSON retrieves the type definition with the given type_id, like
@@ -330,6 +333,16 @@ enum ErrCode {
   ErrRunGRPCServer = 153;
   // ErrDecryptionFailed indicates a decryption failure including a wrong password
   ErrDecryptionFailed = 154;
+  // ErrChainRejected indicates that the chain refused the request for a reason
+  // it did not classify: free text rather than one of the typed errors above,
+  // typically a realm panic the VM recovered and the ABCI layer degraded to a
+  // string. It does not claim the VM raised it — the same catch-all covers any
+  // unclassified failure of a message or a query.
+  //
+  // Its ErrDetails carry that reason as the message: the wording differs per
+  // failure and belongs to the realm, not to this library — which also makes it
+  // untrusted, see ErrDetails.message.
+  ErrChainRejected = 155;
 
   // The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
 
@@ -372,17 +385,8 @@ enum ErrCode {
   ErrInvalidPkgPath = 217;
   ErrInvalidStmt = 218;
   ErrInvalidExpr = 219;
-
-  // ErrChainRejected indicates that the chain refused the request for a reason
-  // it did not classify: free text rather than one of the typed errors above,
-  // typically a realm panic the VM recovered and the ABCI layer degraded to a
-  // string. It does not claim the VM raised it — the same catch-all covers any
-  // unclassified failure of a message or a query.
-  //
-  // Its ErrDetails carry that reason as the message: the wording differs per
-  // failure and belongs to the realm, not to this library — which also makes it
-  // untrusted, see ErrDetails.message.
-  ErrChainRejected = 220;
+  ErrObjectNotFound = 220;
+  ErrExportSizeExceeded = 221;
 }
 
 // ErrDetails is attached to a failing call so that a client can tell what went

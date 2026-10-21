@@ -54,9 +54,19 @@ const (
 	ErrCode_ErrRunGRPCServer   ErrCode = 153
 	// ErrDecryptionFailed indicates a decryption failure including a wrong password
 	ErrCode_ErrDecryptionFailed ErrCode = 154
-	ErrCode_ErrTxDecode         ErrCode = 200
-	ErrCode_ErrInvalidSequence  ErrCode = 201
-	ErrCode_ErrUnauthorized     ErrCode = 202
+	// ErrChainRejected indicates that the chain refused the request for a reason
+	// it did not classify: free text rather than one of the typed errors above,
+	// typically a realm panic the VM recovered and the ABCI layer degraded to a
+	// string. It does not claim the VM raised it — the same catch-all covers any
+	// unclassified failure of a message or a query.
+	//
+	// Its ErrDetails carry that reason as the message: the wording differs per
+	// failure and belongs to the realm, not to this library — which also makes it
+	// untrusted, see ErrDetails.message.
+	ErrCode_ErrChainRejected   ErrCode = 155
+	ErrCode_ErrTxDecode        ErrCode = 200
+	ErrCode_ErrInvalidSequence ErrCode = 201
+	ErrCode_ErrUnauthorized    ErrCode = 202
 	// ErrInsufficientFunds indicates that there are insufficient funds to pay for fees
 	ErrCode_ErrInsufficientFunds ErrCode = 203
 	// ErrUnknownRequest indicates that the path of a realm function call is unrecognized
@@ -87,19 +97,11 @@ const (
 	// ErrGasOverflow indicates that an action results in a gas consumption unsigned integer overflow
 	ErrCode_ErrGasOverflow ErrCode = 216
 	// ErrInvalidPkgPath indicates that the package path is not recognized.
-	ErrCode_ErrInvalidPkgPath ErrCode = 217
-	ErrCode_ErrInvalidStmt    ErrCode = 218
-	ErrCode_ErrInvalidExpr    ErrCode = 219
-	// ErrChainRejected indicates that the chain refused the request for a reason
-	// it did not classify: free text rather than one of the typed errors above,
-	// typically a realm panic the VM recovered and the ABCI layer degraded to a
-	// string. It does not claim the VM raised it — the same catch-all covers any
-	// unclassified failure of a message or a query.
-	//
-	// Its ErrDetails carry that reason as the message: the wording differs per
-	// failure and belongs to the realm, not to this library — which also makes it
-	// untrusted, see ErrDetails.message.
-	ErrCode_ErrChainRejected ErrCode = 220
+	ErrCode_ErrInvalidPkgPath     ErrCode = 217
+	ErrCode_ErrInvalidStmt        ErrCode = 218
+	ErrCode_ErrInvalidExpr        ErrCode = 219
+	ErrCode_ErrObjectNotFound     ErrCode = 220
+	ErrCode_ErrExportSizeExceeded ErrCode = 221
 )
 
 // Enum value maps for ErrCode.
@@ -123,6 +125,7 @@ var (
 		152: "ErrNoActiveAccount",
 		153: "ErrRunGRPCServer",
 		154: "ErrDecryptionFailed",
+		155: "ErrChainRejected",
 		200: "ErrTxDecode",
 		201: "ErrInvalidSequence",
 		202: "ErrUnauthorized",
@@ -143,7 +146,8 @@ var (
 		217: "ErrInvalidPkgPath",
 		218: "ErrInvalidStmt",
 		219: "ErrInvalidExpr",
-		220: "ErrChainRejected",
+		220: "ErrObjectNotFound",
+		221: "ErrExportSizeExceeded",
 	}
 	ErrCode_value = map[string]int32{
 		"Undefined":               0,
@@ -164,6 +168,7 @@ var (
 		"ErrNoActiveAccount":      152,
 		"ErrRunGRPCServer":        153,
 		"ErrDecryptionFailed":     154,
+		"ErrChainRejected":        155,
 		"ErrTxDecode":             200,
 		"ErrInvalidSequence":      201,
 		"ErrUnauthorized":         202,
@@ -184,7 +189,8 @@ var (
 		"ErrInvalidPkgPath":       217,
 		"ErrInvalidStmt":          218,
 		"ErrInvalidExpr":          219,
-		"ErrChainRejected":        220,
+		"ErrObjectNotFound":       220,
+		"ErrExportSizeExceeded":   221,
 	}
 )
 
@@ -289,7 +295,7 @@ const file_rpc_proto_rawDesc = "" +
 	"\n" +
 	"ErrDetails\x122\n" +
 	"\x04code\x18\x01 \x01(\x0e2\x1e.land.gno.gnonative.v1.ErrCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage*\xfb\x06\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage*\xaf\a\n" +
 	"\aErrCode\x12\r\n" +
 	"\tUndefined\x10\x00\x12\b\n" +
 	"\x04TODO\x10\x01\x12\x15\n" +
@@ -308,7 +314,8 @@ const file_rpc_proto_rawDesc = "" +
 	"\x14ErrCryptoKeyNotFound\x10\x97\x01\x12\x17\n" +
 	"\x12ErrNoActiveAccount\x10\x98\x01\x12\x15\n" +
 	"\x10ErrRunGRPCServer\x10\x99\x01\x12\x18\n" +
-	"\x13ErrDecryptionFailed\x10\x9a\x01\x12\x10\n" +
+	"\x13ErrDecryptionFailed\x10\x9a\x01\x12\x15\n" +
+	"\x10ErrChainRejected\x10\x9b\x01\x12\x10\n" +
 	"\vErrTxDecode\x10\xc8\x01\x12\x17\n" +
 	"\x12ErrInvalidSequence\x10\xc9\x01\x12\x14\n" +
 	"\x0fErrUnauthorized\x10\xca\x01\x12\x19\n" +
@@ -328,8 +335,9 @@ const file_rpc_proto_rawDesc = "" +
 	"\x0eErrGasOverflow\x10\xd8\x01\x12\x16\n" +
 	"\x11ErrInvalidPkgPath\x10\xd9\x01\x12\x13\n" +
 	"\x0eErrInvalidStmt\x10\xda\x01\x12\x13\n" +
-	"\x0eErrInvalidExpr\x10\xdb\x01\x12\x15\n" +
-	"\x10ErrChainRejected\x10\xdc\x012\x88/\n" +
+	"\x0eErrInvalidExpr\x10\xdb\x01\x12\x16\n" +
+	"\x11ErrObjectNotFound\x10\xdc\x01\x12\x1a\n" +
+	"\x15ErrExportSizeExceeded\x10\xdd\x012\x88/\n" +
 	"\x10GnoNativeService\x12^\n" +
 	"\tSetRemote\x12'.land.gno.gnonative.v1.SetRemoteRequest\x1a(.land.gno.gnonative.v1.SetRemoteResponse\x12^\n" +
 	"\tGetRemote\x12'.land.gno.gnonative.v1.GetRemoteRequest\x1a(.land.gno.gnonative.v1.GetRemoteResponse\x12a\n" +

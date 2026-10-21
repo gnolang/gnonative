@@ -1105,6 +1105,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
       /// The return value is an Amino JSON string like
       /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1125,6 +1126,8 @@ namespace Land.Gno.Gnonative.V1 {
       /// inside the result can still be a ref.
       /// If the GnoValue is not a type which can be used to fetch an object, return
       /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -3079,6 +3082,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
       /// The return value is an Amino JSON string like
       /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3095,6 +3099,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
       /// The return value is an Amino JSON string like
       /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -3109,6 +3114,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
       /// The return value is an Amino JSON string like
       /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3125,6 +3131,7 @@ namespace Land.Gno.Gnonative.V1 {
       /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
       /// The return value is an Amino JSON string like
       /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -3144,6 +3151,8 @@ namespace Land.Gno.Gnonative.V1 {
       /// inside the result can still be a ref.
       /// If the GnoValue is not a type which can be used to fetch an object, return
       /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3165,6 +3174,8 @@ namespace Land.Gno.Gnonative.V1 {
       /// inside the result can still be a ref.
       /// If the GnoValue is not a type which can be used to fetch an object, return
       /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -3184,6 +3195,8 @@ namespace Land.Gno.Gnonative.V1 {
       /// inside the result can still be a ref.
       /// If the GnoValue is not a type which can be used to fetch an object, return
       /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -3205,6 +3218,8 @@ namespace Land.Gno.Gnonative.V1 {
       /// inside the result can still be a ref.
       /// If the GnoValue is not a type which can be used to fetch an object, return
       /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>

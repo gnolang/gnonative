@@ -316,6 +316,7 @@ type GnoNativeServiceClient interface {
 	// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
 	// The return value is an Amino JSON string like
 	// "{\"objectid\":\"...\",\"value\":{...}}".
+	// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
 	QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error)
 	// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
 	// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
@@ -326,6 +327,8 @@ type GnoNativeServiceClient interface {
 	// inside the result can still be a ref.
 	// If the GnoValue is not a type which can be used to fetch an object, return
 	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+	// If the object (or the object of a followed ref) doesn't exist, return
+	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
 	QObjectJSONValue(context.Context, *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error)
 	// QTypeJSON retrieves the type definition with the given type_id, like
 	// "gno.land/r/sys/users.UserData".
@@ -1233,6 +1236,7 @@ type GnoNativeServiceHandler interface {
 	// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
 	// The return value is an Amino JSON string like
 	// "{\"objectid\":\"...\",\"value\":{...}}".
+	// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
 	QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error)
 	// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
 	// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
@@ -1243,6 +1247,8 @@ type GnoNativeServiceHandler interface {
 	// inside the result can still be a ref.
 	// If the GnoValue is not a type which can be used to fetch an object, return
 	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+	// If the object (or the object of a followed ref) doesn't exist, return
+	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
 	QObjectJSONValue(context.Context, *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error)
 	// QTypeJSON retrieves the type definition with the given type_id, like
 	// "gno.land/r/sys/users.UserData".

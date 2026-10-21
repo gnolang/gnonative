@@ -1627,6 +1627,10 @@ func getGrpcError(err error) error {
 		return api_gen.ErrCode_ErrInvalidStmt
 	} else if errors.As(err, &vm.InvalidExprError{}) {
 		return api_gen.ErrCode_ErrInvalidExpr
+	} else if errors.As(err, &vm.ObjectNotFoundError{}) {
+		return api_gen.ErrCode_ErrObjectNotFound
+	} else if errors.As(err, &vm.ExportSizeExceededError{}) {
+		return api_gen.ErrCode_ErrExportSizeExceeded
 	}
 
 	// Everything the chain refused without classifying arrives as an
