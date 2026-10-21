@@ -12739,7 +12739,9 @@ namespace Land.Gno.Gnonative.V1 {
     public const int DataFieldNumber = 5;
     private pb::ByteString data_ = pb::ByteString.Empty;
     /// <summary>
-    /// For kind "bytes", the bytes of a []byte or [N]byte
+    /// For kind "bytes", the bytes of a []byte or [N]byte.
+    /// For kind "unknown" where the value can't be interpreted (for example, because its type can't be resolved),
+    /// the raw 8 bytes of the primitive value from the Gno VM (if any).
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

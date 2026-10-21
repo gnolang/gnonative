@@ -1209,7 +1209,9 @@ export type GnoValue = Message<"land.gno.gnonative.v1.GnoValue"> & {
   scalar: string;
 
   /**
-   * For kind "bytes", the bytes of a []byte or [N]byte
+   * For kind "bytes", the bytes of a []byte or [N]byte.
+   * For kind "unknown" where the value can't be interpreted (for example, because its type can't be resolved),
+   * the raw 8 bytes of the primitive value from the Gno VM (if any).
    *
    * @generated from field: bytes data = 5;
    */

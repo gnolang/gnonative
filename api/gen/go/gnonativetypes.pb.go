@@ -2752,7 +2752,9 @@ type GnoValue struct {
 	// (A number is text so that a 64-bit integer keeps its precision.)
 	// For kind "func", the function name. For kind "type", the type.
 	Scalar string `protobuf:"bytes,4,opt,name=scalar,proto3" json:"scalar,omitempty"`
-	// For kind "bytes", the bytes of a []byte or [N]byte
+	// For kind "bytes", the bytes of a []byte or [N]byte.
+	// For kind "unknown" where the value can't be interpreted (for example, because its type can't be resolved),
+	// the raw 8 bytes of the primitive value from the Gno VM (if any).
 	Data []byte `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
 	// For kind "struct", the fields in declaration order, where each has its name
 	Fields []*GnoValue `protobuf:"bytes,6,rep,name=fields,proto3" json:"fields,omitempty"`
