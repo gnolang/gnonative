@@ -157,6 +157,17 @@ service GnoNativeService {
   // "{\"objectid\":\"...\",\"value\":{...}}".
   rpc QObjectJSON(QObjectJSONRequest) returns (QObjectJSONResponse);
 
+  // QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+  // "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+  // from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+  // is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+  // If the result would be a ref to another persisted object (like a pointer to a struct which is
+  // persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+  // inside the result can still be a ref.
+  // If the GnoValue is not a type which can be used to fetch an object, return
+  // [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+  rpc QObjectJSONValue(QObjectJSONValueRequest) returns (QObjectJSONValueResponse);
+
   // QTypeJSON retrieves the type definition with the given type_id, like
   // "gno.land/r/sys/users.UserData".
   // The return value is an Amino JSON string like

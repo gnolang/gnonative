@@ -293,17 +293,20 @@ type GnoValue struct {
 	Elems []GnoValue `json:"elems" yaml:"elems"`
 	// For kind "map", the key of each entry in insertion order, where the value is the same index in elems
 	Keys []GnoValue `json:"keys" yaml:"keys"`
-	// For kind "ref" or "pointer", the ID of the persisted object which is not expanded. Fetch it with QObjectJSON.
-	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	// For kind "ref" or "pointer", the ID of the persisted object which is not expanded. Fetch it with
+	// QObjectJSONValue. Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
 	ObjectID string `json:"object_id" yaml:"object_id"`
 	// If object_id is used and the persisted object has a declared type, this is its type ID. (For kind "pointer",
-	// this is the type which is pointed to.) The object from QObjectJSON doesn't have its type, so fetch it
-	// with QTypeJSON to get the struct field names. Example: "gno.land/p/gnoland/boards/v0.storage"
+	// this is the type which is pointed to.) QObjectJSONValue uses it to get the struct field names.
+	// Example: "gno.land/p/gnoland/boards/v0.storage"
 	TypeID string `json:"type_id" yaml:"type_id"`
 	// For kind "ref" where the type is a slice, object_id is the persisted array and the slice is the
-	// length elements of the array starting at offset.
+	// length elements of the array starting at offset. (length is not 0.)
 	Offset uint64 `json:"offset" yaml:"offset"`
 	Length uint64 `json:"length" yaml:"length"`
+	// For kind "pointer" where object_id is a persisted struct or array, the index of the field or
+	// element which is pointed to
+	Index uint64 `json:"index" yaml:"index"`
 }
 
 type QEvalJSONValuesRequest struct {
@@ -328,6 +331,17 @@ type QObjectJSONRequest struct {
 type QObjectJSONResponse struct {
 	// An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
 	Result string `json:"result" yaml:"result"`
+}
+
+type QObjectJSONValueRequest struct {
+	// A GnoValue of kind "ref" or "pointer" from a previous result, which has the object_id to fetch
+	Value GnoValue `json:"value" yaml:"value"`
+}
+
+type QObjectJSONValueResponse struct {
+	// The persisted object which is referenced. If the request value is a slice, this is only the elements
+	// of the slice.
+	Value GnoValue `json:"value" yaml:"value"`
 }
 
 type QTypeJSONRequest struct {

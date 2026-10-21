@@ -114,6 +114,9 @@ const (
 	// GnoNativeServiceQObjectJSONProcedure is the fully-qualified name of the GnoNativeService's
 	// QObjectJSON RPC.
 	GnoNativeServiceQObjectJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QObjectJSON"
+	// GnoNativeServiceQObjectJSONValueProcedure is the fully-qualified name of the GnoNativeService's
+	// QObjectJSONValue RPC.
+	GnoNativeServiceQObjectJSONValueProcedure = "/land.gno.gnonative.v1.GnoNativeService/QObjectJSONValue"
 	// GnoNativeServiceQTypeJSONProcedure is the fully-qualified name of the GnoNativeService's
 	// QTypeJSON RPC.
 	GnoNativeServiceQTypeJSONProcedure = "/land.gno.gnonative.v1.GnoNativeService/QTypeJSON"
@@ -314,6 +317,16 @@ type GnoNativeServiceClient interface {
 	// The return value is an Amino JSON string like
 	// "{\"objectid\":\"...\",\"value\":{...}}".
 	QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error)
+	// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+	// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+	// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+	// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+	// If the result would be a ref to another persisted object (like a pointer to a struct which is
+	// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+	// inside the result can still be a ref.
+	// If the GnoValue is not a type which can be used to fetch an object, return
+	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+	QObjectJSONValue(context.Context, *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error)
 	// QTypeJSON retrieves the type definition with the given type_id, like
 	// "gno.land/r/sys/users.UserData".
 	// The return value is an Amino JSON string like
@@ -587,6 +600,12 @@ func NewGnoNativeServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(gnoNativeServiceMethods.ByName("QObjectJSON")),
 			connect.WithClientOptions(opts...),
 		),
+		qObjectJSONValue: connect.NewClient[_go.QObjectJSONValueRequest, _go.QObjectJSONValueResponse](
+			httpClient,
+			baseURL+GnoNativeServiceQObjectJSONValueProcedure,
+			connect.WithSchema(gnoNativeServiceMethods.ByName("QObjectJSONValue")),
+			connect.WithClientOptions(opts...),
+		),
 		qTypeJSON: connect.NewClient[_go.QTypeJSONRequest, _go.QTypeJSONResponse](
 			httpClient,
 			baseURL+GnoNativeServiceQTypeJSONProcedure,
@@ -782,6 +801,7 @@ type gnoNativeServiceClient struct {
 	qEvalJSON                 *connect.Client[_go.QEvalJSONRequest, _go.QEvalJSONResponse]
 	qEvalJSONValues           *connect.Client[_go.QEvalJSONValuesRequest, _go.QEvalJSONValuesResponse]
 	qObjectJSON               *connect.Client[_go.QObjectJSONRequest, _go.QObjectJSONResponse]
+	qObjectJSONValue          *connect.Client[_go.QObjectJSONValueRequest, _go.QObjectJSONValueResponse]
 	qTypeJSON                 *connect.Client[_go.QTypeJSONRequest, _go.QTypeJSONResponse]
 	qPkgJSON                  *connect.Client[_go.QPkgJSONRequest, _go.QPkgJSONResponse]
 	call                      *connect.Client[_go.CallRequest, _go.CallResponse]
@@ -949,6 +969,11 @@ func (c *gnoNativeServiceClient) QEvalJSONValues(ctx context.Context, req *conne
 // QObjectJSON calls land.gno.gnonative.v1.GnoNativeService.QObjectJSON.
 func (c *gnoNativeServiceClient) QObjectJSON(ctx context.Context, req *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error) {
 	return c.qObjectJSON.CallUnary(ctx, req)
+}
+
+// QObjectJSONValue calls land.gno.gnonative.v1.GnoNativeService.QObjectJSONValue.
+func (c *gnoNativeServiceClient) QObjectJSONValue(ctx context.Context, req *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error) {
+	return c.qObjectJSONValue.CallUnary(ctx, req)
 }
 
 // QTypeJSON calls land.gno.gnonative.v1.GnoNativeService.QTypeJSON.
@@ -1209,6 +1234,16 @@ type GnoNativeServiceHandler interface {
 	// The return value is an Amino JSON string like
 	// "{\"objectid\":\"...\",\"value\":{...}}".
 	QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error)
+	// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+	// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+	// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+	// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+	// If the result would be a ref to another persisted object (like a pointer to a struct which is
+	// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+	// inside the result can still be a ref.
+	// If the GnoValue is not a type which can be used to fetch an object, return
+	// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+	QObjectJSONValue(context.Context, *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error)
 	// QTypeJSON retrieves the type definition with the given type_id, like
 	// "gno.land/r/sys/users.UserData".
 	// The return value is an Amino JSON string like
@@ -1478,6 +1513,12 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 		connect.WithSchema(gnoNativeServiceMethods.ByName("QObjectJSON")),
 		connect.WithHandlerOptions(opts...),
 	)
+	gnoNativeServiceQObjectJSONValueHandler := connect.NewUnaryHandler(
+		GnoNativeServiceQObjectJSONValueProcedure,
+		svc.QObjectJSONValue,
+		connect.WithSchema(gnoNativeServiceMethods.ByName("QObjectJSONValue")),
+		connect.WithHandlerOptions(opts...),
+	)
 	gnoNativeServiceQTypeJSONHandler := connect.NewUnaryHandler(
 		GnoNativeServiceQTypeJSONProcedure,
 		svc.QTypeJSON,
@@ -1698,6 +1739,8 @@ func NewGnoNativeServiceHandler(svc GnoNativeServiceHandler, opts ...connect.Han
 			gnoNativeServiceQEvalJSONValuesHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQObjectJSONProcedure:
 			gnoNativeServiceQObjectJSONHandler.ServeHTTP(w, r)
+		case GnoNativeServiceQObjectJSONValueProcedure:
+			gnoNativeServiceQObjectJSONValueHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQTypeJSONProcedure:
 			gnoNativeServiceQTypeJSONHandler.ServeHTTP(w, r)
 		case GnoNativeServiceQPkgJSONProcedure:
@@ -1871,6 +1914,10 @@ func (UnimplementedGnoNativeServiceHandler) QEvalJSONValues(context.Context, *co
 
 func (UnimplementedGnoNativeServiceHandler) QObjectJSON(context.Context, *connect.Request[_go.QObjectJSONRequest]) (*connect.Response[_go.QObjectJSONResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QObjectJSON is not implemented"))
+}
+
+func (UnimplementedGnoNativeServiceHandler) QObjectJSONValue(context.Context, *connect.Request[_go.QObjectJSONValueRequest]) (*connect.Response[_go.QObjectJSONValueResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("land.gno.gnonative.v1.GnoNativeService.QObjectJSONValue is not implemented"))
 }
 
 func (UnimplementedGnoNativeServiceHandler) QTypeJSON(context.Context, *connect.Request[_go.QTypeJSONRequest]) (*connect.Response[_go.QTypeJSONResponse], error) {

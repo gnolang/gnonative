@@ -3,7 +3,9 @@ import {
   DeleteAccountResponse,
   GetActivatedAccountResponse,
   HelloStreamResponse,
+  GnoValue,
   QEvalJSONValuesResponse,
+  QObjectJSONValueResponse,
   QueryAccountResponse,
   QuerySessionAccountResponse,
   QueryResponse,
@@ -85,6 +87,7 @@ export interface GnoKeyApi {
   qEvalJSON: (packagePath: string, expression: string) => Promise<any>;
   qEvalJSONValues: (packagePath: string, expression: string) => Promise<QEvalJSONValuesResponse>;
   qObjectJSON: (objectId: string) => Promise<any>;
+  qObjectJSONValue: (value: GnoValue) => Promise<QObjectJSONValueResponse>;
   qTypeJSON: (typeId: string) => Promise<any>;
   qPkgJSON: (pkgPath: string) => Promise<any>;
   call: (

@@ -4,6 +4,9 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
+	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
+	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -18,21 +21,47 @@ var testQTypeJSON = map[string]string{
 	"gno.land/p/gnoland/boards/exts/hub/v0.Board": `{"typeid":"gno.land/p/gnoland/boards/exts/hub/v0.Board","type":{"@type":"/gno.DeclaredType","PkgPath":"gno.land/p/gnoland/boards/exts/hub/v0","Name":"Board","Base":{"@type":"/gno.StructType","Fields":[{"Name":"id","Type":{"@type":"/gno.PrimitiveType","value":"65536"}},{"Name":"name","Type":{"@type":"/gno.PrimitiveType","value":"16"}},{"Name":"aliases","Type":{"@type":"/gno.SliceType","Elt":{"@type":"/gno.PrimitiveType","value":"16"}}},{"Name":"readonly","Type":{"@type":"/gno.PrimitiveType","value":"4"}},{"Name":"threadCount","Type":{"@type":"/gno.PrimitiveType","value":"32"}},{"Name":"memberCount","Type":{"@type":"/gno.PrimitiveType","value":"32"}},{"Name":"creator","Type":{"@type":"/gno.DeclaredType","PkgPath":".uverse","Name":"address","Base":{"@type":"/gno.PrimitiveType","value":"16"}}},{"Name":"createdAt","Type":{"@type":"/gno.PrimitiveType","value":"1024"}},{"Name":"updatedAt","Type":{"@type":"/gno.PrimitiveType","value":"1024"}}]}}}`,
 	".uverse.address":                `{"typeid":".uverse.address","type":{"@type":"/gno.DeclaredType","PkgPath":".uverse","Name":"address","Base":{"@type":"/gno.PrimitiveType","value":"16"}}}`,
 	"gno.land/r/demo/boards.BoardID": `{"typeid":"gno.land/r/demo/boards.BoardID","type":{"@type":"/gno.DeclaredType","PkgPath":"gno.land/r/demo/boards","Name":"BoardID","Base":{"@type":"/gno.PrimitiveType","value":"65536"}}}`,
+	"gno.land/r/sys/users.UserData":  `{"typeid":"gno.land/r/sys/users.UserData","type":{"@type":"/gno.DeclaredType","PkgPath":"gno.land/r/sys/users","Name":"UserData","Base":{"@type":"/gno.StructType","Fields":[{"Name":"addr","Type":{"@type":"/gno.DeclaredType","PkgPath":".uverse","Name":"address","Base":{"@type":"/gno.PrimitiveType","value":"16"}}},{"Name":"username","Type":{"@type":"/gno.PrimitiveType","value":"16"}},{"Name":"deleted","Type":{"@type":"/gno.PrimitiveType","value":"4"}}]}}}`,
+}
+
+// The responses of the "vm/qobject_json" query by object ID.
+var testQObjectJSON = map[string]string{
+	// A gno.land/r/sys/users.UserData
+	"0ed754d80e40da2645666583e74d4ab093970a6a:535": `{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:535","value":{"@type":"/gno.StructValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716","OwnerID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","ModTime":"0","RefCount":"1","LastObjectSize":"396"},"Fields":[{"T":{"@type":"/gno.RefType","ID":".uverse.address"},"V":{"@type":"/gno.StringValue","value":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"}},{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"test1"}},{"T":{"@type":"/gno.PrimitiveType","value":"4"}}]}}`,
+	// The array of a []string{"a", "b", "c"}
+	"0dc5eff18974d66f6720bc387fc7e5c63514d961:21": `{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:21","value":{"@type":"/gno.ArrayValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:21","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"List":[{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"a"}},{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"b"}},{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"c"}}],"Data":null}}`,
+	// A heap item which only has a ref to another object
+	"0dc5eff18974d66f6720bc387fc7e5c63514d961:23": `{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:24","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`,
+}
+
+// testQuery returns a fake of the client's Query for the "vm/qtype_json" and "vm/qobject_json" queries, using
+// testQTypeJSON and testQObjectJSON. Add the data of each query (the type ID or object ID) to queried (if not nil).
+func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
+	return func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
+		if queried != nil {
+			*queried = append(*queried, string(cfg.Data))
+		}
+		var responses map[string]string
+		switch cfg.Path {
+		case "vm/qtype_json":
+			responses = testQTypeJSON
+		case "vm/qobject_json":
+			responses = testQObjectJSON
+		default:
+			t.Errorf("unexpected query path %q", cfg.Path)
+		}
+		res, ok := responses[string(cfg.Data)]
+		if !ok {
+			return nil, errors.New("not found: " + string(cfg.Data))
+		}
+		return &ctypes.ResultABCIQuery{Response: abci.ResponseQuery{ResponseBase: abci.ResponseBase{Data: []byte(res)}}}, nil
+	}
 }
 
 // testConvertQEvalJSON converts data, using testQTypeJSON for the type queries. Add each queried type ID to queried.
 func testConvertQEvalJSON(t *testing.T, data string, queried *[]string) *api_gen.QEvalJSONValuesResponse {
 	t.Helper()
-	converter := newGnoValueConverter(func(typeID string) ([]byte, error) {
-		if queried != nil {
-			*queried = append(*queried, typeID)
-		}
-		res, ok := testQTypeJSON[typeID]
-		if !ok {
-			return nil, errors.New("type not found: " + typeID)
-		}
-		return []byte(res), nil
-	})
+	converter := newGnoValueConverter(testQuery(t, queried))
 	res, err := converter.convertQEvalJSON([]byte(data))
 	require.NoError(t, err)
 	return res
@@ -181,7 +210,7 @@ func TestConvertQEvalJSONError(t *testing.T) {
 }
 
 func TestConvertQEvalJSONMalformed(t *testing.T) {
-	converter := newGnoValueConverter(func(typeID string) ([]byte, error) {
+	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
 	})
 
@@ -214,4 +243,200 @@ func TestConvertQEvalJSONRefs(t *testing.T) {
 	assert.Equal(t, gnoKindRef, res.Results[1].Kind)
 	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", res.Results[1].ObjectId)
 	assert.Equal(t, "gno.land/p/gnoland/boards/exts/hub/v0.Board", res.Results[1].TypeId)
+}
+
+func TestConvertQEvalJSONEmptySliceRef(t *testing.T) {
+	const refValue = `{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}`
+	// An empty slice of a persisted array doesn't need the array, so it is not a ref.
+	res := testConvertQEvalJSON(t, `{"results":[`+
+		`{"T":{"@type":"/gno.SliceType","Elt":{"@type":"/gno.PrimitiveType","value":"16"},"Vrd":false},"V":{"@type":"/gno.SliceValue","Base":`+refValue+`,"Offset":"2","Length":"0","Maxcap":"8"}},`+
+		`{"T":{"@type":"/gno.SliceType","Elt":{"@type":"/gno.PrimitiveType","value":"4096"},"Vrd":false},"V":{"@type":"/gno.SliceValue","Base":`+refValue+`,"Offset":"0","Length":"0","Maxcap":"8"}}]}`, nil)
+
+	require.Len(t, res.Results, 2)
+	assertGnoScalar(t, res.Results[0], "[]string", gnoKindList, "")
+	assert.Empty(t, res.Results[0].ObjectId)
+	assert.Empty(t, res.Results[0].Elems)
+	assertGnoScalar(t, res.Results[1], "[]uint8", gnoKindBytes, "")
+	assert.Empty(t, res.Results[1].ObjectId)
+}
+
+func TestConvertQEvalJSONPointerIndex(t *testing.T) {
+	// A pointer to the second field of a persisted struct
+	res := testConvertQEvalJSON(t, `{"results":[`+
+		`{"T":{"@type":"/gno.PointerType","Elt":{"@type":"/gno.PrimitiveType","value":"16"}},"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Index":"1"}}]}`, nil)
+
+	require.Len(t, res.Results, 1)
+	assert.Equal(t, gnoKindPointer, res.Results[0].Kind)
+	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", res.Results[0].ObjectId)
+	assert.Equal(t, uint64(1), res.Results[0].Index)
+}
+
+// testConvertQObjectJSON converts the object in data for the ref, using testQTypeJSON for the type queries.
+func testConvertQObjectJSON(t *testing.T, value string, ref *api_gen.GnoValue) (*api_gen.GnoValue, error) {
+	t.Helper()
+	converter := newGnoValueConverter(testQuery(t, nil))
+	return converter.convertQObjectJSON([]byte(`{"objectid":"`+ref.ObjectId+`","value":`+value+`}`), ref)
+}
+
+func TestConvertQObjectJSONStruct(t *testing.T) {
+	const objectInfo = `"ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","ModTime":"0","RefCount":"1","LastObjectSize":"0"}`
+	ref := &api_gen.GnoValue{
+		Name:     "board",
+		Type:     "gno.land/p/gnoland/boards/exts/hub/v0.Board",
+		Kind:     gnoKindRef,
+		ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7",
+		TypeId:   "gno.land/p/gnoland/boards/exts/hub/v0.Board",
+	}
+	value, err := testConvertQObjectJSON(t, `{"@type":"/gno.StructValue",`+objectInfo+`,"Fields":[`+
+		`{"T":{"@type":"/gno.PrimitiveType","value":"65536"},"N":"AQAAAAAAAAA="},`+
+		`{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"openboard1"}}]}`, ref)
+	require.NoError(t, err)
+
+	// The result replaces the ref, so it has the same name and type.
+	assert.Equal(t, "board", value.Name)
+	assert.Equal(t, "gno.land/p/gnoland/boards/exts/hub/v0.Board", value.Type)
+	assert.Equal(t, gnoKindStruct, value.Kind)
+	require.Len(t, value.Fields, 2)
+	assert.Equal(t, "id", value.Fields[0].Name)
+	assertGnoScalar(t, value.Fields[0], "uint64", gnoKindNumber, "1")
+	assert.Equal(t, "name", value.Fields[1].Name)
+	assertGnoScalar(t, value.Fields[1], "string", gnoKindString, "openboard1")
+
+	// Without the type ID, the fields don't have names.
+	ref.TypeId = ""
+	value, err = testConvertQObjectJSON(t, `{"@type":"/gno.StructValue",`+objectInfo+`,"Fields":[`+
+		`{"T":{"@type":"/gno.PrimitiveType","value":"65536"},"N":"AQAAAAAAAAA="}]}`, ref)
+	require.NoError(t, err)
+	assert.Equal(t, gnoKindStruct, value.Kind)
+	require.Len(t, value.Fields, 1)
+	assert.Empty(t, value.Fields[0].Name)
+	assertGnoScalar(t, value.Fields[0], "uint64", gnoKindNumber, "1")
+}
+
+func TestConvertQObjectJSONSlice(t *testing.T) {
+	const objectInfo = `"ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","ModTime":"0","RefCount":"1","LastObjectSize":"0"}`
+	const stringType = `{"@type":"/gno.PrimitiveType","value":"16"}`
+	const array = `{"@type":"/gno.ArrayValue",` + objectInfo + `,"List":[` +
+		`{"T":` + stringType + `,"V":{"@type":"/gno.StringValue","value":"a"}},` +
+		`{"T":` + stringType + `,"V":{"@type":"/gno.StringValue","value":"b"}},` +
+		`{"T":` + stringType + `,"V":{"@type":"/gno.StringValue","value":"c"}}],"Data":null}`
+
+	// Only the elements of the slice
+	value, err := testConvertQObjectJSON(t, array, &api_gen.GnoValue{
+		Type: "[]string", Kind: gnoKindRef, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", Offset: 1, Length: 2,
+	})
+	require.NoError(t, err)
+	assert.Equal(t, "[]string", value.Type)
+	assert.Equal(t, gnoKindList, value.Kind)
+	require.Len(t, value.Elems, 2)
+	assertGnoScalar(t, value.Elems[0], "string", gnoKindString, "b")
+	assertGnoScalar(t, value.Elems[1], "string", gnoKindString, "c")
+
+	// An array which is not a slice has all the elements.
+	value, err = testConvertQObjectJSON(t, array, &api_gen.GnoValue{
+		Type: "[3]string", Kind: gnoKindRef, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7",
+	})
+	require.NoError(t, err)
+	assert.Equal(t, "[3]string", value.Type)
+	assert.Equal(t, gnoKindList, value.Kind)
+	assert.Len(t, value.Elems, 3)
+
+	// A slice of bytes
+	value, err = testConvertQObjectJSON(t, `{"@type":"/gno.ArrayValue",`+objectInfo+`,"List":null,"Data":"aGVsbG8="}`, &api_gen.GnoValue{
+		Type: "[]uint8", Kind: gnoKindRef, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", Offset: 1, Length: 3,
+	})
+	require.NoError(t, err)
+	assert.Equal(t, gnoKindBytes, value.Kind)
+	assert.Equal(t, []byte("ell"), value.Data)
+}
+
+func TestConvertQObjectJSONPointer(t *testing.T) {
+	const objectInfo = `"ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","ModTime":"0","RefCount":"1","LastObjectSize":"0"}`
+	const intType = `{"@type":"/gno.PrimitiveType","value":"32"}`
+	ref := &api_gen.GnoValue{Type: "*int", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:7"}
+
+	// A pointer to a heap item
+	value, err := testConvertQObjectJSON(t, `{"@type":"/gno.HeapItemValue",`+objectInfo+`,"Value":{"T":`+intType+`,"N":"BwAAAAAAAAA="}}`, ref)
+	require.NoError(t, err)
+	assertGnoScalar(t, value, "int", gnoKindNumber, "7")
+
+	// A pointer to a field of a struct
+	const structValue = `{"@type":"/gno.StructValue",` + objectInfo + `,"Fields":[` +
+		`{"T":` + intType + `,"N":"AQAAAAAAAAA="},{"T":` + intType + `,"N":"AgAAAAAAAAA="}]}`
+	ref.Index = 1
+	value, err = testConvertQObjectJSON(t, structValue, ref)
+	require.NoError(t, err)
+	assertGnoScalar(t, value, "int", gnoKindNumber, "2")
+
+	// A pointer to an element of a byte array
+	ref.Type = "*uint8"
+	value, err = testConvertQObjectJSON(t, `{"@type":"/gno.ArrayValue",`+objectInfo+`,"List":null,"Data":"aGk="}`, ref)
+	require.NoError(t, err)
+	assertGnoScalar(t, value, "uint8", gnoKindNumber, "105")
+
+	// The index is out of range.
+	ref.Index = 2
+	_, err = testConvertQObjectJSON(t, structValue, ref)
+	assert.Error(t, err)
+}
+
+func TestConvertQObjectJSONFollowRef(t *testing.T) {
+	// The heap item which a *UserData points to. The UserData is persisted separately, so the heap item only has
+	// a ref to it, which is followed.
+	var queried []string
+	converter := newGnoValueConverter(testQuery(t, &queried))
+	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`),
+		&api_gen.GnoValue{
+			Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
+			ObjectId: "0ed754d80e40da2645666583e74d4ab093970a6a:534", TypeId: "gno.land/r/sys/users.UserData",
+		})
+	require.NoError(t, err)
+
+	assert.Equal(t, "gno.land/r/sys/users.UserData", value.Type)
+	assert.Equal(t, gnoKindStruct, value.Kind)
+	require.Len(t, value.Fields, 3)
+	assert.Equal(t, "addr", value.Fields[0].Name)
+	assertGnoScalar(t, value.Fields[0], "address", gnoKindString, "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5")
+	assert.Equal(t, "username", value.Fields[1].Name)
+	assertGnoScalar(t, value.Fields[1], "string", gnoKindString, "test1")
+	assert.Equal(t, "deleted", value.Fields[2].Name)
+	assertGnoScalar(t, value.Fields[2], "bool", gnoKindBool, "false")
+	assert.Equal(t, []string{"0ed754d80e40da2645666583e74d4ab093970a6a:535", "gno.land/r/sys/users.UserData"}, queried)
+
+	// A heap item which has a slice of a persisted array. The ref is followed, and only has the elements of the slice.
+	const stringType = `{"@type":"/gno.PrimitiveType","value":"16"}`
+	value, err = converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.SliceType","Elt":`+stringType+`,"Vrd":false},"V":{"@type":"/gno.SliceValue","Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:21","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Offset":"1","Length":"2","Maxcap":"2"}}}}`),
+		&api_gen.GnoValue{Type: "*[]string", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:20"})
+	require.NoError(t, err)
+	assert.Equal(t, "[]string", value.Type)
+	assert.Equal(t, gnoKindList, value.Kind)
+	require.Len(t, value.Elems, 2)
+	assertGnoScalar(t, value.Elems[0], "string", gnoKindString, "b")
+	assertGnoScalar(t, value.Elems[1], "string", gnoKindString, "c")
+}
+
+func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
+	// The heap item has a ref to another heap item which has a ref. Only the first ref is followed.
+	var queried []string
+	converter := newGnoValueConverter(testQuery(t, &queried))
+	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
+		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
+	require.NoError(t, err)
+
+	assert.Equal(t, gnoKindRef, value.Kind)
+	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:24", value.ObjectId)
+	assert.Equal(t, []string{"0dc5eff18974d66f6720bc387fc7e5c63514d961:23"}, queried)
+
+	// The object of the followed ref is not found.
+	_, err = converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:99","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
+		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
+	assert.Error(t, err)
+}
+
+func TestConvertQObjectJSONMalformed(t *testing.T) {
+	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
+		return nil, errors.New("unexpected")
+	})
+	_, err := converter.convertQObjectJSON([]byte(`not JSON`), &api_gen.GnoValue{Kind: gnoKindRef, ObjectId: "x:1"})
+	assert.Error(t, err)
 }

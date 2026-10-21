@@ -572,15 +572,7 @@ func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Req
 	}
 
 	// A value only has the ID of its declared type, so query for the type to get the struct field names.
-	converter := newGnoValueConverter(func(typeID string) ([]byte, error) {
-		// TODO: Use gnoclient QTypeJSON
-		qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: []byte(typeID)})
-		if err != nil {
-			return nil, err
-		}
-		return qres.Response.Data, nil
-	})
-	res, err := converter.convertQEvalJSON(qres.Response.Data)
+	res, err := newGnoValueConverter(c.Query).convertQEvalJSON(qres.Response.Data)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -603,6 +595,31 @@ func (s *gnoNativeService) QObjectJSON(ctx context.Context, req *connect.Request
 	result := string(qres.Response.Data)
 
 	return connect.NewResponse(&api_gen.QObjectJSONResponse{Result: result}), nil
+}
+
+func (s *gnoNativeService) QObjectJSONValue(ctx context.Context, req *connect.Request[api_gen.QObjectJSONValueRequest]) (*connect.Response[api_gen.QObjectJSONValueResponse], error) {
+	value := req.Msg.Value
+	if value == nil || (value.Kind != gnoKindRef && value.Kind != gnoKindPointer) || value.ObjectId == "" {
+		return nil, api_gen.ErrCode_ErrInvalidInput.Wrap(errors.New("the value is not kind \"ref\" or \"pointer\" with an object_id"))
+	}
+	s.logger.Debug("QObjectJSONValue", zap.String("objectId", value.ObjectId), zap.String("typeId", value.TypeId))
+
+	c, err := s.getClient(nil)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+	// TODO: Use gnoclient QObjectJSON
+	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(value.ObjectId)})
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	res, err := newGnoValueConverter(c.Query).convertQObjectJSON(qres.Response.Data, value)
+	if err != nil {
+		return nil, getGrpcError(err)
+	}
+
+	return connect.NewResponse(&api_gen.QObjectJSONValueResponse{Value: res}), nil
 }
 
 func (s *gnoNativeService) QTypeJSON(ctx context.Context, req *connect.Request[api_gen.QTypeJSONRequest]) (*connect.Response[api_gen.QTypeJSONResponse], error) {

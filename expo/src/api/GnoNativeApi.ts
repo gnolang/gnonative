@@ -10,7 +10,9 @@ import {
   KeyInfo,
   MakeTxResponse,
   Coin,
+  GnoValue,
   QEvalJSONValuesResponse,
+  QObjectJSONValueResponse,
   QueryAccountResponse,
   QuerySessionAccountResponse,
   QueryResponse,
@@ -434,6 +436,12 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const client = this.#getClient();
     const reponse = await client.qObjectJSON({ objectId });
     return JSON.parse(reponse.result);
+  }
+
+  async qObjectJSONValue(value: GnoValue): Promise<QObjectJSONValueResponse> {
+    const client = this.#getClient();
+    const reponse = await client.qObjectJSONValue({ value });
+    return reponse;
   }
 
   async qTypeJSON(typeId: string) {
