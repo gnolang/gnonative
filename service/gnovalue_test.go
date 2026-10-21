@@ -287,18 +287,26 @@ func TestConvertQEvalJSONPointerIndex(t *testing.T) {
 	res := testConvertQEvalJSON(t, `{"results":[`+
 		// A pointer to the second field of a persisted struct
 		`{"T":{"@type":"/gno.PointerType","Elt":{"@type":"/gno.PrimitiveType","value":"16"}},"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:7","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Index":"1"}},`+
+		// A pointer to the second element of a byte array which is not persisted, like &buf[1]
+		`{"T":{"@type":"/gno.PointerType","Elt":{"@type":"/gno.PrimitiveType","value":"4096"}},"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.ArrayValue",`+objectInfo+`,"List":null,"Data":"aGk="},"Index":"1"}},`+
 		// The special index PointerIndexMap, with a persisted map
 		`{"T":{"@type":"/gno.PointerType","Elt":`+intType+`},"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:8","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Index":"-2"}},`+
 		// The special index PointerIndexBlockBlank, with a struct which is not persisted
 		`{"T":{"@type":"/gno.PointerType","Elt":`+intType+`},"V":{"@type":"/gno.PointerValue","TV":null,"Base":{"@type":"/gno.StructValue",`+objectInfo+`,"Fields":[{"T":`+intType+`,"N":"AQAAAAAAAAA="}]},"Index":"-1"}}]}`, nil)
 
-	require.Len(t, res.Results, 3)
+	require.Len(t, res.Results, 4)
 	assert.Equal(t, gnoKindPointer, res.Results[0].Kind)
 	assert.Equal(t, "0dc5eff18974d66f6720bc387fc7e5c63514d961:7", res.Results[0].ObjectId)
 	assert.Equal(t, uint64(1), res.Results[0].Index)
 
+	assert.Equal(t, "*uint8", res.Results[1].Type)
+	assert.Equal(t, gnoKindPointer, res.Results[1].Kind)
+	assert.Empty(t, res.Results[1].ObjectId)
+	require.Len(t, res.Results[1].Elems, 1)
+	assertGnoScalar(t, res.Results[1].Elems[0], "uint8", gnoKindNumber, "105")
+
 	// A special index can't be used to get the value which is pointed to, so it is not field or element 0.
-	for _, v := range res.Results[1:] {
+	for _, v := range res.Results[2:] {
 		assert.Equal(t, "*int", v.Type)
 		assert.Equal(t, gnoKindUnknown, v.Kind)
 		assert.Empty(t, v.ObjectId)

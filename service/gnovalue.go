@@ -155,14 +155,8 @@ func (c *gnoValueConverter) convertPointedTo(object gno.Value, index uint64) (*a
 			return c.convert(cv.Values[index]), nil
 		}
 	case *gno.ArrayValue:
-		if cv.Data != nil {
-			if index < uint64(len(cv.Data)) {
-				tv := gno.TypedValue{T: gno.Uint8Type}
-				tv.SetUint8(cv.Data[index])
-				return c.convert(tv), nil
-			}
-		} else if index < uint64(len(cv.List)) {
-			return c.convert(cv.List[index]), nil
+		if elem, ok := arrayElem(cv, index); ok {
+			return c.convert(elem), nil
 		}
 	default:
 		return &api_gen.GnoValue{Kind: gnoKindUnknown}, nil
@@ -306,8 +300,8 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 		case *gno.HeapItemValue:
 			res.Elems = []*api_gen.GnoValue{c.convert(base.Value)}
 		case *gno.ArrayValue:
-			if cv.Index >= 0 && cv.Index < len(base.List) {
-				res.Elems = []*api_gen.GnoValue{c.convert(base.List[cv.Index])}
+			if elem, ok := arrayElem(base, uint64(cv.Index)); ok {
+				res.Elems = []*api_gen.GnoValue{c.convert(elem)}
 			}
 		case *gno.StructValue:
 			if cv.Index >= 0 && cv.Index < len(base.Fields) {
@@ -349,6 +343,24 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 	}
 
 	return res
+}
+
+// arrayElem returns the element of the array at index, or false if index is out of range. An element of a
+// byte array is a uint8.
+func arrayElem(av *gno.ArrayValue, index uint64) (gno.TypedValue, bool) {
+	if av.Data != nil {
+		if index >= uint64(len(av.Data)) {
+			return gno.TypedValue{}, false
+		}
+		tv := gno.TypedValue{T: gno.Uint8Type}
+		tv.SetUint8(av.Data[index])
+		return tv, true
+	}
+
+	if index >= uint64(len(av.List)) {
+		return gno.TypedValue{}, false
+	}
+	return av.List[index], true
 }
 
 // convertArray sets res to the length elements of the array starting at offset.
