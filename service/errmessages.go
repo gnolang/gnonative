@@ -76,6 +76,10 @@ var errCodeMessages = map[api_gen.ErrCode]string{
 	api_gen.ErrCode_ErrInvalidPkgPath: "The package path is missing or not valid.",
 	api_gen.ErrCode_ErrInvalidStmt:    "The statement is not valid.",
 	api_gen.ErrCode_ErrInvalidExpr:    "The expression is not valid.",
+
+	// Queries.
+	api_gen.ErrCode_ErrObjectNotFound:     "No object with that ID was found.",
+	api_gen.ErrCode_ErrExportSizeExceeded: "The result is too large to return.",
 }
 
 // messageForError returns the text to send with a classified failure, or "" when

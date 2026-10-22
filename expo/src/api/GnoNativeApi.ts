@@ -10,6 +10,9 @@ import {
   KeyInfo,
   MakeTxResponse,
   Coin,
+  GnoValue,
+  QEvalJSONValuesResponse,
+  QObjectJSONValueResponse,
   QueryAccountResponse,
   QuerySessionAccountResponse,
   QueryResponse,
@@ -415,6 +418,42 @@ export class GnoNativeApi implements GnoKeyApi, GoBridgeInterface {
     const client = this.#getClient();
     const reponse = await client.qEval({ packagePath, expression });
     return reponse.result;
+  }
+
+  async qEvalJSON(packagePath: string, expression: string): Promise<any> {
+    const client = this.#getClient();
+    const reponse = await client.qEvalJSON({ packagePath, expression });
+    return JSON.parse(reponse.result);
+  }
+
+  async qEvalJSONValues(packagePath: string, expression: string): Promise<QEvalJSONValuesResponse> {
+    const client = this.#getClient();
+    const reponse = await client.qEvalJSONValues({ packagePath, expression });
+    return reponse;
+  }
+
+  async qObjectJSON(objectId: string) {
+    const client = this.#getClient();
+    const reponse = await client.qObjectJSON({ objectId });
+    return JSON.parse(reponse.result);
+  }
+
+  async qObjectJSONValue(value: GnoValue): Promise<QObjectJSONValueResponse> {
+    const client = this.#getClient();
+    const reponse = await client.qObjectJSONValue({ value });
+    return reponse;
+  }
+
+  async qTypeJSON(typeId: string) {
+    const client = this.#getClient();
+    const reponse = await client.qTypeJSON({ typeId });
+    return JSON.parse(reponse.result);
+  }
+
+  async qPkgJSON(pkgPath: string) {
+    const client = this.#getClient();
+    const reponse = await client.qPkgJSON({ pkgPath });
+    return JSON.parse(reponse.result);
   }
 
   async call(

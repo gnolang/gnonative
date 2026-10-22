@@ -258,6 +258,116 @@ type QEvalResponse struct {
 	Result string `json:"result" yaml:"result"`
 }
 
+type QEvalJSONRequest struct {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "IsBoardFrozen(1)"
+	Expression string `json:"expression" yaml:"expression"`
+}
+
+type QEvalJSONResponse struct {
+	// An Amino JSON string like "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}"
+	Result string `json:"result" yaml:"result"`
+}
+
+// A Gno value with its type and, for a struct, its field names.
+type GnoValue struct {
+	// If this value is a field of a struct, the field name (or "" if the struct type can't be resolved)
+	Name string `json:"name" yaml:"name"`
+	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
+	Type string `json:"type" yaml:"type"`
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+	// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+	// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+	// be fetched with QObjectJSONValue.
+	Kind string `json:"kind" yaml:"kind"`
+	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
+	// (A number is text so that a 64-bit integer keeps its precision.)
+	// For kind "func", the function name. For kind "type", the type.
+	Scalar string `json:"scalar" yaml:"scalar"`
+	// For kind "bytes", the bytes of a []byte or [N]byte.
+	// For kind "unknown" where the value can't be interpreted (for example, because its type can't be resolved),
+	// the raw 8 bytes of the primitive value from the Gno VM (if any).
+	Data []byte `json:"data" yaml:"data"`
+	// For kind "struct", the fields in declaration order, where each has its name
+	Fields []GnoValue `json:"fields" yaml:"fields"`
+	// For kind "list", the elements of the slice or array.
+	// For kind "map", the value of each entry in insertion order, where the key is the same index in keys.
+	// For kind "pointer", the one value which is pointed to (if object_id is not used).
+	Elems []GnoValue `json:"elems" yaml:"elems"`
+	// For kind "map", the key of each entry in insertion order, where the value is the same index in elems
+	Keys []GnoValue `json:"keys" yaml:"keys"`
+	// For kind "ref" or "pointer", the ID of the persisted object which is not expanded. Fetch it with
+	// QObjectJSONValue. Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	ObjectID string `json:"object_id" yaml:"object_id"`
+	// If object_id is used and the persisted object has a declared type, this is its type ID. (For kind "pointer",
+	// this is the type which is pointed to.) QObjectJSONValue uses it to get the struct field names.
+	// Example: "gno.land/p/gnoland/boards/v0.storage"
+	TypeID string `json:"type_id" yaml:"type_id"`
+	// For kind "ref" where the type is a slice, object_id is the persisted array and the slice is the
+	// length elements of the array starting at offset. (length is not 0.)
+	Offset uint64 `json:"offset" yaml:"offset"`
+	Length uint64 `json:"length" yaml:"length"`
+	// For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+	// element or variable which is pointed to
+	Index uint64 `json:"index" yaml:"index"`
+}
+
+type QEvalJSONValuesRequest struct {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	PackagePath string `json:"package_path" yaml:"package_path"`
+	// Example: "IsBoardFrozen(1)"
+	Expression string `json:"expression" yaml:"expression"`
+}
+
+type QEvalJSONValuesResponse struct {
+	// The return values of the expression, one for each
+	Results []GnoValue `json:"results" yaml:"results"`
+	// If the last return value is an error, this is its Error() string
+	Error string `json:"error" yaml:"error"`
+}
+
+type QObjectJSONRequest struct {
+	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	ObjectID string `json:"object_id" yaml:"object_id"`
+}
+
+type QObjectJSONResponse struct {
+	// An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
+	Result string `json:"result" yaml:"result"`
+}
+
+type QObjectJSONValueRequest struct {
+	// A GnoValue of kind "ref" or "pointer" from a previous result, which has the object_id to fetch
+	Value GnoValue `json:"value" yaml:"value"`
+}
+
+type QObjectJSONValueResponse struct {
+	// The persisted object which is referenced. If the request value is a slice, this is only the elements
+	// of the slice.
+	Value GnoValue `json:"value" yaml:"value"`
+}
+
+type QTypeJSONRequest struct {
+	// Example: "gno.land/r/sys/users.UserData"
+	TypeID string `json:"type_id" yaml:"type_id"`
+}
+
+type QTypeJSONResponse struct {
+	// An Amino JSON string like "{\"typeid\":\"...\",\"type\":{...}}"
+	Result string `json:"result" yaml:"result"`
+}
+
+type QPkgJSONRequest struct {
+	// Example: "gno.land/r/sys/users"
+	PkgPath string `json:"pkg_path" yaml:"pkg_path"`
+}
+
+type QPkgJSONResponse struct {
+	// An Amino JSON string like "{\"names\":[...],\"values\":[...]}"
+	Result string `json:"result" yaml:"result"`
+}
+
 type MsgCall struct {
 	// Example: "gno.land/r/demo/boards"
 	PackagePath string `json:"package_path" yaml:"package_path"`

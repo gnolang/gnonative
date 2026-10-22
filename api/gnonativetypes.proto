@@ -272,6 +272,116 @@ message QEvalResponse {
 	string result = 1;
 }
 
+message QEvalJSONRequest {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	string package_path = 1;
+	// Example: "IsBoardFrozen(1)"
+	string expression = 2;
+}
+
+message QEvalJSONResponse {
+	// An Amino JSON string like "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}"
+	string result = 1;
+}
+
+// A Gno value with its type and, for a struct, its field names.
+message GnoValue {
+	// If this value is a field of a struct, the field name (or "" if the struct type can't be resolved)
+	string name = 1;
+	// The Gno type. Example: "int64", "[]string", "address", "gno.land/r/demo/boards.BoardID"
+	string type = 2;
+	// One of "bool", "number", "string", "bytes", "struct", "list", "map", "pointer", "func", "type", "ref",
+	// "backref", "nil" or "unknown". The kind says which of the following fields is used. Kind "backref" is a
+	// value which is not repeated because it is in a cycle or is shared with another value in the result. It can't
+	// be fetched with QObjectJSONValue.
+	string kind = 3;
+	// For kind "bool", "number" or "string", the value as text. Example: "true", "42", "1.5" or the string itself.
+	// (A number is text so that a 64-bit integer keeps its precision.)
+	// For kind "func", the function name. For kind "type", the type.
+	string scalar = 4;
+	// For kind "bytes", the bytes of a []byte or [N]byte.
+	// For kind "unknown" where the value can't be interpreted (for example, because its type can't be resolved),
+	// the raw 8 bytes of the primitive value from the Gno VM (if any).
+	bytes data = 5;
+	// For kind "struct", the fields in declaration order, where each has its name
+	repeated GnoValue fields = 6;
+	// For kind "list", the elements of the slice or array.
+	// For kind "map", the value of each entry in insertion order, where the key is the same index in keys.
+	// For kind "pointer", the one value which is pointed to (if object_id is not used).
+	repeated GnoValue elems = 7;
+	// For kind "map", the key of each entry in insertion order, where the value is the same index in elems
+	repeated GnoValue keys = 8;
+	// For kind "ref" or "pointer", the ID of the persisted object which is not expanded. Fetch it with
+	// QObjectJSONValue. Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	string object_id = 9;
+	// If object_id is used and the persisted object has a declared type, this is its type ID. (For kind "pointer",
+	// this is the type which is pointed to.) QObjectJSONValue uses it to get the struct field names.
+	// Example: "gno.land/p/gnoland/boards/v0.storage"
+	string type_id = 10;
+	// For kind "ref" where the type is a slice, object_id is the persisted array and the slice is the
+	// length elements of the array starting at offset. (length is not 0.)
+	uint64 offset = 11;
+	uint64 length = 12;
+	// For kind "pointer" where object_id is a persisted struct, array or block, the index of the field,
+	// element or variable which is pointed to
+	uint64 index = 13;
+}
+
+message QEvalJSONValuesRequest {
+	// Example: "gno.land/r/gnoland/boards2/v0"
+	string package_path = 1;
+	// Example: "IsBoardFrozen(1)"
+	string expression = 2;
+}
+
+message QEvalJSONValuesResponse {
+	// The return values of the expression, one for each
+	repeated GnoValue results = 1;
+	// If the last return value is an error, this is its Error() string
+	string error = 2;
+}
+
+message QObjectJSONRequest {
+	// Example: "0ed754d80e40da2645666583e74d4ab093970a6a:534"
+	string object_id = 1;
+}
+
+message QObjectJSONResponse {
+	// An Amino JSON string like "{\"objectid\":\"...\",\"value\":{...}}"
+	string result = 1;
+}
+
+message QObjectJSONValueRequest {
+	// A GnoValue of kind "ref" or "pointer" from a previous result, which has the object_id to fetch
+	GnoValue value = 1;
+}
+
+message QObjectJSONValueResponse {
+	// The persisted object which is referenced. If the request value is a slice, this is only the elements
+	// of the slice.
+	GnoValue value = 1;
+}
+
+message QTypeJSONRequest {
+	// Example: "gno.land/r/sys/users.UserData"
+	string type_id = 1;
+}
+
+message QTypeJSONResponse {
+	// An Amino JSON string like "{\"typeid\":\"...\",\"type\":{...}}"
+	string result = 1;
+}
+
+message QPkgJSONRequest {
+	// Example: "gno.land/r/sys/users"
+	string pkg_path = 1;
+}
+
+message QPkgJSONResponse {
+	// An Amino JSON string like "{\"names\":[...],\"values\":[...]}"
+	string result = 1;
+}
+
 message MsgCall {
 	// Example: "gno.land/r/demo/boards"
 	string package_path = 1;

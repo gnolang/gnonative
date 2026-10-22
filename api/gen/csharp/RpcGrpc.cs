@@ -149,6 +149,30 @@ namespace Land.Gno.Gnonative.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QEvalResponse> __Marshaller_land_gno_gnonative_v1_QEvalResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QEvalResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QEvalJSONRequest> __Marshaller_land_gno_gnonative_v1_QEvalJSONRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QEvalJSONRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QEvalJSONResponse> __Marshaller_land_gno_gnonative_v1_QEvalJSONResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QEvalJSONResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest> __Marshaller_land_gno_gnonative_v1_QEvalJSONValuesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse> __Marshaller_land_gno_gnonative_v1_QEvalJSONValuesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QObjectJSONRequest> __Marshaller_land_gno_gnonative_v1_QObjectJSONRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QObjectJSONRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QObjectJSONResponse> __Marshaller_land_gno_gnonative_v1_QObjectJSONResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QObjectJSONResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest> __Marshaller_land_gno_gnonative_v1_QObjectJSONValueRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse> __Marshaller_land_gno_gnonative_v1_QObjectJSONValueResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QTypeJSONRequest> __Marshaller_land_gno_gnonative_v1_QTypeJSONRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QTypeJSONRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QTypeJSONResponse> __Marshaller_land_gno_gnonative_v1_QTypeJSONResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QTypeJSONResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QPkgJSONRequest> __Marshaller_land_gno_gnonative_v1_QPkgJSONRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QPkgJSONRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.QPkgJSONResponse> __Marshaller_land_gno_gnonative_v1_QPkgJSONResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.QPkgJSONResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CallRequest> __Marshaller_land_gno_gnonative_v1_CallRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CallRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Land.Gno.Gnonative.V1.CallResponse> __Marshaller_land_gno_gnonative_v1_CallResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Land.Gno.Gnonative.V1.CallResponse.Parser));
@@ -432,6 +456,54 @@ namespace Land.Gno.Gnonative.V1 {
         "QEval",
         __Marshaller_land_gno_gnonative_v1_QEvalRequest,
         __Marshaller_land_gno_gnonative_v1_QEvalResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QEvalJSONRequest, global::Land.Gno.Gnonative.V1.QEvalJSONResponse> __Method_QEvalJSON = new grpc::Method<global::Land.Gno.Gnonative.V1.QEvalJSONRequest, global::Land.Gno.Gnonative.V1.QEvalJSONResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QEvalJSON",
+        __Marshaller_land_gno_gnonative_v1_QEvalJSONRequest,
+        __Marshaller_land_gno_gnonative_v1_QEvalJSONResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest, global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse> __Method_QEvalJSONValues = new grpc::Method<global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest, global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QEvalJSONValues",
+        __Marshaller_land_gno_gnonative_v1_QEvalJSONValuesRequest,
+        __Marshaller_land_gno_gnonative_v1_QEvalJSONValuesResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QObjectJSONRequest, global::Land.Gno.Gnonative.V1.QObjectJSONResponse> __Method_QObjectJSON = new grpc::Method<global::Land.Gno.Gnonative.V1.QObjectJSONRequest, global::Land.Gno.Gnonative.V1.QObjectJSONResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QObjectJSON",
+        __Marshaller_land_gno_gnonative_v1_QObjectJSONRequest,
+        __Marshaller_land_gno_gnonative_v1_QObjectJSONResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest, global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse> __Method_QObjectJSONValue = new grpc::Method<global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest, global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QObjectJSONValue",
+        __Marshaller_land_gno_gnonative_v1_QObjectJSONValueRequest,
+        __Marshaller_land_gno_gnonative_v1_QObjectJSONValueResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QTypeJSONRequest, global::Land.Gno.Gnonative.V1.QTypeJSONResponse> __Method_QTypeJSON = new grpc::Method<global::Land.Gno.Gnonative.V1.QTypeJSONRequest, global::Land.Gno.Gnonative.V1.QTypeJSONResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QTypeJSON",
+        __Marshaller_land_gno_gnonative_v1_QTypeJSONRequest,
+        __Marshaller_land_gno_gnonative_v1_QTypeJSONResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Land.Gno.Gnonative.V1.QPkgJSONRequest, global::Land.Gno.Gnonative.V1.QPkgJSONResponse> __Method_QPkgJSON = new grpc::Method<global::Land.Gno.Gnonative.V1.QPkgJSONRequest, global::Land.Gno.Gnonative.V1.QPkgJSONResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QPkgJSON",
+        __Marshaller_land_gno_gnonative_v1_QPkgJSONRequest,
+        __Marshaller_land_gno_gnonative_v1_QPkgJSONResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.CallResponse> __Method_Call = new grpc::Method<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.CallResponse>(
@@ -990,6 +1062,108 @@ namespace Land.Gno.Gnonative.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QEvalResponse> QEval(global::Land.Gno.Gnonative.V1.QEvalRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QEvalJSON evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return value is an Amino JSON string like
+      /// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QEvalJSONResponse> QEvalJSON(global::Land.Gno.Gnonative.V1.QEvalJSONRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return values are decoded from the Amino JSON into a GnoValue for each,
+      /// where a struct has its field names.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse> QEvalJSONValues(global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QObjectJSON retrieves the persisted object with the given object_id, like
+      /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+      /// The return value is an Amino JSON string like
+      /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QObjectJSONResponse> QObjectJSON(global::Land.Gno.Gnonative.V1.QObjectJSONRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+      /// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+      /// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+      /// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+      /// If the result would be a ref to another persisted object (like a pointer to a struct which is
+      /// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+      /// inside the result can still be a ref.
+      /// If the GnoValue is not a type which can be used to fetch an object, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse> QObjectJSONValue(global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QTypeJSON retrieves the type definition with the given type_id, like
+      /// "gno.land/r/sys/users.UserData".
+      /// The return value is an Amino JSON string like
+      /// "{\"typeid\":\"...\",\"type\":{...}}".
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QTypeJSONResponse> QTypeJSON(global::Land.Gno.Gnonative.V1.QTypeJSONRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+      /// "gno.land/r/sys/users".
+      /// The return value is an Amino JSON string like
+      /// "{\"names\":[...],\"values\":[...]}".
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Land.Gno.Gnonative.V1.QPkgJSONResponse> QPkgJSON(global::Land.Gno.Gnonative.V1.QPkgJSONRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2768,6 +2942,414 @@ namespace Land.Gno.Gnonative.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_QEval, null, options, request);
       }
       /// <summary>
+      /// QEvalJSON evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return value is an Amino JSON string like
+      /// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QEvalJSONResponse QEvalJSON(global::Land.Gno.Gnonative.V1.QEvalJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QEvalJSON(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QEvalJSON evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return value is an Amino JSON string like
+      /// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QEvalJSONResponse QEvalJSON(global::Land.Gno.Gnonative.V1.QEvalJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QEvalJSON, null, options, request);
+      }
+      /// <summary>
+      /// QEvalJSON evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return value is an Amino JSON string like
+      /// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QEvalJSONResponse> QEvalJSONAsync(global::Land.Gno.Gnonative.V1.QEvalJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QEvalJSONAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QEvalJSON evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return value is an Amino JSON string like
+      /// "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QEvalJSONResponse> QEvalJSONAsync(global::Land.Gno.Gnonative.V1.QEvalJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QEvalJSON, null, options, request);
+      }
+      /// <summary>
+      /// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return values are decoded from the Amino JSON into a GnoValue for each,
+      /// where a struct has its field names.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse QEvalJSONValues(global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QEvalJSONValues(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return values are decoded from the Amino JSON into a GnoValue for each,
+      /// where a struct has its field names.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse QEvalJSONValues(global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QEvalJSONValues, null, options, request);
+      }
+      /// <summary>
+      /// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return values are decoded from the Amino JSON into a GnoValue for each,
+      /// where a struct has its field names.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse> QEvalJSONValuesAsync(global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QEvalJSONValuesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QEvalJSONValues evaluates the given expression with the realm code at package_path.
+      /// The package path should include the prefix like "gno.land/". The expression
+      /// is usually a function call like "IsBoardFrozen(1)". The
+      /// return values are decoded from the Amino JSON into a GnoValue for each,
+      /// where a struct has its field names.
+      /// If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse> QEvalJSONValuesAsync(global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QEvalJSONValues, null, options, request);
+      }
+      /// <summary>
+      /// QObjectJSON retrieves the persisted object with the given object_id, like
+      /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+      /// The return value is an Amino JSON string like
+      /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QObjectJSONResponse QObjectJSON(global::Land.Gno.Gnonative.V1.QObjectJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QObjectJSON(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QObjectJSON retrieves the persisted object with the given object_id, like
+      /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+      /// The return value is an Amino JSON string like
+      /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QObjectJSONResponse QObjectJSON(global::Land.Gno.Gnonative.V1.QObjectJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QObjectJSON, null, options, request);
+      }
+      /// <summary>
+      /// QObjectJSON retrieves the persisted object with the given object_id, like
+      /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+      /// The return value is an Amino JSON string like
+      /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QObjectJSONResponse> QObjectJSONAsync(global::Land.Gno.Gnonative.V1.QObjectJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QObjectJSONAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QObjectJSON retrieves the persisted object with the given object_id, like
+      /// "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+      /// The return value is an Amino JSON string like
+      /// "{\"objectid\":\"...\",\"value\":{...}}".
+      /// If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QObjectJSONResponse> QObjectJSONAsync(global::Land.Gno.Gnonative.V1.QObjectJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QObjectJSON, null, options, request);
+      }
+      /// <summary>
+      /// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+      /// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+      /// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+      /// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+      /// If the result would be a ref to another persisted object (like a pointer to a struct which is
+      /// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+      /// inside the result can still be a ref.
+      /// If the GnoValue is not a type which can be used to fetch an object, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse QObjectJSONValue(global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QObjectJSONValue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+      /// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+      /// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+      /// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+      /// If the result would be a ref to another persisted object (like a pointer to a struct which is
+      /// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+      /// inside the result can still be a ref.
+      /// If the GnoValue is not a type which can be used to fetch an object, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse QObjectJSONValue(global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QObjectJSONValue, null, options, request);
+      }
+      /// <summary>
+      /// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+      /// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+      /// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+      /// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+      /// If the result would be a ref to another persisted object (like a pointer to a struct which is
+      /// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+      /// inside the result can still be a ref.
+      /// If the GnoValue is not a type which can be used to fetch an object, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse> QObjectJSONValueAsync(global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QObjectJSONValueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+      /// "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+      /// from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+      /// is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+      /// If the result would be a ref to another persisted object (like a pointer to a struct which is
+      /// persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+      /// inside the result can still be a ref.
+      /// If the GnoValue is not a type which can be used to fetch an object, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+      /// If the object (or the object of a followed ref) doesn't exist, return
+      /// [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse> QObjectJSONValueAsync(global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QObjectJSONValue, null, options, request);
+      }
+      /// <summary>
+      /// QTypeJSON retrieves the type definition with the given type_id, like
+      /// "gno.land/r/sys/users.UserData".
+      /// The return value is an Amino JSON string like
+      /// "{\"typeid\":\"...\",\"type\":{...}}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QTypeJSONResponse QTypeJSON(global::Land.Gno.Gnonative.V1.QTypeJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QTypeJSON(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QTypeJSON retrieves the type definition with the given type_id, like
+      /// "gno.land/r/sys/users.UserData".
+      /// The return value is an Amino JSON string like
+      /// "{\"typeid\":\"...\",\"type\":{...}}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QTypeJSONResponse QTypeJSON(global::Land.Gno.Gnonative.V1.QTypeJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QTypeJSON, null, options, request);
+      }
+      /// <summary>
+      /// QTypeJSON retrieves the type definition with the given type_id, like
+      /// "gno.land/r/sys/users.UserData".
+      /// The return value is an Amino JSON string like
+      /// "{\"typeid\":\"...\",\"type\":{...}}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QTypeJSONResponse> QTypeJSONAsync(global::Land.Gno.Gnonative.V1.QTypeJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QTypeJSONAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QTypeJSON retrieves the type definition with the given type_id, like
+      /// "gno.land/r/sys/users.UserData".
+      /// The return value is an Amino JSON string like
+      /// "{\"typeid\":\"...\",\"type\":{...}}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QTypeJSONResponse> QTypeJSONAsync(global::Land.Gno.Gnonative.V1.QTypeJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QTypeJSON, null, options, request);
+      }
+      /// <summary>
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+      /// "gno.land/r/sys/users".
+      /// The return value is an Amino JSON string like
+      /// "{\"names\":[...],\"values\":[...]}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QPkgJSONResponse QPkgJSON(global::Land.Gno.Gnonative.V1.QPkgJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QPkgJSON(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+      /// "gno.land/r/sys/users".
+      /// The return value is an Amino JSON string like
+      /// "{\"names\":[...],\"values\":[...]}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Land.Gno.Gnonative.V1.QPkgJSONResponse QPkgJSON(global::Land.Gno.Gnonative.V1.QPkgJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QPkgJSON, null, options, request);
+      }
+      /// <summary>
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+      /// "gno.land/r/sys/users".
+      /// The return value is an Amino JSON string like
+      /// "{\"names\":[...],\"values\":[...]}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QPkgJSONResponse> QPkgJSONAsync(global::Land.Gno.Gnonative.V1.QPkgJSONRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QPkgJSONAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+      /// "gno.land/r/sys/users".
+      /// The return value is an Amino JSON string like
+      /// "{\"names\":[...],\"values\":[...]}".
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Land.Gno.Gnonative.V1.QPkgJSONResponse> QPkgJSONAsync(global::Land.Gno.Gnonative.V1.QPkgJSONRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QPkgJSON, null, options, request);
+      }
+      /// <summary>
       /// Call one or more specific realm functions. Sign the transaction with the given signer_address.
       /// If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
       /// If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -3914,6 +4496,12 @@ namespace Land.Gno.Gnonative.V1 {
           .AddMethod(__Method_Query, serviceImpl.Query)
           .AddMethod(__Method_Render, serviceImpl.Render)
           .AddMethod(__Method_QEval, serviceImpl.QEval)
+          .AddMethod(__Method_QEvalJSON, serviceImpl.QEvalJSON)
+          .AddMethod(__Method_QEvalJSONValues, serviceImpl.QEvalJSONValues)
+          .AddMethod(__Method_QObjectJSON, serviceImpl.QObjectJSON)
+          .AddMethod(__Method_QObjectJSONValue, serviceImpl.QObjectJSONValue)
+          .AddMethod(__Method_QTypeJSON, serviceImpl.QTypeJSON)
+          .AddMethod(__Method_QPkgJSON, serviceImpl.QPkgJSON)
           .AddMethod(__Method_Call, serviceImpl.Call)
           .AddMethod(__Method_Send, serviceImpl.Send)
           .AddMethod(__Method_Run, serviceImpl.Run)
@@ -3973,6 +4561,12 @@ namespace Land.Gno.Gnonative.V1 {
       serviceBinder.AddMethod(__Method_Query, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QueryRequest, global::Land.Gno.Gnonative.V1.QueryResponse>(serviceImpl.Query));
       serviceBinder.AddMethod(__Method_Render, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.RenderRequest, global::Land.Gno.Gnonative.V1.RenderResponse>(serviceImpl.Render));
       serviceBinder.AddMethod(__Method_QEval, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QEvalRequest, global::Land.Gno.Gnonative.V1.QEvalResponse>(serviceImpl.QEval));
+      serviceBinder.AddMethod(__Method_QEvalJSON, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QEvalJSONRequest, global::Land.Gno.Gnonative.V1.QEvalJSONResponse>(serviceImpl.QEvalJSON));
+      serviceBinder.AddMethod(__Method_QEvalJSONValues, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QEvalJSONValuesRequest, global::Land.Gno.Gnonative.V1.QEvalJSONValuesResponse>(serviceImpl.QEvalJSONValues));
+      serviceBinder.AddMethod(__Method_QObjectJSON, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QObjectJSONRequest, global::Land.Gno.Gnonative.V1.QObjectJSONResponse>(serviceImpl.QObjectJSON));
+      serviceBinder.AddMethod(__Method_QObjectJSONValue, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QObjectJSONValueRequest, global::Land.Gno.Gnonative.V1.QObjectJSONValueResponse>(serviceImpl.QObjectJSONValue));
+      serviceBinder.AddMethod(__Method_QTypeJSON, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QTypeJSONRequest, global::Land.Gno.Gnonative.V1.QTypeJSONResponse>(serviceImpl.QTypeJSON));
+      serviceBinder.AddMethod(__Method_QPkgJSON, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Land.Gno.Gnonative.V1.QPkgJSONRequest, global::Land.Gno.Gnonative.V1.QPkgJSONResponse>(serviceImpl.QPkgJSON));
       serviceBinder.AddMethod(__Method_Call, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.CallRequest, global::Land.Gno.Gnonative.V1.CallResponse>(serviceImpl.Call));
       serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.SendRequest, global::Land.Gno.Gnonative.V1.SendResponse>(serviceImpl.Send));
       serviceBinder.AddMethod(__Method_Run, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Land.Gno.Gnonative.V1.RunRequest, global::Land.Gno.Gnonative.V1.RunResponse>(serviceImpl.Run));

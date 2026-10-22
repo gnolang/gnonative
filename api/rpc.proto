@@ -135,6 +135,54 @@ service GnoNativeService {
   // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
   rpc QEval(QEvalRequest) returns (QEvalResponse);
 
+  // QEvalJSON evaluates the given expression with the realm code at package_path.
+  // The package path should include the prefix like "gno.land/". The expression
+  // is usually a function call like "IsBoardFrozen(1)". The
+  // return value is an Amino JSON string like
+  // "{"results":[{"T":{"@type":"/gno.PrimitiveType","value":"32"},"N":"AgAAAAAAAAA="}]}".
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+  rpc QEvalJSON(QEvalJSONRequest) returns (QEvalJSONResponse);
+
+  // QEvalJSONValues evaluates the given expression with the realm code at package_path.
+  // The package path should include the prefix like "gno.land/". The expression
+  // is usually a function call like "IsBoardFrozen(1)". The
+  // return values are decoded from the Amino JSON into a GnoValue for each,
+  // where a struct has its field names.
+  // If the request package_path is unrecognized, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidPkgPath.
+  rpc QEvalJSONValues(QEvalJSONValuesRequest) returns (QEvalJSONValuesResponse);
+
+  // QObjectJSON retrieves the persisted object with the given object_id, like
+  // "0ed754d80e40da2645666583e74d4ab093970a6a:534".
+  // The return value is an Amino JSON string like
+  // "{\"objectid\":\"...\",\"value\":{...}}".
+  // If the object doesn't exist, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+  rpc QObjectJSON(QObjectJSONRequest) returns (QObjectJSONResponse);
+
+  // QObjectJSONValue retrieves the persisted object referenced by a GnoValue of kind "ref" or
+  // "pointer" from a previous result (from QEvalJSONValues or QObjectJSONValue), and decodes it
+  // from the Amino JSON into a GnoValue. If the GnoValue is a slice, the result
+  // is only the elements of the slice. If it is a pointer, the result is the value which is pointed to.
+  // If the result would be a ref to another persisted object (like a pointer to a struct which is
+  // persisted separately), also retrieve that object. Only one ref is followed like this, so a value
+  // inside the result can still be a ref.
+  // If the GnoValue is not a type which can be used to fetch an object, return
+  // [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrInvalidInput.
+  // If the object (or the object of a followed ref) doesn't exist, return
+  // [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrObjectNotFound.
+  rpc QObjectJSONValue(QObjectJSONValueRequest) returns (QObjectJSONValueResponse);
+
+  // QTypeJSON retrieves the type definition with the given type_id, like
+  // "gno.land/r/sys/users.UserData".
+  // The return value is an Amino JSON string like
+  // "{\"typeid\":\"...\",\"type\":{...}}".
+  rpc QTypeJSON(QTypeJSONRequest) returns (QTypeJSONResponse);
+
+  // QPkgJSON retrieves the package-level variables of the package at pkg_path, like
+  // "gno.land/r/sys/users".
+  // The return value is an Amino JSON string like
+  // "{\"names\":[...],\"values\":[...]}".
+  rpc QPkgJSON(QPkgJSONRequest) returns (QPkgJSONResponse);
+
   // Call one or more specific realm functions. Sign the transaction with the given signer_address.
   // If there is no activated account with the given signer_address, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrNoActiveAccount.
   // If the password is wrong, return [ErrCode](#land.gno.gnonative.v1.ErrCode).ErrDecryptionFailed.
@@ -285,6 +333,16 @@ enum ErrCode {
   ErrRunGRPCServer = 153;
   // ErrDecryptionFailed indicates a decryption failure including a wrong password
   ErrDecryptionFailed = 154;
+  // ErrChainRejected indicates that the chain refused the request for a reason
+  // it did not classify: free text rather than one of the typed errors above,
+  // typically a realm panic the VM recovered and the ABCI layer degraded to a
+  // string. It does not claim the VM raised it — the same catch-all covers any
+  // unclassified failure of a message or a query.
+  //
+  // Its ErrDetails carry that reason as the message: the wording differs per
+  // failure and belongs to the realm, not to this library — which also makes it
+  // untrusted, see ErrDetails.message.
+  ErrChainRejected = 155;
 
   // The following match errors in https://github.com/gnolang/gno/blob/master/tm2/pkg/std/errors.go .
 
@@ -327,17 +385,8 @@ enum ErrCode {
   ErrInvalidPkgPath = 217;
   ErrInvalidStmt = 218;
   ErrInvalidExpr = 219;
-
-  // ErrChainRejected indicates that the chain refused the request for a reason
-  // it did not classify: free text rather than one of the typed errors above,
-  // typically a realm panic the VM recovered and the ABCI layer degraded to a
-  // string. It does not claim the VM raised it — the same catch-all covers any
-  // unclassified failure of a message or a query.
-  //
-  // Its ErrDetails carry that reason as the message: the wording differs per
-  // failure and belongs to the realm, not to this library — which also makes it
-  // untrusted, see ErrDetails.message.
-  ErrChainRejected = 220;
+  ErrObjectNotFound = 220;
+  ErrExportSizeExceeded = 221;
 }
 
 // ErrDetails is attached to a failing call so that a client can tell what went

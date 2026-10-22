@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"testing"
 
+	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	abci "github.com/gnolang/gno/tm2/pkg/bft/abci/types"
 	tm2errors "github.com/gnolang/gno/tm2/pkg/errors"
 	"github.com/gnolang/gno/tm2/pkg/std"
@@ -119,6 +120,27 @@ func TestGetGrpcErrorClassifiesChainRefusals(t *testing.T) {
 func TestGetGrpcErrorPrefersTypedCodes(t *testing.T) {
 	if code := api_gen.FirstCode(getGrpcError(std.ErrOutOfGas("out of gas"))); code != api_gen.ErrCode_ErrOutOfGas {
 		t.Errorf("code = %v, want ErrOutOfGas", code)
+	}
+}
+
+// A query for an object which doesn't exist, or whose result is too large, has its own code. Built the way
+// gnoclient returns the error: the typed ABCI error, wrapped with the response Log.
+func TestGetGrpcErrorClassifiesQueryErrors(t *testing.T) {
+	notFound := tm2errors.Wrapf(vm.ObjectNotFoundError{},
+		"deliver transaction failed: log:%s", "object not found: 0ed754d80e40da2645666583e74d4ab093970a6a:999")
+	if code := api_gen.FirstCode(getGrpcError(notFound)); code != api_gen.ErrCode_ErrObjectNotFound {
+		t.Errorf("code = %v, want ErrObjectNotFound", code)
+	}
+	// QObjectJSONValue wraps the error of the query which follows a ref.
+	followed := fmt.Errorf("can't follow the ref to object 0ed754d80e40da2645666583e74d4ab093970a6a:999: %w", notFound)
+	if code := api_gen.FirstCode(getGrpcError(followed)); code != api_gen.ErrCode_ErrObjectNotFound {
+		t.Errorf("code = %v, want ErrObjectNotFound for the followed ref", code)
+	}
+
+	tooLarge := tm2errors.Wrapf(vm.ExportSizeExceededError{},
+		"deliver transaction failed: log:%s", "estimated response size exceeds 10000000 bytes")
+	if code := api_gen.FirstCode(getGrpcError(tooLarge)); code != api_gen.ErrCode_ErrExportSizeExceeded {
+		t.Errorf("code = %v, want ErrExportSizeExceeded", code)
 	}
 }
 
