@@ -51,6 +51,16 @@ jobs:
         run: |
           asdf set -u nodejs ${{ env.node_version }}
 
+      # gomobile uses ANDROID_NDK_HOME first, which the runner points at its default NDK.
+      # Pin the NDK React Native uses (see "Set up the Android NDK" in the README),
+      # so developers need a single NDK for gnonative and their app.
+      - name: Setup Android NDK
+        env:
+          NDK_VERSION: 27.1.12297006
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;$NDK_VERSION" > /dev/null
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+
       - name: Cache go modules
         uses: actions/cache@v4
         with:

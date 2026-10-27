@@ -72,7 +72,7 @@ sudo apt install curl git make
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
 echo 'export ANDROID_HOME="$HOME/Android/Sdk"' >> ~/.bashrc
-echo 'export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/23.1.7779620"' >> ~/.bashrc
+echo 'export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/27.1.12297006"' >> ~/.bashrc
 ```
 
 Start a new terminal to get the changes to the environment .
@@ -113,5 +113,24 @@ make asdf.install_tools
     default project (so that we get the main screen).
 -   On the Tools menu, open the SDK Manager.
 -   In the "SDK Tools" tab, click "Show Package Details". Expand
-    "NDK (Side by side)" and check "23.1.7779620".
+    "NDK (Side by side)" and check "27.1.12297006".
 -   Click OK to install and close the SDK Manager.
+
+gnonative uses the same NDK as React Native, so an Expo or React Native app and
+gnonative build with one NDK. To check which NDK React Native uses:
+
+-   In an app, read `ndkVersion` in React Native's version catalog:
+
+    ```sh
+    grep ndkVersion node_modules/react-native/gradle/libs.versions.toml
+    ```
+
+-   For an Expo SDK, find its React Native version in the table at
+    https://docs.expo.dev/versions/latest/ , then read `ndkVersion` in
+    `packages/react-native/gradle/libs.versions.toml` at that release's tag
+    (e.g. `v0.88.0`) in https://github.com/facebook/react-native .
+
+When React Native moves to another NDK, update the version here, in
+`ANDROID_NDK_HOME` above and in `.github/workflows/release.yml`. The 16 KB page
+alignment Android 15+ requires doesn't depend on the NDK version: the Makefile
+passes `-Wl,-z,max-page-size=16384` to the linker.

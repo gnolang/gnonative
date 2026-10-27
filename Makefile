@@ -139,7 +139,10 @@ $(gnocore_aar): $(bind_init_files) $(go_deps)
 	# PTHREAD_MUTEX_ROBUST, pthread_mutex_consistent) at any API level, but LMDB's
 	# mdb.c only skips them when the bare ANDROID macro is defined (the NDK defines
 	# __ANDROID__). Disable robust mutexes explicitly so the cgo build links.
+	# Align ELF LOAD segments on 16 KB whatever the NDK (only r28+ does it by default):
+	# Android 15+ devices with 16 KB pages require it.
 	CGO_CFLAGS="$$CGO_CFLAGS -DMDB_USE_ROBUST=0" \
+	CGO_LDFLAGS="$$CGO_LDFLAGS -Wl,-z,max-page-size=16384" \
 	$(gomobile) bind -v \
 		-cache $(cache_dir)/android-gnonative \
 		-javapkg=gnolang.gno \
