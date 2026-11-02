@@ -52,6 +52,9 @@ type gnoNativeService struct {
 	// The remote node address used to create client.RPCClient. We need to save this
 	// here because the remote is a private member of the HTTP struct.
 	remote string
+	// The types of the remote node for the GnoValue results of QEvalJSONValues and QObjectJSONValue.
+	// SetRemote replaces it.
+	typeCache *typeCache
 	// TODO: Allow each userAccount to have its own chain ID
 	chainID string
 
@@ -126,6 +129,7 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 		return nil, err
 	}
 	svc.remote = cfg.Remote
+	svc.typeCache = newTypeCache()
 	svc.chainID = cfg.ChainID
 
 	return svc, nil
@@ -133,10 +137,21 @@ func initService(cfg *Config) (*gnoNativeService, error) {
 
 // Get a gnoclient.Client with the RPCClient and the given signer.
 func (s *gnoNativeService) getClient(signer gnoclient.Signer) (*gnoclient.Client, error) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
 	return &gnoclient.Client{
 		Signer:    signer,
 		RPCClient: s.rpcClient,
 	}, nil
+}
+
+// Get a gnoclient.Client with the RPCClient and no signer, and the type cache of its remote. They are read
+// together, so that a request which is running when SetRemote changes the remote doesn't put the types of
+// the old remote in the cache of the new one.
+func (s *gnoNativeService) getQueryClient() (*gnoclient.Client, *typeCache) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
+	return &gnoclient.Client{RPCClient: s.rpcClient}, s.typeCache
 }
 
 // Look up addr in s.userAccounts and return the signer.

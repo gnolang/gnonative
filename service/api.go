@@ -38,16 +38,23 @@ import (
 )
 
 func (s *gnoNativeService) SetRemote(ctx context.Context, req *connect.Request[api_gen.SetRemoteRequest]) (*connect.Response[api_gen.SetRemoteResponse], error) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+
 	var err error
 	s.rpcClient, err = rpcclient.NewHTTPClient(req.Msg.Remote)
 	if err != nil {
 		return nil, api_gen.ErrCode_ErrSetRemote.Wrap(err)
 	}
 	s.remote = req.Msg.Remote
+	// The types of the new remote may not be the same.
+	s.typeCache = newTypeCache()
 	return connect.NewResponse(&api_gen.SetRemoteResponse{}), nil
 }
 
 func (s *gnoNativeService) GetRemote(ctx context.Context, req *connect.Request[api_gen.GetRemoteRequest]) (*connect.Response[api_gen.GetRemoteResponse], error) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
 	return connect.NewResponse(&api_gen.GetRemoteResponse{Remote: s.remote}), nil
 }
 
@@ -561,10 +568,7 @@ func (s *gnoNativeService) QEvalJSON(ctx context.Context, req *connect.Request[a
 func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Request[api_gen.QEvalJSONValuesRequest]) (*connect.Response[api_gen.QEvalJSONValuesResponse], error) {
 	s.logger.Debug("QEvalJSONValues", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
-	c, err := s.getClient(nil)
-	if err != nil {
-		return nil, getGrpcError(err)
-	}
+	c, cache := s.getQueryClient()
 	// TODO: Use gnoclient QEvalJSON
 	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qeval_json", Data: fmt.Appendf(nil, "%s.%s", req.Msg.PackagePath, req.Msg.Expression)})
 	if err != nil {
@@ -572,7 +576,7 @@ func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Req
 	}
 
 	// A value only has the ID of its declared type, so query for the type to get the struct field names.
-	res, err := newGnoValueConverter(c.Query, s.logger).convertQEvalJSON(qres.Response.Data)
+	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQEvalJSON(qres.Response.Data)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -604,17 +608,14 @@ func (s *gnoNativeService) QObjectJSONValue(ctx context.Context, req *connect.Re
 	}
 	s.logger.Debug("QObjectJSONValue", zap.String("objectId", value.ObjectId), zap.String("typeId", value.TypeId))
 
-	c, err := s.getClient(nil)
-	if err != nil {
-		return nil, getGrpcError(err)
-	}
+	c, cache := s.getQueryClient()
 	// TODO: Use gnoclient QObjectJSON
 	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(value.ObjectId)})
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	res, err := newGnoValueConverter(c.Query, s.logger).convertQObjectJSON(qres.Response.Data, value)
+	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQObjectJSON(qres.Response.Data, value)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -1262,9 +1263,9 @@ func (s *gnoNativeService) ClientSignTx(tx std.Tx, addr []byte, accountNumber, s
 	if err != nil {
 		return nil, err
 	}
-	c := &gnoclient.Client{
-		Signer:    signer,
-		RPCClient: s.rpcClient,
+	c, err := s.getClient(signer)
+	if err != nil {
+		return nil, err
 	}
 	return c.SignTx(tx, accountNumber, sequenceNumber)
 }
