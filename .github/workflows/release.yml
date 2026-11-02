@@ -11,7 +11,11 @@ on:
         required: false
         default: false
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
   semantic-release:
+    needs: test
     runs-on: macos-latest
     timeout-minutes: 20
     permissions:
