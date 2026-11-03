@@ -2,6 +2,9 @@ package service
 
 import (
 	"errors"
+	"strconv"
+	"strings"
+	"sync"
 	"testing"
 
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
@@ -36,8 +39,33 @@ var testQObjectJSON = map[string]string{
 	"0dc5eff18974d66f6720bc387fc7e5c63514d961:23": `{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:24","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`,
 }
 
-// testQuery returns a fake of the client's Query for the "vm/qtype_json" and "vm/qobject_json" queries, using
-// testQTypeJSON and testQObjectJSON. Add the data of each query (the type ID or object ID) to queried (if not nil).
+// The responses of the "vm/qfile" query of a package's gnomod.toml, with the [addpkg] section which the keeper adds.
+var testQFile = map[string]string{
+	"gno.land/r/demo/boards/gnomod.toml": `module = "gno.land/r/demo/boards"
+gno = "0.9"
+
+[addpkg]
+  creator = "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"
+  height = 120
+`,
+	"gno.land/r/sys/users/gnomod.toml": `module = "gno.land/r/sys/users"
+gno = "0.9"
+private = true
+
+[addpkg]
+  creator = "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"
+  height = 5
+`,
+}
+
+// testQueryResult returns the result of the client's Query with the response data.
+func testQueryResult(data string) *ctypes.ResultABCIQuery {
+	return &ctypes.ResultABCIQuery{Response: abci.ResponseQuery{ResponseBase: abci.ResponseBase{Data: []byte(data)}}}
+}
+
+// testQuery returns a fake of the client's Query for the "vm/qtype_json", "vm/qobject_json" and "vm/qfile" queries,
+// using testQTypeJSON, testQObjectJSON and testQFile. Add the data of each query (the type ID, object ID or file
+// path) to queried (if not nil).
 func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 	return func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		if queried != nil {
@@ -49,6 +77,8 @@ func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*c
 			responses = testQTypeJSON
 		case "vm/qobject_json":
 			responses = testQObjectJSON
+		case "vm/qfile":
+			responses = testQFile
 		default:
 			t.Errorf("unexpected query path %q", cfg.Path)
 		}
@@ -56,14 +86,14 @@ func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*c
 		if !ok {
 			return nil, errors.New("not found: " + string(cfg.Data))
 		}
-		return &ctypes.ResultABCIQuery{Response: abci.ResponseQuery{ResponseBase: abci.ResponseBase{Data: []byte(res)}}}, nil
+		return testQueryResult(res), nil
 	}
 }
 
 // testConvertQEvalJSON converts data, using testQTypeJSON for the type queries. Add each queried type ID to queried.
 func testConvertQEvalJSON(t *testing.T, data string, queried *[]string) *api_gen.QEvalJSONValuesResponse {
 	t.Helper()
-	converter := newGnoValueConverter(testQuery(t, queried), zap.NewNop())
+	converter := newGnoValueConverter(testQuery(t, queried), nil, zap.NewNop())
 	res, err := converter.convertQEvalJSON([]byte(data))
 	require.NoError(t, err)
 	return res
@@ -215,7 +245,7 @@ func TestResolveTypeLogsQueryError(t *testing.T) {
 	// The type is not in testQTypeJSON, so the query returns an error, which is logged.
 	core, logs := observer.New(zap.DebugLevel)
 	var queried []string
-	converter := newGnoValueConverter(testQuery(t, &queried), zap.New(core))
+	converter := newGnoValueConverter(testQuery(t, &queried), nil, zap.New(core))
 	assert.Nil(t, converter.resolveType("gno.land/r/foo.Unknown"))
 
 	require.Equal(t, 1, logs.Len())
@@ -233,7 +263,7 @@ func TestResolveTypeLogsQueryError(t *testing.T) {
 func TestConvertQEvalJSONMalformed(t *testing.T) {
 	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
-	}, zap.NewNop())
+	}, nil, zap.NewNop())
 
 	_, err := converter.convertQEvalJSON([]byte(`not JSON`))
 	assert.Error(t, err)
@@ -357,7 +387,7 @@ func TestConvertQEvalJSONPointerIndex(t *testing.T) {
 // testConvertQObjectJSON converts the object in data for the ref, using testQTypeJSON for the type queries.
 func testConvertQObjectJSON(t *testing.T, value string, ref *api_gen.GnoValue) (*api_gen.GnoValue, error) {
 	t.Helper()
-	converter := newGnoValueConverter(testQuery(t, nil), zap.NewNop())
+	converter := newGnoValueConverter(testQuery(t, nil), nil, zap.NewNop())
 	return converter.convertQObjectJSON([]byte(`{"objectid":"`+ref.ObjectId+`","value":`+value+`}`), ref)
 }
 
@@ -500,7 +530,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 	// The heap item which a *UserData points to. The UserData is persisted separately, so the heap item only has
 	// a ref to it, which is followed.
 	var queried []string
-	converter := newGnoValueConverter(testQuery(t, &queried), zap.NewNop())
+	converter := newGnoValueConverter(testQuery(t, &queried), nil, zap.NewNop())
 	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`),
 		&api_gen.GnoValue{
 			Name: "user", Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
@@ -536,7 +566,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 	// The heap item has a ref to another heap item which has a ref. Only the first ref is followed.
 	var queried []string
-	converter := newGnoValueConverter(testQuery(t, &queried), zap.NewNop())
+	converter := newGnoValueConverter(testQuery(t, &queried), nil, zap.NewNop())
 	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
 		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
 	require.NoError(t, err)
@@ -556,7 +586,142 @@ func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 func TestConvertQObjectJSONMalformed(t *testing.T) {
 	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
-	}, zap.NewNop())
+	}, nil, zap.NewNop())
 	_, err := converter.convertQObjectJSON([]byte(`not JSON`), &api_gen.GnoValue{Kind: gnoKindRef, ObjectId: "x:1"})
 	assert.Error(t, err)
+}
+
+// testCachedConvert returns a function which converts data in a new request (a new converter) with query and cache.
+func testCachedConvert(t *testing.T, query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error), cache *typeCache) func(data string) *api_gen.QEvalJSONValuesResponse {
+	return func(data string) *api_gen.QEvalJSONValuesResponse {
+		t.Helper()
+		res, err := newGnoValueConverter(query, cache, zap.NewNop()).convertQEvalJSON([]byte(data))
+		require.NoError(t, err)
+		return res
+	}
+}
+
+func TestTypeCachePublic(t *testing.T) {
+	var queried []string
+	cache := newTypeCache()
+	convert := testCachedConvert(t, testQuery(t, &queried), cache)
+	// A type of a realm, and of the uverse
+	const data = `{"results":[` +
+		`{"T":{"@type":"/gno.RefType","ID":"gno.land/r/demo/boards.BoardID"},"N":"AgAAAAAAAAA="},` +
+		`{"T":{"@type":"/gno.RefType","ID":".uverse.address"}}]}`
+
+	assertGnoScalar(t, convert(data).Results[0], "gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
+	// A type of a pure package
+	assert.Equal(t, "name", convert(testQEvalJSONBoard).Results[0].Fields[1].Name)
+	// Only the realm's gnomod.toml is queried, to know that it isn't private.
+	assert.Equal(t, []string{
+		"gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml", ".uverse.address",
+		"gno.land/p/gnoland/boards/exts/hub/v0.Board",
+	}, queried)
+
+	// The types can't change, so the next requests don't query.
+	queried = nil
+	assertGnoScalar(t, convert(data).Results[0], "gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
+	assert.Equal(t, "name", convert(testQEvalJSONBoard).Results[0].Fields[1].Name)
+	assert.Empty(t, queried)
+
+	// The cache is cleared when it's full, so that its memory is bounded.
+	for i := range maxTypeCacheEntries {
+		cache.addType("gno.land/p/demo/foo.T"+strconv.Itoa(i), nil)
+	}
+	assert.LessOrEqual(t, len(cache.types), maxTypeCacheEntries)
+}
+
+func TestTypeCachePrivate(t *testing.T) {
+	var queried []string
+	redeployed := false
+	convert := testCachedConvert(t, func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
+		res, err := testQuery(t, &queried)(cfg)
+		if redeployed && err == nil {
+			// The redeploy renamed a field.
+			res = testQueryResult(strings.ReplaceAll(string(res.Response.Data), `"Name":"username"`, `"Name":"name"`))
+		}
+		return res, err
+	}, newTypeCache())
+	// A type of a private realm
+	const data = `{"results":[{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.StructValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:0","ModTime":"0","RefCount":"0","LastObjectSize":"0"},"Fields":[` +
+		`{"T":{"@type":"/gno.RefType","ID":".uverse.address"},"V":{"@type":"/gno.StringValue","value":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"}},` +
+		`{"T":{"@type":"/gno.PrimitiveType","value":"16"},"V":{"@type":"/gno.StringValue","value":"test1"}},` +
+		`{"T":{"@type":"/gno.PrimitiveType","value":"4"}}]}}]}`
+
+	assert.Equal(t, "username", convert(data).Results[0].Fields[1].Name)
+	assert.Equal(t, []string{"gno.land/r/sys/users.UserData", "gno.land/r/sys/users/gnomod.toml"}, queried)
+
+	// The realm can be redeployed, so the next request queries the type, but not its gnomod.toml, since a private
+	// realm can't become public.
+	queried = nil
+	assert.Equal(t, "username", convert(data).Results[0].Fields[1].Name)
+	assert.Equal(t, []string{"gno.land/r/sys/users.UserData"}, queried)
+
+	// After a redeploy, the type has the new definition.
+	redeployed = true
+	assert.Equal(t, "name", convert(data).Results[0].Fields[1].Name)
+}
+
+func TestTypeCacheFailures(t *testing.T) {
+	var queried []string
+	gnomodFails := true
+	cache := newTypeCache()
+	convert := testCachedConvert(t, func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
+		if gnomodFails && cfg.Path == "vm/qfile" {
+			queried = append(queried, string(cfg.Data))
+			return nil, errors.New("network error")
+		}
+		return testQuery(t, &queried)(cfg)
+	}, cache)
+	// A type of a pure package which can't be resolved, and a type of a realm whose gnomod.toml can't be queried
+	const data = `{"results":[` +
+		`{"T":{"@type":"/gno.RefType","ID":"gno.land/p/demo/foo.Unknown"},"N":"AwAAAAAAAAA="},` +
+		`{"T":{"@type":"/gno.RefType","ID":"gno.land/r/demo/boards.BoardID"},"N":"AgAAAAAAAAA="}]}`
+
+	// The failures may be network errors, so each request queries again.
+	for range 2 {
+		queried = nil
+		res := convert(data)
+		assert.Equal(t, gnoKindUnknown, res.Results[0].Kind)
+		assertGnoScalar(t, res.Results[1], "gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
+		assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml"}, queried)
+	}
+
+	// When the gnomod.toml can be queried, the realm's type is cached.
+	gnomodFails = false
+	queried = nil
+	convert(data)
+	assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml"}, queried)
+	queried = nil
+	convert(data)
+	assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown"}, queried)
+	// Nothing is kept for the type which can't be resolved, so that the caller can't fill the cache with type IDs
+	// which don't exist.
+	assert.Len(t, cache.types, 1)
+	assert.Equal(t, map[string]bool{"gno.land/r/demo/boards": false}, cache.private)
+}
+
+func TestTypeCacheConcurrentRequests(t *testing.T) {
+	// Requests run concurrently with the same cache (for go test -race).
+	cache := newTypeCache()
+	var wg sync.WaitGroup
+	for range 8 {
+		wg.Go(func() {
+			convert := testCachedConvert(t, testQuery(t, nil), cache)
+			assert.Equal(t, "name", convert(testQEvalJSONBoard).Results[0].Fields[1].Name)
+			assertGnoScalar(t, convert(`{"results":[{"T":{"@type":"/gno.RefType","ID":"gno.land/r/demo/boards.BoardID"},"N":"AgAAAAAAAAA="}]}`).Results[0],
+				"gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
+		})
+	}
+	wg.Wait()
+}
+
+func TestTypePkgPath(t *testing.T) {
+	assert.Equal(t, "gno.land/r/demo/boards", typePkgPath("gno.land/r/demo/boards.BoardID"))
+	assert.Equal(t, ".uverse", typePkgPath(".uverse.address"))
+	assert.Equal(t, "time", typePkgPath("time.Time"))
+	// A type which is declared in a function has its location.
+	assert.Equal(t, "gno.land/r/demo/foo", typePkgPath("gno.land/r/demo/foo[gno.land/r/demo/foo/foo.gno:3:2].Node"))
+	assert.Empty(t, typePkgPath("Node"))
 }
