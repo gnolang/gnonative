@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -602,7 +603,8 @@ func testCachedConvert(t *testing.T, query func(cfg gnoclient.QueryCfg) (*ctypes
 
 func TestTypeCachePublic(t *testing.T) {
 	var queried []string
-	convert := testCachedConvert(t, testQuery(t, &queried), newTypeCache())
+	cache := newTypeCache()
+	convert := testCachedConvert(t, testQuery(t, &queried), cache)
 	// A type of a realm, and of the uverse
 	const data = `{"results":[` +
 		`{"T":{"@type":"/gno.RefType","ID":"gno.land/r/demo/boards.BoardID"},"N":"AgAAAAAAAAA="},` +
@@ -613,7 +615,7 @@ func TestTypeCachePublic(t *testing.T) {
 	assert.Equal(t, "name", convert(testQEvalJSONBoard).Results[0].Fields[1].Name)
 	// Only the realm's gnomod.toml is queried, to know that it isn't private.
 	assert.Equal(t, []string{
-		"gno.land/r/demo/boards/gnomod.toml", "gno.land/r/demo/boards.BoardID", ".uverse.address",
+		"gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml", ".uverse.address",
 		"gno.land/p/gnoland/boards/exts/hub/v0.Board",
 	}, queried)
 
@@ -622,6 +624,12 @@ func TestTypeCachePublic(t *testing.T) {
 	assertGnoScalar(t, convert(data).Results[0], "gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
 	assert.Equal(t, "name", convert(testQEvalJSONBoard).Results[0].Fields[1].Name)
 	assert.Empty(t, queried)
+
+	// The cache is cleared when it's full, so that its memory is bounded.
+	for i := range maxTypeCacheEntries {
+		cache.addType("gno.land/p/demo/foo.T"+strconv.Itoa(i), nil)
+	}
+	assert.LessOrEqual(t, len(cache.types), maxTypeCacheEntries)
 }
 
 func TestTypeCachePrivate(t *testing.T) {
@@ -642,7 +650,7 @@ func TestTypeCachePrivate(t *testing.T) {
 		`{"T":{"@type":"/gno.PrimitiveType","value":"4"}}]}}]}`
 
 	assert.Equal(t, "username", convert(data).Results[0].Fields[1].Name)
-	assert.Equal(t, []string{"gno.land/r/sys/users/gnomod.toml", "gno.land/r/sys/users.UserData"}, queried)
+	assert.Equal(t, []string{"gno.land/r/sys/users.UserData", "gno.land/r/sys/users/gnomod.toml"}, queried)
 
 	// The realm can be redeployed, so the next request queries the type, but not its gnomod.toml, since a private
 	// realm can't become public.
@@ -658,13 +666,14 @@ func TestTypeCachePrivate(t *testing.T) {
 func TestTypeCacheFailures(t *testing.T) {
 	var queried []string
 	gnomodFails := true
+	cache := newTypeCache()
 	convert := testCachedConvert(t, func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		if gnomodFails && cfg.Path == "vm/qfile" {
 			queried = append(queried, string(cfg.Data))
 			return nil, errors.New("network error")
 		}
 		return testQuery(t, &queried)(cfg)
-	}, newTypeCache())
+	}, cache)
 	// A type of a pure package which can't be resolved, and a type of a realm whose gnomod.toml can't be queried
 	const data = `{"results":[` +
 		`{"T":{"@type":"/gno.RefType","ID":"gno.land/p/demo/foo.Unknown"},"N":"AwAAAAAAAAA="},` +
@@ -676,17 +685,21 @@ func TestTypeCacheFailures(t *testing.T) {
 		res := convert(data)
 		assert.Equal(t, gnoKindUnknown, res.Results[0].Kind)
 		assertGnoScalar(t, res.Results[1], "gno.land/r/demo/boards.BoardID", gnoKindNumber, "2")
-		assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards/gnomod.toml", "gno.land/r/demo/boards.BoardID"}, queried)
+		assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml"}, queried)
 	}
 
 	// When the gnomod.toml can be queried, the realm's type is cached.
 	gnomodFails = false
 	queried = nil
 	convert(data)
-	assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards/gnomod.toml", "gno.land/r/demo/boards.BoardID"}, queried)
+	assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown", "gno.land/r/demo/boards.BoardID", "gno.land/r/demo/boards/gnomod.toml"}, queried)
 	queried = nil
 	convert(data)
 	assert.Equal(t, []string{"gno.land/p/demo/foo.Unknown"}, queried)
+	// Nothing is kept for the type which can't be resolved, so that the caller can't fill the cache with type IDs
+	// which don't exist.
+	assert.Len(t, cache.types, 1)
+	assert.Equal(t, map[string]bool{"gno.land/r/demo/boards": false}, cache.private)
 }
 
 func TestTypeCacheConcurrentRequests(t *testing.T) {

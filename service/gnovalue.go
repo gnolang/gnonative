@@ -58,8 +58,8 @@ func newGnoValueConverter(query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCI
 }
 
 // typeCache has the type definitions from the "vm/qtype_json" query for all requests to one remote node, so that
-// a type isn't queried again for each request. SetRemote replaces it. The types are by package, and are only cached
-// if the package isn't private: a public package can't be redeployed, so its types can't change.
+// a type isn't queried again for each request. SetRemote replaces it. A type is only cached if it was resolved and
+// its package isn't private: a public package can't be redeployed, so its types can't change.
 //
 // TODO: A testnet relaunch (or a gnodev reload) behind the same remote keeps this cache, so it can have the types of
 // the old chain. The chain ID isn't enough to know, since a relaunch usually keeps it. To mitigate, keep the hash of
@@ -68,53 +68,50 @@ func newGnoValueConverter(query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCI
 // So that it isn't queried for each request, check it when the cache is first used, and then at a long interval.
 type typeCache struct {
 	lock sync.Mutex
-	// pkgs is by package path.
-	pkgs map[string]*pkgTypes
-}
-
-// pkgTypes has the cached types of one package.
-type pkgTypes struct {
-	// private is from the package's gnomod.toml. It can't change for the package path on the same chain. If
-	// private, then the package can be redeployed any time, so types are queried for each request; types is not used.
-	private bool
 	// types is by type ID.
 	types map[string]gno.Type
+	// private is by realm path, from the realm's gnomod.toml. It can't change for the realm path on the same chain.
+	private map[string]bool
 }
+
+// maxTypeCacheEntries bounds the memory of a typeCache: each of its maps is cleared when it has this many entries.
+const maxTypeCacheEntries = 1000
 
 func newTypeCache() *typeCache {
-	return &typeCache{pkgs: map[string]*pkgTypes{}}
+	return &typeCache{types: map[string]gno.Type{}, private: map[string]bool{}}
 }
 
-// getPkg returns the entry for the package path, or nil if there is none.
-func (tc *typeCache) getPkg(pkgPath string) *pkgTypes {
+// getType returns the cached type, or nil if it isn't cached.
+func (tc *typeCache) getType(typeID string) gno.Type {
 	tc.lock.Lock()
 	defer tc.lock.Unlock()
-	return tc.pkgs[pkgPath]
+	return tc.types[typeID]
 }
 
-// setPkg returns the entry for the package path, adding it with private if there is none.
-func (tc *typeCache) setPkg(pkgPath string, private bool) *pkgTypes {
+func (tc *typeCache) addType(typeID string, t gno.Type) {
 	tc.lock.Lock()
 	defer tc.lock.Unlock()
-	p := tc.pkgs[pkgPath]
-	if p == nil {
-		p = &pkgTypes{private: private, types: map[string]gno.Type{}}
-		tc.pkgs[pkgPath] = p
+	if len(tc.types) >= maxTypeCacheEntries {
+		clear(tc.types)
 	}
-	return p
+	tc.types[typeID] = t
 }
 
-// getType returns the type in the package's entry, or nil if it isn't cached.
-func (tc *typeCache) getType(p *pkgTypes, typeID string) gno.Type {
+// getPrivate returns the private flag of the realm, and false for ok if it isn't cached.
+func (tc *typeCache) getPrivate(pkgPath string) (private bool, ok bool) {
 	tc.lock.Lock()
 	defer tc.lock.Unlock()
-	return p.types[typeID]
+	private, ok = tc.private[pkgPath]
+	return private, ok
 }
 
-func (tc *typeCache) addType(p *pkgTypes, typeID string, t gno.Type) {
+func (tc *typeCache) setPrivate(pkgPath string, private bool) {
 	tc.lock.Lock()
 	defer tc.lock.Unlock()
-	p.types[typeID] = t
+	if len(tc.private) >= maxTypeCacheEntries {
+		clear(tc.private)
+	}
+	tc.private[pkgPath] = private
 }
 
 // typePkgPath returns the package path of the declared type ID, like "gno.land/r/demo/boards" for
@@ -246,7 +243,8 @@ func (c *gnoValueConverter) convertPointedTo(object gno.Value, index uint64) (*a
 // resolveType returns the type definition for the type ID, or nil if it can't be resolved.
 // The result (including nil) is cached in c.types, so each type ID is queried at most once for this request.
 // A type which is resolved is also put in c.cache for later requests, if its package can be checked and isn't
-// private (see pkgTypes). A failure is not, since it may be a network error which should be retried in the next request.
+// private (see isPublic). A failure is not, since it may be a network error which should be retried in the next
+// request, and so that a type ID which doesn't exist isn't kept.
 //
 // TODO: The queries are made one at a time as the conversion finds each type. To save round trips, collect the
 // type IDs in the result first, then send their "vm/qtype_json" queries and the "vm/qfile" queries of their
@@ -255,13 +253,8 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	if t, ok := c.types[typeID]; ok {
 		return t
 	}
-	pkgPath := typePkgPath(typeID)
-	var p *pkgTypes
-	if pkgPath != "" {
-		p = c.pkgTypes(pkgPath)
-	}
-	if p != nil {
-		if t := c.cache.getType(p, typeID); t != nil {
+	if c.cache != nil {
+		if t := c.cache.getType(typeID); t != nil {
 			c.types[typeID] = t
 			return t
 		}
@@ -272,9 +265,9 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 			t = nil
 		}
 		c.types[typeID] = t
-		// Only cache a type of the package which was checked, in case the type ID isn't as expected.
-		if dt, ok := t.(*gno.DeclaredType); ok && p != nil && dt.PkgPath == pkgPath {
-			c.cache.addType(p, typeID, t)
+		// Only cache a type of the package in the type ID, in case the result isn't as expected.
+		if dt, ok := t.(*gno.DeclaredType); ok && c.cache != nil && dt.PkgPath == typePkgPath(typeID) && c.isPublic(dt.PkgPath) {
+			c.cache.addType(typeID, t)
 		}
 	}()
 
@@ -293,41 +286,29 @@ func (c *gnoValueConverter) resolveType(typeID string) (t gno.Type) {
 	return tres.Type
 }
 
-// pkgTypes returns the entry of c.cache for the package path if its types can be cached. If the package isn't
-// cached yet, check if it's private (see checkPkg). Return nil if there is no cache, if the package can't be
-// checked, or if it's private (so it can be redeployed with other types).
-func (c *gnoValueConverter) pkgTypes(pkgPath string) *pkgTypes {
-	if c.cache == nil {
-		return nil
-	}
-	p := c.cache.getPkg(pkgPath)
-	if p == nil {
-		p = c.checkPkg(pkgPath)
-	}
-	if p == nil || p.private {
-		return nil
-	}
-	return p
-}
-
-// checkPkg queries the gnomod.toml of the realm and returns the entry of c.cache with its private flag, or nil if
-// it can't be queried. A package which isn't a realm can't be private, so it isn't queried.
-func (c *gnoValueConverter) checkPkg(pkgPath string) *pkgTypes {
+// isPublic returns true if the package isn't private, so that its types can be cached. A package which isn't a realm
+// can't be private. For a realm, query its gnomod.toml if its private flag isn't cached yet. Return false if it can't
+// be queried. This is only called for a type which was resolved, so that c.cache only has realms which exist.
+func (c *gnoValueConverter) isPublic(pkgPath string) bool {
 	if !gno.IsRealmPath(pkgPath) {
-		return c.cache.setPkg(pkgPath, false)
+		return true
+	}
+	if private, ok := c.cache.getPrivate(pkgPath); ok {
+		return !private
 	}
 
 	qres, err := c.query(gnoclient.QueryCfg{Path: "vm/qfile", Data: []byte(pkgPath + "/gnomod.toml")})
 	if err != nil {
-		c.logger.Debug("checkPkg: gnomod.toml query error", zap.String("pkgPath", pkgPath), zap.Error(err))
-		return nil
+		c.logger.Debug("isPublic: gnomod.toml query error", zap.String("pkgPath", pkgPath), zap.Error(err))
+		return false
 	}
 	gm, err := gnomod.ParseBytes("gnomod.toml", qres.Response.Data)
 	if err != nil {
-		c.logger.Debug("checkPkg: can't parse gnomod.toml", zap.String("pkgPath", pkgPath), zap.Error(err))
-		return nil
+		c.logger.Debug("isPublic: can't parse gnomod.toml", zap.String("pkgPath", pkgPath), zap.Error(err))
+		return false
 	}
-	return c.cache.setPkg(pkgPath, gm.Private)
+	c.cache.setPrivate(pkgPath, gm.Private)
+	return !gm.Private
 }
 
 // baseType resolves a type ID and unwraps a declared type to return its underlying type, or nil if
