@@ -1,0 +1,21 @@
+name: Test
+on:
+  pull_request:
+  # release.yml calls this before a release
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: .tool-versions
+
+      - name: Run tests
+        run: make test

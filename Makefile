@@ -55,7 +55,11 @@ regenerate: api.clean api.generate
 clean: framework.clean
 	rm -rf $(cache_dir)
 
-.PHONY: generate regenerate clean
+# Run the Go tests
+test:
+	go test -race ./...
+
+.PHONY: generate regenerate clean test
 
 # - API : Handle API generation and cleaning
 
