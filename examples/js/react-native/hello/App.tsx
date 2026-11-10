@@ -10,8 +10,11 @@ import {StyleSheet, Text, View} from 'react-native';
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
 // Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
-(Symbol as any).asyncIterator =
-  Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
+// Symbol.asyncIterator is needed by gRPC streams. Engines that provide it natively
+// (e.g. Hermes V1) make it read-only, so assigning to it throws: only define it when missing.
+if (!Symbol.asyncIterator) {
+  Object.defineProperty(Symbol, 'asyncIterator', { value: Symbol.for('Symbol.asyncIterator') });
+}
 
 const config = {
   remote: 'https://gno.berty.io',
