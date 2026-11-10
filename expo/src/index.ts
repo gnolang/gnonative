@@ -7,7 +7,11 @@ import GnonativeModule from './GnonativeModule';
 import GnonativeView from './GnonativeView';
 import 'fast-text-encoding';
 
-(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
+// Symbol.asyncIterator is needed by gRPC streams. Engines that provide it natively
+// (e.g. Hermes V1) make it read-only, so assigning to it throws: only define it when missing.
+if (!Symbol.asyncIterator) {
+  Object.defineProperty(Symbol, 'asyncIterator', { value: Symbol.for('Symbol.asyncIterator') });
+}
 
 const emitter = new EventEmitter(GnonativeModule ?? NativeModulesProxy.Gnonative);
 
