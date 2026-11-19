@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/gnolang/gno/tm2/pkg/amino"
-	"github.com/gnolang/gno/tm2/pkg/amino/genproto"
+	genproto "github.com/gnolang/gno/tm2/pkg/amino/genproto2"
 	"github.com/gnolang/gno/tm2/pkg/commands"
 
 	// TODO: move these out.
