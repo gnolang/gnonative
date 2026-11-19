@@ -10,11 +10,11 @@ import (
 	"sync"
 
 	"github.com/gnolang/gno/gno.land/pkg/gnoclient"
+	"github.com/gnolang/gno/gno.land/pkg/sdk/vm/utils"
 	gno "github.com/gnolang/gno/gnovm/pkg/gnolang"
 	"github.com/gnolang/gno/gnovm/pkg/gnomod"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	ctypes "github.com/gnolang/gno/tm2/pkg/bft/rpc/core/types"
-	"github.com/gnolang/gnonative/v4/service/utils"
 	"go.uber.org/zap"
 
 	api_gen "github.com/gnolang/gnonative/v4/api/gen/go"
@@ -423,7 +423,7 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 			}
 		case gno.RefValue:
 			res.ObjectId = base.ObjectID.String()
-			res.TypeId = utils.GetTypeIDQueryString(tv.T)
+			res.TypeId = utils.ResolveTypeID(tv.T)
 			res.Index = uint64(cv.Index)
 		case gno.ExportRefValue:
 			res.Kind = gnoKindBackref
@@ -445,7 +445,7 @@ func (c *gnoValueConverter) convert(tv gno.TypedValue) *api_gen.GnoValue {
 	case gno.RefValue:
 		res.Kind = gnoKindRef
 		res.ObjectId = cv.ObjectID.String()
-		res.TypeId = utils.GetTypeIDQueryString(tv.T)
+		res.TypeId = utils.ResolveTypeID(tv.T)
 	case gno.ExportRefValue:
 		// Not a persisted object, but an object which is not repeated because it is in a cycle or is shared with
 		// another value in the result. (The ":N" ID is from the order of the export, so it can't be fetched.)
