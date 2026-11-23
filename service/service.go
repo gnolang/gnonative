@@ -62,7 +62,6 @@ type gnoNativeService struct {
 	userAccounts map[string]*userAccount
 
 	listeners []net.Listener
-	server    *http.Server
 	closeFunc func()
 }
 
@@ -318,14 +317,13 @@ func (s *gnoNativeService) runGRPCServer(listener net.Listener) error {
 
 	go func() {
 		// we dont need to log the error
-		err := s.server.Serve(listener)
+		err := server.Serve(listener)
 		if err != nil && !errors.Is(err, http.ErrServerClosed) {
 			s.logger.Error("failed to serve the gRPC listener")
 		}
 	}()
 
 	s.lock.Lock()
-	s.server = server
 	s.closeFunc = u.CombineFuncs(s.closeFunc, func() {
 		if err := server.Shutdown(context.Background()); err != nil {
 			s.logger.Error("cannot close the gRPC server", zap.Error(err)) //nolint:gocritic
