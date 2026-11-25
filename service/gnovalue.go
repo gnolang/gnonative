@@ -128,7 +128,7 @@ func typePkgPath(typeID string) string {
 }
 
 // convertQEvalJSON decodes the response data of the "vm/qeval_json" query and converts each result.
-func (c *gnoValueConverter) convertQEvalJSON(data []byte) (res *api_gen.QEvalJSONValuesResponse, err error) {
+func (c *gnoValueConverter) convertQEvalJSON(data string) (res *api_gen.QEvalJSONValuesResponse, err error) {
 	// The data is from the remote node. Don't let a malformed value panic the service.
 	defer func() {
 		if r := recover(); r != nil {
@@ -138,7 +138,7 @@ func (c *gnoValueConverter) convertQEvalJSON(data []byte) (res *api_gen.QEvalJSO
 	}()
 
 	var qres utils.EvalResponse
-	if err := amino.UnmarshalJSON(data, &qres); err != nil {
+	if err := amino.UnmarshalJSON([]byte(data), &qres); err != nil {
 		return nil, fmt.Errorf("can't decode the qeval_json result: %w", err)
 	}
 
@@ -157,7 +157,7 @@ func (c *gnoValueConverter) convertQEvalJSON(data []byte) (res *api_gen.QEvalJSO
 // convert the elements of the slice. If value is a pointer, convert the value which is pointed to. If the result
 // is a ref to another persisted object (like a pointer to a struct which is persisted separately), query and
 // convert that object. Only follow one ref like this, so that there is no loop.
-func (c *gnoValueConverter) convertQObjectJSON(data []byte, value *api_gen.GnoValue) (res *api_gen.GnoValue, err error) {
+func (c *gnoValueConverter) convertQObjectJSON(data string, value *api_gen.GnoValue) (res *api_gen.GnoValue, err error) {
 	// The data is from the remote node. Don't let a malformed value panic the service.
 	defer func() {
 		if r := recover(); r != nil {
@@ -176,14 +176,14 @@ func (c *gnoValueConverter) convertQObjectJSON(data []byte, value *api_gen.GnoVa
 	if err != nil {
 		return nil, fmt.Errorf("can't follow the ref to object %s: %w", res.ObjectId, err)
 	}
-	return c.convertObject(qres.Response.Data, res)
+	return c.convertObject(string(qres.Response.Data), res)
 }
 
 // convertObject decodes the response data of the "vm/qobject_json" query and converts the object for value
 // as described in convertQObjectJSON, but doesn't follow a ref in the result.
-func (c *gnoValueConverter) convertObject(data []byte, value *api_gen.GnoValue) (res *api_gen.GnoValue, err error) {
+func (c *gnoValueConverter) convertObject(data string, value *api_gen.GnoValue) (res *api_gen.GnoValue, err error) {
 	var qres utils.ObjectResponse
-	if err := amino.UnmarshalJSON(data, &qres); err != nil {
+	if err := amino.UnmarshalJSON([]byte(data), &qres); err != nil {
 		return nil, fmt.Errorf("can't decode the qobject_json result: %w", err)
 	}
 

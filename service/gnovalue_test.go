@@ -94,7 +94,7 @@ func testQuery(t *testing.T, queried *[]string) func(cfg gnoclient.QueryCfg) (*c
 func testConvertQEvalJSON(t *testing.T, data string, queried *[]string) *api_gen.QEvalJSONValuesResponse {
 	t.Helper()
 	converter := newGnoValueConverter(testQuery(t, queried), nil, zap.NewNop())
-	res, err := converter.convertQEvalJSON([]byte(data))
+	res, err := converter.convertQEvalJSON(data)
 	require.NoError(t, err)
 	return res
 }
@@ -265,11 +265,11 @@ func TestConvertQEvalJSONMalformed(t *testing.T) {
 		return nil, errors.New("unexpected")
 	}, nil, zap.NewNop())
 
-	_, err := converter.convertQEvalJSON([]byte(`not JSON`))
+	_, err := converter.convertQEvalJSON(`not JSON`)
 	assert.Error(t, err)
 
 	// No results
-	res, err := converter.convertQEvalJSON([]byte(`{"results":[]}`))
+	res, err := converter.convertQEvalJSON(`{"results":[]}`)
 	require.NoError(t, err)
 	assert.Empty(t, res.Results)
 }
@@ -388,7 +388,7 @@ func TestConvertQEvalJSONPointerIndex(t *testing.T) {
 func testConvertQObjectJSON(t *testing.T, value string, ref *api_gen.GnoValue) (*api_gen.GnoValue, error) {
 	t.Helper()
 	converter := newGnoValueConverter(testQuery(t, nil), nil, zap.NewNop())
-	return converter.convertQObjectJSON([]byte(`{"objectid":"`+ref.ObjectId+`","value":`+value+`}`), ref)
+	return converter.convertQObjectJSON(`{"objectid":"`+ref.ObjectId+`","value":`+value+`}`, ref)
 }
 
 func TestConvertQObjectJSONStruct(t *testing.T) {
@@ -531,7 +531,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 	// a ref to it, which is followed.
 	var queried []string
 	converter := newGnoValueConverter(testQuery(t, &queried), nil, zap.NewNop())
-	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`),
+	value, err := converter.convertQObjectJSON(`{"objectid":"0ed754d80e40da2645666583e74d4ab093970a6a:534","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0ed754d80e40da2645666583e74d4ab093970a6a:534","Hash":"65c78d32cc4893fc17f9addab1c7e77e0badc133","ModTime":"0","RefCount":"2","IsEscaped":true,"LastObjectSize":"351"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/sys/users.UserData"},"V":{"@type":"/gno.RefValue","ObjectID":"0ed754d80e40da2645666583e74d4ab093970a6a:535","Hash":"c71b7fdf1ea86d0d240dbee17e52c795e78ee716"}}}}`,
 		&api_gen.GnoValue{
 			Name: "user", Type: "*gno.land/r/sys/users.UserData", Kind: gnoKindPointer,
 			ObjectId: "0ed754d80e40da2645666583e74d4ab093970a6a:534", TypeId: "gno.land/r/sys/users.UserData",
@@ -553,7 +553,7 @@ func TestConvertQObjectJSONFollowRef(t *testing.T) {
 
 	// A heap item which has a slice of a persisted array. The ref is followed, and only has the elements of the slice.
 	const stringType = `{"@type":"/gno.PrimitiveType","value":"16"}`
-	value, err = converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.SliceType","Elt":`+stringType+`,"Vrd":false},"V":{"@type":"/gno.SliceValue","Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:21","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Offset":"1","Length":"2","Maxcap":"2"}}}}`),
+	value, err = converter.convertQObjectJSON(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:20","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.SliceType","Elt":`+stringType+`,"Vrd":false},"V":{"@type":"/gno.SliceValue","Base":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:21","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"},"Offset":"1","Length":"2","Maxcap":"2"}}}}`,
 		&api_gen.GnoValue{Type: "*[]string", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:20"})
 	require.NoError(t, err)
 	assert.Equal(t, "[]string", value.Type)
@@ -567,7 +567,7 @@ func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 	// The heap item has a ref to another heap item which has a ref. Only the first ref is followed.
 	var queried []string
 	converter := newGnoValueConverter(testQuery(t, &queried), nil, zap.NewNop())
-	value, err := converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
+	value, err := converter.convertQObjectJSON(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:23","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`,
 		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
 	require.NoError(t, err)
 
@@ -576,7 +576,7 @@ func TestConvertQObjectJSONFollowOneRef(t *testing.T) {
 	assert.Equal(t, []string{"0dc5eff18974d66f6720bc387fc7e5c63514d961:23"}, queried)
 
 	// The object of the followed ref is not found. The error has the object ID, and wraps the error of the query.
-	_, err = converter.convertQObjectJSON([]byte(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:99","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`),
+	_, err = converter.convertQObjectJSON(`{"objectid":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","value":{"@type":"/gno.HeapItemValue","ObjectInfo":{"ID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:22","ModTime":"0","RefCount":"1","LastObjectSize":"0"},"Value":{"T":{"@type":"/gno.RefType","ID":"gno.land/r/foo.Node"},"V":{"@type":"/gno.RefValue","ObjectID":"0dc5eff18974d66f6720bc387fc7e5c63514d961:99","Hash":"64ed6ee11c3332f9172a134ca50f4a3b03b3a829"}}}}`,
 		&api_gen.GnoValue{Type: "*gno.land/r/foo.Node", Kind: gnoKindPointer, ObjectId: "0dc5eff18974d66f6720bc387fc7e5c63514d961:22"})
 	require.Error(t, err)
 	assert.Contains(t, err.Error(), "can't follow the ref to object 0dc5eff18974d66f6720bc387fc7e5c63514d961:99")
@@ -587,7 +587,7 @@ func TestConvertQObjectJSONMalformed(t *testing.T) {
 	converter := newGnoValueConverter(func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error) {
 		return nil, errors.New("unexpected")
 	}, nil, zap.NewNop())
-	_, err := converter.convertQObjectJSON([]byte(`not JSON`), &api_gen.GnoValue{Kind: gnoKindRef, ObjectId: "x:1"})
+	_, err := converter.convertQObjectJSON(`not JSON`, &api_gen.GnoValue{Kind: gnoKindRef, ObjectId: "x:1"})
 	assert.Error(t, err)
 }
 
@@ -595,7 +595,7 @@ func TestConvertQObjectJSONMalformed(t *testing.T) {
 func testCachedConvert(t *testing.T, query func(cfg gnoclient.QueryCfg) (*ctypes.ResultABCIQuery, error), cache *typeCache) func(data string) *api_gen.QEvalJSONValuesResponse {
 	return func(data string) *api_gen.QEvalJSONValuesResponse {
 		t.Helper()
-		res, err := newGnoValueConverter(query, cache, zap.NewNop()).convertQEvalJSON([]byte(data))
+		res, err := newGnoValueConverter(query, cache, zap.NewNop()).convertQEvalJSON(data)
 		require.NoError(t, err)
 		return res
 	}
