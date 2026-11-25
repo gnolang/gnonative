@@ -6,7 +6,6 @@ package service
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net"
 	"net/url"
 	"slices"
@@ -555,12 +554,10 @@ func (s *gnoNativeService) QEvalJSON(ctx context.Context, req *connect.Request[a
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// TODO: Use gnoclient QEvalJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qeval_json", Data: fmt.Appendf(nil, "%s.%s", req.Msg.PackagePath, req.Msg.Expression)})
+	result, _, err := c.QEvalJSON(req.Msg.PackagePath, req.Msg.Expression)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result := string(qres.Response.Data)
 
 	return connect.NewResponse(&api_gen.QEvalJSONResponse{Result: result}), nil
 }
@@ -569,14 +566,13 @@ func (s *gnoNativeService) QEvalJSONValues(ctx context.Context, req *connect.Req
 	s.logger.Debug("QEvalJSONValues", zap.String("packagePath", req.Msg.PackagePath), zap.String("expression", req.Msg.Expression))
 
 	c, cache := s.getQueryClient()
-	// TODO: Use gnoclient QEvalJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qeval_json", Data: fmt.Appendf(nil, "%s.%s", req.Msg.PackagePath, req.Msg.Expression)})
+	data, _, err := c.QEvalJSON(req.Msg.PackagePath, req.Msg.Expression)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
 	// A value only has the ID of its declared type, so query for the type to get the struct field names.
-	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQEvalJSON(qres.Response.Data)
+	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQEvalJSON(data)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -591,12 +587,10 @@ func (s *gnoNativeService) QObjectJSON(ctx context.Context, req *connect.Request
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// TODO: Use gnoclient QObjectJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(req.Msg.ObjectId)})
+	result, _, err := c.QObjectJSON(req.Msg.ObjectId)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result := string(qres.Response.Data)
 
 	return connect.NewResponse(&api_gen.QObjectJSONResponse{Result: result}), nil
 }
@@ -609,13 +603,12 @@ func (s *gnoNativeService) QObjectJSONValue(ctx context.Context, req *connect.Re
 	s.logger.Debug("QObjectJSONValue", zap.String("objectId", value.ObjectId), zap.String("typeId", value.TypeId))
 
 	c, cache := s.getQueryClient()
-	// TODO: Use gnoclient QObjectJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qobject_json", Data: []byte(value.ObjectId)})
+	data, _, err := c.QObjectJSON(value.ObjectId)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
 
-	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQObjectJSON(qres.Response.Data, value)
+	res, err := newGnoValueConverter(c.Query, cache, s.logger).convertQObjectJSON(data, value)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
@@ -630,12 +623,10 @@ func (s *gnoNativeService) QTypeJSON(ctx context.Context, req *connect.Request[a
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// TODO: Use gnoclient QTypeJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qtype_json", Data: []byte(req.Msg.TypeId)})
+	result, _, err := c.QTypeJSON(req.Msg.TypeId)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result := string(qres.Response.Data)
 
 	return connect.NewResponse(&api_gen.QTypeJSONResponse{Result: result}), nil
 }
@@ -647,12 +638,10 @@ func (s *gnoNativeService) QPkgJSON(ctx context.Context, req *connect.Request[ap
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	// TODO: Use gnoclient QPkgJSON
-	qres, err := c.Query(gnoclient.QueryCfg{Path: "vm/qpkg_json", Data: []byte(req.Msg.PkgPath)})
+	result, _, err := c.QPkgJSON(req.Msg.PkgPath)
 	if err != nil {
 		return nil, getGrpcError(err)
 	}
-	result := string(qres.Response.Data)
 
 	return connect.NewResponse(&api_gen.QPkgJSONResponse{Result: result}), nil
 }
